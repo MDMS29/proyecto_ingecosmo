@@ -28,7 +28,7 @@
                     <a href="#"><span class="fa fa-sticky-note"></span> Blog</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-cogs"></span> Services</a>
+                    <a href="#"><span class="fa fa-cogs"></span> Service</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-paper-plane"></span> Contacts</a>
