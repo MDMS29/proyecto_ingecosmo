@@ -12,7 +12,7 @@ class Principal extends BaseController
     }
     public function index()
     {
-        echo view('/principal/header');
+        echo view('/principal/sidebar');
         echo view('/principal/principal');
     }
 }
