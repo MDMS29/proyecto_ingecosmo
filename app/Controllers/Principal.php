@@ -10,7 +10,16 @@ class Principal extends BaseController
     {
         helper('sistema');
     }
+
     public function index()
+    {
+        // return view('login');
+        return view('login');
+        echo view('/principal/footer');
+
+    }
+
+    public function home()
     {
         echo view('/principal/header');
         echo view('/principal/principal');

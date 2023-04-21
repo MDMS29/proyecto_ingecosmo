@@ -30,7 +30,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Principal::index'); //Principal Vista
+$routes->get('/', 'Principal::index'); // Vista directa al Login
+// $routes->get('/home', 'Principal::home'); //Vista de entrada al home
 
 /*
  * --------------------------------------------------------------------
