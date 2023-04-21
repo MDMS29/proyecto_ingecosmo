@@ -136,6 +136,7 @@
     </div>
 </form>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
     function verifiContra(tipo) {
@@ -217,11 +218,42 @@
     }
 
     $('#formularioUsuarios').on('submit', function(e) {
-        contra = $('#contra').val()
-        confirmContra = $('#confirContra').val()
 
-        if (contra != confirmContra) {
+        tp = $('#tp').val()
+        nombreP = $('#nombreP').val('')
+        nombreS = $('#nombreS').val('')
+        apellidoP = $('#apellidoP').val('')
+        apellidoS = $('#apellidoS').val('')
+        tipoDoc = $('#tipoDoc').val('')
+        nIdenti = $('#nIdenti').val('')
+        telefono = $('#telefono').val('')
+        email = $('#email').val('')
+        rol = $('#rol').val('')
+        contra = $('#contra').val('')
+        confirContra = $('#confirContra').val('')
 
+        if (tp == 2) {
+            if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, rol, contra, confirContra].includes('')) {
+                e.preventDefault()
+                return Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: '¡Hay campos vacios o las contraseña no coinciden!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        } else {
+            if ([nombres, apellidos, n_iden, email, rol, contra, confirContra].includes('') || contra != confirContra) {
+                e.preventDefault()
+                return Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: '¡Hay campos vacios o las contraseña no coinciden!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
         }
     })
 </script>
