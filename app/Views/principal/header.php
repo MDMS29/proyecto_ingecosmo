@@ -20,42 +20,42 @@
     <div class="d-flex">
         <nav id="sidebar" class="active">
             <!-- <h1><a class="logo"></a></h1> -->
-            <ul class="list-unstyled components mb-5">
+            <ul id="allElement"class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#" style=""><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa">Almacenista</p></a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" >Almacenista</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span>Trabajadores</a>
+                    <a href="#"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span><p id="pa">Trabajadores</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/></span> Clientes</a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/></span><p id="pa">Clientes</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span>Materiales</a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Materiales</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/></span> Vehiculos</a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/></span><p id="pa">Vehiculos</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>"/></span> Proveedores</a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>"/></span><p id="pa">Proveedores</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>"/></span> Historial</a>
+                    <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>"/></span><p id="pa">Historial</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>"/></span> Estanteria</a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>"/></span><p id="pa">Estanteria</p></a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span> Usuarios</a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
                 </li>
                 <li>
-                   <a href="#"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/salir.png') ?>"/></span> Cerrar Sesion</a>
+                   <a href="#" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
                 </li>
             </ul>
             <nav>
                 <div class="container-fluid d-flex justify-content-center" style="position:relative; bottom: 10px">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                        <i class="fa fa-bars"></i>
+                    <button  type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i  class="fa fa-bars"></i>
                         <span class="sr-only">Toggle Menu</span>
                     </button>
                 </div>

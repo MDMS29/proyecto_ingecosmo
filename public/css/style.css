@@ -36,6 +36,16 @@
   box-sizing: border-box;
 }
 
+#aa {
+  align-items: center;
+}
+
+#aa > p{
+  margin: 0 !important;
+  align-items: center !important;
+
+}
+
 html {
   font-family: 'Nunito', sans-serif;
   line-height: 1.15;
@@ -50,7 +60,19 @@ html {
   #log {
     width:146px; height:121px; opacity: 1;
   }
-  
+}
+@media (max-width: 768px){
+  #aa {
+    display: none;
+    opacity: 0;
+    transition: all 0.4s;
+  }
+  #sidebarCollapse{
+    position: absolute;
+    top: -650px;
+    opacity: 1 !important;
+    display: inline-block !important;
+  }
 }
 
 
@@ -11938,12 +11960,17 @@ h5,
     min-width: 80px;
     max-width: 80px;
     text-align: center;
-    margin-left: -80px !important;
+    /* margin-left: -80px !important; */
   }
-
+  #sidebarCollapse{
+    display: none;
+    opacity: 0;
+    /* corregir */
+  }
   #sidebar.active {
     margin-left: 0 !important;
   }
+
 }
 
 a[data-toggle="collapse"] {
