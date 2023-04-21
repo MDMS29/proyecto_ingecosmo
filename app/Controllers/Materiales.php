@@ -20,4 +20,15 @@ class Materiales extends BaseController
         echo view('/principal/header');
         echo view('/materiales/materiales', $data);
     }
+
+    public function detallesMaterial($id){
+    {
+        $returnData = array();
+        $materiales_ = $this->materiales->traerDetalles($id);
+        if (!empty($materiales_)) {
+            array_push($returnData, $materiales_);
+        }
+        echo json_encode($returnData);
+    }
+}
 }

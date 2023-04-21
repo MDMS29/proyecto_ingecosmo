@@ -6,14 +6,14 @@ use CodeIgniter\Model;
 
 class MaterialesModel extends Model{
     protected $table        = 'materiales';
-    protected $primaryKey   = 'id';
+    protected $primaryKey   = 'id_material';
 
     protected $useAutoIncrement = true;
     
     protected $returnType     = 'array';
     protected $useSoftDeletes = false; 
     
-    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categorio_material', 'tipo_material', 'existencia', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante','usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante','usuario_crea', 'fecha_crea'];
     
     protected $useTimestamps = true;
     protected $createdField  = 'fecha_crea';
@@ -29,9 +29,14 @@ class MaterialesModel extends Model{
     public function obtenerInsumos()
     {
         $this->select('materiales.*');
-        $this->where('tipo_material', '9');
+        $this->where('categoria_material', '28');
         $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }
-    
+    public function traerDetalles($id_material){
+        $this->select('materiales.*');
+        $this->where('id_material', $id_material);
+        $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
 }
