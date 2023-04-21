@@ -41,6 +41,7 @@
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
         <div class="modal-dialog modal-dialog-centered modal-lg">
+            <img src="<?= base_url('images/logo_empresa.png')?>" alt="Logo Empresa" class="logoEmpresa">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="tituloModal">Agregar Usuario</h1>
@@ -94,8 +95,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn" id="btnGuardar">Regitrarse</button>
+                    <button type="button" class="btn" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

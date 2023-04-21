@@ -1,3 +1,25 @@
-.logo-user{
-    color: white !important;
+:root{
+    --azulBase : #161666;
+    --rojoAcciones : #EF434D;
+}
+
+/* -- BOTONES GENERALES -- */
+#btnCerrar{
+    background-color: var(--azulBase);
+    color: white;
+}
+#btnGuardar{
+    background-color: var(--rojoAcciones);
+    color: white;
+}
+
+/* -- MODAL -- */
+.modal-content{
+    border: 5px solid var(--azulBase) !important;
+    border-radius: 10px;
+}
+.logoEmpresa{
+    position: absolute;
+    top: 0;
+    left: 50%;
 }
