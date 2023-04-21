@@ -1,0 +1,22 @@
+CRITICAL - 2023-04-21 13:32:43 --> Undefined variable $data
+in APPPATH\Views\materiales\materiales.php on line 6.
+ 1 APPPATH\Views\materiales\materiales.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'APPPATH\\Views\\materiales\\materiales.php', 6)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\materiales\\materiales.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/materiales/materiales', [], true)
+ 5 APPPATH\Controllers\Materiales.php(21): view('/materiales/materiales', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Materiales->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materiales))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-21 14:26:18 --> Undefined array key "id"
+in APPPATH\Views\materiales\materiales.php on line 26.
+ 1 APPPATH\Views\materiales\materiales.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'APPPATH\\Views\\materiales\\materiales.php', 26)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\materiales\\materiales.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/materiales/materiales', [], true)
+ 5 APPPATH\Controllers\Materiales.php(21): view('/materiales/materiales', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Materiales->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materiales))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()

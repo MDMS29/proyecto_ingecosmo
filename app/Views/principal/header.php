@@ -31,7 +31,7 @@
                     <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/></span> Clientes</a>
                 </li>
                 <li>
-                    <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span>Materiales</a>
+                    <a href="<?php echo base_url('materiales');?>"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span>Materiales</a>
                 </li>
                 <li>
                     <a href="#"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/></span> Vehiculos</a>

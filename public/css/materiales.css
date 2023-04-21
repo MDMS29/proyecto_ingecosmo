@@ -1,0 +1,74 @@
+.card-title {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, white 50%, #3F48CC 51%);
+    margin: 10px;
+    width: 17rem;
+    height: 20rem;
+}
+.Imagenes{
+    align-items: center;
+    flex-direction: row;
+    
+}
+
+.contenido1{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+.contenido2{
+    height: 50%;
+    width: 100%;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items:flex-end;
+}
+
+.baterias {
+    width: 90px;
+    padding-bottom: 20px;
+}
+
+.Regresar {
+    background-color: #161666;
+    position: absolute;
+    width: 145px;
+    height: 30px;
+    left: 1157px;
+    top: 900px;
+    color: white;
+    text-align: center;
+}
+
+.Agregar {
+    background-color: #E25050;
+    position: absolute;
+    width: 145px;
+    height: 30px;
+    left: 1396px;
+    top: 900px;
+    color: white;
+    text-align: center;
+
+}
