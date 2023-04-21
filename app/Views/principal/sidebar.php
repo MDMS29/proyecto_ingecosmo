@@ -11,6 +11,17 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>"></link>
+    <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('css/usuarios.css')?>">
+
+    <!-- SCRIPTS -->
+    <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('js/jquery.min.js')?>"></script>
+    <script src="js/main.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,6 +30,7 @@
 
     <div class="d-flex">
         <nav id="sidebar" class="active">
+
             <!-- <h1><a class="logo"></a></h1> -->
             <ul id="allElement"class="list-unstyled components mb-5">
                 <li class="active">
@@ -61,21 +73,10 @@
                 </div>
             </nav>
         </nav>
+
+    </div>
+<div>
         <a href=""><img  class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>"/></a>
 
     </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-
-
-<script>
-    function accion(){
-        
-    }
-</script>
-
-</html>
