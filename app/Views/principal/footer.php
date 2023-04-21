@@ -13,21 +13,23 @@
 </head>
 
 <body>
-<div class="contenedorFooter">
-    <div class="contenidoFooter">
-        <div class="textoF">
-            <label class="lineaF">© 2023 Ingecosmo, Ltda.</label>
-            <label class="lineaF">Cra. 52 #70-110, Barranquilla, Atlántico</label>
-            <label class="lineaF">315 7205280</label>
-            <label class="lineaF">ingecosmosltd@gmail.com</label>
+    <div class="contenedorFooter">
+        <div class="contenidoFooter1">
+            <div class="textoF">
+                <label class="lineaF">© 2023 Ingecosmo, Ltda.</label>
+                <label class="lineaF">Cra. 52 #70-110, Barranquilla, Atlántico</label>
+                <label class="lineaF">315 7205280</label>
+                <label class="lineaF">ingecosmosltd@gmail.com</label>
+            </div>
         </div>
-
-        <div class="redes">
-            <a href="https://web.facebook.com/Ingecosmos/?locale=es_LA&_rdc=1&_rdr"><i id="iconF" class="bi bi-facebook"></i></a>
-            <a href="https://www.instagram.com/ingecosmosltda/?hl=es"><i id="iconF" class="bi bi-instagram"></i></a>
+        <div class="contenidoFooter2">
+            <div class="redes">
+                <a href="https://web.facebook.com/Ingecosmos/?locale=es_LA&_rdc=1&_rdr"><i id="iconF" class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/ingecosmosltda/?hl=es"><i id="iconF" class="bi bi-instagram"></i></a>
+            </div>
         </div>
     </div>
-</div>
+
 
 </body>
 
