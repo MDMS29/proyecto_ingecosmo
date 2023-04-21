@@ -40,12 +40,45 @@
   box-sizing: border-box;
 }
 
+#aa {
+  align-items: center;
+}
+
+#aa > p{
+  margin: 0 !important;
+  align-items: center !important;
+
+}
+
 html {
-  font-family: sans-serif;
+  font-family: 'Nunito', sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+.log{
+  width:70px; height:44px; opacity: 0; position:absolute; right: 10px; top: 10px;  transition: all 0.4s;
+}
+@media (min-width: 768px){
+  #log {
+    width:146px; height:121px; opacity: 1;
+  }
+}
+@media (max-width: 768px){
+  #aa {
+    display: none;
+    opacity: 0;
+    transition: all 0.4s;
+  }
+  #sidebarCollapse{
+    position: absolute;
+    top: -650px;
+    opacity: 1 !important;
+    display: inline-block !important;
+  }
+}
+
 
 article,
 aside,
@@ -62,7 +95,7 @@ section {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -11819,7 +11852,7 @@ h5,
 #sidebar {
   min-width: 270px;
   max-width: 270px;
-  background: #3e64ff;
+  background: rgba(0, 0, 89, 1);
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -11827,7 +11860,7 @@ h5,
 }
 
 #sidebar.active {
-  min-width: 80px;
+  min-width: 100px;
   max-width: 80px;
   text-align: center;
 }
@@ -11857,7 +11890,7 @@ h5,
 #sidebar .logo {
   display: block;
   color: #fff;
-  font-weight: 900;
+  font-weight: 100;
   padding: 10px 30px;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
@@ -11888,7 +11921,8 @@ h5,
 }
 
 #sidebar ul li {
-  font-size: 16px;
+  font-size: 14px;
+
 }
 
 #sidebar ul li>ul {
@@ -11930,12 +11964,17 @@ h5,
     min-width: 80px;
     max-width: 80px;
     text-align: center;
-    margin-left: -80px !important;
+    /* margin-left: -80px !important; */
   }
-
+  #sidebarCollapse{
+    display: none;
+    opacity: 0;
+    /* corregir */
+  }
   #sidebar.active {
     margin-left: 0 !important;
   }
+
 }
 
 a[data-toggle="collapse"] {
@@ -11978,12 +12017,12 @@ a[data-toggle="collapse"] {
 }
 
 .btn.btn-primary {
-  background: #3e64ff;
-  border-color: #3e64ff;
+  background: transparent;
+  border-color: transparent;
 }
 
-.btn.btn-primary:hover,
+/* .btn.btn-primary:hover,
 .btn.btn-primary:focus {
-  background: #3e64ff !important;
+  background: #0056b3 !important;
   border-color: #3e64ff !important;
-}
+} */
