@@ -15,7 +15,7 @@
 
     <!-- SCRIPTS -->
     <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
-    <script src="js/jquery.min.js"></script>
+    <script src="<?= base_url('js/jquery.min.js')?>"></script>
     <script src="js/main.js"></script>
 </head>
 

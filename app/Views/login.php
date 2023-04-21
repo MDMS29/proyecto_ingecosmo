@@ -17,7 +17,7 @@
         <p class="texto-titulo" >LOGIN</p>
 
         <div class="logo">
-            <img class="logo-ingecosmo" src="<?php echo base_url('/image/logo.png'); ?>">
+            <img class="logo-ingecosmo" src="<?php echo base_url('/images/logo.png'); ?>">
         </div>
 
         <div class="bloque-items">

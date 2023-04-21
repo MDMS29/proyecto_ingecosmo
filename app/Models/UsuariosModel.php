@@ -34,4 +34,11 @@ class UsuariosModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function buscarUsuario($id)
+    {
+        $this->select('usuarios.*');
+        $this->where('id_usuario', $id);
+        $data = $this->first();
+        return $data;
+    }
 }

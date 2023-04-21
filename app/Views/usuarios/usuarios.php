@@ -24,7 +24,7 @@
                         <td class="text-center"><?= $u['n_identificacion'] ?></td>
                         <td class="text-center"><?= $u['nombre_rol'] ?></td>
                         <td class="text-center">
-                            <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
+                            <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] . ',' . 2 ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
 
                             <button class="btn"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>
                         </td>
@@ -55,11 +55,11 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombre_p" class="col-form-label">Primer Nombre:</label>
-                                    <input type="text" name="nombre_p" class="form-control" id="nombre_p">
+                                    <input type="text" name="nombre_p" class="form-control" id="nombreP">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombre_s" class="col-form-label">Segundo Nombre:</label>
-                                    <input type="text" name="nombre_s" class="form-control" id="nombre_s">
+                                    <input type="text" name="nombre_s" class="form-control" id="nombreS">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
@@ -76,11 +76,11 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="apellido_p" class="col-form-label">Primer Apellido:</label>
-                                    <input type="text" name="apellido_p" class="form-control" id="apellido_p">
+                                    <input type="text" name="apellido_p" class="form-control" id="apellidoP">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
-                                    <input type="text" name="apellido_s" class="form-control" id="apellido_s">
+                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
@@ -102,9 +102,9 @@
                                     <div class="mb-3">
                                         <label for="rol" class="col-form-label">Tipo de Rol:</label>
                                         <select class="form-select form-select" name="rol" id="rol">
-                                            <option selected>-- Seleccione --</option>
-                                            <?php foreach ($tipoDoc as $t) { ?>
-                                                <option value="<?= $t['id_param_det'] ?>"><?= $t['nombre'] ?></option>
+                                            <option selected value="">-- Seleccione --</option>
+                                            <?php foreach ($roles as $r) { ?>
+                                                <option value="<?= $r['id_rol'] ?>"><?= $r['nombre'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -137,14 +137,91 @@
 </form>
 
 
-
-<script>
-    function seleccionarUsuario(id, tp) {
-        if (tp == 2) {
-            alert('Editar')
-
+<script type="text/javascript">
+    function verifiContra(tipo) {
+        contra = $('#contra').val()
+        confirContra = $('#confirContra').val()
+        if (tipo == 2) {
+            if (contra == '' && confirContra == '') {
+                $('#msgConfir').text('').removeClass().addClass('normal')
+            } else if (contra == confirContra) {
+                $('#msgConfir').text('¡Contraseñas valida!').removeClass().addClass('valido')
+            } else if (contra == '') {
+                $('#msgConfir').text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+            } else if (confirContra == '') {
+                $('#msgConfir').text('').removeClass().addClass('normal')
+            } else if (contra != confirContra) {
+                return $('#msgConfir').text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
+            }
         } else {
-            // alert('Insertar')
+            if (contra == '' && confirContra == '') {
+                $('#msgConfir').text('').removeClass().addClass('normal')
+            } else if (contra == '' && confirContra) {
+                $('#msgConfir').text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+            } else if (confirContra == '') {
+                $('#msgConfir').text('').removeClass().addClass('normal')
+            } else if (confirContra && contra == confirContra) {
+                $('#msgConfir').text('¡Contraseñas valida!').removeClass().addClass('valido')
+            } else if (confirContra && contra != confirContra) {
+                return $('#msgConfir').text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
+            }
         }
     }
+
+    $('#confirContra').on('input', function(e) {
+        verifiContra(2)
+    })
+
+    $('#contra').on('input', function(e) {
+        verifiContra(1)
+    })
+
+    function seleccionarUsuario(id, tp) {
+        if (tp == 2) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchUsu/') ?>" + id,
+                dataType: 'json',
+                success: function(res) {
+                    $('#tp').val(2)
+                    $('#id').val(res[0]['id_usuario'])
+                    $('#nombreP').val(res[0]['nombre_p'])
+                    $('#nombreS').val(res[0]['nombre_s'])
+                    $('#apellidoP').val(res[0]['apellido_p'])
+                    $('#apellidoS').val(res[0]['apellido_s'])
+                    $('#tipoDoc').val(res[0]['tipo_doc'])
+                    $('#nIdenti').val(res[0]['n_identificacion'])
+                    // $('#telefono').val(res[0]['nombre_p'])
+                    // $('#email').val(res[0]['nombre_p'])
+                    $('#rol').val(res[0]['id_rol'])
+                    $('#contra').val('')
+                    $('#confirContra').val('')
+                }
+            })
+
+        } else {
+            $('#tp').val(1)
+            $('#id').val(0)
+            $('#nombreP').val('')
+            $('#nombreS').val('')
+            $('#apellidoP').val('')
+            $('#apellidoS').val('')
+            $('#tipoDoc').val('')
+            $('#nIdenti').val('')
+            $('#telefono').val('')
+            $('#email').val('')
+            $('#rol').val('')
+            $('#contra').val('')
+            $('#confirContra').val('')
+        }
+    }
+
+    $('#formularioUsuarios').on('submit', function(e) {
+        contra = $('#contra').val()
+        confirmContra = $('#confirContra').val()
+
+        if (contra != confirmContra) {
+
+        }
+    })
 </script>
