@@ -25,10 +25,9 @@ class RolesModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerTipoDoc()
+    public function obtenerRoles()
     {
-        $this->select('param_detalle.*,');
-        $this->where('id_param_enc', '1');
+        $this->select('roles.*,');
         $data = $this->findAll();
         return $data;
     }
