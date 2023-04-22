@@ -51,28 +51,19 @@ class Usuarios extends BaseController
 
         } else {
             //Insertar datos
-            if ($id != 0) {
-            } else {
-                $res = $this->usuarios->buscarUsuario(0, $nIdenti);
-                if (!empty($res)) {
-                    //Si la respuesta no esta vacia - error
-                    return json_encode(2);
-                } else {
-                    //Si la respuesta esta vacia - guardar
-                    $usuarioSave = [
-                        'id_rol' => $rol,
-                        'tipo_doc' => $tipoDoc,
-                        'n_identificacion' => $nIdenti,
-                        'nombre_p' => $nombreP,
-                        'nombre_s' => $nombreS,
-                        'apellido_p' => $apellidoP,
-                        'apellido_s' => $apellidoS,
-                        'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
-                    ];
-                    $this->usuarios->save($usuarioSave);
-                    return redirect()->to(base_url('usuarios'));
-                }
-            }
+            //Si la respuesta esta vacia - guardar
+            $usuarioSave = [
+                'id_rol' => $rol,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombreP,
+                'nombre_s' => $nombreS,
+                'apellido_p' => $apellidoP,
+                'apellido_s' => $apellidoS,
+                'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
+            ];
+            $this->usuarios->save($usuarioSave);
+            return redirect()->to(base_url('usuarios'));
         }
     }
 
@@ -89,6 +80,10 @@ class Usuarios extends BaseController
             }
         } else if ($nIdenti != 0) {
             $data = $this->usuarios->buscarUsuario(0, $nIdenti);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($id != 0 && $nIdenti != 0) {
+            $data = $this->usuarios->buscarUsuario($id, $nIdenti);
             array_push($array, $data);
             return json_encode($array);
         }

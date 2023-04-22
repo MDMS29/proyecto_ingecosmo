@@ -39,6 +39,10 @@ class UsuariosModel extends Model
         $this->select('usuarios.*');
         if ($id != 0) $this->where('id_usuario', $id);
         elseif ($nIdenti != 0) $this->where('n_identificacion', $nIdenti);
+        elseif ($id != 0 && $nIdenti != 0) {
+            $this->where('id_usuario', $id);
+            $this->where('n_identificacion', $nIdenti);
+        }
         $data = $this->first();
         return $data;
     }
