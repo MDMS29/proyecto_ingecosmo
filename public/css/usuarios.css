@@ -6,14 +6,22 @@
 
 /* -- BOTONES GENERALES -- */
 
-#btnCerrar {
-    background-color: var(--azulBase);
-    color: white;
+.btnRedireccion {
+    background-color: var(--azulBase) !important;
+    color: white !important;
 }
 
-#btnGuardar {
-    background-color: var(--rojoAcciones);
-    color: white;
+.btnAccionF {
+    background-color: var(--rojoAcciones) !important;
+    color: white !important;
+}
+
+/* -- HTML -- */
+.footer-page {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1em;
+    gap: 1rem;
 }
 
 
@@ -28,7 +36,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 150px;
+    top: 100px;
     border: 5px solid var(--azulBase) !important;
     border-radius: 10px;
     background-color: white;

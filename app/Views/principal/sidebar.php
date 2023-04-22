@@ -21,9 +21,6 @@
     <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('js/jquery.min.js')?>"></script>
     <script src="js/main.js"></script>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class=" d-flex align-items-stretch">

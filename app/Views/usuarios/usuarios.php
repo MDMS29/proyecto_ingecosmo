@@ -1,5 +1,5 @@
 <div id="content" class="p-4 p-md-5">
-    <h2 class="text-center"><span class="fa fa-user"></span> Usuarios del Sistema</h2>
+    <h1 class="text-center"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>"/> Usuarios Del Sistema</h1>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;">
         <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
             <thead>
@@ -33,7 +33,10 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?php echo 1 . ',' . 1 ?>)"><i class="bi bi-clipboard-plus"></i> Agregar</button>
+    <div class="footer-page">
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png')?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="<?= base_url('home')?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png')?>" alt="icon-plus" width="20"> Eliminados</a>
+    </div>
 </div>
 
 <form method="POST" action="<?php echo base_url('usuarios/insertar'); ?>" autocomplete="off" id="formularioUsuarios">
@@ -125,8 +128,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn" id="btnGuardar">Regitrarse</button>
-                        <button type="button" class="btn" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar" ><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -197,9 +200,10 @@
                     $('#labelNom').text('Cambiar Contraseña:')
                     $('#contra').val('')
                     $('#confirContra').val('')
+                    $('#btnGuardar').text('Actualizar')
                 }
             })
-
+            
         } else {
             //Insertar datos
             $('#tp').val(1)
@@ -216,6 +220,7 @@
             $('#contra').val('')
             $('#confirContra').val('')
             $('#labelNom').text('Contraseña:')
+            $('#btnGuardar').text('Agregar')
             
         }
     }
