@@ -1,7 +1,7 @@
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center"><span class="fa fa-user"></span> Usuarios del Sistema</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;">
-        <table class="table table-bordered table-sm table-striped table-hover" id="tablePaises" width="100%" cellspacing="0">
+        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -36,7 +36,7 @@
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?php echo 1 . ',' . 1 ?>)"><i class="bi bi-clipboard-plus"></i> Agregar</button>
 </div>
 
-<form method="POST" action="<?php echo base_url('instrUsu'); ?>" autocomplete="off" id="formularioUsuarios">
+<form method="POST" action="<?php echo base_url('usuarios/insertar'); ?>" autocomplete="off" id="formularioUsuarios">
     <div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
@@ -65,10 +65,8 @@
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
                                         <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                            <option selected>-- Seleccione --</option>
-                                            <?php foreach ($tipoDoc as $t) { ?>
-                                                <option value="<?= $t['id_param_det'] ?>"><?= $t['nombre'] ?></option>
-                                            <?php } ?>
+                                            <option value="1" selected>Cedula de Ciudadania</option>
+                                            <option>-- Seleccione --</option>
                                         </select>
                                     </div>
                                 </div>
@@ -112,7 +110,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombres" class="col-form-label">Contraseña:</label>
+                                    <label id="labelNom" for="nombres" class="col-form-label"> <!-- TEXTO DINAMICO --> </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
                                 </div>
@@ -179,6 +177,7 @@
 
     function seleccionarUsuario(id, tp) {
         if (tp == 2) {
+            //Actualizar datos
             $.ajax({
                 type: 'POST',
                 url: "<?php echo base_url('srchUsu/') ?>" + id,
@@ -190,47 +189,51 @@
                     $('#nombreS').val(res[0]['nombre_s'])
                     $('#apellidoP').val(res[0]['apellido_p'])
                     $('#apellidoS').val(res[0]['apellido_s'])
-                    $('#tipoDoc').val(res[0]['tipo_doc'])
+                    $('#tipoDoc').val(1)
                     $('#nIdenti').val(res[0]['n_identificacion'])
                     // $('#telefono').val(res[0]['nombre_p'])
                     // $('#email').val(res[0]['nombre_p'])
                     $('#rol').val(res[0]['id_rol'])
+                    $('#labelNom').text('Cambiar Contraseña:')
                     $('#contra').val('')
                     $('#confirContra').val('')
                 }
             })
 
         } else {
+            //Insertar datos
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
             $('#nombreS').val('')
             $('#apellidoP').val('')
             $('#apellidoS').val('')
-            $('#tipoDoc').val('')
+            $('#tipoDoc').val(1)
             $('#nIdenti').val('')
             $('#telefono').val('')
             $('#email').val('')
             $('#rol').val('')
             $('#contra').val('')
             $('#confirContra').val('')
+            $('#labelNom').text('Contraseña:')
+            
         }
     }
 
     $('#formularioUsuarios').on('submit', function(e) {
 
         tp = $('#tp').val()
-        nombreP = $('#nombreP').val('')
-        nombreS = $('#nombreS').val('')
-        apellidoP = $('#apellidoP').val('')
-        apellidoS = $('#apellidoS').val('')
-        tipoDoc = $('#tipoDoc').val('')
-        nIdenti = $('#nIdenti').val('')
-        telefono = $('#telefono').val('')
-        email = $('#email').val('')
-        rol = $('#rol').val('')
-        contra = $('#contra').val('')
-        confirContra = $('#confirContra').val('')
+        nombreP = $('#nombreP').val()
+        nombreS = $('#nombreS').val()
+        apellidoP = $('#apellidoP').val()
+        apellidoS = $('#apellidoS').val()
+        tipoDoc = $('#tipoDoc').val()
+        nIdenti = $('#nIdenti').val()
+        telefono = $('#telefono').val()
+        email = $('#email').val()
+        rol = $('#rol').val()
+        contra = $('#contra').val()
+        confirContra = $('#confirContra').val()
 
         if (tp == 2) {
             if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, rol, contra, confirContra].includes('')) {

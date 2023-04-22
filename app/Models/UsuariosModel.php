@@ -17,7 +17,7 @@ class UsuariosModel extends Model
     protected $allowedFields = ['id_rol', 'tipo_doc', 'n_identificacion', 'nombre_p', 'nombre_s', 'apellido_p', 'apellido_S', 'contrasena', 'estado', 'fecha_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
-    protected $createdField = 'fechaCrea'; /*fecha automatica para la creacion */
+    protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
     protected $updatedField = ''; /*fecha automatica para la edicion */
     protected $deletedField = ''; /*no se usara, es para la eliminacion fisica */
 
@@ -34,10 +34,11 @@ class UsuariosModel extends Model
         $data = $this->findAll();
         return $data;
     }
-    public function buscarUsuario($id)
+    public function buscarUsuario($id, $nIdenti)
     {
         $this->select('usuarios.*');
-        $this->where('id_usuario', $id);
+        if ($id != 0) $this->where('id_usuario', $id);
+        elseif ($nIdenti != 0) $this->where('n_identificacion', $nIdenti);
         $data = $this->first();
         return $data;
     }
