@@ -32,6 +32,7 @@ class Usuarios extends BaseController
     }
     public function insertar()
     {
+
         $tp = $this->request->getPost('tp');
         $id = $this->request->getPost('id');
         $nombreP = $this->request->getPost('nombre_p');
@@ -42,7 +43,9 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('nIdenti');
         $rol = $this->request->getPost('rol');
         $contra = $this->request->getVar('contra');
-        
+
+
+
         if ($tp == 2) {
             //Actualizar datos
 
@@ -53,7 +56,7 @@ class Usuarios extends BaseController
                 $res = $this->usuarios->buscarUsuario(0, $nIdenti);
                 if (!empty($res)) {
                     //Si la respuesta no esta vacia - error
-                    return "Error al insertar un documento ya existente";
+                    return json_encode(2);
                 } else {
                     //Si la respuesta esta vacia - guardar
                     $usuarioSave = [
@@ -67,16 +70,25 @@ class Usuarios extends BaseController
                         'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
                     ];
                     $this->usuarios->save($usuarioSave);
+                    return redirect()->to(base_url('usuarios'));
                 }
             }
         }
     }
 
-    public function buscarUsuario($id)
+    public function buscarUsuario($id, $nIdenti)
     {
+        // echo $nIdenti;
         $array = array();
-        $data = $this->usuarios->buscarUsuario($id, 0);
-        if (!empty($data)) {
+
+        if ($id != 0) {
+            $data = $this->usuarios->buscarUsuario($id, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nIdenti != 0) {
+            $data = $this->usuarios->buscarUsuario(0, $nIdenti);
             array_push($array, $data);
             return json_encode($array);
         }

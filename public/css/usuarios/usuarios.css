@@ -23,6 +23,10 @@
     padding-top: 1em;
     gap: 1rem;
 }
+label{
+    color: #1B335B;
+    font-weight: 600;
+}
 
 
 /* -- MODAL -- */
@@ -62,11 +66,11 @@
 
 /* -- CONTRASEÑA -- */
 
-#msgConfir.valido {
+#msgConfir.valido{
     color: green !important;
 }
 
-#msgConfir.invalido {
+#msgConfir.invalido, #msgDoc.invalido {
     color: red;
 }
 

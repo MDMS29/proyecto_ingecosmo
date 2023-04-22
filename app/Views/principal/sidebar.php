@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>"></link>
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/usuarios.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css')?>">
 
     <!-- SCRIPTS -->
     <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
