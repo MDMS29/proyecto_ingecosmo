@@ -1,6 +1,6 @@
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;">
+    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
         <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -142,7 +142,6 @@
 
 <script type="text/javascript">
     var inputIden = 0;
-
     //Verificacion de contraseñas
     function verifiContra(tipo) {
         contra = $('#contra').val()
@@ -179,8 +178,6 @@
     $('#contra').on('input', function(e) {
         verifiContra(1)
     })
-    //FIN
-
     //Insertar y editar Usuario
     function seleccionarUsuario(id, tp) {
         if (tp == 2) {
@@ -219,8 +216,8 @@
             $('#apellidoS').val('')
             $('#tipoDoc').val(1)
             $('#nIdenti').val('')
-            $('#telefono').val('')
-            $('#email').val('')
+            // $('#telefono').val('')
+            // $('#email').val('')
             $('#rol').val('')
             $('#contra').val('')
             $('#confirContra').val('')
@@ -229,8 +226,23 @@
 
         }
     }
-    //FIN
-
+    //Funcion para buscar usuario segun su identificacion
+    function buscarUsuarioIdent(id, inputIden) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgDoc').text('')
+                    validIdent = true
+                } else if (res[0] != null) {
+                    $('#msgDoc').text('* Numero de identificación invalido *')
+                    validIdent = false
+                }
+            }
+        })
+    }
     //Identificar si el numero de identificacion no este registrado
     var validIdent; //Valor para la identificación si es valido o invalido
     $('#nIdenti').on('input', function(e) {
@@ -238,20 +250,7 @@
         tp = $('#tp').val()
         id = $('#id').val()
         if (tp == 1 && id == 0) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchUsu/') ?>" + 0 + "/" + inputIden,
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res[0] == null) {
-                        $('#msgDoc').text('')
-                        validIdent = true
-                    } else if (res[0] != null) {
-                        $('#msgDoc').text('* Numero de identificación invalido *')
-                        validIdent = false
-                    }
-                }
-            })
+            buscarUsuarioIdent(0, inputIden)
         } else if (tp == 2 && id != 0) {
             $.ajax({
                 type: 'POST',
@@ -262,28 +261,13 @@
                         $('#msgDoc').text('')
                         validIdent = true
                     } else {
-                        $.ajax({
-                            type: 'POST',
-                            url: "<?php echo base_url('srchUsu/') ?>" + 0 + "/" + inputIden,
-                            dataType: 'JSON',
-                            success: function(res) {
-                                if (res[0] == null) {
-                                    $('#msgDoc').text('')
-                                    validIdent = true
-                                } else if (res[0] != null) {
-                                    $('#msgDoc').text('* Numero de identificación invalido *')
-                                    validIdent = false
-                                }
-                            }
-                        })
+                        buscarUsuarioIdent(0, inputIden)
                     }
                 }
             })
         }
     })
-    //FIN
-
-
+    //Envio de formulario
     $('#formularioUsuarios').on('submit', function(e) {
         tp = $('#tp').val()
         nombreP = $('#nombreP').val()

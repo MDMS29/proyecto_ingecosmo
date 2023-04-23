@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css')?>">
 
+    <link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
+
     <!-- SCRIPTS -->
     <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('js/jquery.min.js')?>"></script>
@@ -31,7 +33,7 @@
             <!-- <h1><a class="logo"></a></h1> -->
             <ul id="allElement"class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" ><?php echo session('nombre',' ','apellido');?></p></a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px;" src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" ><?php echo session('rol');?></p></a>
                 </li>
                 <li>
                     <a href="#"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span><p id="pa">Trabajadores</p></a>
@@ -58,7 +60,7 @@
                     <a href="<?php echo base_url('usuarios')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
                 </li>
                 <li>
-                   <a href="<?php echo base_url('/salir')?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
+                   <a href="<?php echo base_url('salir')?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
                 </li>
             </ul>
             <nav>

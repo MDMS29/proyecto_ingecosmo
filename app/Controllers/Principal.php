@@ -22,6 +22,5 @@ class Principal extends BaseController
     {
         echo view('/principal/sidebar');
         echo view('/principal/principal');
-        // echo view('/principal/footer');
     }
 }

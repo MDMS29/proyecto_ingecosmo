@@ -26,7 +26,7 @@
                 <input type="text" name="usuario" id="usuario" class="form-control">
                 <br>
                 <p class="texto">CONTRASEÑA</p>
-                <input type="text" name="contrasena" id="contrasena" class="form-control">
+                <input type="password" name="contrasena" id="contrasena" class="form-control">
             </div>
 
             <div class="botones-login">

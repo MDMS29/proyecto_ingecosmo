@@ -29,7 +29,6 @@ class Usuarios extends BaseController
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
-        echo view('/principal/footer');
     }
     public function insertar()
     {
@@ -106,7 +105,8 @@ class Usuarios extends BaseController
 
             $data = [
                 "nombre" => $datos['nombre_p'],
-                "apellido" => $datos['apellido_p']
+                "apellido" => $datos['apellido_p'],
+                "rol" => $datos['nombre_rol']
             ];
 
             $session = session();
