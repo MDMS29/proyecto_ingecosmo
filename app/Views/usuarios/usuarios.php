@@ -1,7 +1,7 @@
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -94,11 +94,17 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Telefono:</label>
-                                    <input type="number" name="telefono" class="form-control" id="telefono">
+                                    <div class="d-flex">
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                    </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
-                                    <input type="email" name="email" class="form-control" id="email">
+                                    <div class="d-flex">
+                                        <input type="email" name="email" class="form-control" id="email">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarEmail" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                    </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
@@ -138,10 +144,58 @@
     </div>
 </form>
 
+<div class="modal fade" id="agregarTelefono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
+                        <div class="d-flex gap-2" style="width: 100%;">
+                            <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                            <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
+                        </div>
+                        <div class="d-flex gap-2" style="width: 100%;">
+                            <label for="prioridad" class="col-form-label">Prioridad:</label>
+                            <select class="form-select form-select" name="prioridad" id="prioridad">
+                                <option selected value="">-- Seleccione --</option>
+                                <option value="P">Primaria</option>
+                                <option value="S">Secundaria</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Telefono</th>
+                                    <th>Priodidad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyTel">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
     var inputIden = 0;
+    const telefonos = [] //Telefonos del usuario.
     //Verificacion de contraseñas
     function verifiContra(tipo) {
         contra = $('#contra').val()
@@ -292,4 +346,77 @@
             })
         }
     })
+    //Funcion para mostrar telefono
+    function guardarTelefono(info) {
+        telefonos.push(info)
+        var cadena
+        for (let i = 0; i < telefonos.length; i++) {
+            cadena += ` <tr class="text-center">
+                               <td>${telefonos[i].telefono}</td>
+                               <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                               <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
+                           </tr>`
+            $('#bodyTel').html(cadena)
+        }
+    }
+    //Agregar Telefono a la tabla
+    $('#btnAddTel').on('click', function(e) {
+        contador = 0
+        const tp = $('#tp').val()
+        const telefono = $('#telefonoAdd').val()
+        const prioridad = $('#prioridad').val()
+        if (tp == 2) {
+
+        } else {
+            if ([telefono, prioridad].includes('')) {
+                return Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: '¡Hay campos vacios!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+            let info = {
+                id: contador += 1,
+                telefono,
+                prioridad
+            }
+
+
+            const filtro = telefonos.filter(tel => tel.prioridad == 'P')
+            const filtroTel = telefonos.filter(tel => tel.telefono == telefono)
+
+            
+            if (filtroTel.length != 0) {
+                return Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: '¡Ya se agrego este numero de telefono!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                return guardarTelefono(info)
+            }
+
+
+            if (filtro.length > 0) {
+                return Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: '¡Ya hay un telefono prioritario!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else if (info.prioridad == 'S') {
+                return guardarTelefono(info)
+            }
+        }
+    })
+
+    function eliminarTel(id) {
+        const tele = telefonos.map(tel => tel.id != id)
+        console.log(tele)
+    }
 </script>

@@ -28,6 +28,11 @@ label{
     font-weight: 600;
 }
 
+table{
+    background-color: white;
+    border: 5px solid #161666;
+    border-radius: 10px;
+}
 
 /* -- MODAL -- */
 
