@@ -30,53 +30,61 @@
 
     <div class="d-flex">
         <nav id="sidebar" class="active">
-
             <!-- <h1><a class="logo"></a></h1> -->
-            <ul id="allElement"class="list-unstyled components mb-5">
-                <li class="active">
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" >Almacenista</p></a>
-                </li>
-                <li>
-                    <a href="#"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span><p id="pa">Trabajadores</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/></span><p id="pa">Clientes</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Materiales</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/></span><p id="pa">Vehiculos</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>"/></span><p id="pa">Proveedores</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>"/></span><p id="pa">Historial</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>"/></span><p id="pa">Estanteria</p></a>
-                </li>
-                <li>
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
-                </li>
-                <li>
-                   <a href="#" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
-                </li>
-            </ul>
+            <div class=" d-flex justify-content-between flex-column" style="height:95vh;">
+                <ul id="allElement" class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" >Almacenista</p></a>
+                    </li>
+                    <li>
+                        <a href="#"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span><p id="pa">Trabajadores</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/></span><p id="pa">Clientes</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Materiales</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/></span><p id="pa">Vehiculos</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>"/></span><p id="pa">Proveedores</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>"/></span><p id="pa">Historial</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>"/></span><p id="pa">Estanteria</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
+                    </li>
+                    <li>
+                       <a href="#" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
+                    </li>
+                </ul>
+            </div>
             <nav>
-                <div class="container-fluid d-flex justify-content-center" style="position:relative; bottom: 10px">
-                    <button  type="button" id="sidebarCollapse" class="btn btn-primary">
-                        <i  class="fa fa-bars"></i>
+                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top:5px">
+                    <button  type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
+                        <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>"/></i>
                         <span class="sr-only">Toggle Menu</span>
                     </button>
                 </div>
             </nav>
         </nav>
-
     </div>
+
 <div>
-        <a href=""><img  class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>"/></a>
+    <a href=""><img class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>"/></a>
+</div>
 
-    </div>
+<script>
+    document.querySelectorAll(".menu").forEach(el => {
+        el.addEventListener("click", () => {
+            el.classList.toggle("rotate");
+        });
+    });
+</script>
 

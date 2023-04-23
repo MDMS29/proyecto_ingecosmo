@@ -12,12 +12,10 @@ $(document).ready(function ($) {
 			$('.js-fullheight').css('height', $(window).height());
 		});
 	};
-
 	fullHeight();
 
 	$('#sidebarCollapse').on('click', function () {
 		$('#sidebar').toggleClass('active');
-
 		if (document.getElementById("sidebar").className == 'active') {
 			var elm = document.querySelectorAll("[id='aa']");
 			for (var i = 0; i < elm.length; i++) {
