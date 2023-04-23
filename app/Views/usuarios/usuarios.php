@@ -1,5 +1,5 @@
 <div id="content" class="p-4 p-md-5">
-    <h2 class="text-center"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
         <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
@@ -383,12 +383,11 @@
                 prioridad
             }
 
-
             const filtro = telefonos.filter(tel => tel.prioridad == 'P')
             const filtroTel = telefonos.filter(tel => tel.telefono == telefono)
 
-            
-            if (filtroTel.length != 0) {
+            if (filtroTel.length > 0) {
+                filtroTel.length = 0
                 return Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -396,22 +395,23 @@
                     showConfirmButton: false,
                     timer: 1500
                 })
-            } else {
-                return guardarTelefono(info)
             }
-
-
             if (filtro.length > 0) {
-                return Swal.fire({
+                filtro.length = 0
+                Swal.fire({
                     position: 'center',
                     icon: 'error',
                     text: '¡Ya hay un telefono prioritario!',
                     showConfirmButton: false,
                     timer: 1500
                 })
-            } else if (info.prioridad == 'S') {
+            } if (info.prioridad == 'S') {
+                return guardarTelefono(info)
+            } else {
                 return guardarTelefono(info)
             }
+
+
         }
     })
 

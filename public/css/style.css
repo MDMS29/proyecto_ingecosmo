@@ -33,6 +33,30 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+*::-webkit-scrollbar,
+body::-webkit-scrollbar{
+  -webkit-appearance: none;
+}
+*::-webkit-scrollbar:vertical,            
+body::-webkit-scrollbar:vertical{
+  width: 5px;
+}
+*::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb{
+  background-color: #797979;
+  border-radius: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 *,
 *::before,
 *::after {
