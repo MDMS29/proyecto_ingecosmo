@@ -29,11 +29,10 @@
 
     <div class="d-flex">
         <nav id="sidebar" class="active">
-
             <!-- <h1><a class="logo"></a></h1> -->
             <ul id="allElement"class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px;" src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" ><?php echo session('rol');?></p></a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" >Almacenista</p></a>
                 </li>
                 <li>
                     <a href="#"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span><p id="pa">Trabajadores</p></a>
@@ -57,25 +56,32 @@
                     <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>"/></span><p id="pa">Estanteria</p></a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('usuarios')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
+                <a href="<?php echo base_url('usuarios')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
                 </li>
                 <li>
-                   <a href="<?php echo base_url('salir')?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
+                <a href="<?php echo base_url('salir')?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
                 </li>
             </ul>
             <nav>
-                <div class="container-fluid d-flex justify-content-center" style="position:relative; bottom: 10px">
-                    <button  type="button" id="sidebarCollapse" class="btn btn-primary">
-                        <i  class="fa fa-bars"></i>
+                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top:5px">
+                    <button  type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
+                        <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>"/></i>
                         <span class="sr-only">Toggle Menu</span>
                     </button>
                 </div>
             </nav>
         </nav>
-
     </div>
+
 <div>
-        <a href=""><img  class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>"/></a>
+    <a href=""><img class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>"/></a>
+</div>
 
-    </div>
+<script>
+    document.querySelectorAll(".menu").forEach(el => {
+        el.addEventListener("click", () => {
+            el.classList.toggle("rotate");
+        });
+    });
+</script>
 
