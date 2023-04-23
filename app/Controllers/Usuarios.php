@@ -33,6 +33,7 @@ class Usuarios extends BaseController
     }
     public function insertar()
     {
+
         $tp = $this->request->getPost('tp');
         $id = $this->request->getPost('id');
         $nombreP = $this->request->getPost('nombre_p');
@@ -43,41 +44,47 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('nIdenti');
         $rol = $this->request->getPost('rol');
         $contra = $this->request->getVar('contra');
-        
+
+
+
         if ($tp == 2) {
             //Actualizar datos
 
         } else {
             //Insertar datos
-            if ($id != 0) {
-            } else {
-                $res = $this->usuarios->buscarUsuario(0, $nIdenti);
-                if (!empty($res)) {
-                    //Si la respuesta no esta vacia - error
-                    return "Error al insertar un documento ya existente";
-                } else {
-                    //Si la respuesta esta vacia - guardar
-                    $usuarioSave = [
-                        'id_rol' => $rol,
-                        'tipo_doc' => $tipoDoc,
-                        'n_identificacion' => $nIdenti,
-                        'nombre_p' => $nombreP,
-                        'nombre_s' => $nombreS,
-                        'apellido_p' => $apellidoP,
-                        'apellido_s' => $apellidoS,
-                        'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
-                    ];
-                    $this->usuarios->save($usuarioSave);
-                }
-            }
+            //Si la respuesta esta vacia - guardar
+            $usuarioSave = [
+                'id_rol' => $rol,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombreP,
+                'nombre_s' => $nombreS,
+                'apellido_p' => $apellidoP,
+                'apellido_s' => $apellidoS,
+                'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
+            ];
+            $this->usuarios->save($usuarioSave);
+            return redirect()->to(base_url('usuarios'));
         }
     }
 
     public function buscarUsuario($id, $nIdenti)
     {
+        // echo $nIdenti;
         $array = array();
-        $data = $this->usuarios->buscarUsuario($id, 0);
-        if (!empty($data)) {
+
+        if ($id != 0) {
+            $data = $this->usuarios->buscarUsuario($id, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nIdenti != 0) {
+            $data = $this->usuarios->buscarUsuario(0, $nIdenti);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($id != 0 && $nIdenti != 0) {
+            $data = $this->usuarios->buscarUsuario($id, $nIdenti);
             array_push($array, $data);
             return json_encode($array);
         }

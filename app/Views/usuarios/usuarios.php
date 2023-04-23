@@ -1,5 +1,5 @@
 <div id="content" class="p-4 p-md-5">
-    <h1 class="text-center"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>"/> Usuarios Del Sistema</h1>
+    <h2 class="text-center"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;">
         <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
             <thead>
@@ -34,8 +34,8 @@
         </table>
     </div>
     <div class="footer-page">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png')?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?= base_url('home')?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png')?>" alt="icon-plus" width="20"> Eliminados</a>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="<?= base_url('home') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -49,9 +49,9 @@
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
                 </div>
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="tituloModal">Agregar Usuario</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header flex">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -84,9 +84,10 @@
                                     <input type="text" name="apellido_s" class="form-control" id="apellidoS">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <div class="mb-3">
+                                    <div class="">
                                         <label for="nIdenti" class="col-form-label">N° Identificación:</label>
-                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti">
+                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11">
+                                        <small id="msgDoc" class="invalido"></small>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +130,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar" ><!-- TEXTO DIANMICO --></button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -140,6 +141,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+    var inputIden = 0;
+
+    //Verificacion de contraseñas
     function verifiContra(tipo) {
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
@@ -169,23 +173,24 @@
             }
         }
     }
-
     $('#confirContra').on('input', function(e) {
         verifiContra(2)
     })
-
     $('#contra').on('input', function(e) {
         verifiContra(1)
     })
+    //FIN
 
+    //Insertar y editar Usuario
     function seleccionarUsuario(id, tp) {
         if (tp == 2) {
             //Actualizar datos
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('srchUsu/') ?>" + id,
+                url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + 0,
                 dataType: 'json',
                 success: function(res) {
+                    $('#tituloModal').text('Editar Usuario')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_usuario'])
                     $('#nombreP').val(res[0]['nombre_p'])
@@ -203,9 +208,9 @@
                     $('#btnGuardar').text('Actualizar')
                 }
             })
-            
         } else {
             //Insertar datos
+            $('#tituloModal').text('Agregar Usuario')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
@@ -221,9 +226,63 @@
             $('#confirContra').val('')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
-            
+
         }
     }
+    //FIN
+
+    //Identificar si el numero de identificacion no este registrado
+    var validIdent; //Valor para la identificación si es valido o invalido
+    $('#nIdenti').on('input', function(e) {
+        inputIden = $('#nIdenti').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchUsu/') ?>" + 0 + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0] == null) {
+                        $('#msgDoc').text('')
+                        validIdent = true
+                    } else if (res[0] != null) {
+                        $('#msgDoc').text('* Numero de identificación invalido *')
+                        validIdent = false
+                    }
+                }
+            })
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['n_identificacion'] == inputIden) {
+                        $('#msgDoc').text('')
+                        validIdent = true
+                    } else {
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?php echo base_url('srchUsu/') ?>" + 0 + "/" + inputIden,
+                            dataType: 'JSON',
+                            success: function(res) {
+                                if (res[0] == null) {
+                                    $('#msgDoc').text('')
+                                    validIdent = true
+                                } else if (res[0] != null) {
+                                    $('#msgDoc').text('* Numero de identificación invalido *')
+                                    validIdent = false
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    })
+    //FIN
+
 
     $('#formularioUsuarios').on('submit', function(e) {
         tp = $('#tp').val()
@@ -237,29 +296,16 @@
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
-
-        if (tp == 2) {
-            if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra) {
-                e.preventDefault()
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Hay campos vacios o las contraseña no coinciden!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        } else {
-            if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol, contra, confirContra].includes('')) {
-                e.preventDefault()
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Hay campos vacios o las contraseña no coinciden!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } 
+        //Control de campos vacios
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false) {
+            e.preventDefault()
+            return Swal.fire({
+                position: 'center',
+                icon: 'error',
+                text: '¡Hay campos vacios o invalidos!',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     })
 </script>

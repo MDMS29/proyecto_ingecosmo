@@ -37,7 +37,9 @@ $routes->get('/salir', 'Usuarios::salir');
 
 
 $routes->post('/instrUsu', 'Usuarios::insertar'); //Buscar Usuario
-$routes->post('/srchUsu/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Buscar Usuario
+
+
+$routes->post('/srchUsu/(:num)/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Buscar Usuario
 
 /*
  * --------------------------------------------------------------------
