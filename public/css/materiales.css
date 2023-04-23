@@ -1,9 +1,36 @@
 .card-title {
     color: rgb(0, 0, 0);
     text-align: center;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
 }
 
-.contenedor {
+#MasBaterias{
+    display: flex;
+    justify-content: center;
+    bottom: 50px;
+
+}
+
+
+#contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+#imagenBateria{
+    position: absolute;
+    height: 85px;
+    width: 70px;
+    left: 65rem;
+    top: 27px;
+    border-radius: 0px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,59 +43,135 @@
     justify-content: center;
     align-items: center;
     background: linear-gradient(to bottom right, white 50%, #3F48CC 51%);
-    margin: 10px;
-    width: 17rem;
-    height: 20rem;
-}
-.Imagenes{
-    align-items: center;
-    flex-direction: row;
-    
+    margin: 30px;
+    width: 217px;
+    height: 267px;
+    padding: 20px;
 }
 
-.contenido1{
+.Imagenes {
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.contenido1 {
     height: 50%;
     width: 100%;
     display: flex;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     padding-top: 20px;
 }
-.contenido2{
+
+.contenido2 {
     height: 50%;
     width: 100%;
     padding-right: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     display: flex;
     justify-content: flex-end;
-    align-items:flex-end;
+    display: end;
+    align-items: flex-end;
 }
 
 .baterias {
-    width: 90px;
+    height: 85px;
+    width: 70px;
+    left: 1256px;
+    top: 272px;
+    border-radius: 0px;
     padding-bottom: 20px;
 }
 
-.Regresar {
+.tituloBaterias{
+    height: 85px;
+    width: 70px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+#Regresar {
     background-color: #161666;
     position: absolute;
-    width: 145px;
-    height: 30px;
+    width: 185px;
+    height: 45px;
     left: 1157px;
     top: 900px;
     color: white;
     text-align: center;
 }
 
-.Agregar {
+#Agregar {
     background-color: #E25050;
+    color: white;
     position: absolute;
-    width: 145px;
-    height: 30px;
+    width: 185px;
+    height: 45px;
     left: 1396px;
     top: 900px;
-    color: white;
     text-align: center;
 
+}
+
+#titulo{
+    text-align: center;
+}
+
+.detalles {
+    position: absolute;
+    left: 28rem;
+    top: 10px;
+    width: 50px;
+    padding-bottom: 20px;
+}
+
+.logoIngecosmo {
+    position: absolute;
+    left: 1rem;
+    top: 10px;
+    width: 60px;
+    padding-bottom: 20px;
+}
+
+.modal-content {
+    flex-wrap: wrap
+}
+
+.botones {
+    position: absolute;
+    width: 431.58px;
+    height: 45px;
+    left: 300px;
+    top: 2rem;
+    text-align: center;
+   justify-content: end;
+}
+
+#agregar{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 30%;
+    height: 30px;
+}
+
+.activar{
+    position: absolute;
+    height: 85px;
+    width: 70px;
+    left: 1rem;
+    bottom: 5px;
+    border-radius: 0px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap
 }
