@@ -46,7 +46,7 @@
         <div class="modal-dialog modal-xl">
             <div class="body">
                 <div class="logo">
-                    <img src="<?= base_url('images/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
                 </div>
                 <div class="modal-content">
                     <div class="modal-header">

@@ -31,7 +31,7 @@
             <!-- <h1><a class="logo"></a></h1> -->
             <ul id="allElement"class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" >Almacenista</p></a>
+                    <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>"/></span><p id="pa" ><?php echo session('nombre',' ','apellido');?></p></a>
                 </li>
                 <li>
                     <a href="#"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span><p id="pa">Trabajadores</p></a>
@@ -58,7 +58,7 @@
                     <a href="<?php echo base_url('usuarios')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/></span><p id="pa">Usuarios</p></a>
                 </li>
                 <li>
-                   <a href="#" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
+                   <a href="<?php echo base_url('/salir')?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/></span><p id="pa">Cerrar Sesion</p></a>
                 </li>
             </ul>
             <nav>

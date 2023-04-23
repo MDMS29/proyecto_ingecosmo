@@ -29,6 +29,7 @@ class Usuarios extends BaseController
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
+        echo view('/principal/footer');
     }
     public function insertar()
     {
@@ -72,7 +73,7 @@ class Usuarios extends BaseController
         }
     }
 
-    public function buscarUsuario($id)
+    public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
         $data = $this->usuarios->buscarUsuario($id, 0);
@@ -80,5 +81,41 @@ class Usuarios extends BaseController
             array_push($array, $data);
             return json_encode($array);
         }
+    }
+
+    public function login()
+    {
+        $nIdenti = $this->request->getPost('usuario');
+        $contrasena = $this->request->getVar('contrasena');
+        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
+
+
+        // $Usuario = new Usuarios();
+        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
+
+            echo $nIdenti;
+
+            //Aqui puedes meter toda la info del user que aparcera en el home
+
+            $data = [
+                "nombre" => $datos['nombre_p'],
+                "apellido" => $datos['apellido_p']
+            ];
+
+            $session = session();
+            $session->set($data); //agregamos los datos obtenidos del usuario
+
+            return redirect()->to(base_url('/home'));
+        } else {
+            return redirect()->to(base_url('/'));
+        }
+    }
+
+
+    public function salir()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to(base_url('/'));
     }
 }
