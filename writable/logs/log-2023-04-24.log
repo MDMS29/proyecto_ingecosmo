@@ -1,0 +1,22 @@
+CRITICAL - 2023-04-24 16:06:50 --> Undefined array key "nombre_categoria"
+in APPPATH\Views\materiales\materiales.php on line 9.
+ 1 APPPATH\Views\materiales\materiales.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nombre_categoria"', 'APPPATH\\Views\\materiales\\materiales.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\materiales\\materiales.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/materiales/materiales', [], true)
+ 5 APPPATH\Controllers\Materiales.php(21): view('/materiales/materiales', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Materiales->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materiales))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-24 16:10:54 --> Undefined array key "nombre_categoria"
+in APPPATH\Views\materiales\materiales.php on line 9.
+ 1 APPPATH\Views\materiales\materiales.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nombre_categoria"', 'APPPATH\\Views\\materiales\\materiales.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\materiales\\materiales.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/materiales/materiales', [], true)
+ 5 APPPATH\Controllers\Materiales.php(21): view('/materiales/materiales', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Materiales->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materiales))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()

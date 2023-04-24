@@ -1,99 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="css/materiales.css">
+<script src="jquery-3.6.4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/materiales.css">
-  <script src="jquery-3.6.4.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  <title>Materiales</title>
-</head>
+<div id="content" class="p-4 p-md-5">
+  <div class="MasBaterias" id="MasBaterias">
+    <img src="<?php echo base_url('/img/baterias.png') ?>" id="imagenBateria" />
+    <h5><?php echo $data[0]['nombre_categoria']?></h5>
 
+  </div>
+  <div id="contenedor">
+    <?php foreach ($data as $dato) { ?>
 
-<body>
+      <div class="card">
 
-  <div id="content" class="p-4 p-md-5">
-    <div class="MasBaterias" id="MasBaterias">
-      <h5>Baterias</h5>
-      <img src="<?php echo base_url('/img/baterias.png') ?>" id="imagenBateria" />
-
-    </div>
-    <div id="contenedor">
-      <?php foreach ($data as $dato) { ?>
-
-        <div class="card">
-
-          <div class="contenido1">
-            <img src="<?php echo base_url('/img/baterias.png') ?>" class="baterias" />
-            <h5 class="card-title"><?php echo $dato['nombre']; ?></h5>
-          </div>
-          <br>
-          <br>
-
-          <div class="contenido2">
-            <div class="Imagenes">
-              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo"></input>
-              <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterialModal" type="image" src="<?php echo base_url(); ?>/img/usarM.png" width="30" height="30" title="Usar insumo"></input>
-            </div>
-          </div>
-
+        <div class="contenido1">
+          <img src="<?php echo base_url('/img/baterias.png') ?>" class="baterias" />
+          <h5 class="card-title"><?php echo $dato['nombre']; ?></h5>
         </div>
-      <?php } ?>
-      <div class="botones">
-        <a href="<?php echo base_url('/principal'); ?>" class="btn Regresar" id="Regresar">Regresar</a>
-        <a href="" onclick="seleccionarMaterial(<?php echo 1 . ',' . 1 ?>);" class="btn Agregar" id="Agregar" data-bs-toggle="modal" type="image" src="<?php echo base_url(); ?>/img/agregar11.png" width="30" height="30" data-bs-target="#materialesModal">Agregar</a>
-      </div>
+        <br>
+        <br>
 
-    </div>
+        <div class="contenido2">
+          <div class="Imagenes">
+            <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo"></input>
+            <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterialModal" type="image" src="<?php echo base_url(); ?>/img/usarM.png" width="30" height="30" title="Usar insumo"></input>
+          </div>
+        </div>
+
+      </div>
+    <?php } ?>
+  </div>
+  <div class="footer-page">
+    <button href="<?php echo base_url('/principal'); ?>" class="btn btnRegresar" id="Regresar">Regresar</button>
+    <button type="button" class="btn btnAgregar" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="seleccionarMaterial(<?php echo 1 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
   </div>
 
   <!-- Modal -->
   <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="modal-content">
 
-          <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detalles</h5>
+        <div class="modal-header" id="modal-header">
+          <div class="header2">
+            <img src="<?php echo base_url('/img/masDetalles.png') ?>" class="detalles" />
+            <h5 class="modal-title text-center" id="exampleModalLabel">Detalles</h5>
+          </div>
 
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-          <img src="<?php echo base_url('/img/masDetalles.png') ?>" class="detalles" />
 
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
         </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="row" style="flex-direction: row;">
-              <div class="col-xs-100 col-md-100">
-                <div class="form-group two-fields">
+        <div class="modal-body" id="modal-body">
 
-                  <div class="input-group">
-                    <label for="exampleDataList" class="form-label" style="padding: 5px; margin:5px; top:20px;font-weight: 500;">Precio de Venta</label>
-                    <input class="form-control" list="datalistOptions" style="padding: 5px; margin:5px; width:10px;text-align:center;font-weight: bold;" id="precioVenta" name="precioVenta" placeholder="" disabled>
 
-                    <label for="exampleDataList" class="form-label" style="padding: 5px; margin:5px; top:20px;font-weight: 500;">Precio de Compra</label>
-                    <input class="form-control" list="datalistOptions" style="padding: 5px; margin:5px; width:10px;text-align:center;font-weight: bold;" id="precioCompra" name="precioCompra" placeholder="" disabled>
+          <div class="campos">
 
-                    <label for="exampleDataList" class="form-label" style="padding: 5px; margin:5px; top:20px;font-weight: 500;">Cantidad Vendida</label>
-                    <input class="form-control" list="datalistOptions" style="padding: 5px; margin:5px; width:10px;text-align:center;font-weight: bold;" id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
-                    <label for="exampleDataList" class="form-label" style="padding: 5px; margin:5px; top:20px;text-align:center;font-weight: 500;">Cantidad Actual</label>
-                    <input class="form-control" list="datalistOptions" style="padding: 5px; margin:5px; width:10px;text-align:center;font-weight: bold;" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <label for="exampleDataList" class="form-label">Precio de Venta</label>
+            <input type="text" class="form-control" list="datalistOptions" id="precioVenta" name="precioVenta" placeholder="" disabled>
           </div>
 
+          <div class="campos">
 
+            <label for="exampleDataList" class="form-label">Precio de Compra</label>
+            <input type="text" class="form-control" list="datalistOptions" id="precioCompra" name="precioCompra" placeholder="" disabled>
+          </div>
 
+          <div class="campos">
+
+            <label for="exampleDataList" class="form-label">Cantidad Vendida</label>
+            <input type="text" class="form-control" list="datalistOptions" id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
+          </div>
+
+          <div class="campos">
+
+            <label for="exampleDataList" class="form-label">Cantidad Actual</label>
+            <input type="text" class="form-control" list="datalistOptions" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
+          </div>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-cerrar mx-auto" style="background-color: #161666; width: 118px; height: 45px;color: #ffffff;" data-bs-dismiss="modal">Cerrar</button>
+
+        <div class="modal-footer" id="modal-footer">
+          <button type="button" class="btn btn-Cerrar mx-auto" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -179,7 +169,7 @@
         url: dataURL,
         dataType: "json",
         success: function(rs) {
-          $("#titulo").text('Mas Detalles');
+          $("#titulo").text('');
           $("#precioVenta").val(rs[0]['precio_venta']);
           $("#precioCompra").val(rs[0]['precio_compra']);
           $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
@@ -189,7 +179,3 @@
       })
     }
   </script>
-</body>
-
-
-</html>

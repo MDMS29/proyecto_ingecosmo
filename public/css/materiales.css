@@ -1,3 +1,27 @@
+:root {
+    --azulBase: #161666;
+    --rojoAcciones: #EF434D;
+}
+
+
+/* -- BOTONES GENERALES -- */
+
+.btnRegresar {
+    background-color: var(--azulBase) !important;
+    color: white !important;
+}
+
+.btnAgregar {
+    background-color: var(--rojoAcciones) !important;
+    color: white !important;
+}
+.footer-page{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1em;
+    gap: 1rem;
+}
+
 .card-title {
     color: rgb(0, 0, 0);
     text-align: center;
@@ -10,7 +34,10 @@
 #MasBaterias{
     display: flex;
     justify-content: center;
-    bottom: 50px;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
 
 }
 
@@ -24,18 +51,11 @@
 }
 
 #imagenBateria{
-    position: absolute;
-    height: 85px;
+    height: 60px;
     width: 70px;
-    left: 65rem;
-    top: 27px;
-    border-radius: 0px;
-    padding-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap
+    margin-right: 20px;
+
+
 }
 
 .card {
@@ -75,7 +95,6 @@
     display: end;
     align-items: flex-end;
 }
-
 .baterias {
     height: 85px;
     width: 70px;
@@ -85,73 +104,79 @@
     padding-bottom: 20px;
 }
 
-.tituloBaterias{
-    height: 85px;
+.detalles {
+    width: 50px;
+    margin-right: 10px;
+  
+}
+.logoIngecosmo {
+    position: absolute;
+    left: 1rem;
+    top: 10px;
     width: 70px;
+    padding-bottom: 30px;
+}
+
+#detalles-modal {
     display: flex;
-    padding: 10px;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap
 }
+#modal-content{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
-#Regresar {
-    background-color: #161666;
-    position: absolute;
-    width: 185px;
-    height: 45px;
-    left: 1157px;
-    top: 900px;
-    color: white;
+#modal-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+
+}
+#modal-footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#modal-body{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 250px;
+   
+}
+.campos{
+    width: 300px;
+    padding-left:20px;
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    /* padding: 5px; 
+    margin:5px;
+     width:10px;
+     text-align:center;
+     font-weight: bold; */
+}
+
+input[type="text"]{
     text-align: center;
 }
 
-#Agregar {
-    background-color: #E25050;
-    color: white;
-    position: absolute;
-    width: 185px;
-    height: 45px;
-    left: 1396px;
-    top: 900px;
-    text-align: center;
-
-}
-
-#titulo{
-    text-align: center;
-}
-
-.detalles {
-    position: absolute;
-    left: 28rem;
-    top: 10px;
-    width: 50px;
-    padding-bottom: 20px;
-}
-
-.logoIngecosmo {
-    position: absolute;
-    left: 1rem;
-    top: 10px;
-    width: 60px;
-    padding-bottom: 20px;
-}
-
-.modal-content {
-    flex-wrap: wrap
-}
-
-.botones {
-    position: absolute;
-    width: 431.58px;
-    height: 45px;
-    left: 300px;
-    top: 2rem;
-    text-align: center;
-   justify-content: end;
-}
 
 #agregar{
     position: absolute;
@@ -160,18 +185,16 @@
     left: 30%;
     height: 30px;
 }
-
 .activar{
     position: absolute;
     height: 85px;
     width: 70px;
     left: 1rem;
     bottom: 5px;
-    border-radius: 0px;
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap
+}
+#btnCerrar{
+    background-color: #161666; 
+    width: 118px; 
+    height: 40px;
+    color: #ffffff;
 }
