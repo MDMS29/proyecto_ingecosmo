@@ -28,6 +28,30 @@
 
 <body class=" d-flex align-items-stretch">
 
+<nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059">
+  <div class="container-fluid">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+   <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>"/>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>"/> Almacenista</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/> Trabajadores</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/> Clientes</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/> Materiales</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/> Vehiculos</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>"/> Proveedores</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>"/> Hisotrial</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>"/> Estanteria</a></li>
+            <li><a class="dropdown-item" href="#" style="color: white">"<img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>"/> Usuarios</a></li>
+            <li><hr class="dropdown-divider" style="border-color: white"></li>
+            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>"/> Cerrar Sesion</a></li>
+         </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
     <div class="d-flex">
         <nav id="sidebar" class="active">
             <!-- <h1><a class="logo"></a></h1> -->
