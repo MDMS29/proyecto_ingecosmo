@@ -14,28 +14,30 @@
 
 <body class="container-lg d-flex align-items-center justify-content-center ">
     <div class="login">
+            <form action="<?php echo base_url('/login') ?>" method="POST">
 
-        <p class="texto-titulo" >LOGIN</p>
+            <p class="texto-titulo">LOGIN</p>
 
-        <div class="logo">
-            <img class="logo-ingecosmo" src="<?php echo base_url('/images/logo.png'); ?>">
+            <div class="logo">
+                <img class="logo-ingecosmo" src="<?php echo base_url('/img/logo.png'); ?>">
+            </div>
+
+            <div class="bloque-items">
+                <p class="texto">NUMERO DE IDENTIFICACION</p>
+                <input type="text" name="usuario" id="usuario" class="form-control">
+                <br>
+                <p class="texto">CONTRASEÑA</p>
+                <input type="password" name="contrasena" id="contrasena" class="form-control">
+            </div>
+
+            <div class="botones-login">
+                <button class="btn-ingresar">INGRESAR</button>
+            </div>
+
+        </form>
         </div>
 
-        <div class="bloque-items">
-            <p class="texto">NUMERO DE IDENTIFICACION</p>
-            <input type="text" class="form-control">
-            <br>
-            <p class="texto">CONTRASEÑA</p>
-            <input type="text" class="form-control">
-        </div>
 
-        <div class="botones-login">
-            <button>INGRESAR</button>
-        </div>
-
-    </div>
-
-   
 </body>
 
 </html>
