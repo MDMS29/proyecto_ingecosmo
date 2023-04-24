@@ -61,7 +61,7 @@
                 <ul id="allElement" class="list-unstyled components mb-5">
                     <li class="active">
                         <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
-                            <p id="pa">Almacenista</p>
+                            <p id="pa"><?= session('rol')?></p>
                         </a>
                     </li>
                     <li>

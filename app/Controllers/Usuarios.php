@@ -32,19 +32,16 @@ class Usuarios extends BaseController
     }
     public function insertar()
     {
-
         $tp = $this->request->getPost('tp');
         $id = $this->request->getPost('id');
-        $nombreP = $this->request->getPost('nombre_p');
-        $nombreS = $this->request->getPost('nombre_s');
-        $apellidoP = $this->request->getPost('apellido_p');
-        $apellidoS = $this->request->getPost('apellido_s');
+        $nombreP = $this->request->getPost('nombreP');
+        $nombreS = $this->request->getPost('nombreS');
+        $apellidoP = $this->request->getPost('apellidoP');
+        $apellidoS = $this->request->getPost('apellidoS');
         $tipoDoc = $this->request->getPost('tipoDoc');
         $nIdenti = $this->request->getPost('nIdenti');
-        $rol = $this->request->getPost('rol');
+        $rol = $this->request->getVar('rol');
         $contra = $this->request->getVar('contra');
-
-
 
         if ($tp == 2) {
             //Actualizar datos
@@ -63,7 +60,7 @@ class Usuarios extends BaseController
                 'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
             ];
             $this->usuarios->save($usuarioSave);
-            return redirect()->to(base_url('usuarios'));
+            return json_encode($this->usuarios->getInsertID());
         }
     }
 
@@ -104,6 +101,7 @@ class Usuarios extends BaseController
             //Aqui puedes meter toda la info del user que aparcera en el home
 
             $data = [
+                "id" => $datos['id_usuario'],
                 "nombre" => $datos['nombre_p'],
                 "apellido" => $datos['apellido_p'],
                 "rol" => $datos['nombre_rol']

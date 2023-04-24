@@ -38,8 +38,9 @@
         <a href="<?= base_url('home') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
-
-<form method="POST" action="<?php echo base_url('usuarios/insertar'); ?>" autocomplete="off" id="formularioUsuarios">
+<!-- method="POST" action="<? #php echo base_url('usuarios/insertar'); 
+                            ?>" -->
+<form autocomplete="off" id="formularioUsuarios">
     <div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
@@ -178,6 +179,9 @@
                                 </tr>
                             </thead>
                             <tbody id="bodyTel">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY TELEFONOS</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -195,7 +199,7 @@
 
 <script type="text/javascript">
     var inputIden = 0;
-    const telefonos = [] //Telefonos del usuario.
+    let telefonos = [] //Telefonos del usuario.
     //Verificacion de contraseñas
     function verifiContra(tipo) {
         contra = $('#contra').val()
@@ -297,6 +301,7 @@
             }
         })
     }
+
     //Identificar si el numero de identificacion no este registrado
     var validIdent; //Valor para la identificación si es valido o invalido
     $('#nIdenti').on('input', function(e) {
@@ -325,12 +330,13 @@
     $('#formularioUsuarios').on('submit', function(e) {
         tp = $('#tp').val()
         nombreP = $('#nombreP').val()
+        nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
         apellidoS = $('#apellidoS').val()
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
-        telefono = $('#telefono').val()
-        email = $('#email').val()
+        // telefono = $('#telefono').val()
+        // email = $('#email').val()
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
@@ -344,24 +350,77 @@
                 showConfirmButton: false,
                 timer: 1500
             })
-        }
+        } else {
+            dataUser = {
+                tp,
+                nombreP,
+                nombreS,
+                apellidoP,
+                apellidoS,
+                tipoDoc,
+                nIdenti,
+                rol,
+                contra,
+                telefonos
+            }
+            $.post({
+                url: '<?php echo base_url('usuarios/insertar') ?>',
+                data: dataUser,
+                success: function(id) {
+                    e.preventDefault()
+                    telefonos.forEach(tel => {
+                        $.post({
+                            url: '<?php echo base_url('telefonos/insertar') ?>',
+                            data: {
+                                idUsu,
+                                numero: tel.telefono,
+                                prioridad: tel.prioridad,
+                                tipoUsu: 7,
+                                tipoTel: 3,
+                            },
+                            success: function(res) {
+                                if (res == 1) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        text: '¡Se ha registrado el usuario!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    window.location.href = "usuarios";
+                                }
+                            }
+                        })
+                    });
+
+                }
+            });
+        };
     })
-    //Funcion para mostrar telefono
-    function guardarTelefono(info) {
-        telefonos.push(info)
+    // Funcion para mostrar telefono
+    function guardarTelefono() {
         var cadena
-        for (let i = 0; i < telefonos.length; i++) {
+        if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
-                               <td>${telefonos[i].telefono}</td>
-                               <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                               <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
-                           </tr>`
+                            <td colspan="3">NO HAY TELEFONOS</td>
+                        </tr>`
             $('#bodyTel').html(cadena)
+        } else {
+            for (let i = 0; i < telefonos.length; i++) {
+                cadena += ` <tr class="text-center">
+                <td>${telefonos[i].telefono}</td>
+                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
+                </tr>`
+            }
         }
+        $('#bodyTel').html(cadena)
     }
-    //Agregar Telefono a la tabla
+
+    var contador = 0;
+    // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
-        contador = 0
+
         const tp = $('#tp').val()
         const telefono = $('#telefonoAdd').val()
         const prioridad = $('#prioridad').val()
@@ -382,12 +441,12 @@
                 telefono,
                 prioridad
             }
-
-            const filtro = telefonos.filter(tel => tel.prioridad == 'P')
-            const filtroTel = telefonos.filter(tel => tel.telefono == telefono)
-
+            let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+            let filtroTel = telefonos.filter(tel => tel.telefono == info.telefono)
+            $('#telefonoAdd').val('')
+            $('#prioridad').val('')
             if (filtroTel.length > 0) {
-                filtroTel.length = 0
+                filtro = []
                 return Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -396,27 +455,30 @@
                     timer: 1500
                 })
             }
-            if (filtro.length > 0) {
-                filtro.length = 0
-                Swal.fire({
+            if (info.prioridad == 'S') {
+                telefonos.push(info)
+                return guardarTelefono()
+            } else if (filtro.length > 0) {
+                filtro = []
+                return Swal.fire({
                     position: 'center',
                     icon: 'error',
                     text: '¡Ya hay un telefono prioritario!',
                     showConfirmButton: false,
                     timer: 1500
                 })
-            } if (info.prioridad == 'S') {
-                return guardarTelefono(info)
             } else {
-                return guardarTelefono(info)
+                telefonos.push(info)
+                return guardarTelefono()
             }
-
-
         }
     })
 
     function eliminarTel(id) {
-        const tele = telefonos.map(tel => tel.id != id)
-        console.log(tele)
+        telefonos = telefonos.filter(tel => tel.id != id)
+        // telefonos = telefonoActu
+        console.log(telefonos)
+        guardarTelefono()
+        // telefonos = telefonoActu
     }
 </script>
