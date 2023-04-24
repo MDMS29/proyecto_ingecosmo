@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
+                        <a href="<?php echo base_url(); ?>proveedores" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
                             <p id="pa">Proveedores</p>
                         </a>
                     </li>

@@ -1,0 +1,77 @@
+INFO - 2023-04-24 00:46:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:46:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:46:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:47:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:47:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:47:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 00:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 01:01:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 01:12:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 01:12:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-04-24 01:31:02 --> Invalid file: "/usuarios/proveedores.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('/usuarios/proveedores.php')
+ 2 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/usuarios/proveedores', [], true)
+ 3 APPPATH\Controllers\Proveedores.php(18): view('/usuarios/proveedores')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Proveedores->index()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Proveedores))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-24 01:41:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-24 01:41:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-04-24 02:02:19 --> Undefined variable $proveedores
+in APPPATH\Views\proveedores\proveedores.php on line 15.
+ 1 APPPATH\Views\proveedores\proveedores.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $proveedores', 'APPPATH\\Views\\proveedores\\proveedores.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\proveedores\\proveedores.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/proveedores/proveedores', [], true)
+ 5 APPPATH\Controllers\Proveedores.php(18): view('/proveedores/proveedores')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Proveedores->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Proveedores))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-24 02:13:25 --> Undefined variable $proveedores
+in APPPATH\Views\proveedores\proveedores.php on line 15.
+ 1 APPPATH\Views\proveedores\proveedores.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $proveedores', 'APPPATH\\Views\\proveedores\\proveedores.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\proveedores\\proveedores.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/proveedores/proveedores', [], true)
+ 5 APPPATH\Controllers\Proveedores.php(20): view('/proveedores/proveedores')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Proveedores->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Proveedores))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-24 02:15:14 --> Undefined variable $u
+in APPPATH\Views\proveedores\proveedores.php on line 18.
+ 1 APPPATH\Views\proveedores\proveedores.php(18): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $u', 'APPPATH\\Views\\proveedores\\proveedores.php', 18)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\proveedores\\proveedores.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/proveedores/proveedores', [], true)
+ 5 APPPATH\Controllers\Proveedores.php(20): view('/proveedores/proveedores')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Proveedores->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Proveedores))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-24 02:17:07 --> Undefined variable $proveedores
+in APPPATH\Views\proveedores\proveedores.php on line 15.
+ 1 APPPATH\Views\proveedores\proveedores.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $proveedores', 'APPPATH\\Views\\proveedores\\proveedores.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\proveedores\\proveedores.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/proveedores/proveedores', [], true)
+ 5 APPPATH\Controllers\Proveedores.php(20): view('/proveedores/proveedores')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Proveedores->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Proveedores))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-24 02:23:23 --> Undefined variable $proveedores
+in APPPATH\Views\proveedores\proveedores.php on line 15.
+ 1 APPPATH\Views\proveedores\proveedores.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $proveedores', 'APPPATH\\Views\\proveedores\\proveedores.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\proveedores\\proveedores.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/proveedores/proveedores', [], true)
+ 5 APPPATH\Controllers\Proveedores.php(20): view('/proveedores/proveedores')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Proveedores->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Proveedores))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
