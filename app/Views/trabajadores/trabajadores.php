@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<form method="POST" action="<?php echo base_url('trabajadores/insertar'); ?>" autocomplete="off" id="formularioTrabajadores">
+<form autocomplete="off" id="formularioTrabajadores">
     <div class="modal fade" id="agregarTrabajador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
@@ -334,6 +334,7 @@
         e.preventDefault()
         tp = $('#tp').val()
         nombreP = $('#nombreP').val()
+        nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
         apellidoS = $('#apellidoS').val()
         tipoDoc = $('#tipoDoc').val()
@@ -343,7 +344,7 @@
         telefono = $('#telefono').val()
         email = $('#email').val()
         //Control de campos vacios
-        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || correos.length == 0 || telefonos.length == 0) {
             return Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -362,7 +363,6 @@
                 nIdenti,
                 direccion,
                 cargo,
-                contra,
                 telefonos
             }
             $.post({
@@ -373,10 +373,10 @@
                         $.post({
                             url: '<?php echo base_url('telefonos/insertar') ?>',
                             data: {
-                                idTrabajador: idTrabCreado,
+                                idUsuario: idTrabCreado,
                                 numero: tel.telefono,
                                 prioridad: tel.prioridad,
-                                tipoUsu: 7,
+                                tipoUsu: 6,
                                 tipoTel: 3,
                             },
                             success: function(res) {
@@ -395,10 +395,10 @@
                             $.post({
                                 url: '<?php echo base_url('email/insertar') ?>',
                                 data: {
-                                    idTrabajador: idTrabCreado,
+                                    idUsuario: idTrabCreado,
                                     correo: correo.correo,
                                     prioridad: correo.prioridad,
-                                    tipoUsu: 7,
+                                    tipoUsu: 6,
                                 },
                                 success: function(res) {
                                     if (res != 1) {

@@ -35,10 +35,10 @@ class Trabajadores extends BaseController
 
         $tp = $this->request->getPost('tp');
         $id = $this->request->getPost('id');
-        $nombreP = $this->request->getPost('nombre_p');
-        $nombreS = $this->request->getPost('nombre_s');
-        $apellidoP = $this->request->getPost('apellido_p');
-        $apellidoS = $this->request->getPost('apellido_s');
+        $nombre_p= $this->request->getPost('nombreP');
+        $nombre_s = $this->request->getPost('nombreS');
+        $apellido_p = $this->request->getPost('apellidoP');
+        $apellido_s = $this->request->getPost('apellidoS');
         $tipoDoc = $this->request->getPost('tipoDoc');
         $nIdenti = $this->request->getPost('nIdenti');
         $cargo = $this->request->getPost('cargo');
@@ -54,12 +54,12 @@ class Trabajadores extends BaseController
             //Si la respuesta esta vacia - guardar
             $trabajadorSave = [
                 'id_cargo' => $cargo,
-                'tipo_doc' => $tipoDoc,
+                'tipo_identificacion' => $tipoDoc,
                 'n_identificacion' => $nIdenti,
-                'nombre_p' => $nombreP,
-                'nombre_s' => $nombreS,
-                'apellido_p' => $apellidoP,
-                'apellido_s' => $apellidoS,
+                'nombre_p' => $nombre_p,
+                'nombre_s' => $nombre_s,
+                'apellido_p' => $apellido_p,
+                'apellido_s' => $apellido_s,
                 'direccion' => $direccion,
                 
             ];
