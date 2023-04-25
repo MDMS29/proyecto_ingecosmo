@@ -32,4 +32,10 @@ class TelefonosModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function buscarTelefono($numero){
+        $this->select('id_telefono, numero, prioridad');
+        $this->where('numero' , $numero);
+        $data = $this->first();
+        return $data;
+    }
 }

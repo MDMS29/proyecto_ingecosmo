@@ -159,6 +159,7 @@
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                             <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
+                            <small id="msgTel" class="invalido"></small>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
@@ -249,6 +250,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+    var contador = 0;
+    var contadorCorreo = 0;
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
@@ -417,6 +420,7 @@
                 data: dataUser,
                 success: function(idUserCreado) {
                     telefonos.forEach(tel => {
+                        //Insertar Telefonos
                         $.post({
                             url: '<?php echo base_url('telefonos/insertar') ?>',
                             data: {
@@ -439,6 +443,7 @@
                             }
                         })
                         correos.forEach(correo => {
+                            //Insertar Correos
                             $.post({
                                 url: '<?php echo base_url('email/insertar') ?>',
                                 data: {
@@ -470,53 +475,11 @@
                         })
                         setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                     });
-
                 }
             });
         };
     })
-    // Funcion para mostrar telefono en la tabla.
-    function guardarTelefono() {
-        $('#telefono').val(telefonos[0].telefono)
-        var cadena
-        if (telefonos.length == 0) {
-            cadena += ` <tr class="text-center">
-            <td colspan="3">NO HAY TELEFONOS</td>
-            </tr>`
-            $('#bodyTel').html(cadena)
-        } else {
-            for (let i = 0; i < telefonos.length; i++) {
-                cadena += ` <tr class="text-center">
-                <td>${telefonos[i].telefono}</td>
-                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
-                </tr>`
-            }
-        }
-        $('#bodyTel').html(cadena)
-    }
-    // Funcion para mostrar telefono en la tabla.
-    function guardarCorreo() {
-        $('#email').val(correos[0].correo)
-        var cadena
-        if (correos.length == 0) {
-            cadena += ` <tr class="text-center">
-                            <td colspan="3">NO HAY CORREOS</td>
-                        </tr>`
-            $('#bodyCorre').html(cadena)
-        } else {
-            for (let i = 0; i < correos.length; i++) {
-                cadena += ` <tr class="text-center">
-                <td>${correos[i].correo}</td>
-                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                <td><button class="btn" onclick="eliminarTel(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
-                </tr>`
-            }
-        }
-        $('#bodyCorre').html(cadena)
-    }
-    var contador = 0;
-    var contadorCorreo = 0;
+
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
 
@@ -572,6 +535,48 @@
             }
         }
     })
+
+    $('#telefonoAdd').on('input', function(e) {
+        $.post({
+            url: '<?php echo base_url('telefonos/buscarTelefono') ?>',
+            data: {
+                numero: $('#telefonoAdd').val()
+            },
+            success: function(data) {
+                console.log(data)
+                if(data.length > 0) {
+                    $('#msgTel').text('')
+                }
+            }
+        })
+    })
+
+    // Funcion para mostrar telefonos en la tabla.
+    function guardarTelefono() {
+        $('#telefono').val(telefonos[0]?.telefono)
+        var cadena
+        if (telefonos.length == 0) {
+            cadena += ` <tr class="text-center">
+            <td colspan="3">NO HAY TELEFONOS</td>
+            </tr>`
+            $('#bodyTel').html(cadena)
+        } else {
+            for (let i = 0; i < telefonos.length; i++) {
+                cadena += ` <tr class="text-center">
+                <td>${telefonos[i].telefono}</td>
+                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
+                </tr>`
+            }
+        }
+        $('#bodyTel').html(cadena)
+    }
+
+    function eliminarTel(id) {
+        telefonos = telefonos.filter(tel => tel.id != id)
+        guardarTelefono() //Actualizar tabla
+    }
+
     //Agregar Correo a la tabla
     $('#btnAddCorre').on('click', function(e) {
 
@@ -627,14 +632,29 @@
             }
         }
     })
-
-    function eliminarTel(id) {
-        telefonos = telefonos.filter(tel => tel.id != id)
-        guardarTelefono() //Actualizar tabla
+    // Funcion para mostrar correos en la tabla.
+    function guardarCorreo() {
+        $('#email').val(correos[0]?.correo)
+        var cadena
+        if (correos.length == 0) {
+            cadena += ` <tr class="text-center">
+                            <td colspan="3">NO HAY CORREOS</td>
+                        </tr>`
+            $('#bodyCorre').html(cadena)
+        } else {
+            for (let i = 0; i < correos.length; i++) {
+                cadena += ` <tr class="text-center">
+                <td>${correos[i].correo}</td>
+                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                <td><button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
+                </tr>`
+            }
+        }
+        $('#bodyCorre').html(cadena)
     }
 
     function eliminarCorreo(id) {
         correos = correos.filter(correo => correo.id != id)
-        guardarTelefono() //Actualizar tabla
+        guardarCorreo() //Actualizar tabla
     }
 </script>
