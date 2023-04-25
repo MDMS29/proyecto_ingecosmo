@@ -1,0 +1,191 @@
+:root {
+    --azulBase: #161666;
+    --rojoAcciones: #EF434D;
+}
+
+
+/* -- BOTONES GENERALES -- */
+
+.btnRedireccion {
+    background-color: var(--rojoAcciones) !important;
+    color: white !important;
+}
+
+.btnAccionF {
+    background-color: var(--azulBase) !important;
+    color: white !important;
+}
+
+.footer-page{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1em;
+    gap: 1rem;
+}
+
+.card-title {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#MasBaterias{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+}
+
+
+#contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+#imagenBateria{
+    height: 60px;
+    width: 70px;
+    margin-right: 20px;
+
+
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, white 50%, #3F48CC 50.2%);
+    margin: 30px;
+    width: 13rem; 
+    height:18rem;
+    padding: 20px;
+}
+
+.Imagenes {
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.contenido1 {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.contenido2 {
+    height: 50%;
+    width: 100%;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    display: end;
+    align-items: flex-end;
+}
+.baterias {
+    height: 85px;
+    width: 70px;
+    left: 1256px;
+    top: 272px;
+    border-radius: 0px;
+    padding-bottom: 20px;
+}
+
+.detalles {
+    width: 50px;
+    margin-right: 10px;
+  
+}
+.logoIngecosmo {
+    position: absolute;
+    left: 1rem;
+    top: 10px;
+    width: 70px;
+    padding-bottom: 30px;
+}
+
+#detalles-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+#modal-content{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#modal-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+
+}
+#modal-footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#modal-body{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 250px;
+   
+}
+.campos{
+    width: 300px;
+    padding-left:20px;
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+}
+
+input[type="text"]{
+    text-align: center;
+}
+
+
+#agregar{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 30%;
+    height: 30px;
+}
+.activar{
+    position: absolute;
+    height: 85px;
+    width: 70px;
+    left: 1rem;
+    bottom: 5px;
+}
+
