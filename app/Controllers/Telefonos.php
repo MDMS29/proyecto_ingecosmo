@@ -22,7 +22,7 @@ class Telefonos extends BaseController
         $tipoUsu = $this->request->getPost('tipoUsu');
         $tipoTel = $this->request->getPost('tipoTel');
         $usuarioCrea = session('id');
-        
+
         $data = [
             'id_usuario' => $idUsu,
             'numero' => $numero,
@@ -35,16 +35,11 @@ class Telefonos extends BaseController
             return json_encode(1);
         }
     }
-    public function buscarTelefono(){
+    public function buscarTelefono($numero)
+    {
         $array = array();
-        $numero = $this->request->getPost('numero');
-        
         $data = $this->telefonos->buscarTelefono($numero);
-        if(!empty($data)){
-            array_push($array, $data);
-            return json_encode($array);
-        }else{
-            return json_encode($array);
-        }
+        array_push($array, $data);
+        return json_encode($array);
     }
 }

@@ -158,8 +158,10 @@
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="telefonoAdd" class="col-form-label">Telefono:</label>
-                            <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
-                            <small id="msgTel" class="invalido"></small>
+                            <div >
+                                <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
+                                <small id="msgTel" class="invalido"></small>
+                            </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
@@ -479,7 +481,6 @@
             });
         };
     })
-
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
 
@@ -489,11 +490,11 @@
         if (tp == 2) {
 
         } else {
-            if ([telefono, prioridad].includes('')) {
+            if ([telefono, prioridad].includes('') || validTel == false) {
                 return Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    text: '¡Hay campos vacios!',
+                    text: '¡Hay campos vacios o invalidos!',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -537,20 +538,23 @@
     })
 
     $('#telefonoAdd').on('input', function(e) {
-        $.post({
-            url: '<?php echo base_url('telefonos/buscarTelefono') ?>',
-            data: {
-                numero: $('#telefonoAdd').val()
-            },
-            success: function(data) {
-                console.log(data)
-                if(data.length > 0) {
+        numero = $('#telefonoAdd').val()
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('telefonos/buscarTelefono/') ?>" + numero ,
+            dataType: 'JSON',
+            success: function(res) {
+                console.log(res)
+                if (res[0] == null) {
                     $('#msgTel').text('')
+                    validTel = true
+                } else if (res[0] != null) {
+                    $('#msgTel').text('* Este telefono ya esta registrado *')
+                    validTel = false
                 }
             }
         })
     })
-
     // Funcion para mostrar telefonos en la tabla.
     function guardarTelefono() {
         $('#telefono').val(telefonos[0]?.telefono)
@@ -571,7 +575,6 @@
         }
         $('#bodyTel').html(cadena)
     }
-
     function eliminarTel(id) {
         telefonos = telefonos.filter(tel => tel.id != id)
         guardarTelefono() //Actualizar tabla
