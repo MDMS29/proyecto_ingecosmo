@@ -4,17 +4,17 @@ namespace App\Models; //Reservamos el espacio de nombre de la ruta app\models
 
 use CodeIgniter\Model;
 
-class TelefonosModel extends Model
+class EmailModel extends Model
 {
-    protected $table = 'telefonos'; /* nombre de la tabla modelada/*/
-    protected $primaryKey = 'id_telefono';
+    protected $table = 'email'; /* nombre de la tabla modelada/*/
+    protected $primaryKey = 'id_email';
 
     protected $useAutoIncrement = true; /* Si la llave primaria se genera con autoincremento*/
 
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_usuario', 'numero', 'tipo_telefono', 'tipo_usuario', 'prioridad', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_usuario', 'email',  'prioridad', 'tipo_usuario', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -25,10 +25,10 @@ class TelefonosModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerTelefonoUser($id)
+    public function obtenerEmailUser($id)
     {
-        $this->select('id_telefono, numero, prioridad');
-        $this->where('id_usuario' , $id);
+        $this->select('id_email, email, prioridad');
+        $this->where('id_usuario', $id);
         $data = $this->findAll();
         return $data;
     }
