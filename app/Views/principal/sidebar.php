@@ -12,19 +12,37 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-    
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>"></link>
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('css/usuarios.css')?>">
 
     <!-- SCRIPTS -->
+    
+
+    <!-- SCRIPTS SHADIA -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
-    <script src="<?= base_url('js/jquery.min.js')?>"></script>
-    <script src="js/main.js"></script>
+    <script src="<?php echo base_url('js/jquery.min.js')?>"></script>
+    <script src="<?php echo base_url('js/main.js')?>"></script>
+    <script src="<?php echo base_url('js/popper.js')?>"></script>
+    <script src="<?php echo base_url('bootstrap5/js/bootstrap.min.js')?>"></script> 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/categorias.css">
+
+
+    
+
 </head>
 
 <body class=" d-flex align-items-stretch">
@@ -39,8 +57,8 @@
             <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>"/> Almacenista</a></li>
             <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/> Trabajadores</a></li>
             <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/> Clientes</a></li>
-            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>"/> Repuestos</a></li>
-            <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/> Insumos</a></li>
+            <li><a class="dropdown-item" href="<?php echo base_url()?>Categoria" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>"/> Repuestos</a></li>
+            <li><a class="dropdown-item" href="<?php echo base_url()?>Categoria" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/> Insumos</a></li>
             <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/> Vehiculos</a></li>
             <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>"/> Proveedores</a></li>
             <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>"/> Hisotrial</a></li>
@@ -69,10 +87,10 @@
                         <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>"/></span><p id="pa">Clientes</p></a>
                     </li>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>"/></span><p id="pa">Repuestos</p></a>
+                        <a href="<?php echo base_url()?>CategoriaRepuesto" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>"/></span><p id="pa">Repuestos</p></a>
                     </li>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Insumos</p></a>
+                        <a href="<?php echo base_url()?>Categoria" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Insumos</p></a>
                     </li>
                     <li>
                         <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>"/></span><p id="pa">Vehiculos</p></a>
@@ -108,6 +126,7 @@
 <div>
     <a href=""><img class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>"/></a>
 </div>
+
 
 <script>
     document.querySelectorAll(".menu").forEach(el => {
