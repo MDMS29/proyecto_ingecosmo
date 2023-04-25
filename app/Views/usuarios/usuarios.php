@@ -213,7 +213,7 @@
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
-                            <select class="form-select form-select" name="prioridad" id="prioridadCorreo">
+                            <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
                                 <option value="P">Primaria</option>
                                 <option value="S">Secundaria</option>
@@ -317,7 +317,7 @@
             })
         } else {
             //Insertar datos
-            $('#tituloModal').text('Agregar Usuario')
+            $('#tituloModal').text('Agregar')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
@@ -427,32 +427,48 @@
                                 tipoTel: 3,
                             },
                             success: function(res) {
-                                correos.forEach(correo => {
-                                    $.post({
-                                        url: '<?php echo base_url('email/insertar') ?>',
-                                        data: {
-                                            idUsuario: idUserCreado,
-                                            correo: correo.correo,
-                                            prioridad: correo.prioridad,
-                                            tipoUsu: 7,
-                                        },
-                                        success: function(res) {
-
-                                            if (res == 1) {
-                                                Swal.fire({
-                                                    position: 'center',
-                                                    icon: 'success',
-                                                    text: '¡Se ha registrado el usuario!',
-                                                    showConfirmButton: false,
-                                                    timer: 2000
-                                                })
-                                                setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
-                                            }
-                                        }
+                                if (res != 1) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        text: '¡Ha ocurrido un error!',
+                                        showConfirmButton: false,
+                                        timer: 2000
                                     })
-                                });
+                                }
                             }
                         })
+                        correos.forEach(correo => {
+                            $.post({
+                                url: '<?php echo base_url('email/insertar') ?>',
+                                data: {
+                                    idUsuario: idUserCreado,
+                                    correo: correo.correo,
+                                    prioridad: correo.prioridad,
+                                    tipoUsu: 7,
+                                },
+                                success: function(res) {
+                                    if (res != 1) {
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'error',
+                                            text: '¡Ha ocurrido un error!',
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        })
+                                        setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
+                                    }
+                                }
+                            })
+                        });
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            text: '¡Se ha registrado el usuario!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                     });
 
                 }
@@ -588,7 +604,7 @@
                 return Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    text: '¡Ya se agrego este numero de correo!',
+                    text: '¡Ya se agrego este correo!',
                     showConfirmButton: false,
                     timer: 1500
                 })
