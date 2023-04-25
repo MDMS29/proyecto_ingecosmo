@@ -64,15 +64,15 @@ class Filters extends BaseConfig
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
     public array $filters = [
-         'session' => [
-             'before' => [
-                 /* -- RUTAS DEFINIDAS -- */
-                 // 'paises', 
-                 // 'paises/*', 
-                 'home',
-                 'usuarios',
-                 'usuarios/*'
-             ]
-         ]
+
+        'session' => [
+            'before' => [ 
+                'home',
+                'usuarios',
+                'usuarios/*',
+                'trabajadores',
+                'trabajadores/*'
+            ]
+        ]
     ];
 }
