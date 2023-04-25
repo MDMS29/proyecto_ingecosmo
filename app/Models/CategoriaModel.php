@@ -26,14 +26,7 @@ class CategoriaModel extends Model{
 
  
 
-    public function obtenerCategorias()
-    {
-        $this->select('materiales.*, param_encabezado.nombre as nombre_categoria');
-        $this->join('param_detalle', 'param_detalle.id_param_enc = materiales.categoria_material');
-        $this->where('id_param_enc', '10');
-        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
-        return $datos;
-    }
+    
     // public function traerDetalles($id_material){
     //     $this->select('materiales.*');
     //     $this->where('id_material', $id_material);

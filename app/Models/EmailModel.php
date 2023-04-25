@@ -4,17 +4,17 @@ namespace App\Models; //Reservamos el espacio de nombre de la ruta app\models
 
 use CodeIgniter\Model;
 
-class ParamModel extends Model
+class EmailModel extends Model
 {
-    protected $table = 'param_detalle'; /* nombre de la tabla modelada/*/
-    protected $primaryKey = 'id_param_det';
+    protected $table = 'email'; /* nombre de la tabla modelada/*/
+    protected $primaryKey = 'id_email';
 
     protected $useAutoIncrement = true; /* Si la llave primaria se genera con autoincremento*/
 
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_param_enc', 'nombre', 'resumen', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_usuario', 'email',  'prioridad', 'tipo_usuario', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -25,18 +25,11 @@ class ParamModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerTipoDoc()
+    public function obtenerEmailUser($id)
     {
-        $this->select('param_detalle.*,');
-        $this->where('id_param_enc', '1');
+        $this->select('id_email, email, prioridad');
+        $this->where('id_usuario', $id);
         $data = $this->findAll();
         return $data;
-    }
-    public function obtenerCategorias()
-    {
-        $this->select('param_detalle.*');
-        $this->where('id_param_enc', '10');
-        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
-        return $datos;
     }
 }

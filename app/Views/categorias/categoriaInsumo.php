@@ -1,7 +1,10 @@
+<link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>">
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
         <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">MATERIALES</h1>
         <button class="btnRegresar">Regresar</button>
+
+
 
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
@@ -11,7 +14,7 @@
                             <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
                                 <img class="iconos" src="<?php echo base_url('/img/imagen2.png'); ?>">
                                 <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Baterias</h5>
+                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Baterias<?= $data['nombre']?></h5>
                                     <a href="#" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
                                 </div>
                             </div>

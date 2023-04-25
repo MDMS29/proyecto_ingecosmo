@@ -33,9 +33,12 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Principal::index'); // Vista directa al Login
 $routes->get('/home', 'Principal::home'); //Vista de entrada al home
 
-
 $routes->post('/instrUsu', 'Usuarios::insertar'); //Buscar Usuario
-$routes->post('/srchUsu/(:num)', 'Usuarios::buscarUsuario/$1'); //Buscar Usuario
+$routes->post('/srchUsu/(:num)/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Buscar Usuario
+$routes->post('/login', 'Usuarios::login');
+$routes->get('/salir', 'Usuarios::salir');
+
+
 
 /*
  * --------------------------------------------------------------------

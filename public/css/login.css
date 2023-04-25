@@ -18,11 +18,18 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border: 10px solid #1B335B;
     border-radius: 10px;
     width: 400px;
     height: 440px;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .logo {
@@ -35,7 +42,6 @@ body {
 .logo-ingecosmo {
     height: 90px;
     width: 160px;
-
 }
 
 .texto{
@@ -61,7 +67,7 @@ input, input:focus {
     padding-top: 25px;
 }
 
-button {
+.btn-ingresar{
     font-weight: bolder;
     /* text-align: center; */
     font-family: 'Nunito', sans-serif;

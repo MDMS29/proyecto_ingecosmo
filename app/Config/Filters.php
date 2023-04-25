@@ -65,10 +65,10 @@ class Filters extends BaseConfig
      */
     public array $filters = [
         // 'session' => [
-        //     'before' => [
-        //         /* -- RUTAS DEFINIDAS -- */
-        //         // 'paises', 
-        //         // 'paises/*', 
+        //     'before' => [ 
+        //         'home',
+        //         'usuarios',
+        //         'usuarios/*'
         //     ]
         // ]
     ];
