@@ -1,0 +1,67 @@
+:root {
+    --azulBase: #161666;
+    --rojoAcciones: #EF434D;
+}
+
+
+/* -- BOTONES GENERALES -- */
+
+#btnCerrar {
+    background-color: var(--azulBase);
+    color: white;
+}
+
+#btnGuardar {
+    background-color: var(--rojoAcciones);
+    color: white;
+}
+
+
+/* -- MODAL -- */
+
+.modal-content {
+    border: none;
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 150px;
+    border: 5px solid var(--azulBase) !important;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -10%;
+    width: 70%;
+    z-index: 1;
+}
+
+.logo img {
+    border: 5px solid var(--azulBase) !important;
+    border-radius: 10px;
+    width: 140px;
+    height: 90px;
+    background-color: white;
+}
+
+
+/* -- CONTRASEÑA -- */
+
+#msgConfir.valido {
+    color: green !important;
+}
+
+#msgConfir.invalido {
+    color: red;
+}
+
+#msgConfir.normal {
+    color: #8e8e8e;
+}

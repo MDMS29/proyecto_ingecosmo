@@ -1,3 +1,7 @@
+*{
+  padding: 0;
+  margin: 0;
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -36,6 +40,18 @@
   box-sizing: border-box;
 }
 
+#aa {
+  align-items: center;
+  transition: all 0.4s;
+}
+
+#aa > p{
+  margin: 0 !important;
+  align-items: center !important;
+  transition: all 0.4s;
+
+}
+
 html {
   font-family: 'Nunito', sans-serif;
   line-height: 1.15;
@@ -48,11 +64,60 @@ html {
 }
 @media (min-width: 768px){
   #log {
-    width:146px; height:121px; opacity: 1;
+    width:116px; height:91px; opacity: 1;
   }
-  
 }
 
+/* Estilos para pantallas grandes */
+@media (min-width: 768px) {
+  #sidebar {
+    display: block;
+  }
+  
+  #sidebar2 {
+    display: none;
+    pointer-events: none;
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 767px) {
+  #sidebar {
+    display: none;
+    pointer-events: none;
+  }
+  
+  #sidebar2 {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  #content{
+    margin-top: 8vh;
+  }
+
+  .menu{
+    transform:rotate(-270deg) !important;
+    transition: all 0.6s;
+  }
+  
+  .rotate{
+    transform:rotate(-90deg)  !important;
+    transition: all 0.6s;
+  }
+}
+
+.menu{
+  transform:rotate(0deg);
+  transition: all 0.6s;
+}
+
+.rotate{
+  transform:rotate(180deg);
+  transition: all 0.6s;
+}
 
 article,
 aside,
@@ -75,7 +140,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: blue;
 }
 
 [tabindex="-1"]:focus {
@@ -11830,8 +11895,8 @@ h5,
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
-  transition: all 0.3s;
-}
+  transition: all 0.5s; 
+} 
 
 #sidebar.active {
   min-width: 100px;
@@ -11938,12 +12003,17 @@ h5,
     min-width: 80px;
     max-width: 80px;
     text-align: center;
-    margin-left: -80px !important;
+    /* margin-left: -80px !important; */
   }
-
+  #sidebarCollapse{
+    display: none;
+    opacity: 0;
+    /* corregir */
+  }
   #sidebar.active {
     margin-left: 0 !important;
   }
+
 }
 
 a[data-toggle="collapse"] {
