@@ -6,15 +6,16 @@
 
 /* -- BOTONES GENERALES -- */
 
-.btnRegresar {
+.btnRedireccion {
+    background-color: var(--rojoAcciones) !important;
+    color: white !important;
+}
+
+.btnAccionF {
     background-color: var(--azulBase) !important;
     color: white !important;
 }
 
-.btnAgregar {
-    background-color: var(--rojoAcciones) !important;
-    color: white !important;
-}
 .footer-page{
     display: flex;
     justify-content: flex-end;
@@ -62,10 +63,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom right, white 50%, #3F48CC 51%);
+    background: linear-gradient(to bottom right, white 50%, #3F48CC 50.2%);
     margin: 30px;
-    width: 217px;
-    height: 267px;
+    width: 13rem; 
+    height:18rem;
     padding: 20px;
 }
 
@@ -166,11 +167,6 @@
     display: flex;
     flex-direction: row;
     font-weight: 500;
-    /* padding: 5px; 
-    margin:5px;
-     width:10px;
-     text-align:center;
-     font-weight: bold; */
 }
 
 input[type="text"]{
@@ -192,9 +188,4 @@ input[type="text"]{
     left: 1rem;
     bottom: 5px;
 }
-#btnCerrar{
-    background-color: #161666; 
-    width: 118px; 
-    height: 40px;
-    color: #ffffff;
-}
+
