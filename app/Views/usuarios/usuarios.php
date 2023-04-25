@@ -38,8 +38,7 @@
         <a href="<?= base_url('home') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
-<!-- method="POST" action="<? #php echo base_url('usuarios/insertar'); 
-                            ?>" -->
+
 <form autocomplete="off" id="formularioUsuarios">
     <div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
@@ -328,6 +327,7 @@
     })
     //Envio de formulario
     $('#formularioUsuarios').on('submit', function(e) {
+        e.preventDefault()
         tp = $('#tp').val()
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
@@ -335,14 +335,14 @@
         apellidoS = $('#apellidoS').val()
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
-        // telefono = $('#telefono').val()
+
         // email = $('#email').val()
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false) {
-            e.preventDefault()
+            // e.preventDefault()
             return Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -367,27 +367,27 @@
                 url: '<?php echo base_url('usuarios/insertar') ?>',
                 data: dataUser,
                 success: function(id) {
-                    e.preventDefault()
                     telefonos.forEach(tel => {
                         $.post({
                             url: '<?php echo base_url('telefonos/insertar') ?>',
                             data: {
-                                idUsu,
+                                idUsuario: id,
                                 numero: tel.telefono,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 7,
                                 tipoTel: 3,
                             },
                             success: function(res) {
+                                console.log(res)
                                 if (res == 1) {
                                     Swal.fire({
                                         position: 'center',
-                                        icon: 'error',
+                                        icon: 'success',
                                         text: '¡Se ha registrado el usuario!',
                                         showConfirmButton: false,
-                                        timer: 1500
+                                        timer: 2000
                                     })
-                                    window.location.href = "usuarios";
+                                    setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                                 }
                             }
                         })
@@ -397,8 +397,9 @@
             });
         };
     })
-    // Funcion para mostrar telefono
+    // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
+        $('#telefono').val(telefonos[0].telefono)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -416,7 +417,6 @@
         }
         $('#bodyTel').html(cadena)
     }
-
     var contador = 0;
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
@@ -476,9 +476,7 @@
 
     function eliminarTel(id) {
         telefonos = telefonos.filter(tel => tel.id != id)
-        // telefonos = telefonoActu
         console.log(telefonos)
-        guardarTelefono()
-        // telefonos = telefonoActu
+        guardarTelefono() //Actualizar tabla
     }
 </script>

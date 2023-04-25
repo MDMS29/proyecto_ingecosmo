@@ -16,11 +16,11 @@ class Telefonos extends BaseController
 
     public function insertar()
     {
-        $idUsu = $this->request->getPost('idUsu');
+        $idUsu = $this->request->getVar('idUsuario');
         $numero = $this->request->getPost('numero');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
-        $tipoTel = $this->request->getPost('tipoUsu');
+        $tipoTel = $this->request->getPost('tipoTel');
         $usuarioCrea = session('id');
 
         $data = [
@@ -31,10 +31,8 @@ class Telefonos extends BaseController
             'prioridad' => $prioridad,
             'usuario_crea' => $usuarioCrea
         ];
-
-        $res = $this->telefonos->save($data);
-        if ($res == 1) {
-            return 1;
+        if ($this->telefonos->save($data)) {
+            return json_encode(1);
         }
     }
 }
