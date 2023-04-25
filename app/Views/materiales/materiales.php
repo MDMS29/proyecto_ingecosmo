@@ -166,14 +166,13 @@
 <div class="modal fade" id="usarMaterialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content modal-lg">
-      <div class="modal-header">
+      <div class="modal-header" id="modal-header">
         <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-        <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <<h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
+          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
       </div>
       <div class="modal-body">
-        <div style="text-align:center;font-weight:bold;" class="modal-body">
-
+        <div class="modal-body">
           <label for="exampleDataList" class="form-label">Nombre de la bateria:</label>
           <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
           <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
@@ -181,7 +180,7 @@
         </div>
       </div>
       <div class="modal-footer" id="modal-footer">
-        <button type="button" class="btn btnRedireccion"  data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btnAccionF">Usar</button>
       </div>
     </div>
@@ -207,11 +206,10 @@
       }
     })
   }
-  
-//   $('#btnCerrar').click( function() {
-//     $("#detallesModal").modal("hide");
-//     detallesMaterial(2)
-// console.log('click');
-//   })
 
+  //   $('#btnCerrar').click( function() {
+  //     $("#detallesModal").modal("hide");
+  //     detallesMaterial(2)
+  // console.log('click');
+  //   })
 </script>
