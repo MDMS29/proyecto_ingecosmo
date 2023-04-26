@@ -14,7 +14,7 @@ class EmailModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_usuario', 'email',  'prioridad', 'tipo_usuario', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_usuario', 'email', 'prioridad', 'tipo_usuario', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -25,11 +25,23 @@ class EmailModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerEmailUser($id)
+    public function obtenerEmailUser($id, $tipoUsuario)
     {
-        $this->select('id_email, email, prioridad');
+        $this->select('id_email, email as correo, prioridad');
         $this->where('id_usuario', $id);
+        $this->where('tipo_usuario', $tipoUsuario);
         $data = $this->findAll();
+        return $data;
+    }
+    public function buscarEmail($correo, $idUsuario, $tipoUsuario)
+    {
+        $this->select('*');
+        $this->where('email', $correo);
+        $this->where('tipo_usuario', $tipoUsuario);
+        if ($idUsuario != 0) {
+            $this->where('id_usuario', $idUsuario);
+        }
+        $data = $this->first();
         return $data;
     }
 }

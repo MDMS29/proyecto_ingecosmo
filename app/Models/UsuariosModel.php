@@ -14,7 +14,7 @@ class UsuariosModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_cargo', 'tipo_identificacion', 'n_identificacion', 'nombre_p', 'nombre_s', 'apellido_p', 'apellido_s', 'direccion', 'estado', 'fecha_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_rol', 'tipo_doc', 'n_identificacion', 'nombre_p', 'nombre_s', 'apellido_p', 'apellido_s', 'contrasena', 'estado', 'fecha_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
