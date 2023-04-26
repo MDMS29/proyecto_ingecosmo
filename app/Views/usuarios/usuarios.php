@@ -97,14 +97,14 @@
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
                                         <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
                                         <input type="email" name="email" class="form-control" id="email" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -146,21 +146,21 @@
 </form>
 
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
-<div class="modal fade" id="agregarTelefono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="telefonoAdd" class="col-form-label">Telefono:</label>
-                            <div >
-                                <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
+                            <div>
+                                <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
                                 <small id="msgTel" class="invalido"></small>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
             </div>
         </div>
@@ -200,20 +200,23 @@
 </div>
 
 <!-- MODAL AGREGAR - EDITAR CORREO -->
-<div class="modal fade" id="agregarCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="correoAdd" class="col-form-label">Correo:</label>
-                            <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                            <div>
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                <small id="msgCorreo" class="invalido"></small>
+                            </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
@@ -243,7 +246,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -258,6 +261,12 @@
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
+
+    //Limpiar campos de telefonos y correos
+    function limpiarCampos(input1, input2) {
+        $(`#${input1}`).val('')
+        $(`#${input2}`).val('')
+    }
     //Verificacion de contraseñas
     function verifiContra(tipo) {
         contra = $('#contra').val()
@@ -397,7 +406,7 @@
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
         //Control de campos vacios
-        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -537,24 +546,30 @@
             }
         }
     })
-
-    $('#telefonoAdd').on('input', function(e) {
-        numero = $('#telefonoAdd').val()
+    //Funcion para buscar el correo o el telefono
+    function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('telefonos/buscarTelefono/') ?>" + numero ,
+            url: "<?php echo base_url() ?>" + `${url}` + valor,
             dataType: 'JSON',
             success: function(res) {
                 console.log(res)
                 if (res[0] == null) {
-                    $('#msgTel').text('')
+                    $(`#${inputName}`).text('')
                     validTel = true
+                    validCorreo = true
                 } else if (res[0] != null) {
-                    $('#msgTel').text('* Este telefono ya esta registrado *')
+                    $(`#${inputName}`).text(`* Este ${tipo} ya esta registrado *`)
                     validTel = false
+                    validCorreo = false
                 }
             }
         })
+    }
+    //Al escribir validar que el numero no este registrado
+    $('#telefonoAdd').on('input', function(e) {
+        numero = $('#telefonoAdd').val()
+        buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
     // Funcion para mostrar telefonos en la tabla.
     function guardarTelefono() {
@@ -576,11 +591,11 @@
         }
         $('#bodyTel').html(cadena)
     }
+    //Eliminar telefono de la tabla
     function eliminarTel(id) {
         telefonos = telefonos.filter(tel => tel.id != id)
         guardarTelefono() //Actualizar tabla
     }
-
     //Agregar Correo a la tabla
     $('#btnAddCorre').on('click', function(e) {
         const tp = $('#tp').val()
@@ -635,6 +650,11 @@
             }
         }
     })
+    //Al escribir validar que el correo no este registrado
+    $('#correoAdd').on('input', function(e) {
+        correo = $('#correoAdd').val()
+        buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
+    })
     // Funcion para mostrar correos en la tabla.
     function guardarCorreo() {
         $('#email').val(correos[0]?.correo)
@@ -655,7 +675,7 @@
         }
         $('#bodyCorre').html(cadena)
     }
-
+    //Eliminar correo de la tabla
     function eliminarCorreo(id) {
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla

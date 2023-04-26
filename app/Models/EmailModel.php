@@ -32,4 +32,10 @@ class EmailModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function buscarEmail($correo){
+        $this->select('*');
+        $this->where('email' , $correo);
+        $data = $this->first();
+        return $data;
+    }
 }

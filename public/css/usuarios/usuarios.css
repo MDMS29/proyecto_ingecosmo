@@ -23,12 +23,13 @@
     padding-top: 1em;
     gap: 1rem;
 }
-label{
+
+label {
     color: #1B335B;
     font-weight: 600;
 }
 
-table{
+table {
     background-color: white;
     border: 5px solid #161666;
     border-radius: 10px;
@@ -71,11 +72,14 @@ table{
 
 /* -- CONTRASEÑA -- */
 
-#msgConfir.valido{
+#msgConfir.valido {
     color: green !important;
 }
 
-#msgConfir.invalido, #msgDoc.invalido {
+#msgConfir.invalido, 
+#msgDoc.invalido, 
+#msgTel.invalido,
+#msgCorreo.invalido {
     color: red;
 }
 

@@ -33,4 +33,11 @@ class Email extends BaseController
             return json_encode(1);
         }
     }
+    public function buscarEmail($correo)
+    {
+        $array = array();
+        $data = $this->email->buscarEmail($correo);
+        array_push($array, $data);
+        return json_encode($array);
+    }
 }

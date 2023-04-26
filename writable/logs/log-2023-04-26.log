@@ -1,0 +1,96 @@
+CRITICAL - 2023-04-26 13:45:52 --> Too few arguments to function App\Controllers\Telefonos::buscarTelefono(), 0 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 1 expected
+in APPPATH\Controllers\Telefonos.php on line 38.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Telefonos->buscarTelefono()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Telefonos))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-26 13:46:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:46:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:46:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:46:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:47:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:47:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:48:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:49:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 13:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 14:01:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-04-26 14:01:21 --> Too few arguments to function App\Controllers\Email::buscarEmail(), 0 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 1 expected
+in APPPATH\Controllers\Email.php on line 36.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Email->buscarEmail()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-26 14:01:25 --> Too few arguments to function App\Controllers\Email::buscarEmail(), 0 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 1 expected
+in APPPATH\Controllers\Email.php on line 36.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Email->buscarEmail()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-26 14:02:11 --> Too few arguments to function App\Controllers\Email::buscarEmail(), 0 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 1 expected
+in APPPATH\Controllers\Email.php on line 36.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Email->buscarEmail()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-26 14:07:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2023-04-26 14:07:24 --> [DEPRECATED] Using ${var} in strings is deprecated, use {$var} instead in APPPATH\Views\usuarios\usuarios.php on line 547.
+ 1 SYSTEMPATH\View\View.php(213): include('SYSTEMPATH\\Debug\\Exceptions.php')
+ 2 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/usuarios/usuarios', [], true)
+ 4 APPPATH\Controllers\Usuarios.php(31): view('/usuarios/usuarios', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Usuarios->index()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Usuarios))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-26 14:07:24 --> Undefined variable $url
+in APPPATH\Views\usuarios\usuarios.php on line 547.
+ 1 APPPATH\Views\usuarios\usuarios.php(547): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $url', 'APPPATH\\Views\\usuarios\\usuarios.php', 547)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\usuarios\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/usuarios/usuarios', [], true)
+ 5 APPPATH\Controllers\Usuarios.php(31): view('/usuarios/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Usuarios->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Usuarios))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-26 14:07:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2023-04-26 14:07:24 --> [DEPRECATED] Using ${var} in strings is deprecated, use {$var} instead in APPPATH\Views\usuarios\usuarios.php on line 547.
+ 1 SYSTEMPATH\View\View.php(213): include('SYSTEMPATH\\Debug\\Exceptions.php')
+ 2 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/usuarios/usuarios', [], true)
+ 4 APPPATH\Controllers\Usuarios.php(31): view('/usuarios/usuarios', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Usuarios->index()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Usuarios))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-04-26 14:07:24 --> Undefined variable $url
+in APPPATH\Views\usuarios\usuarios.php on line 547.
+ 1 APPPATH\Views\usuarios\usuarios.php(547): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $url', 'APPPATH\\Views\\usuarios\\usuarios.php', 547)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\usuarios\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/usuarios/usuarios', [], true)
+ 5 APPPATH\Controllers\Usuarios.php(31): view('/usuarios/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Usuarios->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Usuarios))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-26 14:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 14:08:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 14:08:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-04-26 14:09:03 --> Too few arguments to function App\Controllers\Email::buscarEmail(), 0 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 1 expected
+in APPPATH\Controllers\Email.php on line 36.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Email->buscarEmail()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-26 14:16:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 14:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-26 14:17:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-04-26 14:17:36 --> Too few arguments to function App\Controllers\Telefonos::buscarTelefono(), 0 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 1 expected
+in APPPATH\Controllers\Telefonos.php on line 38.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Telefonos->buscarTelefono()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Telefonos))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
