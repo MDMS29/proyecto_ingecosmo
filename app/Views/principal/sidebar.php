@@ -5,6 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;1,500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url('/img/ingecosmo.png') ?>" />
     <title>Ingecosmo Ltda.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>">
     </link>
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+
 
     <link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
 
@@ -28,6 +29,7 @@
 
 <body class=" d-flex align-items-stretch">
 
+
     <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> Almacenista</a></li>
-                    <li><a class="dropdown-item" href="<?php echo base_url('trabajadores') ?>" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
+                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Materiales</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
@@ -65,8 +67,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>"/></span>
-                            <p id="pa">Trabajadores</p>
+                        <a href="<?php echo base_url('trabajadores')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
+                          <p id="pa">Trabajadores</p>
                         </a>
                     </li>
                     <li>
@@ -75,9 +77,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
-                            <p id="pa">Materiales</p>
-                        </a>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>"/></span><p id="pa">Repuestos</p></a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Insumos</p></a>
+
                     </li>
                     <li>
                         <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
