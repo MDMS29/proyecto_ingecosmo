@@ -66,15 +66,6 @@
                                     <label for="nombre_s" class="col-form-label">Segundo Nombre:</label>
                                     <input type="text" name="nombre_s" class="form-control" id="nombreS">
                                 </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="mb-3">
-                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
-                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                            <option value="1" selected>Cedula de Ciudadania</option>
-                                            <option>-- Seleccione --</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
@@ -85,11 +76,39 @@
                                     <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
                                     <input type="text" name="apellido_s" class="form-control" id="apellidoS">
                                 </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <div class="mb-3">
+                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
+                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
+                                            <option value="1" selected>Cedula de Ciudadania</option>
+                                            <option>-- Seleccione --</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
                                         <label for="nIdenti" class="col-form-label">N° Identificación:</label>
                                         <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11">
                                         <small id="msgDoc" class="invalido"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="direccion" class="col-form-label">Direccion:</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" >
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <div class="mb-3">
+                                        <label for="rol" class="col-form-label">Tipo de Cargo:</label>
+                                        <select class="form-select form-select" name="cargo" id="cargo">
+                                            <option selected value="">-- Seleccione --</option>
+                                            <?php foreach ($cargos as $c) { ?>
+                                                <option value="<?= $c['id_cargo'] ?>"><?= $c['nombre'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -106,21 +125,6 @@
                                     <div class="d-flex">
                                         <input type="email" name="email" class="form-control" id="email" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" class="btn" style="border:none;background-color:gray;color:white;">+</button>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="direccion" class="col-form-label">Direccion:</label>
-                                        <input type="text" name="direccion" class="form-control" id="direccion" >
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="mb-3">
-                                        <label for="rol" class="col-form-label">Tipo de Cargo:</label>
-                                        <select class="form-select form-select" name="cargo" id="cargo">
-                                            <option selected value="">-- Seleccione --</option>
-                                            <?php foreach ($cargos as $c) { ?>
-                                                <option value="<?= $c['id_cargo'] ?>"><?= $c['nombre'] ?></option>
-                                            <?php } ?>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
