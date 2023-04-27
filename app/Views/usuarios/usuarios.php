@@ -41,7 +41,7 @@
                         <td class="text-center">
                             <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] . ',' . 2 ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
 
-                            <button class="btn"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>
+                            <button class="btn" onclick="cambiarEstado(<?= $u['id_usuario'] ?>, 'I')"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>
                         </td>
                     </tr>
                 <?php } ?>
@@ -112,14 +112,14 @@
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
                                         <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
                                         <input type="email" name="email" class="form-control" id="email" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -694,5 +694,24 @@
         }
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
+    }
+    //Cambiar estado de "Activo" a "Eliminado"
+    function cambiarEstado(id, estado) {
+
+        $.post({
+            url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
+            data: {
+                id : id,
+                estado : estado
+            },
+            success: function(data) {
+                if (data == 1) {
+                    mostrarMensaje('success', '¡Se ha eliminado el usuario!')
+                } else {
+                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                }
+                window.location.reload()
+            }
+        })
     }
 </script>

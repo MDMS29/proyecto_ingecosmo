@@ -19,9 +19,30 @@ class Usuarios extends BaseController
         $this->roles = new RolesModel();
         helper('sistema');
     }
+    public function login()
+    {
+        $nIdenti = $this->request->getPost('usuario');
+        $contrasena = $this->request->getVar('contrasena');
+        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
+        // $Usuario = new Usuarios();
+        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
+            //Aqui puedes meter toda la info del user que aparcera en el home
+            $data = [
+                "id" => $datos['id_usuario'],
+                "nombre" => $datos['nombre_p'],
+                "apellido" => $datos['apellido_p'],
+                "rol" => $datos['nombre_rol']
+            ];
+            $session = session();
+            $session->set($data); //agregamos los datos obtenidos del usuario
+            return redirect()->to(base_url('/home'));
+        } else {
+            return redirect()->to(base_url('/'));
+        }
+    }
     public function index()
     {
-        $usuarios = $this->usuarios->obtenerUsuarios();
+        $usuarios = $this->usuarios->obtenerUsuarios('A');
         $param = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
 
@@ -29,6 +50,12 @@ class Usuarios extends BaseController
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
+    }
+    public function salir()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to(base_url('/'));
     }
     public function insertar()
     {
@@ -73,7 +100,6 @@ class Usuarios extends BaseController
             return json_encode($this->usuarios->getInsertID());
         }
     }
-
     public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
@@ -93,31 +119,13 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
-    public function login()
+    public function cambiarEstado()
     {
-        $nIdenti = $this->request->getPost('usuario');
-        $contrasena = $this->request->getVar('contrasena');
-        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        // $Usuario = new Usuarios();
-        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            //Aqui puedes meter toda la info del user que aparcera en el home
-            $data = [
-                "id" => $datos['id_usuario'],
-                "nombre" => $datos['nombre_p'],
-                "apellido" => $datos['apellido_p'],
-                "rol" => $datos['nombre_rol']
-            ];
-            $session = session();
-            $session->set($data); //agregamos los datos obtenidos del usuario
-            return redirect()->to(base_url('/home'));
-        } else {
-            return redirect()->to(base_url('/'));
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
+
+        if ($this->usuarios->update($id, ['estado' => $estado])) {
+            return json_encode(1);
         }
-    }
-    public function salir()
-    {
-        $session = session();
-        $session->destroy();
-        return redirect()->to(base_url('/'));
     }
 }

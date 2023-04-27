@@ -25,12 +25,13 @@ class UsuariosModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerUsuarios()
+    public function obtenerUsuarios($estado)
     {
         $this->select('usuarios.*, param_detalle.resumen as doc_res, roles.nombre as nombre_rol');
         $this->join('roles', 'roles.id_rol = usuarios.id_rol');
         $this->join('param_detalle', 'param_detalle.id_param_det = usuarios.tipo_doc');
         $this->orderBy('id_usuario', 'asc');
+        $this->where('usuarios.estado', $estado);
         $data = $this->findAll();
         return $data;
     }
