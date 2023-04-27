@@ -166,17 +166,31 @@
 
 <div class="modal fade" id="usarMaterialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
+<<<<<<< HEAD
     <div class="modal-content modal-lg" style="border: 5px solid #161666;  border-radius: 10px;">
       <div class="modal-header">
+=======
+    <div class="modal-content modal-lg">
+      <div class="modal-header" id="modal-header">
+>>>>>>> 58b9edf05fe80b22c5f6895defb065386ce80a3b
         <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-        <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <<h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
+          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
       </div>
       <div class="modal-body">
+<<<<<<< HEAD
         <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
         <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
         <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
         <input class="form-control" list="datalistOptions" id="cantidad" name="cantidad" placeholder="">
+=======
+        <div class="modal-body">
+          <label for="exampleDataList" class="form-label">Nombre de la bateria:</label>
+          <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
+          <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
+          <input class="form-control" list="datalistOptions" id="cantidad" name="cantidad" placeholder="">
+        </div>
+>>>>>>> 58b9edf05fe80b22c5f6895defb065386ce80a3b
       </div>
       <div class="modal-footer" id="modal-footer">
         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
