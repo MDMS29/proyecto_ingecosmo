@@ -280,6 +280,16 @@
     let correos = [] //Correos del usuario.
     var validCorreo
 
+    //Mostrar mensajes de SwalFire
+    function mostrarMensaje(tipo, msg) {
+        Swal.fire({
+            position: 'center',
+            icon: `${tipo}`,
+            text: `${msg}`,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2) {
         $(`#${input1}`).val('')
@@ -443,13 +453,7 @@
         confirContra = $('#confirContra').val()
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Hay campos vacios o invalidos!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.post({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
@@ -481,13 +485,7 @@
                             },
                             success: function(res) {
                                 if (res != 1) {
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'error',
-                                        text: '¡Ha ocurrido un error!',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    })
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
                                 }
                             }
                         })
@@ -504,34 +502,16 @@
                                 },
                                 success: function(res) {
                                     if (res != 1) {
-                                        Swal.fire({
-                                            position: 'center',
-                                            icon: 'error',
-                                            text: '¡Ha ocurrido un error!',
-                                            showConfirmButton: false,
-                                            timer: 2000
-                                        })
+                                        mostrarMensaje('error', '¡Ha ocurrido un error!')
                                         setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                                     }
                                 }
                             })
                         });
                         if (tp == 2) {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                text: '¡Se ha Actualizado el Usuario!',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
+                            mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')
                         } else {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                text: '¡Se ha Registrado el Usuario!',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
+                            mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
                         }
                         setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                     });
@@ -546,13 +526,7 @@
         const prioridad = $('#prioridad').val()
 
         if ([numero, prioridad].includes('') || validTel == false) {
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Hay campos vacios o invalidos!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
         contador += 1
         let info = {
@@ -566,26 +540,15 @@
         $('#prioridad').val('')
         if (filtroTel.length > 0) {
             filtro = []
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Ya se agrego este numero de telefono!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
         }
         if (info.prioridad == 'S') {
             telefonos.push(info)
             return guardarTelefono()
         } else if (filtro.length > 0) {
             filtro = []
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Ya hay un telefono prioritario!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+
         } else {
             telefonos.push(info)
             return guardarTelefono()
@@ -641,11 +604,14 @@
         tp = $('#tp').val()
         if (tp == 2) {
             // Consulta tipo delete
-            $.post({
-                url: '<?php echo base_url('telefonos/eliminarTelefono') ?>',
-                data: id, //Id telefono            
-                success : function(data){
-                    console.log(data)
+            $.ajax({
+                url: '<?php echo base_url('telefonos/eliminarTelefono/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        return mostrarMensaje('success', '¡Se ha eliminado el telefono!')
+                    }
                 }
             })
         }
@@ -658,13 +624,7 @@
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
         if ([correo, prioridad].includes('')) {
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Hay campos vacios!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
             id: contadorCorreo += 1,
@@ -677,26 +637,14 @@
         $('#prioridadCorreo').val('')
         if (filtroCorreo.length > 0) {
             filtro = []
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Ya se agrego este correo!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Ya se agrego este correo!')
         }
         if (info.prioridad == 'S') {
             correos.push(info)
             return guardarCorreo()
         } else if (filtro.length > 0) {
             filtro = []
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Ya hay un correo prioritario!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
         } else {
             correos.push(info)
             return guardarCorreo()
@@ -730,7 +678,20 @@
     }
     //Eliminar correo de la tabla
     function eliminarCorreo(id) {
-
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('email/eliminarEmail/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        mostrarMensaje('success', '¡Se ha eliminado el correo!!')
+                    }
+                }
+            })
+        }
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }

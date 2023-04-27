@@ -61,10 +61,9 @@ class Telefonos extends BaseController
         array_push($array, $data);
         return json_encode($array);
     }
-    public function eliminarTelefono()
+    public function eliminarTelefono($idTelefono)
     {
-        $idTele = $this->request->getPost('id');
-        if ($this->telefonos->delete($idTele)) {
+        if ($this->telefonos->delete($idTelefono)) {
             return json_encode(1);
         }
     }

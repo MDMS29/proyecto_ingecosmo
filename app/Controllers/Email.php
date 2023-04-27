@@ -45,7 +45,6 @@ class Email extends BaseController
                 return json_encode(1);
             }
         }
-
     }
     public function buscarEmail($correo, $idUsuario, $tipoUsuario)
     {
@@ -60,5 +59,11 @@ class Email extends BaseController
         $data = $this->email->obtenerEmailUser($idUsuario, $tipoUsuario);
         array_push($array, $data);
         return json_encode($array);
+    }
+    public function eliminarEmail($idCorreo)
+    {
+        if ($this->email->delete($idCorreo)) {
+            return json_encode(1);
+        }
     }
 }
