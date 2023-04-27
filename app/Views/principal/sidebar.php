@@ -15,14 +15,13 @@
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>">
 
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> -->
-    <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
+    <!-- <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script> -->
 
     <script src="<?php echo base_url('js/jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('js/main.js') ?>"></script>
@@ -90,7 +89,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ?>Categoria" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                        <a href="<?php echo base_url() ?>insumos" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                             <p id="pa">Insumos</p>
                         </a>
                     </li>

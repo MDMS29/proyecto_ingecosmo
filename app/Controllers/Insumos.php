@@ -20,4 +20,5 @@ class Insumos extends BaseController
         echo view('/principal/sidebar');
         echo view('/categorias/categoriaInsumo', $data);
     }
+    
 }

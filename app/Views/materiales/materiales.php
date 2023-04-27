@@ -6,11 +6,10 @@
 
 <div id="content" class="p-4 p-md-5">
   <div class="MasBaterias" id="MasBaterias">
-    <img src="<?php echo base_url('/img/baterias.png') ?>" id="imagenBateria" />
-    <h5><?php echo $data[0]['nombre_categoria'] ?></h5>
+    <h5 class="titulo"><?php echo $data[0]['nombre_categoria'] ?></h5>
 
   </div>
-  <div id="contenedor">
+  <div id="contenedor" style="gap:5px;">
     <?php foreach ($data as $dato) { ?>
 
       <div class="card">
@@ -33,7 +32,7 @@
     <?php } ?>
   </div>
   <div class="footer-page">
-    <button href="<?php echo base_url('/principal'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</button>
+    <a href="<?php echo base_url('/insumos'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</a>
     <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="seleccionarMaterial(<?php echo 1 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
   </div>
 </div>
@@ -44,7 +43,7 @@
 <form method="POST" action="<?php echo base_url('/materiales/insertar'); ?>" autocomplete="off">
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content"  style="border: 5px solid #161666;  border-radius: 10px;">
         <div class="modal-header">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div id="agregar">
@@ -139,7 +138,7 @@
 
 <div class="modal" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content modal-lg">
+    <div class="modal-content modal-lg" style="border: 5px solid #161666;  border-radius: 10px;">
       <div class="modal-header" id="modal-header">
         <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
         <<h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
@@ -165,21 +164,18 @@
 
 <div class="modal fade" id="usarMaterialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content modal-lg">
+    <div class="modal-content modal-lg"  style="border: 5px solid #161666;  border-radius: 10px;">
       <div class="modal-header">
         <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
         <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div style="text-align:center;font-weight:bold;" class="modal-body">
-
           <label for="exampleDataList" class="form-label">Nombre de la bateria:</label>
           <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
           <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
           <input class="form-control" list="datalistOptions" id="cantidad" name="cantidad" placeholder="">
         </div>
-      </div>
       <div class="modal-footer" id="modal-footer">
         <button type="button" class="btn btnRedireccion"  data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btnAccionF">Usar</button>

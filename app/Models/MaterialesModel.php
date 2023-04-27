@@ -34,6 +34,7 @@ class MaterialesModel extends Model{
         $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }
+    
     public function traerDetalles($id_material){
         $this->select('materiales.*');
         $this->where('id_material', $id_material);
