@@ -73,6 +73,25 @@ class Usuarios extends BaseController
             return json_encode($this->usuarios->getInsertID());
         }
     }
+    public function buscarUsuario($id, $nIdenti)
+    {
+        $array = array();
+        if ($id != 0) {
+            $data = $this->usuarios->buscarUsuario($id, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nIdenti != 0) {
+            $data = $this->usuarios->buscarUsuario(0, $nIdenti);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($id != 0 && $nIdenti != 0) {
+            $data = $this->usuarios->buscarUsuario($id, $nIdenti);
+            array_push($array, $data);
+            return json_encode($array);
+        }
+    }
     public function login()
     {
         $nIdenti = $this->request->getPost('usuario');

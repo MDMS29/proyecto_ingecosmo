@@ -69,18 +69,15 @@
     justify-content: space-around;
 }
 
-.btnTrash, .btnEditar{
-    border-radius: 5px;
-    height: 35px;
-    width: 35px;
-    padding: 3px;
-    background-color: white;
-}
+.btnRedireccion {
+    background-color: var(--azulBoton) !important;
+    color: white !important;
+  }
 
-.btnTrash:hover, .btnEditar:hover{
-background-color: var(--grisModal);
-}
-
+  .btnAccionF {
+    background-color: var(--rojoBoton) !important;
+    color: white !important;
+  }
 
 /* modal confirmar eliminar */
 #modalEliminarContentP{

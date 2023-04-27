@@ -4,21 +4,20 @@ namespace App\Models; //Reservamos el espacio de nombre de la ruta app\models
 
 use CodeIgniter\Model;
 
-class ProveedoresModel extends Model
+class CargosModel extends Model
 {
-    
-    protected $table = 'terceros'; /* nombre de la tabla modelada/*/
-    protected $primaryKey = 'id_tercero';
+    protected $table = 'cargos'; /* nombre de la tabla modelada/*/
+    protected $primaryKey = 'id_cargo';
 
     protected $useAutoIncrement = true; /* Si la llave primaria se genera con autoincremento*/
 
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = [  'razon_social', 'direccion', 'tipo_tercero', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['nombre', 'descripcion', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
-    protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
+    protected $createdField = 'fechaCrea'; /*fecha automatica para la creacion */
     protected $updatedField = ''; /*fecha automatica para la edicion */
     protected $deletedField = ''; /*no se usara, es para la eliminacion fisica */
 
@@ -26,13 +25,10 @@ class ProveedoresModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-
-    public function obtenerProveedores()
+    public function obtenerCargos()
     {
-        $this->select('terceros.*');
-        $this->where('tipo_tercero','8');
-        $this->where('estado','A');
-        $data = $this->findAll();  
+        $this->select('cargos.*,');
+        $data = $this->findAll();
         return $data;
     }
 }

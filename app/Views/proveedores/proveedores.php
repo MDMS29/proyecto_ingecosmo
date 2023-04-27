@@ -21,12 +21,12 @@
                         <td class="text-center"><?php echo $p['razon_social']; ?></td>
                         <td class="text-center"><?php echo $p['n_identificacion']; ?></td>
                         <td class="text-center"><?php echo $p['direccion']; ?></td>
-                        <td class="text-center" id="btnAccionesP">
+                        <td class="text-center">
 
-                            <button class="btnEditar" style="border: solid #161666 1px;" onclick="seleccionarProveedor(<?= $p['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>
+                            <button class="btn"  onclick="seleccionarProveedor(<?= $p['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>
 
 
-                            <input type="image" style="border: solid #E25050 1px;" class="btnTrash" href="#" data-href="<?php echo base_url('/proveedores/eliminar') . '/' . $p['id_tercero'] . '/' . 'E'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="<?php echo base_url('icons/delete.svg') ?>"></input>
+                            <input type="image" class="btn" href="#" data-href="<?php echo base_url('/proveedores/eliminar') . '/' . $p['id_tercero'] . '/' . 'E'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="<?php echo base_url('icons/delete.svg') ?>"></input>
 
                         </td>
                     </tr>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="footer-page">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
         <a href="<?php echo base_url('/proveedores/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 
