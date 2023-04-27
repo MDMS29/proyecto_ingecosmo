@@ -100,7 +100,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="direccion" class="col-form-label">Direccion:</label>
-                                        <input type="text" name="direccion" class="form-control" id="direccion" >
+                                    <input type="text" name="direccion" class="form-control" id="direccion">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
@@ -149,14 +149,17 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="telefonoAdd" class="col-form-label">Telefono:</label>
-                            <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
+                            <div>
+                                <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
+                                <small id="msgTel" class="invalido"></small>
+                            </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
@@ -186,7 +189,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
             </div>
         </div>
@@ -200,14 +203,17 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="correoAdd" class="col-form-label">Correo:</label>
-                            <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                            <div>
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                <small id="msgCorreo" class="invalido"></small>
+                            </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
@@ -237,7 +243,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -247,9 +253,28 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+    var contador = 0;
+    var contadorCorreo = 0;
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
-    let correos = []
+    let correos = [] //Correos del usuario.
+    var validCorreo
+
+    //Mostrar mensajes de SwalFire
+    function mostrarMensaje(tipo, msg) {
+        Swal.fire({
+            position: 'center',
+            icon: `${tipo}`,
+            text: `${msg}`,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    //Limpiar campos de telefonos y correos
+    function limpiarCampos(input1, input2) {
+        $(`#${input1}`).val('')
+        $(`#${input2}`).val('')
+    }
     //Insertar y editar Trabajador
     function seleccionarTrabajador(id, tp) {
         if (tp == 2) {
@@ -269,10 +294,26 @@
                     $('#tipoDoc').val(1)
                     $('#nIdenti').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
-                    // $('#telefono').val(res[0]['id_usuario'])
-                    // $('#email').val(res[0]['id_usuario'])
                     $('#cargo').val(res[0]['id_cargo'])
                     $('#btnGuardar').text('Actualizar')
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,
+                        dataType: 'json',
+                        success: function(data) {
+                            telefonos = data[0]
+                            guardarTelefono()
+                        }
+                    })
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 6,
+                        dataType: 'json',
+                        success: function(data) {
+                            correos = data[0]
+                            guardarCorreo()
+                        }
+                    })
                 }
             })
         } else {
@@ -291,7 +332,6 @@
             $('#direccion').val('')
             $('#cargo').val('')
             $('#btnGuardar').text('Agregar')
-
         }
     }
     //Funcion para buscar trabajador segun su identificacion
@@ -339,6 +379,7 @@
     $('#formularioTrabajadores').on('submit', function(e) {
         e.preventDefault()
         tp = $('#tp').val()
+        id = $('#id').val()
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
@@ -350,93 +391,139 @@
         telefono = $('#telefono').val()
         email = $('#email').val()
         //Control de campos vacios
-        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || correos.length == 0 || telefonos.length == 0) {
-            return Swal.fire({
-                position: 'center',
-                icon: 'error',
-                text: '¡Hay campos vacios o invalidos!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
-            dataTrab = {
-                tp,
-                nombreP,
-                nombreS,
-                apellidoP,
-                apellidoS,
-                tipoDoc,
-                nIdenti,
-                direccion,
-                cargo,
-                telefonos
-            }
             $.post({
                 url: '<?php echo base_url('trabajadores/insertar') ?>',
-                data: dataTrab,
-                success: function(idTrabCreado) {
+                data: {
+                    id,
+                    tp,
+                    nombreP,
+                    nombreS,
+                    apellidoP,
+                    apellidoS,
+                    tipoDoc,
+                    nIdenti,
+                    direccion,
+                    cargo,
+                    telefonos
+                },
+                success: function(idTrab) {
                     telefonos.forEach(tel => {
+                        //Insertar Telefonos
                         $.post({
                             url: '<?php echo base_url('telefonos/insertar') ?>',
                             data: {
-                                idUsuario: idTrabCreado,
-                                numero: tel.telefono,
+                                tp: tp,
+                                idUsuario: idTrab,
+                                numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 6,
                                 tipoTel: 3,
                             },
                             success: function(res) {
                                 if (res != 1) {
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'error',
-                                        text: '¡Ha ocurrido un error!',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    })
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
                                 }
                             }
                         })
-                        correos.forEach(correo => {
-                            $.post({
-                                url: '<?php echo base_url('email/insertar') ?>',
-                                data: {
-                                    idUsuario: idTrabCreado,
-                                    correo: correo.correo,
-                                    prioridad: correo.prioridad,
-                                    tipoUsu: 6,
-                                },
-                                success: function(res) {
-                                    if (res != 1) {
-                                        Swal.fire({
-                                            position: 'center',
-                                            icon: 'error',
-                                            text: '¡Ha ocurrido un error!',
-                                            showConfirmButton: false,
-                                            timer: 2000
-                                        })
-                                        setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
-                                    }
-                                }
-                            })
-                        });
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            text: '¡Se ha registrado el usuario!',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
                     });
-
+                    correos.forEach(correo => {
+                        //Insertar Correos
+                        $.post({
+                            url: '<?php echo base_url('email/insertar') ?>',
+                            data: {
+                                tp,
+                                idUsuario: idTrab,
+                                correo: correo.correo,
+                                prioridad: correo.prioridad,
+                                tipoUsu: 6,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                    setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
+                                }
+                            }
+                        })
+                    });
+                    if (tp == 2) {
+                        mostrarMensaje('success', '¡Se ha Actualizado el Trabajador!')
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Registrado el Trabajador!')
+                    }
+                    setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
                 }
             });
         };
     })
-     // Funcion para mostrar telefono en la tabla.
-     function guardarTelefono() {
-        $('#telefono').val(telefonos[0]?.telefono)
+
+    // Agregar Telefono a la tabla
+    $('#btnAddTel').on('click', function(e) {
+
+        const numero = $('#telefonoAdd').val()
+        const prioridad = $('#prioridad').val()
+
+        if ([numero, prioridad].includes('') || validTel == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        }
+        contador += 1
+        let info = {
+            id: `${contador}1111`,
+            numero,
+            prioridad
+        }
+        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+        let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
+        $('#telefonoAdd').val('')
+        $('#prioridad').val('')
+        if (filtroTel.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
+        }
+        if (info.prioridad == 'S') {
+            telefonos.push(info)
+            return guardarTelefono()
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+
+        } else {
+            telefonos.push(info)
+            return guardarTelefono()
+        }
+
+    })
+
+    //Funcion para buscar el correo o el telefono
+    function buscarCorreoTel(url, valor, inputName, tipo) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 6, //url, valor, idUsuario, tipoUsuario
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $(`#${inputName}`).text('')
+                    validTel = true
+                    validCorreo = true
+                } else if (res[0] != null) {
+                    $(`#${inputName}`).text(`* Este ${tipo} ya esta registrado *`)
+                    validTel = false
+                    validCorreo = false
+                }
+            }
+        })
+    }
+
+    //Al escribir validar que el numero no este registrado
+    $('#telefonoAdd').on('input', function(e) {
+        numero = $('#telefonoAdd').val()
+        buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
+    })
+    // Funcion para mostrar telefono en la tabla.
+    function guardarTelefono() {
+        $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -446,7 +533,7 @@
         } else {
             for (let i = 0; i < telefonos.length; i++) {
                 cadena += ` <tr class="text-center">
-                <td>${telefonos[i].telefono}</td>
+                <td>${telefonos[i].numero}</td>
                 <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                 <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
                 </tr>`
@@ -454,6 +541,63 @@
         }
         $('#bodyTel').html(cadena)
     }
+    //Eliminar telefono de la tabla
+    function eliminarTel(id) {
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('telefonos/eliminarTelefono/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        return mostrarMensaje('success', '¡Se ha eliminado el telefono!')
+                    }
+                }
+            })
+        }
+        telefonos = telefonos.filter(tel => tel.id != id)
+        guardarTelefono() //Actualizar tabla
+    }
+    //Agregar Correo a la tabla
+    $('#btnAddCorre').on('click', function(e) {
+        const tp = $('#tp').val()
+        const correo = $('#correoAdd').val()
+        const prioridad = $('#prioridadCorreo').val()
+        if ([correo, prioridad].includes('')) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        }
+        let info = {
+            id: contadorCorreo += 1,
+            correo,
+            prioridad
+        }
+        let filtro = correos.filter(correo => correo.prioridad == 'P')
+        let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
+        $('#correoAdd').val('')
+        $('#prioridadCorreo').val('')
+        if (filtroCorreo.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya se agrego este correo!')
+        }
+        if (info.prioridad == 'S') {
+            correos.push(info)
+            return guardarCorreo()
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
+        } else {
+            correos.push(info)
+            return guardarCorreo()
+        }
+
+    })
+    //Al escribir validar que el correo no este registrado
+    $('#correoAdd').on('input', function(e) {
+        correo = $('#correoAdd').val()
+        buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
+    })
     // Funcion para mostrar correos en la tabla.
     function guardarCorreo() {
         $('#email').val(correos[0]?.correo)
@@ -474,123 +618,22 @@
         }
         $('#bodyCorre').html(cadena)
     }
-    var contador = 0;
-    var contadorCorreo = 0;
-    // Agregar Telefono a la tabla
-    $('#btnAddTel').on('click', function(e) {
-
-        const tp = $('#tp').val()
-        const telefono = $('#telefonoAdd').val()
-        const prioridad = $('#prioridad').val()
-        if (tp == 2) {
-
-        } else {
-            if ([telefono, prioridad].includes('')) {
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Hay campos vacios!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-            let info = {
-                id: contador += 1,
-                telefono,
-                prioridad
-            }
-            let filtro = telefonos.filter(tel => tel.prioridad == 'P')
-            let filtroTel = telefonos.filter(tel => tel.telefono == info.telefono)
-            $('#telefonoAdd').val('')
-            $('#prioridad').val('')
-            if (filtroTel.length > 0) {
-                filtro = []
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Ya se agrego este numero de telefono!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-            if (info.prioridad == 'S') {
-                telefonos.push(info)
-                return guardarTelefono()
-            } else if (filtro.length > 0) {
-                filtro = []
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Ya hay un telefono prioritario!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                telefonos.push(info)
-                return guardarTelefono()
-            }
-        }
-    })
-    //Agregar Correo a la tabla
-    $('#btnAddCorre').on('click', function(e) {
-        const tp = $('#tp').val()
-        const correo = $('#correoAdd').val()
-        const prioridad = $('#prioridadCorreo').val()
-        if (tp == 2) {
-
-        } else {
-            if ([correo, prioridad].includes('')) {
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Hay campos vacios!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-            let info = {
-                id: contadorCorreo += 1,
-                correo,
-                prioridad
-            }
-            let filtro = correos.filter(correo => correo.prioridad == 'P')
-            let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
-            $('#correoAdd').val('')
-            $('#prioridad').val('')
-            if (filtroCorreo.length > 0) {
-                filtro = []
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Ya se agrego este correo!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-            if (info.prioridad == 'S') {
-                correos.push(info)
-                return guardarCorreo()
-            } else if (filtro.length > 0) {
-                filtro = []
-                return Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: '¡Ya hay un correo prioritario!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                correos.push(info)
-                return guardarCorreo()
-            }
-        }
-    })
-    function eliminarTel(id) {
-        telefonos = telefonos.filter(tel => tel.id != id)
-        guardarTelefono() //Actualizar tabla
-    }
-
+    //Eliminar correo de la tabla
     function eliminarCorreo(id) {
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('email/eliminarEmail/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        mostrarMensaje('success', '¡Se ha eliminado el correo!!')
+                    }
+                }
+            })
+        }
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
