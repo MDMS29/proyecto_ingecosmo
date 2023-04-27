@@ -70,13 +70,13 @@
 }
 
 .btnRedireccion {
-    background-color: var(--azulBoton) !important;
-    color: white !important;
+    background-color: var(--azulBoton);
+    color: white;
   }
 
   .btnAccionF {
-    background-color: var(--rojoBoton) !important;
-    color: white !important;
+    background-color: var(--rojoBoton);
+    color: white;
   }
 
 /* modal confirmar eliminar */
