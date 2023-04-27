@@ -51,12 +51,16 @@
 }
 
 
-#contenedor{
+.contenedor-d{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    flex-direction: row;
     flex-wrap: wrap
+}
+@media screen and (max-width: 1140px) {
+    .contenedor-d{
+        justify-content: center;
+    }
 }
 
 #imagenBateria{
@@ -72,7 +76,7 @@
     justify-content: center;
     align-items: center;
     background: linear-gradient(to bottom right, white 50%, #3F48CC 50.2%);
-    margin: 30px;
+    margin: 15px;
     width: 13rem; 
     height:18rem;
     font-family: Nunito sans-serif;
@@ -199,4 +203,5 @@ input[type="text"]{
     left: 1rem;
     bottom: 5px;
 }
+
 

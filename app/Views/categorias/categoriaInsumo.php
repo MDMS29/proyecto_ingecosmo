@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>">
+
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
         <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">MATERIALES</h1>
@@ -11,77 +12,71 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
-                            <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
-                                <img class="iconos" src="<?php echo base_url('/img/imagen2.png'); ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Baterias</h5>
-                                    <a href="<?php echo base_url('materiales') ?>"class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                </div>
-                            </div>
 
-                            <div class="card" style="width: 13rem; height:18rem; ">
-                                <img class="iconos" src="<?php echo base_url('/img/combustible.png'); ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Aceites</h5>
-                                    <a href="<?php echo base_url('materiales') ?>"class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a> 
-                                </div>
-                            </div>
 
-                            <div class="card" style="width: 13rem; height:18rem; ">
-                                <img class="iconos" src="<?php echo base_url('/img/imagen6.png'); ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Pinturas</h5>
-                                    <a href="#" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+
+                            <?php $i = 0;
+                            for ($e = 0; $e < count($data);) {
+                            ?>
+                                <span><?php $e ?></span>
+                                <?php
+                                $e += 3;
+                                $salida = array_slice($data, 0, $e);
+                                ?>
+                                <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
+                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
+                                    <div class="textoCard">
+                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$i]['nombre'] ?></h5>
+
+                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                                    </div>
                                 </div>
-                            </div>
+                                <?php if ($e == 8) { ?>
+
+                                <?php break;
+                                }
+                                $i++ ?>
+                            <?php } ?>
+
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
 
-                            <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
-                                <img class="iconoBombi" src="<?php echo base_url('/img/imagen1.png'); ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Bombilleria</h5>
-                                    <a href="#" class="btnVer" style="font-family: 'Nunito', sans-serif;"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                </div>
-                            </div>
 
-                            <div class="card" style="width: 13rem; height:18rem; ">
-                                <img class="iconoBroca" src="<?php echo base_url('/img/imagen7.png'); ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Brocas</h5>
-                                    <a href="#" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+
+                            <?php $r = 0;
+                            for ($a = 0; $a < count($data);) {
+                            ?>
+                                <span><?php $a ?></span>
+                                <?php
+                                $a += 3;
+                                $salida = array_slice($data, 3, $a);
+                                ?>
+                                <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
+                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
+                                    <div class="textoCard">
+                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
+
+                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card" style="width: 13rem; height:18rem; ">
-                                <img class="iconos" src="<?php echo base_url('/img/imagen8.png'); ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Remaches</h5>
-                                    <a href="#" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                </div>
-                            </div>
+                                <?php if ($e == 8) { ?>
+
+                                <?php break;
+                                }
+                                $r++ ?>
+                            <?php } ?>
 
                         </div>
                     </div>
+
+                    
+
+
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
                             <div class="d-flex" style="gap:10px;">
-                                <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
-                                    <img class="iconos" src="<?php echo base_url('/img/imagen9.png'); ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Discos</h5>
-                                        <a href="#" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                    </div>
-                                </div>
-
-                                <div class="card" style="width: 13rem; height:18rem; ">
-                                    <img class="iconos" src="<?php echo base_url('/img/imagen10.png'); ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Lubricantes</h5>
-                                        <a href="#" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                    </div>
-                                </div>
                                 <div class="card1" style="width: 13rem; height:18rem;">
                                     <div class="textoCard">
                                         <button type="submit" class="btn btnAgregar" data-bs-target="#categoriaModal" data-bs-toggle="modal"><i class="bi bi-plus-circle" style="font-size:70px;"></i></button>

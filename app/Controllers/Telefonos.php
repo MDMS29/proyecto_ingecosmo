@@ -3,66 +3,67 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\EmailModel;
+use App\Models\TelefonosModel;
 
-class Email extends BaseController
+class Telefonos extends BaseController
 {
-    protected $email;
+    protected $telefonos;
     public function __construct()
     {
-        $this->email = new EmailModel();
+        $this->telefonos = new TelefonosModel();
         helper('sistema');
     }
 
     public function insertar()
     {
-        $tp = $this->request->getPost('tp');
+        $tp = $this->request->getVar('tp');
         $idUsu = $this->request->getPost('idUsuario');
-        $email = $this->request->getPost('correo');
+        $numero = $this->request->getPost('numero');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
+        $tipoTel = $this->request->getPost('tipoTel');
         $usuarioCrea = session('id');
 
         $data = [
             'id_usuario' => $idUsu,
-            'email' => $email,
-            'prioridad' => $prioridad,
+            'numero' => $numero,
+            'tipo_telefono' => $tipoTel,
             'tipo_usuario' => $tipoUsu,
+            'prioridad' => $prioridad,
             'usuario_crea' => $usuarioCrea
         ];
-
         if ($tp == 2) {
-            $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
+            $res = $this->telefonos->buscarTelefono($numero, $idUsu, $tipoUsu);
             if (!empty($res)) {
                 return json_encode(1);
             } else {
-                if ($this->email->save($data)) {
+                if ($this->telefonos->save($data)) {
                     return json_encode(1);
                 }
             }
         } else {
-            if ($this->email->save($data)) {
+            if ($this->telefonos->save($data)) {
                 return json_encode(1);
             }
         }
     }
-    public function buscarEmail($correo, $idUsuario, $tipoUsuario)
+    public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
     {
         $array = array();
-        $data = $this->email->buscarEmail($correo, 0, $tipoUsuario);
+        $data = $this->telefonos->buscarTelefono($numero, 0, $tipoUsuario);
         array_push($array, $data);
         return json_encode($array);
     }
-    public function obtenerEmailUser($idUsuario, $tipoUsuario)
+    public function obtenerTelefonosUser($idUsuario, $tipoUsuario)
     {
         $array = array();
-        $data = $this->email->obtenerEmailUser($idUsuario, $tipoUsuario);
+        $data = $this->telefonos->obtenerTelefonoUser($idUsuario, $tipoUsuario);
         array_push($array, $data);
         return json_encode($array);
     }
-    public function eliminarEmail($idCorreo)
+    public function eliminarTelefono($idTelefono)
     {
-        if ($this->email->delete($idCorreo)) {
+        if ($this->telefonos->delete($idTelefono)) {
             return json_encode(1);
         }
     }

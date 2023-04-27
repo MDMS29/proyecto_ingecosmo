@@ -13,7 +13,7 @@ class MaterialesModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false; 
     
-    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante','usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'n_iconos', 'usuario_crea', 'fecha_crea'];
     
     protected $useTimestamps = true;
     protected $createdField  = 'fecha_crea';
@@ -26,11 +26,11 @@ class MaterialesModel extends Model{
 
  
 
-    public function obtenerInsumos()
+    public function obtenerInsumo($id)
     {
         $this->select('materiales.*, param_detalle.nombre as nombre_categoria');
         $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
-        $this->where('categoria_material', '28');
+        $this->where('categoria_material', $id);
         $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }
