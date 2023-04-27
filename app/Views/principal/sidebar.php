@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>">
     </link>
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+
 
     <link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
 
@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> Almacenista</a></li>
-                    <li><a class="dropdown-item" href="<?php echo base_url('trabajadores')?>" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
+                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Materiales</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
@@ -68,7 +68,7 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url('trabajadores')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
-                            <p id="pa">Trabajadores</p>
+                          <p id="pa">Trabajadores</p>
                         </a>
                     </li>
                     <li>
