@@ -105,6 +105,7 @@ class Usuarios extends BaseController
                 "id" => $datos['id_usuario'],
                 "nombre" => $datos['nombre_p'],
                 "apellido" => $datos['apellido_p'],
+                "idRol" => $datos['idRol'],
                 "rol" => $datos['nombre_rol']
             ];
             $session = session();

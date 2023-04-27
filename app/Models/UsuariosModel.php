@@ -37,13 +37,11 @@ class UsuariosModel extends Model
     public function buscarUsuario($id, $nIdenti)
     {
         if ($id != 0) {
-
             $this->select('usuarios.*');
             $this->where('id_usuario', $id);
 
         } elseif ($nIdenti != 0) {
-
-            $this->select('usuarios.*, roles.nombre as nombre_rol');
+            $this->select('usuarios.*, roles.nombre as nombre_rol, roles.id_rol as idRol');
             $this->where('n_identificacion', $nIdenti);
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
 
