@@ -267,8 +267,8 @@
                     $('#tipoDoc').val(1)
                     $('#nIdenti').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
-                    // $('#telefono').val(res[0]['nombre_p'])
-                    // $('#email').val(res[0]['nombre_p'])
+                    // $('#telefono').val(res[0]['id_usuario'])
+                    // $('#email').val(res[0]['id_usuario'])
                     $('#cargo').val(res[0]['id_cargo'])
                     $('#btnGuardar').text('Actualizar')
                 }

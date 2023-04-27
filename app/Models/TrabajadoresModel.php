@@ -46,6 +46,8 @@ class TrabajadoresModel extends Model
             $this->select('trabajadores.*, cargos.nombre as nombre_cargo');
             $this->where('n_identificacion', $nIdenti);
             $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
+            // $this->join('email', 'email.id_usuario = trabajadores.id');
+            // $this->join('telefonos', 'cargos.id_usuario = trabajadores.id');
 
         } elseif ($id != 0 && $nIdenti != 0) {
 
