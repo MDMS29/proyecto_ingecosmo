@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
@@ -267,8 +269,8 @@
                     $('#tipoDoc').val(1)
                     $('#nIdenti').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
-                    // $('#telefono').val(res[0]['nombre_p'])
-                    // $('#email').val(res[0]['nombre_p'])
+                    // $('#telefono').val(res[0]['id_usuario'])
+                    // $('#email').val(res[0]['id_usuario'])
                     $('#cargo').val(res[0]['id_cargo'])
                     $('#btnGuardar').text('Actualizar')
                 }
