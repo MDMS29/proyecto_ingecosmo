@@ -21,7 +21,7 @@ class Trabajadores extends BaseController
     }
     public function index()
     {
-        $trabajadores = $this->trabajadores->obtenerTrabajadores();
+        $trabajadores = $this->trabajadores->obtenerTrabajadores('');
         $param = $this->param->obtenerTipoDoc();
         $cargos = $this->cargos->obtenerCargos();
 
@@ -101,4 +101,19 @@ class Trabajadores extends BaseController
         }
     }
 
+    public function eliminar($id,$estado){
+        $data = $this->trabajadores->elimina_Trabajador($id,$estado);
+        return redirect()->to(base_url('/trabajadores'));
+    }
+    public function eliminados(){
+
+        $trabajadores = $this->trabajadores->obtenerTrabajadores('I');
+        $param = $this->param->obtenerTipoDoc();
+        $cargos = $this->cargos->obtenerCargos();
+
+        $data = ['trabajadores' => $trabajadores, 'tipoDoc' => $param, 'cargos' => $cargos];
+
+        echo view('/principal/sidebar');
+        echo view('/trabajadores/eliminados', $data);
+    }
 }

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>">
 
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
@@ -30,7 +31,7 @@
                         <td class="text-center">
                             <button class="btn" onclick="seleccionarTrabajador(<?= $t['id_trabajador'] . ',' . 2 ?>)" data-bs-target="#agregarTrabajador" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Trabajador"></button>
 
-                            <button class="btn"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>
+                            <button class="btn" href="#" data-href="<?php echo base_url('/trabajadores/eliminar') . '/' . $t['id_trabajador'] . '/' . 'I'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>
                         </td>
                     </tr>
                 <?php } ?>
@@ -39,7 +40,7 @@
     </div>
     <div class="footer-page">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="seleccionarTrabajador(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?= base_url('home') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?php echo base_url('/trabajadores/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -250,9 +251,39 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalConfirmaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                </div>
+
+                <div class="contenidoEliminarP">
+                    <div class="bloqueModalP">
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+    $('#modalConfirmaP').on('show.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
+    });
+
     var contador = 0;
     var contadorCorreo = 0;
     var inputIden = 0;

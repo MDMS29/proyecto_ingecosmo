@@ -25,14 +25,26 @@ class TrabajadoresModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerTrabajadores()
+    public function obtenerTrabajadores($estado)
     {
-        $this->select('trabajadores.*, param_detalle.resumen as doc_res, cargos.nombre as nombre_cargo');
+        if ($estado == 'I'){
+            $this->select('trabajadores.*, param_detalle.resumen as doc_res, cargos.nombre as nombre_cargo');
         $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
         $this->join('param_detalle', 'param_detalle.id_param_det = trabajadores.tipo_identificacion');
         $this->orderBy('id_trabajador', 'asc');
+        $this->where('trabajadores.estado', 'I');
         $data = $this->findAll();
         return $data;
+        } else {
+            $this->select('trabajadores.*, param_detalle.resumen as doc_res, cargos.nombre as nombre_cargo');
+            $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
+            $this->join('param_detalle', 'param_detalle.id_param_det = trabajadores.tipo_identificacion');
+            $this->orderBy('id_trabajador', 'asc');
+            $this->where('trabajadores.estado', 'A');
+            $data = $this->findAll();
+            return $data;
+        }   
+
     }
     public function buscarTrabajador($id, $nIdenti)
     {
@@ -58,5 +70,9 @@ class TrabajadoresModel extends Model
         }
         $data = $this->first();
         return $data;
+
+    }  public function elimina_Trabajador($id,$estado){
+        $datos = $this->update($id, ['estado' => $estado]);         
+        return $datos;
     }
 }
