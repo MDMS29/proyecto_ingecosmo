@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>">
-
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/icon-proveedores.png') ?>" /> Proveedores</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
@@ -22,98 +21,90 @@
                         <td class="text-center"><?php echo $p['n_identificacion']; ?></td>
                         <td class="text-center"><?php echo $p['direccion']; ?></td>
                         <td class="text-center">
-
-                            <button class="btn"  onclick="seleccionarProveedor(<?= $p['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>
-
-
+                            <button class="btn" onclick="seleccionarProveedor(<?= $p['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>
                             <input type="image" class="btn" href="#" data-href="<?php echo base_url('/proveedores/eliminar') . '/' . $p['id_tercero'] . '/' . 'E'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="<?php echo base_url('icons/delete.svg') ?>"></input>
-
                         </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
-
     <div class="footer-page">
         <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
         <a href="<?php echo base_url('/proveedores/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
+</div>
 
+<!-- -----modal----------     -->
+<form method="POST" action="<?php echo base_url(); ?>proveedores/insertar" autocomplete="off">
 
-    <!-- -----modal----------     -->
-    <form method="POST" action="<?php echo base_url(); ?>proveedores/insertar" autocomplete="off">
+    <div class="modal fade" id="agregarProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content" id="modalContentP">
 
-        <div class="modal fade" id="agregarProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog ">
-                <div class="modal-content" id="modalContentP">
+                <div class="modal-header" id="modalHeader">
 
-                    <div class="modal-header" id="modalHeader">
+                    <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
-                        <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
+                    <div id="modalHeader2">
 
-                        <div id="modalHeader2">
+                        <img style="margin-right: 10px;" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus" width="20">
+                        <h1 class="modal-title fs-5" id="tituloModal">AGREGAR</h1>
+                    </div>
 
-                            <img style="margin-right: 10px;" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus" width="20">
-                            <h1 class="modal-title fs-5" id="tituloModal">AGREGAR</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modalAgregarP">
+                        <div class="mb-3" id="camposModalP">
+                            <div for="recipient-name" id="textoP" style="margin:0;">Razon Social:</div>
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                            <input hidden id="tp" name="tp">
+                            <input hidden id="id" name="id">
                         </div>
 
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form>
-                        <div class="modalAgregarP">
-                            <div class="mb-3" id="camposModalP">
-                                <div for="recipient-name" id="textoP" style="margin:0;">Razon Social:</div>
-                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
-                                <input hidden id="tp" name="tp">
-                                <input hidden id="id" name="id">
-                            </div>
-
-                            <div class="mb-3" id="camposModalP">
-                                <div style="margin:0;" for="message-text" id="textoP">NIT:</div>
-                                <input class="form-control" id="nit" name="nit"></input>
-                            </div>
-
-                            <div class="mb-3" id="camposModalP">
-                                <div style="margin:0;" for="message-text" id="textoP">Direccion:</div>
-                                <input class="form-control" id="direccion" name="direccion"></input>
-                            </div>
+                        <div class="mb-3" id="camposModalP">
+                            <div style="margin:0;" for="message-text" id="textoP">NIT:</div>
+                            <input class="form-control" id="nit" name="nit"></input>
                         </div>
-                    </form>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Agregar</button>
+
+                        <div class="mb-3" id="camposModalP">
+                            <div style="margin:0;" for="message-text" id="textoP">Direccion:</div>
+                            <input class="form-control" id="direccion" name="direccion"></input>
+                        </div>
                     </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                    <button type="submit" class="btn btnAccionF" id="btnGuardar">Agregar</button>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 
-    <!-- Modal Confirma Eliminar -->
-    <div class="modal fade" id="modalConfirmaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<!-- Modal Confirma Eliminar -->
+<div class="modal fade" id="modalConfirmaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
-            <div class="modal-content" id="modalEliminarContentP">
-                <div class="modalContenedorP">
-                    <div id="contenidoHeaderEliminarP" class="modal-header">
-                        <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
-                    </div>
-
-                    <div class="contenidoEliminarP">
-                        <div class="bloqueModalP">
-                            <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
-                            <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div id="bloqueBtnP" class="modal-footer">
-                    <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
-                    <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
+                <div class="contenidoEliminarP">
+                    <div class="bloqueModalP">
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
+                    </div>
+
+                </div>
             </div>
-
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+            </div>
 
         </div>
     </div>

@@ -16,12 +16,12 @@
 }
 
 /* -- HTML -- */
-.footer-page {
+/* .footer-page {
   display: flex;
   justify-content: flex-end;
   padding-top: 1em;
   gap: 1rem;
-}
+} */
 
 label {
   color: #1b335b;

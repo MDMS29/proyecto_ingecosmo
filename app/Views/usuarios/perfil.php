@@ -20,30 +20,55 @@
                     </div>
                 </div>
                 <div class="card-body p-4 text-black">
-                    <div class="d-flex justify-content-center gap-4">
-                        <div class="mb-5 flex-grow-1">
+                    <div class="d-flex flex-wrap justify-content-center gap-4">
+                        <div class="flex-grow-1 ">
                             <p class="lead fw-normal mb-1">Telefonos:</p>
-                            <div class="p-4" style="background-color: #f8f9fa;">
-                            <?php foreach($telefonos as $tel) {?>
-                                <div class="d-flex align-items-center gap-4">
-                                    <h6 class="font-italic mb-1"><?= $tel['numero'] ?></h6>
-                                    -
-                                    <h6 class="font-italic mb-1"><?= $tel['prioridad'] == 'P' ? 'Primario' : 'Secundario' ?></h6>
-                                </div>
-                            <?php } ?>
+                            <div class="table-responsive p-4" style="background-color: #f8f9fa;">
+                                <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
+                                    <thead>
+                                        <tr class="table-secondary">
+                                            <th scope="col" class="text-center">Numero</th>
+                                            <th scope="col" class="text-center">Prioridad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($telefonos as $tel) { ?>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <?= $tel['numero'] ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?= $tel['prioridad'] == 'P' ? 'Primario' : 'Secundario' ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="mb-5 flex-grow-1">
                             <p class="lead fw-normal mb-1">Emails:</p>
-                            <div class="p-4" style="background-color: #f8f9fa;">
-                            <?php foreach($correos as $correo) {?>
-                                <div class="d-flex align-items-center gap-4">
-                                    <h6 class="font-italic mb-1"><?= $correo['correo'] ?></h6>
-                                    -
-                                    <h6 class="font-italic mb-1"><?= $correo['prioridad'] == 'P' ? 'Primario' : 'Secundario' ?></h6>
-                                </div>
-                            <?php } ?>
-                               
+                            <div class="table-responsive p-4" style="background-color: #f8f9fa;">
+                                <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
+                                    <thead>
+                                        <tr class="table-secondary">
+                                            <th scope="col" class="text-center">Correo</th>
+                                            <th scope="col" class="text-center">Prioridad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($correos as $correo) { ?>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <?= $correo['correo'] ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?= $correo['prioridad'] == 'P' ? 'Primario' : 'Secundario' ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
