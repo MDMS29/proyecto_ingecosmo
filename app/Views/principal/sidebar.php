@@ -15,14 +15,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>">
-    </link>
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
-
-
     <link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
 
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
     <!-- SCRIPTS -->
-    <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
 </head>
@@ -37,7 +36,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<<<<<<< HEAD
+                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?php echo session('rol');?></a></li>
+
+=======
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
+>>>>>>> f877833d7fbe8470753d55c8ebf6bd4217d3c852
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                     <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Materiales</a></li>
@@ -62,8 +66,44 @@
             <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
                 <ul id="allElement" class="list-unstyled components mb-5">
                     <li class="active">
+<<<<<<< HEAD
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
+                            <p id="pa"><?= session('rol') ?></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
+                            <p id="pa">Trabajadores</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
+                            <p id="pa">Clientes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                            <p id="pa">Repuestos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <p id="pa">Insumos</p>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
+                            <p id="pa">Vehiculos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>proveedores" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
+                            <p id="pa">Proveedores</p>
+=======
                         <a href="<?= base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                             <p id="pa"><?= session('rol') ?></p>
+>>>>>>> f877833d7fbe8470753d55c8ebf6bd4217d3c852
                         </a>
                     </li>
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>

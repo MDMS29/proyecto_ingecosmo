@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Alike&family=Noto+Serif&family=Nunito:wght@300&display=swap');
 
 /* font-family: 'Nunito', sans-serif; */
+:root{
+    --azulBoton: #161666;
+    --rojoBoton: #E25050;
+    --grisModal: #ECEAEA;
+    --grisInput: #D9D9D9;  /* gris mas oscuro */
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -8,7 +15,7 @@
 }
 
 body {
-    background-color: #D9D9D9;
+    background-color: var(--grisInput);
 }
 
 .login {
@@ -19,10 +26,10 @@ body {
     justify-content: center;
     flex-direction: column;
     background-color: #ffffff;
-    border: 10px solid #1B335B;
+    border: 10px solid var(--azulBoton);
     border-radius: 10px;
     width: 400px;
-    height: 440px;
+    height: 460px;
 }
 
 form{
@@ -52,7 +59,6 @@ form{
 .texto-titulo{
     font-weight: bolder;
     font-size: 25px;
-    margin-bottom: 30px;
 }
 
 .bloque-items>p {
@@ -60,7 +66,7 @@ form{
 }
 
 input, input:focus {
-    background-color: #D9D9D9;
+    background-color: var(--grisInput);
 }
 
 .botones-login {
@@ -76,5 +82,13 @@ input, input:focus {
     border: none;
     width: 100px;
     padding: 3px;
-    background-color: #EF434D;
+    background-color:var(--rojoBoton);
+}
+
+.alerta{
+    border: 1px solid var(--rojoBoton);
+    border-radius: 5px;
+    text-align: center;
+    color:var(--rojoBoton) ;
+    margin-top: 10px;
 }
