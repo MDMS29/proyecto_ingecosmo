@@ -30,9 +30,8 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('usuario');
         $contrasena = $this->request->getVar('contrasena');
         $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        // $Usuario = new Usuarios();
+        $textoAlerta="<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
         if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            //Aqui puedes meter toda la info del user que aparcera en el home
             $data = [
                 "id" => $datos['id_usuario'],
                 "nombre" => $datos['nombre_p'],
@@ -41,10 +40,10 @@ class Usuarios extends BaseController
                 "rol" => $datos['nombre_rol']
             ];
             $session = session();
-            $session->set($data); //agregamos los datos obtenidos del usuario
+            $session->set($data); 
             return redirect()->to(base_url('/home'));
         } else {
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
         }
     }
     public function index()
@@ -149,24 +148,13 @@ class Usuarios extends BaseController
     }
     public function cambiarEstado()
     {
-        $nIdenti = $this->request->getPost('usuario');
-        $contrasena = $this->request->getVar('contrasena');
-        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        $textoAlerta="<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
-        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            $data = [
-                "id" => $datos['id_usuario'],
-                "nombre" => $datos['nombre_p'],
-                "apellido" => $datos['apellido_p'],
-                "idRol" => $datos['idRol'],
-                "rol" => $datos['nombre_rol']
-            ];
-            $session = session();
-            $session->set($data); 
-            return redirect()->to(base_url('/home'));
-        } else {
-            return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getVar('estado');
+
+        if($this->usuarios->update($id, ['estado' => $estado])){
+            return json_encode(1);
         }
+        
     }
     public function eliminados()
     {

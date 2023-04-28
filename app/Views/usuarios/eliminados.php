@@ -47,8 +47,8 @@
                                 <?= $u['nombre_rol'] ?>
                             </td>
                             <td class="text-center">
-                                <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
-                                <button class="btn" onclick="cambiarEstado(<?= $u['id_usuario'] ?>, 'A')"><img src="<?php echo base_url('icons/restore.png') ?>" alt="Boton Eliminar" title="Reestablecer Usuario" width="20" height="20"></button>
+                                <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] ?>)" data-bs-target="#verUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Ver Usuario"></button>
+                                <button class="btn" onclick="cambiarEstado(<?= $u['id_usuario'] ?>, 'A')"><img src="<?php echo base_url('icons/restore.png') ?>" alt="Boton Reestablecer" title="Reestablecer Usuario" width="20" height="20"></button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="verUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
     <div class="modal-dialog modal-xl">
@@ -156,7 +156,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" >X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close" >X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -178,7 +178,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
             </div>
         </div>
     </div>
@@ -191,7 +191,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -213,7 +213,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
             </div>
         </div>
     </div>
@@ -250,7 +250,7 @@
                     dataType: 'json',
                     success: function(data) {
                         telefonos = data[0]
-                        guardarTelefono()
+                        mostrarTelefonos()
                     }
                 })
                 $.ajax({
@@ -259,7 +259,7 @@
                     dataType: 'json',
                     success: function(data) {
                         correos = data[0]
-                        guardarCorreo()
+                        mostrarCorreo()
                     }
                 })
             }
@@ -267,7 +267,7 @@
     }
     
     // Funcion para mostrar correos en la tabla.
-    function guardarCorreo() {
+    function mostrarCorreo() {
         $('#email').val(correos[0]?.correo)
         var cadena
         if (correos.length == 0) {
@@ -286,7 +286,7 @@
         $('#bodyCorre').html(cadena)
     }
     // Funcion para mostrar telefonos en la tabla.
-    function guardarTelefono() {
+    function mostrarTelefonos() {
         $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {

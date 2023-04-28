@@ -151,4 +151,14 @@
                 el.classList.toggle("rotate");
             });
         });
+        //Mostrar mensajes de SwalFire
+        function mostrarMensaje(tipo, msg) {
+            Swal.fire({
+                position: 'center',
+                icon: `${tipo}`,
+                text: `${msg}`,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     </script>

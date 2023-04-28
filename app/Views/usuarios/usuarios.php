@@ -134,15 +134,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
+                            <div class="d-flex column-gap-3" style="width: 100%" >
+                                <div class="mb-3" style="width: 100%"  id="divContras">
                                     <label id="labelNom" for="nombres" class="col-form-label"> <!-- TEXTO DINAMICO -->
                                     </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6
                                         caracteres!</small>
                                 </div>
-                                <div class="mb-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%"  id="divContras2">
                                     <div>
                                         <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
                                         <input type="password" name="confirContra" class="form-control" id="confirContra" minlength="5">
@@ -280,16 +280,7 @@
     let correos = [] //Correos del usuario.
     var validCorreo
 
-    //Mostrar mensajes de SwalFire
-    function mostrarMensaje(tipo, msg) {
-        Swal.fire({
-            position: 'center',
-            icon: `${tipo}`,
-            text: `${msg}`,
-            showConfirmButton: false,
-            timer: 1500
-        })
-    }
+    
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2) {
         $(`#${input1}`).val('')
@@ -352,6 +343,8 @@
                     $('#rol').val(res[0]['id_rol'])
                     $('#labelNom').text('Cambiar Contraseña:')
                     $('#contra').val('')
+                    $('#divContras').attr('hidden', '')
+                    $('#divContras2').attr('hidden', '')
                     $('#confirContra').val('')
                     $('#btnGuardar').text('Actualizar')
                     $.ajax({
@@ -519,6 +512,8 @@
             });
         };
     })
+
+
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
 
