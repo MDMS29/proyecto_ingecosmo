@@ -50,7 +50,7 @@
     </div>
     <div class="footer-page">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?= base_url('home') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -697,12 +697,11 @@
     }
     //Cambiar estado de "Activo" a "Eliminado"
     function cambiarEstado(id, estado) {
-
         $.post({
             url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
             data: {
-                id : id,
-                estado : estado
+                id: id,
+                estado: estado
             },
             success: function(data) {
                 if (data == 1) {
@@ -710,7 +709,10 @@
                 } else {
                     mostrarMensaje('error', '¡Ha ocurrido un error!')
                 }
-                window.location.reload()
+                setTimeout(e => {
+                    window.location.reload()
+                }, 2000)
+
             }
         })
     }

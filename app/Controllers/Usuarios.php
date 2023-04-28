@@ -128,4 +128,13 @@ class Usuarios extends BaseController
             return json_encode(1);
         }
     }
+    public function eliminados()
+    {
+        $usuarios = $this->usuarios->obtenerUsuarios('I');
+        $param = $this->param->obtenerTipoDoc();
+        $roles = $this->roles->obtenerRoles();
+        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
+        echo view('principal/sidebar');
+        echo view('usuarios/eliminados', $data);
+    }
 }

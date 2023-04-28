@@ -46,6 +46,7 @@ class UsuariosModel extends Model
 
             $this->select('usuarios.*, roles.nombre as nombre_rol');
             $this->where('n_identificacion', $nIdenti);
+            $this->where('usuarios.estado', 'A');
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
 
         } elseif ($id != 0 && $nIdenti != 0) {

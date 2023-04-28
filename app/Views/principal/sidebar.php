@@ -24,7 +24,7 @@
     <!-- SCRIPTS -->
     <script src="<?php echo base_url('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('js/jquery.min.js') ?>"></script>
-    <script src="js/main.js"></script>
+    <script src="<?= base_url('js/main.js') ?>"></script>
 </head>
 
 <body class=" d-flex align-items-stretch">
@@ -63,12 +63,12 @@
                 <ul id="allElement" class="list-unstyled components mb-5">
                     <li class="active">
                         <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
-                            <p id="pa"><?= session('rol')?></p>
+                            <p id="pa"><?= session('rol') ?></p>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('trabajadores')?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
-                          <p id="pa">Trabajadores</p>
+                        <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
+                            <p id="pa">Trabajadores</p>
                         </a>
                     </li>
                     <li>
@@ -77,10 +77,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>"/></span><p id="pa">Repuestos</p></a>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                            <p id="pa">Repuestos</p>
+                        </a>
                     </li>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>"/></span><p id="pa">Insumos</p></a>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <p id="pa">Insumos</p>
+                        </a>
 
                     </li>
                     <li>
@@ -136,4 +140,6 @@
                 el.classList.toggle("rotate");
             });
         });
+
+        
     </script>
