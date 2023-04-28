@@ -25,26 +25,28 @@ class UsuariosModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerUsuarios()
+    public function obtenerUsuarios($estado)
     {
         $this->select('usuarios.*, param_detalle.resumen as doc_res, roles.nombre as nombre_rol');
         $this->join('roles', 'roles.id_rol = usuarios.id_rol');
         $this->join('param_detalle', 'param_detalle.id_param_det = usuarios.tipo_doc');
         $this->orderBy('id_usuario', 'asc');
+        $this->where('usuarios.estado', $estado);
         $data = $this->findAll();
         return $data;
     }
     public function buscarUsuario($id, $nIdenti)
     {
         if ($id != 0) {
-
             $this->select('usuarios.*');
             $this->where('id_usuario', $id);
+            // $this->join('roles', 'roles.id_rol = usuarios.id_rol');
+
 
         } elseif ($nIdenti != 0) {
-
-            $this->select('usuarios.*, roles.nombre as nombre_rol');
+            $this->select('usuarios.*, roles.nombre as nombre_rol, roles.id_rol as idRol');
             $this->where('n_identificacion', $nIdenti);
+            $this->where('usuarios.estado', 'A');
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
 
         } elseif ($id != 0 && $nIdenti != 0) {
