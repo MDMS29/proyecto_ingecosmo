@@ -6,17 +6,23 @@ use App\Controllers\BaseController;
 use App\Models\UsuariosModel;
 use App\Models\ParamModel;
 use App\Models\RolesModel;
+use App\Models\TelefonosModel;
+use App\Models\EmailModel;
 
 class Usuarios extends BaseController
 {
     protected $usuarios;
     protected $param;
     protected $roles;
+    protected $telefonos;
+    protected $correos;
     public function __construct()
     {
         $this->usuarios = new UsuariosModel();
         $this->param = new ParamModel();
         $this->roles = new RolesModel();
+        $this->telefonos = new TelefonosModel();
+        $this->correos = new EmailModel();
         helper('sistema');
     }
     public function login()
@@ -61,7 +67,9 @@ class Usuarios extends BaseController
     public function perfil($id)
     {
         $usuarios = $this->usuarios->buscarUsuario($id, 0);
-        $data = ['usuarios' => $usuarios];
+        $telefonos = $this->telefonos->obtenerTelefonoUser($id, 7);
+        $correos = $this->correos->obtenerEmailUser($id, 7);
+        $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
     }

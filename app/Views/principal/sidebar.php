@@ -30,7 +30,7 @@
 <body class=" d-flex align-items-stretch">
 
 
-    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059">
+    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 1;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" />
