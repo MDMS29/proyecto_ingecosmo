@@ -18,7 +18,7 @@
     /* vertical-align: top;
     margin-top: -600px; */
 }
-.logo{
+.logo1{
     width: 60px;
     height: 60px;
     margin-bottom: 35px;
@@ -28,7 +28,7 @@
 .iconos{
     width: 80px;
     height: 80px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     margin-top: 30px;
 }
 
@@ -68,7 +68,7 @@
   text-decoration: none;
   border: 2px solid #ffffff;
   border-radius: 8px;
-  margin-top: 40px;
+  margin-top: 50px;
   width: 105px;
   height: 35px;
   font-family: 'Nunito', sans-serif;
@@ -167,6 +167,7 @@
 }
 .btnRegresar:hover{
     background-color: #12124d;
+    color: white;
 }
 
 .prev2{
@@ -195,3 +196,11 @@
     color: white !important;
 }
 
+.subTexto{
+    color: rgb(0, 0, 0);
+    margin: 0;
+}
+
+.inputNombreC{
+    width: 50px;
+}

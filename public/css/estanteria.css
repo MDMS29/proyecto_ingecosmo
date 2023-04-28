@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Alike&family=Noto+Serif&family=Nunito:wght@300&display=swap');
+
+.estanteria {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.titulo {
+  color: #000000;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+}
+
+.logo1 {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 35px;
+  margin-top: 30px;
+}
+
+.contenedorE {
+  width: 1200px;
+  height: 600px;
+  background: white;
+  border: 2px solid #161666;
+  box-shadow: 0 2px 12px #161666;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  overflow-y: scroll;
+ 
+}
+
+.contenidoCardE {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.iconos {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.card1 {
+  background: #D9D9D9;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 30rem;
+  height: 12rem;
+}
+
+.btnVer {
+  color: #161666;
+  text-decoration: none;
+  border: 2px solid #161666;
+  border-radius: 8px;
+  margin-top: 60px;
+  padding: 8px;
+  width: 105px;
+  height: 35px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+}
+
+.btnVer:hover {
+  color: rgb(255, 255, 255);
+  background-color: #161666;
+}
+
+
+.imagenes {
+  background: #A4AADE;
+  border: 4px solid #161666;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconoBroca {
+  width: 25px;
+  height: 100px;
+}
+
+.iconoBombi {
+  width: 60px;
+  height: 80px;
+}
+
+.bloqueTextoE {
+  color: #161666;
+  margin-bottom: 15px;
+}
+
+.textoCard {
+  padding: 25px;
+  height: 100%;
+}
+
+.subTexto {
+  margin-bottom: 0;
+}
+
+.footer-page {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1em;
+  gap: 1rem;
+  width: 70%;
+}
+
+.btnRedireccion {
+  background-color: #161666;
+  color: white;
+}
+
+.imagenEncab{
+  width: 70px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.contenedor-btn-file input[type="file"] {
+  appearance: none;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  background: #08ff31;
+  z-index: -1;
+}
+.contenedor-btn-file {
+  display: inline-block;
+  position: relative;
+  background-color: #161666;
+  color: #fff;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .15);
+  overflow: hidden;
+  transition: ease-out 120ms background-color;
+}
+.contenedor-btn-file:hover {
+  background-color: #161666;
+}
+.contenedor-btn-file:active {
+  background-color: #161666;
+}
+.contenedor-btn-file > i {
+  margin-right: 15px;
+}
+
+.contenedor-btn-file label {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.contenedor-btn-file.bordeado {
+  background-color: #fff;
+  border: 2px solid #161666;
+  color: #161666;
+}
+.contenedor-btn-file.bordeado:hover {
+  background-color: #161666;
+  color: #fff;
+}
+
+.card2 {
+  background: #D9D9D9;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 30rem;
+  height: 12rem;
+  margin: 15px;
+}
+
+.contenidoCardF {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.bloqueFila{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  margin: 15px;
+}
