@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
-<div id="content" class="p-4 p-md-5">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+    <div class="table-responsive">
+        <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -47,6 +47,7 @@
                 <?php } ?>
             </tbody>
         </table>
+
     </div>
     <div class="footer-page">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
@@ -134,15 +135,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex column-gap-3" style="width: 100%" >
-                                <div class="mb-3" style="width: 100%"  id="divContras">
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="divContras">
                                     <label id="labelNom" for="nombres" class="col-form-label"> <!-- TEXTO DINAMICO -->
                                     </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6
                                         caracteres!</small>
                                 </div>
-                                <div class="mb-3" style="width: 100%"  id="divContras2">
+                                <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
                                         <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
                                         <input type="password" name="confirContra" class="form-control" id="confirContra" minlength="5">
@@ -280,7 +281,14 @@
     let correos = [] //Correos del usuario.
     var validCorreo
 
-    
+    $(document).ready(function() {
+        $('#tableUsuarios').DataTable({
+            "language" : {
+                "url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
+        });
+    });
+
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2) {
         $(`#${input1}`).val('')
