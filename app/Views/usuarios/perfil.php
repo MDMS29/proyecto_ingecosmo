@@ -1,28 +1,99 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<div id="content" class="p-4 p-md-5">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-        <div>
-            <div class="card shadow">
-                <div class="rounded-top text-white d-flex flex-row" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('<?= base_url('img/ingecosmo.png') ?>'); background-position: center;background-repeat:no-repeat;position: relative;height:200px;">
-                    <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;background-color: transparent;border-radius: 50%;">
-                        <img src="<?php echo base_url('/img/usuario.png') ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mb-2" style="width: 150px;1;background-color: black;border:1px solid black;border-radius: 50%;">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                        <div class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="file" accept="image/png" />
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center p-4 text-black" style="background-color: #f8f9fa;">
-                    <div class="d-flex">
-                        <h4 class="fw-bolder"><?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?></h4>
-                    </div>
-                    <div class="d-flex text-center py-1">
-                        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">
-                            Editar perfil
-                        </button>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            <?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
+                        </h5>
+                        <h6>
+                            Web Developer and Designer
+                        </h6>
+                        <p class="profile-ranting"></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Info Personal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#telefonos" role="tab" aria-controls="profile" aria-selected="false">Telefonos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="card-body p-4 text-black">
-                    <div class="d-flex flex-wrap justify-content-center gap-4">
-                        <div class="flex-grow-1 ">
-                            <p class="lead fw-normal mb-1">Telefonos:</p>
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>Permisos</p>
+                        <p>Podrás ver los Trabajadores, Clientes, Materiales, Vehículos y Proveedores, tendrás el poder de agregar, editar y eliminar cualquiera de sus datos almacenados.</p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Id Usuario</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><?= $usuario['id_usuario'] ?></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nombres</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s']  ?></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Apellidos</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><?= $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Tipo Documento</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><?= $usuario['tipo_Documento']?></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>N° Documento</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><?= $usuario['n_identificacion']?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="telefonos" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-responsive p-4" style="background-color: #f8f9fa;">
                                 <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
                                     <thead>
@@ -46,8 +117,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="mb-5 flex-grow-1">
-                            <p class="lead fw-normal mb-1">Emails:</p>
+                        <div class="tab-pane fade" id="correos" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-responsive p-4" style="background-color: #f8f9fa;">
                                 <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
                                     <thead>
@@ -72,28 +142,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <p class="lead fw-normal mb-0">Recent photos</p>
-                        <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-2">
-                            <img src="" alt="image 1" class="w-100 rounded-3">
-                        </div>
-                        <div class="col mb-2">
-                            <img src="" alt="image 1" class="w-100 rounded-3">
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col">
-                            <img src="" alt="image 1" class="w-100 rounded-3">
-                        </div>
-                        <div class="col">
-                            <img src="" alt="image 1" class="w-100 rounded-3">
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>

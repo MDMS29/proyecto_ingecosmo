@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
-<div id="content" class="p-4 p-md-5">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Eliminados</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+    <div class="table-responsive">
+        <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -16,43 +16,8 @@
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $contador = 0 ?>
-
-                <?php if (empty($usuarios)) { ?>
-                    <tr>
-                        <td class="text-center" colspan="7">
-                            <h3>¡No hay Usuarios Eliminados!</h3>
-                        </td>
-                    </tr>
-                <?php } else { ?>
-                    <?php foreach ($usuarios as $u) { ?>
-                        <tr>
-                            <th scope="row" class="text-center">
-                                <?= $contador += 1 ?>
-                            </th>
-                            <td class="text-center">
-                                <?= $u['nombre_p'] . ' ' . $u['nombre_s'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['apellido_p'] . ' ' . $u['apellido_s'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['doc_res'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['n_identificacion'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['nombre_rol'] ?>
-                            </td>
-                            <td class="text-center">
-                                <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] ?>)" data-bs-target="#verUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Ver Usuario"></button>
-                                <button class="btn" onclick="cambiarEstado(<?= $u['id_usuario'] ?>, 'A')"><img src="<?php echo base_url('icons/restore.png') ?>" alt="Boton Reestablecer" title="Reestablecer Usuario" width="20" height="20"></button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                <?php } ?>
+            <tbody class="text-center">
+                <!-- TABLA DE USUARIOS -->
             </tbody>
         </table>
     </div>
@@ -156,7 +121,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close" >X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -221,9 +186,64 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    var ContadorPRC = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-    //Insertar y editar Usuario
+    var tableUsuarios = $("#tableUsuarios").DataTable({
+        ajax: {
+            url: '<?= base_url('usuarios/obtenerUsuarios') ?>',
+            method: "POST",
+            data: {
+                estado: 'I'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'doc_res'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'nombre_rol'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Ver" title="Ver Usuario"></button>' +
+                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"A")><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Reestablecer" title="Reestablecer Usuario" width="20" height="20"></button>'
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+    });
+
     function seleccionarUsuario(id) {
         $.ajax({
             type: 'POST',
@@ -265,7 +285,7 @@
             }
         })
     }
-    
+
     // Funcion para mostrar correos en la tabla.
     function mostrarCorreo() {
         $('#email').val(correos[0]?.correo)
@@ -306,23 +326,24 @@
     }
     //Cambiar estado de "Eliminado" a "Activo"
     function cambiarEstado(id, estado) {
-        $.post({
+        $.ajax({
             url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
+            type: 'POST',
             data: {
                 id: id,
                 estado: estado
             },
             success: function(data) {
                 if (data == 1) {
-                    mostrarMensaje('success', '¡Se ha Reestablecido el usuario!')
+                    mostrarMensaje('success', '¡Se ha reestablecido el usuario!')
                 } else {
                     mostrarMensaje('error', '¡Ha ocurrido un error!')
                 }
-                setTimeout(e => {
-                    window.location.reload()
-                }, 2000)
 
             }
+        }).done(function(data) {
+            tableUsuarios.ajax.reload(null, false);
+            ContadorPRC = 0
         })
     }
 </script>

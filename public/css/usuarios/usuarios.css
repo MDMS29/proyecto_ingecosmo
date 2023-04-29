@@ -1,107 +1,207 @@
 :root {
-    --azulBase: #161666;
-    --rojoAcciones: #ef434d;
+  --azulBase: #161666;
+  --rojoAcciones: #ef434d;
 }
-
 
 /* -- BOTONES GENERALES -- */
 
 .btnRedireccion {
-    background-color: var(--azulBase) !important;
-    color: white !important;
+  background-color: var(--azulBase) !important;
+  color: white !important;
 }
 
 .btnAccionF {
-    background-color: var(--rojoAcciones) !important;
-    color: white !important;
+  background-color: var(--rojoAcciones) !important;
+  color: white !important;
 }
-
 
 /* -- HTML -- */
 
 .footer-page {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1em;
-    gap: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1em;
+  gap: 1rem;
 }
 
 label {
-    color: #1b335b;
-    font-weight: 600;
+  color: #1b335b;
+  font-weight: 600;
 }
 
 table {
-    background-color: white;
-    border: 5px solid #161666;
-    border-radius: 10px;
+  background-color: white;
+  border: 5px solid #161666;
+  border-radius: 10px;
 }
-
 
 /* -- MODAL -- */
 
 .modal-content {
-    border: none;
+  border: none;
 }
 
 .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 100px;
-    border: 5px solid var(--azulBase) !important;
-    border-radius: 10px;
-    background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 100px;
+  border: 5px solid var(--azulBase) !important;
+  border-radius: 10px;
+  background-color: white;
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: -10%;
-    width: 70%;
-    z-index: 1;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -10%;
+  width: 70%;
+  z-index: 1;
 }
 
 .logo img {
-    border: 5px solid var(--azulBase) !important;
-    border-radius: 10px;
-    width: 140px;
-    height: 90px;
-    background-color: white;
+  border: 5px solid var(--azulBase) !important;
+  border-radius: 10px;
+  width: 140px;
+  height: 90px;
+  background-color: white;
 }
-
 
 /* -- CONTRASEÑA -- */
 
 #msgConfir.valido {
-    color: green !important;
+  color: green !important;
 }
 
 #msgConfir.invalido,
 #msgDoc.invalido,
 #msgTel.invalido,
 #msgCorreo.invalido {
-    color: red;
+  color: red;
 }
 
 #msgConfir.normal {
-    color: #8e8e8e;
+  color: #8e8e8e;
 }
-
 
 /* DATA TABLE */
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 0px !important;
+  margin: 0px 5px !important;
 }
 
 div.dataTables_wrapper div.dataTables_length select {
-    width: 60px;
-    background-color: white;
+  width: 60px;
+  background-color: white;
 }
 
 div.dataTables_wrapper div.dataTables_filter input {
-    background-color: white;
+  background-color: white;
+}
+
+/* PERFIL */
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.profile-img {
+  text-align: center;
+}
+
+.profile-img img {
+  width: 70%;
+  height: 100%;
+}
+
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.profile-head h5 {
+  color: #333;
+}
+
+.profile-head h6, h5.permiso {
+  color: #0062cc;
+}
+
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
+}
+
+.profile-work {
+  padding: 14%;
+  margin-top: -15%;
+}
+
+
+.profile-work p:first-child {
+  font-size: 20px;
+  color: #0062cc;
+  font-weight: 600;
+  margin-top: 10%;
+}
+
+
+.profile-work ul {
+  list-style: none;
+}
+
+.profile-tab label {
+  font-weight: 600;
+}
+
+.profile-tab p {
+  font-weight: 600;
+  color: #0062cc;
+}
+
+table {
+  background-color: white !important;
 }

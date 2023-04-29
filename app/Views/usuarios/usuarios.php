@@ -16,40 +16,12 @@
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $contador = 0 ?>
-                <?php foreach ($usuarios as $u) { ?>
-                    <tr>
-                        <th scope="row" class="text-center">
-                            <?= $contador += 1 ?>
-                        </th>
-                        <td class="text-center">
-                            <?= $u['nombre_p'] . ' ' . $u['nombre_s'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['apellido_p'] . ' ' . $u['apellido_s'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['doc_res'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['n_identificacion'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['nombre_rol'] ?>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] . ',' . 2 ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
-
-                            <button class="btn" onclick="cambiarEstado(<?= $u['id_usuario'] ?>, 'I')"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>
-                        </td>
-                    </tr>
-                <?php } ?>
+            <tbody class="text-center">
+                <!-- TABLA DE USUARIOS -->
             </tbody>
         </table>
-
     </div>
-    <div class="footer-page">
+    <div class="footer-page mt-4">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
         <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
@@ -274,19 +246,65 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+    var ContadorPRC = 0;
     var contador = 0;
     var contadorCorreo = 0;
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
-
-    $(document).ready(function() {
-        $('#tableUsuarios').DataTable({
-            "language" : {
-                "url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+    var tableUsuarios = $("#tableUsuarios").DataTable({
+        ajax: {
+            url: '<?= base_url('usuarios/obtenerUsuarios') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'doc_res'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'nombre_rol'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
+                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"I")><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>'
+                    );
+                },
             }
-        });
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
     });
 
     //Limpiar campos de telefonos y correos
@@ -456,8 +474,9 @@
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
-            $.post({
+            $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
+                type: 'POST',
                 data: {
                     id,
                     tp,
@@ -515,8 +534,11 @@
                     } else {
                         mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
                     }
-                    setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
+                    // setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                 }
+            }).done(function(data) {
+                tableUsuarios.ajax.reload(null, false);
+                ContadorPRC = 0
             });
         };
     })
@@ -700,8 +722,9 @@
     }
     //Cambiar estado de "Activo" a "Eliminado"
     function cambiarEstado(id, estado) {
-        $.post({
+        $.ajax({
             url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
+            type: 'POST',
             data: {
                 id: id,
                 estado: estado
@@ -712,11 +735,11 @@
                 } else {
                     mostrarMensaje('error', '¡Ha ocurrido un error!')
                 }
-                setTimeout(e => {
-                    window.location.reload()
-                }, 2000)
 
             }
+        }).done(function(data) {
+            tableUsuarios.ajax.reload(null, false);
+            ContadorPRC = 0
         })
     }
 </script>

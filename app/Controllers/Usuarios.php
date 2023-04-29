@@ -30,7 +30,7 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('usuario');
         $contrasena = $this->request->getVar('contrasena');
         $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        $textoAlerta="<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
+        $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
         if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
             $data = [
                 "id" => $datos['id_usuario'],
@@ -40,7 +40,7 @@ class Usuarios extends BaseController
                 "rol" => $datos['nombre_rol']
             ];
             $session = session();
-            $session->set($data); 
+            $session->set($data);
             return redirect()->to(base_url('/home'));
         } else {
             return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
@@ -151,10 +151,9 @@ class Usuarios extends BaseController
         $id = $this->request->getPost('id');
         $estado = $this->request->getVar('estado');
 
-        if($this->usuarios->update($id, ['estado' => $estado])){
+        if ($this->usuarios->update($id, ['estado' => $estado])) {
             return json_encode(1);
         }
-        
     }
     public function eliminados()
     {
@@ -164,5 +163,11 @@ class Usuarios extends BaseController
         $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
         echo view('principal/sidebar');
         echo view('usuarios/eliminados', $data);
+    }
+    public function obtenerUsuarios()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->usuarios->obtenerUsuarios($estado);
+        return json_encode($res);
     }
 }
