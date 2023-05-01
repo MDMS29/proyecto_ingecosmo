@@ -3,7 +3,7 @@
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
-    <div class="table-responsive">
+    <div class="table-responsive p-2">
         <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -253,6 +253,9 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
+
+    // Tabla de usuarios  
+
     var tableUsuarios = $("#tableUsuarios").DataTable({
         ajax: {
             url: '<?= base_url('usuarios/obtenerUsuarios') ?>',
@@ -304,7 +307,8 @@
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        }
+        },
+
     });
 
     //Limpiar campos de telefonos y correos
@@ -356,42 +360,43 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + 0,
                 dataType: 'json',
-                success: function(res) {
-                    $('#tituloModal').text('Editar Usuario')
-                    $('#tp').val(2)
-                    $('#id').val(res[0]['id_usuario'])
-                    $('#nombreP').val(res[0]['nombre_p'])
-                    $('#nombreS').val(res[0]['nombre_s'])
-                    $('#apellidoP').val(res[0]['apellido_p'])
-                    $('#apellidoS').val(res[0]['apellido_s'])
-                    $('#tipoDoc').val(1)
-                    $('#nIdenti').val(res[0]['n_identificacion'])
-                    $('#rol').val(res[0]['id_rol'])
-                    $('#labelNom').text('Cambiar Contraseña:')
-                    $('#contra').val('')
-                    $('#divContras').attr('hidden', '')
-                    $('#divContras2').attr('hidden', '')
-                    $('#confirContra').val('')
-                    $('#btnGuardar').text('Actualizar')
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
-                        dataType: 'json',
-                        success: function(data) {
-                            telefonos = data[0]
-                            guardarTelefono()
-                        }
-                    })
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
-                        dataType: 'json',
-                        success: function(data) {
-                            correos = data[0]
-                            guardarCorreo()
-                        }
-                    })
-                }
+                
+            }).done(function(res) {
+                
+                $('#tituloModal').text('Editar Usuario')
+                $('#tp').val(2)
+                $('#id').val(res[0]['id_usuario'])
+                $('#nombreP').val(res[0]['nombre_p'])
+                $('#nombreS').val(res[0]['nombre_s'])
+                $('#apellidoP').val(res[0]['apellido_p'])
+                $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tipoDoc').val(1)
+                $('#nIdenti').val(res[0]['n_identificacion'])
+                $('#rol').val(res[0]['id_rol'])
+                $('#labelNom').text('Cambiar Contraseña:')
+                $('#contra').val('')
+                $('#divContras').attr('hidden', '')
+                $('#divContras2').attr('hidden', '')
+                $('#confirContra').val('')
+                $('#btnGuardar').text('Actualizar')
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        guardarTelefono()
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        guardarCorreo()
+                    }
+                })
             })
         } else {
             //Insertar datos
@@ -411,6 +416,7 @@
             $('#confirContra').val('')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
+            // $('#formularioUsuarios').modal('hidden')
             // telefonos = []
         }
     }
@@ -534,10 +540,9 @@
                     } else {
                         mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
                     }
-                    // setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                 }
             }).done(function(data) {
-                tableUsuarios.ajax.reload(null, false);
+                tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 ContadorPRC = 0
             });
         };
@@ -738,7 +743,8 @@
 
             }
         }).done(function(data) {
-            tableUsuarios.ajax.reload(null, false);
+            tableUsuarios.search('').draw()
+            tableUsuarios.ajax.reload(null, false); //Recargar tabla
             ContadorPRC = 0
         })
     }
