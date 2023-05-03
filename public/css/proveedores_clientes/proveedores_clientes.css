@@ -2,6 +2,7 @@
 
 /* font-family: 'Nunito', sans-serif; */
 
+/* ---------------------Proveedores------------------------- */
 
 /* modal para agregar y actualizar */
 :root{
@@ -38,7 +39,8 @@
 }
 
 
-#RazonSocial, #nit, #direccion{
+
+#nombre_s, #nombre_p, #apellido_s, #apellido_p, #tipo_doc, #n_identificacion, #RazonSocial, #nit, #direccion{
     margin-left: 15px;
     border-radius: 5px;
     border: 1px solid black;
@@ -79,6 +81,7 @@
     color: white;
   }
 
+
 /* modal confirmar eliminar */
 #modalEliminarContentP{
     display: flex;
@@ -100,8 +103,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-
-    /* margin: 10px 0 0 10px; */
 }
 
 .textoModalP{
@@ -131,14 +132,16 @@
     width: 100%;
 }
 
-
-
 #btnNo{
     margin-right: 30px;
 }
 
+/* ---------------------CLientes------------------------- */
 
-/* modal confirmar eliminar */
-
-
+#modalContentC{
+    height: 750px; 
+    background-color: #161666;
+    border: 5px solid var(--azulBoton); 
+    border-radius:10px; 
+}
 

@@ -27,7 +27,7 @@ class ParamModel extends Model
 
     public function obtenerTipoDoc()
     {
-        $this->select('param_detalle.*,');
+        $this->select('param_detalle.*');
         $this->where('id_param_enc', '1');
         $data = $this->findAll();
         return $data;
@@ -39,4 +39,5 @@ class ParamModel extends Model
         $data = $this->findAll();
         return $data;
     }
+
 }

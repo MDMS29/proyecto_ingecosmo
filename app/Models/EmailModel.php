@@ -44,4 +44,25 @@ class EmailModel extends Model
         $data = $this->first();
         return $data;
     }
+
+
+    // ----clientes-------
+    public function obtenerEmailCliente()
+    {
+        $this->select('email.*');
+        $this->where('tipo_usuario', '5');
+        $data = $this->findAll();
+        return $data;
+    }
+    public function buscarEmailCliente($correo, $idUsuario, $tipoUsuario)
+    {
+        $this->select('*');
+        $this->where('email', $correo);
+        $this->where('tipo_usuario', $tipoUsuario);
+        if ($idUsuario != 0) {
+            $this->where('id_usuario', $idUsuario);
+        }
+        $data = $this->first();
+        return $data;
+    }
 }
