@@ -46,14 +46,19 @@ class Usuarios extends BaseController
             return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
         }
     }
+    public function obtenerUsuarios()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->usuarios->obtenerUsuarios($estado);
+        return json_encode($res);
+    }
     public function index()
     {
-        $usuarios = $this->usuarios->obtenerUsuarios('A');
         $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
         $tipoTel = $this->param->obtenerTipoTel();
 
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
+        $data = [ 'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
@@ -161,28 +166,22 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
-    public function cambiarEstado()
+    public function cambiarEstado($id, $estado)
     {
-        $id = $this->request->getPost('id');
-        $estado = $this->request->getVar('estado');
-
         if ($this->usuarios->update($id, ['estado' => $estado])) {
-            return json_encode(1);
+            if($estado == 'A'){
+                return redirect()->to(base_url('usuarios/eliminados'));
+            }else{
+                return redirect()->to(base_url('usuarios'));
+            }
         }
     }
     public function eliminados()
     {
-        $usuarios = $this->usuarios->obtenerUsuarios('I');
         $param = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
+        $data = ['tipoDoc' => $param, 'roles' => $roles];
         echo view('principal/sidebar');
         echo view('usuarios/eliminados', $data);
-    }
-    public function obtenerUsuarios()
-    {
-        $estado = $this->request->getPost('estado');
-        $res = $this->usuarios->obtenerUsuarios($estado);
-        return json_encode($res);
     }
 }

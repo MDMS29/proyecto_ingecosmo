@@ -22,32 +22,33 @@ class Proveedores extends BaseController
     }
 
     public function insertar()
-        {
-            $tp=$this->request->getPost('tp');
-            $tipoTercero = 8;
-            $tipoDocumento = 2;
-            if ($this->request->getMethod() == "post") {
-                if ($tp == 1) {
-                    $this->proveedores->save([
+    {
+        $tp = $this->request->getPost('tp');
+        $tipoTercero = 8;
+        $tipoDocumento = 2;
+        if ($this->request->getMethod() == "post") {
+            if ($tp == 1) {
+                $this->proveedores->save([
+                    'razon_social' => $this->request->getPost('RazonSocial'),
+                    'n_identificacion' => $this->request->getPost('nit'),
+                    'direccion' => $this->request->getPost('direccion'),
+                    'tipo_tercero' => $tipoTercero,
+                    'tipo_doc' => $tipoDocumento
+                ]);
+            } else {
+                $this->proveedores->update(
+                    $this->request->getPost('id'),
+                    [
                         'razon_social' => $this->request->getPost('RazonSocial'),
                         'n_identificacion' => $this->request->getPost('nit'),
                         'direccion' => $this->request->getPost('direccion'),
                         'tipo_tercero' => $tipoTercero,
                         'tipo_doc' => $tipoDocumento
-                    ]);
-                } else {
-                    $this->proveedores->update($this->request->getPost('id'),
-                    [                    
-                        'razon_social' => $this->request->getPost('RazonSocial'),
-                        'n_identificacion' => $this->request->getPost('nit'),
-                        'direccion' => $this->request->getPost('direccion'),
-                        'tipo_tercero' => $tipoTercero,
-                        'tipo_doc' => $tipoDocumento
-                    ]);
-                }
-                return redirect()->to(base_url('/proveedores'));
+                    ]
+                );
             }
-        
+            return redirect()->to(base_url('/proveedores'));
+        }
     }
 
     public function buscarProveedor($id)
@@ -65,15 +66,10 @@ class Proveedores extends BaseController
         $proveedores_ = $this->proveedores->eliminaProveedor($id, $estado);
         return redirect()->to(base_url('/proveedores'));
     }
-
     public function eliminados(){
         $proveedores = $this->proveedores->select('*')->where('estado', 'I')->where('tipo_tercero', '8')->findAll();
-
-        
         $data = ['proveedores' => $proveedores];
         echo view('/principal/sidebar');
         echo view('/proveedores/eliminados', $data);
     }
-
-
 }

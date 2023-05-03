@@ -4,6 +4,7 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
     <div class="table-responsive p-2">
+        Ocultar Columnas: <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
         <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -135,7 +136,6 @@
     </div>
 </form>
 
-
 <!-- MODAL EDITAR CONTRASEÑA -->
 <form autocomplete="off" id="formularioContraseñas">
     <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
-                    <input type="submit" class="btn btnAccionF" value="Actualizar"></input>
+                    <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
                 </div>
             </div>
         </div>
@@ -186,52 +186,64 @@
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
 <div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="telefonoAdd" class="col-form-label">Telefono:</label>
-                            <div>
-                                <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
-                                <small id="msgTel" class="invalido"></small>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
+                            <div class=" flex-grow-1">
+                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <div>
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <small id="msgTel" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class=" flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <?php foreach ($tipoTele as $tipe) { ?>
+                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <option value="P">Primaria</option>
+                                    <option value="S">Secundaria</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
-                            <select class="form-select form-select" name="prioridad" id="prioridad">
-                                <option selected value="">-- Seleccione --</option>
-                                <option value="P">Primaria</option>
-                                <option value="S">Secundaria</option>
-                            </select>
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Priodidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="4">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Telefono</th>
-                                    <th>Priodidad</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyTel">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY TELEFONOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
-                <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -287,6 +299,33 @@
                 <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirma Eliminar -->
+<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                </div>
+
+                <div class="contenidoEliminarP">
+                    <div class="bloqueModalP">
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de eliminar este Usuario?</p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+            </div>
+
         </div>
     </div>
 </div>
@@ -362,7 +401,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
-                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"I")><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
+                        '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
                         '<butto class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("icons/restorePass.png") ?>" width="25" heigth="25"/></butto>'
                     );
                 },
@@ -373,67 +412,64 @@
         },
 
     });
-
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableUsuarios.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3) {
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
+        $('#msgConfirRes').text('')
+        $('#msgConfir').text('')
     }
     //Verificacion de contraseñas
-    function verifiContra(tipo) {
-        input = $('#msgConfir')
-        input2 = $('#msgConfirRes')
-        contra = $('#contra').val()
-        contra = $('#contraRes').val()
-        confirContra = $('#confirContra').val()
-        confirContra = $('#confirContraRes').val()
+    function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
+        input = $(`#${inputMsg}`)
+        contra = $(`#${inputContra}`).val()
+        confirContra = $(`#${inputConfir}`).val()
         if (tipo == 2) {
             if (contra == '' && confirContra == '') {
                 input.text('').removeClass().addClass('normal')
-                input2.text('').removeClass().addClass('normal')
             } else if (contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
-                input2.text('¡Contraseñas valida!').removeClass().addClass('valido')
             } else if (contra == '') {
                 input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
-                input2.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
             } else if (confirContra == '') {
                 input.text('').removeClass().addClass('normal')
-                input2.text('').removeClass().addClass('normal')
             } else if (contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
-                return input2.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
         } else {
             if (contra == '' && confirContra == '') {
                 input.text('').removeClass().addClass('normal')
             } else if (contra == '' && confirContra) {
                 input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
-                input2.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
             } else if (confirContra == '') {
                 input.text('').removeClass().addClass('normal')
-                input2.text('').removeClass().addClass('normal')
             } else if (confirContra && contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
-                input2.text('¡Contraseñas valida!').removeClass().addClass('valido')
             } else if (confirContra && contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
-                return input2.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
         }
     }
     $('#confirContra').on('input', function(e) {
-        verifiContra(2)
+        verifiContra(2, 'msgConfir', 'contra', 'confirContra')
     })
     $('#contra').on('input', function(e) {
-        verifiContra(1)
+        verifiContra(1, 'msgConfir', 'contra', 'confirContra')
     })
     $('#confirContraRes').on('input', function(e) {
-        verifiContra(2)
+        verifiContra(2, 'msgConfirRes', 'contraRes', 'confirContraRes')
     })
     $('#contraRes').on('input', function(e) {
-        verifiContra(1)
+        verifiContra(1, 'msgConfirRes', 'contraRes', 'confirContraRes')
     })
     //Insertar y editar Usuario
     function seleccionarUsuario(id, tp) {
@@ -445,7 +481,6 @@
                 dataType: 'json',
 
             }).done(function(res) {
-
                 $('#tituloModal').text('Editar Usuario')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_usuario'])
@@ -508,12 +543,13 @@
     //Funcion para cambiar contraseña
     $('#formularioContraseñas').on('submit', function(e) {
         e.preventDefault()
+        $('#btnGuardar').attr('disabled', '')
         idUsuario = $("#idUsuario").val()
         contra = $("#contraRes").val()
         contraConfir = $("#confirContraRes").val()
 
-        if ([contra, contraConfir].includes('')) {
-            return mostrarMensaje('error', '¡Hay campos vacios!')
+        if ([contra, contraConfir].includes('') || contra != contraConfir) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
                 url: '<?= base_url('usuarios/cambiarContrasena') ?>',
@@ -527,6 +563,7 @@
             }).done(function(data) {
                 $('#cambiarContra').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
+                limpiarCampos('msgConfirRes')
                 ContadorPRC = 0
                 if (data == 2) {
                     return mostrarMensaje('error', '¡Ha ocurrido un error!')
@@ -580,6 +617,7 @@
     //Envio de formulario
     $('#formularioUsuarios').on('submit', function(e) {
         e.preventDefault()
+        $('#btnActuContra').attr('disabled', '')
         tp = $('#tp').val()
         id = $('#id').val()
         nombreP = $('#nombreP').val()
@@ -589,9 +627,9 @@
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
         rol = $('#rol').val()
-        console.log(rol)
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
+
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -623,7 +661,7 @@
                                 numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 7,
-                                tipoTel: 3,
+                                tipoTel: tel.tipo,
                             },
                             success: function(res) {
                                 if (res != 1) {
@@ -658,18 +696,19 @@
                     }
                 }
             }).done(function(data) {
+                limpiarCampos('msgConfir')
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
+                $('#btnGuardar').removeAttr('disabled')
                 ContadorPRC = 0
             });
         };
     })
-
-
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
 
         const numero = $('#telefonoAdd').val()
+        const tipo = $('#tipoTele').val()
         const prioridad = $('#prioridad').val()
 
         if ([numero, prioridad].includes('') || validTel == false) {
@@ -679,6 +718,7 @@
         let info = {
             id: `${contador}1111`,
             numero,
+            tipo,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
@@ -732,13 +772,14 @@
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
-            <td colspan="3">NO HAY TELEFONOS</td>
+            <td colspan="4">NO HAY TELEFONOS</td>
             </tr>`
             $('#bodyTel').html(cadena)
         } else {
             for (let i = 0; i < telefonos.length; i++) {
                 cadena += ` <tr class="text-center">
                 <td>${telefonos[i].numero}</td>
+                <td>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                 <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                 <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
                 </tr>`
@@ -842,27 +883,12 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
-    //Cambiar estado de "Activo" a "Eliminado"
-    function cambiarEstado(id, estado) {
-        $.ajax({
-            url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
-            type: 'POST',
-            data: {
-                id: id,
-                estado: estado
-            },
-            success: function(data) {
-                if (data == 1) {
-                    mostrarMensaje('success', '¡Se ha eliminado el usuario!')
-                } else {
-                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                }
-
-            }
-        }).done(function(data) {
-            tableUsuarios.search('').draw()
-            tableUsuarios.ajax.reload(null, false); //Recargar tabla
-            ContadorPRC = 0
+    //Cambiar estado de "Activo" a "Eliminado" 
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
+        $('#btnSi').on('click', function(e) {
+            mostrarMensaje('success', 'Se ha eliminado el usuario')
+            tableUsuarios.ajax.reload(null, false)
         })
-    }
+    })
 </script>

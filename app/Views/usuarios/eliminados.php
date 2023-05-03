@@ -130,7 +130,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Telefono</th>
-                                    <th>Priodidad</th>
+                                    <th>Prioridad</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyTel">
@@ -165,7 +165,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Correo</th>
-                                    <th>Priodidad</th>
+                                    <th>Prioridad</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyCorre">
@@ -180,6 +180,34 @@
             <div class="modal-footer">
                 <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Confirma Reestablecer -->
+<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                </div>
+
+                <div class="contenidoEliminarP">
+                    <div class="bloqueModalP">
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de reestablecer este Usuario?</p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+            </div>
+
         </div>
     </div>
 </div>
@@ -236,7 +264,7 @@
                     return (
 
                         '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Ver" title="Ver Usuario"></button>' +
-                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"A")><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Reestablecer" title="Reestablecer Usuario" width="20" height="20"></button>'
+                        '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/A data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Usuario" width="20"></button>'
                     );
                 },
             }
@@ -326,25 +354,11 @@
         $('#bodyTel').html(cadena)
     }
     //Cambiar estado de "Eliminado" a "Activo"
-    function cambiarEstado(id, estado) {
-        $.ajax({
-            url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
-            type: 'POST',
-            data: {
-                id: id,
-                estado: estado
-            },
-            success: function(data) {
-                if (data == 1) {
-                    mostrarMensaje('success', '¡Se ha reestablecido el usuario!')
-                } else {
-                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                }
-
-            }
-        }).done(function(data) {
-            tableUsuarios.ajax.reload(null, false); //Recargar tabla
-            ContadorPRC = 0
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
+        $('#btnSi').on('click', function(e) {
+            mostrarMensaje('success', 'Se ha reestablecido el usuario')
+            tableUsuarios.ajax.reload(null, false)
         })
-    }
+    })
 </script>
