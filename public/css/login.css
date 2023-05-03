@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Alike&family=Noto+Serif&family=Nunito:wght@300&display=swap');
+
+/* font-family: 'Nunito', sans-serif; */
+:root{
+    --azulBoton: #161666;
+    --rojoBoton: #E25050;
+    --grisModal: #ECEAEA;
+    --grisInput: #D9D9D9;  /* gris mas oscuro */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-color: var(--grisInput);
+}
+
+.login {
+    position: absolute;
+    bottom: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 10px solid var(--azulBoton);
+    border-radius: 10px;
+    width: 400px;
+    height: 460px;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.logo {
+    position: absolute;
+    top: -50px;
+    z-index: 1;
+}
+
+
+.logo-ingecosmo {
+    height: 90px;
+    width: 160px;
+}
+
+.texto{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.texto-titulo{
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.bloque-items>p {
+    color: #1B335B;
+}
+
+input, input:focus {
+    background-color: var(--grisInput);
+}
+
+.botones-login {
+    padding-top: 25px;
+}
+
+.btn-ingresar{
+    font-weight: bolder;
+    /* text-align: center; */
+    font-family: 'Nunito', sans-serif;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+    padding: 3px;
+    background-color:var(--rojoBoton);
+}
+
+.alerta{
+    border: 1px solid var(--rojoBoton);
+    border-radius: 5px;
+    text-align: center;
+    color:var(--rojoBoton) ;
+    margin-top: 10px;
+}

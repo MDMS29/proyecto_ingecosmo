@@ -14,7 +14,7 @@ class TrabajadoresModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_cargo', 'tipo_identificacion', 'n_identificacion', 'nombre_p', 'nombre_s', 'apellido_p', 'apellido_s', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_cargo', 'tipo_identificacion', 'n_identificacion', 'nombre_p', 'nombre_s', 'apellido_p', 'apellido_s', 'estado', 'fecha_crea', 'direccion', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -46,6 +46,8 @@ class TrabajadoresModel extends Model
             $this->select('trabajadores.*, cargos.nombre as nombre_cargo');
             $this->where('n_identificacion', $nIdenti);
             $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
+            // $this->join('email', 'email.id_usuario = trabajadores.id');
+            // $this->join('telefonos', 'cargos.id_usuario = trabajadores.id');
 
         } elseif ($id != 0 && $nIdenti != 0) {
 

@@ -16,13 +16,14 @@ class Telefonos extends BaseController
 
     public function insertar()
     {
-        $tp = $this->request->getVar('tp');
+        $tp = $this->request->getPost('tp');
         $idUsu = $this->request->getPost('idUsuario');
         $numero = $this->request->getPost('numero');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
         $tipoTel = $this->request->getPost('tipoTel');
-        $usuarioCrea = session('id');
+        $usuarioCrea = 1;
+        // $usuarioCrea = session('id');
 
         $data = [
             'id_usuario' => $idUsu,

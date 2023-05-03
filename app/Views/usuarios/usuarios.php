@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
-<div id="content" class="p-4 p-md-5">
+
+<!-- TABLA MOSTRAR USUARIOS -->
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+    <div class="table-responsive p-2">
+        <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -14,41 +16,14 @@
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $contador = 0 ?>
-                <?php foreach ($usuarios as $u) { ?>
-                    <tr>
-                        <th scope="row" class="text-center">
-                            <?= $contador += 1 ?>
-                        </th>
-                        <td class="text-center">
-                            <?= $u['nombre_p'] . ' ' . $u['nombre_s'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['apellido_p'] . ' ' . $u['apellido_s'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['doc_res'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['n_identificacion'] ?>
-                        </td>
-                        <td class="text-center">
-                            <?= $u['nombre_rol'] ?>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] . ',' . 2 ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
-
-                            <button class="btn"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>
-                        </td>
-                    </tr>
-                <?php } ?>
+            <tbody class="text-center">
+                <!-- TABLA DE USUARIOS -->
             </tbody>
         </table>
     </div>
-    <div class="footer-page">
+    <div class="footer-page mt-4">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?= base_url('home') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -110,14 +85,14 @@
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
                                         <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
                                         <input type="email" name="email" class="form-control" id="email" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -133,14 +108,14 @@
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="divContras">
                                     <label id="labelNom" for="nombres" class="col-form-label"> <!-- TEXTO DINAMICO -->
                                     </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6
                                         caracteres!</small>
                                 </div>
-                                <div class="mb-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
                                         <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
                                         <input type="password" name="confirContra" class="form-control" id="confirContra" minlength="5">
@@ -271,6 +246,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+    var ContadorPRC = 0;
     var contador = 0;
     var contadorCorreo = 0;
     var inputIden = 0;
@@ -278,16 +254,63 @@
     let correos = [] //Correos del usuario.
     var validCorreo
 
-    //Mostrar mensajes de SwalFire
-    function mostrarMensaje(tipo, msg) {
-        Swal.fire({
-            position: 'center',
-            icon: `${tipo}`,
-            text: `${msg}`,
-            showConfirmButton: false,
-            timer: 1500
-        })
-    }
+    // Tabla de usuarios  
+
+    var tableUsuarios = $("#tableUsuarios").DataTable({
+        ajax: {
+            url: '<?= base_url('usuarios/obtenerUsuarios') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'doc_res'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'nombre_rol'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
+                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"I")><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>'
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+
+    });
+
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2) {
         $(`#${input1}`).val('')
@@ -337,40 +360,43 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + 0,
                 dataType: 'json',
-                success: function(res) {
-                    $('#tituloModal').text('Editar Usuario')
-                    $('#tp').val(2)
-                    $('#id').val(res[0]['id_usuario'])
-                    $('#nombreP').val(res[0]['nombre_p'])
-                    $('#nombreS').val(res[0]['nombre_s'])
-                    $('#apellidoP').val(res[0]['apellido_p'])
-                    $('#apellidoS').val(res[0]['apellido_s'])
-                    $('#tipoDoc').val(1)
-                    $('#nIdenti').val(res[0]['n_identificacion'])
-                    $('#rol').val(res[0]['id_rol'])
-                    $('#labelNom').text('Cambiar Contraseña:')
-                    $('#contra').val('')
-                    $('#confirContra').val('')
-                    $('#btnGuardar').text('Actualizar')
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
-                        dataType: 'json',
-                        success: function(data) {
-                            telefonos = data[0]
-                            guardarTelefono()
-                        }
-                    })
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
-                        dataType: 'json',
-                        success: function(data) {
-                            correos = data[0]
-                            guardarCorreo()
-                        }
-                    })
-                }
+                
+            }).done(function(res) {
+                
+                $('#tituloModal').text('Editar Usuario')
+                $('#tp').val(2)
+                $('#id').val(res[0]['id_usuario'])
+                $('#nombreP').val(res[0]['nombre_p'])
+                $('#nombreS').val(res[0]['nombre_s'])
+                $('#apellidoP').val(res[0]['apellido_p'])
+                $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tipoDoc').val(1)
+                $('#nIdenti').val(res[0]['n_identificacion'])
+                $('#rol').val(res[0]['id_rol'])
+                $('#labelNom').text('Cambiar Contraseña:')
+                $('#contra').val('')
+                $('#divContras').attr('hidden', '')
+                $('#divContras2').attr('hidden', '')
+                $('#confirContra').val('')
+                $('#btnGuardar').text('Actualizar')
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        guardarTelefono()
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        guardarCorreo()
+                    }
+                })
             })
         } else {
             //Insertar datos
@@ -390,6 +416,7 @@
             $('#confirContra').val('')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
+            // $('#formularioUsuarios').modal('hidden')
             // telefonos = []
         }
     }
@@ -453,8 +480,9 @@
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
-            $.post({
+            $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
+                type: 'POST',
                 data: {
                     id,
                     tp,
@@ -487,36 +515,40 @@
                                 }
                             }
                         })
-                        correos.forEach(correo => {
-                            //Insertar Correos
-                            $.post({
-                                url: '<?php echo base_url('email/insertar') ?>',
-                                data: {
-                                    tp,
-                                    idUsuario: idUser,
-                                    correo: correo.correo,
-                                    prioridad: correo.prioridad,
-                                    tipoUsu: 7,
-                                },
-                                success: function(res) {
-                                    if (res != 1) {
-                                        mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                        setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
-                                    }
-                                }
-                            })
-                        });
-                        if (tp == 2) {
-                            mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')
-                        } else {
-                            mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
-                        }
-                        setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
                     });
+                    correos.forEach(correo => {
+                        //Insertar Correos
+                        $.post({
+                            url: '<?php echo base_url('email/insertar') ?>',
+                            data: {
+                                tp,
+                                idUsuario: idUser,
+                                correo: correo.correo,
+                                prioridad: correo.prioridad,
+                                tipoUsu: 7,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                    setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
+                                }
+                            }
+                        })
+                    });
+                    if (tp == 2) {
+                        mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
+                    }
                 }
+            }).done(function(data) {
+                tableUsuarios.ajax.reload(null, false); //Recargar tabla
+                ContadorPRC = 0
             });
         };
     })
+
+
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
 
@@ -692,5 +724,28 @@
         }
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
+    }
+    //Cambiar estado de "Activo" a "Eliminado"
+    function cambiarEstado(id, estado) {
+        $.ajax({
+            url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
+            type: 'POST',
+            data: {
+                id: id,
+                estado: estado
+            },
+            success: function(data) {
+                if (data == 1) {
+                    mostrarMensaje('success', '¡Se ha eliminado el usuario!')
+                } else {
+                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                }
+
+            }
+        }).done(function(data) {
+            tableUsuarios.search('').draw()
+            tableUsuarios.ajax.reload(null, false); //Recargar tabla
+            ContadorPRC = 0
+        })
     }
 </script>

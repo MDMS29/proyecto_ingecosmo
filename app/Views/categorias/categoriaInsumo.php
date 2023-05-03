@@ -2,8 +2,8 @@
 
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
-        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">MATERIALES</h1>
-        <button class="btnRegresar">Regresar</button>
+        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">INSUMOS</h1>
+        <a href="<?php echo base_url('/home'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</a>
 
 
 
@@ -103,7 +103,7 @@
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
                             <div class="d-flex" style="gap:10px;">
                                 <div class="card1" style="width: 13rem; height:18rem;">
-                                    <div class="textoCard" title="Agregar una nueva categoriA">
+                                    <div class="textoCard" title="Agregar una nueva categoria">
                                         <button type="submit" class="btn btnAgregar" data-bs-target="#categoriaModal" data-bs-toggle="modal"><i class="bi bi-plus-circle" style="font-size:70px;"></i></button>
                                     </div>
                                 </div>

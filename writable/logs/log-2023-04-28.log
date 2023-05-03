@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INFO - 2023-04-28 12:40:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-04-28 12:40:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-04-28 12:40:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
@@ -639,10 +640,37 @@ Stack trace:
 #1 C:\xampp\htdocs\ingecosmo\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ma...')
 #2 C:\xampp\htdocs\ingecosmo\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ma...')
 #3 C:\xampp\htdocs\ingecosmo\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ma...', Array, false)
+=======
+INFO - 2023-04-28 19:41:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:41:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:41:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:41:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:41:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:42:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:42:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-04-28 19:43:27 --> Too few arguments to function App\Controllers\Email::buscarEmail(), 2 passed in C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php on line 934 and exactly 3 expected
+in APPPATH\Controllers\Email.php on line 49.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Email->buscarEmail('0', '7')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-28 19:43:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:43:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:43:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-04-28 19:43:40 --> mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in C:\xampp\htdocs\ingecosmo\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\ingecosmo\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `em...', 0)
+#1 C:\xampp\htdocs\ingecosmo\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 C:\xampp\htdocs\ingecosmo\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 C:\xampp\htdocs\ingecosmo\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+>>>>>>> 6a538878275147e11b8856ae9a96d1c01f1381d5
 #4 C:\xampp\htdocs\ingecosmo\system\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
 #5 C:\xampp\htdocs\ingecosmo\system\BaseModel.php(782): CodeIgniter\Model->doInsert(Array)
 #6 C:\xampp\htdocs\ingecosmo\system\Model.php(730): CodeIgniter\BaseModel->insert(Array, false)
 #7 C:\xampp\htdocs\ingecosmo\system\BaseModel.php(692): CodeIgniter\Model->insert(Array, false)
+<<<<<<< HEAD
 #8 C:\xampp\htdocs\ingecosmo\app\Controllers\Insumos.php(51): CodeIgniter\BaseModel->save(Array)
 #9 C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php(934): App\Controllers\Insumos->insertar()
 #10 C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Insumos))
@@ -652,10 +680,22 @@ Stack trace:
 CRITICAL - 2023-04-28 14:58:41 --> Cannot add or update a child row: a foreign key constraint fails (`db_ingecosmo`.`materiales`, CONSTRAINT `materiales_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `terceros` (`id_tercero`) ON UPDATE CASCADE)
 in SYSTEMPATH\Database\BaseConnection.php on line 645.
  1 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `materiales` (`nombre`, `cantidad_actual`, `precio_compra`, `tipo_material`, `categoria_material`, `fecha_crea`) VALUES (:nombre:, :cantidad_actual:, :precio_compra:, :tipo_material:, :categoria_material:, :fecha_crea:)', [...], false)
+=======
+#8 C:\xampp\htdocs\ingecosmo\app\Controllers\Email.php(44): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php(934): App\Controllers\Email->insertar()
+#10 C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+#11 C:\xampp\htdocs\ingecosmo\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\ingecosmo\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2023-04-28 19:43:40 --> Duplicate entry '0' for key 'PRIMARY'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `email` (`id_usuario`, `email`, `prioridad`, `tipo_usuario`, `usuario_crea`, `fecha_crea`) VALUES (:id_usuario:, :email:, :prioridad:, :tipo_usuario:, :usuario_crea:, :fecha_crea:)', [...], false)
+>>>>>>> 6a538878275147e11b8856ae9a96d1c01f1381d5
  2 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
  3 SYSTEMPATH\BaseModel.php(782): CodeIgniter\Model->doInsert([...])
  4 SYSTEMPATH\Model.php(730): CodeIgniter\BaseModel->insert([...], false)
  5 SYSTEMPATH\BaseModel.php(692): CodeIgniter\Model->insert([...], false)
+<<<<<<< HEAD
  6 APPPATH\Controllers\Insumos.php(51): CodeIgniter\BaseModel->save([...])
  7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Insumos->insertar()
  8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Insumos))
@@ -1068,3 +1108,17 @@ in SYSTEMPATH\Database\BaseConnection.php on line 645.
 INFO - 2023-04-28 15:18:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-04-28 15:19:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-04-28 15:19:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+=======
+ 6 APPPATH\Controllers\Email.php(44): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Email->insertar()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Email))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-04-28 19:43:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 19:45:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 21:05:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 21:05:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 21:05:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 21:05:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-28 21:05:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+>>>>>>> 6a538878275147e11b8856ae9a96d1c01f1381d5

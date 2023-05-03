@@ -34,7 +34,7 @@ class Trabajadores extends BaseController
     {
 
         $tp = $this->request->getPost('tp');
-        $id = $this->request->getPost('id');
+        $idTrab = $this->request->getPost('id');
         $nombre_p= $this->request->getPost('nombreP');
         $nombre_s = $this->request->getPost('nombreS');
         $apellido_p = $this->request->getPost('apellidoP');
@@ -48,7 +48,18 @@ class Trabajadores extends BaseController
 
         if ($tp == 2) {
             //Actualizar datos
-
+            $trabajadorUpdate = [
+                'id_cargo' => $cargo,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombre_p,
+                'nombre_s' => $nombre_s,
+                'apellido_p' => $apellido_p,
+                'apellido_s' => $apellido_s,
+                'direccion' => $direccion,
+            ];
+            $this->trabajadores->update($idTrab, $trabajadorUpdate);
+            return $idTrab;
         } else {
             //Insertar datos
             //Si la respuesta esta vacia - guardar

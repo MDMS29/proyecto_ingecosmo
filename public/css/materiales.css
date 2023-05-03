@@ -3,6 +3,8 @@
 :root {
     --azulBase: #161666;
     --rojoAcciones: #EF434D;
+    --grisModal: #ECEAEA;
+    --grisInput: #D9D9D9;  
 }
 
 
@@ -46,8 +48,6 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-
-
 }
 
 
@@ -202,6 +202,69 @@ input[type="text"]{
     width: 70px;
     left: 1rem;
     bottom: 5px;
+
 }
+
+
+.camposAgregar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:row;
+    width: 100%;
+    margin-top: 20px;
+    bottom: 50%;
+}
+
+#modalAgregar2{
+
+    margin: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#modalHeader{
+    text-align: center;
+}
+
+
+#modalContent{
+    height: 460px; 
+    border: 5px solid var(--azulBoton); 
+    border-radius:10px; 
+}
+
+#nombre, #precioC, #precioV, #cantidadA{
+    margin-left: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 30px;
+    width: 250px;
+    background-color: var(--grisModal);
+}
+
+#titulo1{
+    font-size: 20px;
+    display: flex;
+    margin-left: 40%;
+    font-family: 'Nunito', sans-serif; 
+    text-transform: uppercase;
+    font-weight: bold;
+    
+
+}
+.form-label {
+    margin-bottom: 0.5rem;
+    width: 100px;
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+  
+}
+
+
+
 
 

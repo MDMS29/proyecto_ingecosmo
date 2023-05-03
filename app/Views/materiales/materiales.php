@@ -38,7 +38,7 @@
     <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregarMaterial(<?php echo 1 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
   </div>
 </div>
-
+          
 </html>
 
 <!-- MODAL AGREGAR -->
@@ -46,28 +46,36 @@
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <input type="text" value="<?= $idCate?>" id="idCategoria">
-      <div class="modal-content" style="border: 5px solid #161666;  border-radius: 10px;">
-        <div class="modal-header">
+      <div class="modal-content" id="modalContent"style="border: 5px solid #161666;  border-radius: 10px;">
+        <div class="modal-header" id="modalHeader">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div id="agregar">
-
-            <img src="<?php echo base_url('/img/agregar11.png') ?>" />
+      <img style="margin-right: 10px; width:30px;"  src="http://localhost/ingecosmo/public/icons/plus-b.png" alt="icon-plus" width="20">
           </div>
-          <h1 class="modal-title fs-5 w-100 text-center" id="titulo1">Agregar</h1>
+          <h1 class="modal-title" id="titulo1">Agregar</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modalAgregar2">
+          
+          <div class="camposAgregar">
           <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
           <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
+          </div>
 
-          <label for="exampleDataList" class="form-label">Precio Compra</label>
+          <div class="camposAgregar">
+          <label for="exampleDataList" class="form-label">Precio Compra:</label>
           <input class="form-control" type="number" list="datalistOptions" id="precioC" name="precioC" placeholder="">
+          </div>
 
-          <label for="exampleDataList" class="form-label">Precio Venta</label>
+          <div class="camposAgregar">
+          <label for="exampleDataList" class="form-label">Precio Venta:</label>
           <input class="form-control" type="number" list="datalistOptions" id="precioV" name="precioV" placeholder="">
-           
-          <label for="exampleDataList" class="form-label">Cantidad Actual</label>
-          <input class="form-control"  type="number"list="datalistOptions" id="cantidadA" name="cantidadA" placeholder="">
+          </div>
+
+          <div class="camposAgregar">
+            <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
+            <input class="form-control"  type="number"list="datalistOptions" id="cantidadA" name="cantidadA" placeholder="">
+          </div>
 
 
 
@@ -152,9 +160,9 @@
       <div class="modal-body">
         <div class="modal-body">
           <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-          <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
+          <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="">
           <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
-          <input class="form-control" list="datalistOptions" id="cantidad" name="cantidad" placeholder="">
+          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
         </div>
       </div>
       <div class="modal-footer" id="modal-footer">
@@ -183,16 +191,11 @@
           <div class="modal-body">
 
             <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-            <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
+            <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="">
             <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
-            <input class="form-control" list="datalistOptions" id="cantidad" name="cantidad" placeholder="">
+            <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
 
-            <div class="modal-body">
-              <label for="exampleDataList" class="form-label">Nombre de la bateria:</label>
-              <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
-              <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
-              <input class="form-control" list="datalistOptions" id="cantidad" name="cantidad" placeholder="">
-            </div>
+  
 
           </div>
           <div class="modal-footer" id="modal-footer">
