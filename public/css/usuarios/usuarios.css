@@ -52,6 +52,13 @@ table {
   background-color: white;
 }
 
+.body-R {
+  width: 100%;
+  border: 5px solid var(--azulBase) !important;
+  border-radius: 10px;
+  background-color: white;
+}
+
 .logo {
   display: flex;
   justify-content: center;
@@ -71,18 +78,21 @@ table {
 
 /* -- CONTRASEÑA -- */
 
-#msgConfir.valido {
+#msgConfir.valido,
+#msgConfirRes.valido {
   color: green !important;
 }
 
 #msgConfir.invalido,
+#msgConfirRes.invalido,
 #msgDoc.invalido,
 #msgTel.invalido,
 #msgCorreo.invalido {
   color: red;
 }
 
-#msgConfir.normal {
+#msgConfir.normal,
+#msgConfirRes.normal {
   color: #8e8e8e;
 }
 
@@ -205,3 +215,65 @@ div.dataTables_wrapper div.dataTables_filter input {
 table {
   background-color: white !important;
 }
+
+
+/* modal confirmar eliminar */
+#modalEliminarContentP {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 5000px;
+  border: 5px solid var(--azulBase);
+  border-radius: 10px;
+}
+
+.modalContenedorP {
+  display: flex;
+  flex-direction: column;
+}
+
+#contenidoHeaderEliminarP {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /* margin: 10px 0 0 10px; */
+}
+
+.textoModalP {
+  font-size: 25px;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.contenidoEliminarP {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  margin: 20px;
+  height: 100%;
+  width: 80%;
+}
+
+.bloqueModalP {
+  display: flex;
+}
+
+#bloqueBtnP {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+#btnNo {
+  margin-right: 30px;
+}
+
+
+/* modal confirmar eliminar */
