@@ -27,7 +27,7 @@ class TelefonosModel extends Model
 
     public function obtenerTelefonoUser($id, $tipoUsuario)
     {
-        $this->select('id_telefono as id, numero, prioridad');
+        $this->select('id_telefono as id, numero, prioridad, tipo_telefono as tipo');
         $this->where('id_usuario', $id);
         $this->where('tipo_usuario', $tipoUsuario);
         $data = $this->findAll();

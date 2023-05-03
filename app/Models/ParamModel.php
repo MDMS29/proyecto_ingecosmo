@@ -32,4 +32,11 @@ class ParamModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function obtenerTipoTel()
+    {
+        $this->select('id_param_det as id, nombre');
+        $this->where('id_param_enc', '2');
+        $data = $this->findAll();
+        return $data;
+    }
 }

@@ -49,10 +49,11 @@ class Usuarios extends BaseController
     public function index()
     {
         $usuarios = $this->usuarios->obtenerUsuarios('A');
-        $param = $this->param->obtenerTipoDoc();
+        $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
+        $tipoTel = $this->param->obtenerTipoTel();
 
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
+        $data = ['usuarios' => $usuarios, 'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
@@ -88,16 +89,7 @@ class Usuarios extends BaseController
         if ($tp == 2) {
             //Actualizar datos
             $res = $this->usuarios->buscarUsuario($idUser, 0);
-            //Si la contraseña esta vacia no se actualiza
-            if ($contra != '') {
-                //Verifica que no sea la misma de antes
-                $contraHash = password_verify($contra, $res['contrasena']);
-                if (!$contraHash) {
-                    $contra = password_hash($contra, PASSWORD_DEFAULT); //Hasheo nuevo
-                }
-            } else {
-                $contra = $res['contrasena'];
-            }
+            $contra = $res['contrasena'];
             $usuarioUpdate = [
                 'id_rol' => $rol,
                 'tipo_doc' => $tipoDoc,
@@ -125,6 +117,29 @@ class Usuarios extends BaseController
             ];
             $this->usuarios->save($usuarioSave);
             return json_encode($this->usuarios->getInsertID());
+        }
+    }
+    public function cambiarContrasena()
+    {
+        $idUser = $this->request->getPost('idUsuario');
+        $contra = $this->request->getVar('contra');
+        $contrConfir = $this->request->getVar('contraConfir');
+
+        $res = $this->usuarios->buscarUsuario($idUser, 0);
+        //Si la contraseña esta vacia no se actualiza
+        if ($contra != '') {
+            //Verifica que no sea la misma de antes
+            $contraHash = password_verify($contra, $res['contrasena']);
+            if (!$contraHash) {
+                $contra = password_hash($contra, PASSWORD_DEFAULT); //Hasheo nuevo
+            }
+        } else {
+            $contra = $res['contrasena'];
+        }
+        if($this->usuarios->update($idUser, ['contrasena' => $contra])){
+            return json_encode(1);
+        }else{
+            return json_encode(2);
         }
     }
     public function buscarUsuario($id, $nIdenti)

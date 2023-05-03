@@ -135,6 +135,54 @@
     </div>
 </form>
 
+
+<!-- MODAL EDITAR CONTRASEÑA -->
+<form autocomplete="off" id="formularioContraseñas">
+    <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/restorePass.png') ?>" alt="" width="30" height="30"> REESTABLECER CONTRASEÑA</h1>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="idUsuario" id="idUsuario">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="mb-3" style="width: 100%" id="divContras">
+                                <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
+                                </label>
+                                <div class="flex">
+                                    <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
+                                    <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
+                                    <label class="form-check-label" for="ver">
+                                        Ver Contraseña
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%" id="divContras2">
+                                <div>
+                                    <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                    <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                </div>
+                                <small id="msgConfirRes" class="normal"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
+                    <input type="submit" class="btn btnAccionF" value="Actualizar"></input>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
 <div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -196,7 +244,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridadCorreo')">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -236,7 +284,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -253,9 +301,23 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
-
+    //Ver contraseñas
+    function verContrasena() {
+        var password1, password2, check;
+        password1 = document.getElementById("contraRes");
+        password2 = document.getElementById("confirContraRes");
+        check = document.getElementById("ver");
+        if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
+        {
+            password1.type = "text";
+            password2.type = "text";
+        } else // Si no está activada 
+        {
+            password1.type = "password";
+            password2.type = "password";
+        }
+    }
     // Tabla de usuarios  
-
     var tableUsuarios = $("#tableUsuarios").DataTable({
         ajax: {
             url: '<?= base_url('usuarios/obtenerUsuarios') ?>',
@@ -300,7 +362,8 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
-                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"I")><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>'
+                        '<button class="btn" onclick=cambiarEstado(' + data.id_usuario + ',"I")><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
+                        '<butto class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("icons/restorePass.png") ?>" width="25" heigth="25"/></butto>'
                     );
                 },
             }
@@ -312,37 +375,51 @@
     });
 
     //Limpiar campos de telefonos y correos
-    function limpiarCampos(input1, input2) {
+    function limpiarCampos(input1, input2, input3) {
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
+        $(`#${input3}`).val('')
     }
     //Verificacion de contraseñas
     function verifiContra(tipo) {
+        input = $('#msgConfir')
+        input2 = $('#msgConfirRes')
         contra = $('#contra').val()
+        contra = $('#contraRes').val()
         confirContra = $('#confirContra').val()
+        confirContra = $('#confirContraRes').val()
         if (tipo == 2) {
             if (contra == '' && confirContra == '') {
-                $('#msgConfir').text('').removeClass().addClass('normal')
+                input.text('').removeClass().addClass('normal')
+                input2.text('').removeClass().addClass('normal')
             } else if (contra == confirContra) {
-                $('#msgConfir').text('¡Contraseñas valida!').removeClass().addClass('valido')
+                input.text('¡Contraseñas valida!').removeClass().addClass('valido')
+                input2.text('¡Contraseñas valida!').removeClass().addClass('valido')
             } else if (contra == '') {
-                $('#msgConfir').text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+                input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+                input2.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
             } else if (confirContra == '') {
-                $('#msgConfir').text('').removeClass().addClass('normal')
+                input.text('').removeClass().addClass('normal')
+                input2.text('').removeClass().addClass('normal')
             } else if (contra != confirContra) {
-                return $('#msgConfir').text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
+                return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
+                return input2.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
         } else {
             if (contra == '' && confirContra == '') {
-                $('#msgConfir').text('').removeClass().addClass('normal')
+                input.text('').removeClass().addClass('normal')
             } else if (contra == '' && confirContra) {
-                $('#msgConfir').text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+                input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+                input2.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
             } else if (confirContra == '') {
-                $('#msgConfir').text('').removeClass().addClass('normal')
+                input.text('').removeClass().addClass('normal')
+                input2.text('').removeClass().addClass('normal')
             } else if (confirContra && contra == confirContra) {
-                $('#msgConfir').text('¡Contraseñas valida!').removeClass().addClass('valido')
+                input.text('¡Contraseñas valida!').removeClass().addClass('valido')
+                input2.text('¡Contraseñas valida!').removeClass().addClass('valido')
             } else if (confirContra && contra != confirContra) {
-                return $('#msgConfir').text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
+                return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
+                return input2.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
         }
     }
@@ -350,6 +427,12 @@
         verifiContra(2)
     })
     $('#contra').on('input', function(e) {
+        verifiContra(1)
+    })
+    $('#confirContraRes').on('input', function(e) {
+        verifiContra(2)
+    })
+    $('#contraRes').on('input', function(e) {
         verifiContra(1)
     })
     //Insertar y editar Usuario
@@ -360,9 +443,9 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + 0,
                 dataType: 'json',
-                
+
             }).done(function(res) {
-                
+
                 $('#tituloModal').text('Editar Usuario')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_usuario'])
@@ -414,12 +497,45 @@
             $('#rol').val('')
             $('#contra').val('')
             $('#confirContra').val('')
+            $('#divContras').removeAttr('hidden')
+            $('#divContras2').removeAttr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
             // $('#formularioUsuarios').modal('hidden')
             // telefonos = []
         }
     }
+    //Funcion para cambiar contraseña
+    $('#formularioContraseñas').on('submit', function(e) {
+        e.preventDefault()
+        idUsuario = $("#idUsuario").val()
+        contra = $("#contraRes").val()
+        contraConfir = $("#confirContraRes").val()
+
+        if ([contra, contraConfir].includes('')) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {
+            $.ajax({
+                url: '<?= base_url('usuarios/cambiarContrasena') ?>',
+                data: {
+                    idUsuario,
+                    contra,
+                    contraConfir
+                },
+                type: 'POST',
+                dataType: 'json'
+            }).done(function(data) {
+                $('#cambiarContra').modal('hide')
+                tableUsuarios.ajax.reload(null, false); //Recargar tabla
+                ContadorPRC = 0
+                if (data == 2) {
+                    return mostrarMensaje('error', '¡Ha ocurrido un error!')
+                } else {
+                    return mostrarMensaje('success', '¡Se ha actualizado su contraseña!')
+                }
+            })
+        }
+    })
     //Funcion para buscar usuario segun su identificacion
     function buscarUsuarioIdent(id, inputIden) {
         $.ajax({
@@ -542,6 +658,7 @@
                     }
                 }
             }).done(function(data) {
+                $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 ContadorPRC = 0
             });
