@@ -25,16 +25,22 @@ class TelefonosModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerTelefonoUser($id)
+    public function obtenerTelefonoUser($id, $tipoUsuario)
     {
-        $this->select('id_telefono, numero, prioridad');
-        $this->where('id_usuario' , $id);
+        $this->select('id_telefono as id, numero, prioridad');
+        $this->where('id_usuario', $id);
+        $this->where('tipo_usuario', $tipoUsuario);
         $data = $this->findAll();
         return $data;
     }
-    public function buscarTelefono($numero){
-        $this->select('id_telefono, numero, prioridad');
-        $this->where('numero' , $numero);
+    public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
+    {
+        $this->select('*');
+        $this->where('numero', $numero);
+        $this->where('tipo_usuario', $tipoUsuario);
+        if ($idUsuario != 0) {
+            $this->where('id_usuario', $idUsuario);
+        }
         $data = $this->first();
         return $data;
     }

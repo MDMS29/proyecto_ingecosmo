@@ -1,0 +1,129 @@
+INFO - 2023-05-03 12:11:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:11:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:11:31 --> Undefined property: App\Controllers\Filas::$materiales
+in APPPATH\Controllers\Filas.php on line 15.
+ 1 APPPATH\Controllers\Filas.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Filas::$materiales', 'APPPATH\\Controllers\\Filas.php', 15)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:19:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:19:41 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:19:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:19:42 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:19:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:19:42 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:20:16 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:20:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:20:17 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:20:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:20:18 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:22:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:24:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:24:20 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:30:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:30:06 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:30:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:30:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:30:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:30:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:30:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:30:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:32:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:32:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-05-03 12:32:54 --> Undefined variable $nombreFila
+in APPPATH\Views\estanteria\filas.php on line 5.
+ 1 APPPATH\Views\estanteria\filas.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreFila', 'APPPATH\\Views\\estanteria\\filas.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\estanteria\\filas.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('/estanteria/filas', [], true)
+ 5 APPPATH\Controllers\Filas.php(20): view('/estanteria/filas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Filas->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filas))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+INFO - 2023-05-03 12:35:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-05-03 12:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

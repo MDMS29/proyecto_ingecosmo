@@ -16,7 +16,8 @@ class Email extends BaseController
 
     public function insertar()
     {
-        $idUsu = $this->request->getVar('idUsuario');
+        $tp = $this->request->getPost('tp');
+        $idUsu = $this->request->getPost('idUsuario');
         $email = $this->request->getPost('correo');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
@@ -29,7 +30,39 @@ class Email extends BaseController
             'tipo_usuario' => $tipoUsu,
             'usuario_crea' => $usuarioCrea
         ];
-        if ($this->email->save($data)) {
+
+        if ($tp == 2) {
+            $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
+            if (!empty($res)) {
+                return json_encode(1);
+            } else {
+                if ($this->email->save($data)) {
+                    return json_encode(1);
+                }
+            }
+        } else {
+            if ($this->email->save($data)) {
+                return json_encode(1);
+            }
+        }
+    }
+    public function buscarEmail($correo, $idUsuario, $tipoUsuario)
+    {
+        $array = array();
+        $data = $this->email->buscarEmail($correo, 0, $tipoUsuario);
+        array_push($array, $data);
+        return json_encode($array);
+    }
+    public function obtenerEmailUser($idUsuario, $tipoUsuario)
+    {
+        $array = array();
+        $data = $this->email->obtenerEmailUser($idUsuario, $tipoUsuario);
+        array_push($array, $data);
+        return json_encode($array);
+    }
+    public function eliminarEmail($idCorreo)
+    {
+        if ($this->email->delete($idCorreo)) {
             return json_encode(1);
         }
     }

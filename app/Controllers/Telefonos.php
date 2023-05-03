@@ -16,13 +16,14 @@ class Telefonos extends BaseController
 
     public function insertar()
     {
-        $idUsu = $this->request->getVar('idUsuario');
+        $tp = $this->request->getVar('tp');
+        $idUsu = $this->request->getPost('idUsuario');
         $numero = $this->request->getPost('numero');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
         $tipoTel = $this->request->getPost('tipoTel');
         $usuarioCrea = session('id');
-        
+
         $data = [
             'id_usuario' => $idUsu,
             'numero' => $numero,
@@ -31,20 +32,39 @@ class Telefonos extends BaseController
             'prioridad' => $prioridad,
             'usuario_crea' => $usuarioCrea
         ];
-        if ($this->telefonos->save($data)) {
-            return json_encode(1);
+        if ($tp == 2) {
+            $res = $this->telefonos->buscarTelefono($numero, $idUsu, $tipoUsu);
+            if (!empty($res)) {
+                return json_encode(1);
+            } else {
+                if ($this->telefonos->save($data)) {
+                    return json_encode(1);
+                }
+            }
+        } else {
+            if ($this->telefonos->save($data)) {
+                return json_encode(1);
+            }
         }
     }
-    public function buscarTelefono(){
+    public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
+    {
         $array = array();
-        $numero = $this->request->getPost('numero');
-        
-        $data = $this->telefonos->buscarTelefono($numero);
-        if(!empty($data)){
-            array_push($array, $data);
-            return json_encode($array);
-        }else{
-            return json_encode($array);
+        $data = $this->telefonos->buscarTelefono($numero, 0, $tipoUsuario);
+        array_push($array, $data);
+        return json_encode($array);
+    }
+    public function obtenerTelefonosUser($idUsuario, $tipoUsuario)
+    {
+        $array = array();
+        $data = $this->telefonos->obtenerTelefonoUser($idUsuario, $tipoUsuario);
+        array_push($array, $data);
+        return json_encode($array);
+    }
+    public function eliminarTelefono($idTelefono)
+    {
+        if ($this->telefonos->delete($idTelefono)) {
+            return json_encode(1);
         }
     }
 }

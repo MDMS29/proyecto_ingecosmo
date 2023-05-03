@@ -66,7 +66,7 @@
   text-decoration: none;
   border: 2px solid #161666;
   border-radius: 8px;
-  margin-top: 60px;
+  margin-top: 0;
   padding: 8px;
   width: 105px;
   height: 35px;
@@ -102,7 +102,7 @@
 
 .bloqueTextoE {
   color: #161666;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .textoCard {
@@ -110,9 +110,6 @@
   height: 100%;
 }
 
-.subTexto {
-  margin-bottom: 0;
-}
 
 .footer-page {
   display: flex;
@@ -202,10 +199,32 @@
   width: 100%;
 }
 
-.bloqueFila{
+.textoFila{
   display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.bloqueFila{
+  overflow-x: scroll;
+  display: flex;
+  height: 100px;
+  flex-direction: row;
+  /* flex-wrap:wrap; */
+  width: 300px;
+  /* justify-content: space-around; */
+  margin: 1px;
+}
+
+.bloqueTextoE{
+  padding: 10px;
+  width: auto;
+}
+
+.subTexto {
+  margin-bottom: 0;
+  width: 200px;
+  height: auto;
   flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-around;
-  margin: 15px;
+  display: flex;
 }
