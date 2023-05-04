@@ -6,26 +6,36 @@ use App\Controllers\BaseController;
 use App\Models\TrabajadoresModel;
 use App\Models\ParamModel;
 use App\Models\CargosModel;
+use App\Models\TelefonosModel;
 
 class Trabajadores extends BaseController
 {
     protected $trabajadores;
     protected $param;
     protected $cargos;
+    protected $telefonos;
     public function __construct()
     {
         $this->trabajadores = new TrabajadoresModel();
         $this->param = new ParamModel();
         $this->cargos = new CargosModel();
+        $this->telefonos = new TelefonosModel();
         helper('sistema');
+    }
+    public function obtenerTrabajadores()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->trabajadores->obtenerTrabajadores($estado);
+        return json_encode($res);
     }
     public function index()
     {
-        $trabajadores = $this->trabajadores->obtenerTrabajadores('');
+        // $trabajadores = $this->trabajadores->obtenerTrabajadores('');
         $param = $this->param->obtenerTipoDoc();
         $cargos = $this->cargos->obtenerCargos();
+        $tipoTel = $this->param->obtenerTipoTel();
 
-        $data = ['trabajadores' => $trabajadores, 'tipoDoc' => $param, 'cargos' => $cargos];
+        $data = [ 'tipoDoc' => $param, 'cargos' => $cargos,  'tipoTele' => $tipoTel];
 
         echo view('/principal/sidebar');
         echo view('/trabajadores/trabajadores', $data);
@@ -48,6 +58,7 @@ class Trabajadores extends BaseController
 
         if ($tp == 2) {
             //Actualizar datos
+            $res = $this->trabajadores->buscarTrabajador($idTrab, 0);
             $trabajadorUpdate = [
                 'id_cargo' => $cargo,
                 'tipo_doc' => $tipoDoc,
@@ -83,7 +94,6 @@ class Trabajadores extends BaseController
     {
         // echo $nIdenti;
         $array = array();
-
         if ($id != 0) {
             $data = $this->trabajadores->buscarTrabajador($id, 0);
             if (!empty($data)) {
@@ -102,17 +112,18 @@ class Trabajadores extends BaseController
     }
 
     public function eliminar($id,$estado){
-        $data = $this->trabajadores->elimina_Trabajador($id,$estado);
-        return redirect()->to(base_url('/trabajadores'));
+        if ($this->trabajadores->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return redirect()->to(base_url('trabajadores/eliminados'));
+            }else{
+                return redirect()->to(base_url('trabajadores'));
+            }
+        }
     }
     public function eliminados(){
-
-        $trabajadores = $this->trabajadores->obtenerTrabajadores('I');
         $param = $this->param->obtenerTipoDoc();
         $cargos = $this->cargos->obtenerCargos();
-
-        $data = ['trabajadores' => $trabajadores, 'tipoDoc' => $param, 'cargos' => $cargos];
-
+        $data = ['tipoDoc' => $param, 'cargos' => $cargos];
         echo view('/principal/sidebar');
         echo view('/trabajadores/eliminados', $data);
     }

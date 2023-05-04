@@ -1,10 +1,11 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>">
+<!-- <link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>"> -->
 
-<div id="content" class="p-4 p-md-5">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+    <div class="table-responsive p-2">
+        Ocultar Columnas: <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+        <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -17,24 +18,8 @@
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $contador = 0 ?>
-                <?php foreach ($trabajadores as $t) { ?>
-                    <tr>
-                        <th scope="row" class="text-center"><?= $contador += 1 ?></th>
-                        <td class="text-center"><?= $t['nombre_p'] . ' ' . $t['nombre_s'] ?></td>
-                        <td class="text-center"><?= $t['apellido_p'] . ' ' . $t['apellido_s'] ?></td>
-                        <td class="text-center"><?= $t['doc_res'] ?></td>
-                        <td class="text-center"><?= $t['n_identificacion'] ?></td>
-                        <td class="text-center"><?= $t['nombre_cargo'] ?></td>
-                        <td class="text-center"><?= $t['direccion'] ?></td>
-                        <td class="text-center">
-                            <button class="btn" onclick="seleccionarTrabajador(<?= $t['id_trabajador'] . ',' . 2 ?>)" data-bs-target="#agregarTrabajador" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Trabajador"></button>
-
-                            <button class="btn" href="#" data-href="<?php echo base_url('/trabajadores/eliminar') . '/' . $t['id_trabajador'] . '/' . 'I'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url('icons/delete.svg') ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>
-                        </td>
-                    </tr>
-                <?php } ?>
+            <tbody class="text-center">
+               
             </tbody>
         </table>
     </div>
@@ -280,10 +265,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-    $('#modalConfirmaP').on('show.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    });
 
+    var ContadorPRC = 0;
     var contador = 0;
     var contadorCorreo = 0;
     var inputIden = 0;
@@ -301,10 +284,79 @@
             timer: 1500
         })
     }
+
+    // Tabla de trabajadores  
+    var tableTrabajadores = $("#tableTrabajadores").DataTable({
+        ajax: {
+            url: '<?= base_url('trabajadores/obtenerTrabajadores') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'doc_res'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'nombre_cargo'
+            },
+            {
+                data: 'direccion'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" onclick="seleccionarTrabajador(' + data.id_trabajador + ' , 2 )" data-bs-target="#agregarTrabajador" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Trabajador"></button>' +
+                        '<button class="btn" data-href=<?php echo base_url('/trabajador/cambiarEstado/') ?>' + data.id_trabajador + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>'
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+
+    });
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableTrabajadores.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+
     //Limpiar campos de telefonos y correos
-    function limpiarCampos(input1, input2) {
+    function limpiarCampos(input1, input2, input3) {
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
+        $(`#${input3}`).val('')
     }
     //Insertar y editar Trabajador
     function seleccionarTrabajador(id, tp) {
@@ -668,4 +720,13 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
+
+    //Cambiar estado de "Activo" a "Eliminado" 
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
+        $('#btnSi').on('click', function(e) {
+            mostrarMensaje('success', 'Se ha eliminado el trabajador')
+            tableTrabajadores.ajax.reload(null, false)
+        })
+    })
 </script>

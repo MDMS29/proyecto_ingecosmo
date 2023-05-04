@@ -172,6 +172,11 @@ body {
   color: #212529;
   text-align: left;
   background-color: blue;
+
+}
+
+#sidebar{
+
 }
 
 [tabindex="-1"]:focus {

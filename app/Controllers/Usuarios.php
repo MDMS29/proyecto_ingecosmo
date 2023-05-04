@@ -30,9 +30,8 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('usuario');
         $contrasena = $this->request->getVar('contrasena');
         $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        // $Usuario = new Usuarios();
+        $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
         if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            //Aqui puedes meter toda la info del user que aparcera en el home
             $data = [
                 "id" => $datos['id_usuario'],
                 "nombre" => $datos['nombre_p'],
@@ -41,19 +40,25 @@ class Usuarios extends BaseController
                 "rol" => $datos['nombre_rol']
             ];
             $session = session();
-            $session->set($data); //agregamos los datos obtenidos del usuario
+            $session->set($data);
             return redirect()->to(base_url('/home'));
         } else {
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
         }
+    }
+    public function obtenerUsuarios()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->usuarios->obtenerUsuarios($estado);
+        return json_encode($res);
     }
     public function index()
     {
-        $usuarios = $this->usuarios->obtenerUsuarios('A');
-        $param = $this->param->obtenerTipoDoc();
+        $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
+        $tipoTel = $this->param->obtenerTipoTel();
 
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
+        $data = [ 'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
@@ -89,16 +94,7 @@ class Usuarios extends BaseController
         if ($tp == 2) {
             //Actualizar datos
             $res = $this->usuarios->buscarUsuario($idUser, 0);
-            //Si la contraseña esta vacia no se actualiza
-            if ($contra != '') {
-                //Verifica que no sea la misma de antes
-                $contraHash = password_verify($contra, $res['contrasena']);
-                if (!$contraHash) {
-                    $contra = password_hash($contra, PASSWORD_DEFAULT); //Hasheo nuevo
-                }
-            } else {
-                $contra = $res['contrasena'];
-            }
+            $contra = $res['contrasena'];
             $usuarioUpdate = [
                 'id_rol' => $rol,
                 'tipo_doc' => $tipoDoc,
@@ -128,6 +124,29 @@ class Usuarios extends BaseController
             return json_encode($this->usuarios->getInsertID());
         }
     }
+    public function cambiarContrasena()
+    {
+        $idUser = $this->request->getPost('idUsuario');
+        $contra = $this->request->getVar('contra');
+        $contrConfir = $this->request->getVar('contraConfir');
+
+        $res = $this->usuarios->buscarUsuario($idUser, 0);
+        //Si la contraseña esta vacia no se actualiza
+        if ($contra != '') {
+            //Verifica que no sea la misma de antes
+            $contraHash = password_verify($contra, $res['contrasena']);
+            if (!$contraHash) {
+                $contra = password_hash($contra, PASSWORD_DEFAULT); //Hasheo nuevo
+            }
+        } else {
+            $contra = $res['contrasena'];
+        }
+        if($this->usuarios->update($idUser, ['contrasena' => $contra])){
+            return json_encode(1);
+        }else{
+            return json_encode(2);
+        }
+    }
     public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
@@ -147,33 +166,21 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
-    public function cambiarEstado()
+    public function cambiarEstado($id, $estado)
     {
-        $nIdenti = $this->request->getPost('usuario');
-        $contrasena = $this->request->getVar('contrasena');
-        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        $textoAlerta="<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
-        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            $data = [
-                "id" => $datos['id_usuario'],
-                "nombre" => $datos['nombre_p'],
-                "apellido" => $datos['apellido_p'],
-                "idRol" => $datos['idRol'],
-                "rol" => $datos['nombre_rol']
-            ];
-            $session = session();
-            $session->set($data); 
-            return redirect()->to(base_url('/home'));
-        } else {
-            return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+        if ($this->usuarios->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return redirect()->to(base_url('usuarios/eliminados'));
+            }else{
+                return redirect()->to(base_url('usuarios'));
+            }
         }
     }
     public function eliminados()
     {
-        $usuarios = $this->usuarios->obtenerUsuarios('I');
         $param = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
+        $data = ['tipoDoc' => $param, 'roles' => $roles];
         echo view('principal/sidebar');
         echo view('usuarios/eliminados', $data);
     }

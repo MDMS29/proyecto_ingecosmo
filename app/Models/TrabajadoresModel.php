@@ -27,23 +27,13 @@ class TrabajadoresModel extends Model
 
     public function obtenerTrabajadores($estado)
     {
-        if ($estado == 'I'){
-            $this->select('trabajadores.*, param_detalle.resumen as doc_res, cargos.nombre as nombre_cargo');
+        $this->select('trabajadores.*, param_detalle.resumen as doc_res, cargos.nombre as nombre_cargo');
         $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
         $this->join('param_detalle', 'param_detalle.id_param_det = trabajadores.tipo_identificacion');
         $this->orderBy('id_trabajador', 'asc');
-        $this->where('trabajadores.estado', 'I');
+        $this->where('trabajadores.estado', $estado);
         $data = $this->findAll();
         return $data;
-        } else {
-            $this->select('trabajadores.*, param_detalle.resumen as doc_res, cargos.nombre as nombre_cargo');
-            $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
-            $this->join('param_detalle', 'param_detalle.id_param_det = trabajadores.tipo_identificacion');
-            $this->orderBy('id_trabajador', 'asc');
-            $this->where('trabajadores.estado', 'A');
-            $data = $this->findAll();
-            return $data;
-        }   
 
     }
     public function buscarTrabajador($id, $nIdenti)
@@ -52,11 +42,15 @@ class TrabajadoresModel extends Model
 
             $this->select('trabajadores.*');
             $this->where('id_trabajador', $id);
+            $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
+            $this->join('param_detalle', 'param_detalle.id_param_det = trabajadores.tipo_identificacion');
 
         } elseif ($nIdenti != 0) {
 
             $this->select('trabajadores.*, cargos.nombre as nombre_cargo');
             $this->where('n_identificacion', $nIdenti);
+            $this->where('trabajadores.estado', 'A');
+            $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
             $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
             // $this->join('email', 'email.id_usuario = trabajadores.id');
             // $this->join('telefonos', 'cargos.id_usuario = trabajadores.id');

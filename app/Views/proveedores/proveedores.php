@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>">
+<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_clientes.css") ?>">
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/icon-proveedores.png') ?>" /> Proveedores</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
@@ -22,7 +22,7 @@
                         <td class="text-center"><?php echo $p['direccion']; ?></td>
                         <td class="text-center">
                             <button class="btn" onclick="seleccionarProveedor(<?= $p['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>
-                            <input type="image" class="btn" href="#" data-href="<?php echo base_url('/proveedores/eliminar') . '/' . $p['id_tercero'] . '/' . 'E'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="<?php echo base_url('icons/delete.svg') ?>"></input>
+                            <input type="image" class="btn" href="#" data-href="<?php echo base_url('/proveedores/eliminar') . '/' . $p['id_tercero'] . '/' . 'I'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="<?php echo base_url('icons/delete.svg') ?>"></input>
                         </td>
                     </tr>
                 <?php } ?>

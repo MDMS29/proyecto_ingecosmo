@@ -21,6 +21,6 @@ class Principal extends BaseController
     public function home()
     {
         echo view('/principal/sidebar');
-        echo view('/principal/homeAdmin');
+        echo view('/principal/home');
     }
 }

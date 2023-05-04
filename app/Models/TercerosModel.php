@@ -27,6 +27,7 @@ class TercerosModel extends Model
     protected $skipValidation = false;
 
 
+    // -------------proveedores----------------
     public function obtenerProveedores()
     {
         $this->select('terceros.*');
@@ -34,18 +35,41 @@ class TercerosModel extends Model
         $this->where('estado','A');
         $data = $this->findAll();  
         return $data;
-    }
-
+    }   
+    
     public function traerProveedor($id){
         $this->select('terceros.* ');
         $this->where('id_tercero', $id);
         $data = $this->first();  // nos trae el registro que cumpla con una condicion dada 
         return $data;
     }
-
+    
     public function eliminaProveedor($id,$estado){
         $data = $this->update($id, ['estado' => $estado]);         
         return $data;
     }
+    
 
+    // -------------clientes----------------
+    public function obtenerClientes()
+    {
+        $this->select('terceros.*, param_detalle.resumen as tipoDoc');
+        $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
+        $this->where('tipo_tercero','5');
+        $this->where('terceros.estado','A');
+        $data = $this->findAll();  
+        return $data;
+    }
+
+    public function traerCliente($id){
+        $this->select('terceros.* ');
+        $this->where('id_tercero', $id);
+        $data = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+        return $data;
+    }
+
+    public function eliminaCliente($id,$estado){
+        $data = $this->update($id, ['estado' => $estado]);         
+        return $data;
+    }
 }

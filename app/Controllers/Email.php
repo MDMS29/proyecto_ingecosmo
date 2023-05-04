@@ -21,7 +21,8 @@ class Email extends BaseController
         $email = $this->request->getPost('correo');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
-        $usuarioCrea = session('id');
+        $usuarioCrea = 1;
+        // $usuarioCrea = session('id');
 
         $data = [
             'id_usuario' => $idUsu,

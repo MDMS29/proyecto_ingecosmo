@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
-<div id="content" class="p-4 p-md-5">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Eliminados</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+    <div class="table-responsive p-2">
+        <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -16,43 +16,8 @@
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $contador = 0 ?>
-
-                <?php if (empty($usuarios)) { ?>
-                    <tr>
-                        <td class="text-center" colspan="7">
-                            <h3>¡No hay Usuarios Eliminados!</h3>
-                        </td>
-                    </tr>
-                <?php } else { ?>
-                    <?php foreach ($usuarios as $u) { ?>
-                        <tr>
-                            <th scope="row" class="text-center">
-                                <?= $contador += 1 ?>
-                            </th>
-                            <td class="text-center">
-                                <?= $u['nombre_p'] . ' ' . $u['nombre_s'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['apellido_p'] . ' ' . $u['apellido_s'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['doc_res'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['n_identificacion'] ?>
-                            </td>
-                            <td class="text-center">
-                                <?= $u['nombre_rol'] ?>
-                            </td>
-                            <td class="text-center">
-                                <button class="btn" onclick="seleccionarUsuario(<?= $u['id_usuario'] ?>)" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>
-                                <button class="btn" onclick="cambiarEstado(<?= $u['id_usuario'] ?>, 'A')"><img src="<?php echo base_url('icons/restore.png') ?>" alt="Boton Eliminar" title="Reestablecer Usuario" width="20" height="20"></button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                <?php } ?>
+            <tbody class="text-center">
+                <!-- TABLA DE USUARIOS -->
             </tbody>
         </table>
     </div>
@@ -61,7 +26,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="verUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
     <div class="modal-dialog modal-xl">
@@ -156,7 +121,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" >X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -165,7 +130,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Telefono</th>
-                                    <th>Priodidad</th>
+                                    <th>Prioridad</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyTel">
@@ -178,7 +143,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
             </div>
         </div>
     </div>
@@ -191,7 +156,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -200,7 +165,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Correo</th>
-                                    <th>Priodidad</th>
+                                    <th>Prioridad</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyCorre">
@@ -213,61 +178,145 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Confirma Reestablecer -->
+<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                </div>
+
+                <div class="contenidoEliminarP">
+                    <div class="bloqueModalP">
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de reestablecer este Usuario?</p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+            </div>
+
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    var ContadorPRC = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-    //Insertar y editar Usuario
+
+    // Tabla de usuarios
+    var tableUsuarios = $("#tableUsuarios").DataTable({
+        ajax: {
+            url: '<?= base_url('usuarios/obtenerUsuarios') ?>',
+            method: "POST",
+            data: {
+                estado: 'I'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'doc_res'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'nombre_rol'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Ver" title="Ver Usuario"></button>' +
+                        '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/A data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Usuario" width="20"></button>'
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+    });
+
     function seleccionarUsuario(id) {
         $.ajax({
             type: 'POST',
             url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + 0,
-            dataType: 'json',
-            success: function(res) {
-                $('#tituloModal').text('Ver Usuario')
-                $('#tp').val(2)
-                $('#id').val(res[0]['id_usuario'])
-                $('#nombreP').val(res[0]['nombre_p'])
-                $('#nombreS').val(res[0]['nombre_s'])
-                $('#apellidoP').val(res[0]['apellido_p'])
-                $('#apellidoS').val(res[0]['apellido_s'])
-                $('#tipoDoc').val(1)
-                $('#nIdenti').val(res[0]['n_identificacion'])
-                $('#rol').val(res[0]['id_rol'])
-                $('#labelNom').text('Cambiar Contraseña:')
-                $('#contra').val('')
-                $('#confirContra').val('')
-                $('#btnGuardar').text('Actualizar')
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
-                    dataType: 'json',
-                    success: function(data) {
-                        telefonos = data[0]
-                        guardarTelefono()
-                    }
-                })
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
-                    dataType: 'json',
-                    success: function(data) {
-                        correos = data[0]
-                        guardarCorreo()
-                    }
-                })
-            }
+            dataType: 'json'
+        }).done(function(res) {
+            $('#tituloModal').text('Ver Usuario')
+            $('#tp').val(2)
+            $('#id').val(res[0]['id_usuario'])
+            $('#nombreP').val(res[0]['nombre_p'])
+            $('#nombreS').val(res[0]['nombre_s'])
+            $('#apellidoP').val(res[0]['apellido_p'])
+            $('#apellidoS').val(res[0]['apellido_s'])
+            $('#tipoDoc').val(1)
+            $('#nIdenti').val(res[0]['n_identificacion'])
+            $('#rol').val(res[0]['id_rol'])
+            $('#labelNom').text('Cambiar Contraseña:')
+            $('#contra').val('')
+            $('#confirContra').val('')
+            $('#btnGuardar').text('Actualizar')
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
+                dataType: 'json',
+                success: function(data) {
+                    telefonos = data[0]
+                    mostrarTelefonos()
+                }
+            })
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
+                dataType: 'json',
+                success: function(data) {
+                    correos = data[0]
+                    mostrarCorreo()
+                }
+            })
         })
     }
-    
+
     // Funcion para mostrar correos en la tabla.
-    function guardarCorreo() {
+    function mostrarCorreo() {
         $('#email').val(correos[0]?.correo)
         var cadena
         if (correos.length == 0) {
@@ -286,7 +335,7 @@
         $('#bodyCorre').html(cadena)
     }
     // Funcion para mostrar telefonos en la tabla.
-    function guardarTelefono() {
+    function mostrarTelefonos() {
         $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
@@ -305,24 +354,11 @@
         $('#bodyTel').html(cadena)
     }
     //Cambiar estado de "Eliminado" a "Activo"
-    function cambiarEstado(id, estado) {
-        $.post({
-            url: '<?= base_url() ?>' + 'usuarios/cambiarEstado',
-            data: {
-                id: id,
-                estado: estado
-            },
-            success: function(data) {
-                if (data == 1) {
-                    mostrarMensaje('success', '¡Se ha Reestablecido el usuario!')
-                } else {
-                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                }
-                setTimeout(e => {
-                    window.location.reload()
-                }, 2000)
-
-            }
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
+        $('#btnSi').on('click', function(e) {
+            mostrarMensaje('success', 'Se ha reestablecido el usuario')
+            tableUsuarios.ajax.reload(null, false)
         })
-    }
+    })
 </script>
