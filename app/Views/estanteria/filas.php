@@ -1,77 +1,145 @@
-<link rel="stylesheet" href="css/estanteria.css">
+<link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>">
 <div id="content" class="p-4 p-md-5">
     <div class="estanteria">
         <div class="verFilas" id="verFilas">
-        <h5 class="titulo"><?= $nombreFila ?></h5>
+            <h1 class="titulo" style="text-transform:uppercase;">ESTANTERIA DE <?php echo $titulo['nombre'] ?></h1>
+
         </div>
-        <h1 class="titulo"><img class="logo1" src="<?php echo base_url('/icons/estante-b.png'); ?>">ESTANTERIA BATERIAS</h1>
 
         <div class="contenedorE">
             <div class="contenidoCardF">
+                <?php if (empty($data)) { ?>
+                    <p>No se encuentran filas - <?php echo $titulo['nombre'] ?></p>
+            </div>
+        </div>
+    <?php } else { ?>
+        <?php foreach ($data as $dato) { ?>
+        <?php } ?>
 
-                <div class="card2">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-                    </div>
-                    <div class="textoFila">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Fila 1</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">4 baterias A4K</p>
-                            <p class="subTexto">4 baterias bd5</p>
-                            <p class="subTexto">4 baterias as2</p>
-                            <p class="subTexto">4 baterias gr4</p>
-                        </div>
-                    </div>
+        <div class="card2">
+            <div class="imagenes">
+                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+            </div>
+            <div class="textoFila">
+                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 1</h5>
+                <div class="bloqueTextoE">
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
                 </div>
-
             </div>
         </div>
 
-        <div class="footer-page">
-            <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-
-            <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('icons/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
+        <div class="card2">
+            <div class="imagenes">
+                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+            </div>
+            <div class="textoFila">
+                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 2</h5>
+                <div class="bloqueTextoE">
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                </div>
+            </div>
         </div>
+
+        <div class="card2">
+            <div class="imagenes">
+                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+            </div>
+            <div class="textoFila">
+                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 3</h5>
+                <div class="bloqueTextoE">
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card2">
+            <div class="imagenes">
+                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+            </div>
+            <div class="textoFila">
+                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 4</h5>
+                <div class="bloqueTextoE">
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card2">
+            <div class="imagenes">
+                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+            </div>
+            <div class="textoFila">
+                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 5</h5>
+                <div class="bloqueTextoE">
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                    <p class="subTexto">materiales</p>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
+<?php } ?>
+
+
+<div class="footer-page">
+    <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+
+    <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('icons/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
+</div>
+</div>
 
 </div>
 
 <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div style="background:white; border:5px solid #161666; border-radius:10px; height:400px; width:800px;" class="modal-content">
+        <div style="background:white; border:5px solid #161666; border-radius:10px; height:420px; width:800px;" class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;"><img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">Agregar Categoria</h1>
+                <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                <div class="tituloHeader">
+                    <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar Categoria</h1>
+                </div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre</label>
-                        <input type="text" class="inputNombreC" id="nombre" name="nombre">
+                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">N° fila</label>
+                        <select class="form-select" id="nombre" name="nombre">
+                            <option selected>-- SELECCIONE UNA FILA --</option>
+                            <?php foreach($filas as $fila){?>
+                  <option value=<?php echo $p['id']; ?>>
+                    <?php echo $p['nombre']; ?></option>
+                    <?php }?>
+                        </select>
                         <input hidden id="tp" name="tp">
                         <input hidden id="id" name="id">
                     </div>
 
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Filas</label>
-                        <input type="text" id="fila" name="fila">
-                        <input hidden id="tp" name="tp">
-                        <input hidden id="id" name="id">
-                    </div>
+                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre producto</label>
+                        <select class="form-select" id="nombre_prod" name="nombre_prod">
+                            <option selected>-- SELECCIONE PRODUCTOS --</option>
 
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Imagen</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/*">
-                    </div>
-
-                    <div class="mb-3">
-                        <button class="contenedor-btn-file">
-                            <i class="fas fa-file"></i>
-                            Adjuntar archivo
-                            <label for="btn-file"></label>
-                            <input type="file" id="btn-file">
-                        </button>
+                        </select>
                     </div>
                 </form>
             </div>

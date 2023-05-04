@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+
 class Estanteria extends BaseController
 {
     public function __construct()
@@ -14,6 +15,5 @@ class Estanteria extends BaseController
     {
         echo view('/principal/sidebar');
         echo view('/estanteria/estanteria');
-        
     }
 }

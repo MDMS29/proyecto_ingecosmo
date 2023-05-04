@@ -44,6 +44,28 @@ class MaterialesModel extends Model{
         return $datos;
     }
 
+        
+    public function traerMateriales($id_material){
+        $this->select('materiales.*');
+        $this->where('id_material', $id_material);
+        $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+
+    public function traerMaterialesCategoria($id_material){
+        $this->select('materiales.*');
+        $this->where('materiales.id_material', $id_material);
+        $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+
+    public function obtenerMateriales($id_material){
+        $this->select('materiales.*');
+        $this->where('id_material', $id_material);
+    }
+
+
+
     // public function traerNombre($id_material){
     //     $this->select('param_detalle.*');
     //     $this->where('nombre', '28');

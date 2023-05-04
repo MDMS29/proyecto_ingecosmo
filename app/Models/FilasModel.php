@@ -24,11 +24,20 @@ class FilasModel extends Model{
     protected $validationMessages = [];
     protected $skipValidation    = false;
 
-    public function obtenerFilas()
-    {
-        $this->select('materiales.*, materiales.estante as nombreFila');
-        
-        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
-        return $datos;
-    }
+     public function obtenerFilas($estante)
+     {
+         $this->select('materiales.*, materiales.estante as nombreFila, estanteria.nombre as estanteria');
+         $this->join('estanteria','materiales.estante = estanteria.id');
+         $this->where('estante', $estante);
+         $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+         return $datos;
+     }
+
+     public function traerFilas($fila){
+        $this->select('materiales.*, materiales.fila as numeroFila');
+        $this->where('fila', $fila);
+     }
+
+
+
 }

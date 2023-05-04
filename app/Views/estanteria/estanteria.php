@@ -11,12 +11,12 @@
                         <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria baterias</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria baterias</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/3" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
 
@@ -25,12 +25,12 @@
                         <img class="iconos" src="<?php echo base_url('/img/aceites.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria aceites</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria aceites</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/6" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
 
@@ -39,12 +39,12 @@
                         <img class="iconos" src="<?php echo base_url('/img/pinturas.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria pinturas</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria pinturas</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/5" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
 
@@ -53,12 +53,12 @@
                         <img class="iconoBombi" src="<?php echo base_url('/img/bombillerias.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria bombillerias</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria bombillerias</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/4" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
 
@@ -67,12 +67,12 @@
                         <img class="iconoBroca" src="<?php echo base_url('/img/brocas.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria brocas</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria brocas</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/1" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
                 <div class="card1">
@@ -80,12 +80,12 @@
                         <img class="iconos" src="<?php echo base_url('/img/remaches.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria remaches</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria remaches</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/7" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
                 <div class="card1">
@@ -93,12 +93,12 @@
                         <img class="iconos" src="<?php echo base_url('/img/discos.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria discos</h5>
+                        <h5 class="card-title" id="subTitulo" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria discos</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/2" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
                 <div class="card1">
@@ -106,12 +106,12 @@
                         <img class="iconos" src="<?php echo base_url('/img/lubricantes.png'); ?>">
                     </div>
                     <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black;">Estanteria lubricantes</h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria lubricantes</h5>
                         <div class="bloqueTextoE">
                             <p class="subTexto">Contiene 5 filas</p>
                             <p class="subTexto">Contiene 30 articulos</p>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                        <a href="<?php echo base_url() ?>Filas/mostrarFila/8" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
                 </div>
             </div>
@@ -119,6 +119,8 @@
 
         <div class="footer-page">
             <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+
+            <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('icons/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
         </div>
     </div>
 
@@ -126,7 +128,7 @@
 
 <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div style="background:white; border:5px solid #161666; border-radius:10px; height:400px; width:800px;" class="modal-content">
+        <div style="background:white; border:5px solid #161666; border-radius:10px; height:500px; width:800px;" class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;"><img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">Agregar Categoria</h1>
 
@@ -136,30 +138,21 @@
                 <form>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre</label>
-                        <input type="text" class="inputNombreC" id="nombre" name="nombre">
+                        <input type="text" class="form-control" id="nombre" name="nombre">
                         <input hidden id="tp" name="tp">
                         <input hidden id="id" name="id">
                     </div>
 
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Filas</label>
-                        <input type="text" id="fila" name="fila">
+                        <input type="text" class="form-control" id="fila" name="fila">
                         <input hidden id="tp" name="tp">
                         <input hidden id="id" name="id">
                     </div>
 
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Imagen</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/*">
-                    </div>
-
-                    <div class="mb-3">
-                        <button class="contenedor-btn-file">
-                            <i class="fas fa-file"></i>
-                            Adjuntar archivo
-                            <label for="btn-file"></label>
-                            <input type="file" id="btn-file">
-                        </button>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
                     </div>
                 </form>
             </div>

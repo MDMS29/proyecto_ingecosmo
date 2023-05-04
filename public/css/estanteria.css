@@ -7,6 +7,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+
 }
 
 .titulo {
@@ -23,7 +24,7 @@
 }
 
 .contenedorE {
-  width: 1200px;
+  width: 930px;
   height: 600px;
   background: white;
   border: 2px solid #161666;
@@ -57,8 +58,27 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  width: 30rem;
-  height: 12rem;
+  width: 25rem;
+  height: 10rem;
+}
+
+.imagenes {
+  background: #A4AADE;
+  border: 4px solid #161666;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textoCard {
+  padding: 10px;
+  height: 100%;
+}
+
+.bloqueTextoE {
+  color: #161666;
 }
 
 .btnVer {
@@ -79,85 +99,40 @@
   background-color: #161666;
 }
 
-
-.imagenes {
-  background: #A4AADE;
-  border: 4px solid #161666;
-  width: 40%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .iconoBroca {
-  width: 25px;
-  height: 100px;
+  width: 80px;
+  height: 90px;
 }
 
 .iconoBombi {
-  width: 60px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 }
-
-.bloqueTextoE {
-  color: #161666;
-  /* margin-bottom: 15px; */
-}
-
-.textoCard {
-  padding: 25px;
-  height: 100%;
-}
-
 
 .footer-page {
   display: flex;
   justify-content: flex-end;
   padding-top: 1em;
   gap: 1rem;
-  width: 70%;
+  width: 54%;
 }
 
 .btnRedireccion {
-  background-color: #161666;
+  background-color: #161666 !important;
   color: white;
 }
 
 .imagenEncab{
-  width: 70px;
-  height: 60px;
-  margin-right: 20px;
+  width: 80px;
+  height: 70px;
+  margin-right: 0;
+
 }
 
-.contenedor-btn-file input[type="file"] {
-  appearance: none;
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  background: #08ff31;
-  z-index: -1;
-}
-.contenedor-btn-file {
-  display: inline-block;
-  position: relative;
-  background-color: #161666;
-  color: #fff;
-  border: 0;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, .15);
-  overflow: hidden;
-  transition: ease-out 120ms background-color;
-}
-.contenedor-btn-file:hover {
-  background-color: #161666;
-}
-.contenedor-btn-file:active {
-  background-color: #161666;
-}
-.contenedor-btn-file > i {
-  margin-right: 15px;
+.imgAgregar{
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
 }
 
 .contenedor-btn-file label {
@@ -188,8 +163,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 30rem;
-  height: 12rem;
+  width: 25rem;
+  height: 10rem;
   margin: 15px;
 }
 
@@ -228,3 +203,33 @@
   flex-wrap: wrap;
   display: flex;
 }
+
+#cerrarX{
+  margin: 0;
+}
+
+.tituloHeader{
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.modal-header{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-right: 10px;
+  flex-direction: row;
+}
+
+.btnCerrar{
+  background-color: #E25050 !important;
+  color: white !important;
+}
+
+.btnGuardar1{
+  background-color: #161666 !important;
+  color: white !important;
+} 
+

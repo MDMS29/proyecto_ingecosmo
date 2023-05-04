@@ -1,9 +1,13 @@
 <link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>">
 
+
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
-        <h1 class="titulo"><img class="logo1" src="<?php echo base_url('/img/insumos.png'); ?>">CATEGORIAS INSUMOS</h1>
-        <button class="btn btnRegresar">Regresar</button>
+        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">MATERIALES</h1>
+        <a class="btn btnRegresar" style="background: #E25050; color:white; width:140px;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('icons/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
+
+
+
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
@@ -17,12 +21,12 @@
                                 $e += 3;
                                 $salida = array_slice($data, 0, $e);
                                 ?>
-                                <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
+                                <div class="card" style="width: 13rem; height:18rem; ">
                                     <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$i]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
                                     </div>
                                 </div>
                                 <?php if ($e == 8) { ?>
@@ -43,12 +47,12 @@
                                 $a += 3;
                                 $salida = array_slice($data, 3, $a);
                                 ?>
-                                <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
+                                <div class="card" style="width: 13rem; height:18rem;">
                                     <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
                                     </div>
                                 </div>
                                 <?php if ($e == 8) { ?>
@@ -58,39 +62,48 @@
                                 $r++ ?>
                             <?php } ?>
 
-
                         </div>
                     </div>
+
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
-                            <?php $r = 0;
-                            for ($a = 0; $a < count($data);) {
-                            ?>
-                                <span><?php $a ?></span>
-                                <?php
-                                $a += 3;
-                                $salida = array_slice($data, 6, $a);
-                                ?>
-                                <div class="card" style="width: 13rem; height:18rem;padding-right:20px; ">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+
+
+                            <?php $j = 0;
+                            for ($l = 0; $l < count($data);) {
+                            ?>
+                                <span><?php $l ?></span>
+                                <?php
+                                $l += 3;
+                                $salida = array_slice($data, 6, $l);
+                                ?>
+                                <div class="card" style="width: 13rem; height:18rem;">
+                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
+                                    <div class="textoCard">
+                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
+
+                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
                                     </div>
                                 </div>
                                 <?php if ($e == 8) { ?>
 
                                 <?php break;
                                 }
-                                $r++ ?>
+                                $j++ ?>
                             <?php } ?>
+
                         </div>
                     </div>
+
                     <div class="swiper-slide">
-                        <div class="card1" style="width: 13rem; height:18rem;">
-                            <div class="textoCard">
-                                <button type="submit" class="btn btnAgregar" data-bs-target="#categoriaModal" data-bs-toggle="modal"><i class="bi bi-plus-circle" style="font-size:70px;"></i></button>
+                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                            <div class="d-flex" style="gap:10px;">
+                                <div class="card1" style="width: 13rem; height:18rem;">
+                                    <div class="textoCard" title="Agregar una nueva categoriA">
+                                        <button type="submit" class="btn btnAgregar" data-bs-target="#categoriaModal" data-bs-toggle="modal"><i class="bi bi-plus-circle" style="font-size:70px;"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,12 +113,15 @@
                 <div class="swiper-button-prev" style="color:black;"></div>
             </div>
         </div>
+
     </div>
+
 </div>
 
+
 <div class="modal fade" id="categoriaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div style="background:white; border:5px solid #161666; border-radius:10px; height:400px; width:800px;" class="modal-content">
+    <div class="modal-dialog">
+        <div style="background:white;" class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;"><img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">Agregar Categoria</h1>
 
@@ -115,7 +131,7 @@
                 <form>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre</label>
-                        <input type="text" class="inputNombreC" id="nombre" name="nombre">
+                        <input type="text" class="form-control" id="nombre" name="nombre">
                         <input hidden id="tp" name="tp">
                         <input hidden id="id" name="id">
                     </div>
@@ -123,7 +139,6 @@
                         <label for="message-text" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Imagen</label>
                         <input type="file" class="form-control" id="imagen" name="imagen">
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -142,4 +157,7 @@
             prevEl: ".swiper-button-prev",
         },
     });
+
+
+
 </script>
