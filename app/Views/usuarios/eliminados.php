@@ -184,7 +184,6 @@
     </div>
 </div>
 
-
 <!-- Modal Confirma Reestablecer -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -217,7 +216,6 @@
     var ContadorPRC = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-
     // Tabla de usuarios
     var tableUsuarios = $("#tableUsuarios").DataTable({
         ajax: {
@@ -263,7 +261,7 @@
                 render: function(data, type, row) {
                     return (
 
-                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Ver" title="Ver Usuario"></button>' +
+                        '<button class="btn text-primary" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
                         '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/A data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Usuario" width="20"></button>'
                     );
                 },
@@ -273,7 +271,6 @@
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     });
-
     function seleccionarUsuario(id) {
         $.ajax({
             type: 'POST',
@@ -314,7 +311,6 @@
             })
         })
     }
-
     // Funcion para mostrar correos en la tabla.
     function mostrarCorreo() {
         $('#email').val(correos[0]?.correo)
