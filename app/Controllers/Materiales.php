@@ -31,6 +31,17 @@ class Materiales extends BaseController
         echo json_encode($returnData);
     }
 
+    public function editarMaterial($id)
+    {
+        $returnData = array();
+        $materiales_ = $this->materiales->traerEditar($id);
+        if (!empty($materiales_)) {
+            array_push($returnData, $materiales_);
+        }
+        echo json_encode($returnData);
+    }
+
+
 
     public function agregarMaterial($id_material)
     {

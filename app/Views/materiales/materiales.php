@@ -38,43 +38,43 @@
     <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregarMaterial(<?php echo 1 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
   </div>
 </div>
-          
+
 </html>
 
 <!-- MODAL AGREGAR -->
 <form id="formularioAgregar" autocomplete="off">
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <input type="text" value="<?= $idCate?>" id="idCategoria">
-      <div class="modal-content" id="modalContent"style="border: 5px solid #161666;  border-radius: 10px;">
+      <input type="text" value="<?= $idCate ?>" id="idCategoria" hidden>
+      <div class="modal-content" id="modalContent" style="border: 5px solid #161666;  border-radius: 10px;">
         <div class="modal-header" id="modalHeader">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div id="agregar">
-      <img style="margin-right: 10px; width:30px;"  src="http://localhost/ingecosmo/public/icons/plus-b.png" alt="icon-plus" width="20">
+            <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/icons/plus-b.png" alt="icon-plus" width="20">
           </div>
           <h1 class="modal-title" id="titulo1">Agregar</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="modalAgregar2">
-          
+
           <div class="camposAgregar">
-          <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-          <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
+            <label for="exampleDataList" class="form-label">Nombre:</label>
+            <input class="form-control" list="datalistOptions" id="nombre" name="nombre" placeholder="">
           </div>
 
           <div class="camposAgregar">
-          <label for="exampleDataList" class="form-label">Precio Compra:</label>
-          <input class="form-control" type="number" list="datalistOptions" id="precioC" name="precioC" placeholder="">
+            <label for="exampleDataList" class="form-label">Precio Compra:</label>
+            <input class="form-control" type="number" list="datalistOptions" id="precioC" name="precioC" placeholder="">
           </div>
 
           <div class="camposAgregar">
-          <label for="exampleDataList" class="form-label">Precio Venta:</label>
-          <input class="form-control" type="number" list="datalistOptions" id="precioV" name="precioV" placeholder="">
+            <label for="exampleDataList" class="form-label">Precio Venta:</label>
+            <input class="form-control" type="number" list="datalistOptions" id="precioV" name="precioV" placeholder="">
           </div>
 
           <div class="camposAgregar">
             <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
-            <input class="form-control"  type="number"list="datalistOptions" id="cantidadA" name="cantidadA" placeholder="">
+            <input class="form-control" type="number" list="datalistOptions" id="cantidadA" name="cantidadA" placeholder="">
           </div>
 
 
@@ -83,7 +83,7 @@
         </div>
         <div class="modal-footer" id="modal-footer">
           <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF">Agregar</button>
+          <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
       </div>
     </div>
@@ -91,16 +91,78 @@
 </form>
 
 
-<!-- Modal -->
+<!-- Modal Detalles- Editar-->
 
-<div class="modal" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content" id="modal-content">
 
       <div class="modal-header" id="modal-header">
         <div class="header2">
-          <img src="<?php echo base_url('/img/masDetalles.png') ?>" class="detalles" />
-          <h5 class="modal-title text-center" id="exampleModalLabel">Detalles</h5>
+          <img src="<?php echo base_url('/img/masDetalles.png') ?>" id="imagenDetalle" class="detalles" />
+          <h5 class="modal-title text-center" id="titulo">Detalles</h5>
+        </div>
+
+        <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
+
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
+
+      </div>
+      <div class="modal-body" id="modal-body">
+
+        <div class="campos">
+
+          <label for="exampleDataList" class="form-label">Nombre insumo:</label>
+          <input type="text" class="form-control" list="datalistOptions" id="nombre1" name="nombre" placeholder="" disabled>
+        </div>
+
+        <div class="campos">
+
+          <label for="exampleDataList" class="form-label">Precio de Venta:</label>
+          <input type="text" class="form-control" list="datalistOptions" id="precioVenta" name="precioVenta" placeholder="" disabled>
+        </div>
+
+        <div class="campos">
+
+          <label for="exampleDataList" class="form-label">Precio de Compra:</label>
+          <input type="text" class="form-control" list="datalistOptions" id="precioCompra" name="precioCompra" placeholder="" disabled>
+        </div>
+
+        <div class="campos">
+
+          <label for="exampleDataList" class="form-label">Cantidad Vendida:</label>
+          <input type="text" class="form-control" list="datalistOptions" id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
+        </div>
+
+        <div class="campos">
+
+          <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
+          <input type="text" class="form-control" list="datalistOptions" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" id="modal-footer">
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
+        <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button>
+        <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDITAR MODAL PRUEBA- NO SEGURO
+
+<div class="modal fade" id="editarMaterial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="modal-content">
+      <input type="text" name="id" id="id" hidden>
+      <input type="text" name="tp" id="tp" hidden>
+      <div class="modal-header" id="modal-header">
+        <div class="header2">
+          <img src="<?php echo base_url('/img/editar.png') ?>" id="editar" />
+          <h5 class="modalTitulo id=" exampleModalLabel">Editar</h5>
         </div>
 
         <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
@@ -110,62 +172,79 @@
       </div>
       <div class="modal-body" id="modal-body">
 
-
         <div class="campos">
 
-          <label for="exampleDataList" class="form-label">Precio de Venta</label>
-          <input type="text" class="form-control" list="datalistOptions" id="precioVenta" name="precioVenta" placeholder="" disabled>
+          <label for="exampleDataList" class="form-label">Nombre insumo</label>
+          <input type="text" class="form-control" list="datalistOptions" id="nombre2" style="background-color:
+#ECEAEA;" name="precioVenta" placeholder="">
+        </div>
+        <div class="campos">
+
+          <label for="exampleDataList" class="form-label">Precio de Venta:</label>
+          <input type="text" class="form-control" list="datalistOptions" id="precioVenta1" style="background-color:
+          #ECEAEA;" name="precioVenta" placeholder="">
         </div>
 
         <div class="campos">
 
-          <label for="exampleDataList" class="form-label">Precio de Compra</label>
-          <input type="text" class="form-control" list="datalistOptions" id="precioCompra" name="precioCompra" placeholder="" disabled>
+          <label for="exampleDataList" class="form-label">Precio de Compra:</label>
+          <input type="text" class="form-control" list="datalistOptions" style="background-color:
+          #ECEAEA;" id="precioCompra1" name="precioCompra" placeholder="">
         </div>
 
         <div class="campos">
 
-          <label for="exampleDataList" class="form-label">Cantidad Vendida</label>
-          <input type="text" class="form-control" list="datalistOptions" id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
+          <label for="exampleDataList" class="form-label">Cantidad Vendida:</label>
+          <input type="text" class="form-control" list="datalistOptions" style="background-color:
+          #ECEAEA;" id="cantidadVendida1" name="cantidadVendida" placeholder="">
         </div>
 
         <div class="campos">
 
-          <label for="exampleDataList" class="form-label">Cantidad Actual</label>
-          <input type="text" class="form-control" list="datalistOptions" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
+          <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
+          <input type="text" class="form-control" list="datalistOptions" style="background-color:
+          #ECEAEA;" id="cantidadActual1" name="cantidadActual" placeholder="">
         </div>
 
       </div>
 
       <div class="modal-footer" id="modal-footer">
-        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
+        <button type="submit" class="btn btnEditar" data-bs-toggle="modal" data-bs-target="#detalllesMaterial">Actualizar</button>
+
       </div>
     </div>
   </div>
-</div>
-
+</div> -->
 
 
 <!-- MODAL USAR -->
 
-<div class="modal" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content modal-lg" style="border: 5px solid #161666;  border-radius: 10px;">
-      <div class="modal-header" id="modal-header">
+    <div class="modal-content modal-lg" id="modalContentUsar">
+      <div class="modal-header" id="modalHeaderUsar">
         <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-        <<h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
+
+        <div class="HEADER">
+
+          <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
           <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-body">
-          <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-          <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="">
-          <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
-          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
         </div>
       </div>
-      <div class="modal-footer" id="modal-footer">
+      <div class="modal-body" id="modalBodyUsar">
+
+        <div class="camposUsar">
+          <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
+          <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="">
+        </div>
+        <div class="camposUsar">
+          <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
+          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
+        </div>
+
+      </div>
+      <div class="modal-footer" id="modalFooter">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
         <button type="button" class="btn btnAccionF">Usar</button>
       </div>
@@ -173,40 +252,40 @@
   </div>
 </div>
 
-<!-- MODAL USAR -->
+<!-- MODAL USAR 2-->
 
 <div class="modal fade" id="usarMaterialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-
     <div class="modal-content modal-lg" style="border: 5px solid #161666;  border-radius: 10px;">
-      <div class="modal-header">
+      <div class="modal-header" id="modal-header">
+        <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
+        <<h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
+          <button type="button" class="btn" data-bs-toggle="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body" id="modalBodyUsar">
 
-        <div class="modal-content modal-lg">
-          <div class="modal-header" id="modal-header">
-
-            <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-            <<h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
-              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
-          </div>
-          <div class="modal-body">
-
-            <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-            <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="">
-            <label for="exampleDataList" class="form-label">Cantidad a Usar</label>
-            <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
-
-  
-
-          </div>
-          <div class="modal-footer" id="modal-footer">
-            <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btnAccionF">Usar</button>
-          </div>
+        <div class="camposUsar">
+          <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
+          <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="">
         </div>
+        <div class="camposUsar">
+          <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
+          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
+        </div>
+
+      </div>
+      <div class="modal-footer" id="modal-footer">
+        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btnAccionF">Usar</button>
       </div>
     </div>
   </div>
 </div>
+</div>
+</div>
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -217,12 +296,99 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-        $("#titulo").text('');
+        $("#titulo").text('Detalles');
+        $("#nombre1").val(rs[0]['nombre']);
         $("#precioVenta").val(rs[0]['precio_venta']);
         $("#precioCompra").val(rs[0]['precio_compra']);
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
+
+        $("#nombre1").attr('disabled', '');
+        $("#precioVenta").attr('disabled', '');
+        $("#precioCompra").attr('disabled', '');
+        $("#cantidadVendida").attr('disabled', '');
+        $("#cantidadActual").attr('disabled', '');
+        $("#btnUsar1").removeAttr('hidden', '');
         $("#detallesModal").modal("show");
+        $("#btnEditar").text('Editar');
+        $("#btnEditar").attr('onclick', 'habilitar()');
+
+        $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
+
+      }
+    })
+  }
+
+  // function editarMaterial(id_material) {
+  //   dataURL = "<?php echo base_url('/materiales/editarMaterial'); ?>" + "/" + id_material;
+  //   $.ajax({
+  //     type: "POST",
+  //     url: dataURL,
+  //     dataType: "json",
+  //     success: function(rs) {
+  //       $("#titulo").text('');
+  //       $("#nombre2").val(rs[0]['nombre']);
+  //       $("#precioVenta1").val(rs[0]['precio_venta']);
+  //       $("#precioCompra1").val(rs[0]['precio_compra']);
+  //       $("#cantidadVendida1").val(rs[0]['cantidad_vendida']);
+  //       $("#cantidadActual1").val(rs[0]['cantidad_actual']);
+
+
+  //     }
+  //   })
+  // }
+
+  function habilitar() {
+
+    $("#titulo").text('Editar');
+    $("#nombre1").removeAttr('disabled', '');
+    $("#precioVenta").removeAttr('disabled', '');
+    $("#precioCompra").removeAttr('disabled', '');
+    $("#cantidadVendida").removeAttr('disabled', '');
+    $("#cantidadActual").removeAttr('disabled', '');
+    $("#btnUsar1").attr('hidden', '');
+    $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar.png') ?>');
+    $("#btnEditar").text('Guardar');
+    $("#btnEditar").attr('onclick', 'actualizar()');
+  }
+
+  function actualizar() {
+
+    nombre = $("#nombre1").val()
+    precioCompra = $("#precioCompra").val()
+    precioVenta = $("#precioVenta").val()
+    cantidadActual = $("#cantidadActual").val()
+    idCategoria = $("#idCategoria").val()
+    if ([nombre, precioCompra, cantidadActual].includes("")) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        text: "¡Campos Vacios!",
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+    $.post({
+      url: '<?php echo base_url('insumos/actualizar') ?>',
+      data: {
+        nombre: nombre,
+        precioCompra: precioCompra,
+        precioVenta: precioVenta,
+        cantidadActual: cantidadActual,
+        tipoMaterial: 9,
+        idCategoria: idCategoria
+      },
+      success: function(e) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: 'Se actualizo el material',
+          showConfirmButton: false,
+          timer: 1000
+        })
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
       }
     })
   }
@@ -259,9 +425,11 @@
           icon: "success",
           text: 'Se agrego material',
           showConfirmButton: false,
-          time: 5000
+          timer: 1000
         })
-        window.location.reload()
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
       }
     })
 

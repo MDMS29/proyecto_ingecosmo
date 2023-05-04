@@ -54,4 +54,27 @@ class Insumos extends BaseController
 
         // return redirect()->to(base_url('/materiales'));
     }
+
+    public function actualizar()
+    {
+        $nombre =  $this->request->getPost('nombre');
+        $cantidadActual = $this->request->getPost('cantidadActual');
+        $precioCompra = $this->request->getPost('precioCompra');
+        $precioVenta = $this->request->getPost('precioVenta');
+        $tipoMaterial = $this->request->getPost('tipoMaterial');
+        $idCategoria = $this->request->getPost('idCategoria');
+
+        $data = [
+            'nombre' => $nombre,
+            'cantidad_actual' => $cantidadActual,
+            'precio_compra' => $precioCompra,
+            'precio_venta' => $precioVenta,
+            'tipo_material' => $tipoMaterial,
+            'categoria_material' => $idCategoria
+        ];
+
+        $this->materiales->update($data);
+
+        // return redirect()->to(base_url('/materiales'));
+    }
 }
