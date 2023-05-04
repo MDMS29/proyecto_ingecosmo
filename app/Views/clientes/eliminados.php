@@ -1,40 +1,55 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_clientes.css") ?>">
 
 <div id="content" class="p-4 p-md-5">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/icon-proveedores.png') ?>" /> Proveedores Eliminados</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes Eliminados</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
         <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Id</th>
-                    <th scope="col" class="text-center">Razon Social</th>
-                    <th scope="col" class="text-center">NIT</th>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Nombres</th>
+                    <th scope="col" class="text-center">Apellidos</th>
+                    <th scope="col" class="text-center">Tipo de Documento</th>
+                    <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <!-- <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">Email</th> -->
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $contador = 0 ?>
-                <?php foreach ($proveedores as $p) { ?>
+                <?php if (empty($clientes)) { ?>
                     <tr>
-                        <th scope="row" class="text-center"><?= $contador += 1 ?></th>
-                        <td class="text-center"><?php echo $p['razon_social']; ?></td>
-                        <td class="text-center"><?php echo $p['n_identificacion']; ?></td>
-                        <td class="text-center"><?php echo $p['direccion']; ?></td>
-                        <td class="text-center">
-
-                            <button class="btn"  href="#" data-href="<?php echo base_url('/proveedores/eliminar') . '/' . $p['id_tercero'] . '/' . 'A'; ?>" data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("/img/icon-volver.png"); ?>" alt="Boton Reestablecer" title="Reestablecer Cliente" width="20" height="20"></button>
-
-
+                        <td class="text-center" colspan="7">
+                            <h3>¡No hay Clientes Eliminados!</h3>
                         </td>
                     </tr>
+                <?php } else { ?>
+                    <?php foreach ($clientes as $c) { ?>
+                        <tr>
+                            <th scope="row" class="text-center"><?= $contador += 1 ?></th>
+                            <td class="text-center"><?php echo $c['nombre_p'] . ' ' . $c['nombre_s']; ?></td>
+                            <td class="text-center"><?php echo $c['apellido_p'] . ' ' . $c['apellido_s']; ?></td>
+                            <td class="text-center"><?php echo $c['tipo_doc']; ?></td>
+                            <td class="text-center"><?php echo $c['n_identificacion']; ?></td>
+                            <td class="text-center"><?php echo $c['direccion']; ?></td>
+                            <!-- <td class="text-center">< ?php echo $p['numero']; ?></td>
+                        <td class="text-center">< ?php echo $p['Email']; ?></td> -->
+                            <td class="text-center">
+
+                                <button class="btn" href="#" data-href="<?php echo base_url('/clientes/eliminar') . '/' . $c['id_tercero'] . '/' . 'A'; ?>" data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("/img/icon-volver.png"); ?>" alt="Boton Reestablecer" title="Reestablecer Proveedor" width="20" height="20"></button>
+
+                            </td>
+                        </tr>
+                    <?php } ?>
                 <?php } ?>
             </tbody>
         </table>
     </div>
 
     <div class="footer-page">
-        <a href="<?php echo base_url('/proveedores') ?>" class="btn btnRedireccion">Regresar</a>
+        <a href="<?php echo base_url('/clientes') ?>" class="btn btnRedireccion">Regresar</a>
     </div>
 
     <!-- Modal Confirma activar -->

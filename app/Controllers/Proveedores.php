@@ -66,11 +66,8 @@ class Proveedores extends BaseController
         $proveedores_ = $this->proveedores->eliminaProveedor($id, $estado);
         return redirect()->to(base_url('/proveedores'));
     }
-
-    public function eliminados()
-    {
-        $proveedores = $this->proveedores->where('estado', 'E')->findAll();
-
+    public function eliminados(){
+        $proveedores = $this->proveedores->select('*')->where('estado', 'I')->where('tipo_tercero', '8')->findAll();
         $data = ['proveedores' => $proveedores];
         echo view('/principal/sidebar');
         echo view('/proveedores/eliminados', $data);
