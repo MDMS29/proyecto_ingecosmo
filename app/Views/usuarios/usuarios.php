@@ -299,7 +299,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -343,6 +343,17 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
+    var objCorreo = {
+        id: 0,
+        correo: '',
+        prioridad: ''
+    }
+    var objTelefono = {
+        id: 0,
+        numero: '',
+        tipo: '',
+        prioridad: ''
+    }
     //Ver contraseñas
     function verContrasena() {
         var password1, password2, check;
@@ -424,7 +435,15 @@
         column.visible(!column.visible());
     });
     //Limpiar campos de telefonos y correos
-    function limpiarCampos(input1, input2, input3) {
+    function limpiarCampos(input1, input2, input3, accion) {
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo()
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono()
+        }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
@@ -521,6 +540,10 @@
             })
         } else {
             //Insertar datos
+            telefonos = []
+            correos = []
+            guardarCorreo()
+            guardarTelefono()
             $('#tituloModal').text('Agregar')
             $('#tp').val(1)
             $('#id').val(0)
@@ -540,7 +563,6 @@
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
             // $('#formularioUsuarios').modal('hidden')
-            // telefonos = []
         }
     }
     //Funcion para cambiar contraseña
@@ -680,7 +702,7 @@
                             url: '<?php echo base_url('email/insertar') ?>',
                             data: {
                                 tp,
-                                idCorreo : correo.id,
+                                idCorreo: correo.id,
                                 idUsuario: idUser,
                                 correo: correo.correo,
                                 prioridad: correo.prioridad,
@@ -706,6 +728,17 @@
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 $('#btnGuardar').removeAttr('disabled')
                 $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
                 ContadorPRC = 0
             });
         };
@@ -723,8 +756,8 @@
         contador += 1
         let info = {
             id: [editTel].includes('') || edit == 0 ? `'${contador}111e'` : edit,
-            numero,
             tipo,
+            numero,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
@@ -809,7 +842,12 @@
         $('#tipoTele').val(tipo.attr('id'));
         $('#prioridad').val(prioridad.attr('id'));
         $('#editTele').val(fila.attr('id'));
-
+        objTelefono = {
+            id: fila.attr('id'),
+            numero: numero.text(),
+            tipo: tipo.attr('id'),
+            prioridad: prioridad.attr('id')
+        }
         telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
         guardarTelefono()
     }
@@ -896,6 +934,22 @@
         }
         $('#bodyCorre').html(cadena)
     }
+    //Editar Correo
+    function editarCorreo(id) {
+        const fila = $(`#${id}`);
+        const correo = fila.find('td').eq(0)
+        const prioridad = fila.find('td').eq(1)
+        $('#correoAdd').val(correo.text());
+        $('#prioridadCorreo').val(prioridad.attr('id'));
+        $('#editCorreo').val(fila.attr('id'));
+        objCorreo = {
+            id: fila.attr('id'),
+            correo: correo.text(),
+            prioridad: prioridad.attr('id')
+        }
+        correos = correos.filter(correo => correo.id != fila.attr('id'));
+        guardarCorreo()
+    }
     //Eliminar correo de la tabla
     function eliminarCorreo(id) {
         tp = $('#tp').val()
@@ -923,16 +977,4 @@
             tableUsuarios.ajax.reload(null, false)
         })
     })
-    //Editar Correo
-    function editarCorreo(id) {
-        const fila = $(`#${id}`);
-        const correo = fila.find('td').eq(0)
-        const prioridad = fila.find('td').eq(1)
-        $('#correoAdd').val(correo.text());
-        $('#prioridadCorreo').val(prioridad.attr('id'));
-        $('#editCorreo').val(fila.attr('id'));
-
-        correos = correos.filter(correo => correo.id != fila.attr('id'));
-        guardarCorreo()
-    }
 </script>
