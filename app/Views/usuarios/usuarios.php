@@ -193,6 +193,7 @@
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
                 </div>
+                <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
@@ -227,7 +228,7 @@
                                     <tr class="text-center">
                                         <th>Telefono</th>
                                         <th>Tipo</th>
-                                        <th>Priodidad</th>
+                                        <th>Prioridad</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -256,8 +257,10 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridadCorreo')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
             </div>
+            <input type="text" name="editCorreo" id="editCorreo" hidden>
+
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
@@ -282,7 +285,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Correo</th>
-                                    <th>Priodidad</th>
+                                    <th>Prioridad</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -296,7 +299,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -340,6 +343,17 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
+    var objCorreo = {
+        id: 0,
+        correo: '',
+        prioridad: ''
+    }
+    var objTelefono = {
+        id: 0,
+        numero: '',
+        tipo: '',
+        prioridad: ''
+    }
     //Ver contraseñas
     function verContrasena() {
         var password1, password2, check;
@@ -402,7 +416,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
                         '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
-                        '<butto class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("icons/restorePass.png") ?>" width="25" heigth="25"/></butto>'
+                        '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("icons/restorePass.png") ?>" width="25" heigth="25"/></button>'
                     );
                 },
             }
@@ -421,7 +435,15 @@
         column.visible(!column.visible());
     });
     //Limpiar campos de telefonos y correos
-    function limpiarCampos(input1, input2, input3) {
+    function limpiarCampos(input1, input2, input3, accion) {
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo()
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono()
+        }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
@@ -518,6 +540,10 @@
             })
         } else {
             //Insertar datos
+            telefonos = []
+            correos = []
+            guardarCorreo()
+            guardarTelefono()
             $('#tituloModal').text('Agregar')
             $('#tp').val(1)
             $('#id').val(0)
@@ -537,7 +563,6 @@
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
             // $('#formularioUsuarios').modal('hidden')
-            // telefonos = []
         }
     }
     //Funcion para cambiar contraseña
@@ -658,6 +683,7 @@
                             data: {
                                 tp,
                                 idUsuario: idUser,
+                                idTele: tel.id,
                                 numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 7,
@@ -676,6 +702,7 @@
                             url: '<?php echo base_url('email/insertar') ?>',
                             data: {
                                 tp,
+                                idCorreo: correo.id,
                                 idUsuario: idUser,
                                 correo: correo.correo,
                                 prioridad: correo.prioridad,
@@ -700,6 +727,18 @@
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 $('#btnGuardar').removeAttr('disabled')
+                $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
                 ContadorPRC = 0
             });
         };
@@ -710,21 +749,23 @@
         const numero = $('#telefonoAdd').val()
         const tipo = $('#tipoTele').val()
         const prioridad = $('#prioridad').val()
-
+        const editTel = $('#editTele').val();
         if ([numero, prioridad].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
         contador += 1
         let info = {
-            id: `${contador}1111`,
-            numero,
+            id: [editTel].includes('') || edit == 0 ? `'${contador}111e'` : edit,
             tipo,
+            numero,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
         let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
         $('#telefonoAdd').val('')
+        $('#tipoTele').val('')
         $('#prioridad').val('')
+        $('#editTele').val(0);
         if (filtroTel.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
@@ -764,6 +805,7 @@
     //Al escribir validar que el numero no este registrado
     $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
+        console.log(numero)
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
     // Funcion para mostrar telefonos en la tabla.
@@ -777,15 +819,37 @@
             $('#bodyTel').html(cadena)
         } else {
             for (let i = 0; i < telefonos.length; i++) {
-                cadena += ` <tr class="text-center">
-                <td>${telefonos[i].numero}</td>
-                <td>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
-                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
-                </tr>`
+                cadena += ` <tr class="text-center" id=${telefonos[i].id}>
+                                <td>${telefonos[i].numero}</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>
+                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
+                                </td>
+                            </tr>`
             }
         }
         $('#bodyTel').html(cadena)
+    }
+    //Editar Telefono
+    function editarTelefono(id) {
+        const fila = $(`#${id}`);
+        const numero = fila.find('td').eq(0)
+        const tipo = fila.find('td').eq(1)
+        const prioridad = fila.find('td').eq(2)
+        $('#telefonoAdd').val(numero.text());
+        $('#tipoTele').val(tipo.attr('id'));
+        $('#prioridad').val(prioridad.attr('id'));
+        $('#editTele').val(fila.attr('id'));
+        objTelefono = {
+            id: fila.attr('id'),
+            numero: numero.text(),
+            tipo: tipo.attr('id'),
+            prioridad: prioridad.attr('id')
+        }
+        telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
+        guardarTelefono()
     }
     //Eliminar telefono de la tabla
     function eliminarTel(id) {
@@ -811,11 +875,13 @@
         const tp = $('#tp').val()
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
+        const editCorreo = $('#editCorreo').val();
+
         if ([correo, prioridad].includes('')) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: contadorCorreo += 1,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo}111e'` : editCorreo,
             correo,
             prioridad
         }
@@ -823,6 +889,7 @@
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
         $('#correoAdd').val('')
         $('#prioridadCorreo').val('')
+        $('#editCorreo').val(0);
         if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
@@ -855,14 +922,33 @@
             $('#bodyCorre').html(cadena)
         } else {
             for (let i = 0; i < correos.length; i++) {
-                cadena += ` <tr class="text-center">
-                <td>${correos[i].correo}</td>
-                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                <td><button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
-                </tr>`
+                cadena += ` <tr class="text-center" id=${correos[i].id}>
+                                <td>${correos[i].correo}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>
+                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Correo">
+                                </td>
+                            </tr>`
             }
         }
         $('#bodyCorre').html(cadena)
+    }
+    //Editar Correo
+    function editarCorreo(id) {
+        const fila = $(`#${id}`);
+        const correo = fila.find('td').eq(0)
+        const prioridad = fila.find('td').eq(1)
+        $('#correoAdd').val(correo.text());
+        $('#prioridadCorreo').val(prioridad.attr('id'));
+        $('#editCorreo').val(fila.attr('id'));
+        objCorreo = {
+            id: fila.attr('id'),
+            correo: correo.text(),
+            prioridad: prioridad.attr('id')
+        }
+        correos = correos.filter(correo => correo.id != fila.attr('id'));
+        guardarCorreo()
     }
     //Eliminar correo de la tabla
     function eliminarCorreo(id) {
