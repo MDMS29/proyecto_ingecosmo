@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_clientes.css") ?>">
+<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 <div id="content" class="p-4 p-md-5">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</h2>
     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+        <table class="table table-bordered table-sm table-hover" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -12,29 +12,29 @@
                     <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
                     <th scope="col" class="text-center">Telefono</th>
-                    <th scope="col" class="text-center">Email</th> 
+                    <th scope="col" class="text-center">Correo</th> 
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $contador = 0 ?>
-                <?php foreach ($clientes as $c) { ?>
+            <tbody class="text-center">
+                <!-- < ?php $contador = 0 ?>
+                < ?php foreach ($clientes as $c) { ?>
                     <tr>
-                        <th scope="row" class="text-center"><?= $contador += 1 ?></th>
-                        <td class="text-center"><?php echo $c['nombre_p'] . ' ' . $c['nombre_s']; ?></td>
-                        <td class="text-center"><?php echo $c['apellido_p'] . ' ' . $c['apellido_s']; ?></td>
-                        <td class="text-center"><?php echo $c['tipoDoc']; ?></td>
-                        <td class="text-center"><?php echo $c['n_identificacion']; ?></td>
-                        <td class="text-center"><?php echo $c['direccion']; ?></td>
-                        <td class="text-center"><?php echo $c['numero']; ?></td>
-                        <td class="text-center"><?php echo $c['correo']; ?></td> 
+                        <th scope="row" class="text-center">< ?= $contador += 1 ?></th>
+                        <td class="text-center">< ?php echo $c['nombre_p'] . ' ' . $c['nombre_s']; ?></td>
+                        <td class="text-center">< ?php echo $c['apellido_p'] . ' ' . $c['apellido_s']; ?></td>
+                        <td class="text-center">< ?php echo $c['tipoDoc']; ?></td>
+                        <td class="text-center">< ?php echo $c['n_identificacion']; ?></td>
+                        <td class="text-center">< ?php echo $c['direccion']; ?></td>
+                        <td class="text-center">< ?php echo $c['numero']; ?></td>
+                        <td class="text-center">< ?php echo $c['correo']; ?></td> 
                         <td class="text-center">
-                            <button class="btn" onclick="seleccionarCliente(<?= $c['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>
+                            <button class="btn" onclick="seleccionarCliente(< ?= $c['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="< ?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>
 
-                            <input type="image" class="btn" href="#" data-href="<?php echo base_url('/clientes/eliminar') . '/' . $c['id_tercero'] . '/' . 'I'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="<?php echo base_url('icons/delete.svg') ?>"></input>
+                            <input type="image" class="btn" href="#" data-href="< ?php echo base_url('/clientes/eliminar') . '/' . $c['id_tercero'] . '/' . 'I'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="< ?php echo base_url('icons/delete.svg') ?>"></input>
                         </td>
                     </tr>
-                <?php } ?>
+                < ?php } ?> -->
             </tbody>
         </table>
     </div>
@@ -106,6 +106,16 @@
                             <div style="margin:0;" for="message-text" id="textoP">Direccion:</div>
                             <input class="form-control" id="direccion" name="direccion"></input>
                         </div>
+
+                        <div class="mb-3" id="camposModalP">
+                            <div style="margin:0;" for="message-text" id="textoP">Telefono:</div>
+                            <input class="form-control" id="numero" name="numero"></input>
+                        </div>
+
+                        <div class="mb-3" id="camposModalP">
+                            <div style="margin:0;" for="message-text" id="textoP">Correo:</div>
+                            <input class="form-control" id="correo" name="correo"></input>
+                        </div>
                     </div>
                 </form>
                 <div class="modal-footer">
@@ -149,30 +159,114 @@
         $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
     });
 
-    function seleccionarCliente(id, tp) {
+        // Tabla de usuarios  
+        var tableClientes = $("#tableClientes").DataTable({
+        ajax: {
+            url: '<?= base_url('clientes/obtenerClientes') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'tipoDoc'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'direccion'
+            },
+            {
+                data: 'numero'
+            },
+            {
+                data: 'correo'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>'+ 
+                        
+                        '<input type="image" class="btn" data-href=<?php echo base_url('/clientes/cambiarEstado/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>' 
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+
+    });
+
+      //Insertar y editar Usuario
+      function seleccionarCliente(id, tp) {
         if (tp == 2) {
+            //Actualizar datos
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/clientes/buscarCliente/') ?>" + id,
+                url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
-                success: function(res) {
-                    $('#tituloModal').text('EDITAR')
-                    $('#tp').val(2)
+
+            }).done(function(res) {
+                $('#tituloModal').text('EDITAR')
+                $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
                     $('#nombreP').val(res[0]['nombre_p'])
                     $('#nombreS').val(res[0]['nombre_s'])
                     $('#apellidoP').val(res[0]['apellido_p'])
                     $('#apellidoS').val(res[0]['apellido_s'])
-                    $('#tipoDoc').val(res[0]['tipo_doc'])
+                    $('#tipoDoc').val(1)
                     $('#Nidentificacion').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
+                    $('#numero').val(res[0]['numero'])
+                    $('#correo').val(res[0]['correo'])
                     $('#btnGuardar').text('Actualizar')
-                }
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosCliente/') ?>' + id + '/' + 5,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        guardarTelefono()
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailCliente/') ?>' + id + '/' + 5,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        guardarCorreo()
+                    }
+                })
             })
         } else {
-            $("#tp").val(1);
             //Insertar datos
-            $('#tituloModal').text(`AGREGAR`)
+            $('#tituloModal').text('AGREGAR')
             $('#nombreP').val('')
             $('#nombreS').val('')
             $('#apellidoP').val('')
@@ -180,8 +274,9 @@
             $('#tipoDoc').val('')
             $('#Nidentificacion').val('')
             $('#direccion').val('')
+            $('#numero').val('')
+            $('#correo').val('')
             $('#btnGuardar').text('Agregar')
-
         }
     }
 

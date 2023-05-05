@@ -67,4 +67,14 @@ class TelefonosModel extends Model
         $data = $this->first();
         return $data;
     }
+    
+    // -----clientes--------
+    public function obtenerTelefonosCliente($id, $tipoUsuario)
+    {
+        $this->select('id_telefono as id, numero, prioridad');
+        $this->where('id_usuario', $id);
+        $this->where('tipo_usuario', $tipoUsuario);
+        $data = $this->findAll();
+        return $data;
+    }
 }

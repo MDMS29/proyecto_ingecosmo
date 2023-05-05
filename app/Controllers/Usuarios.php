@@ -46,6 +46,13 @@ class Usuarios extends BaseController
             return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
         }
     }
+
+    public function salir()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to(base_url('/'));
+    }
     public function obtenerUsuarios()
     {
         $estado = $this->request->getPost('estado');
@@ -63,12 +70,6 @@ class Usuarios extends BaseController
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }
-    public function salir()
-    {
-        $session = session();
-        $session->destroy();
-        return redirect()->to(base_url('/'));
-    }
     public function perfil($id)
     {
         $usuarios = $this->usuarios->buscarUsuario($id, 0);
@@ -78,6 +79,7 @@ class Usuarios extends BaseController
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
     }
+    
     public function insertar()
     {
         $tp = $this->request->getPost('tp');

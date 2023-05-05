@@ -74,12 +74,12 @@
 }
 
 .btnRedireccion {
-    background-color: var(--azulBoton);
+    background-color: var(--azulBoton) !important;
     color: white;
 }
 
 .btnAccionF {
-    background-color: var(--rojoBoton);
+    background-color: var(--rojoBoton)!important;
     color: white;
 }
 
@@ -143,8 +143,7 @@
 /* ---------------------CLientes------------------------- */
 
 #modalContentC{
-    height: 750px; 
-    background-color: #161666;
+    height: 850px; 
     border: 5px solid var(--azulBoton); 
     border-radius:10px; 
 }

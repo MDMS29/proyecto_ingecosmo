@@ -23,68 +23,109 @@ class Clientes extends BaseController
         $this->telefonos = new TelefonosModel();
         $this->correos = new EmailModel();
     }
+
+    public function obtenerCLientes()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->clientes->obtenerCLientes($estado);
+        return json_encode($res);
+    }
     public function index()
     {
-        $clientes = $this->clientes->obtenerClientes();
+        
         $tipoDoc = $this->param->obtenerTipoDoc();
-        $telefonos = $this->telefonos->obtenerTelefonoCLiente();
-        $correos = $this->correos->obtenerEmailCLiente();
+        $tipoTel = $this->param->obtenerTipoTel();
 
-        $data = ['clientes' => $clientes];
+        $data = [ 'tipoDoc' => $tipoDoc, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/clientes/clientes', $data);
     }
 
+
     public function insertar()
     {
+
         $tp = $this->request->getPost('tp');
+        $idCLiente = $this->request->getPost('id');
+        $nombre_p = $this->request->getPost('nombreP');
+        $nombre_s = $this->request->getPost('nombreS');
+        $apellido_p = $this->request->getPost('apellidoP');
+        $apellido_s = $this->request->getPost('apellidoS');
+        $n_identificacion = $this->request->getPost('Nidentificacion');
+        $direccion = $this->request->getPost('direccion');
+        $numero = $this->request->getPost('numero');
+        $correo = $this->request->getPost('correo');
         $tipoTercero = 5;
         $tipoDocumento = 1;
-        if ($this->request->getMethod() == "post") {
-            if ($tp == 1) {
-                $this->clientes->save([
-                    'nombre_p' => $this->request->getPost('nombreP'),
-                    'nombre_s' => $this->request->getPost('nombreS'),
-                    'apellido_p' => $this->request->getPost('apellidoP'),
-                    'apellido_s' => $this->request->getPost('apellidoS'),
-                    'n_identificacion' => $this->request->getPost('Nidentificacion'),
-                    'direccion' => $this->request->getPost('direccion'),
+
+            if ($tp == 2) {
+               
+            $res = $this->clientes->buscarCliente($idCLiente, 0);
+            $clienteUpdate = [
+                    'nombre_p' =>$nombre_p,
+                    'nombre_s' =>$nombre_s,
+                    'apellido_p' =>$apellido_p,
+                    'apellido_s' =>$apellido_s,
+                    'n_identificacion' =>$n_identificacion,
+                    'direccion' =>$direccion,
+                    'numero' => $numero,
+                    'correo' =>$correo,
                     'tipo_tercero' => $tipoTercero,
                     'tipo_doc' => $tipoDocumento
-                ]);
+            ];
+            $this->clientes->update($idCLiente, $clienteUpdate);
+            return $idCLiente;
+
             } else {
-                $this->clientes->update(
-                    $this->request->getPost('id'),
-                    [
-                        'nombre_p' => $this->request->getPost('nombreP'),
-                        'nombre_s' => $this->request->getPost('nombreS'),
-                        'apellido_p' => $this->request->getPost('apellidoP'),
-                        'apellido_s' => $this->request->getPost('apellidoS'),
-                        'n_identificacion' => $this->request->getPost('Nidentificacion'),
-                        'direccion' => $this->request->getPost('direccion'),
-                        'tipo_tercero' => $tipoTercero,
-                        'tipo_doc' => $tipoDocumento
-                    ]
-                );
+                $clienteSave = [
+                    'nombre_p' =>$nombre_p,
+                    'nombre_s' =>$nombre_s,
+                    'apellido_p' =>$apellido_p,
+                    'apellido_s' =>$apellido_s,
+                    'n_identificacion' =>$n_identificacion,
+                    'direccion' =>$direccion,
+                    'numero' => $numero,
+                    'correo' =>$correo,
+                    'tipo_tercero' => $tipoTercero,
+                    'tipo_doc' => $tipoDocumento
+                ];
+                $this->clientes->save($clienteSave);
+                return json_encode($this->clientes->getInsertID());
             }
             return redirect()->to(base_url('/clientes'));
+        
+    }
+
+    public function buscarCliente($id,  $nIdenti)
+    {
+        $array = array();
+        if ($id != 0) {
+            $data = $this->clientes->buscarCliente($id, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nIdenti != 0) {
+            $data = $this->clientes->buscarCliente(0, $nIdenti);
+            array_push($array, $data);
+            return json_encode($array);
+
+        } else if ($id != 0 && $nIdenti != 0) {
+            $data = $this->clientes->buscarCliente($id, $nIdenti);
+            array_push($array, $data);
+            return json_encode($array);
         }
     }
 
-    public function buscarCliente($id)
+    public function cambiarEstado($id, $estado)
     {
-        $returnData = array();
-        $clientes_ = $this->clientes->traerCliente($id);
-        if (!empty($clientes_)) {
-            array_push($returnData, $clientes_);
+        if ($this->clientes->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return redirect()->to(base_url('clientes/eliminados'));
+            }else{
+                return redirect()->to(base_url('clientes'));
+            }
         }
-        echo json_encode($returnData);
-    }
-
-    public function eliminar($id, $estado)
-    {
-        $clientes_ = $this->clientes->eliminaCliente($id, $estado);
-        return redirect()->to(base_url('/clientes'));
     }
 
     public function eliminados()
@@ -96,5 +137,4 @@ class Clientes extends BaseController
         echo view('/clientes/eliminados', $data);
     }
 
-   
 }
