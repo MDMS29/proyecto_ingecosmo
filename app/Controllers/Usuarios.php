@@ -168,13 +168,15 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
-    public function cambiarEstado($id, $estado)
+    public function cambiarEstado()
     {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
         if ($this->usuarios->update($id, ['estado' => $estado])) {
             if($estado == 'A'){
-                return redirect()->to(base_url('usuarios/eliminados'));
+                return '¡Se ha reestablecido el usuario!';
             }else{
-                return redirect()->to(base_url('usuarios'));
+                return '¡Se ha eliminado el usuario!';
             }
         }
     }

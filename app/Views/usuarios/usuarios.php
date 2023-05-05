@@ -415,7 +415,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
-                        '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
+                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
                         '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("icons/restorePass.png") ?>" width="25" heigth="25"/></button>'
                     );
                 },
@@ -969,12 +969,22 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
-    //Cambiar estado de "Activo" a "Eliminado" 
+    //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
-        $('#btnSi').on('click', function(e) {
-            mostrarMensaje('success', 'Se ha eliminado el usuario')
+        $(this).find('#btnSi').attr('onclick', `EliminarUsuario(${$(e.relatedTarget).data('href')})`)
+    })
+    function EliminarUsuario(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('usuarios/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)
         })
-    })
+    }
 </script>
