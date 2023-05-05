@@ -61,7 +61,6 @@ class TercerosModel extends Model
         $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         $this->where('terceros.tipo_tercero', '5');
         $this->where('terceros.estado', $estado);
-
         $data = $this->findAll();
         return $data;
     }

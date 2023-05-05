@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
-<div id="content" class="p-4 p-md-5">
+
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableClientes" width="100%" cellspacing="0">
+    <div class="table-responsive p-2">
+    <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -12,7 +13,7 @@
                     <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
                     <th scope="col" class="text-center">Telefono</th>
-                    <th scope="col" class="text-center">Correo</th> 
+                    <th scope="col" class="text-center">Correo</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -155,12 +156,13 @@
 </div>
 
 <script>
+    var ContadorPRC = 0
     $('#modalConfirmaP').on('show.bs.modal', function(e) {
         $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
     });
 
-        // Tabla de usuarios  
-        var tableClientes = $("#tableClientes").DataTable({
+    // Tabla de usuarios  
+    var tableClientes = $("#tableClientes").DataTable({
         ajax: {
             url: '<?= base_url('clientes/obtenerClientes') ?>',
             method: "POST",
@@ -209,9 +211,9 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>'+ 
-                        
-                        '<input type="image" class="btn" data-href=<?php echo base_url('/clientes/cambiarEstado/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>' 
+                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
+
+                        '<input type="image" class="btn" data-href=<?php echo base_url('/clientes/cambiarEstado/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
                     );
                 },
             }
@@ -222,8 +224,8 @@
 
     });
 
-      //Insertar y editar Usuario
-      function seleccionarCliente(id, tp) {
+    //Insertar y editar Usuario
+    function seleccionarCliente(id, tp) {
         if (tp == 2) {
             //Actualizar datos
             $.ajax({
@@ -234,17 +236,17 @@
             }).done(function(res) {
                 $('#tituloModal').text('EDITAR')
                 $('#tp').val(2)
-                    $('#id').val(res[0]['id_tercero'])
-                    $('#nombreP').val(res[0]['nombre_p'])
-                    $('#nombreS').val(res[0]['nombre_s'])
-                    $('#apellidoP').val(res[0]['apellido_p'])
-                    $('#apellidoS').val(res[0]['apellido_s'])
-                    $('#tipoDoc').val(1)
-                    $('#Nidentificacion').val(res[0]['n_identificacion'])
-                    $('#direccion').val(res[0]['direccion'])
-                    $('#numero').val(res[0]['numero'])
-                    $('#correo').val(res[0]['correo'])
-                    $('#btnGuardar').text('Actualizar')
+                $('#id').val(res[0]['id_tercero'])
+                $('#nombreP').val(res[0]['nombre_p'])
+                $('#nombreS').val(res[0]['nombre_s'])
+                $('#apellidoP').val(res[0]['apellido_p'])
+                $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tipoDoc').val(1)
+                $('#Nidentificacion').val(res[0]['n_identificacion'])
+                $('#direccion').val(res[0]['direccion'])
+                $('#numero').val(res[0]['numero'])
+                $('#correo').val(res[0]['correo'])
+                $('#btnGuardar').text('Actualizar')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosCliente/') ?>' + id + '/' + 5,

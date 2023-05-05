@@ -40,8 +40,27 @@
 }
 
 
+/* DATA TABLE */
+table {
+    background-color: white;
+    border: 5px solid #161666;
+    border-radius: 10px;
+}
 
-#nombre_s, #nombre_p, #apellido_s, #apellido_p, #tipo_doc, #n_identificacion, #RazonSocial, #nit, #direccion{
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin: 0px 8px !important;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    width: 65px;
+    background-color: white;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    background-color: white;
+}
+
+#nombre_s, #nombre_p, #apellido_s, #apellido_p, #tipo_doc, #n_identificacion, #RazonSocial, #nit, #direccion {
 
     margin-left: 15px;
     border-radius: 5px;
@@ -79,7 +98,7 @@
 }
 
 .btnAccionF {
-    background-color: var(--rojoBoton)!important;
+    background-color: var(--rojoBoton) !important;
     color: white;
 }
 
@@ -142,9 +161,8 @@
 
 /* ---------------------CLientes------------------------- */
 
-#modalContentC{
-    height: 850px; 
-    border: 5px solid var(--azulBoton); 
-    border-radius:10px; 
+#modalContentC {
+    height: 850px;
+    border: 5px solid var(--azulBoton);
+    border-radius: 10px;
 }
-
