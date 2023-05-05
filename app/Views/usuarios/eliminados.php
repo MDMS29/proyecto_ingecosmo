@@ -262,7 +262,7 @@
                     return (
 
                         '<button class="btn text-primary" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=<?php echo base_url('/usuarios/cambiarEstado/') ?>' + data.id_usuario + '/A data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Usuario" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Usuario" width="20"></button>'
                     );
                 },
             }
@@ -349,12 +349,24 @@
         }
         $('#bodyTel').html(cadena)
     }
-    //Cambiar estado de "Eliminado" a "Activo"
+    //Cambiar estado de "Inactivo" a "Activo"
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
-        $('#btnSi').on('click', function(e) {
-            mostrarMensaje('success', 'Se ha reestablecido el usuario')
+        $(this).find('#btnSi').attr('onclick', `ReestablecerUsuario(${$(e.relatedTarget).data('href')})`)
+    })
+
+    function ReestablecerUsuario(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('usuarios/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'A'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            ContadorPRC = 0
+            $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)
         })
-    })
+    }
 </script>

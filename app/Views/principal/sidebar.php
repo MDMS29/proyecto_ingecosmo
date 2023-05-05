@@ -92,7 +92,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
+                            <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
                                 <p id="pa">Vehiculos</p>
                             </a>
                         </li>

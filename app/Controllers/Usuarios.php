@@ -79,7 +79,6 @@ class Usuarios extends BaseController
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
     }
-    
     public function insertar()
     {
         $tp = $this->request->getPost('tp');

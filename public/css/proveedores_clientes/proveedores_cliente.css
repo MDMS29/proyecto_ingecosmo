@@ -2,9 +2,12 @@
 
 /* font-family: 'Nunito', sans-serif; */
 
+
 /* ---------------------Proveedores------------------------- */
 
+
 /* modal para agregar y actualizar */
+
 :root {
     --azulBoton: #161666;
     --rojoBoton: #E25050;
@@ -15,6 +18,16 @@
 
 * {
     font-family: 'Nunito', sans-serif;
+}
+
+.btnRedireccion {
+    background-color: var(--azulBoton) !important;
+    color: white !important;
+}
+
+.btnAccionF {
+    background-color: var(--rojoBoton) !important;
+    color: white !important;
 }
 
 #modalHeader2 {
@@ -41,6 +54,7 @@
 
 
 /* DATA TABLE */
+
 table {
     background-color: white;
     border: 5px solid #161666;
@@ -60,10 +74,8 @@ div.dataTables_wrapper div.dataTables_filter input {
     background-color: white;
 }
 
-
-
-.inputC, .inputP {
-
+.inputC,
+.inputP {
     margin-left: 15px;
     border-radius: 5px;
     border: 1px solid black;
@@ -71,7 +83,6 @@ div.dataTables_wrapper div.dataTables_filter input {
     width: 250px;
     background-color: var(--grisModal);
 }
-
 
 #textoP {
     width: 150px;
@@ -87,18 +98,9 @@ div.dataTables_wrapper div.dataTables_filter input {
     justify-content: space-around;
 }
 
-.btnRedireccion {
-    background-color: var(--azulBoton) !important;
-    color: white;
-}
-
-.btnAccionF {
-    background-color: var(--rojoBoton) !important;
-    color: white;
-}
-
 
 /* modal confirmar eliminar */
+
 #modalEliminarContentP {
     display: flex;
     align-items: center;
@@ -124,7 +126,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 .textoP {
     color: #1b335b;
     font-weight: 600;
-  }
+}
 
 .contenidoEliminarP {
     display: flex;
@@ -146,20 +148,18 @@ div.dataTables_wrapper div.dataTables_filter input {
     width: 100%;
 }
 
-
-
 #btnNo {
     margin-right: 30px;
 }
 
-
-#msgDoc.invalido{
+#msgDoc.invalido {
     color: #E25050;
 }
+
+
 /* ---------------------CLientes------------------------- */
 
 #modalContentC {
-    height: 850px;
     border: 5px solid var(--azulBoton);
     border-radius: 10px;
 }

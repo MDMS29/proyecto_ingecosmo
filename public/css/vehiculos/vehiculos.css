@@ -1,0 +1,39 @@
+:root {
+    --azulBase: #161666;
+    --rojoAcciones: #ef434d;
+}
+
+table {
+    background-color: white;
+    border: 5px solid #161666;
+    border-radius: 10px;
+}
+
+
+/* -- BOTONES GENERALES -- */
+
+.btnRedireccion {
+    background-color: var(--azulBase) !important;
+    color: white !important;
+}
+
+.btnAccionF {
+    background-color: var(--rojoAcciones) !important;
+    color: white !important;
+}
+
+
+/* DATA TABLE */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin: 0px 8px !important;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    width: 65px;
+    background-color: white;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    background-color: white;
+}

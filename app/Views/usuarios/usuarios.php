@@ -343,6 +343,7 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
+    var validIdent; 
     var objCorreo = {
         id: 0,
         correo: '',
@@ -616,7 +617,6 @@
         })
     }
     //Identificar si el numero de identificacion no este registrado
-    var validIdent; //Valor para la identificación si es valido o invalido
     $('#nIdenti').on('input', function(e) {
         inputIden = $('#nIdenti').val()
         tp = $('#tp').val()
@@ -642,8 +642,8 @@
     //Envio de formulario
     $('#formularioUsuarios').on('submit', function(e) {
         e.preventDefault()
-        $('#btnActuContra').attr('disabled', '')
         tp = $('#tp').val()
+        $('#btnActuContra').attr('disabled', '')
         id = $('#id').val()
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
@@ -727,6 +727,7 @@
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 $('#btnGuardar').removeAttr('disabled')
+                $('#btnActuContra').removeAttr('disabled')
                 $('#editTele').val('');
                 objCorreo = {
                     id: 0,
@@ -973,6 +974,7 @@
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `EliminarUsuario(${$(e.relatedTarget).data('href')})`)
     })
+
     function EliminarUsuario(id) {
         $.ajax({
             type: "POST",
