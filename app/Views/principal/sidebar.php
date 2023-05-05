@@ -34,26 +34,44 @@
 <body  style="overflow-y:hidden" class=" d-flex align-items-stretch">
 
 
-    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 1;">
+    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 999;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" />
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Materiales</a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
-                    <li><a class="dropdown-item" href="#" style="color: white"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
-                    <li><a href="<?php echo base_url('usuarios') ?>" class="dropdown-item" href="#" style="color: white">"<img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
+                <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li ><a class="nav-item dropdown" href="#" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
+                    <hr class="nav-item dropdown" style="border-color: white">
+                    <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('trabajadores') ?>" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li ><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>"  style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <?php } else if (session('idRol') == 3) { ?>
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li ><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li ><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                            <?php } ?>
+                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
+                    
                     <li>
-                        <hr class="dropdown-divider" style="border-color: white">
+                        <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
-                    <li><a href="<?php echo base_url('salir') ?>" class="dropdown-item" href="#" style="color: white"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
+                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
                     </li>
                 </ul>
             </div>
@@ -156,4 +174,14 @@
                 el.classList.toggle("rotate");
             });
         });
+        //Mostrar mensajes de SwalFire
+        function mostrarMensaje(tipo, msg) {
+            Swal.fire({
+                position: 'center',
+                icon: `${tipo}`,
+                text: `${msg}`,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     </script>

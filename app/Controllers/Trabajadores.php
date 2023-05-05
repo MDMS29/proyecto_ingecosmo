@@ -120,6 +120,16 @@ class Trabajadores extends BaseController
             }
         }
     }
+    public function cambiarEstado($id, $estado)
+    {
+        if ($this->trabajadores->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return redirect()->to(base_url('trabajadores/eliminados'));
+            }else{
+                return redirect()->to(base_url('trabajadores'));
+            }
+        }
+    }
     public function eliminados(){
         $param = $this->param->obtenerTipoDoc();
         $cargos = $this->cargos->obtenerCargos();

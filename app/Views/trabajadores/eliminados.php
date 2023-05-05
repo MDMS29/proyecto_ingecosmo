@@ -27,6 +27,175 @@
 </div>
 
 
+<div class="modal fade" id="verTrabajador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <input type="text" name="id" id="id" hidden>
+    <input type="text" name="tp" id="tp" hidden>
+    <div class="modal-dialog modal-xl">
+        <div class="body">
+            <div class="logo">
+                <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
+            </div>
+            <div class="modal-content">
+                <div class="modal-header flex">
+                    <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="mb-3" style="width: 100%">
+                                <label for="nombre_p" class="col-form-label">Primer Nombre:</label>
+                                <input type="text" name="nombre_p" class="form-control" id="nombreP" disabled>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="nombre_s" class="col-form-label">Segundo Nombre:</label>
+                                <input type="text" name="nombre_s" class="form-control" id="nombreS" disabled>
+                            </div>
+                        </div>
+                        <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="mb-3" style="width: 100%">
+                                <label for="apellido_p" class="col-form-label">Primer Apellido:</label>
+                                <input type="text" name="apellido_p" class="form-control" id="apellidoP" disabled>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
+                                <input type="text" name="apellido_s" class="form-control" id="apellidoS" disabled>
+                            </div>
+                            
+                        </div>
+                        <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="mb-3" style="width: 100%">
+                                <div class="mb-3">
+                                    <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
+                                    <select class="form-select form-select" name="tipoDoc" id="tipoDoc" disabled>
+                                        <option value="1" selected>Cedula de Ciudadania</option>
+                                        <option>-- Seleccione --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <div class="">
+                                    <label for="nIdenti" class="col-form-label">N° Identificación:</label>
+                                    <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11" disabled>
+                                    <small id="msgDoc" class="invalido"></small>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="mb-3" style="width: 100%">
+                                <label for="telefono" class="col-form-label">Telefono:</label>
+                                <div class="d-flex">
+                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <div class="d-flex">
+                                    <input type="email" name="email" class="form-control" id="email" disabled>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="mb-3" style="width: 100%">
+                                <div class="mb-3">
+                                    <label for="cargo" class="col-form-label">Cargo:</label>
+                                    <select class="form-select form-select" name="cargo" id="cargo" disabled>
+                                        <option selected value="">-- Seleccione --</option>
+                                        <?php foreach ($cargos as $c) { ?>
+                                            <option value="<?= $c['id_cargo'] ?>"><?= $c['nombre'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="direccion" class="col-form-label">Direccion:</label>
+                                <input type="text" name="direccion" class="form-control" id="direccion" disabled>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR - EDITAR TELEFONO -->
+<div class="modal fade" id="verTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Telefono</th>
+                                    <th>Prioridad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyTel">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY TELEFONOS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VER CORREOS -->
+<div class="modal fade" id="verCorreos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Correo</th>
+                                    <th>Prioridad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyCorre">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY CORREOS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal Confirma Reestablecer -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -109,7 +278,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarTrabajador(' + data.id_trabajador + ')" data-bs-target="#verTrabajador" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Ver" title="Ver Trabajador"></button>' +
+                        '<button class="btn text-primary" onclick="seleccionarTrabajador(' + data.id_trabajador + ')" data-bs-target="#verTrabajador" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
                         '<button class="btn" data-href=<?php echo base_url('/trabajadores/cambiarEstado/') ?>' + data.id_trabajador + '/A data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Trabajador" width="20"></button>'
                     );
                 },
@@ -120,7 +289,7 @@
         }
     });
 
-    function seleccionarTrabajador(id, tp) {
+    function seleccionarTrabajador(id) {
             //Actualizar datos
             $.ajax({
                 type: 'POST',
@@ -203,8 +372,8 @@
      $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
         $('#btnSi').on('click', function(e) {
-            mostrarMensaje('success', 'Se ha reestablecido el usuario')
-            tableUsuarios.ajax.reload(null, false)
+            mostrarMensaje('success', 'Se ha reestablecido el Trabajador')
+            tableTrabajadores.ajax.reload(null, false)
         })
     })
 

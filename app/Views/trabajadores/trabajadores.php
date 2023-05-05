@@ -129,68 +129,83 @@
 </form>
 
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
-<div class="modal fade" id="agregarTelefono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="telefonoAdd" class="col-form-label">Telefono:</label>
-                            <div>
-                                <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" maxlength="10">
-                                <small id="msgTel" class="invalido"></small>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                </div>
+                <input type="text" name="editTele" id="editTele" hidden>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
+                            <div class=" flex-grow-1">
+                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <div>
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <small id="msgTel" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class=" flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <?php foreach ($tipoTele as $tipe) { ?>
+                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <option value="P">Primaria</option>
+                                    <option value="S">Secundaria</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
-                            <select class="form-select form-select" name="prioridad" id="prioridad">
-                                <option selected value="">-- Seleccione --</option>
-                                <option value="P">Primaria</option>
-                                <option value="S">Secundaria</option>
-                            </select>
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Prioridad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="4">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Telefono</th>
-                                    <th>Priodidad</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyTel">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY TELEFONOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
-                <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- MODAL AGREGAR - EDITAR CORREO -->
-<div class="modal fade" id="agregarCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
             </div>
+            <input type="text" name="editCorreo" id="editCorreo" hidden>
+
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
@@ -215,7 +230,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Correo</th>
-                                    <th>Priodidad</th>
+                                    <th>Prioridad</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -229,14 +244,15 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('telefonoAdd', 'prioridad')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalConfirmaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Confirma Eliminar -->
+<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
         <div class="modal-content" id="modalEliminarContentP">
@@ -248,13 +264,13 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
+                        <p class="textoModalP">¿Estas seguro de eliminar este Usuario?</p>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                 <a id="btnSi" class="btn btnAccionF">Eliminar</a>
             </div>
 
@@ -333,7 +349,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarTrabajador(' + data.id_trabajador + ' , 2 )" data-bs-target="#agregarTrabajador" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Trabajador"></button>' +
-                        '<button class="btn" data-href=<?php echo base_url('/trabajador/cambiarEstado/') ?>' + data.id_trabajador + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>'
+                        '<button class="btn" data-href=<?php echo base_url('/trabajadores/cambiarEstado/') ?>' + data.id_trabajador + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>'
                     );
                 },
             }
@@ -545,37 +561,41 @@
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
 
-        const numero = $('#telefonoAdd').val()
-        const prioridad = $('#prioridad').val()
+    const numero = $('#telefonoAdd').val()
+    const tipo = $('#tipoTele').val()
+    const prioridad = $('#prioridad').val()
+    const editTel = $('#editTele').val();
+    if ([numero, prioridad].includes('') || validTel == false) {
+        return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+    }
+    contador += 1
+    let info = {
+        id: [editTel].includes('') || edit == 0 ? `'${contador}111e'` : edit,
+        tipo,
+        numero,
+        prioridad
+    }
+    let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+    let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
+    $('#telefonoAdd').val('')
+    $('#tipoTele').val('')
+    $('#prioridad').val('')
+    $('#editTele').val(0);
+    if (filtroTel.length > 0) {
+        filtro = []
+        return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
+    }
+    if (info.prioridad == 'S') {
+        telefonos.push(info)
+        return guardarTelefono()
+    } else if (filtro.length > 0) {
+        filtro = []
+        return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
 
-        if ([numero, prioridad].includes('') || validTel == false) {
-            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        }
-        contador += 1
-        let info = {
-            id: `${contador}1111`,
-            numero,
-            prioridad
-        }
-        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
-        let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
-        $('#telefonoAdd').val('')
-        $('#prioridad').val('')
-        if (filtroTel.length > 0) {
-            filtro = []
-            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
-        }
-        if (info.prioridad == 'S') {
-            telefonos.push(info)
-            return guardarTelefono()
-        } else if (filtro.length > 0) {
-            filtro = []
-            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
-
-        } else {
-            telefonos.push(info)
-            return guardarTelefono()
-        }
+    } else {
+        telefonos.push(info)
+        return guardarTelefono()
+    }
 
     })
 
@@ -610,19 +630,41 @@
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
-            <td colspan="3">NO HAY TELEFONOS</td>
+            <td colspan="4">NO HAY TELEFONOS</td>
             </tr>`
             $('#bodyTel').html(cadena)
         } else {
             for (let i = 0; i < telefonos.length; i++) {
-                cadena += ` <tr class="text-center">
-                <td>${telefonos[i].numero}</td>
-                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                <td><button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono"></td>
-                </tr>`
+                cadena += ` <tr class="text-center" id=${telefonos[i].id}>
+                                <td>${telefonos[i].numero}</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>
+                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
+                                </td>
+                            </tr>`
             }
         }
         $('#bodyTel').html(cadena)
+    }
+    function editarTelefono(id) {
+        const fila = $(`#${id}`);
+        const numero = fila.find('td').eq(0)
+        const tipo = fila.find('td').eq(1)
+        const prioridad = fila.find('td').eq(2)
+        $('#telefonoAdd').val(numero.text());
+        $('#tipoTele').val(tipo.attr('id'));
+        $('#prioridad').val(prioridad.attr('id'));
+        $('#editTele').val(fila.attr('id'));
+        objTelefono = {
+            id: fila.attr('id'),
+            numero: numero.text(),
+            tipo: tipo.attr('id'),
+            prioridad: prioridad.attr('id')
+        }
+        telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
+        guardarTelefono()
     }
     //Eliminar telefono de la tabla
     function eliminarTel(id) {
@@ -648,11 +690,13 @@
         const tp = $('#tp').val()
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
+        const editCorreo = $('#editCorreo').val();
+
         if ([correo, prioridad].includes('')) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: contadorCorreo += 1,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo}111e'` : editCorreo,
             correo,
             prioridad
         }
@@ -660,6 +704,7 @@
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
         $('#correoAdd').val('')
         $('#prioridadCorreo').val('')
+        $('#editCorreo').val(0);
         if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
@@ -692,14 +737,33 @@
             $('#bodyCorre').html(cadena)
         } else {
             for (let i = 0; i < correos.length; i++) {
-                cadena += ` <tr class="text-center">
-                <td>${correos[i].correo}</td>
-                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
-                <td><button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Correo"></td>
-                </tr>`
+                cadena += ` <tr class="text-center" id=${correos[i].id}>
+                                <td>${correos[i].correo}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>
+                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Correo">
+                                </td>
+                            </tr>`
             }
         }
         $('#bodyCorre').html(cadena)
+    }
+        //Editar Correo
+        function editarCorreo(id) {
+        const fila = $(`#${id}`);
+        const correo = fila.find('td').eq(0)
+        const prioridad = fila.find('td').eq(1)
+        $('#correoAdd').val(correo.text());
+        $('#prioridadCorreo').val(prioridad.attr('id'));
+        $('#editCorreo').val(fila.attr('id'));
+        objCorreo = {
+            id: fila.attr('id'),
+            correo: correo.text(),
+            prioridad: prioridad.attr('id')
+        }
+        correos = correos.filter(correo => correo.id != fila.attr('id'));
+        guardarCorreo()
     }
     //Eliminar correo de la tabla
     function eliminarCorreo(id) {
