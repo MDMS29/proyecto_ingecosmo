@@ -28,19 +28,24 @@ class TercerosModel extends Model
 
 
     // -------------proveedores----------------
-    public function obtenerProveedores()
+    public function obtenerProveedores($estado)
     {
         $this->select('terceros.*');
         $this->where('tipo_tercero', '8');
-        $this->where('estado', 'A');
+        $this->where('estado', $estado);
         $data = $this->findAll();
         return $data;
     }
 
-    public function traerProveedor($id)
+    public function traerProveedor($id,$razonSocial)
     {
-        $this->select('terceros.* ');
-        $this->where('id_tercero', $id);
+        if ($id!=0) {
+            $this->select('terceros.* ');
+            $this->where('id_tercero', $id);   
+        }elseif($razonSocial!=0){
+            $this->select('terceros.* ');
+            $this->where('razon_social', $razonSocial);   
+        }
         $data = $this->first();  // nos trae el registro que cumpla con una condicion dada 
         return $data;
     }

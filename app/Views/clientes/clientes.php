@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
     <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
@@ -18,24 +18,7 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-                <!-- < ?php $contador = 0 ?>
-                < ?php foreach ($clientes as $c) { ?>
-                    <tr>
-                        <th scope="row" class="text-center">< ?= $contador += 1 ?></th>
-                        <td class="text-center">< ?php echo $c['nombre_p'] . ' ' . $c['nombre_s']; ?></td>
-                        <td class="text-center">< ?php echo $c['apellido_p'] . ' ' . $c['apellido_s']; ?></td>
-                        <td class="text-center">< ?php echo $c['tipoDoc']; ?></td>
-                        <td class="text-center">< ?php echo $c['n_identificacion']; ?></td>
-                        <td class="text-center">< ?php echo $c['direccion']; ?></td>
-                        <td class="text-center">< ?php echo $c['numero']; ?></td>
-                        <td class="text-center">< ?php echo $c['correo']; ?></td> 
-                        <td class="text-center">
-                            <button class="btn" onclick="seleccionarCliente(< ?= $c['id_tercero'] . ',' . 2 ?>)" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="< ?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>
-
-                            <input type="image" class="btn" href="#" data-href="< ?php echo base_url('/clientes/eliminar') . '/' . $c['id_tercero'] . '/' . 'I'; ?>" data-bs-toggle="modal" data-bs-target="#modalConfirmaP" src="< ?php echo base_url('icons/delete.svg') ?>"></input>
-                        </td>
-                    </tr>
-                < ?php } ?> -->
+                <!-- TABLA CLIENTES -->
             </tbody>
         </table>
     </div>
@@ -70,24 +53,24 @@
                     <div class="modalAgregarP">
                         <div class="mb-3" id="camposModalP">
                             <div for="recipient-name" id="textoP" style="margin:0;">Primer Nombre:</div>
-                            <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
+                            <input class="inputC" type="text" min='1' max='300' id="nombreP" name="nombreP">
                             <input hidden id="tp" name="tp">
                             <input hidden id="id" name="id">
                         </div>
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">Segundo Nombre:</div>
-                            <input class="form-control" id="nombreS" name="nombreS"></input>
+                            <input class="inputC" id="nombreS" name="nombreS"></input>
                         </div>
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">Primer Apellido:</div>
-                            <input class="form-control" id="apellidoP" name="apellidoP"></input>
+                            <input class="inputC" id="apellidoP" name="apellidoP"></input>
                         </div>
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">Segundo Apellido:</div>
-                            <input class="form-control" id="apellidoS" name="apellidoS"></input>
+                            <input class="inputC" id="apellidoS" name="apellidoS"></input>
                         </div>
 
                         <div class="mb-3" id="camposModalP">
@@ -100,22 +83,22 @@
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">No. Documento:</div>
-                            <input class="form-control" id="Nidentificacion" name="Nidentificacion"></input>
+                            <input class="inputC" id="Nidentificacion" name="Nidentificacion"></input>
                         </div>
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">Direccion:</div>
-                            <input class="form-control" id="direccion" name="direccion"></input>
+                            <input class="inputC" id="direccion" name="direccion"></input>
                         </div>
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">Telefono:</div>
-                            <input class="form-control" id="numero" name="numero"></input>
+                            <input class="inputC" id="numero" name="numero"></input>
                         </div>
 
                         <div class="mb-3" id="camposModalP">
                             <div style="margin:0;" for="message-text" id="textoP">Correo:</div>
-                            <input class="form-control" id="correo" name="correo"></input>
+                            <input class="inputC" id="correo" name="correo"></input>
                         </div>
                     </div>
                 </form>

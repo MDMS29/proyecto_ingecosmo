@@ -34,7 +34,7 @@ class Clientes extends BaseController
     {
         
         $tipoDoc = $this->param->obtenerTipoDoc();
-        $tipoTel = $this->param->obtenerTipoTel();
+        $tipoTel = $this->param->obtenerTipoTel(); 
 
         $data = [ 'tipoDoc' => $tipoDoc, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');

@@ -14,13 +14,17 @@ class Proveedores extends BaseController
     }
     public function index()
     {
-        $proveedores = $this->proveedores->obtenerProveedores();
 
-        $data = ['proveedores' => $proveedores];
         echo view('/principal/sidebar');
-        echo view('/proveedores/proveedores', $data);
+        echo view('/proveedores/proveedores');
     }
 
+    public function obtenerProveedores()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->proveedores->obtenerProveedores($estado);
+        return json_encode($res);
+    }
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
@@ -47,14 +51,13 @@ class Proveedores extends BaseController
                     ]
                 );
             }
-            return redirect()->to(base_url('/proveedores'));
         }
     }
 
-    public function buscarProveedor($id)
+    public function buscarProveedor($id, $razonSocial)
     {
         $returnData = array();
-        $proveedores_ = $this->proveedores->traerProveedor($id);
+        $proveedores_ = $this->proveedores->traerProveedor($id,$razonSocial);
         if (!empty($proveedores_)) {
             array_push($returnData, $proveedores_);
         }
