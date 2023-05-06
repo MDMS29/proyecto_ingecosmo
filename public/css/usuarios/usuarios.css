@@ -3,6 +3,14 @@
   --rojoAcciones: #ef434d;
 }
 
+/* -- DIV OCULTAR COLUMNAS -- */
+.ocultar > a:is(.toggle-vis).active,
+.ocultar > a:is(.toggle-vis):hover {
+  border-radius: none !important;
+  color: var(--azulBase);
+  font-weight: 700;
+  border: none;
+}
 /* -- BOTONES GENERALES -- */
 
 .btnRedireccion {
@@ -16,7 +24,6 @@
 }
 
 /* -- HTML -- */
-
 .footer-page {
   display: flex;
   justify-content: flex-end;
@@ -151,7 +158,8 @@ div.dataTables_wrapper div.dataTables_filter input {
   color: #333;
 }
 
-.profile-head h6, h5.permiso {
+.profile-head h6,
+h5.permiso {
   color: #0062cc;
 }
 
@@ -190,14 +198,12 @@ div.dataTables_wrapper div.dataTables_filter input {
   margin-top: -15%;
 }
 
-
 .profile-work p:first-child {
   font-size: 20px;
   color: #0062cc;
   font-weight: 600;
   margin-top: 10%;
 }
-
 
 .profile-work ul {
   list-style: none;
@@ -215,7 +221,6 @@ div.dataTables_wrapper div.dataTables_filter input {
 table {
   background-color: white !important;
 }
-
 
 /* modal confirmar eliminar */
 #modalEliminarContentP {
@@ -269,11 +274,8 @@ table {
   width: 100%;
 }
 
-
-
 #btnNo {
   margin-right: 30px;
 }
-
 
 /* modal confirmar eliminar */

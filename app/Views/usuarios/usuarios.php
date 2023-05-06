@@ -4,7 +4,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
     <div class="table-responsive p-2">
-        Ocultar Columnas: <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+        </div>
         <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -343,7 +345,7 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
-    var validIdent; 
+    var validIdent;
     var objCorreo = {
         id: 0,
         correo: '',
@@ -355,6 +357,15 @@
         tipo: '',
         prioridad: ''
     }
+    //Marcar botones ocultar columnas
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
     //Ver contraseñas
     function verContrasena() {
         var password1, password2, check;
