@@ -288,11 +288,13 @@
         $.post(url, data, function(data) {
             if (JSON.parse(data) == null) {
                 $(`#${input}`).text('')
+                validOrden = true
+                validPlaca = true
             } else {
                 $(`#${input}`).text(`* ${tipo} ya registrada *`)
+                validOrden = false
+                validPlaca = false
             }
-            validOrden = false
-            validPlaca = false
         })
     }
     $('#ordenTrabajo').on('input', function(e) {
@@ -313,6 +315,7 @@
     $('#formularioVehiculos').on('submit', function(e) {
         e.preventDefault()
         tp = $('#tp').val()
+        id = $('#id').val()
         orden = $('#ordenTrabajo').val()
         cliente = $('#cliente').val()
         placa = $('#placa').val()
@@ -331,6 +334,7 @@
                 type: 'POST',
                 data: {
                     tp,
+                    id,
                     orden,
                     cliente,
                     placa,
@@ -341,6 +345,17 @@
                     combustible,
                     estado,
                     fechaEntrada
+                },
+                success : function (data) {
+                    console.log(data)
+                    if(tp == 2){
+                        data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') :  mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    }else{
+                        
+                        data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') :  mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    }
+                    tablaVehiculos.ajax.reload(null, false)
+                    $('#agregarVehiculo').modal('hide')
                 }
             })
         }
