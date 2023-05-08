@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_clientes.css") ?>">
+<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
-<div id="content" class="p-4 p-md-5">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes Eliminados</h2>
-    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 600px;background-color:white;">
-        <table class="table table-bordered table-sm table-hover" id="tableUsuarios" width="100%" cellspacing="0">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes Eliminados</h2>
+    <div class="table-responsive p-2">
+    <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -12,12 +12,12 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <!-- <th scope="col" class="text-center">Telefono</th>
-                    <th scope="col" class="text-center">Email</th> -->
+                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 <?php $contador = 0 ?>
                 <?php if (empty($clientes)) { ?>
                     <tr>
@@ -25,25 +25,8 @@
                             <h3>¡No hay Clientes Eliminados!</h3>
                         </td>
                     </tr>
-                <?php } else { ?>
-                    <?php foreach ($clientes as $c) { ?>
-                        <tr>
-                            <th scope="row" class="text-center"><?= $contador += 1 ?></th>
-                            <td class="text-center"><?php echo $c['nombre_p'] . ' ' . $c['nombre_s']; ?></td>
-                            <td class="text-center"><?php echo $c['apellido_p'] . ' ' . $c['apellido_s']; ?></td>
-                            <td class="text-center"><?php echo $c['tipo_doc']; ?></td>
-                            <td class="text-center"><?php echo $c['n_identificacion']; ?></td>
-                            <td class="text-center"><?php echo $c['direccion']; ?></td>
-                            <!-- <td class="text-center">< ?php echo $p['numero']; ?></td>
-                        <td class="text-center">< ?php echo $p['Email']; ?></td> -->
-                            <td class="text-center">
-
-                                <button class="btn" href="#" data-href="<?php echo base_url('/clientes/eliminar') . '/' . $c['id_tercero'] . '/' . 'A'; ?>" data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("/img/icon-volver.png"); ?>" alt="Boton Reestablecer" title="Reestablecer Proveedor" width="20" height="20"></button>
-
-                            </td>
-                        </tr>
-                    <?php } ?>
                 <?php } ?>
+                <!-- texto dinamico -->
             </tbody>
         </table>
     </div>
@@ -61,7 +44,8 @@
             <div class="modal-content" id="modalEliminarContentP">
                 <div class="modalContenedorP">
                     <div id="contenidoHeaderEliminarP" class="modal-header">
-                        <img style=" width:80px; height:80px; margin:10px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                        <img style=" width:80px; height:80px; margin:0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                        <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="contenidoEliminarP">
@@ -87,9 +71,89 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $('#modalActivarP').on('show.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
+
+    //Cambiar estado de "Inactivo" a "Activo"
+    $('#modalActivarP').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `ReestablecerCLiente(${$(e.relatedTarget).data('href')})`)
+    })
+
+    function ReestablecerCLiente(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clientes/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'A'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            ContadorPRC = 0
+            $('#modalActivarP').modal('hide')
+            tableClientes.ajax.reload(null, false)
+        })
+    }
+
+     // Tabla   
+     var tableClientes = $("#tableClientes").DataTable({
+        ajax: {
+            url: '<?= base_url('clientes/obtenerClientes') ?>',
+            method: "POST",
+            data: {
+                estado: 'I'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'tipoDoc'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'direccion'
+            },
+            {
+                data: 'numero'
+            },
+            {
+                data: 'correo'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Cliente" width="20"></button>'
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+
     });
 
 

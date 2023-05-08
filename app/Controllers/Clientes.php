@@ -117,13 +117,15 @@ class Clientes extends BaseController
         }
     }
 
-    public function cambiarEstado($id, $estado)
+    public function cambiarEstado()
     {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
         if ($this->clientes->update($id, ['estado' => $estado])) {
             if($estado == 'A'){
-                return redirect()->to(base_url('clientes/eliminados'));
+                return '¡Se ha reestablecido el Cliente!';
             }else{
-                return redirect()->to(base_url('clientes'));
+                return '¡Se ha eliminado el Cliente!';
             }
         }
     }
