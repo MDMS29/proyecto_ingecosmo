@@ -27,6 +27,14 @@ class TercerosModel extends Model
     protected $skipValidation = false;
 
 
+    public function obtenerTipoTercero($idTipo)
+    {
+        $this->select('id_tercero, razon_social, n_identificacion, nombre_p, nombre_s, apellido_p, apellido_s, tipo_tercero');
+        $this->where('tipo_tercero', $idTipo);
+        $data = $this->findAll();
+        return $data;
+    }
+
     // -------------proveedores----------------
     public function obtenerProveedores($estado)
     {
@@ -37,14 +45,14 @@ class TercerosModel extends Model
         return $data;
     }
 
-    public function traerProveedor($id,$razonSocial)
+    public function traerProveedor($id, $razonSocial)
     {
-        if ($id!=0) {
+        if ($id != 0) {
             $this->select('terceros.* ');
-            $this->where('id_tercero', $id);   
-        }elseif($razonSocial!=0){
+            $this->where('id_tercero', $id);
+        } elseif ($razonSocial != 0) {
             $this->select('terceros.* ');
-            $this->where('razon_social', $razonSocial);   
+            $this->where('razon_social', $razonSocial);
         }
         $data = $this->first();  // nos trae el registro que cumpla con una condicion dada 
         return $data;
@@ -93,5 +101,4 @@ class TercerosModel extends Model
         $data = $this->first();
         return $data;
     }
-
 }

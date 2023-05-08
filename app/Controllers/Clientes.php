@@ -95,7 +95,6 @@ class Clientes extends BaseController
             return redirect()->to(base_url('/clientes'));
         
     }
-
     public function buscarCliente($id,  $nIdenti)
     {
         $array = array();
@@ -116,7 +115,6 @@ class Clientes extends BaseController
             return json_encode($array);
         }
     }
-
     public function cambiarEstado($id, $estado)
     {
         if ($this->clientes->update($id, ['estado' => $estado])) {
@@ -127,7 +125,6 @@ class Clientes extends BaseController
             }
         }
     }
-
     public function eliminados()
     {
         $clientes = $this->clientes->select('*')->where('estado', 'I')->where('tipo_tercero', '5')->findAll();

@@ -18,6 +18,7 @@
                     <th scope="col" class="text-center">Kilometraje</th>
                     <th scope="col" class="text-center">Combustible</th>
                     <th scope="col" class="text-center">Fecha Entrada</th>
+                    <th scope="col" class="text-center">Fecha Salida</th>
                     <th scope="col" class="text-center">Proceso Taller</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -50,29 +51,33 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
+                                    <label for="tipoCliente" class="col-form-label">Tipo Cliente:</label>
+                                    <select class="form-select form-select" name="tipoCliente" id="tipoCliente">
+                                        <option selected value="">-- Seleccione --</option>
+                                        <option value="5">Natural</option>
+                                        <option value="56">Jurídico</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="cliente" class="col-form-label">Cliente:</label>
+                                    <select class="form-select form-select" name="cliente" id="cliente">
+                                        <!-- SELECT DINAMICO -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
                                     <label for="ordenTrabajo" class="col-form-label">Orden de Trabajo:</label>
                                     <input type="number" name="ordenTrabajo" class="form-control" id="ordenTrabajo">
                                     <small id="msgOrden" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="cliente" class="col-form-label">Tipo Cliente:</label>
-                                    <select class="form-select form-select" name="cliente" id="cliente">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <option selected value="5">Natural</option>
-                                        <option selected value="56">Jurídico<option>
-                                    </select>
+                                    <label for="placa" class="col-form-label">Placa:</label>
+                                    <input type="text" minlength="6" maxlength="8" class="form-control" name="placa" id="placa">
+                                    <small id="msgPlaca" class="invalido"></small>
                                 </div>
-                            </div>
-                            <div class="d-flex column-gap-3 " style="width: 100%">
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="mb-3">
-                                        <label for="placa" class="col-form-label">Placa:</label>
-                                        <input type="text" minlength="6" maxlength="8" class="form-control" name="placa" id="placa">
-                                        <small id="msgPlaca" class="invalido"></small>
-                                    </div>
-                                </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="marca" class="col-form-label">Marca:</label>
                                     <select class="form-select form-select" name="marca" id="marca">
@@ -131,10 +136,18 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="fechaEntrada" class="col-form-label">Fecha Entrada:</label>
                                     <div class="d-flex">
                                         <input type="date" name="fechaEntrada" id="fechaEntrada" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="fechaEntrada" class="col-form-label">Fecha Salida:</label>
+                                    <div class="d-flex">
+                                        <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +196,10 @@
                 data: "n_orden"
             },
             {
-                data: "cliente"
+                data: null,
+                render: function(data, type, row) {
+                    return row.tipo_tercero == 5 ? row.cliente : row.razon_social
+                }
             },
             {
                 data: 'placa'
@@ -206,13 +222,40 @@
             {
                 data: "fecha_entrada",
                 render: function(data, type, row) {
-                    // Formato de fecha deseado: aaaa-mm-dd
+                    var fechaTe = new Date(data);
                     var fecha = new Date(data);
                     var anio = fecha.getFullYear();
                     var mes = fecha.getMonth() + 1;
-                    var dia = fecha.getDate();
+                    var dia = fecha.getDate() + 1;
                     return anio + "-" + (mes < 10 ? '0' + mes : mes) + "-" + (dia < 10 ? '0' + dia : dia);
                 }
+            },
+
+            {
+                data: "fecha_salida",
+                render: function(data, type, row) {
+                    let fechaValid;
+                    var fecha = new Date(data);
+                    fecha.setDate(fecha.getDate() + 1);
+                    var anio = fecha.getFullYear();
+                    var mes = fecha.getMonth() + 1;
+                    var dia = fecha.getDate();
+                    var fechaData = anio + "-" + (mes < 10 ? '0' + mes : mes) + "-" + (dia < 10 ? '0' + dia : dia);
+                    //Validar fecha
+                    var fechaTem = (dia < 10 ? dia : dia) + "/" + (mes < 10 ? mes : mes) + "/" + anio;
+                    var fechaActual = new Date();
+                    if (row.estado == 'Entregado') {
+                        fechaValid = 'entregado'
+                    } else if (fechaActual.toLocaleDateString() === fecha.toLocaleDateString()) {
+                        fechaValid = 'hoy';
+                    } else if (fechaActual > fecha) {
+                        fechaValid = 'pasada';
+                    } else {
+                        fechaValid = '';
+                    }
+                    return '<span id="spanValid" class="' + fechaValid + '"> ' + fechaData + ' </span>';
+                }
+
             },
             {
                 data: 'estado'
@@ -231,6 +274,27 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
+        initComplete: function() {
+            // Crear una lista desplegable para filtrar los estados
+            this.api().columns(9).every(function() {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                // Obtener los valores únicos de la columna de estado
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+        }
     });
     //Tomar informacion del vehiculo
     function seleccionarVehiculo(id, tp) {
@@ -248,8 +312,10 @@
                     $('#tp').val(2)
                     $('#id').val(id)
                     $('#ordenTrabajo').val(data['n_orden'])
-                    $('#cliente').val(data['cliente'])
+                    $('#tipoCliente').val(data['tipo_propietario'])
+                    // verTipoCliente(data['tipo_propietario'], data['cliente'])
                     $('#placa').val(data['placa'])
+                    $('#cliente').val(data['cliente'])
                     $('#marca').val(data['id_marca'])
                     $('#nFabrica').val(data['modelo'])
                     $('#color').val(data['color'])
@@ -257,6 +323,7 @@
                     $('#combustible').val(data['combustible'])
                     $('#estado').val(data['estado'])
                     $('#fechaEntrada').val(data['fecha_entrada'])
+                    $('#fechaSalida').val(data['fecha_salida'])
                     $('#tituloModal').text('Editar')
                     $('#btnGuardar').text('Actualizar')
                 }
@@ -265,6 +332,7 @@
             $('#tp').val(1)
             $('#id').val(id)
             $('#ordenTrabajo').val('')
+            $('#tipoCliente').val('')
             $('#cliente').val('')
             $('#placa').val('')
             $('#marca').val('')
@@ -273,13 +341,38 @@
             $('#kms').val('')
             $('#combustible').val('')
             $('#estado').val('')
-            $('#fechaEntrada').val()
+            $('#fechaEntrada').val('')
+            $('#fechaSalida').val('')
             $('#btnGuardar').text('Guardar')
             $('#tituloModal').text('Editar')
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
         }
     }
+
+    function verTipoCliente(id, idCliente) {
+        $.ajax({
+            url: '<?= base_url('vehiculos/buscarResponsable'); ?>',
+            data: {
+                idTipo: id
+            },
+            type: 'POST',
+            success: function(res) {
+                res = JSON.parse(res)
+                var cadena
+                cadena = `<option> -- Seleccione -- </option>`
+                for (let i = 0; i < res.length; i++) {
+                    nombre = `${res[i].nombre_p} ${res[i].nombre_s} ${res[i].apellido_p} ${res[i].apellido_s}`;
+                    cadena += `<option value=${res[i].id_tercero}>${res[i].tipo_tercero == 5  ? nombre : res[i].razon_social}</option>`
+                }
+                $('#cliente').html(cadena)
+            }
+        })
+    }
+    $('#tipoCliente').on('change', function(e) {
+        id = $('#tipoCliente').val()
+        verTipoCliente(id, '')
+    })
     //Verificacion de Orden de Trabajo y Placa del vehiculo 
     function verificarOrdenPlaca(url, data, input, tipo) {
         $.post(url, data, function(data) {
@@ -314,6 +407,7 @@
         tp = $('#tp').val()
         id = $('#id').val()
         orden = $('#ordenTrabajo').val()
+        tipoCliente = $('#tipoCliente').val()
         cliente = $('#cliente').val()
         placa = $('#placa').val()
         marca = $('#marca').val()
@@ -323,7 +417,8 @@
         combustible = $('#combustible').val()
         estado = $('#estado').val()
         fechaEntrada = $('#fechaEntrada').val()
-        if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada].includes('') || !validOrden || !validPlaca) {
+        fechaSalida = $('#fechaSalida').val()
+        if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada, fechaSalida].includes('') || !validOrden || !validPlaca) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -333,6 +428,7 @@
                     tp,
                     id,
                     orden,
+                    tipoCliente,
                     cliente,
                     placa,
                     marca,
@@ -341,10 +437,10 @@
                     kms,
                     combustible,
                     estado,
-                    fechaEntrada
+                    fechaEntrada,
+                    fechaSalida
                 },
                 success: function(data) {
-                    console.log(data)
                     if (tp == 2) {
                         data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
                     } else {

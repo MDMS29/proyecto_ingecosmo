@@ -50,6 +50,16 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 
 #msgOrden.invalido ,
-#msgPlaca.invalido {
+#msgPlaca.invalido,
+#spanValid.pasada {
   color: red;
+  font-weight : 700;
+}
+#spanValid.hoy {
+  font-weight : 700;
+  color: orange;
+}
+#spanValid.entregado {
+  font-weight : 700;
+  color: green;
 }
