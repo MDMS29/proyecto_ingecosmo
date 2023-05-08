@@ -31,7 +31,7 @@
 
 </head>
 
-<body  style="overflow-y:hidden" class=" d-flex align-items-stretch">
+<body class=" d-flex align-items-stretch">
 
 
     <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 999;">
@@ -41,14 +41,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li ><a class="nav-item dropdown" href="#" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
+                    <li><a class="nav-item dropdown" href="#" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
                     <hr class="nav-item dropdown" style="border-color: white">
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
                         <li><a class="nav-item dropdown" href="<?php echo base_url('trabajadores') ?>" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li ><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
@@ -56,18 +56,18 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>"  style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>" style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <?php } else if (session('idRol') == 3) { ?>
+                    <?php } else if (session('idRol') == 3) { ?>
                         <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li ><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li ><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
+                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                            <?php } ?>
+                    <?php } ?>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
-                    
+
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
@@ -78,8 +78,8 @@
         </div>
     </nav>
 
-    <div  class="d-flex">
-        <nav id="sidebar" class="active">
+    <div>
+        <nav id="sidebar" class="active" style="position: sticky;top:0px;">
             <!-- <h1><a class="logo"></a></h1> -->
             <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
                 <ul id="allElement" class="list-unstyled components mb-5">

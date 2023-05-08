@@ -1,11 +1,7 @@
 <link rel="stylesheet" href="<?= base_url('css/vehiculos/vehiculos.css') ?>">
 <!-- TABLA MOSTRAR VEHICULOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
-    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php
-
-                                                                                use App\Controllers\Vehiculos;
-
-                                                                                echo base_url('/icons/vehiculo-b.png') ?>" /> Vehiculos</h2>
+    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/icons/vehiculo-b.png') ?>" /> Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
             <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Cliente</a> - <a class="toggle-vis btn" data-column="3">Modelo</a> - <a class="toggle-vis btn" data-column="4">Marca</a> - <a class="toggle-vis btn" data-column="5">Color</a> - <a class="toggle-vis btn" data-column="6">Kilometraje</a> - <a class="toggle-vis btn" data-column="7">Combustible</a>
@@ -14,7 +10,7 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Orden de Trabajo</th>
-                    <th scope="col" class="text-center">Cliente</th>
+                    <th scope="col" class="text-center">Responsable</th>
                     <th scope="col" class="text-center">Placa</th>
                     <th scope="col" class="text-center">Modelo</th>
                     <th scope="col" class="text-center">Marca</th>
@@ -22,7 +18,7 @@
                     <th scope="col" class="text-center">Kilometraje</th>
                     <th scope="col" class="text-center">Combustible</th>
                     <th scope="col" class="text-center">Fecha Entrada</th>
-                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Proceso Taller</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -59,14 +55,15 @@
                                     <small id="msgOrden" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="cliente" class="col-form-label">Cliente:</label>
+                                    <label for="cliente" class="col-form-label">Tipo Cliente:</label>
                                     <select class="form-select form-select" name="cliente" id="cliente">
                                         <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($clientes as $cliente) { ?>
-                                            <option value="<?= $cliente['id_tercero'] ?>"><?= $cliente['nombreCompleto'] ?></option>
-                                        <?php } ?>
+                                        <option selected value="5">Natural</option>
+                                        <option selected value="56">Jurídico<option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="d-flex column-gap-3 " style="width: 100%">
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
@@ -346,13 +343,13 @@
                     estado,
                     fechaEntrada
                 },
-                success : function (data) {
+                success: function(data) {
                     console.log(data)
-                    if(tp == 2){
-                        data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') :  mostrarMensaje('error', '¡Ha ocurrido un error!')
-                    }else{
-                        
-                        data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') :  mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    if (tp == 2) {
+                        data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    } else {
+
+                        data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
                     }
                     tablaVehiculos.ajax.reload(null, false)
                     $('#agregarVehiculo').modal('hide')
