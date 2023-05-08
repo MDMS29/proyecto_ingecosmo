@@ -262,7 +262,7 @@
                     return (
 
                         '<button class="btn text-primary" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Usuario" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Usuario" width="20"></button>'
                     );
                 },
             }

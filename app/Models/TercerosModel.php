@@ -58,12 +58,6 @@ class TercerosModel extends Model
         return $data;
     }
 
-    public function eliminaProveedor($id, $estado)
-    {
-        $data = $this->update($id, ['estado' => $estado]);
-        return $data;
-    }
-
 
     // -------------clientes----------------
     public function obtenerClientes($estado)

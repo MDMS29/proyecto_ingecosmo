@@ -3,7 +3,7 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
-    <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
+        <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -34,77 +34,86 @@
 <form method="POST" action="<?php echo base_url(); ?>clientes/insertar" autocomplete="off">
 
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
+        <div class="modal-dialog modal-xl">
+            <div class="body">
 
-            <div class="modal-content" id="modalContentC">
-                <div class="modal-header" id="modalHeader">
+                <div class="modal-content">
+                    <div class="modal-header" id="modalHeader">
 
-                    <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
+                        <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
-                    <div id="modalHeader2">
+                        <div id="modalHeader2" class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <img id="logoModal" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <h1 class="modal-title fs-5" id="tituloModal">Agregar</h1>
+                        </div>
 
-                        <img style="margin-right: 10px;" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus" width="20">
-                        <h1 class="modal-title fs-5" id="tituloModal">AGREGAR</h1>
+                        <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form>
-                    <div class="modalAgregarP">
-                        <div class="mb-3" id="camposModalP">
-                            <div for="recipient-name" id="textoP" style="margin:0;">Primer Nombre:</div>
-                            <input class="inputC" type="text" min='1' max='300' id="nombreP" name="nombreP">
-                            <input hidden id="tp" name="tp">
-                            <input hidden id="id" name="id">
-                        </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
+                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
+                                    <input hidden id="tp" name="tp">
+                                    <input hidden id="id" name="id">
+                                </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">Segundo Nombre:</div>
-                            <input class="inputC" id="nombreS" name="nombreS"></input>
-                        </div>
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Segundo Nombre:</label>
+                                    <input class="form-control" id="nombreS" name="nombreS"></input>
+                                </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">Primer Apellido:</div>
-                            <input class="inputC" id="apellidoP" name="apellidoP"></input>
-                        </div>
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido:</label>
+                                    <input class="form-control" id="apellidoP" name="apellidoP"></input>
+                                </div>
+                            </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">Segundo Apellido:</div>
-                            <input class="inputC" id="apellidoS" name="apellidoS"></input>
-                        </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido:</label>
+                                    <input class="form-control" id="apellidoS" name="apellidoS"></input>
+                                </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="tipoDoc" id="textoP">Tipo Identificación:</div>
-                            <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                <option value="1" selected>Cedula de Ciudadania</option>
-                                <option>-- Seleccione --</option>
-                            </select>
-                        </div>
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
+                                    <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
+                                        <option value="1" selected>Cedula de Ciudadania</option>
+                                        <option>-- Seleccione --</option>
+                                    </select>
+                                </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">No. Documento:</div>
-                            <input class="inputC" id="Nidentificacion" name="Nidentificacion"></input>
-                        </div>
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">No. Documento:</label>
+                                    <input class="form-control" id="Nidentificacion" name="Nidentificacion"></input>
+                                </div>
+                            </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">Direccion:</div>
-                            <input class="inputC" id="direccion" name="direccion"></input>
-                        </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Direccion:</label>
+                                    <input class="form-control" id="direccion" name="direccion"></input>
+                                </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">Telefono:</div>
-                            <input class="inputC" id="numero" name="numero"></input>
-                        </div>
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Telefono:</label>
+                                    <input class="form-control" id="numero" name="numero"></input>
+                                </div>
 
-                        <div class="mb-3" id="camposModalP">
-                            <div style="margin:0;" for="message-text" id="textoP">Correo:</div>
-                            <input class="inputC" id="correo" name="correo"></input>
-                        </div>
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Correo:</label>
+                                    <input class="form-control" id="correo" name="correo"></input>
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnGuardar">Agregar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Agregar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,7 +127,8 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
                 </div>
 
                 <div class="contenidoEliminarP">
@@ -137,14 +147,32 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    // variables
     var ContadorPRC = 0
-    $('#modalConfirmaP').on('show.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    });
 
-    // Tabla de usuarios  
+    //Cambiar estado de "Activo" a "Inactivo" 
+    $('#modalConfirmaP').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `EliminarCliente(${$(e.relatedTarget).data('href')})`)
+    })
+
+    function EliminarCliente(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clientes/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmaP').modal('hide')
+            tableClientes.ajax.reload(null, false)
+        })
+    }
+
+    // Tabla 
     var tableClientes = $("#tableClientes").DataTable({
         ajax: {
             url: '<?= base_url('clientes/obtenerClientes') ?>',
@@ -196,7 +224,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
 
-                        '<input type="image" class="btn" data-href=<?php echo base_url('/clientes/cambiarEstado/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Cliente"></button>'
                     );
                 },
             }
@@ -251,7 +279,7 @@
             })
         } else {
             //Insertar datos
-            $('#tituloModal').text('AGREGAR')
+            $('#tituloModal').text('Agregar')
             $('#nombreP').val('')
             $('#nombreS').val('')
             $('#apellidoP').val('')

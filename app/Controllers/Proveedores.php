@@ -64,15 +64,24 @@ class Proveedores extends BaseController
         echo json_encode($returnData);
     }
 
-    public function eliminar($id, $estado)
-    {
-        $proveedores_ = $this->proveedores->eliminaProveedor($id, $estado);
-        return redirect()->to(base_url('/proveedores'));
-    }
+    
     public function eliminados(){
         $proveedores = $this->proveedores->select('*')->where('estado', 'I')->where('tipo_tercero', '8')->findAll();
         $data = ['proveedores' => $proveedores];
         echo view('/principal/sidebar');
         echo view('/proveedores/eliminados', $data);
+    }
+
+    public function cambiarEstado()
+    {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
+        if ($this->proveedores->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return '¡Se ha reestablecido el Proveedor!';
+            }else{
+                return '¡Se ha eliminado el Proveedor!';
+            }
+        }
     }
 }

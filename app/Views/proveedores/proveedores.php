@@ -36,17 +36,16 @@
                     <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
                     <div id="modalHeader2">
-
-                        <h1 class="modal-title fs-5" id="tituloModal">AGREGAR</h1>
+                        <h1 class="modal-title fs-5" id="tituloModal">Agregar</h1>
                     </div>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form>
                     <div class="modalAgregarP">
                         <div class="mb-3">
-                            <label for="recipient-name" class="textoP" style="margin:0;">Razon Social:</label>
-                            <input class="inputP" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
                             <small id="msgRaSo" class="invalido"></small>
 
                             <input hidden id="tp" name="tp">
@@ -54,14 +53,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label style="margin:0;" for="message-text" class="textoP">NIT:</label>
-                            <input type="number" class="inputP" id="nit" name="nit"></input>
+                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                            <input type="text" class="form-control" id="nit" name="nit"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
 
                         <div class="mb-3">
-                            <label style="margin:0;" class="textoP" for="message-text">Direccion:</label>
-                            <input class="inputP" id="direccion" name="direccion"></input>
+                            <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
+                            <input class="form-control" id="direccion" name="direccion"></input>
                         </div>
                     </div>
                 </form>
@@ -81,7 +80,8 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 50px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="contenidoEliminarP">
@@ -104,19 +104,34 @@
 
 <script>
     // variables
+    var ContadorPRC = 0
     var inputRazonSocial = 0;
     var inputNit = 0;
-    var ContadorPRC = 0
-    var validRazonSocial; 
+    var validRazonSocial;
     var validNit;
 
 
+    //Cambiar estado de "Activo" a "Inactivo" 
+    $('#modalConfirmarP').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `EliminarProveedor(${$(e.relatedTarget).data('href')})`)
+    })
 
-    $('#modalConfirmarP').on('show.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    });
+    function EliminarProveedor(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('proveedores/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmarP').modal('hide')
+            tableProveedores.ajax.reload(null, false)
+        })
+    }
 
-    // Tabla de usuarios  
+    // Tabla   
     var tableProveedores = $("#tableProveedores").DataTable({
         ajax: {
             url: '<?= base_url('proveedores/obtenerProveedores') ?>',
@@ -148,7 +163,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
 
-                        '<input type="image" class="btn" data-href=<?php echo base_url('/proveedores/eliminar/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );
                 },
             }
@@ -162,7 +177,7 @@
     //Envio de formulario
     $('#formularioProveedores').on('submit', function(e) {
         e.preventDefault()
-        $('#btnGuardar').attr('disabled', '')
+        $('#btnGuardar').text('Agregar')
         tp = $('#tp').val()
         id = $('#id').val()
         RazonSocial = $('#RazonSocial').val()
@@ -170,7 +185,7 @@
         direccion = $('#direccion').val()
 
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial!=true|| validNit!=true) {
+        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial != true || validNit != true) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -204,44 +219,92 @@
     function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0+ "/" + inputRazonSocial,
+            url: "<?php echo base_url('srchPro/') ?>" + 0 + "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
                     $('#msgRaSo').text('')
                     validRazonSocial = true
                 } else if (res[0] != null) {
-                    $('#msgRaSo').text('* Razon Social ya Existente *')
+                    $('#msgRaSo').text('* Razon Social ya existente *')
                     validRazonSocial = false
                 }
             }
         })
     }
-    
+
+    //Identificar si la Razon Social esta registrado
+    $('#RazonSocial').on('input', function(e) {
+        inputRazonSocial = $('#RazonSocial').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarRazonSocial(0, inputRazonSocial)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchPro/') ?>" + id + "/" + inputRazonSocial,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['RazonSocial'] == inputRazonSocial) {
+                        $('#msgRaSo').text('')
+                        validIdent = true
+                    } else {
+                        buscarRazonSocial(0, inputRazonSocial)
+                    }
+                }
+            })
+        }
+    })
+
     //Validacion de Nit
     function buscarNit(id, inputNit) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0+ "/" + inputNit,
+            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + inputNit,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
                     $('#msgNit').text('')
                     validRazonNit = true
                 } else if (res[0] != null) {
-                    $('#msgNit').text('* NIT ya Existente *')
+                    $('#msgNit').text('* NIT ya existente *')
                     validRazonNit = false
                 }
             }
         })
     }
 
-    
+    //Identificar si el NIT esta registrado
+    $('#nit').on('input', function(e) {
+        inputNit = $('#nit').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarNit(0, inputNit)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchPro/') ?>" + id + "/" + inputNit,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['nit'] == inputNit) {
+                        $('#msgNit').text('')
+                        validIdent = true
+                    } else {
+                        buscarNit(0, inputNit)
+                    }
+                }
+            })
+        }
+    })
+
+
     function seleccionarProveedor(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id+0,
+                url: "<?php echo base_url('srchPro/') ?>" + id + "/" + 0,
                 dataType: 'json',
                 success: function(res) {
                     $('#tituloModal').text('EDITAR')
@@ -255,7 +318,7 @@
             })
         } else {
             //Insertar datos
-            $('#tituloModal').text(`AGREGAR`)
+            $('#tituloModal').text(`Agregar`)
             $('#tp').val(1)
             $('#id').val(0)
             $('#RazonSocial').val('')
