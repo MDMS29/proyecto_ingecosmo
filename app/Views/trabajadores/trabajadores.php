@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Cargo</a>
         </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
@@ -282,7 +282,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-
     var ContadorPRC = 0;
     var contador = 0;
     var contadorCorreo = 0;
@@ -309,7 +308,6 @@
             $(this).addClass('active');
         }
     })
-
     //Mostrar mensajes de SwalFire
     function mostrarMensaje(tipo, msg) {
         Swal.fire({
@@ -320,7 +318,6 @@
             timer: 1500
         })
     }
-
     // Tabla de trabajadores  
     var tableTrabajadores = $("#tableTrabajadores").DataTable({
         ajax: {
@@ -387,7 +384,6 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
-
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (objCorreo.id != 0) {
@@ -605,10 +601,8 @@
             });
         };
     })
-
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
-
     const numero = $('#telefonoAdd').val()
     const tipo = $('#tipoTele').val()
     const prioridad = $('#prioridad').val()
@@ -646,7 +640,6 @@
     }
 
     })
-
     //Funcion para buscar el correo o el telefono
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
@@ -666,7 +659,6 @@
             }
         })
     }
-
     //Al escribir validar que el numero no este registrado
     $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
@@ -768,7 +760,6 @@
             correos.push(info)
             return guardarCorreo()
         }
-
     })
     //Al escribir validar que el correo no este registrado
     $('#correoAdd').on('input', function(e) {
@@ -833,7 +824,6 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
-
     //Cambiar estado de "Activo" a "Eliminado" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))

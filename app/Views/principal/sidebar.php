@@ -11,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
     <link rel="stylesheet" href="<?php echo base_url('bootstrap5/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('css/style.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
@@ -20,20 +18,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
     <!-- SCRIPTS -->
     <script src="<?= base_url('js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('dataTable/jquery.dataTables.js') ?>"></script>
     <script src="<?= base_url('dataTable/dataTables.bootstrap5.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
-
-
-
 </head>
 
 <body class=" d-flex align-items-stretch">
-
-
     <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 999;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +48,8 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /> Aliados</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>" style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } else if (session('idRol') == 3) { ?>
@@ -67,12 +61,8 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
-
-                    <li>
-                        <hr class="nav-item dropdown" style="border: solid 1px white">
-                    </li>
-                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
-                    </li>
+                    <li> <hr class="nav-item dropdown" style="border: solid 1px white"></li>
+                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li></li>
                 </ul>
             </div>
         </div>
@@ -117,6 +107,11 @@
                         <li>
                             <a href="<?= base_url('proveedores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
                                 <p id="pa">Proveedores</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
+                                <p id="pa">Aliados</p>
                             </a>
                         </li>
                         <li>
