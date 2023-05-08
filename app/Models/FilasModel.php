@@ -13,7 +13,7 @@ class FilasModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false; 
     
-    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'n_iconos', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'usuario_crea', 'fecha_crea', 'estado'];
     
     protected $useTimestamps = true;
     protected $createdField  = 'fecha_crea';
@@ -29,6 +29,7 @@ class FilasModel extends Model{
          $this->select('materiales.*, materiales.estante as nombreFila, estanteria.nombre as estanteria');
          $this->join('estanteria','materiales.estante = estanteria.id');
          $this->where('estante', $estante);
+         $this->groupBy('fila');
          $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
          return $datos;
      }
@@ -36,6 +37,15 @@ class FilasModel extends Model{
      public function traerFilas($fila){
         $this->select('materiales.*, materiales.fila as numeroFila');
         $this->where('fila', $fila);
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+     }
+
+     public function traerMaterial($nombre){
+        $this->select('materiales.*, materiales.nombre as nombreMaterial');
+        $this->where('nombre', $nombre);
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
      }
 
 

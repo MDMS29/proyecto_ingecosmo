@@ -12,13 +12,13 @@ use App\Models\MaterialesModel;
 class Filas extends BaseController
 {
     protected $filas, $estanteria;
-    protected $materiales;
+    protected $material;
 
     public function __construct()
     {
         $this->filas = new FilasModel();
         $this->estanteria = new EstanteriaModel();
-        $this->materiales = new MaterialesModel();
+        $this->material = new MaterialesModel();
     }
     public function index()
     {
@@ -26,35 +26,47 @@ class Filas extends BaseController
         $data = ['data' => $filas];
         echo view('/principal/sidebar');
         echo view('/estanteria/filas', $data);
-        
     }
 
     public  function mostrarFila($estante)
     {
         $filas = $this->filas->obtenerFilas($estante);
         $titulo = $this->estanteria->titulo($estante);
-        $data = ['data' => $filas, 'titulo' => $titulo];
+        $data = ['data' => $filas, 'titulo' => $titulo, 'filas' => $filas];
         echo view('/principal/sidebar');
         echo view('/estanteria/filas', $data);
     }
 
-    public function buscarFilas($fila){
-        $filas_ = $this->filas->traerFilas($fila);   
+    // public function mostrarMaterial($estante, $material){
+    //     $titulo = $this->estanteria->titulo($estante);
+    //     $data = ['titulo' => $titulo,'materiales'=> $material];
+    //     echo view('/principal/sidebar');
+    //     echo view('/estanteria/filas', $data);
+    // }
+
+    public function buscarFilas($fila)
+    {
+        $filas_ = $this->filas->traerFilas($fila);
         if (!empty($filas_)) {
             array_push($returnData, $filas_);
         }
         echo json_encode($returnData);
     }
 
+    public function obtenerMaterialesCate($categoria)
+    {
+        $materiales = $this->material->obtenerMaterialesCate($categoria);
+        if (!empty($materiales)) {
+            return json_encode($materiales);
+        }
+    }
+
     public function insertar()
     {
-        if ($this->request->getMethod() == "post") {
-            
-                $this->estanteria->save([
-                    'nombre' => $this->request->getPost('nombre')
-
-                ]);
-            return redirect()->to(base_url('/cargos'));
-        }
+        $this->filas->update($this->request->getPost('nombre_prod'), [
+            'fila' => $this->request->getPost('fila')
+        ]);
+        return json_encode(1);
+        // return redirect()->to(base_url('/filas'));
     }
 }

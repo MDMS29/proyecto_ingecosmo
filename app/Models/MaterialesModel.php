@@ -52,10 +52,10 @@ class MaterialesModel extends Model{
         return $datos;
     }
 
-    public function traerMaterialesCategoria($id_material){
-        $this->select('materiales.*');
-        $this->where('materiales.id_material', $id_material);
-        $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+    public function obtenerMaterialesCate($categoria){
+        $this->select('id_material, nombre');
+        $this->where('materiales.categoria_material', $categoria);
+        $datos = $this->findAll();  
         return $datos;
     }
 

@@ -44,7 +44,7 @@ body::-webkit-scrollbar:vertical{
 
 *::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb{
-  background-color: transparent;
+  background-color: #797979;
   border-radius: 20px;
 }
 

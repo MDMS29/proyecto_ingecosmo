@@ -41,5 +41,4 @@ class Materiales extends BaseController
         }
         echo json_encode($returnData);
     }
-
 }
