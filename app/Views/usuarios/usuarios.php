@@ -767,7 +767,7 @@
         }
         contador += 1
         let info = {
-            id: [editTel].includes('') || edit == 0 ? `'${contador}111e'` : edit,
+            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
             tipo,
             numero,
             prioridad
