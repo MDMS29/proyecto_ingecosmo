@@ -27,7 +27,7 @@ class ParamModel extends Model
 
     public function obtenerTipoDoc()
     {
-        $this->select('param_detalle.*,');
+        $this->select('param_detalle.*');
         $this->where('id_param_enc', '1');
         $data = $this->findAll();
         return $data;
@@ -44,6 +44,29 @@ class ParamModel extends Model
         $this->select('param_detalle.*');
         $this->where('id_param_enc', '10');
         $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
-        return $datos;
+        return $datos;}
+
+    public function obtenerTipoTel()
+    {
+        $this->select('id_param_det as id, nombre');
+        $this->where('id_param_enc', '2');
+        $data = $this->findAll();
+        return $data;
+    }
+    public function obtenerEstadosVehi($estado)
+    {
+        $this->select('id_param_det as id, nombre');
+        $this->where('id_param_enc', '12');
+        $this->where('estado', $estado);
+        $data = $this->findAll();
+        return $data;
+    }
+    public function obtenerCombustibleVehi($estado)
+    {
+        $this->select('id_param_det as id, nombre');
+        $this->where('id_param_enc', '11');
+        $this->where('estado', $estado);
+        $data = $this->findAll();
+        return $data;
     }
 }

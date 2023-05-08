@@ -33,6 +33,13 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.footer-page {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1em;
+  gap: 1rem;
+}
+
 *::-webkit-scrollbar,
 body::-webkit-scrollbar{
   -webkit-appearance: none;
@@ -172,7 +179,10 @@ body {
   color: #212529;
   text-align: left;
   background-color: blue;
+
 }
+
+
 
 [tabindex="-1"]:focus {
   outline: 0 !important;

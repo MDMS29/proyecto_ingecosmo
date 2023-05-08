@@ -14,74 +14,24 @@
         </div>
     <?php } else { ?>
         <?php foreach ($data as $dato) { ?>
+            <div class="card2">
+                <div class="imagenes">
+                    <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+                </div>
+                <div class="textoFila" id="Contenedor">
+                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila <?php echo $dato['fila']; ?></h5>
+                    <div class="bloqueTextoE" id="<?php echo $dato['fila']; ?>">
+                        <input id='nombreFila' value="<?php echo $dato['fila']; ?>">
+
+
+                        <!-- < ? php foreach($data as $dato){?>
+                            <p class="subTexto"> < ?php echo $dato['nombre']; ?></p>
+                        <  ?  php }?> -->
+                        <!-- <p class="subTexto">materiales</p> -->
+                    </div>
+                </div>
+            </div>
         <?php } ?>
-
-        <div class="card2">
-            <div class="imagenes">
-                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-            </div>
-            <div class="textoFila">
-                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 1</h5>
-                <div class="bloqueTextoE">
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card2">
-            <div class="imagenes">
-                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-            </div>
-            <div class="textoFila">
-                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 2</h5>
-                <div class="bloqueTextoE">
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card2">
-            <div class="imagenes">
-                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-            </div>
-            <div class="textoFila">
-                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 3</h5>
-                <div class="bloqueTextoE">
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card2">
-            <div class="imagenes">
-                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-            </div>
-            <div class="textoFila">
-                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 4</h5>
-                <div class="bloqueTextoE">
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card2">
-            <div class="imagenes">
-                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-            </div>
-            <div class="textoFila">
-                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila 5</h5>
-                <div class="bloqueTextoE">
-                    <p class="subTexto">materiales</p>
-                    <p class="subTexto">materiales</p>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
@@ -141,8 +91,30 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
+
+        bloque = $('#Contenedor .bloqueTextoE') 
+        
+        nombreFila = $('#nombreFila').val()
+        console.log(nombreFila)
+        $.ajax({
+            url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + nombreFila,
+            type: 'POST',
+            dataType: 'json',
+            success: function(res) {
+                var cadena
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    cadena += `<p class="subTexto"> ${res[i].nombre}</p>`
+                }
+                $(`#${nombreFila}`).html(cadena)
+            }
+        })
+
+
         categoria = $('#categoria').val()
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria,
@@ -160,6 +132,7 @@
         })
 
         $('#agregarFila').on('submit', function(e) {
+            e.preventDefault();
             fila = $('#fila').val() //Esto toma el valor por medio del id
             nombre_prod = $('#nombre_prod').val() //Esto toma el valor por medio del id
             $.ajax({
@@ -172,7 +145,7 @@
                 dataType: 'json',
                 success: function(res) {
                     if(res == 1){
-                        alert('Se guardo la fila')
+                        mostrarMensaje('success', '¡Se ha guardado el insumo en la fila!');
                         setTimeout(()=> {
                             window.location.reload()
                         }, 2000)
@@ -180,4 +153,6 @@
                 }
             })
         })
+
+        
     </script>

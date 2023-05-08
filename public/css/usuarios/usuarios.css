@@ -3,6 +3,14 @@
   --rojoAcciones: #ef434d;
 }
 
+/* -- DIV OCULTAR COLUMNAS -- */
+.ocultar > a:is(.toggle-vis).active,
+.ocultar > a:is(.toggle-vis):hover {
+  border-radius: none !important;
+  color: var(--azulBase);
+  font-weight: 700;
+  border: none;
+}
 /* -- BOTONES GENERALES -- */
 
 .btnRedireccion {
@@ -22,6 +30,7 @@
   padding-top: 1em;
   gap: 1rem;
 }
+
 label {
   color: #1b335b;
   font-weight: 600;
@@ -50,6 +59,13 @@ table {
   background-color: white;
 }
 
+.body-R {
+  width: 100%;
+  border: 5px solid var(--azulBase) !important;
+  border-radius: 10px;
+  background-color: white;
+}
+
 .logo {
   display: flex;
   justify-content: center;
@@ -69,17 +85,197 @@ table {
 
 /* -- CONTRASEÑA -- */
 
-#msgConfir.valido {
+#msgConfir.valido,
+#msgConfirRes.valido {
   color: green !important;
 }
 
 #msgConfir.invalido,
+#msgConfirRes.invalido,
 #msgDoc.invalido,
 #msgTel.invalido,
 #msgCorreo.invalido {
   color: red;
 }
 
-#msgConfir.normal {
+#msgConfir.normal,
+#msgConfirRes.normal {
   color: #8e8e8e;
 }
+
+/* DATA TABLE */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  margin: 0px 8px !important;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+  width: 65px;
+  background-color: white;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+  background-color: white;
+}
+
+/* PERFIL */
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.profile-img {
+  text-align: center;
+}
+
+.profile-img img {
+  width: 70%;
+  height: 100%;
+}
+
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.profile-head h5 {
+  color: #333;
+}
+
+.profile-head h6,
+h5.permiso {
+  color: #0062cc;
+}
+
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
+}
+
+.profile-work {
+  padding: 14%;
+  margin-top: -15%;
+}
+
+.profile-work p:first-child {
+  font-size: 20px;
+  color: #0062cc;
+  font-weight: 600;
+  margin-top: 10%;
+}
+
+.profile-work ul {
+  list-style: none;
+}
+
+.profile-tab label {
+  font-weight: 600;
+}
+
+.profile-tab p {
+  font-weight: 600;
+  color: #0062cc;
+}
+
+table {
+  background-color: white !important;
+}
+
+/* modal confirmar eliminar */
+#modalEliminarContentP {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 5000px;
+  border: 5px solid var(--azulBase);
+  border-radius: 10px;
+}
+
+.modalContenedorP {
+  display: flex;
+  flex-direction: column;
+}
+
+#contenidoHeaderEliminarP {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /* margin: 10px 0 0 10px; */
+}
+
+.textoModalP {
+  font-size: 25px;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.contenidoEliminarP {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  margin: 20px;
+  height: 100%;
+  width: 80%;
+}
+
+.bloqueModalP {
+  display: flex;
+}
+
+#bloqueBtnP {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#btnNo {
+  margin-right: 30px;
+}
+
+/* modal confirmar eliminar */

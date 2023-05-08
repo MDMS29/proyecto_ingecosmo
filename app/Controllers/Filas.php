@@ -12,7 +12,7 @@ use App\Models\MaterialesModel;
 class Filas extends BaseController
 {
     protected $filas, $estanteria;
-    protected $material;
+    protected $material, $fila;
 
     public function __construct()
     {
@@ -60,6 +60,14 @@ class Filas extends BaseController
             return json_encode($materiales);
         }
     }
+
+     public function obtenerMaterialesFila($fila)
+     {
+         $materiales = $this->material->obtenerMaterialesFila($fila);
+         if (!empty($materiales)) {
+             return json_encode($materiales);
+         }
+     }
 
     public function insertar()
     {

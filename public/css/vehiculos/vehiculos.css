@@ -1,0 +1,55 @@
+:root {
+  --azulBase: #161666;
+  --rojoAcciones: #ef434d;
+}
+
+table {
+  background-color: white;
+  border: 5px solid #161666;
+  border-radius: 10px;
+}
+.body-R {
+  width: 100%;
+  border: 5px solid var(--azulBase) !important;
+  border-radius: 10px;
+  background-color: white;
+}
+
+/* -- BOTONES GENERALES -- */
+.btnRedireccion {
+  background-color: var(--azulBase) !important;
+  color: white !important;
+}
+.btnAccionF {
+  background-color: var(--rojoAcciones) !important;
+  color: white !important;
+}
+
+/* -- DATA TABLE -- */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  margin: 0px 8px !important;
+}
+div.dataTables_wrapper div.dataTables_length select {
+  width: 65px;
+  background-color: white;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+  background-color: white;
+}
+
+/* -- DIV OCULTAR COLUMNAS -- */
+.ocultar > a:is(.toggle-vis).active,
+.ocultar > a:is(.toggle-vis):hover {
+  border-radius: none !important;
+  color: var(--azulBase);
+  font-weight: 700;
+  border: none;
+}
+
+/* -- MENSAJES CONFIRMACION -- */
+
+
+#msgOrden.invalido ,
+#msgPlaca.invalido {
+  color: red;
+}
