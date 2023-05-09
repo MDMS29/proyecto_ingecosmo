@@ -299,6 +299,7 @@ var validUsar = true
     if(parseInt(cantidad) > parseInt(cantidadExistente)){
       $('#msgUsar').text(' * Valor invalido * ')
       validUsar = false
+      $('#subtotal').val(0)
     }else{
       $('#msgUsar').text('')
       validUsar = true
