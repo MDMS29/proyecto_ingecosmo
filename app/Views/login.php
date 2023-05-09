@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,13 @@
     <link rel="shortcut icon" href="<?php echo base_url('/img/ingecosmo.png') ?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url("css/login.css") ?>">
+    <script src="<?= base_url('js/jquery.min.js') ?>"></script>
+
 </head>
+
 <body class="container-lg d-flex align-items-center justify-content-center ">
     <div class="login">
-        <form action="<?php echo base_url('/login') ?>" method="POST">
+        <form id="formulario">
             <p class="texto-titulo">LOGIN</p>
             <div class="logo">
                 <img class="logo-ingecosmo" src="<?php echo base_url('/img/logo.png'); ?>">
@@ -31,10 +35,41 @@
         </form>
     </div>
 </body>
+
 </html>
 <script>
-    const alerta = document.querySelector(".alerta");
-    setTimeout(() => {
-        alerta.remove();
-    }, 2000);
+    $('#formulario').on('submit', function(e) {
+        e.preventDefault();
+        usuario = $('#usuario').val(),
+        contrasena = $('#contrasena').val()
+        if ([usuario, contrasena].includes('')) {
+            return alert('Campos Vacios')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('/login') ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    usuario,
+                    contrasena
+                },
+                success: function(data) {
+                    const informacion = {
+                        usuario,
+                        contrasena
+                    };
+                    localStorage.setItem("usuario", JSON.stringify(informacion));
+                    const alerta = document.querySelector(".alerta");
+                    setTimeout(() => {
+                        alerta.remove();
+                    }, 2000);
+                    if(data==1){
+                        window.location.href="<?php echo base_url('/home') ?>"
+                    }
+                }
+            })
+        }
+    })
+
+
 </script>

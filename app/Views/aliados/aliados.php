@@ -19,7 +19,7 @@
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarAliado" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarAliado" onclick="seleccionarAliado(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
         <a href="<?php echo base_url('/aliados/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
@@ -27,7 +27,7 @@
 <!-- -----modal----------     -->
 <form method="POST" id="formularioAliados" autocomplete="off">
 
-    <div class="modal fade" id="agregarAlado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" id="modalProveedor">
             <div class="modal-content" id="modalContentP">
 
@@ -117,9 +117,9 @@
     });
 
     // Tabla de usuarios  
-    var tableProveedores = $("#tableProveedores").DataTable({
+    var tableAliados = $("#tableAliados").DataTable({
         ajax: {
-            url: '<?= base_url('proveedores/obtenerProveedores') ?>',
+            url: '<?= base_url('aliados/obtenerAliados') ?>',
             method: "POST",
             data: {
                 estado: 'A'
@@ -146,9 +146,9 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+                        '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
 
-                        '<input type="image" class="btn" data-href=<?php echo base_url('/proveedores/eliminar/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
+                        '<input type="image" class="btn" data-href=<?php echo base_url('/aliado/eliminar/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
                     );
                 },
             }
@@ -174,7 +174,7 @@
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
-                url: '<?php echo base_url('proveedores/insertar') ?>',
+                url: '<?php echo base_url('aliados/insertar') ?>',
                 type: 'POST',
                 data: {
                     id,
@@ -192,8 +192,8 @@
                     }
                 }
             }).done(function(data) {
-                $('#agregarProveedor').modal('hide')
-                tableProveedores.ajax.reload(null, false); //Recargar tabla
+                $('#agregarAliado').modal('hide')
+                tableAliados.ajax.reload(null, false); //Recargar tabla
                 $('#btnGuardar').removeAttr('disabled') //jumm
                 ContadorPRC = 0
             });
@@ -204,7 +204,7 @@
     function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0+ "/" + inputRazonSocial,
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + 0+ "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -222,7 +222,7 @@
     function buscarNit(id, inputNit) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0+ "/" + inputNit,
+            url: "<?php echo base_url('/aliados/buscarAliados/') ?>" + 0+ "/" + inputNit,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -237,11 +237,11 @@
     }
 
     
-    function seleccionarProveedor(id, tp) {
+    function seleccionarAliado(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id+0,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id+0,
                 dataType: 'json',
                 success: function(res) {
                     $('#tituloModal').text('EDITAR')

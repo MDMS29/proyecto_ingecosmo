@@ -41,7 +41,7 @@ class Usuarios extends BaseController
             ];
             $session = session();
             $session->set($data);
-            return redirect()->to(base_url('/home'));
+            return json_encode(1);
         } else {
             return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
         }

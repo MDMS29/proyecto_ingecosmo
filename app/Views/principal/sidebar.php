@@ -76,6 +76,8 @@
                     <li class="active">
                         <a href="<?= base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                             <p id="pa"><?= session('rol') ?></p>
+                            <p id="a"><?= session('id') ?></p>
+                            <p id="a"><?= session('idRol') ?></p>
                         </a>
                     </li>
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>

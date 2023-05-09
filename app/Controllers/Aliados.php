@@ -19,7 +19,7 @@ class Aliados extends BaseController
         echo view('/aliados/aliados');
     }
 
-    public function obtenerAliadosdores()
+    public function obtenerAliados()
     {
         $estado = $this->request->getPost('estado');
         $res = $this->aliados->obtenerAliados($estado);
@@ -28,7 +28,7 @@ class Aliados extends BaseController
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
-        $tipoTercero = 8;
+        $tipoTercero = 56;
         $tipoDocumento = 2;
         if ($this->request->getMethod() == "post") {
             if ($tp == 1) {
@@ -54,7 +54,7 @@ class Aliados extends BaseController
         }
     }
 
-    public function buscarAliados($id, $razonSocial)
+    public function buscarAliado($id, $razonSocial)
     {
         $returnData = array();
         $aliados_ = $this->aliados->traerAliado($id,$razonSocial);
@@ -66,12 +66,12 @@ class Aliados extends BaseController
 
     public function eliminar($id, $estado)
     {
-        $proveedores_ = $this->aliados->eliminaAliados($id, $estado);
+        $aliados_ = $this->aliados->eliminaAliados($id, $estado);
         return redirect()->to(base_url('/aliados'));
     }
     public function eliminados(){
-        $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '8')->findAll();
-        $data = ['proveedores' => $aliados];
+        $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '56')->findAll();
+        $data = ['aliados' => $aliados];
         echo view('/principal/sidebar');
         echo view('/aliados/eliminados', $data);
     }
