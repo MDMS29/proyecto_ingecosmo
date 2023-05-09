@@ -49,6 +49,13 @@ class MaterialesModel extends Model{
         return $datos;
     }
 
+    public function usarInsumo($id_material){
+        $this->select('materiales.*');
+        $this->where('id_material', $id_material);
+        $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+    
 
         
     public function traerMateriales($id_material){

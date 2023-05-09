@@ -342,7 +342,24 @@ estilos modal agregar  */
 }
 
 
+/* USAR */
 
+#nombreInsumo, #cantidadExistente, #PrecioDeVenta, #subtotal{
+    margin-right: 10px;
+    border-radius: 5px;
+    /* border: 1px solid black; */
+    height: 30px;
+    width: 250px;
+    background-color: var(--grisModal);
 
+}
 
+#cantidadUsar{
+    margin-right: 10px;
+    border-radius: 5px;
+    /* border: 1px solid black; */
+    height: 30px;
+    width: 250px;
+    background: rgb(248, 249, 255);
+}
 

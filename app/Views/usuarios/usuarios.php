@@ -125,7 +125,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer"> 
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
@@ -138,6 +138,7 @@
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
 <div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
+
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">

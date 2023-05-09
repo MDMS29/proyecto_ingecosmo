@@ -124,19 +124,19 @@
         <div class="campos">
 
           <label for="exampleDataList" class="form-label">Precio de Compra:</label>
-          <input type="text" class="form-control" list="datalistOptions" id="precioCompra" name="precioCompra" placeholder="" disabled>
+          <input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="" disabled>
         </div>
 
         <div class="campos">
 
           <label for="exampleDataList" class="form-label">Cantidad Vendida:</label>
-          <input type="text" class="form-control" list="datalistOptions" id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
+          <input type="text" class="form-control"  id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
         </div>
 
         <div class="campos">
 
           <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
-          <input type="text" class="form-control" list="datalistOptions" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
+          <input type="text" class="form-control"  id="cantidadActual" name="cantidadActual" placeholder="" disabled>
         </div>
 
       </div>
@@ -154,6 +154,7 @@
 <!-- MODAL USAR -->
 
 <div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="formularioUsar" autocomplete="off">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content modal-lg" id="modalContentUsar">
       <div class="modal-header" id="modalHeaderUsar">
@@ -162,44 +163,47 @@
         <div class="HEADER">
 
           <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
-          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
+          <button type="button" class="btn" data-bs-toggle="modal" aria-label="Close">X</button>
         </div>
       </div>
       <div class="modal-body" id="modalBodyUsar">
 
         <div class="camposUsar">
           <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-          <input class="form-control" list="datalistOptions" id="nombreI" name="nombre" placeholder="" disabled>
+          <input class="form-control"  id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
         </div>
 
         <div class="camposUsar">
           <label for="exampleDataList" class="form-label">Cantidad Existente:</label>
-          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="" disabled>
+          <input class="form-control"  id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
         </div>
         <div class="camposUsar">
           <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
-          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="">
+          <div>
+            <input class="form-control"  id="cantidadUsar" name="cantidadUsar" placeholder="">
+            <small id="msgUsar" class="invalido"></small>
+          </div>
         </div>
         <div class="camposUsar">
           <label for="exampleDataList" class="form-label">Precio de Venta:</label>
-          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="" disabled>
+          <input class="form-control"  id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
         </div>
         <div class="camposUsar">
           <label for="exampleDataList" class="form-label">Subtotal:</label>
-          <input class="form-control" list="datalistOptions" id="cantidadU" name="cantidad" placeholder="" disabled>
+          <input class="form-control" list="datalistOptions" id="subtotal" name="subtotal" placeholder="" disabled>
         </div>
 
       </div>
       <div class="modal-footer" id="modalFooter">
-      <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btnAccionF">Usar</button>
+        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btnAccionF">Usar</button>
       </div>
     </div>
   </div>
+</form>
 </div>
 
 <!-- MODAL USAR 2-->
-
 <!-- <div class="modal fade" id="usarMaterialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content modal-lg" style="border: 5px solid #161666;  border-radius: 10px;">
@@ -232,6 +236,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
+var validUsar = true
+
   function detallesMaterial(id_material) {
     dataURL = "<?php echo base_url('/materiales/detallesMaterial'); ?>" + "/" + id_material;
     $.ajax({
@@ -268,7 +275,38 @@
     })
   }
 
-  function usarMaterial()
+  function usarMaterial(id_material) {
+    dataURL = "<?php echo base_url('/materiales/usarMaterial'); ?>" + "/" + id_material;
+    $.ajax({
+      type: "POST",
+      url: dataURL,
+      dataType: "json",
+      success: function(rs) {
+        $("#id").val(rs[0]['id_material']);
+        $("#nombreInsumo").val(rs[0]['nombre']);
+        $("#cantidadExistente").val(rs[0]['cantidad_actual']);
+        $("#PrecioDeVenta").val(rs[0]['precio_venta']);
+        $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
+
+      }
+    })
+  }
+
+  $('#cantidadUsar').on('input', function(e) {
+    cantidad = $('#cantidadUsar').val()
+    valorVenta = $("#PrecioDeVenta").val()  
+    cantidadExistente = $('#cantidadExistente').val()
+    if(parseInt(cantidad) > parseInt(cantidadExistente)){
+      $('#msgUsar').text(' * Valor invalido * ')
+      validUsar = false
+    }else{
+      $('#msgUsar').text('')
+      validUsar = true
+      $('#subtotal').val(cantidad * valorVenta)
+    }
+  })
+
+  
 
   function habilitar() {
 
@@ -336,6 +374,49 @@
     }
   }
 
+  $("#formularioUsar").on("submit", function(e) {
+    e.preventDefault()
+    nombre = $("#nombreInsumo").val()
+    cantidadExistente = $("#cantidadExistente").val()
+    cantidadUsar = $("#cantidadUsar").val()
+    precioVenta = $("#PrecioDeVenta").val()
+    idCategoria = $("#idCategoria").val()
+    if ([nombre, cantidadExistente, cantidadUsar, precioVenta].includes("")) {
+      return Swal.fire({
+        position: "center",
+        icon: "error",
+        text: "¡Campos Vacios!",
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+    $.post({
+      url: '<?php echo base_url('insumos/usar') ?>',
+      data: {
+        nombre: nombre,
+        cantidadExistente: cantidadExistente,
+        precioVenta: precioVenta,
+        tipoMaterial: 9,
+        idCategoria: idCategoria
+      },
+      success: function(e) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: 'Se ha usado este material con exito',
+          showConfirmButton: false,
+          timer: 1000
+        })
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
+      }
+    })
+
+  })
+
+
+
   $("#formularioAgregar").on("submit", function(e) {
     e.preventDefault()
     nombre = $("#nombre").val()
@@ -377,5 +458,4 @@
     })
 
   })
-
 </script>
