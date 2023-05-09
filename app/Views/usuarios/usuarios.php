@@ -600,8 +600,8 @@
             }).done(function(data) {
                 $('#cambiarContra').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
-                limpiarCampos('msgConfirRes')
                 ContadorPRC = 0
+                limpiarCampos('msgConfirRes')
                 if (data == 2) {
                     return mostrarMensaje('error', '¡Ha ocurrido un error!')
                 } else {
@@ -737,6 +737,7 @@
                 limpiarCampos('msgConfir')
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
+                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled')
                 $('#btnActuContra').removeAttr('disabled')
                 $('#editTele').val('');
@@ -751,7 +752,6 @@
                     tipo: '',
                     prioridad: ''
                 }
-                ContadorPRC = 0
             });
         };
     })
@@ -998,6 +998,7 @@
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)
+            ContadorPRC = 0
         })
     }
 </script>

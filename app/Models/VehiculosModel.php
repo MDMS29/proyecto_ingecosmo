@@ -28,11 +28,12 @@ class VehiculosModel extends Model
 
     public function obtenerVehiculos()
     {
-        $this->select("vehiculos.id_vehiculo, n_orden, vehiculos.id_marca, marca_vehiculo.nombre as marca, placa,  modelo, color, kms, param_detalle.nombre as combustible, vw_param_det.nombre as estado, vehiculos.fecha_entrada, vehiculos.fecha_salida, terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero");
+        $this->select("vehiculos.id_vehiculo, n_orden, vehiculos.id_marca, marca_vehiculo.nombre as marca, placa,  modelo, color, kms, param_detalle.nombre as combustible, vw_param_det.nombre as estado, vehiculos.fecha_entrada, vehiculos.fecha_salida, terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.estado as estadoTercer, vw_param_det2.nombre as tipo_propietario");
         $this->join('param_detalle', 'param_detalle.id_param_det = vehiculos.n_combustible', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = vehiculos.estado', 'left');
         $this->join('marca_vehiculo', 'marca_vehiculo.id_marca = vehiculos.id_marca', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
+        $this->join('vw_param_det2', 'vw_param_det2.id_param_det = propietarios.tipo_propietario', 'left');
         $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
         $data = $this->findAll();
         return $data;
@@ -51,6 +52,13 @@ class VehiculosModel extends Model
         } else if ($id != 0) {
             $this->where('vehiculos.id_vehiculo', $id);
         }
+        $data = $this->first();
+        return $data;
+    }
+    public function obtenerUltimaOrden(){
+        $this->select('n_orden');
+        $this->orderBy('n_orden', 'desc');
+        $this->limit(1);
         $data = $this->first();
         return $data;
     }

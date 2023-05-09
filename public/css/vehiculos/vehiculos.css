@@ -27,7 +27,7 @@ table {
 
 /* -- DATA TABLE -- */
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-  margin: 0px 8px !important;
+  margin: 0px 0px !important;
 }
 div.dataTables_wrapper div.dataTables_length select {
   width: 65px;
@@ -51,15 +51,16 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 #msgOrden.invalido ,
 #msgPlaca.invalido,
-#spanValid.pasada {
+#spanValid.pasada,
+#spanCliente.invalido {
   color: red;
-  font-weight : 700;
+  font-weight : 600;
 }
 #spanValid.hoy {
-  font-weight : 700;
+  font-weight : 600;
   color: orange;
 }
 #spanValid.entregado {
-  font-weight : 700;
+  font-weight : 600;
   color: green;
 }

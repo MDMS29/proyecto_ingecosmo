@@ -29,8 +29,9 @@ class TercerosModel extends Model
 
     public function obtenerTipoTercero($idTipo)
     {
-        $this->select('id_tercero, razon_social, n_identificacion, nombre_p, nombre_s, apellido_p, apellido_s, tipo_tercero');
+        $this->select('id_tercero, razon_social, n_identificacion, nombre_p, nombre_s, apellido_p, apellido_s, tipo_tercero, estado');
         $this->where('tipo_tercero', $idTipo);
+        // $this->where('estado', 'A');
         $data = $this->findAll();
         return $data;
     }

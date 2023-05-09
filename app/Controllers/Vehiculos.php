@@ -133,4 +133,9 @@ class Vehiculos extends BaseController
         $res = $this->clientes->obtenerTipoTercero($tipo);
         return json_encode($res);
     }
+    public function obtenerUltimaOrden()
+    {
+        $res = $this->vehiculos->obtenerUltimaOrden();
+        return json_encode($res);
+    }
 }
