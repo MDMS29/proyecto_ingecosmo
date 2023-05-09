@@ -3,7 +3,7 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes Eliminados</h2>
     <div class="table-responsive p-2">
-    <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
+        <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -73,6 +73,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    ContadorPRC = 0
+
 
     //Cambiar estado de "Inactivo" a "Activo"
     $('#modalActivarP').on('shown.bs.modal', function(e) {
@@ -95,8 +97,8 @@
         })
     }
 
-     // Tabla   
-     var tableClientes = $("#tableClientes").DataTable({
+    // Tabla   
+    var tableClientes = $("#tableClientes").DataTable({
         ajax: {
             url: '<?= base_url('clientes/obtenerClientes') ?>',
             method: "POST",

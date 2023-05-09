@@ -54,6 +54,7 @@ class Telefonos extends BaseController
             }
         }
     }
+    
     public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
     {
         $array = array();

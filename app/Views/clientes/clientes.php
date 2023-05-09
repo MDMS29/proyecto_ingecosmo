@@ -31,8 +31,7 @@
 
 
 <!-- -----modal----------     -->
-<form method="POST" action="<?php echo base_url(); ?>clientes/insertar" autocomplete="off">
-
+<form autocomplete="off" id="formularioProveedores">
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="body">
@@ -245,7 +244,7 @@
                 dataType: 'json',
 
             }).done(function(res) {
-                $('#tituloModal').text('EDITAR')
+                $('#tituloModal').text('Editar')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -292,6 +291,111 @@
             $('#btnGuardar').text('Agregar')
         }
     }
+
+     //Envio de formulario
+     $('#formularioProveedores').on('submit', function(e) {
+        e.preventDefault()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        nombreP = $('#nombreP').val()
+        nombreS = $('#nombreS').val()
+        apellidoP = $('#apellidoP').val()
+        apellidoS = $('#apellidoS').val()
+        tipoDoc = $('#tipoDoc').val()
+        nIdenti = $('#Nidentificacion').val()
+        direccion = $('#direccion').val()
+        numero = $('#numero').val()
+        correo = $('#correo').val()
+
+        //Control de campos vacios 
+        // recordar poner el length de telefonos y correos 
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, direccion, numero, correo].includes('') ) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('clientes/insertar') ?>',
+                type: 'POST',
+                data: {
+                    id,
+                    tp,
+                    nombreP,
+                    nombreS,
+                    apellidoP,
+                    apellidoS,
+                    tipoDoc,
+                    nIdenti,
+                    direccion,
+                    numero,
+                    correo
+                },
+                success: function(idUser) {
+                    telefonos.forEach(tel => {
+                        //Insertar Telefonos
+                        $.post({
+                            url: '<?php echo base_url('telefonos/insertar') ?>',
+                            data: {
+                                tp,
+                                idUsuario: idUser,
+                                idTele: tel.id,
+                                numero: tel.numero,
+                                prioridad: tel.prioridad,
+                                tipoUsu: 5,
+                                tipoTel: tel.tipo,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                }
+                            }
+                        })
+                    });
+                    correos.forEach(correo => {
+                        //Insertar Correos
+                        $.post({
+                            url: '<?php echo base_url('email/insertar') ?>',
+                            data: {
+                                tp,
+                                idCorreo: correo.id,
+                                idUsuario: idUser,
+                                correo: correo.correo,
+                                prioridad: correo.prioridad,
+                                tipoUsu: 5,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                    setTimeout(() => window.location.href = "<?= base_url('clientes') ?>", 2000)
+                                }
+                            }
+                        })
+                    });
+                    if (tp == 2) {
+                        mostrarMensaje('success', '¡Se ha Actualizado el Cliente!')
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Registrado el Cliente!')
+                    }
+                }
+            }).done(function(data) {
+                limpiarCampos('msgConfir')
+                $('#agregarCliente').modal('hide')
+                tableUsuarios.ajax.reload(null, false); //Recargar tabla
+                $('#btnGuardar').removeAttr('disabled')
+                $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
+                ContadorPRC = 0
+            });
+        };
+    })
 
     $('#btnNo').click(function() {
         $("#modalConfirmaP").modal("hide");
