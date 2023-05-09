@@ -60,8 +60,9 @@ class Vehiculos extends BaseController
     {
         $tp = $this->request->getPost('tp');
         $idVechiculo = $this->request->getPost('id');
-        $orden = $this->request->getPost('orden');
+        $tipoCliente = $this->request->getPost('tipoCliente');
         $cliente = $this->request->getPost('cliente');
+        $orden = $this->request->getPost('orden');
         $placa = $this->request->getPost('placa');
         $marca = $this->request->getPost('marca');
         $nFabrica = $this->request->getPost('nFabrica');
@@ -70,6 +71,7 @@ class Vehiculos extends BaseController
         $combustible = $this->request->getPost('combustible');
         $estado = $this->request->getPost('estado');
         $fechaEntrada = $this->request->getPost('fechaEntrada');
+        $fechaSalida = $this->request->getPost('fechaSalida');
         $usuarioCrea = session('id');
 
         $data = [
@@ -83,6 +85,7 @@ class Vehiculos extends BaseController
             'n_combustible' => $combustible,
             'estado' => $estado,
             'fecha_entrada' => $fechaEntrada,
+            'fecha_salida' => $fechaSalida,
             'usuario_crea' => $usuarioCrea
         ];
 
@@ -91,7 +94,8 @@ class Vehiculos extends BaseController
                 $res = $this->propietario->obtenerPropietario($idVechiculo);
                 $dataPropie = [
                     'id_vehiculo' => $idVechiculo,
-                    'id_tercero' => $cliente
+                    'id_tercero' => $cliente,
+                    'tipo_propietario' => $tipoCliente
                 ];
                 if (empty($res)) {
                     if ($this->propietario->save($dataPropie)) {
@@ -112,7 +116,8 @@ class Vehiculos extends BaseController
                 $idVechiulo = $this->vehiculos->getInsertID();
                 $dataPropie = [
                     'id_vehiculo' => $idVechiulo,
-                    'id_tercero' => $cliente
+                    'id_tercero' => $cliente,
+                    'tipo_propietario' => $tipoCliente
                 ];
                 if ($this->propietario->save($dataPropie)) {
                     return json_encode(1);
@@ -121,5 +126,16 @@ class Vehiculos extends BaseController
                 return json_encode(2);
             }
         }
+    }
+    public function buscarResponsable()
+    {
+        $tipo = $this->request->getPost('idTipo');
+        $res = $this->clientes->obtenerTipoTercero($tipo);
+        return json_encode($res);
+    }
+    public function obtenerUltimaOrden()
+    {
+        $res = $this->vehiculos->obtenerUltimaOrden();
+        return json_encode($res);
     }
 }

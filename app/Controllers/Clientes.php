@@ -96,7 +96,6 @@ class Clientes extends BaseController
             return json_encode($this->clientes->getInsertID());
         }
     }
-
     public function buscarCliente($id,  $nIdenti)
     {
         $array = array();
@@ -130,7 +129,6 @@ class Clientes extends BaseController
             }
         }
     }
-
     public function eliminados()
     {
         $clientes = $this->clientes->select('*')->where('estado', 'I')->where('tipo_tercero', '5')->findAll();
