@@ -1,10 +1,11 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
-<!-- <link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>"> -->
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive p-2">
-        Ocultar Columnas: <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Cargo</a>
+        </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -136,7 +137,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -187,7 +188,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -202,7 +203,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -244,7 +245,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -281,7 +282,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-
     var ContadorPRC = 0;
     var contador = 0;
     var contadorCorreo = 0;
@@ -289,7 +289,25 @@
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validCorreo
-
+    var objCorreo = {
+        id: 0,
+        correo: '',
+        prioridad: ''
+    }
+    var objTelefono = {
+        id: 0,
+        numero: '',
+        tipo: '',
+        prioridad: ''
+    }
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
     //Mostrar mensajes de SwalFire
     function mostrarMensaje(tipo, msg) {
         Swal.fire({
@@ -300,7 +318,6 @@
             timer: 1500
         })
     }
-
     // Tabla de trabajadores  
     var tableTrabajadores = $("#tableTrabajadores").DataTable({
         ajax: {
@@ -367,12 +384,21 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
-
     //Limpiar campos de telefonos y correos
-    function limpiarCampos(input1, input2, input3) {
+    function limpiarCampos(input1, input2, input3, accion) {
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo()
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono()
+        }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
+        $('#msgConfirRes').text('')
+        $('#msgConfir').text('')
     }
     //Insertar y editar Trabajador
     function seleccionarTrabajador(id, tp) {
@@ -382,7 +408,8 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchTra/') ?>" + id + "/" + 0,
                 dataType: 'json',
-                success: function(res) {
+                
+            }).done(function(res) {
                     $('#tituloModal').text('Editar Trabajador')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_trabajador'])
@@ -413,8 +440,7 @@
                             guardarCorreo()
                         }
                     })
-                }
-            })
+                })
         } else {
             //Insertar datos
             $('#tituloModal').text('Agregar Trabajador')
@@ -487,14 +513,13 @@
         nIdenti = $('#nIdenti').val()
         direccion = $('#direccion').val()
         cargo = $('#cargo').val()
-        telefono = $('#telefono').val()
-        email = $('#email').val()
         //Control de campos vacios
         if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
-            $.post({
+            $.ajax({
                 url: '<?php echo base_url('trabajadores/insertar') ?>',
+                type: 'POST',
                 data: {
                     id,
                     tp,
@@ -515,11 +540,12 @@
                             url: '<?php echo base_url('telefonos/insertar') ?>',
                             data: {
                                 tp: tp,
+                                idTele: tel.id,
                                 idUsuario: idTrab,
                                 numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 6,
-                                tipoTel: 3,
+                                tipoTel:  tel.tipo,
                             },
                             success: function(res) {
                                 if (res != 1) {
@@ -534,6 +560,7 @@
                             url: '<?php echo base_url('email/insertar') ?>',
                             data: {
                                 tp,
+                                idCorreo: correo.id,
                                 idUsuario: idTrab,
                                 correo: correo.correo,
                                 prioridad: correo.prioridad,
@@ -552,15 +579,30 @@
                     } else {
                         mostrarMensaje('success', '¡Se ha Registrado el Trabajador!')
                     }
-                    setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
                 }
+            }).done(function(data) {
+                limpiarCampos('msgConfir')
+                $('#agregarTrabajador').modal('hide')
+                tableTrabajadores.ajax.reload(null, false); //Recargar tabla
+                $('#btnGuardar').removeAttr('disabled');
+                $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
+                ContadorPRC = 0
             });
         };
     })
-
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
-
     const numero = $('#telefonoAdd').val()
     const tipo = $('#tipoTele').val()
     const prioridad = $('#prioridad').val()
@@ -568,9 +610,9 @@
     if ([numero, prioridad].includes('') || validTel == false) {
         return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
     }
-    contador += 1
+    
     let info = {
-        id: [editTel].includes('') || edit == 0 ? `'${contador}111e'` : edit,
+        id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
         tipo,
         numero,
         prioridad
@@ -598,7 +640,6 @@
     }
 
     })
-
     //Funcion para buscar el correo o el telefono
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
@@ -618,7 +659,6 @@
             }
         })
     }
-
     //Al escribir validar que el numero no este registrado
     $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
@@ -648,6 +688,7 @@
         }
         $('#bodyTel').html(cadena)
     }
+    //Editar telefono
     function editarTelefono(id) {
         const fila = $(`#${id}`);
         const numero = fila.find('td').eq(0)
@@ -719,7 +760,6 @@
             correos.push(info)
             return guardarCorreo()
         }
-
     })
     //Al escribir validar que el correo no este registrado
     $('#correoAdd').on('input', function(e) {
@@ -749,8 +789,8 @@
         }
         $('#bodyCorre').html(cadena)
     }
-        //Editar Correo
-        function editarCorreo(id) {
+    //Editar Correo
+    function editarCorreo(id) {
         const fila = $(`#${id}`);
         const correo = fila.find('td').eq(0)
         const prioridad = fila.find('td').eq(1)
@@ -784,7 +824,6 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
-
     //Cambiar estado de "Activo" a "Eliminado" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
