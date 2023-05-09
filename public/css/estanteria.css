@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alike&family=Noto+Serif&family=Nunito:wght@300&display=swap');
 
-.estanteria {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-
-}
 
 .titulo {
   color: #000000;
@@ -125,7 +116,7 @@
   width: 80px;
   height: 70px;
   margin-right: 0;
-
+  
 }
 
 .imgAgregar{
@@ -165,6 +156,16 @@
   width: 25rem;
   height: 10rem;
   margin: 15px;
+}
+
+.estanteria {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
 }
 
 .contenidoCardF {

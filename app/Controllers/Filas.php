@@ -61,13 +61,13 @@ class Filas extends BaseController
         }
     }
 
-     public function obtenerMaterialesFila($fila)
-     {
-         $materiales = $this->material->obtenerMaterialesFila($fila);
-         if (!empty($materiales)) {
-             return json_encode($materiales);
-         }
-     }
+    public function obtenerMaterialesFila($fila)
+    {
+        $materiales = $this->material->obtenerMaterialesFila($fila);
+        if (!empty($materiales)) {
+            return json_encode($materiales);
+        }
+    }
 
     public function insertar()
     {
