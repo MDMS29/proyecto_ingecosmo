@@ -51,7 +51,7 @@ class Clientes extends BaseController
         $nombre_s = $this->request->getPost('nombreS');
         $apellido_p = $this->request->getPost('apellidoP');
         $apellido_s = $this->request->getPost('apellidoS');
-        $n_identificacion = $this->request->getPost('Nidentificacion');
+        $nIdenti = $this->request->getPost('Nidentificacion');
         $direccion = $this->request->getPost('direccion');
         $numero = $this->request->getPost('numero');
         $correo = $this->request->getPost('correo');
@@ -66,7 +66,7 @@ class Clientes extends BaseController
                     'nombre_s' =>$nombre_s,
                     'apellido_p' =>$apellido_p,
                     'apellido_s' =>$apellido_s,
-                    'n_identificacion' =>$n_identificacion,
+                    'n_identificacion' =>$nIdenti,
                     'direccion' =>$direccion,
                     'numero' => $numero,
                     'correo' =>$correo,
@@ -82,7 +82,7 @@ class Clientes extends BaseController
                     'nombre_s' =>$nombre_s,
                     'apellido_p' =>$apellido_p,
                     'apellido_s' =>$apellido_s,
-                    'n_identificacion' =>$n_identificacion,
+                    'n_identificacion' =>$nIdenti,
                     'direccion' =>$direccion,
                     'numero' => $numero,
                     'correo' =>$correo,
