@@ -108,7 +108,37 @@
     var inputRazonSocial = 0;
     var inputNit = 0;
     var validRazonSocial;
-    var validNit;
+    var validNi;
+
+    function seleccionarProveedor(id, tp) {
+        if (tp == 2) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0,
+                dataType: 'json',
+                success: function(res) {
+                    $('#tituloModal').text('Editar')
+                    $('#tp').val(2)
+                    $('#id').val(res[0]['id_tercero'])
+                    $('#RazonSocial').val(res[0]['razon_social'])
+                    $('#nit').val(res[0]['n_identificacion'])
+                    $('#direccion').val(res[0]['direccion'])
+                    $('#btnGuardar').text('Actualizar')
+                }
+            })
+
+        } else {
+            //Insertar datos
+            $('#tituloModal').text('Agregar')
+            $('#tp').val(1)
+            $('#id').val(0)
+            $('#RazonSocial').val('')
+            $('#nit').val('')
+            $('#direccion').val('')
+            $('#btnGuardar').text('Agregar')
+
+        }
+    }
 
 
     //Cambiar estado de "Activo" a "Inactivo" 
@@ -210,16 +240,20 @@
                 $('#agregarProveedor').modal('hide')
                 tableProveedores.ajax.reload(null, false); //Recargar tabla
                 $('#btnGuardar').removeAttr('disabled') //jumm
-                ContadorPRC = 0
+                ContadorPRC = 0;
+                validRazonSocial == true;
+                validNit == true;
+
             });
         };
+
     })
 
     //Validacion de Razon Social
     function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('srchPro/') ?>" + 0 + "/" + inputRazonSocial,
+            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -247,16 +281,15 @@
                 dataType: 'JSON',
                 success: function(res) {
                     if (res[0]['RazonSocial'] == inputRazonSocial) {
-                        $('#msgRaSo').text('')
-                        validIdent = true
+                        $('#msgNit').text('')
+                        validRazonSocial = true
                     } else {
-                        buscarRazonSocial(0, inputRazonSocial)
+                        buscarRazonSocial(0, inputNit)
                     }
                 }
             })
         }
     })
-
     //Validacion de Nit
     function buscarNit(id, inputNit) {
         $.ajax({
@@ -266,10 +299,10 @@
             success: function(res) {
                 if (res[0] == null) {
                     $('#msgNit').text('')
-                    validRazonNit = true
+                    validNit = true
                 } else if (res[0] != null) {
                     $('#msgNit').text('* NIT ya existente *')
-                    validRazonNit = false
+                    validNit = false
                 }
             }
         })
@@ -290,7 +323,7 @@
                 success: function(res) {
                     if (res[0]['nit'] == inputNit) {
                         $('#msgNit').text('')
-                        validIdent = true
+                        validNit = true
                     } else {
                         buscarNit(0, inputNit)
                     }
@@ -300,34 +333,7 @@
     })
 
 
-    function seleccionarProveedor(id, tp) {
-        if (tp == 2) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchPro/') ?>" + id + "/" + 0,
-                dataType: 'json',
-                success: function(res) {
-                    $('#tituloModal').text('EDITAR')
-                    $('#tp').val(2)
-                    $('#id').val(res[0]['id_tercero'])
-                    $('#RazonSocial').val(res[0]['razon_social'])
-                    $('#nit').val(res[0]['n_identificacion'])
-                    $('#direccion').val(res[0]['direccion'])
-                    $('#btnGuardar').text('Actualizar')
-                }
-            })
-        } else {
-            //Insertar datos
-            $('#tituloModal').text(`Agregar`)
-            $('#tp').val(1)
-            $('#id').val(0)
-            $('#RazonSocial').val('')
-            $('#nit').val('')
-            $('#direccion').val('')
-            $('#btnGuardar').text('Agregar')
 
-        }
-    }
 
     $('#btnNo').click(function() {
         $("#modalConfirmarP").modal("hide");

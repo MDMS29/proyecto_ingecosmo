@@ -56,8 +56,8 @@ class TercerosModel extends Model
     {
         $this->select("terceros.*, param_detalle.resumen as tipoDoc, telefonos.numero as numero, email.email as correo, concat(nombre_p, ' ', nombre_s, ' ', apellido_p, ' ', apellido_s) as nombreCompleto");
         $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
-        $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
-        $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
+        // $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
+        // $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         $this->where('terceros.tipo_tercero', '5');
         $this->where('terceros.estado', $estado);
         $data = $this->findAll();
@@ -67,20 +67,20 @@ class TercerosModel extends Model
     public function buscarCliente($id, $nIdenti)
     {
         if ($id != 0) {
-            $this->select('terceros.*, telefonos.*, email.*,param_detalle. resumen as tipoDoc, telefonos.numero as numero, email.email as correo');
+            $this->select('terceros.*');
             $this->where('id_tercero', $id);
             $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
-            $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
-            $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
+            // $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
+            // $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         } elseif ($nIdenti != 0) {
-            $this->select('terceros.*, telefonos.*, email.*,param_detalle. resumen as tipoDoc, telefonos.numero as numero, email.email as correo');
+            $this->select('terceros.*');
             $this->where('n_identificacion', $nIdenti);
             $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '5');
-            $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
-            $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
+            // $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
+            // $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         } elseif ($id != 0 && $nIdenti != 0) {
-            $this->select('terceros.*, telefonos.*, email.*,param_detalle. resumen as tipoDoc, telefonos.numero as numero, email.email as correo');
+            $this->select('terceros.*');
             $this->where('id_tercero', $id);
             $this->where('n_identificacion', $nIdenti);
         }

@@ -31,7 +31,7 @@
 
 
 <!-- -----modal----------     -->
-<form autocomplete="off" id="formularioProveedores">
+<form autocomplete="off" id="formularioClientes">
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="body">
@@ -85,8 +85,8 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="message-text">No. Documento:</label>
-                                    <input class="form-control" id="Nidentificacion" name="Nidentificacion"></input>
+                                    <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
+                                    <input class="form-control" id="nIdenti" name="nIdenti"></input>
                                 </div>
                             </div>
 
@@ -96,14 +96,20 @@
                                     <input class="form-control" id="direccion" name="direccion"></input>
                                 </div>
 
-                                <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="message-text">Telefono:</label>
-                                    <input class="form-control" id="numero" name="numero"></input>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="telefono" class="col-form-label">Telefono:</label>
+                                    <div class="d-flex">
+                                        <input type="number" name="numero" class="form-control" id="numero" disabled>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                                    </div>
                                 </div>
 
-                                <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="message-text">Correo:</label>
-                                    <input class="form-control" id="correo" name="correo"></input>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="email" class="col-form-label">Email:</label>
+                                    <div class="d-flex">
+                                        <input type="email" name="email" class="form-control" id="email" disabled>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -119,6 +125,132 @@
     </div>
 </form>
 
+
+<!-- MODAL AGREGAR - EDITAR TELEFONO -->
+<div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                </div>
+                <input type="text" name="editTele" id="editTele" hidden>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
+                            <div class=" flex-grow-1">
+                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <div>
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <small id="msgTel" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class=" flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <?php foreach ($tipoTele as $tipe) { ?>
+                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <option value="P">Primaria</option>
+                                    <option value="S">Secundaria</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Prioridad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="4">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR - EDITAR CORREO -->
+<div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
+            </div>
+            <input type="text" name="editCorreo" id="editCorreo" hidden>
+
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
+                        <div class="d-flex gap-2" style="width: 100%;">
+                            <label for="correoAdd" class="col-form-label">Correo:</label>
+                            <div>
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                <small id="msgCorreo" class="invalido"></small>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2" style="width: 100%;">
+                            <label for="prioridad" class="col-form-label">Prioridad:</label>
+                            <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
+                                <option selected value="">-- Seleccione --</option>
+                                <option value="P">Primaria</option>
+                                <option value="S">Secundaria</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Correo</th>
+                                    <th>Prioridad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyCorre">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY CORREOS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -127,7 +259,7 @@
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
                     <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
-                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="contenidoEliminarP">
@@ -149,7 +281,358 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // variables
-    var ContadorPRC = 0
+    var ContadorPRC = 0;
+    var contador = 0;
+    var contadorCorreo = 0;
+    var inputIden = 0;
+    let telefonos = [] //Telefonos del usuario.
+    let correos = [] //Correos del usuario.
+    var validCorreo
+    var objCorreo = {
+        id: 0,
+        correo: '',
+        prioridad: ''
+    }
+    var objTelefono = {
+        id: 0,
+        numero: '',
+        tipo: '',
+        prioridad: ''
+    }
+
+    //Limpiar campos de telefonos y correos
+    function limpiarCampos(input1, input2, input3, accion) {
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo()
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono()
+        }
+        $(`#${input1}`).val('')
+        $(`#${input2}`).val('')
+        $(`#${input3}`).val('')
+    }
+
+    //Insertar y editar Trabajador
+    function seleccionarTrabajador(id, tp) {
+        if (tp == 2) {
+            //Actualizar datos
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
+                dataType: 'json',
+
+            }).done(function(res) {
+                $('#tituloModal').text('Editar Cliente')
+                $('#tp').val(2)
+                $('#id').val(res[0]['id_tercero'])
+                $('#nombreP').val(res[0]['nombre_p'])
+                $('#nombreS').val(res[0]['nombre_s'])
+                $('#apellidoP').val(res[0]['apellido_p'])
+                $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tipoDoc').val(1)
+                $('#nIdenti').val(res[0]['n_identificacion'])
+                $('#direccion').val(res[0]['direccion'])
+                $('#btnGuardar').text('Actualizar')
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        guardarTelefono()
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 5,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        guardarCorreo()
+                    }
+                })
+            })
+        } else {
+            //Insertar datos
+            $('#tituloModal').text('Agregar Cliente')
+            $('#tp').val(1)
+            $('#id').val(0)
+            $('#nombreP').val('')
+            $('#nombreS').val('')
+            $('#apellidoP').val('')
+            $('#apellidoS').val('')
+            $('#tipoDoc').val(1)
+            $('#nIdenti').val('')
+            $('#numero').val('')
+            $('#email').val('')
+            $('#direccion').val('')
+            $('#btnGuardar').text('Agregar')
+        }
+    }
+
+    //Envio de formulario
+    $('#formularioClientes').on('submit', function(e) {
+        e.preventDefault()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        nombreP = $('#nombreP').val()
+        nombreS = $('#nombreS').val()
+        apellidoP = $('#apellidoP').val()
+        apellidoS = $('#apellidoS').val()
+        tipoDoc = $('#tipoDoc').val()
+        nIdenti = $('#nIdenti').val()
+        direccion = $('#direccion').val()
+        //Control de campos vacios
+        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('clientes/insertar') ?>',
+                type: 'POST',
+                data: {
+                    id,
+                    tp,
+                    nombreP,
+                    nombreS,
+                    apellidoP,
+                    apellidoS,
+                    tipoDoc,
+                    nIdenti,
+                    direccion,
+                    cargo,
+                    telefonos
+                },
+                success: function(idTrab) {
+                    telefonos.forEach(tel => {
+                        //Insertar Telefonos
+                        $.post({
+                            url: '<?php echo base_url('telefonos/insertar') ?>',
+                            data: {
+                                tp: tp,
+                                idTele: tel.id,
+                                idUsuario: idTrab,
+                                numero: tel.numero,
+                                prioridad: tel.prioridad,
+                                tipoUsu: 5,
+                                tipoTel: tel.tipo,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                }
+                            }
+                        })
+                    });
+                    correos.forEach(correo => {
+                        //Insertar Correos
+                        $.post({
+                            url: '<?php echo base_url('email/insertar') ?>',
+                            data: {
+                                tp,
+                                idCorreo: correo.id,
+                                idUsuario: idTrab,
+                                correo: correo.correo,
+                                prioridad: correo.prioridad,
+                                tipoUsu: 5,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                    setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
+                                }
+                            }
+                        })
+                    });
+                    if (tp == 2) {
+                        mostrarMensaje('success', '¡Se ha Actualizado el Trabajador!')
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Registrado el Trabajador!')
+                    }
+                }
+            }).done(function(data) {
+                $('#agregarCliente').modal('hide')
+                tableClientes.ajax.reload(null, false); //Recargar tabla
+                $('#btnGuardar').removeAttr('disabled');
+                $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
+                ContadorPRC = 0
+            });
+        };
+    })
+
+
+    // Agregar Telefono a la tabla
+    $('#btnAddTel').on('click', function(e) {
+        const numero = $('#telefonoAdd').val()
+        const tipo = $('#tipoTele').val()
+        const prioridad = $('#prioridad').val()
+        const editTel = $('#editTele').val();
+        if ([numero, prioridad].includes('') || validTel == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        }
+
+        let info = {
+            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
+            tipo,
+            numero,
+            prioridad
+        }
+        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+        let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
+        $('#telefonoAdd').val('')
+        $('#tipoTele').val('')
+        $('#prioridad').val('')
+        $('#editTele').val(0);
+        if (filtroTel.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
+        }
+        if (info.prioridad == 'S') {
+            telefonos.push(info)
+            return guardarTelefono()
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+
+        } else {
+            telefonos.push(info)
+            return guardarTelefono()
+        }
+
+    })
+
+
+    //Funcion para buscar el correo o el telefono
+    function buscarCorreoTel(url, valor, inputName, tipo) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 5, //url, valor, idUsuario, tipoUsuario
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $(`#${inputName}`).text('')
+                    validTel = true
+                    validCorreo = true
+                } else if (res[0] != null) {
+                    $(`#${inputName}`).text(`* Este ${tipo} ya esta registrado *`)
+                    validTel = false
+                    validCorreo = false
+                }
+            }
+        })
+    }
+
+    //Al escribir validar que el numero no este registrado
+    $('#telefonoAdd').on('input', function(e) {
+        numero = $('#telefonoAdd').val()
+        buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
+    })
+
+
+
+    // Funcion para mostrar telefono en la tabla.
+    function guardarTelefono() {
+        $('#numero').val(telefonos[0]?.numero)
+        var cadena
+        if (telefonos.length == 0) {
+            cadena += ` <tr class="text-center">
+            <td colspan="4">NO HAY TELEFONOS</td>
+            </tr>`
+            $('#bodyTel').html(cadena)
+        } else {
+            for (let i = 0; i < telefonos.length; i++) {
+                cadena += ` <tr class="text-center" id=${telefonos[i].id}>
+                                <td>${telefonos[i].numero}</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>
+                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
+                                </td>
+                            </tr>`
+            }
+        }
+        $('#bodyTel').html(cadena)
+    }
+
+
+    //Editar telefono
+    function editarTelefono(id) {
+        const fila = $(`#${id}`);
+        const numero = fila.find('td').eq(0)
+        const tipo = fila.find('td').eq(1)
+        const prioridad = fila.find('td').eq(2)
+        $('#telefonoAdd').val(numero.text());
+        $('#tipoTele').val(tipo.attr('id'));
+        $('#prioridad').val(prioridad.attr('id'));
+        $('#editTele').val(fila.attr('id'));
+        objTelefono = {
+            id: fila.attr('id'),
+            numero: numero.text(),
+            tipo: tipo.attr('id'),
+            prioridad: prioridad.attr('id')
+        }
+        telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
+        guardarTelefono()
+    }
+
+    //Eliminar telefono de la tabla
+    function eliminarTel(id) {
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('telefonos/eliminarTelefono/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        return mostrarMensaje('success', '¡Se ha eliminado el telefono!')
+                    }
+                }
+            })
+        }
+        telefonos = telefonos.filter(tel => tel.id != id)
+        guardarTelefono() //Actualizar tabla
+    }
+
+    // Funcion para mostrar correos en la tabla.
+    function guardarCorreo() {
+        $('#email').val(correos[0]?.correo)
+        var cadena
+        if (correos.length == 0) {
+            cadena += ` <tr class="text-center">
+                            <td colspan="3">NO HAY CORREOS</td>
+                        </tr>`
+            $('#bodyCorre').html(cadena)
+        } else {
+            for (let i = 0; i < correos.length; i++) {
+                cadena += ` <tr class="text-center" id=${correos[i].id}>
+                                <td>${correos[i].correo}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>
+                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Correo">
+                                </td>
+                            </tr>`
+            }
+        }
+        $('#bodyCorre').html(cadena)
+    }
+
 
     //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmaP').on('shown.bs.modal', function(e) {
@@ -234,168 +717,6 @@
 
     });
 
-    //Insertar y editar Usuario
-    function seleccionarCliente(id, tp) {
-        if (tp == 2) {
-            //Actualizar datos
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
-                dataType: 'json',
-
-            }).done(function(res) {
-                $('#tituloModal').text('Editar')
-                $('#tp').val(2)
-                $('#id').val(res[0]['id_tercero'])
-                $('#nombreP').val(res[0]['nombre_p'])
-                $('#nombreS').val(res[0]['nombre_s'])
-                $('#apellidoP').val(res[0]['apellido_p'])
-                $('#apellidoS').val(res[0]['apellido_s'])
-                $('#tipoDoc').val(1)
-                $('#Nidentificacion').val(res[0]['n_identificacion'])
-                $('#direccion').val(res[0]['direccion'])
-                $('#numero').val(res[0]['numero'])
-                $('#correo').val(res[0]['correo'])
-                $('#btnGuardar').text('Actualizar')
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('telefonos/obtenerTelefonosCliente/') ?>' + id + '/' + 5,
-                    dataType: 'json',
-                    success: function(data) {
-                        telefonos = data[0]
-                        guardarTelefono()
-                    }
-                })
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('email/obtenerEmailCliente/') ?>' + id + '/' + 5,
-                    dataType: 'json',
-                    success: function(data) {
-                        correos = data[0]
-                        guardarCorreo()
-                    }
-                })
-            })
-        } else {
-            //Insertar datos
-            $('#tituloModal').text('Agregar')
-            $('#nombreP').val('')
-            $('#nombreS').val('')
-            $('#apellidoP').val('')
-            $('#apellidoS').val('')
-            $('#tipoDoc').val('')
-            $('#Nidentificacion').val('')
-            $('#direccion').val('')
-            $('#numero').val('')
-            $('#correo').val('')
-            $('#btnGuardar').text('Agregar')
-        }
-    }
-
-     //Envio de formulario
-     $('#formularioProveedores').on('submit', function(e) {
-        e.preventDefault()
-        tp = $('#tp').val()
-        id = $('#id').val()
-        nombreP = $('#nombreP').val()
-        nombreS = $('#nombreS').val()
-        apellidoP = $('#apellidoP').val()
-        apellidoS = $('#apellidoS').val()
-        tipoDoc = $('#tipoDoc').val()
-        nIdenti = $('#Nidentificacion').val()
-        direccion = $('#direccion').val()
-        numero = $('#numero').val()
-        correo = $('#correo').val()
-
-        //Control de campos vacios 
-        // recordar poner el length de telefonos y correos 
-        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, direccion, numero, correo].includes('') ) {
-            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else {
-            $.ajax({
-                url: '<?php echo base_url('clientes/insertar') ?>',
-                type: 'POST',
-                data: {
-                    id,
-                    tp,
-                    nombreP,
-                    nombreS,
-                    apellidoP,
-                    apellidoS,
-                    tipoDoc,
-                    nIdenti,
-                    direccion,
-                    numero,
-                    correo
-                },
-                success: function(idUser) {
-                    telefonos.forEach(tel => {
-                        //Insertar Telefonos
-                        $.post({
-                            url: '<?php echo base_url('telefonos/insertar') ?>',
-                            data: {
-                                tp,
-                                idUsuario: idUser,
-                                idTele: tel.id,
-                                numero: tel.numero,
-                                prioridad: tel.prioridad,
-                                tipoUsu: 5,
-                                tipoTel: tel.tipo,
-                            },
-                            success: function(res) {
-                                if (res != 1) {
-                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                }
-                            }
-                        })
-                    });
-                    correos.forEach(correo => {
-                        //Insertar Correos
-                        $.post({
-                            url: '<?php echo base_url('email/insertar') ?>',
-                            data: {
-                                tp,
-                                idCorreo: correo.id,
-                                idUsuario: idUser,
-                                correo: correo.correo,
-                                prioridad: correo.prioridad,
-                                tipoUsu: 5,
-                            },
-                            success: function(res) {
-                                if (res != 1) {
-                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                    setTimeout(() => window.location.href = "<?= base_url('clientes') ?>", 2000)
-                                }
-                            }
-                        })
-                    });
-                    if (tp == 2) {
-                        mostrarMensaje('success', '¡Se ha Actualizado el Cliente!')
-                    } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Cliente!')
-                    }
-                }
-            }).done(function(data) {
-                limpiarCampos('msgConfir')
-                $('#agregarCliente').modal('hide')
-                tableUsuarios.ajax.reload(null, false); //Recargar tabla
-                $('#btnGuardar').removeAttr('disabled')
-                $('#editTele').val('');
-                objCorreo = {
-                    id: 0,
-                    correo: '',
-                    prioridad: ''
-                }
-                objTelefono = {
-                    id: 0,
-                    numero: '',
-                    tipo: '',
-                    prioridad: ''
-                }
-                ContadorPRC = 0
-            });
-        };
-    })
 
     $('#btnNo').click(function() {
         $("#modalConfirmaP").modal("hide");

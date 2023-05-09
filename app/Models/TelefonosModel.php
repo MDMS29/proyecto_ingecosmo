@@ -45,25 +45,4 @@ class TelefonosModel extends Model
         return $data;
     }
 
-
-    // -----clientes--------
-    public function obtenerTelefonoCliente()
-    {
-
-        $this->select('telefono.*');
-        $this->where('tipo_usuario', '5');
-        $data = $this->findAll();
-        return $data;
-    } 
-    
-    
-    // -----clientes--------
-    public function obtenerTelefonosCliente($id, $tipoUsuario)
-    {
-        $this->select('id_telefono as id, numero, prioridad');
-        $this->where('id_usuario', $id);
-        $this->where('tipo_usuario', $tipoUsuario);
-        $data = $this->findAll();
-        return $data;
-    }
 }

@@ -41,59 +41,60 @@ class Clientes extends BaseController
         echo view('/clientes/clientes', $data);
     }
 
-
     public function insertar()
     {
 
         $tp = $this->request->getPost('tp');
         $idCLiente = $this->request->getPost('id');
-        $nombre_p = $this->request->getPost('nombreP');
+        $nombre_p= $this->request->getPost('nombreP');
         $nombre_s = $this->request->getPost('nombreS');
         $apellido_p = $this->request->getPost('apellidoP');
         $apellido_s = $this->request->getPost('apellidoS');
-        $nIdenti = $this->request->getPost('Nidentificacion');
+        $nIdenti = $this->request->getPost('nIdenti');
         $direccion = $this->request->getPost('direccion');
         $numero = $this->request->getPost('numero');
-        $correo = $this->request->getPost('correo');
+        $email = $this->request->getPost('email');
         $tipoTercero = 5;
         $tipoDocumento = 1;
 
-            if ($tp == 2) {
-               
+
+
+        if ($tp == 2) {
+            //Actualizar datos
             $res = $this->clientes->buscarCliente($idCLiente, 0);
             $clienteUpdate = [
-                    'nombre_p' =>$nombre_p,
-                    'nombre_s' =>$nombre_s,
-                    'apellido_p' =>$apellido_p,
-                    'apellido_s' =>$apellido_s,
-                    'n_identificacion' =>$nIdenti,
-                    'direccion' =>$direccion,
-                    'numero' => $numero,
-                    'correo' =>$correo,
-                    'tipo_tercero' => $tipoTercero,
-                    'tipo_doc' => $tipoDocumento
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombre_p,
+                'nombre_s' => $nombre_s,
+                'apellido_p' => $apellido_p,
+                'apellido_s' => $apellido_s,
+                'direccion' => $direccion,
+                'numero' => $numero,
+                'email' => $email,
+                'tipo_tercero' => $tipoTercero,
+                'tipo_doc' => $tipoDocumento
             ];
             $this->clientes->update($idCLiente, $clienteUpdate);
             return $idCLiente;
-
-            } else {
-                $clienteSave = [
-                    'nombre_p' =>$nombre_p,
-                    'nombre_s' =>$nombre_s,
-                    'apellido_p' =>$apellido_p,
-                    'apellido_s' =>$apellido_s,
-                    'n_identificacion' =>$nIdenti,
-                    'direccion' =>$direccion,
-                    'numero' => $numero,
-                    'correo' =>$correo,
-                    'tipo_tercero' => $tipoTercero,
-                    'tipo_doc' => $tipoDocumento
-                ];
-                $this->clientes->save($clienteSave);
-                return json_encode($this->clientes->getInsertID());
-            }
-            return redirect()->to(base_url('/clientes'));
-        
+        } else {
+            //Insertar datos
+            //Si la respuesta esta vacia - guardar
+            $clienteSave = [
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombre_p,
+                'nombre_s' => $nombre_s,
+                'apellido_p' => $apellido_p,
+                'apellido_s' => $apellido_s,
+                'direccion' => $direccion,
+                'numero' => $numero,
+                'email' => $email,
+                'tipo_tercero' => $tipoTercero,
+                'tipo_doc' => $tipoDocumento
+                
+            ];
+            $this->clientes->save($clienteSave);
+            return json_encode($this->clientes->getInsertID());
+        }
     }
 
     public function buscarCliente($id,  $nIdenti)

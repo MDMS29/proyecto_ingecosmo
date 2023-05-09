@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-               
+
             </tbody>
         </table>
     </div>
@@ -408,39 +408,39 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchTra/') ?>" + id + "/" + 0,
                 dataType: 'json',
-                
+
             }).done(function(res) {
-                    $('#tituloModal').text('Editar Trabajador')
-                    $('#tp').val(2)
-                    $('#id').val(res[0]['id_trabajador'])
-                    $('#nombreP').val(res[0]['nombre_p'])
-                    $('#nombreS').val(res[0]['nombre_s'])
-                    $('#apellidoP').val(res[0]['apellido_p'])
-                    $('#apellidoS').val(res[0]['apellido_s'])
-                    $('#tipoDoc').val(1)
-                    $('#nIdenti').val(res[0]['n_identificacion'])
-                    $('#direccion').val(res[0]['direccion'])
-                    $('#cargo').val(res[0]['id_cargo'])
-                    $('#btnGuardar').text('Actualizar')
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,
-                        dataType: 'json',
-                        success: function(data) {
-                            telefonos = data[0]
-                            guardarTelefono()
-                        }
-                    })
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 6,
-                        dataType: 'json',
-                        success: function(data) {
-                            correos = data[0]
-                            guardarCorreo()
-                        }
-                    })
+                $('#tituloModal').text('Editar Trabajador')
+                $('#tp').val(2)
+                $('#id').val(res[0]['id_trabajador'])
+                $('#nombreP').val(res[0]['nombre_p'])
+                $('#nombreS').val(res[0]['nombre_s'])
+                $('#apellidoP').val(res[0]['apellido_p'])
+                $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tipoDoc').val(1)
+                $('#nIdenti').val(res[0]['n_identificacion'])
+                $('#direccion').val(res[0]['direccion'])
+                $('#cargo').val(res[0]['id_cargo'])
+                $('#btnGuardar').text('Actualizar')
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        guardarTelefono()
+                    }
                 })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 6,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        guardarCorreo()
+                    }
+                })
+            })
         } else {
             //Insertar datos
             $('#tituloModal').text('Agregar Trabajador')
@@ -545,7 +545,7 @@
                                 numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 6,
-                                tipoTel:  tel.tipo,
+                                tipoTel: tel.tipo,
                             },
                             success: function(res) {
                                 if (res != 1) {
@@ -603,41 +603,41 @@
     })
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
-    const numero = $('#telefonoAdd').val()
-    const tipo = $('#tipoTele').val()
-    const prioridad = $('#prioridad').val()
-    const editTel = $('#editTele').val();
-    if ([numero, prioridad].includes('') || validTel == false) {
-        return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-    }
-    
-    let info = {
-        id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
-        tipo,
-        numero,
-        prioridad
-    }
-    let filtro = telefonos.filter(tel => tel.prioridad == 'P')
-    let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
-    $('#telefonoAdd').val('')
-    $('#tipoTele').val('')
-    $('#prioridad').val('')
-    $('#editTele').val(0);
-    if (filtroTel.length > 0) {
-        filtro = []
-        return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
-    }
-    if (info.prioridad == 'S') {
-        telefonos.push(info)
-        return guardarTelefono()
-    } else if (filtro.length > 0) {
-        filtro = []
-        return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+        const numero = $('#telefonoAdd').val()
+        const tipo = $('#tipoTele').val()
+        const prioridad = $('#prioridad').val()
+        const editTel = $('#editTele').val();
+        if ([numero, prioridad].includes('') || validTel == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        }
 
-    } else {
-        telefonos.push(info)
-        return guardarTelefono()
-    }
+        let info = {
+            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
+            tipo,
+            numero,
+            prioridad
+        }
+        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+        let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
+        $('#telefonoAdd').val('')
+        $('#tipoTele').val('')
+        $('#prioridad').val('')
+        $('#editTele').val(0);
+        if (filtroTel.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
+        }
+        if (info.prioridad == 'S') {
+            telefonos.push(info)
+            return guardarTelefono()
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+
+        } else {
+            telefonos.push(info)
+            return guardarTelefono()
+        }
 
     })
     //Funcion para buscar el correo o el telefono
