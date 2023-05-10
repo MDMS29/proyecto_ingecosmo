@@ -52,15 +52,16 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="tipoCliente" class="col-form-label">Tipo Cliente:</label>
+                                    <label for="tipoCliente" class="col-form-label">Tipo Responsable:</label>
                                     <select class="form-select form-select" name="tipoCliente" id="tipoCliente">
                                         <option selected value="">-- Seleccione --</option>
-                                        <option value="5">Natural</option>
-                                        <option value="56">Jurídico</option>
+                                        <?php foreach ($tipoClientes as $cliente) { ?>
+                                            <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="cliente" class="col-form-label">Cliente:</label>
+                                    <label for="cliente" class="col-form-label">Responsable:</label>
                                     <select class="form-select form-select" name="cliente" id="cliente">
                                         <!-- SELECT DINAMICO -->
                                     </select>
@@ -74,7 +75,8 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="placa" class="col-form-label">Placa:</label>
-                                    <input type="text" minlength="6" maxlength="8" class="form-control" name="placa" id="placa">
+                                    <input type="text" minlength="6" maxlength="8" class="form-control text-uppercase" name="placa" id="placa">
+                                    <input type="hidden" id="placaHidden">
                                     <small id="msgPlaca" class="invalido"></small>
                                 </div>
                             </div>
@@ -150,6 +152,7 @@
                                     <div class="d-flex">
                                         <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
+                                    <small id="msgFecha" class="invalido"></small>
                                 </div>
                             </div>
                         </form>
@@ -200,6 +203,7 @@
 <script>
     var validOrden = true
     var validPlaca = true
+    var validFecha = true
 
     function limpiarCampos(input) {
         $(`#${input}`).val('')
@@ -335,6 +339,7 @@
                     $('#ordenTrabajo').val(data['n_orden'])
                     $('#tipoCliente').val(data['tipo_propietario'])
                     $('#placa').val(data['placa'])
+                    $('#placaHidden').val(data['placa'])
                     $('#cliente').val(data['cliente'])
                     $('#marca').val(data['id_marca'])
                     $('#nFabrica').val(data['modelo'])
@@ -346,6 +351,8 @@
                     $('#fechaSalida').val(data['fecha_salida'])
                     $('#tituloModal').text('Editar')
                     $('#btnGuardar').text('Actualizar')
+                    $('#msgPlaca').text('')
+                    $('#msgOrden').text('')
                 }
             })
         } else {
@@ -389,7 +396,7 @@
             success: function(res) {
                 res = JSON.parse(res)
                 var cadena
-                cadena = `<option> -- Seleccione -- </option>`
+                cadena = `<option selected value=""> -- Seleccione -- </option>`
                 for (let i = 0; i < res.length; i++) {
                     nombre = `${res[i].nombre_p} ${res[i].nombre_s} ${res[i].apellido_p} ${res[i].apellido_s}`;
                     cadena += `<option ${res[i].estado == 'I' ? 'disabled' : ''} value=${res[i].id_tercero}>${res[i].tipo_tercero == 5  ? nombre : res[i].razon_social} ${res[i].estado == 'I' ? ' - Inactivo' : ''}</option>`
@@ -405,15 +412,30 @@
     })
     //Verificacion de Orden de Trabajo y Placa del vehiculo 
     function verificarOrdenPlaca(url, data, input, tipo) {
-        $.post(url, data, function(data) {
-            if (JSON.parse(data) == null) {
+        tp = $('#tp').val()
+        $.post(url, data, function(res) {
+            if (JSON.parse(res) == null) {
                 $(`#${input}`).text('')
                 validOrden = true
                 validPlaca = true
             } else {
-                $(`#${input}`).text(`* ${tipo} ya registrada *`)
-                validOrden = false
-                validPlaca = false
+                if (tp == 2) {
+                    vehi = JSON.parse(res)
+                    placa = $('#placaHidden').val()
+                    if (placa == vehi.placa) {
+                        $(`#${input}`).text('')
+                        validOrden = true
+                        validPlaca = true
+                    } else {
+                        $(`#${input}`).text(`* ${tipo} ya registrada *`)
+                        validOrden = false
+                        validPlaca = false
+                    }
+                } else {
+                    $(`#${input}`).text(`* ${tipo} ya registrada *`)
+                    validOrden = false
+                    validPlaca = false
+                }
             }
         })
     }
@@ -430,6 +452,37 @@
             placa: $('#placa').val()
         }
         verificarOrdenPlaca("<?= base_url('vehiculos/buscarVehiculo') ?>", data, 'msgPlaca', 'Placa')
+    })
+    //Verificacion de fecha entrada y salida
+    $('#fechaEntrada').on('change', function(e){
+        fechaSalida = $('#fechaSalida').val()
+        fechaEntrada = $('#fechaEntrada').val()
+        if (fechaSalida != '') {
+            $('#msgFecha').text('')
+            validFecha = true
+        } else if (fechaSalida >= fechaEntrada) {
+            $('#msgFecha').text('')
+            validFecha = true
+        } else {
+            $('#msgFecha').text('* La fecha salida debe ser mayor a la de entrada *')
+            validFecha = false
+        }
+    })
+    $('#fechaSalida').on('change', function(e) {
+        fechaSalida = $('#fechaSalida').val()
+        fechaEntrada = $('#fechaEntrada').val()
+        console.log(fechaSalida >= fechaEntrada)
+        if (fechaEntrada == '') {
+            $('#msgFecha').text('* Ingrese una fecha de entrada *')
+            validFecha = false
+        } else if (fechaSalida >= fechaEntrada) {
+            console.log('fechaSalida mayor')
+            $('#msgFecha').text('')
+            validFecha = true
+        } else {
+            $('#msgFecha').text('* La fecha salida debe ser mayor a la de entrada *')
+            validFecha = false
+        }
     })
     //Formulario para agregar o editar Vehiculo
     $('#formularioVehiculos').on('submit', function(e) {
@@ -448,18 +501,18 @@
         estado = $('#estado').val()
         fechaEntrada = $('#fechaEntrada').val()
         fechaSalida = $('#fechaSalida').val()
-        if(tipoCliente != 5 || 56){
+        if (tipoCliente != 5 || 56) {
             mostrarMensaje('error', '¡No se permite cambiar el codigó!')
             $.ajax({
                 url: '<?= base_url('usuarios/salir') ?>',
-                type : 'POST',
-                data : {},
-                success : function(data){
+                type: 'POST',
+                data: {},
+                success: function(data) {
 
                 }
             })
         }
-        if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada, fechaSalida].includes('') || !validOrden || !validPlaca) {
+        if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada, fechaSalida].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({

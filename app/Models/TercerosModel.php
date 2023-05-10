@@ -27,10 +27,11 @@ class TercerosModel extends Model
     protected $skipValidation = false;
 
 
-    public function obtenerTipoTercero($idTipo)
+    public function obtenerTipoTercero($idTipo, $idTipo2)
     {
         $this->select('id_tercero, razon_social, n_identificacion, nombre_p, nombre_s, apellido_p, apellido_s, tipo_tercero, estado');
         $this->where('tipo_tercero', $idTipo);
+        $this->orWhere('tipo_tercero', $idTipo2);
         // $this->where('estado', 'A');
         $data = $this->findAll();
         return $data;

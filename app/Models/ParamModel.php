@@ -55,4 +55,13 @@ class ParamModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function obtenerAliadoClientes()
+    {
+        $this->select('id_param_det as id, nombre');
+        $this->where('id_param_det', '5');
+        $this->orWhere('id_param_det', '56');
+        $this->where('estado', 'A'); 
+        $data = $this->findAll();
+        return $data;
+    }
 }
