@@ -138,4 +138,14 @@ class Vehiculos extends BaseController
         $res = $this->vehiculos->obtenerUltimaOrden();
         return json_encode($res);
     }
+    public function cambiarEstado(){
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
+        
+        if($this->vehiculos->update($id, ['estado' => $estado])){
+            return json_encode(1);
+        }else{
+            return json_encode(2);
+        }
+    }
 }
