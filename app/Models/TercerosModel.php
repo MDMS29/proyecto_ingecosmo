@@ -65,8 +65,8 @@ class TercerosModel extends Model
     {
         $this->select("terceros.*, param_detalle.resumen as tipoDoc, telefonos.numero as numero, email.email as correo, concat(nombre_p, ' ', nombre_s, ' ', apellido_p, ' ', apellido_s) as nombreCompleto");
         $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
-        // $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
-        // $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
+        $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
+        $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         $this->where('terceros.tipo_tercero', '5');
         $this->where('terceros.estado', $estado);
         $data = $this->findAll();

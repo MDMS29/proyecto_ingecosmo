@@ -164,28 +164,32 @@
     </div>
 </form>
 
+<!-- MODAL CAMBIAR ESTADO DEL VEHICULO -->
 <div class="modal fade" id="cambiarEstado" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+        <div class="body-R">
+            <div class="modal-content">
+                <input type="hidden" name="idVehi" id="idVehi">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModalEstado"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"><!-- TEXTO DINAMICO  --></h1>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('estadoVehiculo')">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <label for="prioridad" class="col-form-label">Cambiar Estado:</label>
-                        <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
+                        <select class="form-select form-select" name="estadoVehiculo" id="estadoVehiculo">
                             <option selected value="">-- Seleccione --</option>
                             <?php foreach ($estadosVehi as $estado) { ?>
                                 <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
                             <?php } ?>
                         </select>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
-                <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('estadoVehiculo')">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" id="btnCambiarEstado">Agregar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -196,6 +200,10 @@
 <script>
     var validOrden = true
     var validPlaca = true
+
+    function limpiarCampos(input) {
+        $(`#${input}`).val('')
+    }
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
         e.preventDefault();
@@ -298,8 +306,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarVehiculo(' + data.id_vehiculo + ',2)" data-bs-target="#agregarVehiculo" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
-                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("icons/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>'
-
+                        '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("icons/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>'
                     )
                 }
             }
@@ -371,7 +378,7 @@
             $('#msgPlaca').text('')
         }
     }
-
+    //Input dinamico para los clientes
     function verTipoCliente(id, idCliente) {
         $.ajax({
             url: '<?= base_url('vehiculos/buscarResponsable'); ?>',
@@ -441,6 +448,17 @@
         estado = $('#estado').val()
         fechaEntrada = $('#fechaEntrada').val()
         fechaSalida = $('#fechaSalida').val()
+        if(tipoCliente != 5 || 56){
+            mostrarMensaje('error', '¡No se permite cambiar el codigó!')
+            $.ajax({
+                url: '<?= base_url('usuarios/salir') ?>',
+                type : 'POST',
+                data : {},
+                success : function(data){
+
+                }
+            })
+        }
         if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada, fechaSalida].includes('') || !validOrden || !validPlaca) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
@@ -472,6 +490,48 @@
                     }
                     tablaVehiculos.ajax.reload(null, false)
                     $('#agregarVehiculo').modal('hide')
+                }
+            })
+        }
+    })
+    // Cambiar estado del vehiculo
+    $('#cambiarEstado').on('show.bs.modal', function(e) {
+        $.ajax({
+            url: '<?= base_url('vehiculos/buscarVehiculo') ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: $(e.relatedTarget).data('href')
+            },
+            success: function(data) {
+                $('#tituloModalEstado').text('CAMBIAR ESTADO - ' + data.placa)
+                $('#estadoVehiculo').val(data.estado)
+                $('#idVehi').val($(e.relatedTarget).data('href'))
+            }
+        })
+    })
+    $('#btnCambiarEstado').click(function(e) {
+        id = $('#idVehi').val()
+        estado = $('#estadoVehiculo').val()
+        if (estado == '') {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {
+            $.ajax({
+                url: '<?= base_url('vehiculos/cambiarEstado') ?>',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    id,
+                    estado
+                },
+                success: function(data) {
+                    if (data == 1) {
+                        mostrarMensaje('success', '¡Se ha cambiado el estado del Vehiculo!')
+                        tablaVehiculos.ajax.reload(null, false)
+                        $('#cambiarEstado').modal('hide')
+                        $('#idVehi').val('')
+                        $('#estadoVehiculo').val('')
+                    }
                 }
             })
         }
