@@ -2,6 +2,7 @@
 <div id="content" class="p-4 p-md-5">
     <div class="estanteria">
         <div class="verFilas" id="verFilas">
+
             <h1 class="titulo" style="text-transform:uppercase;">ESTANTERIA DE <?php echo $titulo['nombre'] ?></h1>
 
         </div>
@@ -15,6 +16,7 @@
                     </div>
                     <?php } else { ?>
                         <?php foreach ($data as $dato) { ?>
+                            <!-- <img src="< ?php echo base_url('/img/') . $icono ?>"/> -->
                             <input type="hidden" name="categoria" id="categoria" value="<?= $dato['categoria_material']?>">
                             <div class="card2">
                             <div class="imagenes">

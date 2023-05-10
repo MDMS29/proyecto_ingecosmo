@@ -1,119 +1,27 @@
-<link rel="stylesheet" href="css/estanteria.css">
+<link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>">
 <div id="content" class="p-4 p-md-5">
     <div class="estanteria">
         <h1 class="titulo"><img class="logo1" src="<?php echo base_url('/icons/estante-b.png'); ?>">ORGANIZACIÓN Y ESTANTERIA</h1>
 
         <div class="contenedorE">
             <div class="contenidoCardE">
-
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria baterias</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
+                <?php foreach ($estantes as $dato) { ?>
+                    <div class="card1">
+                        <div class="imagenes">
+                            <img class="iconos" src="<?php echo base_url('/img/') . $dato['n_iconos'] ?>">
                         </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/3" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
-
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/aceites.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria aceites</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
+                        <div class="textoCard">
+                            <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria <?php echo $dato['nombre'] ?></h5>
+                            <div class="bloqueTextoE" id=<?= $dato['id'] ?>>
+                                <p class="subTexto">
+                                    Contiene <span id="contador"> </span>
+                                </p>
+                                <p class="subTexto">Contiene 30 articulos</p>
+                            </div>
+                            <a href="<?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                         </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/6" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                     </div>
-                </div>
-
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/pinturas.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria pinturas</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
-                        </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/5" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
-
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconoBombi" src="<?php echo base_url('/img/bombillerias.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria bombillerias</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
-                        </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/4" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
-
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconoBroca" src="<?php echo base_url('/img/brocas.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria brocas</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
-                        </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/1" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/remaches.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria remaches</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
-                        </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/7" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/discos.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" id="subTitulo" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria discos</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
-                        </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/2" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
-                <div class="card1">
-                    <div class="imagenes">
-                        <img class="iconos" src="<?php echo base_url('/img/lubricantes.png'); ?>">
-                    </div>
-                    <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria lubricantes</h5>
-                        <div class="bloqueTextoE">
-                            <p class="subTexto">Contiene 5 filas</p>
-                            <p class="subTexto">Contiene 30 articulos</p>
-                        </div>
-                        <a href="<?php echo base_url() ?>Filas/mostrarFila/8" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -163,3 +71,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    cards = $('.card1')
+    for (let i = 0; i < cards.length; i++) {
+        console.log($('.bloqueTextoE'));
+        $.ajax({
+            url: '<?= base_url('filas/contadorFilas') ?>',
+            type: 'POST',
+            data: {
+                idEstante: $('#idEstante').val()
+            },
+            dataType: 'json',
+            success: function(data) {
+            }
+        })
+    };
+</script>

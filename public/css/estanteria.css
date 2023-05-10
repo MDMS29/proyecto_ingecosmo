@@ -171,7 +171,7 @@
 .contenidoCardF {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: 10
 }
 
 .textoFila{

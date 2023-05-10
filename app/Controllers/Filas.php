@@ -35,6 +35,7 @@ class Filas extends BaseController
         $data = ['data' => $filas, 'titulo' => $titulo, 'filas' => $filas];
         echo view('/principal/sidebar');
         echo view('/estanteria/filas', $data);
+        echo view('/materiales/materiales', $data);
     }
 
     // public function mostrarMaterial($estante, $material){
@@ -76,5 +77,12 @@ class Filas extends BaseController
         ]);
         return json_encode(1);
         // return redirect()->to(base_url('/filas'));
+    }
+
+    public function contadorFilas()
+    {
+        $idEstante = $this->request->getPost('idEstante');
+        $res = $this->filas->contadorFilas($idEstante);
+        return json_encode($res);
     }
 }
