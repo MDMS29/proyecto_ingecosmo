@@ -13,7 +13,7 @@
 <body class="container-lg d-flex align-items-center justify-content-center ">
     <div class="login">
         <form action="<?php echo base_url('/login') ?>" method="POST">
-            <p class="texto-titulo">LOGIN</p>
+            <p class="texto-titulo" style="margin-bottom: 30px;">LOGIN</p>
             <div class="logo">
                 <img class="logo-ingecosmo" src="<?php echo base_url('/img/logo.png'); ?>">
             </div>

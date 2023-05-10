@@ -446,6 +446,7 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
+    
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (objCorreo.id != 0) {

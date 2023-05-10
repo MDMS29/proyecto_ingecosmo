@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a> - <a class="toggle-vis btn" data-column="7">Correo</a>
+        </div>
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -10,7 +13,7 @@
                     <th scope="col" class="text-center">Nombres</th>
                     <th scope="col" class="text-center">Apellidos</th>
                     <th scope="col" class="text-center">Tipo de Documento</th>
-                    <th scope="col" class="text-center">No. Documento</th>
+                    <th scope="col" class="text-center">Identificacion</th>
                     <th scope="col" class="text-center">Direccion</th>
                     <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Correo</th>
@@ -87,6 +90,7 @@
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
                                     <input class="form-control" id="nIdenti" name="nIdenti"></input>
+                                    <small id="msgDoc" class="invalido"></small>
                                 </div>
                             </div>
 
@@ -99,7 +103,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="numero" class="form-control" id="numero" disabled>
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
@@ -134,7 +138,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -185,7 +189,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -200,7 +204,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -242,7 +246,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -279,7 +283,7 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+<script type="text/javascript">
     // variables
     var ContadorPRC = 0;
     var contador = 0;
@@ -287,7 +291,8 @@
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-    var validCorreo
+    var validCorreo;
+    var validIdent;
     var objCorreo = {
         id: 0,
         correo: '',
@@ -299,6 +304,25 @@
         tipo: '',
         prioridad: ''
     }
+
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableClientes.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+
 
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
@@ -315,8 +339,8 @@
         $(`#${input3}`).val('')
     }
 
-    //Insertar y editar Trabajador
-    function seleccionarTrabajador(id, tp) {
+    //Insertar y editar clientes
+    function seleccionarCliente(id, tp) {
         if (tp == 2) {
             //Actualizar datos
             $.ajax({
@@ -325,7 +349,7 @@
                 dataType: 'json',
 
             }).done(function(res) {
-                $('#tituloModal').text('Editar Cliente')
+                $('#tituloModal').text('Editar')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -335,6 +359,8 @@
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
+                // $('#telefono').val(res[0]['telefono']) se supone que no va aqui pero jum
+                // $('#email').val(res[0]['email'])
                 $('#btnGuardar').text('Actualizar')
                 $.ajax({
                     type: 'POST',
@@ -355,9 +381,14 @@
                     }
                 })
             })
-        } else {
+        } else if(tp == 1) {
             //Insertar datos
-            $('#tituloModal').text('Agregar Cliente')
+            
+            telefonos = []
+            correos = []
+            guardarCorreo()
+            guardarTelefono()
+            $('#tituloModal').text('Agregar')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
@@ -366,9 +397,9 @@
             $('#apellidoS').val('')
             $('#tipoDoc').val(1)
             $('#nIdenti').val('')
-            $('#numero').val('')
-            $('#email').val('')
             $('#direccion').val('')
+            $('#telefono').val('')
+            $('#email').val('')
             $('#btnGuardar').text('Agregar')
         }
     }
@@ -386,7 +417,7 @@
         nIdenti = $('#nIdenti').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -402,10 +433,10 @@
                     tipoDoc,
                     nIdenti,
                     direccion,
-                    cargo,
-                    telefonos
+                    telefonos,
+                    correo //eto no estaba pero idk mira si sirve por si acasi
                 },
-                success: function(idTrab) {
+                success: function(idCli) {
                     telefonos.forEach(tel => {
                         //Insertar Telefonos
                         $.post({
@@ -413,7 +444,7 @@
                             data: {
                                 tp: tp,
                                 idTele: tel.id,
-                                idUsuario: idTrab,
+                                idUsuario: idCli,
                                 numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 5,
@@ -433,7 +464,7 @@
                             data: {
                                 tp,
                                 idCorreo: correo.id,
-                                idUsuario: idTrab,
+                                idUsuario: idCli,
                                 correo: correo.correo,
                                 prioridad: correo.prioridad,
                                 tipoUsu: 5,
@@ -441,15 +472,15 @@
                             success: function(res) {
                                 if (res != 1) {
                                     mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                    setTimeout(() => window.location.href = "<?= base_url('trabajadores') ?>", 2000)
+                                    setTimeout(() => window.location.href = "<?= base_url('clientes') ?>", 2000)
                                 }
                             }
                         })
                     });
                     if (tp == 2) {
-                        mostrarMensaje('success', '¡Se ha Actualizado el Trabajador!')
+                        mostrarMensaje('success', '¡Se ha Actualizado el Cliente!')
                     } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Trabajador!')
+                        mostrarMensaje('success', '¡Se ha Registrado el Cliente!')
                     }
                 }
             }).done(function(data) {
@@ -472,6 +503,79 @@
             });
         };
     })
+
+    // ---------------------------pura identificacion tipo validacion---------------------------
+
+    //Funcion para buscar cliente segun su identificacion
+    function buscarClienteIdent(id, inputIden) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('srchCli/') ?>" + id + "/" + inputIden,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgDoc').text('')
+                    validIdent = true
+                } else if (res[0] != null) {
+                    $('#msgDoc').text('* Numero de identificación invalido *')
+                    validIdent = false
+                }
+            }
+        })
+    }
+
+    //Identificar si el numero de identificacion no este registrado
+    $('#nIdenti').on('input', function(e) {
+        inputIden = $('#nIdenti').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarClienteIdent(0, inputIden)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchCli/') ?>" + id + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['n_identificacion'] == inputIden) {
+                        $('#msgDoc').text('')
+                        validIdent = true
+                    } else {
+                        buscarClienteIdent(0, inputIden)
+                    }
+                }
+            })
+        }
+    })
+
+
+    // --------------------------------------puro telefono----------------------------------
+
+    //Al escribir validar que el numero no este registrado
+    $('#telefonoAdd').on('input', function(e) {
+        numero = $('#telefonoAdd').val()
+        buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
+    })
+
+    //Funcion para buscar el correo o el telefono
+    function buscarCorreoTel(url, valor, inputName, tipo) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 5, //url, valor, idUsuario, tipoUsuario
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $(`#${inputName}`).text('')
+                    validTel = true
+                    validCorreo = true
+                } else if (res[0] != null) {
+                    $(`#${inputName}`).text(`* Este ${tipo} ya esta registrado *`)
+                    validTel = false
+                    validCorreo = false
+                }
+            }
+        })
+    }
 
 
     // Agregar Telefono a la tabla
@@ -515,37 +619,9 @@
     })
 
 
-    //Funcion para buscar el correo o el telefono
-    function buscarCorreoTel(url, valor, inputName, tipo) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 5, //url, valor, idUsuario, tipoUsuario
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $(`#${inputName}`).text('')
-                    validTel = true
-                    validCorreo = true
-                } else if (res[0] != null) {
-                    $(`#${inputName}`).text(`* Este ${tipo} ya esta registrado *`)
-                    validTel = false
-                    validCorreo = false
-                }
-            }
-        })
-    }
-
-    //Al escribir validar que el numero no este registrado
-    $('#telefonoAdd').on('input', function(e) {
-        numero = $('#telefonoAdd').val()
-        buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
-    })
-
-
-
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
-        $('#numero').val(telefonos[0]?.numero)
+        $('#telfono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -609,6 +685,52 @@
         guardarTelefono() //Actualizar tabla
     }
 
+
+    // --------------------------------------puro email----------------------------------
+
+
+    //Al escribir validar que el correo no este registrado
+    $('#correoAdd').on('input', function(e) {
+        correo = $('#correoAdd').val()
+        buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
+    })
+
+    //Agregar Correo a la tabla
+    $('#btnAddCorre').on('click', function(e) {
+        const tp = $('#tp').val()
+        const correo = $('#correoAdd').val()
+        const prioridad = $('#prioridadCorreo').val()
+        const editCorreo = $('#editCorreo').val();
+
+        if ([correo, prioridad].includes('')) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        }
+        let info = {
+            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo}111e'` : editCorreo,
+            correo,
+            prioridad
+        }
+        let filtro = correos.filter(correo => correo.prioridad == 'P')
+        let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
+        $('#correoAdd').val('')
+        $('#prioridadCorreo').val('')
+        $('#editCorreo').val(0);
+        if (filtroCorreo.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya se agrego este correo!')
+        }
+        if (info.prioridad == 'S') {
+            correos.push(info)
+            return guardarCorreo()
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
+        } else {
+            correos.push(info)
+            return guardarCorreo()
+        }
+    })
+
     // Funcion para mostrar correos en la tabla.
     function guardarCorreo() {
         $('#email').val(correos[0]?.correo)
@@ -633,28 +755,46 @@
         $('#bodyCorre').html(cadena)
     }
 
-
-    //Cambiar estado de "Activo" a "Inactivo" 
-    $('#modalConfirmaP').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `EliminarCliente(${$(e.relatedTarget).data('href')})`)
-    })
-
-    function EliminarCliente(id) {
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('clientes/cambiarEstado') ?>",
-            data: {
-                id,
-                estado: 'I'
-            }
-        }).done(function(data) {
-            mostrarMensaje('success', data)
-            $('#modalConfirmaP').modal('hide')
-            tableClientes.ajax.reload(null, false)
-        })
+    //Editar Correo
+    function editarCorreo(id) {
+        const fila = $(`#${id}`);
+        const correo = fila.find('td').eq(0)
+        const prioridad = fila.find('td').eq(1)
+        $('#correoAdd').val(correo.text());
+        $('#prioridadCorreo').val(prioridad.attr('id'));
+        $('#editCorreo').val(fila.attr('id'));
+        objCorreo = {
+            id: fila.attr('id'),
+            correo: correo.text(),
+            prioridad: prioridad.attr('id')
+        }
+        correos = correos.filter(correo => correo.id != fila.attr('id'));
+        guardarCorreo()
+    }
+    //Eliminar correo de la tabla
+    function eliminarCorreo(id) {
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('email/eliminarEmail/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        mostrarMensaje('success', '¡Se ha eliminado el correo!!')
+                    }
+                }
+            })
+        }
+        correos = correos.filter(correo => correo.id != id)
+        guardarCorreo() //Actualizar tabla
     }
 
-    // Tabla 
+
+
+
+    // ------------------------------ estructura Tabla ------------------------------------- 
     var tableClientes = $("#tableClientes").DataTable({
         ajax: {
             url: '<?= base_url('clientes/obtenerClientes') ?>',
@@ -695,10 +835,10 @@
                 data: 'direccion'
             },
             {
-                data: 'numero'
+                data: 'telefono'
             },
             {
-                data: 'correo'
+                data: 'email'
             },
             {
                 data: null,
@@ -716,6 +856,28 @@
         },
 
     });
+
+
+    //Cambiar estado de "Activo" a "Inactivo" 
+    $('#modalConfirmaP').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `EliminarCliente(${$(e.relatedTarget).data('href')})`)
+    })
+
+
+    function EliminarCliente(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clientes/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmaP').modal('hide')
+            tableClientes.ajax.reload(null, false)
+        })
+    }
 
 
     $('#btnNo').click(function() {

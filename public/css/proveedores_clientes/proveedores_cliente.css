@@ -2,12 +2,6 @@
 
 /* font-family: 'Nunito', sans-serif; */
 
-
-/* ---------------------Proveedores------------------------- */
-
-
-/* modal para agregar y actualizar */
-
 :root {
     --azulBoton: #161666;
     --rojoBoton: #E25050;
@@ -15,6 +9,20 @@
     --grisInput: #D9D9D9;
     /* gris mas oscuro */
 }
+
+/* ---------------------Proveedores y Clientes en realidad------------------------- */
+
+/* -- DIV OCULTAR COLUMNAS -- */
+.ocultar > a:is(.toggle-vis).active,
+.ocultar > a:is(.toggle-vis):hover {
+  border-radius: none !important;
+  color: var(--azulBoton);
+  font-weight: 700;
+  border: none;
+}
+
+/* modal para agregar y actualizar */
+
 
 label {
     color: #1b335b;

@@ -52,7 +52,7 @@ class Clientes extends BaseController
         $apellido_s = $this->request->getPost('apellidoS');
         $nIdenti = $this->request->getPost('nIdenti');
         $direccion = $this->request->getPost('direccion');
-        $numero = $this->request->getPost('numero');
+        $telefono = $this->request->getPost('telefono');
         $email = $this->request->getPost('email');
         $tipoTercero = 5;
         $tipoDocumento = 1;
@@ -69,7 +69,7 @@ class Clientes extends BaseController
                 'apellido_p' => $apellido_p,
                 'apellido_s' => $apellido_s,
                 'direccion' => $direccion,
-                'numero' => $numero,
+                'telefono' => $telefono,
                 'email' => $email,
                 'tipo_tercero' => $tipoTercero,
                 'tipo_doc' => $tipoDocumento
@@ -86,7 +86,7 @@ class Clientes extends BaseController
                 'apellido_p' => $apellido_p,
                 'apellido_s' => $apellido_s,
                 'direccion' => $direccion,
-                'numero' => $numero,
+                'telefono' => $telefono,
                 'email' => $email,
                 'tipo_tercero' => $tipoTercero,
                 'tipo_doc' => $tipoDocumento
