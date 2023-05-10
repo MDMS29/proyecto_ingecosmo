@@ -29,6 +29,7 @@ class Insumos extends BaseController
         $materiales = $this->materiales->obtenerInsumo($id);
         $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate];
         echo view('/principal/sidebar');
+        
         echo view('/materiales/materiales', $data);
     }
 
