@@ -130,13 +130,13 @@
         <div class="campos">
 
           <label for="exampleDataList" class="form-label">Cantidad Vendida:</label>
-          <input type="text" class="form-control"  id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
+          <input type="text" class="form-control" id="cantidadVendida" name="cantidadVendida" placeholder="" disabled>
         </div>
 
         <div class="campos">
 
           <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
-          <input type="text" class="form-control"  id="cantidadActual" name="cantidadActual" placeholder="" disabled>
+          <input type="text" class="form-control" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
         </div>
 
       </div>
@@ -154,53 +154,52 @@
 <!-- MODAL USAR -->
 
 <div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="formularioUsar" autocomplete="off">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content modal-lg" id="modalContentUsar">
-      <div class="modal-header" id="modalHeaderUsar">
-        <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-
-        <div class="HEADER">
-
-          <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
-          <button type="button" class="btn" data-bs-toggle="modal" aria-label="Close">X</button>
-        </div>
-      </div>
-      <div class="modal-body" id="modalBodyUsar">
-
-        <div class="camposUsar">
-          <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
-          <input class="form-control"  id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
-        </div>
-
-        <div class="camposUsar">
-          <label for="exampleDataList" class="form-label">Cantidad Existente:</label>
-          <input class="form-control"  id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
-        </div>
-        <div class="camposUsar">
-          <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
-          <div>
-            <input class="form-control"  id="cantidadUsar" name="cantidadUsar" placeholder="">
-            <small id="msgUsar" class="invalido"></small>
+  <form id="formularioUsar" autocomplete="off">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content modal-lg" id="modalContentUsar">
+        <div class="modal-header" id="modalHeaderUsar">
+          <input type="text" name="idMaterial" id="idMaterial">
+          <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
+          <div class="HEADER">
+            <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
+            <button type="button" class="btn" data-bs-toggle="modal" aria-label="Close">X</button>
           </div>
         </div>
-        <div class="camposUsar">
-          <label for="exampleDataList" class="form-label">Precio de Venta:</label>
-          <input class="form-control"  id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
-        </div>
-        <div class="camposUsar">
-          <label for="exampleDataList" class="form-label">Subtotal:</label>
-          <input class="form-control" list="datalistOptions" id="subtotal" name="subtotal" placeholder="" disabled>
-        </div>
+        <div class="modal-body" id="modalBodyUsar">
 
-      </div>
-      <div class="modal-footer" id="modalFooter">
-        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btnAccionF">Usar</button>
+          <div class="camposUsar">
+            <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
+            <input class="form-control" id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
+          </div>
+
+          <div class="camposUsar">
+            <label for="exampleDataList" class="form-label">Cantidad Existente:</label>
+            <input class="form-control" id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
+          </div>
+          <div class="camposUsar">
+            <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
+            <div>
+              <input class="form-control" id="cantidadUsar" name="cantidadUsar" placeholder="">
+              <small id="msgUsar" class="invalido"></small>
+            </div>
+          </div>
+          <div class="camposUsar">
+            <label for="exampleDataList" class="form-label">Precio de Venta:</label>
+            <input class="form-control" id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
+          </div>
+          <div class="camposUsar">
+            <label for="exampleDataList" class="form-label">Subtotal:</label>
+            <input class="form-control" id="subtotal" name="subtotal" placeholder="" disabled>
+          </div>
+
+        </div>
+        <div class="modal-footer" id="modalFooter">
+          <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btnAccionF">Usar</button>
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>
 
 <!-- MODAL USAR 2-->
@@ -236,8 +235,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
-var validUsar = true
+  var validUsar = true
 
   function detallesMaterial(id_material) {
     dataURL = "<?php echo base_url('/materiales/detallesMaterial'); ?>" + "/" + id_material;
@@ -282,7 +280,7 @@ var validUsar = true
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-        $("#id").val(rs[0]['id_material']);
+        $("#idMaterial").val(rs[0]['id_material']);
         $("#nombreInsumo").val(rs[0]['nombre']);
         $("#cantidadExistente").val(rs[0]['cantidad_actual']);
         $("#PrecioDeVenta").val(rs[0]['precio_venta']);
@@ -294,20 +292,20 @@ var validUsar = true
 
   $('#cantidadUsar').on('input', function(e) {
     cantidad = $('#cantidadUsar').val()
-    valorVenta = $("#PrecioDeVenta").val()  
+    valorVenta = $("#PrecioDeVenta").val()
     cantidadExistente = $('#cantidadExistente').val()
-    if(parseInt(cantidad) > parseInt(cantidadExistente)){
+    if (parseInt(cantidad) > parseInt(cantidadExistente)) {
       $('#msgUsar').text(' * Valor invalido * ')
       validUsar = false
       $('#subtotal').val(0)
-    }else{
+    } else {
       $('#msgUsar').text('')
       validUsar = true
       $('#subtotal').val(cantidad * valorVenta)
     }
   })
 
-  
+
 
   function habilitar() {
 
@@ -377,40 +375,32 @@ var validUsar = true
 
   $("#formularioUsar").on("submit", function(e) {
     e.preventDefault()
-    nombre = $("#nombreInsumo").val()
+    idMaterial = $("#idMaterial").val()
     cantidadExistente = $("#cantidadExistente").val()
     cantidadUsar = $("#cantidadUsar").val()
     precioVenta = $("#PrecioDeVenta").val()
-    idCategoria = $("#idCategoria").val()
-    if ([nombre, cantidadExistente, cantidadUsar, precioVenta].includes("")) {
-      return Swal.fire({
-        position: "center",
-        icon: "error",
-        text: "¡Campos Vacios!",
-        showConfirmButton: false,
-        timer: 1000
-      })
+    subtotal = $("#subtotal").val()
+    if ([subtotal, cantidadExistente, cantidadUsar, precioVenta].includes("")) {
+      return mostrarMensaje('error', '¡Campos Vacios!')
     }
     $.post({
       url: '<?php echo base_url('insumos/usar') ?>',
       data: {
-        nombre: nombre,
-        cantidadExistente: cantidadExistente,
-        precioVenta: precioVenta,
-        tipoMaterial: 9,
-        idCategoria: idCategoria
+        idMaterial,
+        precioVenta,
+        cantidadExistente,
+        cantidadUsar,
+        subtotal
       },
-      success: function(e) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          text: 'Se ha usado este material con exito',
-          showConfirmButton: false,
-          timer: 1000
-        })
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000);
+      success: function(data) {
+        if (data == 1) {
+          mostrarMensaje('success', '¡Insumo usado con exito!')
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000)
+        } else {
+          return mostrarMensaje('error', '¡Ha ocurrido un error!')
+        }
       }
     })
 

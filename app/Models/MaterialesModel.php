@@ -30,7 +30,7 @@ class MaterialesModel extends Model{
     {
         $this->select('materiales.*, param_detalle.nombre as nombre_categoria');
         $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
-        $this->where('categoria_material', $id);
+        $this->where('materiales.categoria_material', $id);
         $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }

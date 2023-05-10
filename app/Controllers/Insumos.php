@@ -82,25 +82,22 @@ class Insumos extends BaseController
     }
 
 
-    public function Usar()
+    public function usar()
     {
         $id =  $this->request->getPost('idMaterial');
-        $nombre =  $this->request->getPost('nombreInsumo');
+        $res = $this->materiales->traerDetalles($id);
         $cantidadExistente = $this->request->getPost('cantidadExistente');
-        $precioVenta = $this->request->getPost('PrecioDeVenta');
-        $tipoMaterial = $this->request->getPost('tipoMaterial');
+        $cantidadUsar = $this->request->getPost('cantidadUsar');
+        $subtotal = $this->request->getPost('subtotal');
 
+        $cantidadNueva =  $cantidadExistente - $cantidadUsar; //Nueva cantidad existente del material
+        $cantidadVendidaActual = $res['cantidad_vendida'] + $cantidadUsar; //Nueva cantidad vendida del material
         $data = [
-            'id_material' => $id,
-            'nombre' => $nombre,
-            'cantidad_existente' => $cantidadExistente,
-            'precio_venta' => $precioVenta,
-            'tipo_material' => $tipoMaterial,
+            'cantidad_actual' => $cantidadNueva,
+            'cantidad_vendida' => $cantidadVendidaActual
         ];
-
-        $this->materiales->update($id, $data);
-
-        return json_encode($data);
-        // return redirect()->to(base_url('/materiales'));
+        if($this->materiales->update($id, $data)){
+            return json_encode(1);
+        }
     }
 }
