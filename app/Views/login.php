@@ -30,7 +30,7 @@
                 <?php echo session('mensaje'); ?>
             </div>
             <div class="botones-login">
-                <button class="btn-ingresar">INGRESAR</button>
+                <button id="Ing" class="btn-ingresar">INGRESAR</button>
             </div>
         </form>
     </div>
@@ -38,38 +38,67 @@
 
 </html>
 <script>
-    $('#formulario').on('submit', function(e) {
-        e.preventDefault();
-        usuario = $('#usuario').val(),
-        contrasena = $('#contrasena').val()
-        if ([usuario, contrasena].includes('')) {
-            return alert('Campos Vacios')
-        } else {
-            $.ajax({
-                url: '<?php echo base_url('/login') ?>',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    usuario,
-                    contrasena
-                },
-                success: function(data) {
-                    const informacion = {
+    const informacion = JSON.parse(localStorage.getItem('usuario'));
+    console.log(informacion)
+    if (informacion  == null || informacion?.usuario == '' ) {
+        $('#formulario').on('submit', function(e) {
+            e.preventDefault();
+            usuario = $('#usuario').val();
+            contrasena = $('#contrasena').val();
+            console.log(usuario, contrasena)
+            if ([usuario, contrasena].includes('')) {
+                return alert('Campos Vacios')
+            } else {
+                $.ajax({
+                    url: '<?php echo base_url('/login') ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
                         usuario,
                         contrasena
-                    };
-                    localStorage.setItem("usuario", JSON.stringify(informacion));
-                    const alerta = document.querySelector(".alerta");
-                    setTimeout(() => {
-                        alerta.remove();
-                    }, 2000);
-                    if(data==1){
-                        window.location.href="<?php echo base_url('/home') ?>"
+                    },
+                    success: function(data) {
+                        const informacion = {
+                            usuario,
+                            contrasena
+                        };
+                        localStorage.setItem("usuario", JSON.stringify(informacion));
+                        const alerta = document.querySelector(".alerta");
+                        setTimeout(() => {
+                            alerta.remove();
+                        }, 2000);
+                        if (data == 1) {
+                            window.location.href = "<?php echo base_url('/home') ?>"
+                        }
                     }
+                })
+            }
+        })
+    } else {
+        const usuario = informacion.usuario;
+        const contrasena = informacion.contrasena
+        $.ajax({
+            url: "<?php echo base_url('/login') ?>",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                usuario,
+                contrasena
+            },
+            success: function(data) {
+                const informacion = {
+                    usuario,
+                    contrasena
+                };
+                localStorage.setItem("usuario", JSON.stringify(informacion));
+                const alerta = document.querySelector(".alerta");
+                setTimeout(() => {
+                    alerta.remove();
+                }, 2000);
+                if (data == 1) {
+                    window.location.href = "<?php echo base_url('/home') ?>"
                 }
-            })
-        }
-    })
-
-
+            }
+        })
+    }
 </script>

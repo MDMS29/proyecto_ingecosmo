@@ -62,7 +62,7 @@
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
                     <li> <hr class="nav-item dropdown" style="border: solid 1px white"></li>
-                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li></li>
+                    <li><a href="<?php echo base_url('salir') ?>"  class="nav-item dropdown; salir" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li></li>
                 </ul>
             </div>
         </div>
@@ -76,8 +76,6 @@
                     <li class="active">
                         <a href="<?= base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                             <p id="pa"><?= session('rol') ?></p>
-                            <p id="a"><?= session('id') ?></p>
-                            <p id="a"><?= session('idRol') ?></p>
                         </a>
                     </li>
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
@@ -144,7 +142,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('salir') ?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
+                        <a href="<?php echo base_url('salir') ?>" id="aa" class="salir"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
                             <p id="pa">Cerrar Sesion</p>
                         </a>
                     </li>
@@ -166,6 +164,13 @@
     </div>
 
     <script>
+         $('.salir').on('click', function(e) {
+            const informacion = {
+                        usuario : '',
+                        contrasena : ''
+                    };
+                    localStorage.setItem("usuario", JSON.stringify(informacion));
+         })
         document.querySelectorAll(".menu").forEach(el => {
             el.addEventListener("click", () => {
                 el.classList.toggle("rotate");
