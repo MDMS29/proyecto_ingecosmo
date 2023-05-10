@@ -344,8 +344,8 @@
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-    var validCorreo
-    var validIdent;
+    var validCorreo = true
+    var validIdent = true;
     var objCorreo = {
         id: 0,
         correo: '',
@@ -446,7 +446,7 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
-    
+
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (objCorreo.id != 0) {
@@ -457,11 +457,17 @@
             telefonos.push(objTelefono)
             guardarTelefono()
         }
+        if(input1 == 0){
+            telefonos = []
+            correos = []
+        }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
+        $('#msgDoc').text('')
+        $('#msgTel').text('')
     }
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
@@ -516,6 +522,7 @@
                 dataType: 'json',
 
             }).done(function(res) {
+                limpiarCampos()
                 $('#tituloModal').text('Editar Usuario')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_usuario'])
@@ -555,6 +562,7 @@
             //Insertar datos
             telefonos = []
             correos = []
+            limpiarCampos(0)
             guardarCorreo()
             guardarTelefono()
             $('#tituloModal').text('Agregar')
@@ -575,7 +583,6 @@
             $('#divContras2').removeAttr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
-            // $('#formularioUsuarios').modal('hidden')
         }
     }
     //Funcion para cambiar contraseña
@@ -666,7 +673,6 @@
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
-
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -730,12 +736,16 @@
                     });
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')
+                        validTel = true
+                        validCorreo = true
                     } else {
+                        validTel = true
+                        validCorreo = true
                         mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
                     }
                 }
             }).done(function(data) {
-                limpiarCampos('msgConfir')
+                limpiarCampos()
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 ContadorPRC = 0
@@ -823,6 +833,7 @@
     })
     // Funcion para mostrar telefonos en la tabla.
     function guardarTelefono() {
+        console.log(telefonos)
         $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
@@ -835,7 +846,7 @@
                 cadena += ` <tr class="text-center" id=${telefonos[i].id}>
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
-                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>  
                                 <td>
                                     <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">

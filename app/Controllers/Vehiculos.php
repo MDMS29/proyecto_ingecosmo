@@ -35,8 +35,13 @@ class Vehiculos extends BaseController
         $clientes = $this->clientes->obtenerClientes('A');
         $marcas = $this->marcas->obtenerMarcas('A');
         $estados = $this->param->obtenerEstadosVehi('A');
+        $tipoCliente = $this->param->obtenerAliadoClientes();
         $combustible = $this->param->obtenerCombustibleVehi('A');
-        $data = ['clientes' => $clientes, 'marcas' => $marcas, 'estadosVehi' => $estados, 'combustible' => $combustible];
+        $data = [
+            'clientes' => $clientes, 'marcas' => $marcas, 
+            'estadosVehi' => $estados, 'combustible' => $combustible,
+            'tipoClientes' => $tipoCliente
+        ];
         echo view('principal/sidebar');
         echo view('vehiculos/vehiculos', $data);
     }
@@ -130,7 +135,7 @@ class Vehiculos extends BaseController
     public function buscarResponsable()
     {
         $tipo = $this->request->getPost('idTipo');
-        $res = $this->clientes->obtenerTipoTercero($tipo);
+        $res = $this->clientes->obtenerTipoTercero($tipo, 0);
         return json_encode($res);
     }
     public function obtenerUltimaOrden()

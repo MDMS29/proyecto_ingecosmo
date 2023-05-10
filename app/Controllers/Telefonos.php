@@ -23,8 +23,7 @@ class Telefonos extends BaseController
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
         $tipoTel = $this->request->getPost('tipoTel');
-        $usuarioCrea = 1;
-        // $usuarioCrea = session('id');
+        $usuarioCrea = session('id');
         $data = [
             'id_usuario' => $idUsu,
             'numero' => $numero,
