@@ -397,9 +397,9 @@
             $('#apellidoS').val('')
             $('#tipoDoc').val(1)
             $('#nIdenti').val('')
-            $('#direccion').val('')
             $('#telefono').val('')
             $('#email').val('')
+            $('#direccion').val('')
             $('#btnGuardar').text('Agregar')
         }
     }
@@ -416,6 +416,8 @@
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
         direccion = $('#direccion').val()
+        telefono = $('#telefono').val()
+        correo = $('#email').val()
         //Control de campos vacios
         if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -621,7 +623,7 @@
 
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
-        $('#telfono').val(telefonos[0]?.numero)
+        $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">

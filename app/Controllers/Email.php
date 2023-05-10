@@ -22,17 +22,18 @@ class Email extends BaseController
         $email = $this->request->getPost('correo');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
-        $usuarioCrea = 1;
-        // $usuarioCrea = session('id');
+        $usuarioCrea = session('id');
+        
         $data = [
             'id_usuario' => $idUsu,
             'email' => $email,
             'prioridad' => $prioridad,
             'tipo_usuario' => $tipoUsu,
             'usuario_crea' => $usuarioCrea
+            
         ];
         if ($tp == 2) {
-            if(strpos($idCorreo, 'e')){
+            if (strpos($idCorreo, 'e')) {
                 $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
                 if (!empty($res)) {
                     return json_encode(1);
@@ -41,7 +42,7 @@ class Email extends BaseController
                         return json_encode(1);
                     }
                 }
-            }else{
+            } else {
                 if ($this->email->update($idCorreo, $data)) {
                     return json_encode(1);
                 }

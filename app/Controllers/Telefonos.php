@@ -23,8 +23,7 @@ class Telefonos extends BaseController
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
         $tipoTel = $this->request->getPost('tipoTel');
-        $usuarioCrea = 1;
-        // $usuarioCrea = session('id');
+        $usuarioCrea = session('id');
         $data = [
             'id_usuario' => $idUsu,
             'numero' => $numero,
@@ -34,7 +33,7 @@ class Telefonos extends BaseController
             'usuario_crea' => $usuarioCrea
         ];
         if ($tp == 2) {
-            if(strpos($idTele, 'e')){
+            if (strpos($idTele, 'e')) {
                 $res = $this->telefonos->buscarTelefono($numero, $idUsu, $tipoUsu);
                 if (!empty($res)) {
                     return json_encode(1);
@@ -43,7 +42,7 @@ class Telefonos extends BaseController
                         return json_encode(1);
                     }
                 }
-            }else{
+            } else {
                 if ($this->telefonos->update($idTele, $data)) {
                     return json_encode(1);
                 }
@@ -54,7 +53,7 @@ class Telefonos extends BaseController
             }
         }
     }
-    
+
     public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
     {
         $array = array();

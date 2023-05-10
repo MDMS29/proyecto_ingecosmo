@@ -53,6 +53,7 @@ class Trabajadores extends BaseController
         $nIdenti = $this->request->getPost('nIdenti');
         $cargo = $this->request->getPost('cargo');
         $direccion = $this->request->getPost('direccion');
+        $usuCrea = session('id');
 
 
 
@@ -68,6 +69,7 @@ class Trabajadores extends BaseController
                 'apellido_p' => $apellido_p,
                 'apellido_s' => $apellido_s,
                 'direccion' => $direccion,
+                'usuario_crea' => $usuCrea
             ];
             $this->trabajadores->update($idTrab, $trabajadorUpdate);
             return $idTrab;
@@ -83,6 +85,7 @@ class Trabajadores extends BaseController
                 'apellido_p' => $apellido_p,
                 'apellido_s' => $apellido_s,
                 'direccion' => $direccion,
+                'usuario_crea' => $usuCrea
                 
             ];
             $this->trabajadores->save($trabajadorSave);

@@ -30,6 +30,7 @@ class Proveedores extends BaseController
         $tp = $this->request->getPost('tp');
         $tipoTercero = 8;
         $tipoDocumento = 2;
+        $usuCrea = session('id');
         if ($this->request->getMethod() == "post") {
             if ($tp == 1) {
                 $this->proveedores->save([
@@ -37,7 +38,10 @@ class Proveedores extends BaseController
                     'n_identificacion' => $this->request->getPost('nit'),
                     'direccion' => $this->request->getPost('direccion'),
                     'tipo_tercero' => $tipoTercero,
-                    'tipo_doc' => $tipoDocumento
+                    'tipo_doc' => $tipoDocumento,
+                    'usuario_crea' => $usuCrea
+
+
                 ]);
             } else {
                 $this->proveedores->update(
@@ -47,7 +51,9 @@ class Proveedores extends BaseController
                         'n_identificacion' => $this->request->getPost('nit'),
                         'direccion' => $this->request->getPost('direccion'),
                         'tipo_tercero' => $tipoTercero,
-                        'tipo_doc' => $tipoDocumento
+                        'tipo_doc' => $tipoDocumento,
+                        'usuario_crea' => $usuCrea
+
                     ]
                 );
             }
@@ -57,15 +63,16 @@ class Proveedores extends BaseController
     public function buscarProveedor($id, $razonSocial)
     {
         $returnData = array();
-        $proveedores_ = $this->proveedores->traerProveedor($id,$razonSocial);
+        $proveedores_ = $this->proveedores->traerProveedor($id, $razonSocial);
         if (!empty($proveedores_)) {
             array_push($returnData, $proveedores_);
         }
         echo json_encode($returnData);
     }
 
-    
-    public function eliminados(){
+
+    public function eliminados()
+    {
         $proveedores = $this->proveedores->select('*')->where('estado', 'I')->where('tipo_tercero', '8')->findAll();
         $data = ['proveedores' => $proveedores];
         echo view('/principal/sidebar');
@@ -77,9 +84,9 @@ class Proveedores extends BaseController
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('estado');
         if ($this->proveedores->update($id, ['estado' => $estado])) {
-            if($estado == 'A'){
+            if ($estado == 'A') {
                 return '¡Se ha reestablecido el Proveedor!';
-            }else{
+            } else {
                 return '¡Se ha eliminado el Proveedor!';
             }
         }

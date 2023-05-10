@@ -12,10 +12,10 @@ use App\Models\ParamModel;
 class Clientes extends BaseController
 {
 
+    protected $clientes;
     protected $telefonos;
     protected $param;
     protected $correos;
-    protected $clientes;
     public function __construct()
     {
         $this->clientes = new TercerosModel();
@@ -56,7 +56,7 @@ class Clientes extends BaseController
         $email = $this->request->getPost('email');
         $tipoTercero = 5;
         $tipoDocumento = 1;
-
+        $usuarioCrea = session('id');
 
 
         if ($tp == 2) {
@@ -72,7 +72,8 @@ class Clientes extends BaseController
                 'telefono' => $telefono,
                 'email' => $email,
                 'tipo_tercero' => $tipoTercero,
-                'tipo_doc' => $tipoDocumento
+                'tipo_doc' => $tipoDocumento,
+                'usuario_crea' => $usuarioCrea
             ];
             $this->clientes->update($idCLiente, $clienteUpdate);
             return $idCLiente;
@@ -89,7 +90,8 @@ class Clientes extends BaseController
                 'telefono' => $telefono,
                 'email' => $email,
                 'tipo_tercero' => $tipoTercero,
-                'tipo_doc' => $tipoDocumento
+                'tipo_doc' => $tipoDocumento,
+                'usuario_crea' => $usuarioCrea
                 
             ];
             $this->clientes->save($clienteSave);

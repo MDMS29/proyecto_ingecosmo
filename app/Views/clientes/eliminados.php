@@ -138,10 +138,10 @@
                 data: 'direccion'
             },
             {
-                data: 'numero'
+                data: 'telefono'
             },
             {
-                data: 'correo'
+                data: 'email'
             },
             {
                 data: null,
