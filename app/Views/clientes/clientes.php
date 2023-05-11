@@ -15,6 +15,8 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">Identificacion</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Telefonos</th>
+                    <th scope="col" class="text-center">Emails</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -201,7 +203,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
@@ -333,6 +335,7 @@
             telefonos = []
             correos = []
         }
+        guardarTelefono()
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
@@ -347,7 +350,8 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
             }).done(function(res) {
-                $('#tituloModal').text('Editar')
+                $('#modalHeader2').text('')
+                $('#modalHeader2').text('Editar')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -387,7 +391,8 @@
             guardarCorreo()
             guardarTelefono()
             limpiarCampos(0)
-            $('#tituloModal').text('Agregar')
+            $('#modalHeader2').text('')
+            $('#modalHeader2').text('Agregar')
             $('#msgDoc').text('')
             $('#tp').val(1)
             $('#id').val(0)
@@ -401,7 +406,6 @@
             $('#btnGuardar').text('Agregar')
         }
     }
-
     //Envio de formulario
     $('#formularioClientes').on('submit', function(e) {
         e.preventDefault()
@@ -547,7 +551,6 @@
 
 
     // --------------------------------------puro telefono----------------------------------
-
     //Al escribir validar que el numero no este registrado
     $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
@@ -574,7 +577,6 @@
         })
     }
 
-
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
         const numero = $('#telefonoAdd').val()
@@ -584,9 +586,8 @@
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
-
         let info = {
-            id: [editTel].includes('') || editTel == 0 ? `${contador}111e` : editTel,
+            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
             tipo,
             numero,
             prioridad
@@ -597,6 +598,14 @@
         $('#tipoTele').val('')
         $('#prioridad').val('')
         $('#editTele').val(0);
+        var objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
+        console.log(objTelefono)
+
         if (filtroTel.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
@@ -613,7 +622,6 @@
         }
 
     })
-
 
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
@@ -682,21 +690,17 @@
 
 
     // --------------------------------------puro email----------------------------------
-
-
     //Al escribir validar que el correo no este registrado
     $('#correoAdd').on('input', function(e) {
         correo = $('#correoAdd').val()
         buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
     })
-
     //Agregar Correo a la tabla
     $('#btnAddCorre').on('click', function(e) {
         const tp = $('#tp').val()
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
-
         if ([correo, prioridad].includes('')) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
@@ -710,6 +714,12 @@
         $('#correoAdd').val('')
         $('#prioridadCorreo').val('')
         $('#editCorreo').val(0);
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        console.log(objCorreo)
         if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
@@ -798,6 +808,7 @@
                 estado: 'A'
             },
             dataSrc: "",
+
         },
         columns: [{
                 data: null,
@@ -828,6 +839,24 @@
             },
             {
                 data: 'direccion'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    let numero = $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 5,
+                        dataType: 'json'
+                    }).done(function(res) {
+                        return res[0][0]?.numero
+                    })
+                    console.log(numero.responseText)
+                    return numero
+                }
+
+            },
+            {
+                data: 'email'
             },
             {
                 data: null,

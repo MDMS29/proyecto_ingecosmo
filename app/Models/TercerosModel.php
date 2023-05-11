@@ -68,6 +68,8 @@ class TercerosModel extends Model
     public function obtenerClientes($estado)
     {
         $this->select("terceros.*, param_detalle.resumen as tipoDoc, concat(nombre_p, ' ', nombre_s, ' ', apellido_p, ' ', apellido_s) as nombreCompleto");
+        $this->join('telefonos','telefonos.id_usuario = terceros.id_tercero', 'left'  );
+        $this->join('email','email.id_usuario = terceros.id_tercero', 'left'  );
         $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
         $this->where('terceros.tipo_tercero', '5');
         $this->where('terceros.estado', $estado);

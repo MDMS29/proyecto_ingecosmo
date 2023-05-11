@@ -32,11 +32,12 @@ class Clientes extends BaseController
     }
     public function index()
     {
-        
         $tipoDoc = $this->param->obtenerTipoDoc();
         $tipoTel = $this->param->obtenerTipoTel(); 
+        $tel = $this->telefonos->obtenerTelefonoCliente(); 
+        $email = $this->correos->obtenerEmailCliente(); 
 
-        $data = [ 'tipoDoc' => $tipoDoc, 'tipoTele' => $tipoTel];
+        $data = [ 'tipoDoc' => $tipoDoc, 'tipoTele' => $tipoTel, 'telefono' => $tel, 'email' => $email];
         echo view('/principal/sidebar');
         echo view('/clientes/clientes', $data);
     }

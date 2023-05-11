@@ -29,6 +29,11 @@ label {
     font-weight: 600;
   }
 
+#tituloModal, #modalHeader2{
+  font-size: 25px;
+  color: black;
+}
+
 * {
     font-family: 'Nunito', sans-serif;
 }

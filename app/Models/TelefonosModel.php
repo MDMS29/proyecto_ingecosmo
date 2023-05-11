@@ -33,6 +33,15 @@ class TelefonosModel extends Model
         $data = $this->findAll();
         return $data;
     }
+
+    public function obtenerTelefonoCliente()
+    {
+        $this->select('telefonos.numero as telefono');
+        $this->where('tipo_usuario', '5');
+        $data = $this->first();
+        return $data;
+    }
+
     public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
     {
         $this->select('*');

@@ -35,7 +35,7 @@ class Email extends BaseController
             if (strpos($idCorreo, 'e')) {
                 $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
                 if (!empty($res)) {
-                    return json_encode(1);
+                    return json_encode(2);
                 } else {
                     if ($this->email->save($data)) {
                         return json_encode(1);

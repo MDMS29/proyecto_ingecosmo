@@ -36,7 +36,7 @@ class Telefonos extends BaseController
             if (strpos($idTele, 'e')) {
                 $res = $this->telefonos->buscarTelefono($numero, $idUsu, $tipoUsu);
                 if (!empty($res)) {
-                    return json_encode(1);
+                    return json_encode(2);
                 } else {
                     if ($this->telefonos->save($data)) {
                         return json_encode(1);
