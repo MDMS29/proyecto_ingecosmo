@@ -15,8 +15,8 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">Identificacion</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Telefonos</th>
-                    <th scope="col" class="text-center">Emails</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -839,24 +839,6 @@
             },
             {
                 data: 'direccion'
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    let numero = $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 5,
-                        dataType: 'json'
-                    }).done(function(res) {
-                        return res[0][0]?.numero
-                    })
-                    console.log(numero.responseText)
-                    return numero
-                }
-
-            },
-            {
-                data: 'email'
             },
             {
                 data: null,

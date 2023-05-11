@@ -32,7 +32,7 @@ class Email extends BaseController
             
         ];
         if ($tp == 2) {
-            if (strpos($idCorreo, 'e')) {
+            if (strpos($idCorreo, 'e')) { //cambiar a .
                 $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
                 if (!empty($res)) {
                     return json_encode(2);
