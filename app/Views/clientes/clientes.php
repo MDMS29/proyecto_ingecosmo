@@ -15,6 +15,8 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">Identificacion</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -827,6 +829,12 @@
             },
             {
                 data: 'direccion'
+            },
+            {
+                data: 'email'
+            },
+            {
+                data : 'telefono'
             },
             {
                 data: null,

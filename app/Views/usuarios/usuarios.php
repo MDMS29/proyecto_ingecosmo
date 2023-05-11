@@ -457,9 +457,20 @@
             telefonos.push(objTelefono)
             guardarTelefono()
         }
-        if(input1 == 0){
+        if (input1 == 0) {
             telefonos = []
             correos = []
+        }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
         }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
@@ -468,6 +479,7 @@
         $('#msgConfir').text('')
         $('#msgDoc').text('')
         $('#msgTel').text('')
+        $('#msgCorreo').text('')
     }
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
@@ -778,30 +790,49 @@
         }
         contador += 1
         let info = {
-            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
+            id: [editTel].includes('') || editTel == 0 ?  Math.random().toString()  : editTel,
             tipo,
             numero,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
         let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
-        $('#telefonoAdd').val('')
-        $('#tipoTele').val('')
-        $('#prioridad').val('')
-        $('#editTele').val(0);
+
         if (filtroTel.length > 0) {
             filtro = []
+            $('#btnEditarTel').removeAttr('disabled')
             return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
         }
         if (info.prioridad == 'S') {
             telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
             return guardarTelefono()
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
 
         } else {
+            $('#btnEditarTel').removeAttr('disabled')
             telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
             return guardarTelefono()
         }
 
@@ -828,12 +859,10 @@
     //Al escribir validar que el numero no este registrado
     $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
-        console.log(numero)
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
     // Funcion para mostrar telefonos en la tabla.
     function guardarTelefono() {
-        console.log(telefonos)
         $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
@@ -848,7 +877,7 @@
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>  
                                 <td>
-                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
@@ -866,6 +895,7 @@
         $('#tipoTele').val(tipo.attr('id'));
         $('#prioridad').val(prioridad.attr('id'));
         $('#editTele').val(fila.attr('id'));
+        console.log($(`.btnEditarTel`).at)
         objTelefono = {
             id: fila.attr('id'),
             numero: numero.text(),
@@ -901,31 +931,46 @@
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
 
-        if ([correo, prioridad].includes('')) {
+        if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo}111e'` : editCorreo,
+            id: [editCorreo].includes('') || editCorreo == 0 ? Math.random().toString() : editCorreo,
             correo,
             prioridad
         }
         let filtro = correos.filter(correo => correo.prioridad == 'P')
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
-        $('#correoAdd').val('')
-        $('#prioridadCorreo').val('')
-        $('#editCorreo').val(0);
+
         if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
         }
         if (info.prioridad == 'S') {
             correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
             return guardarCorreo()
         } else if (filtro.length > 0) {
             filtro = []
+
             return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
         } else {
             correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
             return guardarCorreo()
         }
 
@@ -960,7 +1005,10 @@
     }
     //Editar Correo
     function editarCorreo(id) {
+        console.log(id)
         const fila = $(`#${id}`);
+
+        console.log(`#${id}`)
         const correo = fila.find('td').eq(0)
         const prioridad = fila.find('td').eq(1)
         $('#correoAdd').val(correo.text());

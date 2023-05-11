@@ -33,7 +33,7 @@ class Telefonos extends BaseController
             'usuario_crea' => $usuarioCrea
         ];
         if ($tp == 2) {
-            if (strpos($idTele, 'e')) {
+            if (strpos($idTele, 'e')) { //cambiar a .
                 $res = $this->telefonos->buscarTelefono($numero, $idUsu, $tipoUsu);
                 if (!empty($res)) {
                     return json_encode(1);
