@@ -12,11 +12,13 @@
                         </div>
                         <div class="textoCard">
                             <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria <?php echo $dato['nombre'] ?></h5>
-                            <div class="bloqueTextoE" id=<?= $dato['id'] ?>>
+                            <div class="bloqueTextoE" id="<?= $dato['id'] ?>">
+                                <p class="subTexto">Contiene 4 Filas</p>
                                 <p class="subTexto">
-                                    Contiene <span id="contador"> </span>
+                                    <span id="contador">
+                                        <!-- CONTADOS DINAMICO -->
+                                    </span>
                                 </p>
-                                <p class="subTexto">Contiene 30 articulos</p>
                             </div>
                             <a href="<?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                         </div>
@@ -52,7 +54,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Filas</label>
+                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Resumen</label>
                         <input type="text" class="form-control" id="fila" name="fila">
                         <input hidden id="tp" name="tp">
                         <input hidden id="id" name="id">
@@ -73,17 +75,28 @@
 </div>
 
 <script>
-    cards = $('.card1')
+    cards = $('.bloqueTextoE')
     for (let i = 0; i < cards.length; i++) {
-        console.log($('.bloqueTextoE'));
         $.ajax({
-            url: '<?= base_url('filas/contadorFilas') ?>',
+            url: '<?= base_url('filas/contadorArticulos') ?>',
             type: 'POST',
             data: {
-                idEstante: $('#idEstante').val()
+                idEstante: cards[i].id
             },
             dataType: 'json',
             success: function(data) {
+                $(`#${cards[i].id} #contador`).text(data.length == 0 ? 'No tiene articulos' : 'Contiene ' + data[0]?.numeroFila + ' Articulos')
+                $.ajax({
+                    url: '<?= base_url('filas/contadorFilas') ?>',
+                    type: 'POST',
+                    data: {
+                        idEstante: cards[i].id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                    }
+                })
             }
         })
     };

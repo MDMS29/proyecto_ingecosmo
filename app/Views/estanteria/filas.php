@@ -16,11 +16,11 @@
                     </div>
                     <?php } else { ?>
                         <?php foreach ($data as $dato) { ?>
-                            <!-- <img src="< ?php echo base_url('/img/') . $icono ?>"/> -->
+                            
                             <input type="hidden" name="categoria" id="categoria" value="<?= $dato['categoria_material']?>">
                             <div class="card2">
                             <div class="imagenes">
-                                <img class="iconos" src="<?php echo base_url('/img/baterias.png'); ?>">
+                                <img class="iconos" src="<?php echo base_url('/img/'). $dato['icono'] ?>">
                             </div>
                             <div class="textoFila" id="Contenedor">
                                 <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila <?php echo $dato['fila']; ?></h5>

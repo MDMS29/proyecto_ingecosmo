@@ -45,7 +45,7 @@
 <form id="formularioAgregar" autocomplete="off">
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <input type="text" value="<?= $idCate?>" id="idCategoria">
+      <input type="text" value="<?= $idCate ?>" id="idCategoria">
       <div class="modal-content" style="border: 5px solid #161666;  border-radius: 10px;">
         <div class="modal-header">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
@@ -65,9 +65,9 @@
 
           <label for="exampleDataList" class="form-label">Precio Venta</label>
           <input class="form-control" type="number" list="datalistOptions" id="precioV" name="precioV" placeholder="">
-           
+
           <label for="exampleDataList" class="form-label">Cantidad Actual</label>
-          <input class="form-control"  type="number"list="datalistOptions" id="cantidadA" name="cantidadA" placeholder="">
+          <input class="form-control" type="number" list="datalistOptions" id="cantidadA" name="cantidadA" placeholder="">
 
 
 

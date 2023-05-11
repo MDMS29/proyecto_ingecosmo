@@ -7,8 +7,6 @@ use App\Models\FilasModel;
 use App\Models\EstanteriaModel;
 use App\Models\MaterialesModel;
 
-
-
 class Filas extends BaseController
 {
     protected $filas, $estanteria;
@@ -79,6 +77,12 @@ class Filas extends BaseController
         // return redirect()->to(base_url('/filas'));
     }
 
+    public function contadorArticulos()
+    {
+        $idEstante = $this->request->getPost('idEstante');
+        $res = $this->filas->contadorArticulos($idEstante);
+        return json_encode($res);
+    }
     public function contadorFilas()
     {
         $idEstante = $this->request->getPost('idEstante');
