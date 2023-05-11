@@ -15,8 +15,6 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">Identificacion</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Telefono</th>
-                    <th scope="col" class="text-center">Correo</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -252,9 +250,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -285,14 +280,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     // variables
-    var ContadorPRC = 0;
-    var contador = 0;
-    var contadorCorreo = 0;
+    var ContadorPRC = 0; //Contador DataTable
+    var contador = 0; //Contador ids telefono
+    var contadorCorreo = 0; //Contador ids correos
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-    var validCorreo;
-    var validIdent;
+    var validCorreo = true;
+    var validIdent = true;
     var objCorreo = {
         id: 0,
         correo: '',
@@ -334,6 +329,10 @@
             telefonos.push(objTelefono)
             guardarTelefono()
         }
+        if (input1 == 0) {
+            telefonos = []
+            correos = []
+        }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
@@ -347,7 +346,6 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
-
             }).done(function(res) {
                 $('#tituloModal').text('Editar')
                 $('#tp').val(2)
@@ -359,9 +357,8 @@
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
-                // $('#telefono').val(res[0]['telefono']) se supone que no va aqui pero jum
-                // $('#email').val(res[0]['email'])
                 $('#btnGuardar').text('Actualizar')
+                $('#msgDoc').text('')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
@@ -381,15 +378,17 @@
                     }
                 })
             })
-        } else if(tp == 1) {
+        } else {
             //Insertar datos
-            
+
             telefonos = []
             correos = []
+            limpiarCampos(0)
             guardarCorreo()
             guardarTelefono()
             limpiarCampos(0)
             $('#tituloModal').text('Agregar')
+            $('#msgDoc').text('')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
@@ -398,8 +397,6 @@
             $('#apellidoS').val('')
             $('#tipoDoc').val(1)
             $('#nIdenti').val('')
-            $('#telefono').val('')
-            $('#email').val('')
             $('#direccion').val('')
             $('#btnGuardar').text('Agregar')
         }
@@ -410,6 +407,7 @@
         e.preventDefault()
         tp = $('#tp').val()
         id = $('#id').val()
+        $('#btnGuardar').attr('disabled', '')
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
@@ -417,8 +415,6 @@
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
         direccion = $('#direccion').val()
-        telefono = $('#telefono').val()
-        correo = $('#email').val()
         //Control de campos vacios
         if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -435,9 +431,7 @@
                     apellidoS,
                     tipoDoc,
                     nIdenti,
-                    direccion,
-                    telefonos,
-                    correo //eto no estaba pero idk mira si sirve por si acasi
+                    direccion
                 },
                 success: function(idCli) {
                     telefonos.forEach(tel => {
@@ -540,7 +534,7 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + inputIden,
                 dataType: 'JSON',
                 success: function(res) {
-                    if (res[0]['n_identificacion'] == inputIden) {
+                    if (res[0].n_identificacion == inputIden) {
                         $('#msgDoc').text('')
                         validIdent = true
                     } else {
@@ -587,18 +581,18 @@
         const tipo = $('#tipoTele').val()
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
-        if ([numero, prioridad].includes('') || validTel == false) {
+        if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
 
         let info = {
-            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
+            id: [editTel].includes('') || editTel == 0 ? `${contador}111e` : editTel,
             tipo,
             numero,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
-        let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
+        let filtroTel = telefonos.filter(tel => tel.numero == info.numero) //Array de numeros de telefonos
         $('#telefonoAdd').val('')
         $('#tipoTele').val('')
         $('#prioridad').val('')
@@ -612,8 +606,7 @@
             return guardarTelefono()
         } else if (filtro.length > 0) {
             filtro = []
-            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
-
+            return mostrarMensaje('error', '¡Ya hay un telefono principal!')
         } else {
             telefonos.push(info)
             return guardarTelefono()
@@ -636,7 +629,7 @@
                 cadena += ` <tr class="text-center" id=${telefonos[i].id}>
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
-                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
                                     <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
@@ -646,7 +639,6 @@
         }
         $('#bodyTel').html(cadena)
     }
-
 
     //Editar telefono
     function editarTelefono(id) {
@@ -836,12 +828,6 @@
             },
             {
                 data: 'direccion'
-            },
-            {
-                data: 'telefono'
-            },
-            {
-                data: 'email'
             },
             {
                 data: null,

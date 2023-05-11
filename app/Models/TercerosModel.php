@@ -47,16 +47,19 @@ class TercerosModel extends Model
         return $data;
     }
 
-    public function traerProveedor($id, $razonSocial)
+    public function traerProveedor($id, $razonSocial, $nit)
     {
         if ($id != 0) {
             $this->select('terceros.* ');
             $this->where('id_tercero', $id);
-        } elseif ($razonSocial != 0) {
+        } else if ($razonSocial != 0) {
             $this->select('terceros.* ');
             $this->where('razon_social', $razonSocial);
+        } else if($nit != 0 ){
+            $this->select('terceros.* ');
+            $this->where('n_identificacion', $nit);
         }
-        $data = $this->first();  // nos trae el registro que cumpla con una condicion dada 
+        $data = $this->first(); 
         return $data;
     }
 
@@ -64,10 +67,8 @@ class TercerosModel extends Model
     // -------------clientes----------------
     public function obtenerClientes($estado)
     {
-        $this->select("terceros.*, param_detalle.resumen as tipoDoc, telefonos.numero as telefono, email.email as email, concat(nombre_p, ' ', nombre_s, ' ', apellido_p, ' ', apellido_s) as nombreCompleto");
+        $this->select("terceros.*, param_detalle.resumen as tipoDoc, concat(nombre_p, ' ', nombre_s, ' ', apellido_p, ' ', apellido_s) as nombreCompleto");
         $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
-        $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
-        $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         $this->where('terceros.tipo_tercero', '5');
         $this->where('terceros.estado', $estado);
         $data = $this->findAll();
@@ -80,15 +81,11 @@ class TercerosModel extends Model
             $this->select('terceros.*');
             $this->where('id_tercero', $id);
             $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
-            // $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left');
-            // $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         } elseif ($nIdenti != 0) {
             $this->select('terceros.*, ');
             $this->where('n_identificacion', $nIdenti);
             $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '5');
-            // $this->join('telefonos', 'telefonos.id_usuario = terceros.id_tercero', 'left'); sera que va o no va? jumm y tambien pregunto si es un select
-            // $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left'); sera que va o no va? jumm y tambien pregunto si es un select
         } elseif ($id != 0 && $nIdenti != 0) {
             $this->select('terceros.*');
             $this->where('id_tercero', $id);

@@ -60,10 +60,10 @@ class Proveedores extends BaseController
         }
     }
 
-    public function buscarProveedor($id, $razonSocial)
+    public function buscarProveedor($id, $razonSocial, $nit)
     {
         $returnData = array();
-        $proveedores_ = $this->proveedores->traerProveedor($id, $razonSocial);
+        $proveedores_ = $this->proveedores->traerProveedor($id, $razonSocial, $nit);
         if (!empty($proveedores_)) {
             array_push($returnData, $proveedores_);
         }

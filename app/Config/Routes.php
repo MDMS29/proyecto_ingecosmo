@@ -39,7 +39,7 @@ $routes->post('/instrCli', 'Clientes::insertar'); //Buscar CLiente
 $routes->post('/instrPro', 'Proveedor::insertar'); //Buscar CLiente
 $routes->post('/srchUsu/(:num)/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Buscar Usuario
 $routes->post('/srchCli/(:num)/(:num)', 'Clientes::buscarCliente/$1/$2'); //Buscar Cliente
-$routes->post('/srchPro/(:num)/(:alpha)', 'Proveedores::buscarProveedor/$1/$2'); //Buscar Cliente
+$routes->post('/srchPro/(:num)/(:alpha)/(:num)', 'Proveedores::buscarProveedor/$1/$2/$3'); //Buscar Cliente
 $routes->post('/srchTra/(:num)/(:num)', 'Trabajadores::buscarTrabajador/$1/$2'); //Buscar Usuario
 $routes->post('/login', 'Usuarios::login');
 $routes->get('/salir', 'Usuarios::salir');

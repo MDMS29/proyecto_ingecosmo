@@ -175,8 +175,16 @@ div.dataTables_wrapper div.dataTables_filter input {
   }
   
 
-#msgRaSo.invalido , #msgNit {
+#msgRaSo.invalido , #msgNit,#msgTel,#msgCorreo   {
     color: #E25050;
+}
+
+#msgConfir.invalido,
+#msgConfirRes.invalido,
+#msgDoc.invalido,
+#msgTel.invalido,
+#msgCorreo.invalido {
+  color: red;
 }
 
 

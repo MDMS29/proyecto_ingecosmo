@@ -26,7 +26,6 @@
 
 <!-- -----modal----------     -->
 <form method="POST" id="formularioProveedores" autocomplete="off">
-
     <div class="modal fade" id="agregarProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" id="modalProveedor">
             <div class="modal-content" id="modalContentP">
@@ -93,13 +92,14 @@
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                 <a id="btnSi" class="btn btnAccionF">Eliminar</a>
             </div>
 
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -107,14 +107,14 @@
     var ContadorPRC = 0
     var inputRazonSocial = 0;
     var inputNit = 0;
-    var validRazonSocial;
-    var validNi;
-
+    var validRazonSocial = true;
+    var validNi = true;
+    //Editar o Agregar Proveedor
     function seleccionarProveedor(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0,
+                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0 + '/' + 0,
                 dataType: 'json',
                 success: function(res) {
                     $('#tituloModal').text('Editar')
@@ -124,6 +124,10 @@
                     $('#nit').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
                     $('#btnGuardar').text('Actualizar')
+                    $('#msgRaSo').text('')
+                    $('#msgNit').text('')
+                    validRazonSocial = true;
+                    validNi = true;
                 }
             })
 
@@ -136,31 +140,12 @@
             $('#nit').val('')
             $('#direccion').val('')
             $('#btnGuardar').text('Agregar')
-
+            $('#msgRaSo').text('')
+            $('#msgNit').text('')
+            validRazonSocial = true;
+            validNi = true;
         }
     }
-
-
-    //Cambiar estado de "Activo" a "Inactivo" 
-    $('#modalConfirmarP').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `EliminarProveedor(${$(e.relatedTarget).data('href')})`)
-    })
-
-    function EliminarProveedor(id) {
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('proveedores/cambiarEstado') ?>",
-            data: {
-                id,
-                estado: 'I'
-            }
-        }).done(function(data) {
-            mostrarMensaje('success', data)
-            $('#modalConfirmarP').modal('hide')
-            tableProveedores.ajax.reload(null, false)
-        })
-    }
-
     // Tabla   
     var tableProveedores = $("#tableProveedores").DataTable({
         ajax: {
@@ -203,7 +188,91 @@
         },
 
     });
+    //Validacion de Razon Social
+    function buscarRazonSocial(id, inputRazonSocial) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + inputRazonSocial + '/' + 0,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgRaSo').text('')
+                    validRazonSocial = true
+                } else if (res[0] != null) {
+                    $('#msgRaSo').text('* Razon Social ya existente *')
+                    validRazonSocial = false
+                }
+            }
+        })
+    }
+    //Identificar si la Razon Social esta registrado
+    $('#RazonSocial').on('input', function(e) {
+        inputRazonSocial = $('#RazonSocial').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (inputRazonSocial == '') {
+            $('#msgRaSo').text('')
+            validRazonSocial = true
+        }
+        if (tp == 1 && id == 0) {
+            buscarRazonSocial(0, inputRazonSocial)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('proveedores/buscarProveedor/') ?>" + id + "/" + inputRazonSocial + '/' + 0,
 
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0].razon_social == inputRazonSocial) {
+                        $('#msgRaSo').text('')
+                        validRazonSocial = true
+                    } else {
+                        buscarRazonSocial(0, inputRazonSocial)
+                    }
+                }
+            })
+        }
+    })
+    //Validacion de Nit
+    function buscarNit(id, inputNit) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + 0 + '/' + inputNit,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgNit').text('')
+                    validNit = true
+                } else if (res[0] != null) {
+                    $('#msgNit').text('* NIT ya existente *')
+                    validNit = false
+                }
+            }
+        })
+    }
+    //Identificar si el NIT esta registrado
+    $('#nit').on('input', function(e) {
+        inputNit = $('#nit').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarNit(0, inputNit)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0 + '/' + inputNit,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0].n_identificacion == inputNit) {
+                        $('#msgNit').text('')
+                        validNit = true
+                    } else {
+                        buscarNit(0, inputNit)
+                    }
+                }
+            })
+        }
+    })
     //Envio de formulario
     $('#formularioProveedores').on('submit', function(e) {
         e.preventDefault()
@@ -229,7 +298,6 @@
                     direccion
                 },
                 success: function(idUser) {
-
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Proveedor!')
                     } else {
@@ -239,103 +307,33 @@
             }).done(function(data) {
                 $('#agregarProveedor').modal('hide')
                 tableProveedores.ajax.reload(null, false); //Recargar tabla
-                $('#btnGuardar').removeAttr('disabled') //jumm
+                $('#btnGuardar').removeAttr('disabled') //Desabilitar boton para evitar registros dobles
                 ContadorPRC = 0;
-                validRazonSocial == true;
-                validNit == true;
-
+                validRazonSocial = true;
+                validNit = true;
+                $('#msgRaSo').text('')
+                $('#msgNit').text('')
             });
         };
 
     })
-
-    //Validacion de Razon Social
-    function buscarRazonSocial(id, inputRazonSocial) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + inputRazonSocial,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgRaSo').text('')
-                    validRazonSocial = true
-                } else if (res[0] != null) {
-                    $('#msgRaSo').text('* Razon Social ya existente *')
-                    validRazonSocial = false
-                }
-            }
-        })
-    }
-
-    //Identificar si la Razon Social esta registrado
-    $('#RazonSocial').on('input', function(e) {
-        inputRazonSocial = $('#RazonSocial').val()
-        tp = $('#tp').val()
-        id = $('#id').val()
-        if (tp == 1 && id == 0) {
-            buscarRazonSocial(0, inputRazonSocial)
-        } else if (tp == 2 && id != 0) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchPro/') ?>" + id + "/" + inputRazonSocial,
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res[0]['RazonSocial'] == inputRazonSocial) {
-                        $('#msgNit').text('')
-                        validRazonSocial = true
-                    } else {
-                        buscarRazonSocial(0, inputNit)
-                    }
-                }
-            })
-        }
-    })
-    //Validacion de Nit
-    function buscarNit(id, inputNit) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + inputNit,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgNit').text('')
-                    validNit = true
-                } else if (res[0] != null) {
-                    $('#msgNit').text('* NIT ya existente *')
-                    validNit = false
-                }
-            }
-        })
-    }
-
-    //Identificar si el NIT esta registrado
-    $('#nit').on('input', function(e) {
-        inputNit = $('#nit').val()
-        tp = $('#tp').val()
-        id = $('#id').val()
-        if (tp == 1 && id == 0) {
-            buscarNit(0, inputNit)
-        } else if (tp == 2 && id != 0) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchPro/') ?>" + id + "/" + inputNit,
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res[0]['nit'] == inputNit) {
-                        $('#msgNit').text('')
-                        validNit = true
-                    } else {
-                        buscarNit(0, inputNit)
-                    }
-                }
-            })
-        }
+    //Cambiar estado de "Activo" a "Inactivo" 
+    $('#modalConfirmarP').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `EliminarProveedor(${$(e.relatedTarget).data('href')})`)
     })
 
-
-
-
-    $('#btnNo').click(function() {
-        $("#modalConfirmarP").modal("hide");
-    });
+    function EliminarProveedor(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('proveedores/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmarP').modal('hide')
+            tableProveedores.ajax.reload(null, false)
+        })
+    }
 </script>
