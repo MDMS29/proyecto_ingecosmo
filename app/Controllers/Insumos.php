@@ -64,6 +64,7 @@ class Insumos extends BaseController
         $cantidadVendida = $this->request->getPost('cantidadVendida');
         $precioCompra = $this->request->getPost('precioCompra');
         $precioVenta = $this->request->getPost('precioVenta');
+        $estante = $this->request->getPost('estante');
         $tipoMaterial = $this->request->getPost('tipoMaterial');
 
         $data = [
@@ -73,6 +74,7 @@ class Insumos extends BaseController
             'cantidad_vendida' => $cantidadVendida,
             'precio_compra' => $precioCompra,
             'precio_venta' => $precioVenta,
+            'estante' => $estante,
             'tipo_material' => $tipoMaterial,
         ];
 
@@ -99,6 +101,25 @@ class Insumos extends BaseController
         ];
         if($this->materiales->update($id, $data)){
             return json_encode(1);
+        }
+    }
+
+    public function buscarInsumo($id_material, $nombre)
+    {
+        $array = array();
+        if ($id_material != 0) {
+            $data = $this->materiales->buscarInsumo($id_material, '');
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nombre != '') {
+            $data = $this->materiales->buscarInsumo(0, $nombre);
+            return json_encode($data);
+        } else if ($id_material != 0 && $nombre != '') {
+            $data = $this->materiales->buscarInsumo($id_material, $nombre);
+            array_push($array, $data);
+            return json_encode($array);
         }
     }
 }

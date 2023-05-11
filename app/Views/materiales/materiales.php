@@ -17,7 +17,7 @@
 
           <div class="contenido1">
             <img src="<?php echo base_url('/img/') . $icono ?>" class="baterias" />
-            <h5 class="card-title"><?php echo $dato['nombre']; ?></h5>
+            <h5 class="card-title" id="nombreCard"><?php echo $dato['nombre']; ?></h5>
           </div>
           <br>
           <br>
@@ -35,16 +35,20 @@
   </div>
 
   <div class="footer-page">
-    <a href="<?php echo base_url('/insumos'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</a>
-    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregarMaterial(<?php echo 1 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+    <a href="<?php echo base_url('/insumos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
+    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
   </div>
 </div>
 
 <!-- modal agregar -->
 
+<input class="form-control" id="id" name="id" type="text" value="0" hidden>
 <form id="formularioAgregar" autocomplete="off">
-  <input class="form-control" id="id" name="id" type="text" hidden>
   <input type="text" value="<?= $idCate ?>" id="idCategoria" hidden>
+
+  <input type="text" name="id" id="id" hidden>
+  <input type="text" name="tp" id="tp" hidden>
+
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content" id="modalContent" style="border: 5px solid #161666;  border-radius: 10px;">
@@ -54,14 +58,16 @@
             <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/icons/plus-b.png" alt="icon-plus" width="20">
           </div>
           <h1 class="modal-title" id="titulo1">Agregar</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="modalAgregar2">
 
           <div class="camposAgregar">
             <label for="exampleDataList" class="form-label">Nombre:</label>
-            <input class="form-control"  id="nombre" name="nombre" placeholder="">
-            <small id="msgAgregar" class="invalido"></small>
+            <div>
+              <input class="form-control" id="nombre" name="nombre" placeholder="">
+              <small id="msgAgregar" class="invalido"></small>
+            </div>
           </div>
 
           <div class="camposAgregar">
@@ -71,17 +77,13 @@
 
           <div class="camposAgregar">
             <label for="exampleDataList" class="form-label">Precio Venta:</label>
-            <input class="form-control" type="number"  id="precioV" name="precioV" placeholder="">
+            <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
           </div>
 
           <div class="camposAgregar">
             <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
             <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
           </div>
-
-
-
-
         </div>
         <div class="modal-footer" id="modal-footer">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
@@ -94,7 +96,6 @@
 
 
 <!-- Modal Detalles- Editar-->
-
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content" id="modalContentD">
@@ -134,15 +135,14 @@
           <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
           <input type="text" class="form-control" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
         </div>
+        <div class="campos">
+          <label for="exampleDataList" class="form-label"> Estante:</label>
+          <input type="text" class="form-control" id="estante" name="estante" placeholder="" disabled>
+        </div>
 
       </div>
 
-      <div class="modal-footer" id="modalFooterD"
-      
-      
-      
-      
-      >
+      <div class="modal-footer" id="modalFooterD">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
         <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button>
         <button type="button" class="btn btnAccionF" id="btnUsar1" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
@@ -153,7 +153,6 @@
 </div>
 
 <!-- Modal usar-->
-
 <div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <form id="formularioUsar" autocomplete="off">
 
@@ -165,7 +164,7 @@
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div class="HEADER">
             <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
-            <button type="button" class="btn" data-bs-toggle="modal" aria-label="Close">X</button>
+            <button type="button" class="btn" data-bs-toggle="modal" onclick="limpiarCampos()" aria-label="Close">X</button>
           </div>
         </div>
 
@@ -183,7 +182,7 @@
           <div class="camposUsar">
             <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
             <div>
-              <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">  
+              <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
               <small id="msgUsar" class="invalido"></small>
             </div>
           </div>
@@ -198,8 +197,8 @@
 
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()"data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF"id="btnValidar" >Usar</button>
+          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btnAccionF" id="btnValidar">Usar</button>
 
 
         </div>
@@ -218,27 +217,30 @@
   var validAgregar = true
 
 
+  // vaciar campos
+
   function limpiarCampos() {
 
-        $("#nombre1").val('');
-        $("#nombre").val('');
-        $("#precioC").val('');
-        $("#precioV").val('');
-        $("#cantidadA").val('');
-        
-        $("#precioVenta").val('');
-        $("#precioCompra").val('');
-        $("#cantidadVendida").val('');
-        $("#cantidadActual").val('');
+    $("#nombre1").val('');
+    $("#nombre").val('');
+    $("#precioC").val('');
+    $("#precioV").val('');
+    $("#cantidadA").val('');
 
-        $("#cantidadUsar").val('');
-        $("#subtotal").val('');
-        $('#msgUsar').text('')
+    $("#precioVenta").val('');
+    $("#precioCompra").val('');
+    $("#cantidadVendida").val('');
+    $("#cantidadActual").val('');
 
-    }
+    $("#cantidadUsar").val('');
+    $("#subtotal").val('');
+    $('#msgUsar').text('')
+    $('#msgAgregar').text('')
+
+
+  }
 
   // funcion traer detalles del material
-  
   function detallesMaterial(id_material) {
     dataURL = "<?php echo base_url('/materiales/detallesMaterial'); ?>" + "/" + id_material;
     $.ajax({
@@ -253,24 +255,25 @@
         $("#precioCompra").val(rs[0]['precio_compra']);
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
+        $("#estante").val(rs[0]['estante']);
 
         $("#nombre1").attr('disabled', '');
         $("#precioVenta").attr('disabled', '');
         $("#precioCompra").attr('disabled', '');
         $("#cantidadVendida").attr('disabled', '');
+        $("#estante").attr('disabled', '');
         $("#cantidadActual").attr('disabled', '');
         $("#btnUsar1").removeAttr('hidden', '');
         $("#detallesModal").modal("show");
         $("#btnEditar").text('Editar');
         $("#btnEditar").attr('onclick', 'habilitar()');
 
-        
-
 
         precioVenta.style.background = '#e9ecef';
         nombre1.style.background = '#e9ecef';
         precioCompra.style.background = '#e9ecef';
         cantidadActual.style.background = '#e9ecef';
+        estante.style.background= '#e9ecef';
         $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
 
       }
@@ -278,10 +281,12 @@
   }
 
 
-  
   function validarInput() {
     document.getElementById("btnValidar").disabled = !document.getElementById("cantidadUsar").value.length;
+    document.getElementById("btnAgregar").disabled = !document.getElementById("nombre").value.length;
   }
+
+
 
   // formulario agregar 
   $("#formularioAgregar").on("submit", function(e) {
@@ -318,6 +323,7 @@
           showConfirmButton: false,
           timer: 1000
         })
+        $("#id").val(0)
         setTimeout(() => {
           window.location.reload()
         }, 1000);
@@ -326,6 +332,51 @@
 
   })
 
+  function agregar(id, tp){
+    $('#tp').val(tp)
+  }
+  var validarInput; //Valor para la identificación si es valido o invalido
+  $('#nombre').on('input', function(e) {
+    nombre = $('#nombre').val()
+    tp = $('#tp').val()
+    id_material = $('#id').val()
+    if (tp == 1 && id_material == 0) {
+      buscarInsumoNom(0, nombre)
+    } else if (tp == 2 && id_material != 0) {
+      $.ajax({
+        type: 'POST',
+        url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
+        dataType: 'JSON',
+        success: function(res) {
+          if (res.nombre== nombre) {
+            $('#msgAgregar').text('')
+            validIdent = true
+          } else {
+            buscarInsumoNom(0, nombre)
+          }
+        }
+      })
+    }
+  })
+
+  function buscarInsumoNom(id_material, nombre) {
+    $.ajax({
+      type: 'POST',
+      url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
+      dataType: 'JSON',
+      success: function(res) {
+        if (res == null) {
+          $('#msgAgregar').text('')
+         return $("#btnAgregar").removeAttr('disabled', '');
+          validAgregar = true
+        } else if (res != null) {
+          $('#msgAgregar').text('*Este insumo ya existe*')
+          $("#btnAgregar").attr('disabled', '');
+          validAgregar = false
+        }
+      }
+    })
+  }
 
 
 
@@ -340,6 +391,7 @@
 
     $("#cantidadVendida").removeAttr('hidden', '');
     $("#cantidadActual").removeAttr('disabled', '');
+    $("#estante").removeAttr('disabled', '');
     $("#btnUsar1").attr('hidden', '');
     $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar.png') ?>');
     $("#btnEditar").text('Actualizar');
@@ -349,6 +401,7 @@
     nombre1.style.background = '#F8F9FF';
     precioCompra.style.background = '#F8F9FF';
     cantidadActual.style.background = '#F8F9FF';
+    estante.style.background = '#F8F9FF';
 
   }
 
@@ -361,9 +414,10 @@
     precioCompra = $("#precioCompra").val()
     cantidadVendida = $("#cantidadVendida").val()
     precioVenta = $("#precioVenta").val()
+    estante = $("#estante").val()
     cantidadActual = $("#cantidadActual").val()
     idCategoria = $("#idCategoria").val()
-    if ([nombre, precioCompra, cantidadActual, cantidadVendida].includes("")) {
+    if ([nombre, precioCompra, cantidadActual, cantidadVendida, estante].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -381,10 +435,12 @@
           precioVenta: precioVenta,
           cantidadActual: cantidadActual,
           cantidadVendida: cantidadVendida,
+          estante: estante,
           tipoMaterial: 9,
           idCategoria: idCategoria
         },
         success: function(e) {
+          $("#id").val(0)
           Swal.fire({
             position: "center",
             icon: "success",
@@ -436,6 +492,8 @@
       $('#subtotal').val(cantidad * valorVenta)
     }
   })
+
+
 
   // formulario usar
 

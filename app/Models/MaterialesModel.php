@@ -65,6 +65,31 @@ class MaterialesModel extends Model{
         return $datos;
     }
 
+    public function buscarInsumo($id_material, $nombre)
+    {
+        if ($id_material != 0) {
+            $this->select('materiales.*,materiales.nombre as nombre_insumo');
+            $this->where('id_material', $id_material);
+            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
+
+
+        } else if ($nombre != '') {
+            $this->select('materiales.*,param_detalle.nombre as nombre_categoria');
+            $this->where('materiales.nombre', $nombre);
+            $this->where('materiales.estado', 'A');
+            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
+
+        } else if ($id_material != 0 && $nombre != '') {
+
+            $this->select('materiales.*');
+            $this->where('id_material', $id_material);
+            $this->where('nombre', $nombre);
+
+        }
+        $data = $this->first();
+        return $data;
+    }
+
     // public function traerNombre($id_material){
     //     $this->select('param_detalle.*');
     //     $this->where('nombre', '28');

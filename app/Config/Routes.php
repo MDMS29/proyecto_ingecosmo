@@ -36,6 +36,7 @@ $routes->get('/home', 'Principal::home'); //Vista de entrada al home
 $routes->post('/instrUsu', 'Usuarios::insertar'); //Buscar Usuario
 $routes->post('/instrTra', 'Trabajadores::insertar'); //Buscar Usuario
 $routes->post('/srchUsu/(:num)/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Buscar Usuario
+$routes->post('/srchIns/(:num)/(:any)', 'Insumos::buscarInsumo/$1/$2'); //Buscar Usuario
 $routes->post('/srchTra/(:num)/(:num)', 'Trabajadores::buscarTrabajador/$1/$2'); //Buscar Usuario
 $routes->post('/login', 'Usuarios::login');
 $routes->get('/salir', 'Usuarios::salir');
