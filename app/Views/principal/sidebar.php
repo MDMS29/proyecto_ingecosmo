@@ -62,7 +62,7 @@
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
                     <li> <hr class="nav-item dropdown" style="border: solid 1px white"></li>
-                    <li><a href="<?php echo base_url('salir') ?>"  class="nav-item dropdown; salir" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li></li>
+                    <li><a href="<?php echo base_url('salir') ?>"  class="nav-item dropdown; salir  " href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li></li>
                 </ul>
             </div>
         </div>

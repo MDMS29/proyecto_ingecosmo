@@ -1,8 +1,11 @@
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
++
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="1">Razon Social</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a>
+        </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -56,7 +59,7 @@
                         <div class="mb-3">
                             <label style="margin:0;" for="message-text" class="textoP">NIT:</label>
                             <input type="number" class="inputP" id="nit" name="nit"></input>
-                            <small id="msgNit" class="invalido"></small>
+                            <small id="msgDoc" class="invalido"></small>
                         </div>
 
                         <div class="mb-3">
@@ -107,9 +110,28 @@
     var inputRazonSocial = 0;
     var inputNit = 0;
     var ContadorPRC = 0
-    var validRazonSocial; 
+    var validRazonSocial;
     var validNit;
 
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+
+    //Mostrar mensajes de SwalFire
+    function mostrarMensaje(tipo, msg) {
+        Swal.fire({
+            position: 'center',
+            icon: `${tipo}`,
+            text: `${msg}`,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
 
     $('#modalConfirmarP').on('show.bs.modal', function(e) {
@@ -158,9 +180,63 @@
         },
 
     });
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableAliados.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
 
+    //Insertar y editar Trabajador
+    function seleccionarAliado(id, tp) {
+        if (tp == 2) {
+            //Actualizar datos
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchAli/') ?>" + id + "/" + 0,
+                dataType: 'json',
+
+            }).done(function(res) {
+                $('#tituloModal').text('Editar Aliado')
+                $('#tp').val(2)
+                $('#id').val(res[0]['id_trabajador'])
+                $('#RazonSocial').val(res[0]['razon_social  '])
+                $('#nit').val(res[0]['n_identificacion'])
+                $('#direccion').val(res[0]['direccion'])
+                $('#btnGuardar').text('Actualizar')
+            })
+        } else {
+            //Insertar datos
+            $('#tituloModal').text('Agregar Aliado')
+            $('#tp').val(2)
+            $('#id').val('')
+            $('#RazonSocial').val('')
+            $('#nit').val('')
+            $('#direccion').val('')
+            $('#btnGuardar').text('Agregar')
+        }
+    }
+        //Funcion para buscar trabajador segun su identificacion
+        function buscarAliadoRzn(id, inputNit) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('srchAli/') ?>" + id + "/" + inputNit,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgDoc').text('')
+                    validIdent = true
+                } else if (res[0] != null) {
+                    $('#msgDoc').text('* Numero de identificación invalido *')
+                    validIdent = false
+                }
+            }
+        })
+    }
     //Envio de formulario
-    $('#formularioProveedores').on('submit', function(e) {
+    $('#formularioAliados').on('submit', function(e) {
         e.preventDefault()
         $('#btnGuardar').attr('disabled', '')
         tp = $('#tp').val()
@@ -170,7 +246,7 @@
         direccion = $('#direccion').val()
 
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial!=true|| validNit!=true) {
+        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial != true || validNit != true) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -204,7 +280,7 @@
     function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + 0+ "/" + inputRazonSocial,
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + 0 + "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -217,12 +293,12 @@
             }
         })
     }
-    
+
     //Validacion de Nit
     function buscarNit(id, inputNit) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliados/') ?>" + 0+ "/" + inputNit,
+            url: "<?php echo base_url('/aliados/buscarAliados/') ?>" + 0 + "/" + inputNit,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -236,12 +312,12 @@
         })
     }
 
-    
+
     function seleccionarAliado(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id+0,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + 0,
                 dataType: 'json',
                 success: function(res) {
                     $('#tituloModal').text('EDITAR')
