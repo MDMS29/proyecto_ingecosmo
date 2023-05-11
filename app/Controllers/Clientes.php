@@ -24,10 +24,10 @@ class Clientes extends BaseController
         $this->correos = new EmailModel();
     }
 
-    public function obtenerCLientes()
+    public function obtenerClientes()
     {
         $estado = $this->request->getPost('estado');
-        $res = $this->clientes->obtenerCLientes($estado);
+        $res = $this->clientes->obtenerClientes($estado);
         return json_encode($res);
     }
     public function index()
@@ -43,7 +43,6 @@ class Clientes extends BaseController
 
     public function insertar()
     {
-
         $tp = $this->request->getPost('tp');
         $idCLiente = $this->request->getPost('id');
         $nombre_p= $this->request->getPost('nombreP');
@@ -61,7 +60,6 @@ class Clientes extends BaseController
 
         if ($tp == 2) {
             //Actualizar datos
-            $res = $this->clientes->buscarCliente($idCLiente, 0);
             $clienteUpdate = [
                 'n_identificacion' => $nIdenti,
                 'nombre_p' => $nombre_p,
