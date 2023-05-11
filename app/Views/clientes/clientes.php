@@ -388,6 +388,7 @@
             correos = []
             guardarCorreo()
             guardarTelefono()
+            limpiarCampos(0)
             $('#tituloModal').text('Agregar')
             $('#tp').val(1)
             $('#id').val(0)
