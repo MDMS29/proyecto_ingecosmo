@@ -8,6 +8,7 @@ use App\Models\TercerosModel;
 use App\Models\MarcasModel;
 use App\Models\ParamModel;
 use App\Models\PropietariosModel;
+use App\Models\MoviEncModel;
 
 class Vehiculos extends BaseController
 {
@@ -16,6 +17,7 @@ class Vehiculos extends BaseController
     protected $marcas;
     protected $param;
     protected $propietario;
+    protected $movimiento;
     public function __construct()
     {
         $this->vehiculos = new VehiculosModel();
@@ -23,6 +25,7 @@ class Vehiculos extends BaseController
         $this->marcas = new MarcasModel();
         $this->param = new ParamModel();
         $this->propietario = new PropietariosModel();
+        $this->movimiento = new MoviEncModel();
         helper('sistema');
     }
     public function obtenerVehiculos()
@@ -94,6 +97,10 @@ class Vehiculos extends BaseController
             'usuario_crea' => $usuarioCrea
         ];
 
+        $dataMovimiento => [
+            
+        ];
+
         if ($tp == 2) {
             if ($this->vehiculos->update($idVechiculo, $data)) {
                 $res = $this->propietario->obtenerPropietario($idVechiculo);
@@ -104,6 +111,7 @@ class Vehiculos extends BaseController
                 ];
                 if (empty($res)) {
                     if ($this->propietario->save($dataPropie)) {
+                        $this->movimiento->save()
                         return json_encode(1);
                     } else {
                         return json_encode(2);

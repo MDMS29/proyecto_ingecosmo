@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('css/vehiculos/vehiculos.css') ?>">
+
 <!-- TABLA MOSTRAR VEHICULOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/icons/vehiculo-b.png') ?>" /> Vehiculos</h2>
@@ -454,7 +455,7 @@
         verificarOrdenPlaca("<?= base_url('vehiculos/buscarVehiculo') ?>", data, 'msgPlaca', 'Placa')
     })
     //Verificacion de fecha entrada y salida
-    $('#fechaEntrada').on('change', function(e){
+    $('#fechaEntrada').on('change', function(e) {
         fechaSalida = $('#fechaSalida').val()
         fechaEntrada = $('#fechaEntrada').val()
         if (fechaSalida != '') {
@@ -501,17 +502,7 @@
         estado = $('#estado').val()
         fechaEntrada = $('#fechaEntrada').val()
         fechaSalida = $('#fechaSalida').val()
-        if (tipoCliente != 5 || 56) {
-            mostrarMensaje('error', '¡No se permite cambiar el codigó!')
-            $.ajax({
-                url: '<?= base_url('usuarios/salir') ?>',
-                type: 'POST',
-                data: {},
-                success: function(data) {
 
-                }
-            })
-        }
         if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada, fechaSalida].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {

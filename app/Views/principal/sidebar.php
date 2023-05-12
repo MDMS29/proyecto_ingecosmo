@@ -19,10 +19,12 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <!-- SCRIPTS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" rel="stylesheet">
     <script src="<?= base_url('js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('dataTable/jquery.dataTables.js') ?>"></script>
     <script src="<?= base_url('dataTable/dataTables.bootstrap5.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
+    
 </head>
 
 <body class=" d-flex align-items-stretch">
@@ -61,8 +63,11 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
-                    <li> <hr class="nav-item dropdown" style="border: solid 1px white"></li>
-                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li></li>
+                    <li>
+                        <hr class="nav-item dropdown" style="border: solid 1px white">
+                    </li>
+                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -85,7 +90,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('clientes') ?>"  id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
+                            <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
                                 <p id="pa">Clientes</p>
                             </a>
                         </li>

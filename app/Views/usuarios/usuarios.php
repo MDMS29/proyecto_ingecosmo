@@ -219,7 +219,7 @@
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
                                 <select class="form-select form-select" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
-                                    <option value="P">Primaria</option>
+                                    <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
                                 </select>
                             </div>
@@ -277,7 +277,7 @@
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
                             <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
-                                <option value="P">Primaria</option>
+                                <option value="P">Principal</option>
                                 <option value="S">Secundaria</option>
                             </select>
                         </div>
@@ -790,7 +790,7 @@
         }
         contador += 1
         let info = {
-            id: [editTel].includes('') || editTel == 0 ?  Math.random().toString()  : editTel,
+            id: [editTel].includes('') || editTel == 0 ?  `${contador+=1}e`  : editTel,
             tipo,
             numero,
             prioridad
@@ -872,12 +872,12 @@
             $('#bodyTel').html(cadena)
         } else {
             for (let i = 0; i < telefonos.length; i++) {
-                cadena += ` <tr class="text-center" id=${telefonos[i].id}>
+                cadena += ` <tr class="text-center" id='${telefonos[i].id}'>
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
-                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>  
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>  
                                 <td>
-                                    <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
@@ -935,7 +935,7 @@
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: [editCorreo].includes('') || editCorreo == 0 ? Math.random().toString() : editCorreo,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,
             prioridad
         }
@@ -991,11 +991,11 @@
             $('#bodyCorre').html(cadena)
         } else {
             for (let i = 0; i < correos.length; i++) {
-                cadena += ` <tr class="text-center" id=${correos[i].id}>
+                cadena += ` <tr class="text-center" id='${correos[i].id}'>
                                 <td>${correos[i].correo}</td>
-                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Correo">
                                 </td>
                             </tr>`
@@ -1007,8 +1007,6 @@
     function editarCorreo(id) {
         console.log(id)
         const fila = $(`#${id}`);
-
-        console.log(`#${id}`)
         const correo = fila.find('td').eq(0)
         const prioridad = fila.find('td').eq(1)
         $('#correoAdd').val(correo.text());
