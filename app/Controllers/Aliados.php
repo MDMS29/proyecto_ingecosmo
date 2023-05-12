@@ -36,7 +36,7 @@ class Aliados extends BaseController
         $idTer = $this->request->getPost('id');
         $razonSocial= $this->request->getPost('RazonSocial');
         $nit = $this->request->getPost('nit');
-        $tipoDoc = $this->request->getPost('tipoDoc');
+        $tipoDoc = 2;
         $tipoTer = 56;
         $direccion = $this->request->getPost('direccion');
 
@@ -68,7 +68,7 @@ class Aliados extends BaseController
         }
     }
 
-    public function buscarAliado($id, $razonSocial)
+    public function buscarAliado($id, $nit)
     {
         $array = array();
         if ($id != 0) {
@@ -77,26 +77,44 @@ class Aliados extends BaseController
                 array_push($array, $data);
                 return json_encode($array);
             }
-        } else if ($razonSocial != 0) {
-            $data = $this->aliados->buscarAliado(0, $razonSocial);
+        } else if ($nit != 0) {
+            $data = $this->aliados->buscarAliado(0, $nit);
             array_push($array, $data);
             return json_encode($array);
-        } else if ($id != 0 && $razonSocial != 0) {
-            $data = $this->aliados->buscarAliado($id, $razonSocial);
+        } else if ($id != 0 && $nit != 0) {
+            $data = $this->aliados->buscarAliado($id, $nit);
             array_push($array, $data);
             return json_encode($array);
         }
     }
 
-    public function eliminar($id, $estado)
+    // public function eliminar($id, $estado)
+    // {
+    //     $aliados_ = $this->aliados->eliminaAliados($id, $estado);
+    //     return redirect()->to(base_url('/aliados'));
+    // }
+    // public function eliminados(){
+    //     $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '56')->findAll();
+    //     $data = ['aliados' => $aliados];
+    //     echo view('/principal/sidebar');
+    //     echo view('/aliados/eliminados', $data);
+    // }
+
+    public function cambiarEstado($id, $estado)
     {
-        $aliados_ = $this->aliados->eliminaAliados($id, $estado);
-        return redirect()->to(base_url('/aliados'));
+        if ($this->aliados->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return redirect()->to(base_url('aliados/eliminados'));
+            }else{
+                return redirect()->to(base_url('aliados'));
+            }
+        }
     }
     public function eliminados(){
-        $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '56')->findAll();
-        $data = ['aliados' => $aliados];
+        $param = $this->param->obtenerTipoDoc();
+        $data = ['tipoDoc' => $param];
         echo view('/principal/sidebar');
         echo view('/aliados/eliminados', $data);
     }
+
 }

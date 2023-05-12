@@ -1,5 +1,5 @@
-+
-
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
@@ -168,9 +168,9 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
+                        '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ',2)" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
 
-                        '<input type="image" class="btn" data-href=<?php echo base_url('/aliado/eliminar/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
+                        '<input type="image" class="btn" data-href=<?php echo base_url('/aliados/cambiarEstado/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
                     );
                 },
             }
@@ -189,37 +189,15 @@
         column.visible(!column.visible());
     });
 
-    //Insertar y editar Trabajador
-    function seleccionarAliado(id, tp) {
-        if (tp == 2) {
-            //Actualizar datos
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchAli/') ?>" + id + "/" + 0,
-                dataType: 'json',
-
-            }).done(function(res) {
-                $('#tituloModal').text('Editar Aliado')
-                $('#tp').val(2)
-                $('#id').val(res[0]['id_trabajador'])
-                $('#RazonSocial').val(res[0]['razon_social  '])
-                $('#nit').val(res[0]['n_identificacion'])
-                $('#direccion').val(res[0]['direccion'])
-                $('#btnGuardar').text('Actualizar')
-            })
-        } else {
-            //Insertar datos
-            $('#tituloModal').text('Agregar Aliado')
-            $('#tp').val(2)
-            $('#id').val('')
-            $('#RazonSocial').val('')
-            $('#nit').val('')
-            $('#direccion').val('')
-            $('#btnGuardar').text('Agregar')
-        }
+    //Limpiar campos de telefonos y correos
+    function limpiarCampos(accion) {
+        $('#msgConfirRes').text('')
+        $('#msgConfir').text('')
     }
-        //Funcion para buscar trabajador segun su identificacion
-        function buscarAliadoRzn(id, inputNit) {
+
+
+    //Funcion para buscar trabajador segun su identificacion
+    function buscarAliadoNit(id, inputNit) {
         $.ajax({
             type: 'POST',
             url: "<?php echo base_url('srchAli/') ?>" + id + "/" + inputNit,
@@ -227,26 +205,47 @@
             success: function(res) {
                 if (res[0] == null) {
                     $('#msgDoc').text('')
-                    validIdent = true
+                    validNit = true
                 } else if (res[0] != null) {
                     $('#msgDoc').text('* Numero de identificación invalido *')
-                    validIdent = false
+                    validNit = false
                 }
             }
         })
     }
+    var validNit; //Valor para la identificación si es valido o invalido
+    $('#nit').on('input', function(e) {
+        inputNit = $('#nit').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarAliadoNit(0, inputNit)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchAli/') ?>" + id + "/" + inputNit,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['n_identificacion'] == inputNit) {
+                        $('#msgDoc').text('')
+                        validNit = true
+                    } else {
+                        buscarAliadoNit(0, inputNit)
+                    }
+                }
+            })
+        }
+    })
     //Envio de formulario
     $('#formularioAliados').on('submit', function(e) {
         e.preventDefault()
-        $('#btnGuardar').attr('disabled', '')
         tp = $('#tp').val()
         id = $('#id').val()
         RazonSocial = $('#RazonSocial').val()
         nit = $('#nit').val()
         direccion = $('#direccion').val()
-
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial != true || validNit != true) {
+        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -259,8 +258,7 @@
                     nit,
                     direccion
                 },
-                success: function(idUser) {
-
+                success: function(idTer) {
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Proveedor!')
                     } else {
@@ -268,6 +266,7 @@
                     }
                 }
             }).done(function(data) {
+                limpiarCampos('msgConfir')
                 $('#agregarAliado').modal('hide')
                 tableAliados.ajax.reload(null, false); //Recargar tabla
                 $('#btnGuardar').removeAttr('disabled') //jumm
@@ -317,10 +316,10 @@
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + 0,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0,
                 dataType: 'json',
                 success: function(res) {
-                    $('#tituloModal').text('EDITAR')
+                    $('#tituloModal').text('Editar Aliado')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -340,9 +339,19 @@
             $('#btnGuardar').text('Agregar')
 
         }
+
     }
 
     $('#btnNo').click(function() {
         $("#modalConfirmarP").modal("hide");
     });
+
+    //Cambiar estado de "Activo" a "Eliminado" 
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
+        $('#btnSi').on('click', function(e) {
+            mostrarMensaje('success', 'Se ha eliminado el trabajador')
+            tableAliados.ajax.reload(null, false)
+        })
+    })
 </script>
