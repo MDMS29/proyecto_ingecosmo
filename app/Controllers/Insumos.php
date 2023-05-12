@@ -65,6 +65,7 @@ class Insumos extends BaseController
         $precioCompra = $this->request->getPost('precioCompra');
         $precioVenta = $this->request->getPost('precioVenta');
         $estante = $this->request->getPost('estante');
+        $fila = $this->request->getPost('fila');
         $tipoMaterial = $this->request->getPost('tipoMaterial');
 
         $data = [
@@ -75,6 +76,7 @@ class Insumos extends BaseController
             'precio_compra' => $precioCompra,
             'precio_venta' => $precioVenta,
             'estante' => $estante,
+            'fila' => $fila,
             'tipo_material' => $tipoMaterial,
         ];
 

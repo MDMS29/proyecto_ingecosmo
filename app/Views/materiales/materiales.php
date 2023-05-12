@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('css/materiales.css') ?>">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <!-- contenedor card -->
@@ -25,6 +26,7 @@
           <div class="contenido2">
             <div class="Imagenes">
               <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo" id="btnUsar"></input>
+
               <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/usarM.png" width="30" height="30" title="Usar insumo"></input>
             </div>
           </div>
@@ -42,8 +44,8 @@
 
 <!-- modal agregar -->
 
-<input class="form-control" id="id" name="id" type="text" value="0" hidden>
 <form id="formularioAgregar" autocomplete="off">
+  <input class="form-control" id="id" name="id" type="text" value="0" hidden>
   <input type="text" value="<?= $idCate ?>" id="idCategoria" hidden>
 
   <input type="text" name="id" id="id" hidden>
@@ -61,31 +63,31 @@
           <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="modalAgregar2">
-
-          <div class="camposAgregar">
-            <label for="exampleDataList" class="form-label">Nombre:</label>
+          
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Nombre:</label>
             <div>
               <input class="form-control" id="nombre" name="nombre" placeholder="">
               <small id="msgAgregar" class="invalido"></small>
             </div>
           </div>
 
-          <div class="camposAgregar">
-            <label for="exampleDataList" class="form-label">Precio Compra:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
             <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
           </div>
 
-          <div class="camposAgregar">
-            <label for="exampleDataList" class="form-label">Precio Venta:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
             <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
           </div>
 
-          <div class="camposAgregar">
-            <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
             <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
           </div>
         </div>
-        <div class="modal-footer" id="modal-footer">
+        <div class="modal-footer" id="modalFooter">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
@@ -97,7 +99,7 @@
 
 <!-- Modal Detalles- Editar-->
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content" id="modalContentD">
 
       <div class="modal-header" id="modalHeaderD">
@@ -111,36 +113,46 @@
 
       <div class="modal-body" id="modalBodyD">
 
-        <div class="campos">
-          <label for="exampleDataList" class="form-label">Nombre insumo:</label>
+      <div class="d-flex column-gap-3" style="width: 100%">
+      <div class="mb-3" style="width: 90%;">
+          <label for="exampleDataList" class="col-form-label">Nombre insumo:</label>
           <input type="text" class="form-control" id="nombre1" name="nombre" placeholder="" disabled>
         </div>
 
-        <div class="campos">
-          <label for="exampleDataList" class="form-label">Precio de Venta:</label>
+        <div class="mb-3" style="width: 90%;">
+          <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
           <input type="text" class="form-control" id="precioVenta" name="precioVenta" placeholder="" disabled>
         </div>
 
-        <div class="campos">
-          <label for="exampleDataList" class="form-label">Precio de Compra:</label>
+        <div class="mb-3" style="width: 90%;">
+          <label for="exampleDataList" class="col-form-label">Precio de Compra:</label>
           <input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="" disabled>
         </div>
 
-        <div class="campos">
-          <label for="exampleDataList" class="form-label">Cantidad Vendida:</label>
+        <div class="mb-3" style="width: 90%;">
+          <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
           <input type="text" class="form-control" id="cantidadVendida" name="cantidadVendida" style="margin-left: 15px;" placeholder="" disabled>
         </div>
+      </div>
 
-        <div class="campos">
-          <label for="exampleDataList" class="form-label">Cantidad Actual:</label>
+      <div class="d-flex column-gap-3" style="width: 90%">
+
+        <div class="mb-3" style="width: 80%;">
+          <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
           <input type="text" class="form-control" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
         </div>
-        <div class="campos">
-          <label for="exampleDataList" class="form-label"> Estante:</label>
+      
+      <div class="mb-3" style="width: 80%;">
+        <label for="exampleDataList" class="col-form-label"> Estante:</label>
           <input type="text" class="form-control" id="estante" name="estante" placeholder="" disabled>
         </div>
-
+        <div class="mb-3" style="width: 80%;">
+        <label for="exampleDataList" class="col-form-label">Fila:</label>
+          <input type="text" class="form-control" id="fila" name="fila" placeholder="" disabled>
+        </div>
       </div>
+ 
+    </div>
 
       <div class="modal-footer" id="modalFooterD">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
@@ -163,35 +175,35 @@
           <input type="text" name="idMaterial" id="idMaterial" hidden>
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div class="HEADER">
-            <h1 class="modal-title fs-5 w-100 text-center" id="titulo3">Usar Insumo</h1>
+            <h1 class="modal-title fs-5 w-100 text-center">Usar Insumo</h1>
             <button type="button" class="btn" data-bs-toggle="modal" onclick="limpiarCampos()" aria-label="Close">X</button>
           </div>
         </div>
 
         <div class="modal-body" id="modalBodyUsar">
 
-          <div class="camposUsar">
-            <label for="exampleDataList" class="form-label">Nombre del insumo:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Nombre del insumo:</label>
             <input class="form-control" id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
           </div>
 
-          <div class="camposUsar">
-            <label for="exampleDataList" class="form-label">Cantidad Existente:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Cantidad Existente:</label>
             <input class="form-control" id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
           </div>
-          <div class="camposUsar">
-            <label for="exampleDataList" class="form-label">Cantidad a Usar:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
             <div>
               <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
               <small id="msgUsar" class="invalido"></small>
             </div>
           </div>
-          <div class="camposUsar">
-            <label for="exampleDataList" class="form-label">Precio de Venta:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
             <input class="form-control" id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
           </div>
-          <div class="camposUsar">
-            <label for="exampleDataList" class="form-label">Subtotal:</label>
+          <div class="mb-3">
+            <label for="exampleDataList" class="col-form-label">Subtotal:</label>
             <input class="form-control" id="subtotal" name="subtotal" placeholder="" disabled>
           </div>
 
@@ -241,6 +253,8 @@
   }
 
   // funcion traer detalles del material
+
+  
   function detallesMaterial(id_material) {
     dataURL = "<?php echo base_url('/materiales/detallesMaterial'); ?>" + "/" + id_material;
     $.ajax({
@@ -256,12 +270,15 @@
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
         $("#estante").val(rs[0]['estante']);
+        $("#fila").val(rs[0]['fila']);
+
 
         $("#nombre1").attr('disabled', '');
         $("#precioVenta").attr('disabled', '');
         $("#precioCompra").attr('disabled', '');
         $("#cantidadVendida").attr('disabled', '');
         $("#estante").attr('disabled', '');
+        $("#fila").attr('disabled', '');
         $("#cantidadActual").attr('disabled', '');
         $("#btnUsar1").removeAttr('hidden', '');
         $("#detallesModal").modal("show");
@@ -274,6 +291,7 @@
         precioCompra.style.background = '#e9ecef';
         cantidadActual.style.background = '#e9ecef';
         estante.style.background= '#e9ecef';
+        fila.style.background= '#e9ecef';
         $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
 
       }
@@ -283,7 +301,7 @@
 
   function validarInput() {
     document.getElementById("btnValidar").disabled = !document.getElementById("cantidadUsar").value.length;
-    document.getElementById("btnAgregar").disabled = !document.getElementById("nombre").value.length;
+  
   }
 
 
@@ -335,7 +353,9 @@
   function agregar(id, tp){
     $('#tp').val(tp)
   }
-  var validarInput; //Valor para la identificación si es valido o invalido
+  var validarInput; 
+  
+  //Valor para el nombre si es valido o invalido
   $('#nombre').on('input', function(e) {
     nombre = $('#nombre').val()
     tp = $('#tp').val()
@@ -358,6 +378,8 @@
       })
     }
   })
+
+  // Validacion de nombre del insumo
 
   function buscarInsumoNom(id_material, nombre) {
     $.ajax({
@@ -392,16 +414,18 @@
     $("#cantidadVendida").removeAttr('hidden', '');
     $("#cantidadActual").removeAttr('disabled', '');
     $("#estante").removeAttr('disabled', '');
+    $("#fila").removeAttr('disabled', '');
     $("#btnUsar1").attr('hidden', '');
     $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar.png') ?>');
     $("#btnEditar").text('Actualizar');
     $("#btnEditar").attr('onclick', 'actualizar()');
 
-    precioVenta.style.background = '#F8F9FF';
-    nombre1.style.background = '#F8F9FF';
-    precioCompra.style.background = '#F8F9FF';
-    cantidadActual.style.background = '#F8F9FF';
-    estante.style.background = '#F8F9FF';
+    precioVenta.style.background = '#FFFFFF';
+    nombre1.style.background = '#FFFFFF';
+    precioCompra.style.background = '#FFFFFF';
+    cantidadActual.style.background = '#FFFFFF';
+    estante.style.background = '#FFFFFF';
+    fila.style.background = '#FFFFFF';
 
   }
 
@@ -415,9 +439,10 @@
     cantidadVendida = $("#cantidadVendida").val()
     precioVenta = $("#precioVenta").val()
     estante = $("#estante").val()
+    fila = $("#fila").val()
     cantidadActual = $("#cantidadActual").val()
     idCategoria = $("#idCategoria").val()
-    if ([nombre, precioCompra, cantidadActual, cantidadVendida, estante].includes("")) {
+    if ([nombre, precioCompra, cantidadActual, cantidadVendida, estante, fila].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -436,6 +461,7 @@
           cantidadActual: cantidadActual,
           cantidadVendida: cantidadVendida,
           estante: estante,
+          fila: fila,
           tipoMaterial: 9,
           idCategoria: idCategoria
         },

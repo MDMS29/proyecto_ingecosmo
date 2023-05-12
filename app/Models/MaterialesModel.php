@@ -13,7 +13,7 @@ class MaterialesModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false; 
     
-    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'n_iconos', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material','cantidad_vendida','cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'usuario_crea', 'fecha_crea'];
     
     protected $useTimestamps = true;
     protected $createdField  = 'fecha_crea';

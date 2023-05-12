@@ -52,9 +52,6 @@
 #MasBaterias{
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
 }
 
 
@@ -133,10 +130,13 @@
 }
 #modalContentD{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    border: 5px solid #161666;
+    position: relative;
+    top: 100px;
+    border: 5px solid var(--azulBase) !important;
     border-radius: 10px;
+    background-color: white;
 }
 
 #modalHeaderD{
@@ -161,25 +161,32 @@
 
 #modalBodyD{
     display: flex;
+    padding: 30px;
     justify-content:center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    height: 300px;
+    height: 250px;
    
 }
-.campos{
-    width: 300px;
-    padding-left:20px;
-    display: flex;
-    flex-direction: row;
-    font-weight: 500;
-    margin-left: 15px;
+
+.d-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+label{
+    color: #1b335b;
+    font-weight: 600;
+    
 }
 
 input[type="text"]{
     text-align: center;
+    margin-bottom: 15px;
+    margin-left: 15px;
 }
 
 
@@ -201,31 +208,26 @@ input[type="text"]{
 /* 
 estilos modal agregar  */
 
-.camposAgregar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:row;
-    width: 100%;
-    margin-top: 20px;
-    bottom: 50%;
-}
+
 #modalAgregar2{
 
-    margin: 8px;
+    display: flex;
+    justify-content:center;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-#modalHeader{
-    text-align: center;
-}
 
+#modalFooter{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
 
 #modalContent{
-    height: 460px; 
-    border: 5px solid #161666; 
+    height: 550px; 
+    border: 5px solid var(--azulBase) !important;
     border-radius: 10px;
 }
 
@@ -259,22 +261,12 @@ estilos modal agregar  */
 
 /* estilos modal usar */
 
-.camposUsar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:row;
-    width: 100%;
-    margin-top: 20px;
-    bottom: 50%;
-
-    
-}
 #modalBodyUsar{
-    margin: 8px;
-    align-items: center;
+    display: flex;
     justify-content: center;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 #modalHeaderUsar{
         width: 100%;
@@ -291,10 +283,9 @@ estilos modal agregar  */
 #nombreI, #cantidadU{
     margin-right: 10px;
     border-radius: 5px;
-    /* border: 1px solid black; */
     height: 30px;
     width: 250px;
-    /* background-color: var(--grisModal); */
+
 }
 
 .HEADER{
@@ -304,15 +295,7 @@ estilos modal agregar  */
     width: 100%;
 }
 
-#usar{
-    width: 50px;
-    margin-right: 10px;
-}
 
-#editar{
-    width: 30px;
-    margin-right: 10px;
-}
 
 .modalTitulo{
     font-family: 'Nunito';
@@ -325,21 +308,9 @@ estilos modal agregar  */
 #nombre1, #precioCompra, #precioVenta, #cantidadActual, #estante{
     margin-left: 15px;
     border-radius: 5px;
-
     background-color: var(--grisModal);
 
 }
-
-#titulo{
-    font-size: 20px;
-    display: flex;
-    margin-left: 10px;
-    margin-bottom: 1px;
-    font-family: 'Nunito', sans-serif; 
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
 
 /* USAR */
 
@@ -349,20 +320,17 @@ estilos modal agregar  */
     height: 30px;
     width: 250px;
     background-color: var(--grisModal);
-
 }
 
 #cantidadUsar{
     margin-right: 10px;
     border-radius: 5px;
-    /* border: 1px solid black; */
     height: 30px;
     width: 250px;
-    background: rgb(248, 249, 255);
+    background: rgb(255, 255, 255);
 }
 
 .invalido{
-    color: red;
     color: red;
     font-size: 9px;
     font-weight: 600;
