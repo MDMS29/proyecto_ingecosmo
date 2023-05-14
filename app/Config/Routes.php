@@ -41,6 +41,7 @@ $routes->post('/srchUsu/(:num)/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Busc
 $routes->post('/srchCli/(:num)/(:num)', 'Clientes::buscarCliente/$1/$2'); //Buscar Cliente
 $routes->post('/srchPro/(:num)/(:alpha)/(:num)', 'Proveedores::buscarProveedor/$1/$2/$3'); //Buscar Cliente
 $routes->post('/srchTra/(:num)/(:num)', 'Trabajadores::buscarTrabajador/$1/$2'); //Buscar Usuario
+$routes->post('/srchAli/(:num)/(:num)', 'Aliados::buscarAliado/$1/$2'); //Buscar Aliado
 $routes->post('/login', 'Usuarios::login');
 $routes->get('/salir', 'Usuarios::salir');
 

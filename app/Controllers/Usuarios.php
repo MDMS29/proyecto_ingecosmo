@@ -8,6 +8,7 @@ use App\Models\ParamModel;
 use App\Models\RolesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
+use CodeIgniter\CLI\Console;
 
 class Usuarios extends BaseController
 {
@@ -27,24 +28,48 @@ class Usuarios extends BaseController
     }
     public function login()
     {
-        $nIdenti = $this->request->getPost('usuario');
-        $contrasena = $this->request->getVar('contrasena');
-        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
-        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            $data = [
-                "id" => $datos['id_usuario'],
-                "nombre" => $datos['nombre_p'],
-                "apellido" => $datos['apellido_p'],
-                "idRol" => $datos['idRol'],
-                "rol" => $datos['nombre_rol']
-            ];
-            $session = session();
-            $session->set($data);
-            return redirect()->to(base_url('/home'));
+        $usuario = $this->request->getPost('usuario');
+        $contra = $this->request->getVar('contrasena');
+        if (!empty($usuario) && !empty($contra)) {
+            $nIdenti = $usuario;
+            $contrasena = $contra;
+            $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
+            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
+            if (!empty($datos) && password_verify($contra, $datos['contrasena'])) {
+                $data = [
+                    "id" => $datos['id_usuario'],
+                    "nombre" => $datos['nombre_p'],
+                    "apellido" => $datos['apellido_p'],
+                    "idRol" => $datos['idRol'],
+                    "rol" => $datos['nombre_rol']
+                ];
+                $session = session();
+                $session->set($data);
+                return json_encode(1);
+            } else {
+                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+            }
         } else {
-            return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+            $nIdenti = $this->request->getPost('usuario');
+            $contrasena = $this->request->getVar('contrasena');
+            $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
+            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
+            if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
+                $data = [
+                    "id" => $datos['id_usuario'],
+                    "nombre" => $datos['nombre_p'],
+                    "apellido" => $datos['apellido_p'],
+                    "idRol" => $datos['idRol'],
+                    "rol" => $datos['nombre_rol']
+                ];
+                $session = session();
+                $session->set($data);
+                return json_encode(1);
+            } else {
+                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+            }
         }
+
     }
 
     public function salir()
@@ -52,6 +77,8 @@ class Usuarios extends BaseController
         $session = session();
         $session->destroy();
         return redirect()->to(base_url('/'));
+
+
     }
     public function obtenerUsuarios()
     {
@@ -65,7 +92,7 @@ class Usuarios extends BaseController
         $roles = $this->roles->obtenerRoles();
         $tipoTel = $this->param->obtenerTipoTel();
 
-        $data = [ 'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
+        $data = ['tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
 
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
@@ -142,9 +169,9 @@ class Usuarios extends BaseController
         } else {
             $contra = $res['contrasena'];
         }
-        if($this->usuarios->update($idUser, ['contrasena' => $contra])){
+        if ($this->usuarios->update($idUser, ['contrasena' => $contra])) {
             return json_encode(1);
-        }else{
+        } else {
             return json_encode(2);
         }
     }
@@ -172,9 +199,9 @@ class Usuarios extends BaseController
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('estado');
         if ($this->usuarios->update($id, ['estado' => $estado])) {
-            if($estado == 'A'){
+            if ($estado == 'A') {
                 return '¡Se ha reestablecido el usuario!';
-            }else{
+            } else {
                 return '¡Se ha eliminado el usuario!';
             }
         }

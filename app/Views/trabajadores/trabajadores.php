@@ -62,8 +62,7 @@
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
-                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS">
+                                   <input type="text" name="apellido_s" class="form-control" id="apellidoS">
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">

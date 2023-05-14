@@ -4,22 +4,27 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
 use App\Models\TercerosModel;
+use App\Models\ParamModel;
 
 class Aliados extends BaseController
 {
     protected $aliados;
+    protected $param;
     public function __construct()
     {
         $this->aliados = new TercerosModel();
+        $this->param = new ParamModel();
     }
     public function index()
     {
+        $param = $this->param->obtenerTipoDoc();
+        $data = [ 'tipoDoc' => $param];
 
         echo view('/principal/sidebar');
-        echo view('/aliados/aliados');
+        echo view('/aliados/aliados', $data);
     }
 
-    public function obtenerAliadosdores()
+    public function obtenerAliados()
     {
         $estado = $this->request->getPost('estado');
         $res = $this->aliados->obtenerAliados($estado);
@@ -28,51 +33,88 @@ class Aliados extends BaseController
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
-        $tipoTercero = 8;
-        $tipoDocumento = 2;
-        if ($this->request->getMethod() == "post") {
-            if ($tp == 1) {
-                $this->aliados->save([
-                    'razon_social' => $this->request->getPost('RazonSocial'),
-                    'n_identificacion' => $this->request->getPost('nit'),
-                    'direccion' => $this->request->getPost('direccion'),
-                    'tipo_tercero' => $tipoTercero,
-                    'tipo_doc' => $tipoDocumento
-                ]);
-            } else {
-                $this->aliados->update(
-                    $this->request->getPost('id'),
-                    [
-                        'razon_social' => $this->request->getPost('RazonSocial'),
-                        'n_identificacion' => $this->request->getPost('nit'),
-                        'direccion' => $this->request->getPost('direccion'),
-                        'tipo_tercero' => $tipoTercero,
-                        'tipo_doc' => $tipoDocumento
-                    ]
-                );
+        $idTer = $this->request->getPost('id');
+        $razonSocial= $this->request->getPost('RazonSocial');
+        $nit = $this->request->getPost('nit');
+        $tipoDoc = 2;
+        $tipoTer = 56;
+        $direccion = $this->request->getPost('direccion');
+
+        if ($tp == 2) {
+            //Actualizar datos
+            $res = $this->aliados->buscarAliado($idTer, 0);
+            $aliadoUpdate = [
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nit,
+                'razon_social' => $razonSocial,
+                'tipo_tercero' => $tipoTer,
+                'direccion' => $direccion,
+            ];
+            $this->aliados->update($idTer, $aliadoUpdate);
+            return $idTer;
+        } else {
+            //Insertar datos
+            //Si la respuesta esta vacia - guardar
+            $aliadoSave = [
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nit,
+                'razon_social' => $razonSocial,
+                'tipo_tercero' => $tipoTer,
+                'direccion' => $direccion,
+                
+            ];
+            $this->aliados->save($aliadoSave);
+            return json_encode($this->aliados->getInsertID());
+        }
+    }
+
+    public function buscarAliado($id, $nit)
+    {
+        $array = array();
+        if ($id != 0) {
+            $data = $this->aliados->buscarAliado($id, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nit != 0) {
+            $data = $this->aliados->buscarAliado(0, $nit);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($id != 0 && $nit != 0) {
+            $data = $this->aliados->buscarAliado($id, $nit);
+            array_push($array, $data);
+            return json_encode($array);
+        }
+    }
+
+    // public function eliminar($id, $estado)
+    // {
+    //     $aliados_ = $this->aliados->eliminaAliados($id, $estado);
+    //     return redirect()->to(base_url('/aliados'));
+    // }
+    // public function eliminados(){
+    //     $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '56')->findAll();
+    //     $data = ['aliados' => $aliados];
+    //     echo view('/principal/sidebar');
+    //     echo view('/aliados/eliminados', $data);
+    // }
+
+    public function cambiarEstado($id, $estado)
+    {
+        if ($this->aliados->update($id, ['estado' => $estado])) {
+            if($estado == 'A'){
+                return redirect()->to(base_url('aliados/eliminados'));
+            }else{
+                return redirect()->to(base_url('aliados'));
             }
         }
     }
-
-    public function buscarAliados($id, $razonSocial)
-    {
-        $returnData = array();
-        $aliados_ = $this->aliados->traerAliado($id,$razonSocial);
-        if (!empty($aliados_)) {
-            array_push($returnData, $aliados_);
-        }
-        echo json_encode($returnData);
-    }
-
-    public function eliminar($id, $estado)
-    {
-        $proveedores_ = $this->aliados->eliminaAliados($id, $estado);
-        return redirect()->to(base_url('/aliados'));
-    }
     public function eliminados(){
-        $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '8')->findAll();
-        $data = ['proveedores' => $aliados];
+        $param = $this->param->obtenerTipoDoc();
+        $data = ['tipoDoc' => $param];
         echo view('/principal/sidebar');
         echo view('/aliados/eliminados', $data);
     }
+
 }

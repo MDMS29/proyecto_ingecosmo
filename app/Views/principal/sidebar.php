@@ -24,7 +24,7 @@
     <script src="<?= base_url('dataTable/jquery.dataTables.js') ?>"></script>
     <script src="<?= base_url('dataTable/dataTables.bootstrap5.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
-    
+
 </head>
 
 <body class=" d-flex align-items-stretch">
@@ -66,7 +66,7 @@
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
-                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown;" href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
+                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown; salir  " href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
                     </li>
                 </ul>
             </div>
@@ -124,6 +124,11 @@
                                 <p id="pa">Usuarios</p>
                             </a>
                         </li>
+                        <li>
+                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo.png') ?>" /></span>
+                            <p id="pa">Historial Vehiculos</p>
+                        </a>
+                    </li>
                     <?php } else if (session('idRol') == 3) { ?>
                         <li>
                             <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
@@ -147,7 +152,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('salir') ?>" id="aa"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
+                        <a href="<?php echo base_url('salir') ?>" id="aa" class="salir"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
                             <p id="pa">Cerrar Sesion</p>
                         </a>
                     </li>
@@ -169,6 +174,13 @@
     </div>
 
     <script>
+        $('.salir').on('click', function(e) {
+            const informacion = {
+                usuario: '',
+                contrasena: ''
+            };
+            localStorage.setItem("usuario", JSON.stringify(informacion));
+        })
         document.querySelectorAll(".menu").forEach(el => {
             el.addEventListener("click", () => {
                 el.classList.toggle("rotate");
