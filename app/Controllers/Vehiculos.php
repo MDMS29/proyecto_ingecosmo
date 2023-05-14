@@ -185,7 +185,7 @@ class Vehiculos extends BaseController
             'id_vehiculo' => $id,
             'estado' => $estado,
             'fecha_movimiento' => date('Y-m-d'),
-            'tipo_movimiento' => $estado == 44 ? 57 : 59
+            'tipo_movimiento' => $estado == 38 ? 58 : 59
         ];
 
 
