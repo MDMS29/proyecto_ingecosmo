@@ -41,7 +41,7 @@ class Vehiculos extends BaseController
         $tipoCliente = $this->param->obtenerAliadoClientes();
         $combustible = $this->param->obtenerCombustibleVehi('A');
         $data = [
-            'clientes' => $clientes, 'marcas' => $marcas, 
+            'clientes' => $clientes, 'marcas' => $marcas,
             'estadosVehi' => $estados, 'combustible' => $combustible,
             'tipoClientes' => $tipoCliente
         ];
@@ -81,6 +81,8 @@ class Vehiculos extends BaseController
         $fechaEntrada = $this->request->getPost('fechaEntrada');
         $fechaSalida = $this->request->getPost('fechaSalida');
         $usuarioCrea = session('id');
+        $fechaActual = date('Y-m-d');
+        $tipoMov = 0;
 
         $data = [
             'n_orden' => $orden,
@@ -97,13 +99,25 @@ class Vehiculos extends BaseController
             'usuario_crea' => $usuarioCrea
         ];
 
-        $dataMovimiento => [
-            
+        $estado == 38 ? $tipoMov = 58 : $tipoMov = 0;
+
+        $dataMovimiento = [
+            'id_tercero' => $cliente,
         ];
+
 
         if ($tp == 2) {
             if ($this->vehiculos->update($idVechiculo, $data)) {
+                $this->movimiento->save($dataMovimiento); //Movimiento
+
                 $res = $this->propietario->obtenerPropietario($idVechiculo);
+                array_push($dataMovimiento, [
+                    'estado' => $estado,
+                    'id_vehiculo' => $idVechiculo,
+                    'fecha_movimiento' => $fechaActual,
+                    'tipo_movimiento' => $tipoMov
+                ]);
+                //Propietario
                 $dataPropie = [
                     'id_vehiculo' => $idVechiculo,
                     'id_tercero' => $cliente,
@@ -111,7 +125,6 @@ class Vehiculos extends BaseController
                 ];
                 if (empty($res)) {
                     if ($this->propietario->save($dataPropie)) {
-                        $this->movimiento->save()
                         return json_encode(1);
                     } else {
                         return json_encode(2);
@@ -127,11 +140,21 @@ class Vehiculos extends BaseController
         } else {
             if ($this->vehiculos->save($data)) {
                 $idVechiulo = $this->vehiculos->getInsertID();
+
+                $dataMovimiento = [
+                    'id_tercero' => $cliente,
+                    'id_vehiculo' => $idVechiulo,
+                    'fecha_movimiento' => $fechaActual,
+                    'estado' => $estado,
+                    'tipo_movimiento' => 57,
+                    'usuario_crea' => $usuarioCrea
+                ];
                 $dataPropie = [
                     'id_vehiculo' => $idVechiulo,
                     'id_tercero' => $cliente,
                     'tipo_propietario' => $tipoCliente
                 ];
+                $this->movimiento->save($dataMovimiento); //Movimiento
                 if ($this->propietario->save($dataPropie)) {
                     return json_encode(1);
                 }
@@ -151,13 +174,25 @@ class Vehiculos extends BaseController
         $res = $this->vehiculos->obtenerUltimaOrden();
         return json_encode($res);
     }
-    public function cambiarEstado(){
+    public function cambiarEstado()
+    {
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('estado');
-        
-        if($this->vehiculos->update($id, ['estado' => $estado])){
+        $res = $this->propietario->obtenerPropietario($id);
+
+        $dataMovimiento = [
+            'id_tercero' => $res['id_tercero'],
+            'id_vehiculo' => $id,
+            'estado' => $estado,
+            'fecha_movimiento' => date('Y-m-d'),
+            'tipo_movimiento' => 57
+        ];
+
+
+        if ($this->vehiculos->update($id, ['estado' => $estado])) {
+            $this->movimiento->save($dataMovimiento); //Movimiento
             return json_encode(1);
-        }else{
+        } else {
             return json_encode(2);
         }
     }

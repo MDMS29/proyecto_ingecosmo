@@ -376,8 +376,8 @@ INSERT INTO `param_detalle` (`id_param_det`, `id_param_enc`, `nombre`, `resumen`
 (54, 10, 'Otros', 'Lt', 'A', '2023-03-02 15:06:41', 2, 'mas.png'),
 (56, 3, 'Aliado', 'Ali', 'A', '2023-05-08 14:45:52', 3, ''),
 (57, 5, 'Entrada - Vehiculo', 'EnVe', 'A', '2023-05-12 14:00:57', 3, ''),
-(58, 5, 'Salida -Vehiculo', 'SaVe', 'A', '2023-05-12 14:01:15', 3, ''),
-(59, 5, 'Cambio Estado Vehiculo', 'CEV', 'A', '2023-05-12 15:30:51', 3, '');
+(58, 5, 'Salida - Vehiculo', 'SaVe', 'A', '2023-05-12 14:01:15', 3, ''),
+(59, 5, 'Cambio de Estado - Vehiculo', 'CEV', 'A', '2023-05-12 15:30:51', 3, '');
 
 -- --------------------------------------------------------
 
@@ -719,61 +719,6 @@ INSERT INTO `vehiculos` (`id_vehiculo`, `n_orden`, `id_marca`, `placa`, `linea`,
 
 -- --------------------------------------------------------
 
---
--- Estructura Stand-in para la vista `vw_param_det`
--- (Véase abajo para la vista actual)
---
-DROP VIEW IF EXISTS `vw_param_det`;
-CREATE TABLE `vw_param_det` (
-`id_param_det` smallint(2)
-,`id_param_enc` smallint(2)
-,`nombre` varchar(50)
-,`resumen` char(5)
-,`estado` char(1)
-,`fecha_crea` timestamp
-,`usuario_crea` smallint(2)
-,`n_iconos` varchar(20)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `vw_param_det2`
--- (Véase abajo para la vista actual)
---
-DROP VIEW IF EXISTS `vw_param_det2`;
-CREATE TABLE `vw_param_det2` (
-`id_param_det` smallint(2)
-,`id_param_enc` smallint(2)
-,`nombre` varchar(50)
-,`resumen` char(5)
-,`estado` char(1)
-,`fecha_crea` timestamp
-,`usuario_crea` smallint(2)
-,`n_iconos` varchar(20)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `vw_param_det`
---
-DROP TABLE IF EXISTS `vw_param_det`;
-
-DROP VIEW IF EXISTS `vw_param_det`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_param_det`  AS SELECT `param_detalle`.`id_param_det` AS `id_param_det`, `param_detalle`.`id_param_enc` AS `id_param_enc`, `param_detalle`.`nombre` AS `nombre`, `param_detalle`.`resumen` AS `resumen`, `param_detalle`.`estado` AS `estado`, `param_detalle`.`fecha_crea` AS `fecha_crea`, `param_detalle`.`usuario_crea` AS `usuario_crea`, `param_detalle`.`n_iconos` AS `n_iconos` FROM `param_detalle``param_detalle`  ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `vw_param_det2`
---
-DROP TABLE IF EXISTS `vw_param_det2`;
-
-DROP VIEW IF EXISTS `vw_param_det2`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_param_det2`  AS SELECT `param_detalle`.`id_param_det` AS `id_param_det`, `param_detalle`.`id_param_enc` AS `id_param_enc`, `param_detalle`.`nombre` AS `nombre`, `param_detalle`.`resumen` AS `resumen`, `param_detalle`.`estado` AS `estado`, `param_detalle`.`fecha_crea` AS `fecha_crea`, `param_detalle`.`usuario_crea` AS `usuario_crea`, `param_detalle`.`n_iconos` AS `n_iconos` FROM `param_detalle``param_detalle`  ;
-
---
 -- Índices para tablas volcadas
 --
 
@@ -1119,6 +1064,63 @@ ALTER TABLE `vehiculos`
   ADD CONSTRAINT `n_combus` FOREIGN KEY (`n_combustible`) REFERENCES `param_detalle` (`id_param_det`) ON UPDATE CASCADE,
   ADD CONSTRAINT `vehiculos_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marca_vehiculo` (`id_marca`) ON UPDATE CASCADE;
 COMMIT;
+
+
+--
+-- Estructura Stand-in para la vista `vw_param_det`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `vw_param_det`;
+CREATE TABLE `vw_param_det` (
+`id_param_det` smallint(2)
+,`id_param_enc` smallint(2)
+,`nombre` varchar(50)
+,`resumen` char(5)
+,`estado` char(1)
+,`fecha_crea` timestamp
+,`usuario_crea` smallint(2)
+,`n_iconos` varchar(20)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vw_param_det2`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `vw_param_det2`;
+CREATE TABLE `vw_param_det2` (
+`id_param_det` smallint(2)
+,`id_param_enc` smallint(2)
+,`nombre` varchar(50)
+,`resumen` char(5)
+,`estado` char(1)
+,`fecha_crea` timestamp
+,`usuario_crea` smallint(2)
+,`n_iconos` varchar(20)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vw_param_det`
+--
+DROP TABLE IF EXISTS `vw_param_det`;
+
+DROP VIEW IF EXISTS `vw_param_det`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_param_det`  AS SELECT `param_detalle`.`id_param_det` AS `id_param_det`, `param_detalle`.`id_param_enc` AS `id_param_enc`, `param_detalle`.`nombre` AS `nombre`, `param_detalle`.`resumen` AS `resumen`, `param_detalle`.`estado` AS `estado`, `param_detalle`.`fecha_crea` AS `fecha_crea`, `param_detalle`.`usuario_crea` AS `usuario_crea`, `param_detalle`.`n_iconos` AS `n_iconos` FROM `param_detalle``param_detalle`  ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vw_param_det2`
+--
+DROP TABLE IF EXISTS `vw_param_det2`;
+
+DROP VIEW IF EXISTS `vw_param_det2`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_param_det2`  AS SELECT `param_detalle`.`id_param_det` AS `id_param_det`, `param_detalle`.`id_param_enc` AS `id_param_enc`, `param_detalle`.`nombre` AS `nombre`, `param_detalle`.`resumen` AS `resumen`, `param_detalle`.`estado` AS `estado`, `param_detalle`.`fecha_crea` AS `fecha_crea`, `param_detalle`.`usuario_crea` AS `usuario_crea`, `param_detalle`.`n_iconos` AS `n_iconos` FROM `param_detalle``param_detalle`  ;
+
+--
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -25,4 +25,14 @@ class MoviEncModel extends Model
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
+
+    public function historialVehiculos()
+    {
+        $this->select('*');
+        $this->where('tipo_movimiento', '57');
+        $this->orWhere('tipo_movimiento', '58');
+        $this->orWhere('tipo_movimiento', '59');
+        $data = $this->findAll();
+        return $data;
+    }
 }
