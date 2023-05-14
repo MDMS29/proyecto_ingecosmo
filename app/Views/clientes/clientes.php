@@ -487,6 +487,7 @@
             }).done(function(data) {
                 $('#agregarCliente').modal('hide')
                 tableClientes.ajax.reload(null, false); //Recargar tabla
+                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
                 objCorreo = {
@@ -557,6 +558,67 @@
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
 
+    
+    // Agregar Telefono a la tabla
+    $('#btnAddTel').on('click', function(e) {
+        const numero = $('#telefonoAdd').val()
+        const tipo = $('#tipoTele').val()
+        const prioridad = $('#prioridad').val()
+        const editTel = $('#editTele').val();
+        if ([numero, prioridad, tipo].includes('') || validTel == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        }
+        contador += 1
+        let info = {
+            id: [editTel].includes('') || editTel == 0 ? `${contador+=1}e` : editTel,
+            tipo,
+            numero,
+            prioridad
+        }
+        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+        let filtroTel = telefonos.filter(tel => tel.numero == info.numero) //Array de numeros de telefonos
+       
+        if (filtroTel.length > 0) {
+            filtro = []
+            $('#btnEditarTel').removeAttr('disabled')
+            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
+        }
+        if (info.prioridad == 'S') {
+            telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
+            return guardarTelefono()
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+            
+        } else {
+            $('#btnEditarTel').removeAttr('disabled')
+            telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
+            return guardarTelefono()
+        }
+        
+    })
+
+
     //Funcion para buscar el correo o el telefono
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
@@ -576,52 +638,6 @@
             }
         })
     }
-
-    // Agregar Telefono a la tabla
-    $('#btnAddTel').on('click', function(e) {
-        const numero = $('#telefonoAdd').val()
-        const tipo = $('#tipoTele').val()
-        const prioridad = $('#prioridad').val()
-        const editTel = $('#editTele').val();
-        if ([numero, prioridad, tipo].includes('') || validTel == false) {
-            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        }
-        let info = {
-            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
-            tipo,
-            numero,
-            prioridad
-        }
-        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
-        let filtroTel = telefonos.filter(tel => tel.numero == info.numero) //Array de numeros de telefonos
-        $('#telefonoAdd').val('')
-        $('#tipoTele').val('')
-        $('#prioridad').val('')
-        $('#editTele').val(0);
-        var objTelefono = {
-            id: 0,
-            numero: '',
-            tipo: '',
-            prioridad: ''
-        }
-        console.log(objTelefono)
-
-        if (filtroTel.length > 0) {
-            filtro = []
-            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
-        }
-        if (info.prioridad == 'S') {
-            telefonos.push(info)
-            return guardarTelefono()
-        } else if (filtro.length > 0) {
-            filtro = []
-            return mostrarMensaje('error', '¡Ya hay un telefono principal!')
-        } else {
-            telefonos.push(info)
-            return guardarTelefono()
-        }
-
-    })
 
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
@@ -711,29 +727,38 @@
         }
         let filtro = correos.filter(correo => correo.prioridad == 'P')
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
-        $('#correoAdd').val('')
-        $('#prioridadCorreo').val('')
-        $('#editCorreo').val(0);
-        objCorreo = {
-            id: 0,
-            correo: '',
-            prioridad: ''
-        }
-        console.log(objCorreo)
-        if (filtroCorreo.length > 0) {
+       if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
         }
         if (info.prioridad == 'S') {
             correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
             return guardarCorreo()
         } else if (filtro.length > 0) {
             filtro = []
+
             return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
         } else {
             correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
             return guardarCorreo()
         }
+
     })
 
     // Funcion para mostrar correos en la tabla.
@@ -839,6 +864,12 @@
             },
             {
                 data: 'direccion'
+            },
+            {
+                data: 'email'
+            },
+            {
+                data: 'telefono'
             },
             {
                 data: null,
