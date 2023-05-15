@@ -305,7 +305,7 @@ estilos modal agregar  */
 
 /* detalles */
 
-#nombre1, #precioCompra, #precioVenta, #cantidadActual, #estante{
+#nombre1, #precioCompra, #precioVenta, #cantidadActual, #estante,#fila{
     margin-left: 15px;
     border-radius: 5px;
     background-color: var(--grisModal);
@@ -331,6 +331,11 @@ estilos modal agregar  */
 }
 
 .invalido{
+    color: red;
+    font-size: 9px;
+    font-weight: 600;
+}
+.invalido2{
     color: red;
     font-size: 9px;
     font-weight: 600;

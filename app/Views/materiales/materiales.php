@@ -63,12 +63,12 @@
           <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="modalAgregar2">
-          
+
           <div class="mb-3">
             <label for="exampleDataList" class="col-form-label">Nombre:</label>
             <div>
               <input class="form-control" id="nombre" name="nombre" placeholder="">
-              <small id="msgAgregar" class="invalido"></small>
+              <small id="msgAgregar" class="invalido2"></small>
             </div>
           </div>
 
@@ -98,8 +98,11 @@
 
 
 <!-- Modal Detalles- Editar-->
-<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
+    <input type="text" name="id" id="id" hidden>
+    <input type="text" name="tp" id="tp" hidden>
+
     <div class="modal-content" id="modalContentD">
 
       <div class="modal-header" id="modalHeaderD">
@@ -113,46 +116,57 @@
 
       <div class="modal-body" id="modalBodyD">
 
-      <div class="d-flex column-gap-3" style="width: 100%">
-      <div class="mb-3" style="width: 90%;">
-          <label for="exampleDataList" class="col-form-label">Nombre insumo:</label>
-          <input type="text" class="form-control" id="nombre1" name="nombre" placeholder="" disabled>
+        <div class="d-flex column-gap-3" style="width: 100%">
+          <div class="mb-3" style="width: 90%;">
+            <label for="exampleDataList" class="col-form-label">Nombre insumo:</label>
+            <input type="text" class="form-control" id="nombre1" name="nombre1" onInput="validarInput()" placeholder="" disabled>
+            <small id="msgEditar" class="invalido3"></small>
+          </div>
+
+          <div class="mb-3" style="width: 90%;">
+            <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
+            <input type="text" class="form-control" id="precioVenta" name="precioVenta" placeholder="" disabled>
+          </div>
+
+          <div class="mb-3" style="width: 90%;">
+            <label for="exampleDataList" class="col-form-label">Precio de Compra:</label>
+            <input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="" disabled>
+          </div>
+
+          <div class="mb-3" style="width: 90%;">
+            <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
+            <input type="text" class="form-control" id="cantidadVendida" name="cantidadVendida" style="margin-left: 15px;" placeholder="" disabled>
+          </div>
         </div>
 
-        <div class="mb-3" style="width: 90%;">
-          <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
-          <input type="text" class="form-control" id="precioVenta" name="precioVenta" placeholder="" disabled>
+        <div class="d-flex column-gap-3" style="width: 90%">
+
+          <div class="mb-3" style="width: 80%;">
+            <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
+            <input type="text" class="form-control" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
+          </div>
+
+          <div class="mb-3" style="width: 80%;">
+            <label for="exampleDataList" class="col-form-label"> Estante:</label>
+            <select name="estante" id="estante" class="form-select">
+              <option id="estante"></option>
+              <?php foreach ($data as $dato) { ?>
+                <option value="<?php echo $dato['estante']; ?>"><?php echo $dato['estante']; ?></option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="mb-3" style="width: 80%;">
+            <label for="exampleDataList" class="col-form-label">Fila:</label>
+            <select name="fila" id="fila" class="form-select">
+              <option id="estante"></option>
+              <?php foreach ($data as $dato) { ?>
+                <option value="<?php echo $dato['fila']; ?>"><?php echo $dato['fila']; ?></option>
+              <?php } ?>
+            </select>
+          </div>
         </div>
 
-        <div class="mb-3" style="width: 90%;">
-          <label for="exampleDataList" class="col-form-label">Precio de Compra:</label>
-          <input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="" disabled>
-        </div>
-
-        <div class="mb-3" style="width: 90%;">
-          <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
-          <input type="text" class="form-control" id="cantidadVendida" name="cantidadVendida" style="margin-left: 15px;" placeholder="" disabled>
-        </div>
       </div>
-
-      <div class="d-flex column-gap-3" style="width: 90%">
-
-        <div class="mb-3" style="width: 80%;">
-          <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
-          <input type="text" class="form-control" id="cantidadActual" name="cantidadActual" placeholder="" disabled>
-        </div>
-      
-      <div class="mb-3" style="width: 80%;">
-        <label for="exampleDataList" class="col-form-label"> Estante:</label>
-          <input type="text" class="form-control" id="estante" name="estante" placeholder="" disabled>
-        </div>
-        <div class="mb-3" style="width: 80%;">
-        <label for="exampleDataList" class="col-form-label">Fila:</label>
-          <input type="text" class="form-control" id="fila" name="fila" placeholder="" disabled>
-        </div>
-      </div>
- 
-    </div>
 
       <div class="modal-footer" id="modalFooterD">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
@@ -226,8 +240,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   var validUsar = true
-  var validAgregar = true
 
+  var validAgregar = true
+  var validEditar = true
 
   // vaciar campos
 
@@ -248,13 +263,14 @@
     $("#subtotal").val('');
     $('#msgUsar').text('')
     $('#msgAgregar').text('')
+    $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
 
 
   }
 
   // funcion traer detalles del material
 
-  
+
   function detallesMaterial(id_material) {
     dataURL = "<?php echo base_url('/materiales/detallesMaterial'); ?>" + "/" + id_material;
     $.ajax({
@@ -262,6 +278,8 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
+        $('#tp').val(1)
+
         $("#titulo").text('Detalles');
         $("#id").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);
@@ -284,15 +302,16 @@
         $("#detallesModal").modal("show");
         $("#btnEditar").text('Editar');
         $("#btnEditar").attr('onclick', 'habilitar()');
+        $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
 
 
         precioVenta.style.background = '#e9ecef';
         nombre1.style.background = '#e9ecef';
         precioCompra.style.background = '#e9ecef';
         cantidadActual.style.background = '#e9ecef';
-        estante.style.background= '#e9ecef';
-        fila.style.background= '#e9ecef';
-        $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
+        estante.style.background = '#ECEAEA';
+        fila.style.background = '#ECEAEA';
+
 
       }
     })
@@ -301,7 +320,8 @@
 
   function validarInput() {
     document.getElementById("btnValidar").disabled = !document.getElementById("cantidadUsar").value.length;
-  
+    document.getElementById("btnEditar").disabled = !document.getElementById("nombre1").value.length;
+
   }
 
 
@@ -350,11 +370,11 @@
 
   })
 
-  function agregar(id, tp){
+  function agregar(id, tp) {
     $('#tp').val(tp)
   }
-  var validarInput; 
-  
+  var validarInput;
+
   //Valor para el nombre si es valido o invalido
   $('#nombre').on('input', function(e) {
     nombre = $('#nombre').val()
@@ -368,11 +388,37 @@
         url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
         dataType: 'JSON',
         success: function(res) {
-          if (res.nombre== nombre) {
+          if (res.nombre == nombre) {
             $('#msgAgregar').text('')
-            validIdent = true
+            validAgregar = true
           } else {
             buscarInsumoNom(0, nombre)
+          }
+        }
+      })
+    }
+  })
+
+  $('#nombre1').on('input', function(e) {
+    nombre1 = $('#nombre1').val()
+    tp = $('#tp').val()
+    console.log(tp)
+    id_material = $('#id').val()
+    if (tp == 1 && id_material == 0) {
+      console.log('first')
+      buscarInsumoNom2(0, nombre1)
+    } else if (tp == 2 && id_material != 0) {
+      $.ajax({
+        type: 'POST',
+        url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
+        dataType: 'JSON',
+        success: function(res) {
+          if (res[0]['nombre'] == nombre1) {
+            $('#msgEditar').text('')
+            validEditar = true
+          } else {
+            console.log('mmal')
+            buscarInsumoNom2(0, nombre)
           }
         }
       })
@@ -389,7 +435,7 @@
       success: function(res) {
         if (res == null) {
           $('#msgAgregar').text('')
-         return $("#btnAgregar").removeAttr('disabled', '');
+          return $("#btnAgregar").removeAttr('disabled', '');
           validAgregar = true
         } else if (res != null) {
           $('#msgAgregar').text('*Este insumo ya existe*')
@@ -398,14 +444,32 @@
         }
       }
     })
+
+
   }
 
-
+  function buscarInsumoNom2(id_material, nombre) {
+    $.ajax({
+      type: 'POST',
+      url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
+      dataType: 'JSON',
+      success: function(res) {
+        if (res[0] == null) {
+          $('#msgEditar').text('')
+          validEditar = true
+        } else if (res[0] != null) {
+          $('#msgEditar').text('*Este insumo ya existe*')
+          $("#btnEditar").attr('disabled', '');
+          validEditar = false
+        }
+      }
+    })
+  }
 
   // habilitar botones disables
 
   function habilitar() {
-
+    $('#tp').val(2)
     $("#titulo").text('Editar');
     $("#nombre1").removeAttr('disabled', '');
     $("#precioVenta").removeAttr('disabled', '');
@@ -416,16 +480,19 @@
     $("#estante").removeAttr('disabled', '');
     $("#fila").removeAttr('disabled', '');
     $("#btnUsar1").attr('hidden', '');
-    $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar.png') ?>');
+    $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar1.png') ?>');
     $("#btnEditar").text('Actualizar');
     $("#btnEditar").attr('onclick', 'actualizar()');
 
-    precioVenta.style.background = '#FFFFFF';
-    nombre1.style.background = '#FFFFFF';
-    precioCompra.style.background = '#FFFFFF';
-    cantidadActual.style.background = '#FFFFFF';
-    estante.style.background = '#FFFFFF';
-    fila.style.background = '#FFFFFF';
+    precioVenta.style.background = '#ECEAEA';
+    nombre1.style.background = '#ECEAEA';
+    precioCompra.style.background = '#ECEAEA';
+    cantidadActual.style.background = '#ECEAEA';
+    estante.style.background = '#ECEAEA';
+    fila.style.background = '#ECEAEA';
+
+
+
 
   }
 

@@ -109,7 +109,7 @@
                                                     <?= $tel['numero'] ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?= $tel['prioridad'] == 'P' ? 'Primario' : 'Secundario' ?>
+                                                    <?= $tel['prioridad'] == 'P' ? 'Principal' : 'Secundario' ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -133,7 +133,7 @@
                                                     <?= $correo['correo'] ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?= $correo['prioridad'] == 'P' ? 'Primario' : 'Secundario' ?>
+                                                    <?= $correo['prioridad'] == 'P' ? 'Principal' : 'Secundario' ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>

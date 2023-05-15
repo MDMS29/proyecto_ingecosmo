@@ -8,6 +8,7 @@ use App\Models\ParamModel;
 use App\Models\RolesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
+use CodeIgniter\CLI\Console;
 
 class Usuarios extends BaseController
 {
@@ -27,41 +28,74 @@ class Usuarios extends BaseController
     }
     public function login()
     {
-        $nIdenti = $this->request->getPost('usuario');
-        $contrasena = $this->request->getVar('contrasena');
-        $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-        $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
-        if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
-            $data = [
-                "id" => $datos['id_usuario'],
-                "nombre" => $datos['nombre_p'],
-                "apellido" => $datos['apellido_p'],
-                "idRol" => $datos['idRol'],
-                "rol" => $datos['nombre_rol']
-            ];
-            $session = session();
-            $session->set($data);
-            return redirect()->to(base_url('/home'));
+        $usuario = $this->request->getPost('usuario');
+        $contra = $this->request->getVar('contrasena');
+        if (!empty($usuario) && !empty($contra)) {
+            $nIdenti = $usuario;
+            $contrasena = $contra;
+            $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
+            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
+            if (!empty($datos) && password_verify($contra, $datos['contrasena'])) {
+                $data = [
+                    "id" => $datos['id_usuario'],
+                    "nombre" => $datos['nombre_p'],
+                    "apellido" => $datos['apellido_p'],
+                    "idRol" => $datos['idRol'],
+                    "rol" => $datos['nombre_rol']
+                ];
+                $session = session();
+                $session->set($data);
+                return json_encode(1);
+            } else {
+                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+            }
         } else {
-            return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+            $nIdenti = $this->request->getPost('usuario');
+            $contrasena = $this->request->getVar('contrasena');
+            $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
+            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
+            if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
+                $data = [
+                    "id" => $datos['id_usuario'],
+                    "nombre" => $datos['nombre_p'],
+                    "apellido" => $datos['apellido_p'],
+                    "idRol" => $datos['idRol'],
+                    "rol" => $datos['nombre_rol']
+                ];
+                $session = session();
+                $session->set($data);
+                return json_encode(1);
+            } else {
+                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+            }
         }
-    }
-    public function index()
-    {
-        $usuarios = $this->usuarios->obtenerUsuarios('A');
-        $param = $this->param->obtenerTipoDoc();
-        $roles = $this->roles->obtenerRoles();
 
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
-
-        echo view('/principal/sidebar');
-        echo view('/usuarios/usuarios', $data);
     }
+
     public function salir()
     {
         $session = session();
         $session->destroy();
         return redirect()->to(base_url('/'));
+
+
+    }
+    public function obtenerUsuarios()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->usuarios->obtenerUsuarios($estado);
+        return json_encode($res);
+    }
+    public function index()
+    {
+        $tipoDoc = $this->param->obtenerTipoDoc();
+        $roles = $this->roles->obtenerRoles();
+        $tipoTel = $this->param->obtenerTipoTel();
+
+        $data = ['tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
+
+        echo view('/principal/sidebar');
+        echo view('/usuarios/usuarios', $data);
     }
     public function perfil($id)
     {
@@ -88,16 +122,7 @@ class Usuarios extends BaseController
         if ($tp == 2) {
             //Actualizar datos
             $res = $this->usuarios->buscarUsuario($idUser, 0);
-            //Si la contraseña esta vacia no se actualiza
-            if ($contra != '') {
-                //Verifica que no sea la misma de antes
-                $contraHash = password_verify($contra, $res['contrasena']);
-                if (!$contraHash) {
-                    $contra = password_hash($contra, PASSWORD_DEFAULT); //Hasheo nuevo
-                }
-            } else {
-                $contra = $res['contrasena'];
-            }
+            $contra = $res['contrasena'];
             $usuarioUpdate = [
                 'id_rol' => $rol,
                 'tipo_doc' => $tipoDoc,
@@ -127,6 +152,29 @@ class Usuarios extends BaseController
             return json_encode($this->usuarios->getInsertID());
         }
     }
+    public function cambiarContrasena()
+    {
+        $idUser = $this->request->getPost('idUsuario');
+        $contra = $this->request->getVar('contra');
+        $contrConfir = $this->request->getVar('contraConfir');
+
+        $res = $this->usuarios->buscarUsuario($idUser, 0);
+        //Si la contraseña esta vacia no se actualiza
+        if ($contra != '') {
+            //Verifica que no sea la misma de antes
+            $contraHash = password_verify($contra, $res['contrasena']);
+            if (!$contraHash) {
+                $contra = password_hash($contra, PASSWORD_DEFAULT); //Hasheo nuevo
+            }
+        } else {
+            $contra = $res['contrasena'];
+        }
+        if ($this->usuarios->update($idUser, ['contrasena' => $contra])) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
+    }
     public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
@@ -149,25 +197,21 @@ class Usuarios extends BaseController
     public function cambiarEstado()
     {
         $id = $this->request->getPost('id');
-        $estado = $this->request->getVar('estado');
-
+        $estado = $this->request->getPost('estado');
         if ($this->usuarios->update($id, ['estado' => $estado])) {
-            return json_encode(1);
+            if ($estado == 'A') {
+                return '¡Se ha reestablecido el usuario!';
+            } else {
+                return '¡Se ha eliminado el usuario!';
+            }
         }
     }
     public function eliminados()
     {
-        $usuarios = $this->usuarios->obtenerUsuarios('I');
         $param = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
-        $data = ['usuarios' => $usuarios, 'tipoDoc' => $param, 'roles' => $roles];
+        $data = ['tipoDoc' => $param, 'roles' => $roles];
         echo view('principal/sidebar');
         echo view('usuarios/eliminados', $data);
-    }
-    public function obtenerUsuarios()
-    {
-        $estado = $this->request->getPost('estado');
-        $res = $this->usuarios->obtenerUsuarios($estado);
-        return json_encode($res);
     }
 }

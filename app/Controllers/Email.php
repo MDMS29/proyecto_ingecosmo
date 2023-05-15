@@ -16,28 +16,33 @@ class Email extends BaseController
 
     public function insertar()
     {
-        $tp = $this->request->getPost('tp');
+        $tp = $this->request->getPost('tp'); 
+        $idCorreo = $this->request->getVar('idCorreo');
         $idUsu = $this->request->getPost('idUsuario');
         $email = $this->request->getPost('correo');
         $prioridad = $this->request->getPost('prioridad');
         $tipoUsu = $this->request->getPost('tipoUsu');
-        $usuarioCrea = 1;
-        // $usuarioCrea = session('id');
-
+        $usuarioCrea = session('id');
         $data = [
             'id_usuario' => $idUsu,
             'email' => $email,
             'prioridad' => $prioridad,
             'tipo_usuario' => $tipoUsu,
             'usuario_crea' => $usuarioCrea
+            
         ];
-
         if ($tp == 2) {
-            $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
-            if (!empty($res)) {
-                return json_encode(1);
+            if (strpos($idCorreo, 'e')) { 
+                $res = $this->email->buscarEmail($email, $idUsu, $tipoUsu);
+                if (!empty($res)) {
+                    return json_encode(2);
+                } else {
+                    if ($this->email->save($data)) {
+                        return json_encode(1);
+                    }
+                }
             } else {
-                if ($this->email->save($data)) {
+                if ($this->email->update($idCorreo, $data)) {
                     return json_encode(1);
                 }
             }

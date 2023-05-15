@@ -30,7 +30,15 @@ class EmailModel extends Model
         $this->select('id_email as id, email as correo, prioridad');
         $this->where('id_usuario', $id);
         $this->where('tipo_usuario', $tipoUsuario);
-        $data = $this->findAll();
+        $data = $this->find();
+        return $data;
+    }
+
+    public function obtenerEmailCliente()
+    {
+        $this->select('email.email as email');
+        $this->where('tipo_usuario', '5');
+        $data = $this->first();
         return $data;
     }
     public function buscarEmail($correo, $idUsuario, $tipoUsuario)
@@ -44,4 +52,5 @@ class EmailModel extends Model
         $data = $this->first();
         return $data;
     }
+
 }

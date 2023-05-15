@@ -1,85 +1,90 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
-
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/icon-proveedores.png') ?>" /> Proveedores Eliminados</h2>
-
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes Eliminados</h2>
     <div class="table-responsive p-2">
-
-        <table class="table table-striped" id="tableProveedores" width="100%" cellspacing="0">
+        <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Id</th>
-                    <th scope="col" class="text-center">Razon Social</th>
-                    <th scope="col" class="text-center">NIT</th>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Nombres</th>
+                    <th scope="col" class="text-center">Apellidos</th>
+                    <th scope="col" class="text-center">Tipo de Documento</th>
+                    <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
-
             <tbody class="text-center">
-            <?php $contador = 0 ?>
-                <?php if (empty($proveedores)) { ?>
+                <?php $contador = 0 ?>
+                <?php if (empty($clientes)) { ?>
                     <tr>
                         <td class="text-center" colspan="7">
-                            <h3>¡No hay Proveedores Eliminados!</h3>
+                            <h3>¡No hay Clientes Eliminados!</h3>
                         </td>
                     </tr>
                 <?php } ?>
                 <!-- texto dinamico -->
             </tbody>
-
         </table>
     </div>
 
     <div class="footer-page">
-        <a href="<?php echo base_url('/proveedores') ?>" class="btn btnRedireccion">Regresar</a>
+        <a href="<?php echo base_url('/clientes') ?>" class="btn btnRedireccion">Regresar</a>
     </div>
 
     <!-- Modal Confirma activar -->
     <div class="modal fade" id="modalActivarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
         <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
             <div class="modal-content" id="modalEliminarContentP">
                 <div class="modalContenedorP">
                     <div id="contenidoHeaderEliminarP" class="modal-header">
-                        <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                        <img style=" width:80px; height:80px; margin:0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                         <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="contenidoEliminarP">
                         <div class="bloqueModalP">
-                            <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
-                            <p class="textoModalP">¿Estas seguro de activar este Proveedor?</p>
+                            <img style=" width:100px; height:80px; margin:10px; " src="<?php echo base_url('/icons/icon-activar.png') ?>" />
+                            <p class="textoModalP">¿Estas seguro de activar este registro?</p>
                         </div>
 
                     </div>
                 </div>
                 <div id="bloqueBtnP" class="modal-footer">
-                    <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                    <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+                    <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                    <a id="btnSi" class="btn btnAccionF">Activar</a>
                 </div>
 
             </div>
+
+
         </div>
+
     </div>
 </div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    var ContadorPRC = 0
+    ContadorPRC = 0
+
 
     //Cambiar estado de "Inactivo" a "Activo"
     $('#modalActivarP').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `ReestablecerProveedor(${$(e.relatedTarget).data('href')})`)
+        $(this).find('#btnSi').attr('onclick', `ReestablecerCLiente(${$(e.relatedTarget).data('href')})`)
     })
 
-    function ReestablecerProveedor(id) {
+    function ReestablecerCLiente(id) {
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('proveedores/cambiarEstado') ?>",
+            url: "<?php echo base_url('clientes/cambiarEstado') ?>",
             data: {
                 id,
                 estado: 'A'
@@ -88,14 +93,14 @@
             mostrarMensaje('success', data)
             ContadorPRC = 0
             $('#modalActivarP').modal('hide')
-            tableProveedores.ajax.reload(null, false)
+            tableClientes.ajax.reload(null, false)
         })
     }
 
     // Tabla   
-    var tableProveedores = $("#tableProveedores").DataTable({
+    var tableClientes = $("#tableClientes").DataTable({
         ajax: {
-            url: '<?= base_url('proveedores/obtenerProveedores') ?>',
+            url: '<?= base_url('clientes/obtenerClientes') ?>',
             method: "POST",
             data: {
                 estado: 'I'
@@ -110,7 +115,21 @@
                 },
             },
             {
-                data: 'razon_social'
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'tipoDoc'
             },
             {
                 data: 'n_identificacion'
@@ -119,10 +138,16 @@
                 data: 'direccion'
             },
             {
+                data: 'telefono'
+            },
+            {
+                data: 'email'
+            },
+            {
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Proveedor" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Cliente" width="20"></button>'
                     );
                 },
             }

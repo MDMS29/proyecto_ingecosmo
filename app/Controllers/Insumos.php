@@ -124,4 +124,6 @@ class Insumos extends BaseController
             return json_encode($array);
         }
     }
+
+    
 }
