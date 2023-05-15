@@ -22,9 +22,9 @@
                             <?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
                         </h5>
                         <h6>
-                            Web Developer and Designer
+                            Wayando
                         </h6>
-                        <p class="profile-ranting"></p>
+                        <p class="profile-ranting" style="opacity: 0;">3</p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Info Personal</a>

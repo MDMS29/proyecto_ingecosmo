@@ -27,40 +27,45 @@
 <!-- -----modal----------     -->
 <form method="POST" id="formularioProveedores" autocomplete="off">
     <div class="modal fade" id="agregarProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" id="modalProveedor">
-            <div class="modal-content" id="modalContentP">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
                 <div class="modal-header" id="modalHeader">
+                    <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>"/>
 
-                    <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
-
-                    <div id="modalHeader2">
-                        <h1 class="modal-title fs-5" id="tituloModal">Agregar</h1>
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <img id="logoModal" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"></h1>
                     </div>
 
                     <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <form>
-                    <div class="modalAgregarP">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
-                            <small id="msgRaSo" class="invalido"></small>
+                    <div class="modal-body d-flex">
+                        <div class="column-gap-3" style="width: 100%; padding-inline: 15px;">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                                <small id="msgRaSo" class="invalido"></small>
 
-                            <input hidden id="tp" name="tp">
-                            <input hidden id="id" name="id">
+                                <input hidden id="tp" name="tp">
+                                <input hidden id="id" name="id">
+                            </div>
+
+                            <div class="mb-3">
+                                <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                                <input type="text" class="form-control" id="nit" name="nit"></input>
+                                <small id="msgNit" class="invalido"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
+                                <input class="form-control" id="direccion" name="direccion"></input>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                            <input type="text" class="form-control" id="nit" name="nit"></input>
-                            <small id="msgNit" class="invalido"></small>
-                        </div>
 
-                        <div class="mb-3">
-                            <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                            <input class="form-control" id="direccion" name="direccion"></input>
-                        </div>
                     </div>
                 </form>
                 <div class="modal-footer">
@@ -118,6 +123,7 @@
                 dataType: 'json',
                 success: function(res) {
                     $('#tituloModal').text('Editar')
+                    $('#logoModal').attr('src', '<?php echo base_url('icons/editar.png') ?>')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -134,6 +140,7 @@
         } else {
             //Insertar datos
             $('#tituloModal').text('Agregar')
+            $('#logoModal').attr('src', '<?php echo base_url('icons/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#RazonSocial').val('')

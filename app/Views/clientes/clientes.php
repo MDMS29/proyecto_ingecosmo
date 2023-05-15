@@ -41,10 +41,9 @@
 
                 <div class="modal-content">
                     <div class="modal-header" id="modalHeader">
+                        <img class="imagenEncab"  src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
-                        <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
-
-                        <div id="modalHeader2" class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                             <img id="logoModal" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5" id="tituloModal">Agregar</h1>
                         </div>
@@ -81,7 +80,7 @@
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
-                                    <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
+                                    <select class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
                                         <option value="1" selected>Cedula de Ciudadania</option>
                                         <option>-- Seleccione --</option>
                                     </select>
@@ -153,7 +152,7 @@
                             </div>
                             <div class=" flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
-                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
                                         <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
@@ -162,7 +161,7 @@
                             </div>
                             <div class="flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
-                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Primaria</option>
                                     <option value="S">Secundaria</option>
@@ -220,7 +219,7 @@
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
-                            <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
+                            <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
                                 <option value="P">Primaria</option>
                                 <option value="S">Secundaria</option>
@@ -350,8 +349,8 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
             }).done(function(res) {
-                $('#modalHeader2').text('')
-                $('#modalHeader2').text('Editar')
+                $('#tituloModal').text('Editar')
+                $('#logoModal').attr('src', '<?php echo base_url('icons/editar.png')?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -391,8 +390,8 @@
             guardarCorreo()
             guardarTelefono()
             limpiarCampos(0)
-            $('#modalHeader2').text('')
-            $('#modalHeader2').text('Agregar')
+            $('#tituloModal').text('Agregar')
+            $('#logoModal').attr('src', '<?php echo base_url('icons/plus-b.png')?>')
             $('#msgDoc').text('')
             $('#tp').val(1)
             $('#id').val(0)
@@ -558,7 +557,7 @@
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
 
-    
+
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
         const numero = $('#telefonoAdd').val()
@@ -577,7 +576,7 @@
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
         let filtroTel = telefonos.filter(tel => tel.numero == info.numero) //Array de numeros de telefonos
-       
+
         if (filtroTel.length > 0) {
             filtro = []
             $('#btnEditarTel').removeAttr('disabled')
@@ -599,7 +598,7 @@
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
-            
+
         } else {
             $('#btnEditarTel').removeAttr('disabled')
             telefonos.push(info)
@@ -615,7 +614,7 @@
             }
             return guardarTelefono()
         }
-        
+
     })
 
 
@@ -727,7 +726,7 @@
         }
         let filtro = correos.filter(correo => correo.prioridad == 'P')
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
-       if (filtroCorreo.length > 0) {
+        if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
         }
