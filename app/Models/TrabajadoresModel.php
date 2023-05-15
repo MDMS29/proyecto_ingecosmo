@@ -51,7 +51,6 @@ class TrabajadoresModel extends Model
             $this->where('n_identificacion', $nIdenti);
             $this->where('trabajadores.estado', 'A');
             $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
-            $this->join('cargos', 'cargos.id_cargo = trabajadores.id_cargo');
             // $this->join('email', 'email.id_usuario = trabajadores.id');
             // $this->join('telefonos', 'cargos.id_usuario = trabajadores.id');
 

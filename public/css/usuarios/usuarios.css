@@ -94,7 +94,9 @@ table {
 #msgConfirRes.invalido,
 #msgDoc.invalido,
 #msgTel.invalido,
-#msgCorreo.invalido {
+#msgCorreo.invalido, 
+#msgRaSo.invalido,
+#msgNit.invalido {
   color: red;
 }
 

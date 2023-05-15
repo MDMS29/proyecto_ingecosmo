@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
@@ -32,45 +31,43 @@
 
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" id="modalProveedor">
-            <div class="modal-content" id="modalContentP">
-
-                <div class="modal-header" id="modalHeader">
-
-                    <img style=" width:60px; height:60px; " src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
-
-                    <div id="modalHeader2">
-
-                        <h1 class="modal-title fs-5" id="tituloModal">AGREGAR</h1>
+            <div class="body">
+                <div class="modal-content" id="modalContentP">
+                    <div class="modal-header d-flex align-items-center justify-content-between">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
-
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form>
-                    <div class="modalAgregarP">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="textoP" style="margin:0;">Razon Social:</label>
-                            <input class="inputP" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
-                            <small id="msgRaSo" class="invalido"></small>
-
-                            <input hidden id="tp" name="tp">
-                            <input hidden id="id" name="id">
-                        </div>
-
-                        <div class="mb-3">
-                            <label style="margin:0;" for="message-text" class="textoP">NIT:</label>
-                            <input type="number" class="inputP" id="nit" name="nit"></input>
-                            <small id="msgDoc" class="invalido"></small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label style="margin:0;" class="textoP" for="message-text">Direccion:</label>
-                            <input class="inputP" id="direccion" name="direccion"></input>
-                        </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="modalAgregarP">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="razon_social" class="col-form-label">Razon Social:</label>
+                                    <input type="text" name="RazonSocial" class="form-control inputP" id="RazonSocial" min='1' max='300'>
+                                    <small id="msgRaSo" class="invalido"></small>
+                                    <input hidden id="tp" name="tp">
+                                    <input hidden id="id" name="id">
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <div class="">
+                                        <label for="nit" class="col-form-label">NIT:</label>
+                                        <input type="number" name="nit" class="form-control" id="nit" minlength="9" maxlength="11">
+                                        <small id="msgNit" class="invalido"></small>
+                                    </div>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <div class="">
+                                        <label for="direccion" class="col-form-label">Direccion:</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,7 +87,7 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
+                        <p class="textoModalP">¿Estas seguro de eliminar este Aliado?</p>
                     </div>
 
                 </div>
@@ -111,7 +108,7 @@
     var inputNit = 0;
     var ContadorPRC = 0
     var validRazonSocial;
-    var validNit;
+    var validNit=true;  
 
     var botones = $(".ocultar a");
     botones.click(function() {
@@ -196,41 +193,82 @@
     }
 
 
-    //Funcion para buscar trabajador segun su identificacion
-    function buscarAliadoNit(id, inputNit) {
+    //Validacion de Razon Social
+    function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('srchAli/') ?>" + id + "/" + inputNit,
+            url: "<?php echo base_url('/aliados/buscarAliadoRzn/') ?>" + id + "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
-                    $('#msgDoc').text('')
+                    $('#msgRaSo').text('')
+                    validRazonSocial = true
+                } else if (res[0] != null) {
+                    $('#msgRaSo').text('* Razon Social ya Existente *')
+                    validRazonSocial = false
+                }
+            }
+        })
+    }
+    //Valor para el nit si es valido o invalido
+    $('#RazonSocial').on('input', function(e) {
+        inputRazonSocial = $('#RazonSocial').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarRazonSocial(0, inputRazonSocial)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/aliados/buscarAliadoRzn/') ?>" + id + "/" + inputRazonSocial,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['razon_social'] == inputRazonSocial) {
+                        $('#msgRaSo').text('')
+                        validRazonSocial = true
+                    } else {
+                        buscarRazonSocial(0, inputRazonSocial)
+                    }
+                }
+            })
+        }
+    })
+    //Validacion de Nit
+    function buscarNit(id, inputNit) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgNit').text('')
                     validNit = true
                 } else if (res[0] != null) {
-                    $('#msgDoc').text('* Numero de identificación invalido *')
+                    $('#msgNit').text('* NIT ya Existente *')
                     validNit = false
                 }
             }
         })
     }
-    var validNit; //Valor para la identificación si es valido o invalido
+    //Valor para el nit si es valido o invalido
     $('#nit').on('input', function(e) {
-        inputNit = $('#nit').val()
+        inputNit = $('#nit').val()  
+        console.log(inputNit)
         tp = $('#tp').val()
         id = $('#id').val()
         if (tp == 1 && id == 0) {
-            buscarAliadoNit(0, inputNit)
+            buscarNit(0, inputNit)
         } else if (tp == 2 && id != 0) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('srchAli/') ?>" + id + "/" + inputNit,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit,
                 dataType: 'JSON',
                 success: function(res) {
                     if (res[0]['n_identificacion'] == inputNit) {
-                        $('#msgDoc').text('')
+                        $('#msgNit').text('')
                         validNit = true
                     } else {
-                        buscarAliadoNit(0, inputNit)
+                        buscarNit(0, inputNit)
                     }
                 }
             })
@@ -275,43 +313,6 @@
         };
     })
 
-    //Validacion de Razon Social
-    function buscarRazonSocial(id, inputRazonSocial) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + 0 + "/" + inputRazonSocial,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgRaSo').text('')
-                    validRazonSocial = true
-                } else if (res[0] != null) {
-                    $('#msgRaSo').text('* Razon Social ya Existente *')
-                    validRazonSocial = false
-                }
-            }
-        })
-    }
-
-    //Validacion de Nit
-    function buscarNit(id, inputNit) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliados/') ?>" + 0 + "/" + inputNit,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgNit').text('')
-                    validRazonNit = true
-                } else if (res[0] != null) {
-                    $('#msgNit').text('* NIT ya Existente *')
-                    validRazonNit = false
-                }
-            }
-        })
-    }
-
-
     function seleccionarAliado(id, tp) {
         if (tp == 2) {
             $.ajax({
@@ -336,22 +337,32 @@
             $('#RazonSocial').val('')
             $('#nit').val('')
             $('#direccion').val('')
+            $('#msgNit').text('') 
+            $('#msgRaSo').text('') 
             $('#btnGuardar').text('Agregar')
 
         }
 
     }
 
-    $('#btnNo').click(function() {
-        $("#modalConfirmarP").modal("hide");
-    });
-
     //Cambiar estado de "Activo" a "Eliminado" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
-        $('#btnSi').on('click', function(e) {
-            mostrarMensaje('success', 'Se ha eliminado el trabajador')
-            tableAliados.ajax.reload(null, false)
-        })
+        $(this).find('#btnSi').attr('onclick', `EliminarAliado(${$(e.relatedTarget).data('href')})`)
     })
+
+    function EliminarAliado(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('aliados/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmar').modal('hide')
+            tableAliados.ajax.reload(null, false)
+            ContadorPRC = 0
+        })
+    }
 </script>
