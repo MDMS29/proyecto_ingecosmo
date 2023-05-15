@@ -123,13 +123,15 @@ class Trabajadores extends BaseController
             }
         }
     }
-    public function cambiarEstado($id, $estado)
+    public function cambiarEstado()
     {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
         if ($this->trabajadores->update($id, ['estado' => $estado])) {
             if($estado == 'A'){
-                return redirect()->to(base_url('trabajadores/eliminados'));
+                return '¡Se ha reestablecido el trabajador!';
             }else{
-                return redirect()->to(base_url('trabajadores'));
+                return '¡Se ha eliminado el trabajador!';
             }
         }
     }

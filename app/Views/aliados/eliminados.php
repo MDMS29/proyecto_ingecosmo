@@ -165,27 +165,25 @@
         })
     })
 
-    // $('#modalConfirmaP').on('show.bs.modal', function(e) {
-    //     $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    // });
+        //Cambiar estado de "Inactivo" a "Activo"
+        $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `ReestablecerAliado(${$(e.relatedTarget).data('href')})`)
+    })
 
-    // $('#modalActivarP').on('show.bs.modal', function(e) {
-    //     $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    // });
+    function ReestablecerAliado(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('aliados/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'A'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            ContadorPRC = 0
+            $('#modalConfirmar').modal('hide')
+            tableAliados.ajax.reload(null, false)
+        })
+    }
 
-
-    // $('.btnNo').click(function() {
-    //     $("#modalActivarP").modal("hide");
-    // });
-
-    // //Mostrar mensajes de SwalFire
-    // function mostrarMensaje(tipo, msg) {
-    //     Swal.fire({
-    //         position: 'center',
-    //         icon: `${tipo}`,
-    //         text: `${msg}`,
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //     })
-    // }
 </script>

@@ -62,6 +62,7 @@
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
+                                <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS">
                                 </div>
                             </div>
@@ -287,7 +288,8 @@
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
-    var validCorreo
+    var validCorreo = true;
+    var validIdent = true;
     var objCorreo = {
         id: 0,
         correo: '',
@@ -393,11 +395,29 @@
             telefonos.push(objTelefono)
             guardarTelefono()
         }
+        if (input1 == 0) {
+            telefonos = []
+            correos = []
+        }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
+        $('#msgDoc').text('')
+        $('#msgTel').text('')
+        $('#msgCorreo').text('')
     }
     //Insertar y editar Trabajador
     function seleccionarTrabajador(id, tp) {
@@ -442,6 +462,11 @@
             })
         } else {
             //Insertar datos
+            telefonos = []
+            correos = []
+            limpiarCampos(0)
+            guardarCorreo()
+            guardarTelefono()
             $('#tituloModal').text('Agregar Trabajador')
             $('#tp').val(1)
             $('#id').val(0)
@@ -476,7 +501,6 @@
         })
     }
     //Identificar si el numero de identificacion no este registrado
-    var validIdent; //Valor para la identificación si es valido o invalido
     $('#nIdenti').on('input', function(e) {
         inputIden = $('#nIdenti').val()
         tp = $('#tp').val()
@@ -538,9 +562,9 @@
                         $.post({
                             url: '<?php echo base_url('telefonos/insertar') ?>',
                             data: {
-                                tp: tp,
-                                idTele: tel.id,
+                                tp,
                                 idUsuario: idTrab,
+                                idTele: tel.id,
                                 numero: tel.numero,
                                 prioridad: tel.prioridad,
                                 tipoUsu: 6,
@@ -559,8 +583,8 @@
                             url: '<?php echo base_url('email/insertar') ?>',
                             data: {
                                 tp,
-                                idCorreo: correo.id,
                                 idUsuario: idTrab,
+                                idCorreo: correo.id,
                                 correo: correo.correo,
                                 prioridad: correo.prioridad,
                                 tipoUsu: 6,
@@ -575,14 +599,19 @@
                     });
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Trabajador!')
+                        validTel = true
+                        validCorreo = true
                     } else {
                         mostrarMensaje('success', '¡Se ha Registrado el Trabajador!')
+                        validTel = true
+                        validCorreo = true
                     }
                 }
             }).done(function(data) {
-                limpiarCampos('msgConfir')
+                limpiarCampos()
                 $('#agregarTrabajador').modal('hide')
                 tableTrabajadores.ajax.reload(null, false); //Recargar tabla
+                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
                 objCorreo = {
@@ -596,7 +625,6 @@
                     tipo: '',
                     prioridad: ''
                 }
-                ContadorPRC = 0
             });
         };
     })
@@ -609,32 +637,50 @@
         if ([numero, prioridad].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
-
+        contador += 1
         let info = {
-            id: [editTel].includes('') || editTel == 0 ? `'${contador}111e'` : editTel,
+            id: [editTel].includes('') || editTel == 0 ? `'${contador+=1}e` : editTel,
             tipo,
             numero,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
         let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
-        $('#telefonoAdd').val('')
-        $('#tipoTele').val('')
-        $('#prioridad').val('')
-        $('#editTele').val(0);
         if (filtroTel.length > 0) {
             filtro = []
+            $('#btnEditarTel').removeAttr('disabled')
             return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
         }
         if (info.prioridad == 'S') {
             telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
             return guardarTelefono()
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
 
         } else {
+            $('#btnEditarTel').removeAttr('disabled')
             telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
             return guardarTelefono()
         }
 
@@ -679,7 +725,7 @@
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
@@ -732,31 +778,45 @@
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
 
-        if ([correo, prioridad].includes('')) {
+        if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo}111e'` : editCorreo,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo+=1}e` : editCorreo,
             correo,
             prioridad
         }
         let filtro = correos.filter(correo => correo.prioridad == 'P')
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
-        $('#correoAdd').val('')
-        $('#prioridadCorreo').val('')
-        $('#editCorreo').val(0);
+
         if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
         }
         if (info.prioridad == 'S') {
             correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
             return guardarCorreo()
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
         } else {
             correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
             return guardarCorreo()
         }
     })
@@ -831,4 +891,24 @@
             tableTrabajadores.ajax.reload(null, false)
         })
     })
+
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
+        $(this).find('#btnSi').attr('onclick', `EliminarTrabajadores(${$(e.relatedTarget).data('href')})`)
+    })
+
+    function EliminarTrabajadores(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('trabajadores/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'I'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmar').modal('hide')
+            tableTrabajadores.ajax.reload(null, false)
+            ContadorPRC = 0
+        })
+    }
 </script>

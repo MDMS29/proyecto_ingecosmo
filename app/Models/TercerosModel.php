@@ -102,14 +102,39 @@ class TercerosModel extends Model
             $this->where('n_identificacion', $nit);
             $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '56'); 
-            // $this->join('email', 'email.id_usuario = trabajadores.id');
-            // $this->join('telefonos', 'cargos.id_usuario = trabajadores.id');
 
         } elseif ($id != 0 && $nit != 0) {
 
             $this->select('terceros.*');
             $this->where('id_tercero', $id);
             $this->where('n_identificacion', $nit);
+
+        }
+        $data = $this->first();
+        return $data;
+
+    } 
+    public function buscarAliadoRzn($id, $razonSocial)
+    {
+        if ($id != 0) {
+
+            $this->select('terceros.*');
+            $this->where('id_tercero', $id);
+            $this->where('tipo_tercero', '56'); 
+            $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
+
+        } elseif ($razonSocial != 0) {
+
+            $this->select('terceros.*, ');
+            $this->where('razon_social', $razonSocial);
+            $this->where('terceros.estado', 'A');
+            $this->where('tipo_tercero', '56'); 
+
+        } elseif ($id != 0 && $razonSocial != 0) {
+
+            $this->select('terceros.*');
+            $this->where('id_tercero', $id);
+            $this->where('razon_social', $razonSocial);
 
         }
         $data = $this->first();

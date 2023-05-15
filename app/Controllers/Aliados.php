@@ -87,6 +87,25 @@ class Aliados extends BaseController
             return json_encode($array);
         }
     }
+    public function buscarAliadoRzn($id, $razonSocial)
+    {
+        $array = array();
+        if ($id != 0) {
+            $data = $this->aliados->buscarAliadoRzn($id, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($razonSocial != 0) {
+            $data = $this->aliados->buscarAliadoRzn(0, $razonSocial);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($id != 0 && $razonSocial != 0) {
+            $data = $this->aliados->buscarAliadoRzn($id, $razonSocial);
+            array_push($array, $data);
+            return json_encode($array);
+        }
+    }
 
     // public function eliminar($id, $estado)
     // {
@@ -100,13 +119,15 @@ class Aliados extends BaseController
     //     echo view('/aliados/eliminados', $data);
     // }
 
-    public function cambiarEstado($id, $estado)
+    public function cambiarEstado()
     {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
         if ($this->aliados->update($id, ['estado' => $estado])) {
             if($estado == 'A'){
-                return redirect()->to(base_url('aliados/eliminados'));
+                return '¡Se ha reestablecido el aliado!';
             }else{
-                return redirect()->to(base_url('aliados'));
+                return '¡Se ha eliminado el aliado!';
             }
         }
     }

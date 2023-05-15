@@ -959,7 +959,6 @@
             return guardarCorreo()
         } else if (filtro.length > 0) {
             filtro = []
-
             return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
         } else {
             correos.push(info)
