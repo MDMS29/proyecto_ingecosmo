@@ -263,12 +263,4 @@
     })
 
   })
-
-
-
-  //   $('#btnCerrar').click( function() {
-  //     $("#detallesModal").modal("hide");
-  //     detallesMaterial(2)
-  // console.log('click');
-  //   })
 </script>

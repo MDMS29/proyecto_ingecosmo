@@ -54,7 +54,7 @@
 
                     <div class="tituloHeader">
                         <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
-                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar Categoria</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar insumos</h1>
                     </div>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX"></button>
@@ -62,8 +62,8 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">N° fila</label>
-                            <select class="form-select" id="fila" name="fila">
+                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">N° fila</label>
+                            <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
                                     <option value=<?php echo $fila['fila']; ?>><?php echo $fila['fila']; ?></option>
@@ -74,8 +74,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre producto</label>
-                            <select class="form-select" id="nombre_prod" name="nombre_prod">
+                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Nombre producto</label>
+                            <select class="form-select" id="nombre_prod" name="nombre_prod" style="background: #ECEAEA;">
                             </select>
                         </div>
                     </form>
@@ -93,6 +93,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+
+    var estanteria = $(".estanteria")
+
     bloque = $('.bloqueTextoE')
     for (let i = 0; i < bloque.length; i++) {
         $.ajax({
@@ -147,5 +150,6 @@
                 }
             }
         })
+        estanteria.ajax.reload(null, false)
     })
 </script>

@@ -44,5 +44,21 @@ class Estanteria extends BaseController
         echo json_encode($returnData);
     }
 
+    public function insertar()
+    {
+        $img = $this->request->getFile('imagen');
+        $img->move('./img');
+        // echo $img->getName();
+        // exit;
+        $this->estantes->save([
+            'nombre' => $this->request->getPost('nombre'),
+            'fila' => $this->request->getPost('fila'),
+
+            //subir imagenes 
+        ]);
+        // return json_encode(1);
+        // return redirect()->to(base_url('/filas'));
+    }
+
 }
 

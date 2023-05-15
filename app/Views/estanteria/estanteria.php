@@ -36,43 +36,54 @@
 
 </div>
 
-<div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div style="background:white; border:5px solid #161666; border-radius:10px; height:500px; width:800px;" class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;"><img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">Agregar Categoria</h1>
+<form enctype="multipart/form-data" autocomplete="off" id="agregarEstante">
+    <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="body">
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
-                        <input hidden id="tp" name="tp">
-                        <input hidden id="id" name="id">
+                <div class="modal-content" style="border:5px solid #161666; border-radius:10px;">
+                    <div class="modal-header" id="modalHeader">
+
+                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
+                        <div class="tituloHeader">
+                            <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar estante</h1>
+                        </div>
+                        <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Resumen</label>
-                        <input type="text" class="form-control" id="fila" name="fila">
-                        <input hidden id="tp" name="tp">
-                        <input hidden id="id" name="id">
-                    </div>
+                    <div class="modal-body d-flex ">
+                        <form>
+                            <div class=" column-gap-3" style="width: 100%; padding-inline: 15px;">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" for="recipient-name" style="margin:0; font-size:17px;">Nombre:</label>
+                                    <input class="form-control" type="text" min='1' max='300' id="nombre" name="nombre">
+                                </div>
 
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Imagen</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0; font-size:17px;" for="message-text">Filas:</label>
+                                    <input class="form-control" id="fila" name="fila" type="number"></input>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0; font-size:17px;" for="message-text">Imagen:</label>
+
+                                    <img src="<?php echo base_url() . '' ?> " class="logo" width="100">
+                                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" ></input>
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnCerrar" data-bs-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btnGuardar1" id="btnGuardar">Guardar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnGuardar1" id="btnGuardar">Agregar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <script>
     cards = $('.bloqueTextoE')
@@ -100,4 +111,30 @@
             }
         })
     };
+
+    $('#agregarEstante').on('submit', function(e) {
+    e.preventDefault();
+    
+    var formData = new FormData();
+    formData.append('imagen', $('#imagen')[0].files[0]); // Obtener el archivo seleccionado
+
+    $.ajax({
+        url: "<?php echo base_url('/estanteria/insertar'); ?>",
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        processData: false, // Evitar que jQuery procese los datos
+        contentType: false, // Evitar que jQuery establezca el tipo de contenido
+        success: function(res) {
+            if (res == 1) {
+                mostrarMensaje('success', '¡Se ha guardado el estante!');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            }
+        }
+    });
+});
+
+
 </script>
