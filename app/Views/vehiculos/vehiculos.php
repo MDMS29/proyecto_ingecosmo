@@ -248,7 +248,12 @@
                 data: "tipo_propietario"
             },
             {
-                data: 'placa'
+                data: "placa",
+                render: function(data, type, row) {
+                    return (
+                        '<span class="text-uppercase">' + row.placa + '</span>'
+                    )
+                }
             },
             {
                 data: 'modelo'

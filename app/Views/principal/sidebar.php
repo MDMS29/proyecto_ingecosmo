@@ -19,11 +19,22 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <!-- SCRIPTS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" rel="stylesheet">
+
+    
+
+
     <script src="<?= base_url('js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('dataTable/jquery.dataTables.js') ?>"></script>
     <script src="<?= base_url('dataTable/dataTables.bootstrap5.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
+
+    <script src="<?= base_url('dataTable/Buttons-2.3.6/js/dataTables.buttons.min.js') ?>"></script>
+    <script src="<?= base_url('dataTable/JSZip-2.5.0/jszip.min.js') ?>"></script>
+    <!-- -->
+    <script src="<?= base_url('dataTable/pdfmake-0.2.7/vfs_fonts.js') ?>"></script>
+    <script src="<?= base_url('dataTable/Buttons-2.3.6/js/buttons.html5.min.js') ?>"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 </head>
 
@@ -125,10 +136,10 @@
                             </a>
                         </li>
                         <li>
-                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo.png') ?>" /></span>
-                            <p id="pa">Historial Vehiculos</p>
-                        </a>
-                    </li>
+                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo.png') ?>" /></span>
+                                <p id="pa">Historial Vehiculos</p>
+                            </a>
+                        </li>
                     <?php } else if (session('idRol') == 3) { ?>
                         <li>
                             <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>

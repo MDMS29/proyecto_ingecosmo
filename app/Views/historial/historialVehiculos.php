@@ -3,19 +3,27 @@
 <!-- TABLA MOSTRAR VEHICULOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo-b.png') ?>" />Historial Vehiculos</h2>
-    <div class="d-flex justify-content-around p-2 container gap-4" id="container">
-        <div id="entrada" class="container card" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 800px;">
-            <h3 class="text-center p-3" style="position: sticky;top:0px; z-index:1; background-color:white;"><img style="margin: 5px 20px; width:45px; height:45px;" src="<?php echo base_url('/icons/entrada-histo.png') ?>" />Entrada</h3>
-            <div id="containerEntrada" class="d-flex flex-column gap-4">
-                <!-- CARD DINAMICA -->
-            </div>
+    <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">Tipo Responsable</a> - <a class="toggle-vis btn" data-column="1">Responsable</a> - <a class="toggle-vis btn" data-column="4">Proceso Taller</a>
         </div>
-        <div id="salida" class="container card" style="overflow:scroll-vertical;overflow-y: scroll !important; overflow:scroll-horizontal;overflow-x: scroll !important;height: 800px;">
-            <h3 class="text-center p-3" style="position: sticky;top:0px; z-index:1; background-color:white;"><img style="margin: 5px 20px; width:45px; height:45px;" src="<?php echo base_url('/icons/salida-histo.jpg') ?>" />Salida</h3>
-            <div id="containerSalida" class="d-flex flex-column gap-4">
-                <!-- CARD DINAMICA -->
-            </div>
-        </div>
+        <table class="table table-striped" id="tableHistorial" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Tipo Responsable</th>
+                    <th scope="col" class="text-center">Responsable</th>
+                    <th scope="col" class="text-center">Orden de Trabajo</th>
+                    <th scope="col" class="text-center">Placa</th>
+                    <th scope="col" class="text-center">Proceso Taller</th>
+                    <th scope="col" class="text-center">Tipo Movimiento</th>
+                    <th scope="col" class="text-center">Fecha Movimiento</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <!-- TABLA DE VEHICULOS -->
+            </tbody>
+        </table>
     </div>
     <!-- <div class="footer-page mt-4">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarVehiculo" onclick="seleccionarVehiculo(< ?= 0 . ',' . 1 ?>)"><img src="< ?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
@@ -26,56 +34,69 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    tiposMovi = {
-        57: 'Entrada',
-        58: 'Salida',
-        59: 'Cambio de Estado'
-    }
-    //Mostrar movimientos
-    $.ajax({
-        url: '<?= base_url('historial/obtenerHistorialVehiculos') ?>',
-        method: "POST",
-        dataSrc: "",
-    }).done(
-        function(res) {
-            data = JSON.parse(res)
-            var cardE = ""
-            var cardS = ""
-            data.forEach(mov => {
-                if (mov.id_tipo_mov == 57) {
-                    cardE += `
-                        <div id=${mov.id_movimientoenc} class="card" style="border: none !important;">
-                            <div class="d-flex align-items-center flex-wrap justify-content-center"> 
-                                <img style="margin: 0px 20px; width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo-b.png') ?>" />
-                                <div class="card-body" style="background-color: #d9d9d9;border-radius:10px; color:black;">
-                                    <p>Tipo Responsable: <span class="fw-bold">${mov.nom_tipo_terce} </p>
-                                    <p>Responsable: <span class="fw-bold">${mov.tipo_tercero == 5 ? mov.cliente : mov.razon_social}</span></p>
-                                    <p>N° Orden: <span class="fw-bold">${mov.n_orden} </span></p>
-                                    <p>Placa Vehiculo: <span class="fw-bold text-uppercase">${mov.placa} </span></p>
-                                    <p>Fecha Entrada: <span class="fw-bold">${mov.fecha_movimiento} </span></p>
-                                </div>
-                            </div>
-                        </div>
-                    `
-                    $('#containerEntrada').html(cardE)
-                } else if (mov.id_tipo_mov == 58) {
-                    cardS += `
-                        <div id=${mov.id_movimientoenc} class="card" style="border: none !important;">
-                            <div class="d-flex align-items-center flex-wrap justify-content-center"> 
-                                <img style="margin: 0px 20px; width:45px; height:45px;" src="<?php echo base_url('/img/historial-vehiculo-b.png') ?>" />
-                                <div class="card-body" style="background-color: #d9d9d9;border-radius:10px;color:black;">
-                                    <p>Tipo Responsable: <span class="fw-bold">${mov.nom_tipo_terce} </span></p>
-                                    <p>Responsable: <span class="fw-bold">${mov.tipo_tercero == 5 ? mov.cliente : mov.razon_social}</span></p>
-                                    <p>N° Orden: <span class="fw-bold">${mov.n_orden} </span></p>     
-                                    <p>Placa Vehiculo: <span class="fw-bold text-uppercase">${mov.placa} </span></p>
-                                    <p>Fecha Salida: <span class="fw-bold">${mov.fecha_movimiento} </span></p>
-                                </div>
-                            </div>
-                        </div>
-                    `
-                    $('#containerSalida').html(cardS)
-                }
-            });
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tablaHistorial.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+    //Div ocualtar columnas de la tabla
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
         }
-    )
+    })
+    //Tabla de Historial
+    var tablaHistorial = $('#tableHistorial').DataTable({
+        ajax: {
+            url: '<?= base_url('historial/obtenerHistorialVehiculos') ?>',
+            method: "POST",
+            dataSrc: "",
+        },
+        columns: [{
+                data: "nom_tipo_terce"
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return `<span>
+                    ${row.tipo_tercero == 5 ? row.cliente : row.razon_social}
+                    </span>`
+                }
+            },
+            {
+                data: "n_orden"
+            },
+            {
+                data: "placa",
+                render: function(data, type, row) {
+                    return '<span class="text-uppercase">' + row.placa + '</span>';
+                }
+            },
+            {
+                data: "estado"
+            },
+            {
+                data: "tipo_movimiento"
+            },
+            {
+                data: "fecha_movimiento"
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return '<button class="btn btn-danger">PDF</button>';
+                }
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+    });
+   
 </script>
