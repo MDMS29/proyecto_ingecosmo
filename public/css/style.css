@@ -64,6 +64,12 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+*::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb:hover{
+  background-color: #797979;
+  border-radius: 20px;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -12121,3 +12127,5 @@ a[data-toggle="collapse"] {
   background: #0056b3 !important;
   border-color: #3e64ff !important;
 } */
+
+

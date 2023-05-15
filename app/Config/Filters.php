@@ -23,7 +23,7 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'session'       => SessionFilter::class //Archivo en la carpeta Filters
+        // 'session'       => SessionFilter::class //Archivo en la carpeta Filters
     ];
 
     /**
@@ -63,16 +63,26 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [
+    // public array $filters = [
 
-        'session' => [
-            'before' => [ 
-                'home',
-                'usuarios',
-                'usuarios/*',
-                'trabajadores',
-                'trabajadores/*'
-            ]
-        ]
-    ];
+    //     // 'session' => [
+    //     //     'before' => [ 
+    //     //         'home',
+    //     //         'usuarios',
+    //     //         'usuarios/*'
+    //     //     ]
+    //     // ]
+
+
+    //     'session' => [
+    //         'before' => [ 
+    //             'home',
+    //             'usuarios',
+    //             'usuarios/*',
+    //             'trabajadores',
+    //             'trabajadores/*'
+    //         ]
+    //     ]
+
+    // ];
 }

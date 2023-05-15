@@ -14,7 +14,7 @@ class ParamModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_param_enc', 'nombre', 'resumen', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_param_enc', 'nombre', 'resumen', 'estado', 'fecha_crea', 'usuario_crea', 'n_iconos']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -32,6 +32,20 @@ class ParamModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function obtenerCategorias()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '10');
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+    public function obtenerFilas()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '10');
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;}
+
     public function obtenerTipoTel()
     {
         $this->select('id_param_det as id, nombre');

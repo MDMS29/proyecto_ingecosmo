@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Alike&family=Noto+Serif&family=Nunito:wght@300&display=swap');
+
+:root {
+  --azulBoton: #161666;
+  --rojoBoton: #E25050;
+  --grisInput: #ECEAEA; /* gris mas oscuro */
+  --grisModal: #D9D9D9; 
+}
+
+.titulo {
+  color: #000000;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+}
+
+.logo1 {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 35px;
+  margin-top: 30px;
+}
+
+.contenedorE {
+  width: 930px;
+  height: 600px;
+  background: white;
+  border: 2px solid #161666;
+  box-shadow: 0 2px 12px #161666;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  overflow-y: scroll;
+}
+
+.contenidoCardE {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.iconos {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.card1 {
+  background: #D9D9D9;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 25rem;
+  height: 10rem;
+}
+
+.imagenes {
+  background: #A4AADE;
+  border: 4px solid #161666;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textoCard {
+  padding: 10px;
+  height: 100%;
+}
+
+.bloqueTextoE {
+  color: #161666;
+}
+
+.btnVer {
+  color: #161666;
+  text-decoration: none;
+  border: 2px solid #161666;
+  border-radius: 8px;
+  margin-top: 0;
+  padding: 8px;
+  width: 105px;
+  height: 35px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+}
+
+.btnVer:hover {
+  color: rgb(255, 255, 255);
+  background-color: #161666;
+}
+
+.iconoBroca {
+  width: 80px;
+  height: 90px;
+}
+
+.iconoBombi {
+  width: 90px;
+  height: 90px;
+}
+
+.footer-page {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1em;
+  gap: 1rem;
+  width: 54%;
+}
+
+.btnRedireccion {
+  background-color: #161666 !important;
+  color: white !important;
+}
+
+.imagenEncab{
+  width: 80px;
+  height: 70px;
+  margin-right: 0;
+}
+
+.imgAgregar{
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.contenedor-btn-file label {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.contenedor-btn-file.bordeado {
+  background-color: #fff;
+  border: 2px solid #161666;
+  color: #161666;
+}
+.contenedor-btn-file.bordeado:hover {
+  background-color: #161666;
+  color: #fff;
+}
+
+.card2 {
+  background: #D9D9D9;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 25rem;
+  height: 10rem;
+  margin: 15px;
+}
+
+.estanteria {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.contenidoCardF {
+  display: flex;
+  flex-wrap: wrap;
+  width: 10
+}
+
+.textoFila{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.bloqueFila{
+  overflow-x: scroll;
+  display: flex;
+  height: 100px;
+  flex-direction: row;
+  width: 300px;
+  margin: 1px;
+}
+
+.bloqueTextoE{
+  padding: 10px;
+  width: auto;
+}
+
+.subTexto {
+  margin-bottom: 0;
+  width: 200px;
+  height: auto;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+#cerrarX{
+  margin: 0;
+}
+
+.tituloHeader{
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+/* .modal-header{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-right: 10px;
+  flex-direction: row;
+} */
+
+.btnCerrar{
+  background-color: #E25050 !important;
+  color: white !important;
+}
+
+.btnGuardar1{
+  background-color: #161666 !important;
+  color: white !important;
+} 
+
+label {
+  color: #1b335b;
+  font-weight: 600;
+}
+
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
+#modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-control {
+  background-color: var(--grisInput);
+}
+
+
+

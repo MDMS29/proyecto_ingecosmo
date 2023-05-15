@@ -1,5 +1,6 @@
 <head>
-    <link rel="shortcut icon" href="<?php echo base_url('/img/ingecosmo.png') ?>" />
+<link rel="shortcut icon" href="<?php echo base_url('/img/ingecosmo.png') ?>" />
+<link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
 </head>
 
 <div id="content" class="p-4 p-md-5">

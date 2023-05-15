@@ -89,11 +89,13 @@
             <!-- <h1><a class="logo"></a></h1> -->
             <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
                 <ul id="allElement" class="list-unstyled components mb-5">
+                    
                     <li class="active">
-                        <a href="<?= base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
+                        <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                             <p id="pa"><?= session('rol') ?></p>
                         </a>
                     </li>
+                    
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
                         <li>
                             <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
@@ -152,7 +154,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                            <a href="<?= base_url('estanteria/mostrarEstante') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
                                 <p id="pa">Estanteria</p>
                             </a>
                         </li>
@@ -160,6 +162,16 @@
                     <li>
                         <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                             <p id="pa">Historial</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url() ?>Estanteria" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                            <p id="pa">Estanteria</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url() ?>Estanteria" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                            <p id="pa">Estanteria</p>
                         </a>
                     </li>
                     <li>
