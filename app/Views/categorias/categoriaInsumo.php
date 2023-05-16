@@ -3,11 +3,8 @@
 
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
-        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">INSUMOS</h1>
+        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">INSUMOS</h1>        
         <a href="<?php echo base_url('/home'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</a>
-
-
-
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
