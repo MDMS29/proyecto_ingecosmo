@@ -1055,7 +1055,13 @@
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)
-            ContadorPRC = 0
+            
+            
+            
+            
+            
+            
+            = 0
         })
     }
 </script>

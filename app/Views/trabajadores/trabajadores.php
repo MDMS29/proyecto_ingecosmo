@@ -36,11 +36,9 @@
         <input type="text" name="tp" id="tp" hidden>
         <div class="modal-dialog modal-xl">
             <div class="body">
-                <div class="logo">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
-                </div>
                 <div class="modal-content">
-                    <div class="modal-header flex">
+                    <div class="modal-header d-flex align-items-center justify-content-between">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
                         <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
                         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
