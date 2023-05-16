@@ -151,7 +151,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url('estanteria/mostrarEstante') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                            <a href="<?= base_url('estanteria') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
                                 <p id="pa">Estanteria</p>
                             </a>
                         </li>

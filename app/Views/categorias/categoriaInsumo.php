@@ -1,10 +1,12 @@
-<link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>">
-
+<link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>" />
 
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
-        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">INSUMOS</h1>        
+        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>" width="50"> INSUMOS</h1>
         <a href="<?php echo base_url('/home'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</a>
+
+
+
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
@@ -32,10 +34,14 @@
                                 }
                                 $i++ ?>
                             <?php } ?>
+
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+
+
+
                             <?php $r = 0;
                             for ($a = 0; $a < count($data);) {
                             ?>
@@ -154,4 +160,7 @@
             prevEl: ".swiper-button-prev",
         },
     });
+
+
+
 </script>

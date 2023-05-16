@@ -20,10 +20,10 @@ class Filas extends BaseController
     }
     public function index()
     {
-        $filas = $this->filas->obtenerFilas("id_material");
-        $data = ['data' => $filas];
-        echo view('/principal/sidebar');
-        echo view('/estanteria/filas', $data);
+        // $filas = $this->filas->obtenerFilas("id_material");
+        // $data = ['data' => $filas];
+        // echo view('/principal/sidebar');
+        // echo view('/estanteria/filas', $data);
     }
 
     public  function mostrarFila($estante)
@@ -33,7 +33,7 @@ class Filas extends BaseController
         $data = ['data' => $filas, 'titulo' => $titulo, 'filas' => $filas];
         echo view('/principal/sidebar');
         echo view('/estanteria/filas', $data);
-        echo view('/materiales/materiales', $data);
+        // echo view('/materiales/materiales', $data);
     }
 
     // public function mostrarMaterial($estante, $material){
