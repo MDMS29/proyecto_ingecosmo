@@ -21,9 +21,11 @@
                         <h5>
                             <?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
                         </h5>
+
                         <h6>
-                            Wayando
+                            <?= $usuario['nombre_rol'] ?>
                         </h6>
+
                         <p class="profile-ranting" style="opacity: 0;">3</p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
@@ -34,6 +36,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#contraseñas" role="tab" aria-controls="profile" aria-selected="false">Contraseñas</a>
                             </li>
                         </ul>
                     </div>
@@ -51,7 +56,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Id Usuario</label>
@@ -81,7 +86,7 @@
                                     <label>Tipo Documento</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><?= $usuario['tipo_Documento']?></p>
+                                    <p><?= $usuario['tipo_Documento'] ?></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -89,7 +94,7 @@
                                     <label>N° Documento</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><?= $usuario['n_identificacion']?></p>
+                                    <p><?= $usuario['n_identificacion'] ?></p>
                                 </div>
                             </div>
                         </div>
@@ -141,9 +146,59 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="container" style="background-color: #dfe6f2;border-radius:10px;">
+                                <div class="d-flex column-gap-3" style="width: 100%" id="contenedorPerfil">
+                                    <div class="mb-3" style="width: 100%; margin: 0;" id="contenidoPerfil">
+                                        <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
+                                            <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
+                                            </label>
+                                            <div class="flex">
+                                                <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
+                                                <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
+                                            </div>
+                                            <div class="form-check" style="margin-top: 10px;">
+                                                <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
+                                                <label class="form-check-label" for="ver">
+                                                    Ver Contraseña
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div id="contenidoPerfil2" class="mb-3" style="width: 100%; margin: 0px;">
+                                            <div class="mb-3" style="width: 100%; margin: 0px;" id="bloqueContra">
+                                                <div>
+                                                    <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                                    <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                                </div>
+                                                <small id="msgConfirRes" class="normal"></small>
+                                            </div>
+                                            <div id="bloqueContra2">
+                                                <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
+
+<script>
+    //Ver contraseñas
+    function verContrasena() {
+        var check, password;
+        password = document.getElementById("contraRes");
+        check = document.getElementById("ver");
+        if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
+        {
+            password.type = "text";
+        } else // Si no está activada 
+        {
+            password.type = "password";
+        }
+    }
+</script>

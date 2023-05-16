@@ -145,7 +145,7 @@
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/restorePass.png') ?>" alt="" width="30" height="30"> REESTABLECER CONTRASEÑA</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/restorePass.png') ?>" alt="" width="30" height="30"> Restablecer Contraseña</h1>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
                 </div>
                 <div class="modal-body">
@@ -159,7 +159,7 @@
                                     <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
                                 </div>
-                                <div class="form-check">
+                                <div class="form-check" style="margin-top: 10px;">
                                     <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
                                     <label class="form-check-label" for="ver">
                                         Ver Contraseña
@@ -426,7 +426,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar"></button>' +
                         '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
                         '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("icons/restorePass.png") ?>" width="25" heigth="25"/></button>'
                     );
@@ -535,7 +535,7 @@
 
             }).done(function(res) {
                 limpiarCampos()
-                $('#tituloModal').text('Editar Usuario')
+                $('#tituloModal').text('Editar')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_usuario'])
                 $('#nombreP').val(res[0]['nombre_p'])

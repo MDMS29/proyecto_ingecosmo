@@ -69,7 +69,6 @@ class Usuarios extends BaseController
                 return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
             }
         }
-
     }
 
     public function salir()
@@ -77,8 +76,6 @@ class Usuarios extends BaseController
         $session = session();
         $session->destroy();
         return redirect()->to(base_url('/'));
-
-
     }
     public function obtenerUsuarios()
     {
@@ -97,6 +94,7 @@ class Usuarios extends BaseController
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }
+
     public function perfil($id)
     {
         $usuarios = $this->usuarios->buscarUsuario($id, 0);
@@ -175,6 +173,7 @@ class Usuarios extends BaseController
             return json_encode(2);
         }
     }
+
     public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
@@ -194,6 +193,7 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
+
     public function cambiarEstado()
     {
         $id = $this->request->getPost('id');

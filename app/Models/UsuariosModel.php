@@ -35,6 +35,8 @@ class UsuariosModel extends Model
         $data = $this->findAll();
         return $data;
     }
+
+
     public function buscarUsuario($id, $nIdenti)
     {
         if ($id != 0) {
@@ -42,20 +44,16 @@ class UsuariosModel extends Model
             $this->where('id_usuario', $id);
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
             $this->join('param_detalle', 'param_detalle.id_param_det = usuarios.tipo_doc');
-
-
         } elseif ($nIdenti != 0) {
             $this->select('usuarios.*, roles.nombre as nombre_rol, roles.id_rol as idRol');
             $this->where('n_identificacion', $nIdenti);
             $this->where('usuarios.estado', 'A');
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
-
         } elseif ($id != 0 && $nIdenti != 0) {
 
             $this->select('usuarios.*');
             $this->where('id_usuario', $id);
             $this->where('n_identificacion', $nIdenti);
-
         }
         $data = $this->first();
         return $data;
