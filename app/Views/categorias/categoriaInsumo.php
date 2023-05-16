@@ -5,9 +5,6 @@
     <div class="contenedor">
         <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>">MATERIALES</h1>
         <a class="btn btnRegresar" style="background: #E25050; color:white; width:140px;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('icons/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
-
-
-
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
@@ -157,7 +154,4 @@
             prevEl: ".swiper-button-prev",
         },
     });
-
-
-
 </script>

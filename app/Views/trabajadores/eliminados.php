@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores/proveedores.css") ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
@@ -279,7 +278,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarTrabajador(' + data.id_trabajador + ')" data-bs-target="#verTrabajador" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=<?php echo base_url('/trabajadores/cambiarEstado/') ?>' + data.id_trabajador + '/A data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Trabajador" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_trabajador + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Trabajador" width="20"></button>'
                     );
                 },
             }
@@ -370,34 +369,22 @@
     }
      //Cambiar estado de "Eliminado" a "Activo"
      $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
-        $('#btnSi').on('click', function(e) {
-            mostrarMensaje('success', 'Se ha reestablecido el Trabajador')
-            tableTrabajadores.ajax.reload(null, false)
-        })
+        $(this).find('#btnSi').attr('onclick', `ReestaurarTrabajadores(${$(e.relatedTarget).data('href')})`)
     })
 
-    // $('#modalConfirmaP').on('show.bs.modal', function(e) {
-    //     $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    // });
-
-    // $('#modalActivarP').on('show.bs.modal', function(e) {
-    //     $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    // });
-
-
-    // $('.btnNo').click(function() {
-    //     $("#modalActivarP").modal("hide");
-    // });
-
-    // //Mostrar mensajes de SwalFire
-    // function mostrarMensaje(tipo, msg) {
-    //     Swal.fire({
-    //         position: 'center',
-    //         icon: `${tipo}`,
-    //         text: `${msg}`,
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //     })
-    // }
+    function ReestaurarTrabajadores(id) {
+        $.ajax({
+            url: "<?php echo base_url('trabajadores/cambiarEstado') ?>",
+            type: "POST",
+            data: {
+                id,
+                estado: 'A'
+            }
+        }).done(function(data) {
+            mostrarMensaje('success', data)
+            $('#modalConfirmar').modal('hide')
+            tableTrabajadores.ajax.reload(null, false)
+            ContadorPRC = 0
+        })
+    }
 </script>

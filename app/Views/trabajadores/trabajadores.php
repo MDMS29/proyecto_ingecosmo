@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Cargo</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a>
         </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
@@ -62,8 +62,8 @@
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
-                                   <input type="text" name="apellido_s" class="form-control" id="apellidoS">
+                                    <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
+                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS">
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
@@ -265,7 +265,7 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar este Usuario?</p>
+                        <p class="textoModalP">¿Estas seguro de eliminar este Trabajador?</p>
                     </div>
 
                 </div>
@@ -367,7 +367,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarTrabajador(' + data.id_trabajador + ' , 2 )" data-bs-target="#agregarTrabajador" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Trabajador"></button>' +
-                        '<button class="btn" data-href=<?php echo base_url('/trabajadores/cambiarEstado/') ?>' + data.id_trabajador + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>'
+                        '<button class="btn" data-href=' + data.id_trabajador + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Trabajador"></button>'
                     );
                 },
             }
@@ -885,21 +885,13 @@
     }
     //Cambiar estado de "Activo" a "Eliminado" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'))
-        $('#btnSi').on('click', function(e) {
-            mostrarMensaje('success', 'Se ha eliminado el trabajador')
-            tableTrabajadores.ajax.reload(null, false)
-        })
-    })
-
-    $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `EliminarTrabajadores(${$(e.relatedTarget).data('href')})`)
     })
 
     function EliminarTrabajadores(id) {
         $.ajax({
-            type: "POST",
             url: "<?php echo base_url('trabajadores/cambiarEstado') ?>",
+            type: "POST",
             data: {
                 id,
                 estado: 'I'

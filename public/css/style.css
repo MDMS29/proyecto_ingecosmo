@@ -41,6 +41,22 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.form-control {
+  background-color: var(--grisInput);
+}
+
+/* -- DATA TABLE -- */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  margin: 0px 0px !important;
+}
+div.dataTables_wrapper div.dataTables_length select {
+  width: 65px;
+  background-color: white;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+  background-color: white;
+}
+
 .footer-page {
   display: flex;
   justify-content: flex-end;

@@ -105,21 +105,6 @@ table {
   color: #8e8e8e;
 }
 
-/* DATA TABLE */
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  margin: 0px 8px !important;
-}
-
-div.dataTables_wrapper div.dataTables_length select {
-  width: 65px;
-  background-color: white;
-}
-
-div.dataTables_wrapper div.dataTables_filter input {
-  background-color: white;
-}
-
 /* PERFIL */
 .emp-profile {
   padding: 3%;

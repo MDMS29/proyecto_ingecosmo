@@ -75,7 +75,7 @@
 </form>
 
 <!-- Modal Confirma Eliminar -->
-<div class="modal fade" id="modalConfirmarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
         <div class="modal-content" id="modalEliminarContentP">
@@ -118,7 +118,6 @@
             $(this).addClass('active');
         }
     })
-
     //Mostrar mensajes de SwalFire
     function mostrarMensaje(tipo, msg) {
         Swal.fire({
@@ -129,12 +128,6 @@
             timer: 1500
         })
     }
-
-
-    $('#modalConfirmarP').on('show.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('href', $(e.relatedTarget).data('href'));
-    });
-
     // Tabla de usuarios  
     var tableAliados = $("#tableAliados").DataTable({
         ajax: {
@@ -167,7 +160,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ',2)" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
 
-                        '<input type="image" class="btn" data-href=<?php echo base_url('/aliados/cambiarEstado/') ?>' + data.id_tercero + '/I data-bs-toggle="modal" data-bs-target="#modalConfirmarP" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
+                        '<input type="image" class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
                     );
                 },
             }
@@ -191,8 +184,6 @@
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
     }
-
-
     //Validacion de Razon Social
     function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
