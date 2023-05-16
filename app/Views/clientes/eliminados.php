@@ -51,14 +51,14 @@
                     <div class="contenidoEliminarP">
                         <div class="bloqueModalP">
                             <img style=" width:100px; height:80px; margin:10px; " src="<?php echo base_url('/icons/icon-activar.png') ?>" />
-                            <p class="textoModalP">¿Estas seguro de activar este registro?</p>
+                            <p class="textoModalP">¿Estas seguro de reestablece este cliente?</p>
                         </div>
 
                     </div>
                 </div>
                 <div id="bloqueBtnP" class="modal-footer">
                     <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
-                    <a id="btnSi" class="btn btnAccionF">Activar</a>
+                    <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
                 </div>
 
             </div>
