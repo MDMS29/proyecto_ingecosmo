@@ -3,6 +3,9 @@
 :root {
     --azulBase: #161666;
     --rojoAcciones: #EF434D;
+    --grisModal: #ECEAEA;
+    --grisInput: #D9D9D9; 
+    --editarBase: #000000; 
 }
 
 
@@ -17,6 +20,12 @@
     background-color: var(--azulBase) !important;
     color: white !important;
 }
+
+.btnEditar{
+    background-color: var(--editarBase) !important;
+    color: white !important;
+}
+
 
 .footer-page{
     display: flex;
@@ -43,11 +52,6 @@
 #MasBaterias{
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-
 }
 
 
@@ -63,14 +67,6 @@
     }
 }
 
-#imagenBateria{
-    height: 60px;
-    width: 70px;
-    margin-right: 20px;
-
-
-}
-
 .card {
     display: flex;
     justify-content: center;
@@ -80,12 +76,6 @@
     width: 13rem; 
     height:18rem;
     font-family: Nunito sans-serif;
-}
-
-.Imagenes {
-    align-items: center;
-    flex-direction: row;
-
 }
 
 .contenido1 {
@@ -120,7 +110,7 @@
 
 .detalles {
     width: 50px;
-    margin-right: 10px;
+    margin-left: 10px;
   
 }
 .logoIngecosmo {
@@ -138,22 +128,25 @@
     flex-direction: row;
     flex-wrap: wrap
 }
-#modal-content{
+#modalContentD{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    border: 5px solid #161666;
+    position: relative;
+    top: 100px;
+    border: 5px solid var(--azulBase) !important;
     border-radius: 10px;
+    background-color: white;
 }
 
-#modal-header{
+#modalHeaderD{
     width: 100%;
     display: flex;
     align-items: center;
     padding-right: 10px;
 
 }
-#modal-footer{
+#modalFooterD{
     width: 100%;
     display: flex;
     align-items: center;
@@ -166,8 +159,9 @@
     width: 100%;
 }
 
-#modal-body{
+#modalBodyD{
     display: flex;
+    padding: 30px;
     justify-content:center;
     align-items: center;
     flex-direction: row;
@@ -176,16 +170,23 @@
     height: 250px;
    
 }
-.campos{
-    width: 300px;
-    padding-left:20px;
-    display: flex;
-    flex-direction: row;
-    font-weight: 500;
+
+.d-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+label{
+    color: #1b335b;
+    font-weight: 600;
+    
 }
 
 input[type="text"]{
     text-align: center;
+    margin-bottom: 15px;
+    margin-left: 15px;
 }
 
 
@@ -202,6 +203,140 @@ input[type="text"]{
     width: 70px;
     left: 1rem;
     bottom: 5px;
+
+}
+/* 
+estilos modal agregar  */
+
+
+#modalAgregar2{
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 
+#modalFooter{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#modalContent{
+    height: 550px; 
+    border: 5px solid var(--azulBase) !important;
+    border-radius: 10px;
+}
+
+#nombre, #precioC, #precioV, #cantidadA{
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 250px;
+    background-color: var(--grisModal);
+}
+
+#titulo1{
+    font-size: 20px;
+    display: flex;
+    margin-left: 40%;
+    font-family: 'Nunito', sans-serif; 
+    text-transform: uppercase;
+    font-weight: bold;
+    
+
+}
+.form-label {
+    margin-bottom: 0.5rem;
+    width: 100px;
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+  
+}
+
+/* estilos modal usar */
+
+#modalBodyUsar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#modalHeaderUsar{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-right: 10px;
+}
+#modalContentUsar{
+
+    border: 5px solid var(--azulBase); 
+    border-radius:10px; 
+}
+
+#nombreI, #cantidadU{
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 250px;
+
+}
+
+.HEADER{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+.modalTitulo{
+    font-family: 'Nunito';
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* detalles */
+
+#nombre1, #precioCompra, #precioVenta, #cantidadActual, #estante,#fila{
+    margin-left: 15px;
+    border-radius: 5px;
+    background-color: var(--grisModal);
+
+}
+
+/* USAR */
+
+#nombreInsumo, #cantidadExistente, #PrecioDeVenta, #subtotal{
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 250px;
+    background-color: var(--grisModal);
+}
+
+#cantidadUsar{
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 250px;
+    background: rgb(255, 255, 255);
+}
+
+.invalido{
+    color: red;
+    font-size: 9px;
+    font-weight: 600;
+}
+.invalido2{
+    color: red;
+    font-size: 9px;
+    font-weight: 600;
+}

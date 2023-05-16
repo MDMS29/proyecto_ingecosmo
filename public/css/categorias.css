@@ -4,6 +4,11 @@
     --azulBase: #161666;
     --rojoAcciones: #EF434D;
 }
+.btnRedireccion {
+    background-color: var(--rojoAcciones) !important;
+    color: white !important;
+    margin-bottom: 30px;
+}
 
 .contenedor{
     display: flex;
@@ -94,6 +99,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 100px;
 }
 #btnAgregar{
 
@@ -144,7 +150,18 @@
 }
 
 
-
+.btnRegresar{
+    background: #161666;
+    color: #D9D9D9;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    width: 100px;
+    margin-bottom: 30px;
+}
+.btnRegresar:hover{
+    background-color: #12124d;
+}
 
 .prev2{
     background-color: #3F48CC;

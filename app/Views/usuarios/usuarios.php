@@ -128,7 +128,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer"> 
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
