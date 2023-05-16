@@ -1,4 +1,46 @@
 <link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<style>
+    html,
+    body {
+        position: relative;
+        height: 100%;
+    }
+
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+
+    swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
 
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
@@ -7,116 +49,103 @@
 
 
 
-        <div class="fondoCarrusel">
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
-                            <?php $i = 0;
-                            for ($e = 0; $e < count($data);) {
-                            ?>
-                                <span><?php $e ?></span>
-                                <?php
-                                $e += 3;
-                                $salida = array_slice($data, 0, $e);
-                                ?>
-                                <div class="card" style="width: 13rem; height:18rem; ">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$i]['nombre'] ?></h5>
+        <swiper-container class="fondoCarrusel mySwiper" navigation="true">
+            <swiper-slide>
+                <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                    <?php $i = 0;
+                    for ($e = 0; $e < count($data);) {
+                    ?>
+                        <span><?php $e ?></span>
+                        <?php
+                        $e += 3;
+                        $salida = array_slice($data, 0, $e);
+                        ?>
+                        <div class="card" style="width: 13rem; height:18rem; ">
+                            <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
+                            <div class="textoCard">
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$i]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                    </div>
-                                </div>
-                                <?php if ($e == 8) { ?>
-
-                                <?php break;
-                                }
-                                $i++ ?>
-                            <?php } ?>
-
+                                <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                        <?php if ($e == 8) { ?>
 
+                        <?php break;
+                        }
+                        $i++ ?>
+                    <?php } ?>
 
-
-                            <?php $r = 0;
+                </div>
+            </swiper-slide>
+            <swiper-slide><?php $r = 0;
                             for ($a = 0; $a < count($data);) {
                             ?>
-                                <span><?php $a ?></span>
-                                <?php
+                    <span><?php $a ?></span>
+                    <?php
                                 $a += 3;
                                 $salida = array_slice($data, 3, $a);
-                                ?>
-                                <div class="card" style="width: 13rem; height:18rem;">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
+                    ?>
+                    <div class="card" style="width: 13rem; height:18rem;">
+                        <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
+                        <div class="textoCard">
+                            <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                    </div>
-                                </div>
-                                <?php if ($e == 8) { ?>
+                            <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                        </div>
+                    </div>
+                    <?php if ($e == 8) { ?>
 
-                                <?php break;
+                    <?php break;
                                 }
                                 $r++ ?>
-                            <?php } ?>
+                <?php } ?>
+            </swiper-slide>
+            <swiper-slide>
+                <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
 
+
+
+                    <?php $j = 0;
+                    for ($l = 0; $l < count($data);) {
+                    ?>
+                        <span><?php $l ?></span>
+                        <?php
+                        $l += 3;
+                        $salida = array_slice($data, 6, $l);
+                        ?>
+                        <div class="card" style="width: 13rem; height:18rem;">
+                            <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
+                            <div class="textoCard">
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
+
+                                <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                            </div>
                         </div>
-                    </div>
+                        <?php if ($e == 8) { ?>
 
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                        <?php break;
+                        }
+                        $j++ ?>
+                    <?php } ?>
 
-
-
-                            <?php $j = 0;
-                            for ($l = 0; $l < count($data);) {
-                            ?>
-                                <span><?php $l ?></span>
-                                <?php
-                                $l += 3;
-                                $salida = array_slice($data, 6, $l);
-                                ?>
-                                <div class="card" style="width: 13rem; height:18rem;">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
-
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
-                                    </div>
-                                </div>
-                                <?php if ($e == 8) { ?>
-
-                                <?php break;
-                                }
-                                $j++ ?>
-                            <?php } ?>
-
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
-                            <div class="d-flex" style="gap:10px;">
-                                <div class="card1" style="width: 13rem; height:18rem;">
-                                    <div class="textoCard" title="Agregar una nueva categoria">
-                                        <button type="submit" class="btn btnAgregar" data-bs-target="#categoriaModal" data-bs-toggle="modal"><i class="bi bi-plus-circle" style="font-size:70px;"></i></button>
-                                    </div>
-                                </div>
+                </div>
+            </swiper-slide>
+            <swiper-slide>
+                <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                    <div class="d-flex" style="gap:10px;">
+                        <div class="card1" style="width: 13rem; height:18rem;">
+                            <div class="textoCard" title="Agregar una nueva categoria">
+                                <button type="submit" class="btn btnAgregar" data-bs-target="#categoriaModal" data-bs-toggle="modal"><i class="bi bi-plus-circle" style="font-size:70px;"></i></button>
                             </div>
                         </div>
                     </div>
-
                 </div>
+            </swiper-slide>
                 <div class="swiper-button-next" style="color:black;"></div>
                 <div class="swiper-button-prev" style="color:black;"></div>
-            </div>
-        </div>
-
+            </swiper-slide>
+        </swiper-container>
+        <!-- Slider main container -->
     </div>
 
 </div>
@@ -151,16 +180,6 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <script>
-    var swiper = new Swiper(".mySwiper", {
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-
-
-
 </script>
