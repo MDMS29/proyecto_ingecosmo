@@ -2,7 +2,7 @@
 
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/icon-proveedores.png') ?>" /> Proveedores Eliminados</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/icon-proveedores.png') ?>" /> Proveedores Eliminados</h2>
 
     <div class="table-responsive p-2">
 
@@ -49,7 +49,7 @@
 
                     <div class="contenidoEliminarP">
                         <div class="bloqueModalP">
-                            <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                            <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                             <p class="textoModalP">¿Estas seguro de activar este Proveedor?</p>
                         </div>
 
@@ -122,7 +122,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Proveedor" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Proveedor" width="20"></button>'
                     );
                 },
             }

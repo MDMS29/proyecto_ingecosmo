@@ -34,7 +34,6 @@ class Usuarios extends BaseController
             $nIdenti = $usuario;
             $contrasena = $contra;
             $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
             if (!empty($datos) && password_verify($contra, $datos['contrasena'])) {
                 $data = [
                     "id" => $datos['id_usuario'],
@@ -47,13 +46,12 @@ class Usuarios extends BaseController
                 $session->set($data);
                 return json_encode(1);
             } else {
-                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+                return json_encode(2);
             }
         } else {
             $nIdenti = $this->request->getPost('usuario');
             $contrasena = $this->request->getVar('contrasena');
             $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
             if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
                 $data = [
                     "id" => $datos['id_usuario'],
@@ -66,7 +64,7 @@ class Usuarios extends BaseController
                 $session->set($data);
                 return json_encode(1);
             } else {
-                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+                return json_encode(2);
             }
         }
     }
