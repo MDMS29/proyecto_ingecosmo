@@ -39,42 +39,47 @@
 </html>
 <script>
     const informacion = JSON.parse(localStorage.getItem('usuario'));
-    console.log(informacion)
     if (informacion == null || informacion?.usuario == '') {
+        // FORMULARIO
         $('#formulario').on('submit', function(e) {
             e.preventDefault();
             usuario = $('#usuario').val();
             contrasena = $('#contrasena').val();
-            console.log(usuario, contrasena)
             if ([usuario, contrasena].includes('')) {
                 return alert('Campos Vacios')
-            } else {
-                $.ajax({
-                    url: '<?php echo base_url('/login') ?>',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        usuario,
-                        contrasena
-                    },
-                    success: function(data) {
+            }
+            $.ajax({
+                url: '<?php echo base_url('/login') ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    usuario,
+                    contrasena
+                },
+                success: function(data) {
+                    if (data == 2) {
+                        $('#error').html("<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>")
+                        const alerta = document.querySelector(".alerta");
+                        setTimeout(() => {
+                            alerta.remove();
+                        }, 2000);
+                    }else{
                         const informacion = {
                             usuario,
                             contrasena
                         };
                         localStorage.setItem("usuario", JSON.stringify(informacion));
-                        const alerta = document.querySelector(".alerta");
-                        setTimeout(() => {
-                            alerta.remove();
-                        }, 2000);
+    
                         if (data == 1) {
                             window.location.href = "<?php echo base_url('/home') ?>"
                         }
                     }
-                })
-            }
+                }
+            })
+
         })
     } else {
+        // LOCAL STORAGE
         const usuario = informacion.usuario;
         const contrasena = informacion.contrasena
         $.ajax({
