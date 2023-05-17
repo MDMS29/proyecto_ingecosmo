@@ -6,6 +6,8 @@ p {
 :root {
   --azulBase: #161666;
   --rojoAcciones: #ef434d;
+  --azulClaro: #dfe6f2;
+  --grisInput: #ECEAEA; /* gris mas oscuro */
 }
 
 /* -- DIV OCULTAR COLUMNAS -- */
@@ -113,6 +115,39 @@ table {
 
 /* PERFIL */
 
+#encP{
+  height: auto;
+  height: 100px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; */
+}
+
+#home{
+  border-radius: 10px;
+  width: 75%;
+}
+
+.bloquePerfil2{
+  display: flex;
+  justify-content: end;
+  width: 91%;
+
+}
+
+.row{
+  margin: 10px;
+}
+
+.form-control{
+  background-color: var(--grisInput);
+}
+
+.rowBtn{
+  margin-top: 10px;
+}
+
 .emp-profile {
   padding: 3%;
   margin-top: 3%;
@@ -189,7 +224,7 @@ h5.permiso {
 
 .profile-work {
   margin-inline: 50px;
-  background: #dfe6f2;
+  background: var(--azulClaro);
   border-radius: 10px;
   /* top | right | bottom | left */
   padding: 1px 20px 5px 20px;
