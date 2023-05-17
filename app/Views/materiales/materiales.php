@@ -170,7 +170,7 @@
 
       <div class="modal-footer" id="modalFooterD">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
-        <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button>
+        <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
         <button type="button" class="btn btnAccionF" id="btnUsar1" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
       </div>
 

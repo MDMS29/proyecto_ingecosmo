@@ -3,7 +3,7 @@
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
         <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>" width="50"> INSUMOS</h1>
-        <a href="<?php echo base_url('/home'); ?>" class="btn btnRedireccion" id="Regresar">Regresar</a>
+        <a href="<?php echo base_url('/home'); ?>" class="btn btnRedireccion" id="Regresar"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
 
 
 

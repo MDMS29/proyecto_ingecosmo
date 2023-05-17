@@ -33,6 +33,8 @@ class Insumos extends BaseController
         echo view('/materiales/materiales', $data);
     }
 
+    
+
     public function insertar()
     {
         $nombre =  $this->request->getPost('nombre');

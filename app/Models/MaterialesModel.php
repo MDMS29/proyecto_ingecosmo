@@ -110,6 +110,16 @@ class MaterialesModel extends Model{
         return $data;
     }
 
+    
+    public function obtenerRepuestoBodega($id)
+    {
+        
+        $this->select('*');
+        $this->where('estante', $id);
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+
     // public function traerNombre($id_material){
     //     $this->select('param_detalle.*');
     //     $this->where('nombre', '28');

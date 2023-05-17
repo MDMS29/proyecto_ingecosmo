@@ -4,13 +4,15 @@ namespace App\Controllers;
 
 use App\Models\EstanteriaModel;
 use App\Models\FilasModel;
+use App\Models\ParamModel;
+use App\Models\MaterialesModel;
 
 use App\Controllers\BaseController;
 
 
 class Estanteria extends BaseController
 {
-    protected $estantes, $filas;
+    protected $estantes, $filas, $materiales, $categorias;
     public function __construct()
     {
         $this->estantes = new EstanteriaModel();
@@ -34,6 +36,7 @@ class Estanteria extends BaseController
         echo view('/estanteria/estanteria', $data);
         return json_encode($estantes);
     }
+    
 
     public function buscarEstante($id)
     {

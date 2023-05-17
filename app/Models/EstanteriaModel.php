@@ -14,7 +14,7 @@ class EstanteriaModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id', 'nombre', 'usuario_crea', 'fecha_crea', 'estado', 'n_iconos'];
+    protected $allowedFields = ['id', 'nombre', 'usuario_crea', 'fecha_crea', 'tipo_estante', 'estado', 'n_iconos'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'fecha_crea';
@@ -29,6 +29,15 @@ class EstanteriaModel extends Model
     {
         $this->select('estanteria.*');
         $datos = $this->findAll();
+        return $datos;
+    }
+
+    public function obtenerBodega()
+    {
+        $this->select('id , nombre , tipo_estante , n_iconos');
+        $this->where('tipo_estante', '61');
+        $this->where('estado', 'A');
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }
 
