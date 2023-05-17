@@ -5,20 +5,24 @@ namespace App\Controllers;
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
 use App\Models\TercerosModel;
 use App\Models\ParamModel;
+use App\Models\TelefonosModel;
 
 class Aliados extends BaseController
 {
     protected $aliados;
     protected $param;
+    protected $telefonos;
     public function __construct()
     {
         $this->aliados = new TercerosModel();
         $this->param = new ParamModel();
+        $this->telefonos = new TelefonosModel();
     }
     public function index()
     {
         $param = $this->param->obtenerTipoDoc();
-        $data = [ 'tipoDoc' => $param];
+        $tipoTel = $this->param->obtenerTipoTel();
+        $data = [ 'tipoDoc' => $param, 'tipoTele' => $tipoTel];
 
         echo view('/principal/sidebar');
         echo view('/aliados/aliados', $data);
