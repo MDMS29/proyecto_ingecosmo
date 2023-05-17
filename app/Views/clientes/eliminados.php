@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes Eliminados</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes Eliminados</h2>
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
@@ -50,7 +50,7 @@
 
                     <div class="contenidoEliminarP">
                         <div class="bloqueModalP">
-                            <img style=" width:100px; height:80px; margin:10px; " src="<?php echo base_url('/icons/icon-activar.png') ?>" />
+                            <img style=" width:100px; height:80px; margin:10px; " src="<?php echo base_url('/img/icon-activar.png') ?>" />
                             <p class="textoModalP">¿Estas seguro de reestablece este cliente?</p>
                         </div>
 
@@ -147,7 +147,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Cliente" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Cliente" width="20"></button>'
                     );
                 },
             }

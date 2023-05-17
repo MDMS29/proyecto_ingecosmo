@@ -21,8 +21,8 @@
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarAliado" onclick="seleccionarAliado(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('/aliados/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarAliado" onclick="seleccionarAliado(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="<?php echo base_url('/aliados/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -86,7 +86,7 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de eliminar este Aliado?</p>
                     </div>
 
@@ -158,9 +158,9 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ',2)" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
+                        '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ',2)" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
 
-                        '<input type="image" class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar" src="<?php echo base_url("icons/delete.svg") ?>"></input>'
+                        '<input type="image" class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar" src="<?php echo base_url("img/delete.svg") ?>"></input>'
                     );
                 },
             }

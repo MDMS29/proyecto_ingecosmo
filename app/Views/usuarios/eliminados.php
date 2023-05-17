@@ -120,7 +120,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
@@ -155,7 +155,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
@@ -196,7 +196,7 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de reestablecer este Usuario?</p>
                     </div>
 
@@ -262,7 +262,7 @@
                     return (
 
                         '<button class="btn text-primary" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Usuario" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Usuario" width="20"></button>'
                     );
                 },
             }

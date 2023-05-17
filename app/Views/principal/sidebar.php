@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;1,500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="<?php echo base_url('/img/ingecosmo.png') ?>" />
-    <title>Ingecosmo Ltda.</title>
+    <title>Ingecosmos Ltda.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">

@@ -78,7 +78,7 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de reestablecer este Aliado?</p>
                     </div>
 
@@ -128,7 +128,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarAliado(' + data.id_tercero + ')" data-bs-target="#verAliado" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("icons/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Aliado" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Aliado" width="20"></button>'
                     );
                 },
             }
