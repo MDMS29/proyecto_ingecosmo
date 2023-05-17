@@ -57,7 +57,7 @@
         <div class="modal-header" id="modalHeader">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div id="agregar">
-            <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/icons/plus-b.png" alt="icon-plus" width="20">
+            <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/img/plus-b.png" alt="icon-plus" width="20">
           </div>
           <h1 class="modal-title" id="titulo1">Agregar</h1>
           <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>

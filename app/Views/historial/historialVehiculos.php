@@ -17,7 +17,6 @@
                     <th scope="col" class="text-center">Proceso Taller</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
                     <th scope="col" class="text-center">Fecha Movimiento</th>
-                    <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -26,8 +25,8 @@
         </table>
     </div>
     <!-- <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarVehiculo" onclick="seleccionarVehiculo(< ?= 0 . ',' . 1 ?>)"><img src="< ?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="< ?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="< ?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarVehiculo" onclick="seleccionarVehiculo(< ?= 0 . ',' . 1 ?>)"><img src="< ?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="< ?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="< ?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div> -->
 </div>
 
@@ -86,12 +85,6 @@
             },
             {
                 data: "fecha_movimiento"
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return '<button class="btn btn-danger">PDF</button>';
-                }
             }
         ],
         "language": {
