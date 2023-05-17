@@ -10,7 +10,7 @@
                 <p class="texto-home">En Ingecosmos tenemos la mejor calidad y garantía para fidelizar a cada uno de
                     nuestros clientes.
                     En este programa se podrá ver los Trabajadores, Clientes, Materiales, Vehículos y Proveedores, tendrá el
-                    poder de agregar, editar y eliminar cualquiera de sus datos almacenados</p>
+                    poder de agregar, editar y eliminar cualquiera de sus datos almacenados.</p>
             <?php } ?>
 
             <?php if (session('idRol') == 3) { ?>
@@ -19,7 +19,7 @@
                 <p class="texto-home">En Ingecosmos tenemos la mejor calidad y garantía para fidelizar a cada uno de
                     nuestros clientes.
                     En este programa podrás ver los Insumos, Historial, Organizacion y Estanteria, tendrá el poder de
-                    agregar, editar y eliminar cualquiera de sus datos almacenados </p>
+                    agregar, editar y eliminar cualquiera de sus datos almacenados. </p>
             <?php } ?>
         </div>
 

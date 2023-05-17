@@ -525,7 +525,8 @@
         verifiContra(1, 'msgConfirRes', 'contraRes', 'confirContraRes')
     })
     //Insertar y editar Usuario
-    function seleccionarUsuario(id, tp) {
+    function 
+    seleccionarUsuario(id, tp) {
         if (tp == 2) {
             //Actualizar datos
             $.ajax({
