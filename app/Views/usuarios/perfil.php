@@ -111,7 +111,7 @@
 
                                 <div class="bloquePerfil2">
                                     <div class="rowBtn">
-                                        <button type="button" class="btn btnRedireccion" onclick="verInput()">Editar perfil</button>
+                                        <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion" onclick="verInput()">Editar perfil</button>
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
             <div class="modal-content">
 
                 <div class="modal-header" id="modalHeader">
-                    <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>"/>
+                    <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus">
@@ -228,23 +228,39 @@
                     <div class="modal-body d-flex">
                         <div class="column-gap-3" style="width: 100%; padding-inline: 15px;">
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
-                                <small id="msgRaSo" class="invalido"></small>
+                                <label for="recipient-name" class="col-form-label" style="margin:0;">Primer Nombre:</label>
+                                <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
 
                                 <input hidden id="tp" name="tp">
                                 <input hidden id="id" name="id">
                             </div>
 
                             <div class="mb-3">
-                                <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                                <input type="text" class="form-control" id="nit" name="nit"></input>
-                                <small id="msgNit" class="invalido"></small>
+                                <label style="margin:0;" for="message-text" class="col-form-label">Segundo Nombre:</label>
+                                <input type="text" class="form-control" id="nombreS" name="nombreS"></input>
                             </div>
 
                             <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
+                                <label style="margin:0;" for="message-text" class="col-form-label">Primer Apellido:</label>
+                                <input type="text" class="form-control" id="apellidoP" name="apellidoP"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label style="margin:0;" for="message-text" class="col-form-label">Segundo Apellido:</label>
+                                <input type="text" class="form-control" id="apellidoS" name="apellidoS"></input>
+                            </div>
+
+                            <div class="mb-3" style="width: 100%;">
+                                <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
+                                <select class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
+                                    <option value="1" selected>Cedula de Ciudadania</option>
+                                    <option>-- Seleccione --</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3" style="width: 100%;">
+                                <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
+                                <input class="form-control" id="nIdenti" name="nIdenti"></input>
+                                <small id="msgDoc" class="invalido"></small>
                             </div>
                         </div>
 
@@ -277,8 +293,8 @@
 
     function verInput(id) {
 
-        let formPerfil=
-        ` <form>
+        let formPerfil =
+            ` <form>
         <div>
             hi
         </div>
