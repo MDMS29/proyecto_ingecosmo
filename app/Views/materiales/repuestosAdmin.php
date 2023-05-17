@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Repuestos</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" /> Repuestos</h2>
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tableProveedores" width="100%" cellspacing="0">
             <thead>
@@ -9,7 +9,6 @@
                     <th scope="col" class="text-center">#</th>
                     <th scope="col" class="text-center">Nombre</th>
                     <th scope="col" class="text-center">Existencia</th>
-                    <th scope="col" class="text-center">Tipo material</th>
                     <th scope="col" class="text-center">Placa de vehiculo</th>
                     <th scope="col" class="text-center">Precio</th>
                     <th scope="col" class="text-center">proveedores </th>
@@ -22,8 +21,8 @@
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('/proveedores/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="<?php echo base_url('/proveedores/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -37,7 +36,7 @@
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>"/>
 
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <img id="logoModal" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus">
+                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus">
                         <h1 class="modal-title fs-5 text-center" id="tituloModal"></h1>
                     </div>
 
@@ -49,7 +48,7 @@
                         <div class="column-gap-3" style="width: 100%; padding-inline: 15px;">
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label" style="margin:0;">Nombre:</label>
-                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                                <input class="form-control" type="text" min='1' max='300' id="nombre" name="nombre">
                                 <small id="msgRaSo" class="invalido"></small>
 
                                 <input hidden id="tp" name="tp">
@@ -58,38 +57,23 @@
 
                             <div class="mb-3">
                                 <label style="margin:0;" for="message-text" class="col-form-label">Existencia:</label>
-                                <input type="text" class="form-control" id="nit" name="nit"></input>
+                                <input type="text" class="form-control" id="existencia" name="existencia"></input>
                                 <small id="msgNit" class="invalido"></small>
                             </div>
 
                             <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Tipo material:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
-                            </div>
-
-                            <div class="mb-3">
                                 <label style="margin:0;" class="col-form-label" for="message-text">Placa de vehiculo:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
-                            </div>
-
-                            <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Tipo material:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
+                                <input class="form-control" id="placa" name="placa"></input>
                             </div>
 
                             <div class="mb-3">
                                 <label style="margin:0;" class="col-form-label" for="message-text">Precio:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
+                                <input class="form-control" id="precio" name="precio"></input>
                             </div>
 
                             <div class="mb-3">
                                 <label style="margin:0;" class="col-form-label" for="message-text">proveedores:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
-                            </div>
-
-                            <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Acciones:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
+                                <input class="form-control" id="proveedores" name="proveedores"></input>
                             </div>
                         </div>
 
@@ -119,7 +103,7 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
+                        <p class="textoModalP">¿Estas seguro de eliminar el repuesto?</p>
                     </div>
 
                 </div>
@@ -136,12 +120,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // variables
-    var ContadorPRC = 0
-    var inputRazonSocial = 0;
-    var inputNit = 0;
-    var validRazonSocial = true;
-    var validNi = true;
+   
     //Editar o Agregar Proveedor
     function seleccionarProveedor(id, tp) {
         if (tp == 2) {
@@ -151,7 +130,7 @@
                 dataType: 'json',
                 success: function(res) {
                     $('#tituloModal').text('Editar')
-                    $('#logoModal').attr('src', '<?php echo base_url('icons/editar.png') ?>')
+                    $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -160,8 +139,6 @@
                     $('#btnGuardar').text('Actualizar')
                     $('#msgRaSo').text('')
                     $('#msgNit').text('')
-                    validRazonSocial = true;
-                    validNi = true;
                 }
             })
 
@@ -177,8 +154,6 @@
             $('#btnGuardar').text('Agregar')
             $('#msgRaSo').text('')
             $('#msgNit').text('')
-            validRazonSocial = true;
-            validNi = true;
         }
     }
     // Tabla   
@@ -199,13 +174,19 @@
                 },
             },
             {
+                data: 'nombre'
+            },
+            {
+                data: 'cantidad_actual'
+            },
+            {
+                data: 'placa'
+            },
+            {
+                data: 'precio_venta'
+            },
+            {
                 data: 'razon_social'
-            },
-            {
-                data: 'n_identificacion'
-            },
-            {
-                data: 'direccion'
             },
             {
                 data: null,
@@ -213,7 +194,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
 
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );
                 },
             }
