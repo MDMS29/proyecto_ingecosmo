@@ -1,16 +1,18 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/icon-proveedores.png') ?>" /> Proveedores</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" /> Repuestos</h2>
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tableProveedores" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">Razon Social</th>
-                    <th scope="col" class="text-center">NIT</th>
-                    <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Acciones</th>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Existencia</th>
+                    <th scope="col" class="text-center">Placa de vehiculo</th>
+                    <th scope="col" class="text-center">Precio</th>
+                    <th scope="col" class="text-center">proveedores </th>
+                    <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -45,8 +47,8 @@
                     <div class="modal-body d-flex">
                         <div class="column-gap-3" style="width: 100%; padding-inline: 15px;">
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                                <label for="recipient-name" class="col-form-label" style="margin:0;">Nombre:</label>
+                                <input class="form-control" type="text" min='1' max='300' id="nombre" name="nombre">
                                 <small id="msgRaSo" class="invalido"></small>
 
                                 <input hidden id="tp" name="tp">
@@ -54,14 +56,24 @@
                             </div>
 
                             <div class="mb-3">
-                                <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                                <input type="text" class="form-control" id="nit" name="nit"></input>
+                                <label style="margin:0;" for="message-text" class="col-form-label">Existencia:</label>
+                                <input type="text" class="form-control" id="existencia" name="existencia"></input>
                                 <small id="msgNit" class="invalido"></small>
                             </div>
 
                             <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
+                                <label style="margin:0;" class="col-form-label" for="message-text">Placa de vehiculo:</label>
+                                <input class="form-control" id="placa" name="placa"></input>
+                            </div>
+
+                            <div class="mb-3">
+                                <label style="margin:0;" class="col-form-label" for="message-text">Precio:</label>
+                                <input class="form-control" id="precio" name="precio"></input>
+                            </div>
+
+                            <div class="mb-3">
+                                <label style="margin:0;" class="col-form-label" for="message-text">proveedores:</label>
+                                <input class="form-control" id="proveedores" name="proveedores"></input>
                             </div>
                         </div>
 
@@ -90,8 +102,8 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar este Proveedor?</p>
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de eliminar el repuesto?</p>
                     </div>
 
                 </div>
@@ -108,12 +120,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // variables
-    var ContadorPRC = 0
-    var inputRazonSocial = 0;
-    var inputNit = 0;
-    var validRazonSocial = true;
-    var validNi = true;
+   
     //Editar o Agregar Proveedor
     function seleccionarProveedor(id, tp) {
         if (tp == 2) {
@@ -132,15 +139,13 @@
                     $('#btnGuardar').text('Actualizar')
                     $('#msgRaSo').text('')
                     $('#msgNit').text('')
-                    validRazonSocial = true;
-                    validNi = true;
                 }
             })
 
         } else {
             //Insertar datos
             $('#tituloModal').text('Agregar')
-            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
+            $('#logoModal').attr('src', '<?php echo base_url('icons/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#RazonSocial').val('')
@@ -149,8 +154,6 @@
             $('#btnGuardar').text('Agregar')
             $('#msgRaSo').text('')
             $('#msgNit').text('')
-            validRazonSocial = true;
-            validNi = true;
         }
     }
     // Tabla   
@@ -171,19 +174,25 @@
                 },
             },
             {
+                data: 'nombre'
+            },
+            {
+                data: 'cantidad_actual'
+            },
+            {
+                data: 'placa'
+            },
+            {
+                data: 'precio_venta'
+            },
+            {
                 data: 'razon_social'
-            },
-            {
-                data: 'n_identificacion'
-            },
-            {
-                data: 'direccion'
             },
             {
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+                        '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
 
                         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );

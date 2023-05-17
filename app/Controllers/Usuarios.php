@@ -34,7 +34,6 @@ class Usuarios extends BaseController
             $nIdenti = $usuario;
             $contrasena = $contra;
             $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
             if (!empty($datos) && password_verify($contra, $datos['contrasena'])) {
                 $data = [
                     "id" => $datos['id_usuario'],
@@ -47,13 +46,12 @@ class Usuarios extends BaseController
                 $session->set($data);
                 return json_encode(1);
             } else {
-                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+                return json_encode(2);
             }
         } else {
             $nIdenti = $this->request->getPost('usuario');
             $contrasena = $this->request->getVar('contrasena');
             $datos = $this->usuarios->buscarUsuario(0, $nIdenti);
-            $textoAlerta = "<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>";
             if (!empty($datos) && password_verify($contrasena, $datos['contrasena'])) {
                 $data = [
                     "id" => $datos['id_usuario'],
@@ -66,10 +64,9 @@ class Usuarios extends BaseController
                 $session->set($data);
                 return json_encode(1);
             } else {
-                return redirect()->to(base_url('/'))->with('mensaje', $textoAlerta);
+                return json_encode(2);
             }
         }
-
     }
 
     public function salir()
@@ -77,8 +74,6 @@ class Usuarios extends BaseController
         $session = session();
         $session->destroy();
         return redirect()->to(base_url('/'));
-
-
     }
     public function obtenerUsuarios()
     {
@@ -97,6 +92,7 @@ class Usuarios extends BaseController
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }
+
     public function perfil($id)
     {
         $usuarios = $this->usuarios->buscarUsuario($id, 0);
@@ -175,6 +171,7 @@ class Usuarios extends BaseController
             return json_encode(2);
         }
     }
+
     public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
@@ -194,6 +191,7 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
+
     public function cambiarEstado()
     {
         $id = $this->request->getPost('id');

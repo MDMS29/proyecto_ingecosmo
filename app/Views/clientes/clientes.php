@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/icons/clientes-b.png') ?>" /> Clientes</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
             <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a> - <a class="toggle-vis btn" data-column="7">Correo</a>
@@ -26,9 +26,9 @@
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="seleccionarCliente(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('icons/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="seleccionarCliente(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
 
-        <a href="<?php echo base_url('/clientes/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('icons/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?php echo base_url('/clientes/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
                         <img class="imagenEncab"  src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                            <img id="logoModal" src="<?= base_url('icons/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5" id="tituloModal">Agregar</h1>
                         </div>
 
@@ -136,7 +136,7 @@
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
@@ -202,7 +202,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('icons/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
@@ -264,7 +264,7 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de eliminar este Cliente?</p>
                     </div>
 
@@ -350,7 +350,7 @@
                 dataType: 'json',
             }).done(function(res) {
                 $('#tituloModal').text('Editar')
-                $('#logoModal').attr('src', '<?php echo base_url('icons/editar.png')?>')
+                $('#logoModal').attr('src', '<?php echo base_url('img/editar.png')?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -391,7 +391,7 @@
             guardarTelefono()
             limpiarCampos(0)
             $('#tituloModal').text('Agregar')
-            $('#logoModal').attr('src', '<?php echo base_url('icons/plus-b.png')?>')
+            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png')?>')
             $('#msgDoc').text('')
             $('#tp').val(1)
             $('#id').val(0)
@@ -654,8 +654,8 @@
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Telefono">
-                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Telefono">
+                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
             }
@@ -775,8 +775,8 @@
                                 <td>${correos[i].correo}</td>
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('icons/edit.svg') ?>" title="Editar Correo">
-                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('icons/delete.svg') ?>" title="Eliminar Correo">
+                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
                                 </td>
                             </tr>`
             }
@@ -874,9 +874,9 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
+                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
 
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url("icons/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Cliente"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Cliente"></button>'
                     );
                 },
             }
