@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>" />
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
         <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>" width="50"> INSUMOS</h1>
