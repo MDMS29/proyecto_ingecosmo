@@ -21,13 +21,15 @@
             <div class="logo">
                 <img class="logo-ingecosmo" src="<?php echo base_url('/img/logo.png'); ?>">
             </div>
-            <div class="bloque-items">
+            <div class="bloque-items">  
                 <p class="texto">NUMERO DE IDENTIFICACION</p>
                 <input type="text" name="usuario" id="usuario" class="form-control">
                 <br>
                 <p class="texto">CONTRASEÑA</p>
                 <input type="password" name="contrasena" id="contrasena" class="form-control">
-                <?php echo session('mensaje'); ?>
+                <div id="error">
+                    <!-- error -->
+                </div>  
             </div>
             <div class="botones-login">
                 <button id="Ing" class="btn-ingresar">INGRESAR</button>
@@ -105,5 +107,5 @@
                 }
             }
         })
-    }
+    }   
 </script>
