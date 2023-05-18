@@ -27,6 +27,8 @@ class RepuestosAdmin extends BaseController
         echo view('/materiales/repuestosAdmin');
     }
 
+    
+
     public function insertar()
     {
         $tp = $this->request->getPost('tp');

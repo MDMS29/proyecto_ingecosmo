@@ -57,13 +57,13 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar insumos</h1>
                     </div>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX" onclick="limpiarCampos()"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">N° fila</label>
-                            <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
+                            <select class="form-select" id="fila1" name="fila1" style="background: #ECEAEA;">
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
                                     <option value=<?php echo $fila['fila']; ?>><?php echo $fila['fila']; ?></option>
@@ -75,13 +75,13 @@
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Nombre producto</label>
-                            <select class="form-select" id="nombre_prod" name="nombre_prod" style="background: #ECEAEA;">
+                            <select class="form-select" id="nombreProd" name="nombreProd" style="background: #ECEAEA;">
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" onclick="limpiarCampos()">Cerrar</button>
                     <button type="submit" class="btn btnGuardar1" id="btnGuardar">Guardar</button>
                 </div>
             </div>
@@ -95,6 +95,10 @@
 <script>
 
     var estanteria = $(".estanteria")
+    var inputFila = 0;
+    var inputNombreProd = 0;
+    var validIFila = true;
+    var validINombreProd = true;
 
     bloque = $('.bloqueTextoE')
     for (let i = 0; i < bloque.length; i++) {
@@ -125,7 +129,7 @@
 
                 cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
             }
-            $('#nombre_prod').html(cadena)
+            $('#nombreProd').html(cadena)
         }
     })
 
@@ -152,4 +156,51 @@
         })
         estanteria.ajax.reload(null, false)
     })
+
+    function limpiarCampos() {
+        $('#fila1').val('')
+        $('#nombreProd').val('')
+    }
+
+    // ---------------------------validaciones---------------------------
+
+    
+    function buscarUsuarioIdent(id, inputIden) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgDoc').text('')
+                    validIdent = true
+                } else if (res[0] != null) {
+                    $('#msgDoc').text('* Numero de identificación invalido *')
+                    validIdent = false
+                }
+            }
+        })
+    }
+    //Identificar si el numero de identificacion no este registrado
+    $('#nIdenti').on('input', function(e) {
+        inputIden = $('#nIdenti').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['n_identificacion'] == inputIden) {
+                        $('#msgDoc').text('')
+                        validIdent = true
+                    } else {
+                        buscarUsuarioIdent(0, inputIden)
+                    }
+                }
+            })
+        }
+    })
+ 
 </script>

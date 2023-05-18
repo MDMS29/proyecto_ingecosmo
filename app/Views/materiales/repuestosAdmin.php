@@ -102,7 +102,7 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/icons/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de eliminar el repuesto?</p>
                     </div>
 
@@ -145,7 +145,7 @@
         } else {
             //Insertar datos
             $('#tituloModal').text('Agregar')
-            $('#logoModal').attr('src', '<?php echo base_url('icons/plus-b.png') ?>')
+            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#RazonSocial').val('')
@@ -192,7 +192,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('icons/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+                        '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
 
                         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );

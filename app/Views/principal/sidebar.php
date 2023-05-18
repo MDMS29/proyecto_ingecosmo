@@ -49,7 +49,7 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestosAdmin') ?>" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
@@ -103,8 +103,8 @@
                                 <p id="pa">Clientes</p>
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                        <li>
+                            <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                                 <p id="pa">Repuestos</p>
                             </a>
                         </li>
@@ -112,7 +112,7 @@
                             <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                                 <p id="pa">Insumos</p>
                             </a>
-                        </li> -->
+                        </li>
                         <li>
                             <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
                                 <p id="pa">Vehiculos</p>

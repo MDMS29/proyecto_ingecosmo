@@ -70,7 +70,7 @@ class Filas extends BaseController
 
     public function insertar()
     {
-        $this->filas->update($this->request->getPost('nombre_prod'), [
+        $this->filas->update($this->request->getPost('nombreProd'), [
             'fila' => $this->request->getPost('fila')
         ]);
         return json_encode(1);
