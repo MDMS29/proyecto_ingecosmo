@@ -883,7 +883,6 @@
                 }
             },
             {
-
                 data: null,
                 render: function(data, type, row) {
                     var telefono = '';

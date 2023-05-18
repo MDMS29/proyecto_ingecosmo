@@ -1056,13 +1056,6 @@
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)
-            
-            
-            
-            
-            
-            
-            = 0
         })
     }
 </script>
