@@ -23,7 +23,7 @@
             </div>
             <div class="bloque-items">  
                 <p class="texto">NUMERO DE IDENTIFICACION</p>
-                <input type="text" name="usuario" id="usuario" class="form-control">
+                <input type="number" name="usuario" id="usuario" class="form-control">
                 <br>
                 <p class="texto">CONTRASEÑA</p>
                 <input type="password" name="contrasena" id="contrasena" class="form-control">

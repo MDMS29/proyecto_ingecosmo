@@ -39,6 +39,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#contraseñas" role="tab" aria-controls="profile" aria-selected="false">Contraseñas</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -168,7 +171,7 @@
                                 </div>
                             </div>
 
-                            <!-- <form autocomplete="off" id="formularioContraseñas">
+                            <form autocomplete="off" id="formularioContraseñas">
                                 <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="container" style="background-color: #dfe6f2;border-radius:10px;">
                                         <div class="d-flex column-gap-3" style="width: 100%" id="contenedorPerfil">
@@ -176,7 +179,7 @@
                                                 <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
                                                     <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                                     </label>
-                                                    <input type="hidden" name="idUsuario" id="idUsuario">
+                                                    <input type="" name="idUsuario" id="idUsuario">
 
                                                     <div class="flex">
                                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -206,7 +209,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form> -->
+                            </form>
                         </div>
 
                     </div>
