@@ -18,7 +18,7 @@
         </table>
     </div>
     <div class="footer-page">
-        <a href="<?php echo base_url('/aliados') ?>" class="btn btnRedireccion">Regresar</a>
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 

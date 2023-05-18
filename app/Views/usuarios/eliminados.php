@@ -22,7 +22,7 @@
         </table>
     </div>
     <div class="footer-page">
-        <a href="<?= base_url('usuarios') ?>" class="btn btnRedireccion"> Regresar</a>
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 
@@ -271,6 +271,7 @@
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     });
+
     function seleccionarUsuario(id) {
         $.ajax({
             type: 'POST',

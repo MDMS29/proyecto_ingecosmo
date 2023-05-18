@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?= base_url('css/vehiculos/vehiculos.css') ?>">
 
 <!-- TABLA MOSTRAR VEHICULOS -->
-<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo-b.png') ?>" />Historial Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
@@ -24,10 +24,10 @@
             </tbody>
         </table>
     </div>
-    <!-- <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarVehiculo" onclick="seleccionarVehiculo(< ?= 0 . ',' . 1 ?>)"><img src="< ?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="< ?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="< ?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
-    </div> -->
+    <div class="footer-page mt-4">
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <!-- <a href="< ?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="< ?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a> -->
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

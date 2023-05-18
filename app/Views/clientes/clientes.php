@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
-<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
@@ -865,12 +865,45 @@
                 data: 'direccion'
             },
             {
-                data: 'email'
+                data: null,
+                render: function(data, type, row) {
+                    var email = '';
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + row.id_tercero + '/' + 5,
+                        dataType: 'json',
+                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                        success: function(response) {
+                            if (response.length > 0) {
+                                email = response[0][0].correo;
+                            }
+                        }
+                    });
+                    return email;
+                }
             },
             {
-                data: 'telefono'
-            },
-            {
+
+                data: null,
+                render: function(data, type, row) {
+                    var telefono = '';
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 5,
+                        dataType: 'json',
+                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                        success: function(response) {
+                            if (response.length > 0) {
+                                telefono = response[0][0].numero;
+                            }
+                        }
+                    });
+                    return telefono;
+                }
+
+            }
+
+            , {
                 data: null,
                 render: function(data, type, row) {
                     return (

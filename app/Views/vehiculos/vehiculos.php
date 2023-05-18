@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('css/vehiculos/vehiculos.css') ?>">
 <!-- TABLA MOSTRAR VEHICULOS -->
-<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/vehiculo-b.png') ?>" /> Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
@@ -31,7 +31,6 @@
     </div>
     <div class="footer-page mt-4">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarVehiculo" onclick="seleccionarVehiculo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -315,7 +314,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarVehiculo(' + data.id_vehiculo + ',2)" data-bs-target="#agregarVehiculo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
-                        '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' 
                     )
                 }
             }

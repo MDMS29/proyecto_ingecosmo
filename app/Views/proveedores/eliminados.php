@@ -18,7 +18,7 @@
             </thead>
 
             <tbody class="text-center">
-            <?php $contador = 0 ?>
+                <?php $contador = 0 ?>
                 <?php if (empty($proveedores)) { ?>
                     <tr>
                         <td class="text-center" colspan="7">
@@ -33,39 +33,39 @@
     </div>
 
     <div class="footer-page">
-        <a href="<?php echo base_url('/proveedores') ?>" class="btn btnRedireccion">Regresar</a>
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+
     </div>
 
-    <!-- Modal Confirma activar -->
-    <div class="modal fade" id="modalActivarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+</div>
+<!-- Modal Confirma activar -->
+<div class="modal fade" id="modalActivarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
-            <div class="modal-content" id="modalEliminarContentP">
-                <div class="modalContenedorP">
-                    <div id="contenidoHeaderEliminarP" class="modal-header">
-                        <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
-                        <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="contenidoEliminarP">
-                        <div class="bloqueModalP">
-                            <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                            <p class="textoModalP">¿Estas seguro de activar este Proveedor?</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div id="bloqueBtnP" class="modal-footer">
-                    <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                    <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
+                <div class="contenidoEliminarP">
+                    <div class="bloqueModalP">
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de activar este Proveedor?</p>
+                    </div>
+
+                </div>
             </div>
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+            </div>
+
         </div>
     </div>
 </div>
 
-</div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
