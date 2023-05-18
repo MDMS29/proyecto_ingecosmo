@@ -127,17 +127,19 @@ table {
 #home{
   border-radius: 10px;
   width: 75%;
+  border: 1px var(--azulClaro) solid;
+  padding: 10px;
 }
 
 .bloquePerfil2{
   display: flex;
   justify-content: end;
-  width: 91%;
+  width: 100%;
 
 }
 
 .row{
-  margin: 10px;
+  margin: 0px;
 }
 
 .form-control{
