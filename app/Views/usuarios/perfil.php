@@ -39,9 +39,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#contraseñas" role="tab" aria-controls="profile" aria-selected="false">Contraseñas</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -171,7 +168,7 @@
                                 </div>
                             </div>
 
-                            <form autocomplete="off" id="formularioContraseñas">
+                            <!-- <form autocomplete="off" id="formularioContraseñas">
                                 <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="container" style="background-color: #dfe6f2;border-radius:10px;">
                                         <div class="d-flex column-gap-3" style="width: 100%" id="contenedorPerfil">
@@ -209,7 +206,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form> -->
                         </div>
 
                     </div>
@@ -242,8 +239,8 @@
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
                                     <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
-                                    <input id="id" name="id">
-                                    <input type="text" name="tp" id="tp">
+                                    <input id="id" name="id" hidden>
+                                    <input type="text" name="tp" id="tp" hidden>
 
                                 </div>
 
@@ -305,7 +302,7 @@
         $('#msgConfir').text('')
         $('#msgDoc').text('')
     }
-    
+
     function editarCampos(id, tp) {
         //Actualizar datos
         if (tp == 2) {
@@ -331,14 +328,24 @@
     $('#formularioPerfil').on('submit', function(e) {
         e.preventDefault()
         id = $('#id').val()
-        tp = $('#tp').val(2)
+        tp = $('#tp').val()
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
         apellidoS = $('#apellidoS').val()
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
-        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false) {
+        console.log({
+            id,
+            tp,
+            nombreP,
+            nombreS,
+            apellidoP,
+            apellidoS,
+            tipoDoc,
+            nIdenti
+        })
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -352,7 +359,8 @@
                     apellidoP,
                     apellidoS,
                     tipoDoc,
-                    nIdenti
+                    nIdenti,
+                    rol: '<?= session('idRol') ?>'
                 },
                 success: function(idUser) {
                     if (tp == 2) {
@@ -360,6 +368,9 @@
                         validIdent = true
                     }
                 }
+            }).done(function(data) {
+                $("#editarPerfil").modal('hide');
+                location.reload();
             })
         }
     })
@@ -423,9 +434,8 @@
             password2.type = "password";
         }
     }
-
-        //Verificacion de contraseñas
-        function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
+    //Verificacion de contraseñas
+    function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
         input = $(`#${inputMsg}`)
         contra = $(`#${inputContra}`).val()
         confirContra = $(`#${inputConfir}`).val()
@@ -463,7 +473,7 @@
     })
 
     //Funcion para cambiar contraseña
-    $('#formularioContraseñas').on('submit', function(e) {
+    $('#formularioContraseñas').on('click', function(e) {
         e.preventDefault()
         idUsuario = $("#idUsuario").val()
         contra = $("#contraRes").val()

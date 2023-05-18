@@ -419,7 +419,7 @@
         nIdenti = $('#nIdenti').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
