@@ -314,7 +314,8 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarVehiculo(' + data.id_vehiculo + ',2)" data-bs-target="#agregarVehiculo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
-                        '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' 
+                        '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' +
+                        '<button class="btn btn-danger" onclick="pdf(' + data.id_vehiculo + ')">PDF</button>'
                     )
                 }
             }
@@ -323,6 +324,91 @@
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     });
+
+
+    function pdf(id) {
+        $.ajax({
+            url: "<?= base_url('vehiculos/buscarVehiculo') ?>",
+            type: 'POST',
+            data: {
+                orden: '',
+                placa: '',
+                id
+            },
+            dataType: 'json',
+            success: function(data) {
+                doc = new jsPDF();
+                doc.setFontSize(12);
+                // cabezera
+                // var imageUrl = 'https://e7.pngegg.com/pngimages/989/941/png-clipart-spider-man-comics-spider-man-heroes-superhero.png';
+
+                // // Agregar la imagen al documento
+                // doc.addImage(imageUrl, 'PNG', 15, 15, 50, 50, 'Logo Empresa', 'FAST', 0);
+
+                doc.text('FECHA ENTRADA', 74, 10);
+                doc.text(`${data['fecha_entrada']}`, 81, 20);
+
+                doc.text('FECHA SALIDA', 122, 10);
+                doc.text(`${data['fecha_salida']}`, 125, 20);
+
+                doc.text('ORDEN DE TRABAJO', 160, 10);
+                doc.text(`No. ${data['n_orden']}`, 175, 20);
+                // cuerpo
+
+                doc.setFontSize(12)
+                // Info Cliente
+                doc.text('PROPIETARIO', 3, 30);
+                doc.text(`${data.tipo_tercero == 5 ? data.nomCliente : data.razon_social}`, 3, 36);
+
+                doc.text('C.C. o NIT', 3, 44);
+                doc.text(`${data.identificacion}`, 3, 50);
+
+                var telefono = '';
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + data.cliente + '/' + data.tipo_propietario,
+                    dataType: 'json',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    success: function(response) {
+                        if (response.length > 0) {
+                            telefono = response[0][0].numero;
+                        }
+                    }
+                });
+                doc.text('Telefono', 3, 58);
+                doc.text(`${telefono}`, 3, 64);
+                //Divisiones
+                doc.setLineWidth(1)
+                // doc.line(0, 25, 500, 25, 'F')
+                doc.setDrawColor(22, 22, 102);
+                doc.rect(0, 0, 70, 25);
+                doc.rect(70, 0, 47, 25);
+                doc.rect(117, 0, 41, 25);
+                doc.rect(158, 0, 52, 25);
+                doc.rect(70, 15, 140, 10);
+
+                // Info Auto
+                doc.text('MARCA', 72, 30);
+                doc.text(`${data['marca']}`, 90, 30);
+
+                doc.text('No. FAB', 72, 37);
+                doc.text(`${data['modelo']}`, 90, 37);
+
+                doc.text('COLOR', 72, 44);
+                doc.text(`${data['color']}`, 90, 44);
+
+                doc.text('PLACA', 72, 51);
+                doc.text(`${data['placa']}`, 90, 51);
+
+                doc.text('KMS', 72, 58);
+                doc.text(`${data['kms']}`, 90, 58);
+
+                doc.save(`${data['n_orden']}_.pdf`);
+
+            }
+        })
+    }
+
     //Tomar informacion del vehiculo
     function seleccionarVehiculo(id, tp) {
         if (tp == 2) {

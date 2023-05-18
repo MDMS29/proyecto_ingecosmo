@@ -375,6 +375,8 @@
         },
 
     });
+
+    
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
         e.preventDefault();

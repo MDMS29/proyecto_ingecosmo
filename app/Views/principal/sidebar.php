@@ -30,7 +30,10 @@
     <script src="<?= base_url('dataTable/pdfmake-0.2.7/vfs_fonts.js') ?>"></script>
     <script src="<?= base_url('dataTable/Buttons-2.3.6/js/buttons.html5.min.js') ?>"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="<?php echo base_url(); ?>/jsPDF-1.3.2/dist/jspdf.debug.js"></script>
+    <script src="<?php echo base_url(); ?>/jsPDF-1.3.2/dist/jspdf.min.js"></script>
+    <script src="<?php echo base_url(); ?>/jsPDF-1.3.2/plugins/addimage.js"></script>
+
 
 </head>
 

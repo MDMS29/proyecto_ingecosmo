@@ -40,10 +40,12 @@ class VehiculosModel extends Model
     }
     public function buscarVehiculo($orden, $placa, $id)
     {
-        $this->select("vehiculos.id_vehiculo as id, n_orden, propietarios.id_tercero as cliente, placa, id_marca, modelo, color, kms, param_detalle.id_param_det as combustible, vw_param_det.id_param_det as estado, fecha_entrada, vehiculos.fecha_salida, propietarios.tipo_propietario");
+        $this->select("vehiculos.id_vehiculo as id, n_orden, propietarios.id_tercero as cliente, placa, vehiculos.id_marca, marca_vehiculo.nombre as marca, modelo, color, kms, param_detalle.id_param_det as combustible, vw_param_det.id_param_det as estado, fecha_entrada, vehiculos.fecha_salida, propietarios.tipo_propietario, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as nomCliente, terceros.tipo_tercero, terceros.razon_social, terceros.n_identificacion as identificacion");
         $this->join('param_detalle', 'param_detalle.id_param_det = vehiculos.n_combustible', 'left');
+        $this->join('marca_vehiculo', 'marca_vehiculo.id_marca = vehiculos.id_marca', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = vehiculos.estado', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
+        $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
 
         if ($orden != '') {
             $this->where('n_orden', $orden);
