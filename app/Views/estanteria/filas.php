@@ -28,6 +28,7 @@
                                 <div class="bloqueTextoE" id="<?php echo $dato['fila']; ?>">
                                     <!-- INFORMACION DINAMICA -->
                                 </div>
+                                <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" style="width:100px" ><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
                             </div>
                         </div>
                     <?php } ?>
@@ -35,7 +36,7 @@
             </div>
         </div>
         <div class="footer-page">
-            <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+            
 
             <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
         </div>
@@ -63,7 +64,7 @@
                     <form>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">N° fila</label>
-                            <select class="form-select" id="fila1" name="fila1" style="background: #ECEAEA;">
+                            <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
                                     <option value=<?php echo $fila['fila']; ?>><?php echo $fila['fila']; ?></option>
@@ -136,13 +137,13 @@
     $('#agregarFila').on('submit', function(e) {
         e.preventDefault();
         fila = $('#fila').val() //Esto toma el valor por medio del id
-        nombre_prod = $('#nombre_prod').val() //Esto toma el valor por medio del id
+        nombreProd = $('#nombreProd').val() //Esto toma el valor por medio del id
         $.ajax({
             url: "<?php echo base_url('/filas/insertar'); ?>",
             type: 'POST',
             data: {
                 fila,
-                nombre_prod
+                nombreProd
             },
             dataType: 'json',
             success: function(res) {
@@ -158,49 +159,46 @@
     })
 
     function limpiarCampos() {
-        $('#fila1').val('')
+        $('#fila').val('')
         $('#nombreProd').val('')
     }
 
     // ---------------------------validaciones---------------------------
 
-    
-    function buscarUsuarioIdent(id, inputIden) {
+    //Identificar si el numero de identificacion no este registrado
+    $('#fila').on('input', function(e) {
+        inputFila = $('#fila').val()
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputFila,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['fila'] == inputFila) {
+                        $('#msgDoc').text('')
+                        validIFila = true
+                    } else {
+                        buscarFila(0, inputFila)
+                    }
+                }
+            })
+    })
+
+    function buscarFila(fila, inputFila) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
+            url: "<?php echo base_url('filas/buscarFilas') ?>" + fila + "/" + inputFila,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
                     $('#msgDoc').text('')
-                    validIdent = true
+                    validIFila = true
                 } else if (res[0] != null) {
-                    $('#msgDoc').text('* Numero de identificación invalido *')
-                    validIdent = false
+                    $('#msgDoc').text('* Numero de fila invalido *')
+                    validIFila = false
                 }
             }
         })
     }
-    //Identificar si el numero de identificacion no este registrado
-    $('#nIdenti').on('input', function(e) {
-        inputIden = $('#nIdenti').val()
-        tp = $('#tp').val()
-        id = $('#id').val()
-        if (tp == 2 && id != 0) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res[0]['n_identificacion'] == inputIden) {
-                        $('#msgDoc').text('')
-                        validIdent = true
-                    } else {
-                        buscarUsuarioIdent(0, inputIden)
-                    }
-                }
-            })
-        }
-    })
+    
  
 </script>
