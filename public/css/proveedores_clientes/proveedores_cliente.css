@@ -3,17 +3,17 @@
 /* font-family: 'Nunito', sans-serif; */
 
 :root {
-  --azulBoton: #161666; /* tambien para bordes */ 
-  --rojoBoton: #E25050;
-  --grisInput: #ECEAEA; /* gris mas oscuro */
-  --label:  #1b335b;
+  --azulBoton: #161666; /* tambien para bordes */
+  --rojoBoton: #e25050;
+  --grisInput: #eceaea; /* gris mas oscuro */
+  --label: #1b335b;
 }
 
 /* ---------------------Proveedores y Clientes en realidad------------------------- */
 
 /* -- DIV OCULTAR COLUMNAS -- */
-.ocultar>a:is(.toggle-vis).active,
-.ocultar>a:is(.toggle-vis):hover {
+.ocultar > a:is(.toggle-vis).active,
+.ocultar > a:is(.toggle-vis):hover {
   border-radius: none !important;
   color: var(--azulBoton);
   font-weight: 700;
@@ -22,7 +22,7 @@
 
 /* modal para agregar y actualizar */
 
-.modal-content{
+.modal-content {
   border: 5px solid var(--azulBoton) !important;
   border-radius: 10px;
 }
@@ -33,7 +33,7 @@ label {
 }
 
 * {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 .btnRedireccion {
@@ -62,12 +62,11 @@ label {
   margin-right: 10px;
 }
 
-.imagenEncab{
+.imagenEncab {
   width: 80px;
   height: 70px;
   margin-right: 0;
 }
-
 
 /* DATA TABLE */
 
@@ -76,7 +75,6 @@ table {
   border: 5px solid #161666;
   border-radius: 10px;
 }
-
 
 /* modal confirmar eliminar */
 #modalEliminarContentP {
@@ -132,17 +130,23 @@ table {
   margin-right: 30px;
 }
 
-
-#msgRaSo.invalido, #msgNit, #msgTel, #msgCorreo,
+#msgRaSo.invalido,
+#msgNit,
+#msgTel,
+#msgCorreo,
 #msgDoc.invalido {
-  color: #E25050;
+  color: #e25050;
 }
-
-
 
 /* ---------------------CLientes------------------------- */
 
 #modalContentC {
   border: 5px solid var(--azulBoton);
   border-radius: 10px;
+}
+.body-R {
+  width: 100%;
+  border: 5px solid var(--azulBase) !important;
+  border-radius: 10px;
+  background-color: white;
 }
