@@ -562,6 +562,7 @@
   // operaciones con el input usar
 
   $('#cantidadUsar').on('input', function(e) {
+     idMaterial = $("#idMaterial").val()
     cantidad = $('#cantidadUsar').val()
     valorVenta = $("#PrecioDeVenta").val()
     cantidadExistente = $('#cantidadExistente').val()

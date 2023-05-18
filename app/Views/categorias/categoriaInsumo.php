@@ -98,7 +98,7 @@
 
                         </div>
                     </div>
-
+<!-- 
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
                             <div class="d-flex" style="gap:10px;">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="swiper-button-next" style="color:black;"></div>

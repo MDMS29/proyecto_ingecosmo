@@ -28,6 +28,7 @@ class EstanteriaModel extends Model
     public function obtenerAllEstantes()
     {
         $this->select('estanteria.*');
+        
         $datos = $this->findAll();
         return $datos;
     }

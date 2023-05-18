@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Nombre producto</label>
+                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Nombre Producto</label>
                             <select class="form-select" id="nombreProd" name="nombreProd" style="background: #ECEAEA;">
                             </select>
                         </div>
