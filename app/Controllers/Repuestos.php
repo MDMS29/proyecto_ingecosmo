@@ -37,4 +37,16 @@ class Repuestos extends BaseController
         
         echo view('/materiales/repuestos', $data);
     }
+
+    public function insertar()
+    {
+        $nombre =  $this->request->getPost('nombre');
+        $data = [
+            'nombre' => $nombre,
+        ];
+
+        $this->materiales->save($data);
+
+        // return redirect()->to(base_url('/materiales'));
+    }
 }

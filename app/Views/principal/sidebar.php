@@ -103,7 +103,7 @@
                                 <p id="pa">Clientes</p>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                                 <p id="pa">Repuestos</p>
                             </a>
@@ -112,7 +112,7 @@
                             <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                                 <p id="pa">Insumos</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
                                 <p id="pa">Vehiculos</p>

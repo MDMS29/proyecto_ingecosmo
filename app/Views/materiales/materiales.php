@@ -25,7 +25,7 @@
 
           <div class="contenido2">
             <div class="Imagenes">
-              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo" id="btnUsar"></input>
+              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material']. ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo" ></input>
 
               <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/usarM.png" width="30" height="30" title="Usar insumo"></input>
             </div>
@@ -147,22 +147,12 @@
           </div>
 
           <div class="mb-3" style="width: 80%;">
-            <label for="exampleDataList" class="col-form-label"> Estante:</label>
-            <select name="estante" id="estante" class="form-select">
-              <option id="estante"></option>
-              <?php foreach ($data as $dato) { ?>
-                <option value="<?php echo $dato['estante']; ?>"><?php echo $dato['estante']; ?></option>
-              <?php } ?>
-            </select>
+          <label for="exampleDataList" class="col-form-label">Estante:</label>
+          <input type="text" class="form-control" id="estante" name="estante" placeholder="" disabled>
           </div>
           <div class="mb-3" style="width: 80%;">
-            <label for="exampleDataList" class="col-form-label">Fila:</label>
-            <select name="fila" id="fila" class="form-select">
-              <option id="estante"></option>
-              <?php foreach ($data as $dato) { ?>
-                <option value="<?php echo $dato['fila']; ?>"><?php echo $dato['fila']; ?></option>
-              <?php } ?>
-            </select>
+          <label for="exampleDataList" class="col-form-label">Fila:</label>
+          <input type="text" class="form-control" id="fila" name="fila" placeholder="" disabled>
           </div>
         </div>
 
@@ -278,10 +268,9 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-        $('#tp').val(1)
 
         $("#titulo").text('Detalles');
-        $("#id").val(rs[0]['id_material']);
+        $("#idMaterial").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);
         $("#precioVenta").val(rs[0]['precio_venta']);
         $("#precioCompra").val(rs[0]['precio_compra']);
@@ -309,8 +298,9 @@
         nombre1.style.background = '#e9ecef';
         precioCompra.style.background = '#e9ecef';
         cantidadActual.style.background = '#e9ecef';
-        estante.style.background = '#ECEAEA';
-        fila.style.background = '#ECEAEA';
+        estante.style.background = '#e9ecef';
+        fila.style.background = '#e9ecef';
+  
 
 
       }
@@ -320,7 +310,7 @@
 
   function validarInput() {
     document.getElementById("btnValidar").disabled = !document.getElementById("cantidadUsar").value.length;
-    document.getElementById("btnEditar").disabled = !document.getElementById("nombre1").value.length;
+    // document.getElementById("btnEditar").disabled = !document.getElementById("nombre1").value.length;
 
   }
 
@@ -329,6 +319,7 @@
   // formulario agregar 
   $("#formularioAgregar").on("submit", function(e) {
     e.preventDefault()
+    idMaterial = $("#idMaterial").val()
     nombre = $("#nombre").val()
     precioCompra = $("#precioC").val()
     precioVenta = $("#precioV").val()
@@ -346,6 +337,7 @@
     $.post({
       url: '<?php echo base_url('insumos/insertar') ?>',
       data: {
+        idMaterial: id_material,
         nombre: nombre,
         precioCompra: precioCompra,
         precioVenta: precioVenta,
@@ -399,31 +391,31 @@
     }
   })
 
-  $('#nombre1').on('input', function(e) {
-    nombre1 = $('#nombre1').val()
-    tp = $('#tp').val()
-    console.log(tp)
-    id_material = $('#id').val()
-    if (tp == 1 && id_material == 0) {
-      console.log('first')
-      buscarInsumoNom2(0, nombre1)
-    } else if (tp == 2 && id_material != 0) {
-      $.ajax({
-        type: 'POST',
-        url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
-        dataType: 'JSON',
-        success: function(res) {
-          if (res[0]['nombre'] == nombre1) {
-            $('#msgEditar').text('')
-            validEditar = true
-          } else {
-            console.log('mmal')
-            buscarInsumoNom2(0, nombre)
-          }
-        }
-      })
-    }
-  })
+  // $('#nombre1').on('input', function(e) {
+  //   nombre1 = $('#nombre1').val()
+  //   tp = $('#tp').val()
+  //   console.log(tp)
+  //   id_material = $('#id').val()
+  //   if (tp == 1 && id_material == 0) {
+  //     console.log('first')
+  //     buscarInsumoNom2(0, nombre1)
+  //   } else if (tp == 2 && id_material != 0) {
+  //     $.ajax({
+  //       type: 'POST',
+  //       url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
+  //       dataType: 'JSON',
+  //       success: function(res) {
+  //         if (res[0]['nombre'] == nombre1) {
+  //           $('#msgEditar').text('')
+  //           validEditar = true
+  //         } else {
+  //           console.log('mmal')
+  //           buscarInsumoNom2(0, nombre)
+  //         }
+  //       }
+  //     })
+  //   }
+  // })
 
   // Validacion de nombre del insumo
 
@@ -435,7 +427,7 @@
       success: function(res) {
         if (res == null) {
           $('#msgAgregar').text('')
-          return $("#btnAgregar").removeAttr('disabled', '');
+          $("#btnAgregar").removeAttr('disabled', '');
           validAgregar = true
         } else if (res != null) {
           $('#msgAgregar').text('*Este insumo ya existe*')
@@ -448,53 +440,52 @@
 
   }
 
-  function buscarInsumoNom2(id_material, nombre) {
-    $.ajax({
-      type: 'POST',
-      url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
-      dataType: 'JSON',
-      success: function(res) {
-        if (res[0] == null) {
-          $('#msgEditar').text('')
-          validEditar = true
-        } else if (res[0] != null) {
-          $('#msgEditar').text('*Este insumo ya existe*')
-          $("#btnEditar").attr('disabled', '');
-          validEditar = false
-        }
-      }
-    })
-  }
+  // function buscarInsumoNom2(id_material, nombre) {
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
+  //     dataType: 'JSON',
+  //     success: function(res) {
+  //       if (res[0] == null) {
+  //         $('#msgEditar').text('')
+  //         validEditar = true
+  //       } else if (res[0] != null) {
+  //         $('#msgEditar').text('*Este insumo ya existe*')
+  //         $("#btnEditar").attr('disabled', '');
+  //         validEditar = false
+  //       }
+  //     }
+  //   })
+  // }
 
   // habilitar botones disables
 
-  function habilitar() {
-    $('#tp').val(2)
-    $("#titulo").text('Editar');
-    $("#nombre1").removeAttr('disabled', '');
-    $("#precioVenta").removeAttr('disabled', '');
-    $("#precioCompra").removeAttr('disabled', '');
+  // function habilitar() {
+  //   $('#tp').val(2)
+  //   $("#titulo").text('Editar');
+  //   $("#nombre1").removeAttr('disabled', '');
+  //   $("#precioVenta").removeAttr('disabled', '');
+  //   $("#precioCompra").removeAttr('disabled', '');
 
-    $("#cantidadVendida").removeAttr('hidden', '');
-    $("#cantidadActual").removeAttr('disabled', '');
-    $("#estante").removeAttr('disabled', '');
-    $("#fila").removeAttr('disabled', '');
-    $("#btnUsar1").attr('hidden', '');
-    $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar1.png') ?>');
-    $("#btnEditar").text('Actualizar');
-    $("#btnEditar").attr('onclick', 'actualizar()');
+  //   $("#cantidadVendida").removeAttr('hidden', '');
+  //   $("#cantidadActual").removeAttr('disabled', '');
+  //   $("#estante").removeAttr('disabled', '');
+  //   $("#fila").removeAttr('disabled', '');
+  //   $("#btnUsar1").attr('hidden', '');
+  //   $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar1.png') ?>');
+  //   $("#btnEditar").text('Actualizar');
+  //   $("#btnEditar").attr('onclick', 'actualizar()');
 
-    precioVenta.style.background = '#ECEAEA';
-    nombre1.style.background = '#ECEAEA';
-    precioCompra.style.background = '#ECEAEA';
-    cantidadActual.style.background = '#ECEAEA';
-    estante.style.background = '#ECEAEA';
-    fila.style.background = '#ECEAEA';
+  //   precioVenta.style.background = '#ECEAEA';
+  //   nombre1.style.background = '#ECEAEA';
+  //   precioCompra.style.background = '#ECEAEA';
+  //   cantidadActual.style.background = '#ECEAEA';
 
 
 
 
-  }
+
+  // }
 
 
   // funcion de actualizar
