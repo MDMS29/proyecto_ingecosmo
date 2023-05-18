@@ -344,6 +344,7 @@
     var inputIden = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
+    var validTel = true
     var validCorreo = true
     var validIdent = true;
     var objCorreo = {
@@ -896,7 +897,6 @@
         $('#tipoTele').val(tipo.attr('id'));
         $('#prioridad').val(prioridad.attr('id'));
         $('#editTele').val(fila.attr('id'));
-        console.log($(`.btnEditarTel`).at)
         objTelefono = {
             id: fila.attr('id'),
             numero: numero.text(),

@@ -41,7 +41,7 @@
 
                 <div class="modal-content">
                     <div class="modal-header" id="modalHeader">
-                        <img class="imagenEncab"  src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
+                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                             <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
@@ -350,7 +350,7 @@
                 dataType: 'json',
             }).done(function(res) {
                 $('#tituloModal').text('Editar')
-                $('#logoModal').attr('src', '<?php echo base_url('img/editar.png')?>')
+                $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -391,7 +391,7 @@
             guardarTelefono()
             limpiarCampos(0)
             $('#tituloModal').text('Agregar')
-            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png')?>')
+            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#msgDoc').text('')
             $('#tp').val(1)
             $('#id').val(0)
@@ -654,7 +654,7 @@
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarTelefono(${telefonos[i].id})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
@@ -734,7 +734,7 @@
             correos.push(info)
             $('#correoAdd').val('')
             $('#prioridadCorreo').val('')
-            $('#editCorreo').val(0);
+            $('#editCorreo').val(0)
             objCorreo = {
                 id: 0,
                 correo: '',
@@ -775,7 +775,7 @@
                                 <td>${correos[i].correo}</td>
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
                                 </td>
                             </tr>`
