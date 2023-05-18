@@ -31,6 +31,8 @@ class FilasModel extends Model
       $this->select('materiales.*, materiales.estante as nombreFila, estanteria.nombre as estanteria, estanteria.n_iconos as icono');
       $this->join('estanteria', 'materiales.estante = estanteria.id');
       $this->where('estante', $estante);
+   
+
       $this->groupBy('fila');
       $datos = $this->findAll();
       return $datos;

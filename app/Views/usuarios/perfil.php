@@ -179,7 +179,7 @@
                                                 <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
                                                     <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                                     </label>
-                                                    <input type="hidden" name="idUsuario" id="idUsuario">
+                                                    <input type="" name="idUsuario" id="idUsuario">
 
                                                     <div class="flex">
                                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -242,8 +242,8 @@
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
                                     <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
-                                    <input id="id" name="id">
-                                    <input type="text" name="tp" id="tp">
+                                    <input id="id" name="id" hidden>
+                                    <input type="text" name="tp" id="tp" hidden>
 
                                 </div>
 
@@ -305,7 +305,7 @@
         $('#msgConfir').text('')
         $('#msgDoc').text('')
     }
-    
+
     function editarCampos(id, tp) {
         //Actualizar datos
         if (tp == 2) {
@@ -331,14 +331,24 @@
     $('#formularioPerfil').on('submit', function(e) {
         e.preventDefault()
         id = $('#id').val()
-        tp = $('#tp').val(2)
+        tp = $('#tp').val()
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
         apellidoS = $('#apellidoS').val()
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
-        if ([nombreP, nombreS, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false) {
+        console.log({
+            id,
+            tp,
+            nombreP,
+            nombreS,
+            apellidoP,
+            apellidoS,
+            tipoDoc,
+            nIdenti
+        })
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -352,7 +362,8 @@
                     apellidoP,
                     apellidoS,
                     tipoDoc,
-                    nIdenti
+                    nIdenti,
+                    rol: '<?= session('idRol') ?>'
                 },
                 success: function(idUser) {
                     if (tp == 2) {
@@ -360,6 +371,9 @@
                         validIdent = true
                     }
                 }
+            }).done(function(data) {
+                $("#editarPerfil").modal('hide');
+                location.reload();
             })
         }
     })
@@ -423,9 +437,8 @@
             password2.type = "password";
         }
     }
-
-        //Verificacion de contraseñas
-        function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
+    //Verificacion de contraseñas
+    function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
         input = $(`#${inputMsg}`)
         contra = $(`#${inputContra}`).val()
         confirContra = $(`#${inputConfir}`).val()
@@ -463,7 +476,7 @@
     })
 
     //Funcion para cambiar contraseña
-    $('#formularioContraseñas').on('submit', function(e) {
+    $('#formularioContraseñas').on('click', function(e) {
         e.preventDefault()
         idUsuario = $("#idUsuario").val()
         contra = $("#contraRes").val()

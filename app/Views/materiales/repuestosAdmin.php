@@ -11,7 +11,7 @@
                     <th scope="col" class="text-center">Existencia</th>
                     <th scope="col" class="text-center">Placa de vehiculo</th>
                     <th scope="col" class="text-center">Precio</th>
-                    <th scope="col" class="text-center">proveedores </th>
+                    <th scope="col" class="text-center">Proveedores </th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>

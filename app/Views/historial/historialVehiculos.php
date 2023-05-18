@@ -57,6 +57,13 @@
             method: "POST",
             dataSrc: "",
         },
+        // dom: 'Bfrtilp',
+        // buttons: [{
+        //     extend: 'excelHtml5',
+        //     text: '<i class="bi bi-file-earmark-spreadsheet"></i>Excel',
+        //     titleAttr: 'Exportar a Excel',
+        //     className: 'btn btn-success'
+        // }],
         columns: [{
                 data: "nom_tipo_terce"
             },
@@ -91,5 +98,4 @@
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
     });
-   
 </script>
