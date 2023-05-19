@@ -10,7 +10,7 @@
 
   <div class="contenedor-d">
     <?php if (empty($data)) { ?>
-      <p>No se encuentra insumos - <?= $nombreCategoria ?></p>
+      <abbr>No se encuentra insumos - <?= $nombreCategoria ?></abbr>
     <?php } else { ?>
       <?php foreach ($data as $dato) { ?>
 
@@ -161,7 +161,9 @@
       <div class="modal-footer" id="modalFooterD">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
         <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
-        <button type="button" class="btn btnAccionF" id="btnUsar1" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
+        <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
+
+       
       </div>
 
     </div>
@@ -185,6 +187,26 @@
         </div>
 
         <div class="modal-body" id="modalBodyUsar">
+
+
+        <div class="mb-3">
+             <label for="exampleDataList" class="col-form-label">Vehiculos:</label>
+              <select class="form-select form-select" name="vehiculos" id="vehiculos">
+                 <option id="vehiculo"selected="">-- Seleccione el Vehiculo--</option>
+                 <?php foreach ($data as $vehiculos) { ?>
+                  <option value="<?= $vehiculos['id_material'] ?>"><?= $vehiculos['id_vehiculo'] ?></option>
+                  <?php } ?>
+                    </select>
+            </div>
+        <div class="mb-3">
+             <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
+              <select class="form-select form-select" style="height: 38px; width: 268px" name="trabajadores" id="trabajadores">
+                 <option id="trabajadores"selected="">-- Seleccione un trabajador--</option>
+                 <?php foreach ($data as $fila) { ?>
+                  <option value="<?= $fila['id_material'] ?>"><?= $fila['fila'] ?></option>
+                  <?php } ?>
+                    </select>
+            </div>
 
           <div class="mb-3">
             <label for="exampleDataList" class="col-form-label">Nombre del insumo:</label>
@@ -251,6 +273,9 @@
 
     $("#cantidadUsar").val('');
     $("#subtotal").val('');
+    $("#trabajadores").val('');
+    $("#vehiculos").val('');
+    $("#vehiculo").val('');
     $('#msgUsar').text('')
     $('#msgAgregar').text('')
     $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
@@ -262,6 +287,9 @@
 
 
   function detallesMaterial(id_material) {
+
+    $('#btnUsar1').attr('onclick', `usarMaterial(${id_material},2)`)
+
     dataURL = "<?php echo base_url('/materiales/detallesMaterial'); ?>" + "/" + id_material;
     $.ajax({
       type: "POST",
@@ -276,7 +304,7 @@
         $("#precioCompra").val(rs[0]['precio_compra']);
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
-        $("#estante").val(rs[0]['estante']);
+        $("#estante").val(rs[0]['nombreEstante']);
         $("#fila").val(rs[0]['fila']);
 
 

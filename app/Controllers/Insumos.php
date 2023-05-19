@@ -27,6 +27,10 @@ class Insumos extends BaseController
     public  function mostrarInsumo($id, $nombre, $icon, $idCate)
     {
         $materiales = $this->materiales->obtenerInsumo($id);
+        if (empty($materiales)) {
+            $materiales = '';
+        }
+        
         $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate];
         echo view('/principal/sidebar');
         
