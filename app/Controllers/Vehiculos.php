@@ -10,6 +10,8 @@ use App\Models\ParamModel;
 use App\Models\PropietariosModel;
 use App\Models\MoviEncModel;
 
+
+
 class Vehiculos extends BaseController
 {
     protected $vehiculos;
@@ -27,6 +29,127 @@ class Vehiculos extends BaseController
         $this->propietario = new PropietariosModel();
         $this->movimiento = new MoviEncModel();
         helper('sistema');
+    }
+    public function pdf()
+    {
+        //TODO: CAMBIAR AUTOLOAD AL MONTAR EN HOSTING
+        $mrg_tp = 5;
+        $mrg_lf = 5;
+        $pdf = new \FPDF('P', 'mm', 'letter');
+        $pdf->AddPage();
+        $pdf->SetMargins(5, 10, 5);
+        $pdf->SetY(5);
+        $pdf->SetX(35);
+        $pdf->image(base_url() . 'img/logo_empresa.png', 10, 5, 18, 18, 'png');
+        $pdf->SetY(24);
+        $pdf->SetX(3);
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->Cell(10, 5, utf8_decode('a'), 0, 1, 'L');
+        $pdf->Rect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 19, '');
+        $pdf->line($mrg_lf + 35, $mrg_tp, $mrg_lf + 35, $mrg_tp + 24);
+        $pdf->SetTitle(utf8_decode('Cotización'));
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->SetY(5);
+        $pdf->SetX(60);
+        $pdf->Cell(10, 25, 'FORMATO DE COTIZACION A CLIENTE   ', 0, 1, 'L');
+        $pdf->line(165, $mrg_tp, 165, $mrg_tp + 24);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->SetY($mrg_tp + 2);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 5, utf8_decode('Código: FO-COT-02'), 0, 1, 'L');
+        $pdf->SetY($mrg_tp);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 24, utf8_decode('Versión: 02'), 0, 1, 'L');
+        $pdf->SetY(5);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 40, utf8_decode('Fecha: '), 0, 1, 'L');
+        $pdf->SetFillColor(15, 221, 62);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetY(31);
+        $pdf->SetX(3);
+        $pdf->Cell(210, 5, utf8_decode('Descripción de la Cotización'), 1, 1, 'C', 1);
+        $pdf->Rect(2, 38, 120, 26, '');
+        $pdf->Rect(124, 38, 90, 26, '');
+        $pdf->SetY(40);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Cliente'), 1, 1, 'L', 1);
+
+        $pdf->SetY(46);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Nit o C.C'), 1, 1, 'L', 1);
+
+        $pdf->SetY(52);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Dirección'), 1, 1, 'L', 1);
+
+        $pdf->SetY(58);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Teléfonos'), 1, 1, 'L', 1);
+
+        $pdf->SetY(41);
+        $pdf->SetX(30);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, utf8_decode('sadasd'), 0, 1, 'L');
+
+        $pdf->SetY(47);
+        $pdf->SetX(30);
+        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
+
+        $pdf->SetY(53);
+        $pdf->SetX(30);
+        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
+
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetY(40);
+        $pdf->SetX(127);
+        $pdf->Cell(30, 5, utf8_decode('Cotización Nro.'), 1, 1, 'L', 1);
+        $pdf->SetY(46);
+        $pdf->SetX(127);
+        $pdf->Cell(30, 5, utf8_decode('Fecha'), 1, 1, 'L', 1);
+        //$pdf->SetY(52);
+        //$pdf->SetX(127);
+        //$pdf->Cell(30, 5, utf8_decode('Proyecto'), 1, 1, 'L', 1);
+
+        $pdf->SetY(40);
+        $pdf->SetX(159);
+        $pdf->SetTextColor(252, 10, 10);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(25, 5, utf8_decode('COT' . 'waos' . ' -'), 0, 1, 'L');
+
+        $pdf->SetY(40);
+        $pdf->SetX(177);
+        $pdf->SetTextColor(252, 10, 10);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
+
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetY(47);
+        $pdf->SetX(159);
+        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
+
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetY(54);
+        $pdf->SetX(127);
+        $pdf->multiCell(82, 5, utf8_decode('waos'), 0, 1, 'L');
+
+        $pdf->SetFillColor(15, 221, 62);
+        $pdf->SetTextColor(0, 0, 0);
+
+        $pdf->SetY(66);
+        $pdf->SetX(2);
+        $pdf->Cell(10, 5, 'Item', 1, 0, 'C', 1);
+        $pdf->Cell(120, 5, utf8_decode('Descripción'), 1, 0, 'C', 1);
+        $pdf->Cell(15, 5, 'U.Med', 1, 0, 'C', 1);
+        $pdf->Cell(15, 5, 'Cnt', 1, 0, 'C', 1);
+        $pdf->Cell(26, 5, utf8_decode('Vr.Unitario'), 1, 0, 'C', 1);
+        $pdf->Cell(26, 5, 'SubTotal', 1, 0, 'C', 1);
+        $pdf->SetFont('Arial', '', 8);
+
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $pdf->Output("pdf/cotizaciones/cotizacion_V-.pdf", "F");
+        $pdf->Output("cotizacion_.pdf", "I");
     }
     public function obtenerVehiculos()
     {

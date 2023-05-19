@@ -1,0 +1,385 @@
+https://libreriasjs.com/libreria-javascript-crear-pdf-jspdf/
+
+
+    function pdf(){
+        alert('Ya')
+        doc = new jsPDF('P', 'mm', 'letter');
+        doc.setFontSize(40);
+        doc.text(40, 20, "Octocat loves jsPDF");
+        
+        doc.line(0, 80 - 60, 100, 80 - 60);
+        doc.text(`Fuerza: `, 10, 40);
+        doc.text(`Magia: `, 10,  30);
+        doc.text(`Velocidad: `, 10,  20);
+         doc.save(`autorizacion_"+".pdf`);
+    }
+
+https://blog.trescomatres.com/2021/07/enviar-emails-con-codeigniter-4/
+
+
+****** CREACION DE PDF *****************************
+function cotizacion($id)
+    {
+        $session = session();
+        $pdf = new \FPDF('P', 'mm', 'letter');
+        $pdf->AddPage();
+        $mrg_lf = 5;
+        $mrg_tp = 5;
+        $empresas = $this->empresas->where('id_empresa', 1)->first();
+        $cotizaciones = $this->cotizaciones->buscar_cotiza_x_Cliente($id);
+        $numero = $cotizaciones['nro_cotizacion'];
+        $version = $cotizaciones['secuencia'];
+
+        $p_dct = $cotizaciones['dct_porc'];
+        $p_iva = $cotizaciones['ivagral_porc'];
+        $p_adm = $cotizaciones['adm_porc'];
+        $p_imp = $cotizaciones['imp_porc'];
+        $p_uti = $cotizaciones['uti_porc'];
+        $p_poriva = $cotizaciones['porc_iva'];
+        $dct_vr = $cotizaciones['dct_vlr'];
+        $ivagral_vr = $cotizaciones['ivagral_vlr'];
+        $adm_vr = $cotizaciones['administracion'];
+        $imp_vr = $cotizaciones['imprevisto'];
+        $uti_vr = $cotizaciones['utilidad'];
+        $iva_vr = $cotizaciones['iva'];
+
+        $terceros = $this->terceros->where('id', $cotizaciones['id_tercero'])->first();
+        $this->Header($pdf, $mrg_lf, $mrg_tp, $empresas, $terceros, $cotizaciones);
+        $this->Footer($pdf, $empresas);
+        $cotizaciones_detalles = $this->cotizaciones_detalles->traerDetallesaCambiar($numero, $version);
+
+        $this->detalleCotiza($pdf, $cotizaciones_detalles, $p_dct, $p_iva, $p_adm, $p_imp, $p_uti, $p_poriva, $dct_vr, $ivagral_vr, $adm_vr, $imp_vr, $uti_vr, $iva_vr, $empresas,$id);
+
+        $pdf->Ln();
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $pdf->Output("pdf/cotizaciones/cotizacion_" . "V-" . $version . "-" . $numero . ".pdf", "F");
+        $pdf->Output("cotizacion_" . "V-" . $version . "-" . $numero . ".pdf", "I");
+    }
+
+    function detalleCotiza($pdf, $cotizaciones_detalles, $p_dct, $p_iva, $p_adm, $p_imp, $p_uti, $p_poriva, $dct_vr, $ivagral_vr, $adm_vr, $imp_vr, $uti_vr, $iva_vr, $empresas,$id)
+    {
+        $contador = 1;
+        $total = 0;
+        $pdf->SetY(73);
+        $ye = 73;
+        $alto = 5;
+        $sw = 0;
+
+        foreach ($cotizaciones_detalles as $row) {
+
+            $pdf->SetX(2);
+            if ($row['id_tipo'] == 1) {
+                $pdf->SetFillColor(255, 255, 255);
+                //$pdf->Multicell(10, $alto, '', 1, 'C');
+                //$ye+=$alto;
+                $pdf->SetY($ye);
+                $pdf->SetX(12);
+                $pdf->SetFont('Arial', '', 8);
+                $pdf->SetFillColor(255, 255, 255);
+                $y = $pdf->GetY();
+                $acotado = utf8_decode($row['descripcion']);
+                $pdf->MultiCell(120, $alto, $acotado, 1, 'L', 0, 1);
+                //if(strlen($row['descripcion'])>80){$y+=$alto;}
+                $pdf->SetXY(132, $y);
+                $pdf->SetFont('Arial', '', 8);
+                $pdf->SetY($ye);
+                $pdf->SetX(132);
+                $pdf->Cell(15, $alto, 'Und', 1, 0, 'C');
+                $pdf->SetY($ye);
+                $pdf->SetX(147);
+                $pdf->Cell(15, $alto, number_format($row['cantidad'], 2, '.', ','), 1, 0, 'R');
+                $pdf->SetY($ye);
+                $pdf->SetX(162);
+                $pdf->Cell(26, $alto, number_format($row['vr_unitario'], 2, '.', ','), 1, 0, 'R');
+                $pdf->SetY($ye);
+                $pdf->SetX(188);
+                $subtotal = $row['cantidad'] * $row['vr_unitario'];
+                $pdf->Cell(26, $alto, number_format($subtotal, 2, '.', ','), 1, 1, 'R');
+                $total += $subtotal;
+                $pdf->SetXY(214, $ye);
+                if (strlen($row['descripcion']) > 80) {
+                    $ye += $alto*2;
+                }
+                $ye += $alto;
+            };
+
+            if ($row['id_tipo'] == 0) {
+                $ye += $alto;
+
+                $y = $pdf->GetY();
+                $pdf->SetFont('Arial', '', 8);
+                $pdf->SetFillColor(255, 255, 0);
+                // $pdf->Cell(10, $alto, $row['id_detalle'], 1, 0, 'C', 1);
+                $acotado = utf8_decode($row['id_detalle'] . '          ' . $row['descripcion']);
+                $pdf->SetXY(2, $ye);
+                $pdf->SetXY(2, $ye);
+                $pdf->MultiCell(212, $alto, $acotado, 1, 'L', true);
+                if (strlen($row['descripcion'])>80) {
+                    $ye += $alto;
+                }
+                $ye += $alto;
+            }
+
+            $contador++;
+            if ($ye >= 233) {
+                $this->Footer($pdf, $empresas);
+                $pdf->AddPage();
+                $mrg_lf = 5;
+                $mrg_tp = 5;
+                $cotizaciones = $this->cotizaciones->buscar_cotiza_x_Cliente($id);
+                $terceros = $this->terceros->where('id', $cotizaciones['id_tercero'])->first();
+                $this->Header($pdf, $mrg_lf, $mrg_tp, $empresas, $terceros, $cotizaciones);
+                $ye = 73;
+            }
+        }
+
+        //$admon = round(($total * 0.05),0);
+        //$imprevistos = round(($total * 0.05),0);
+        //$utilidad = round(($total * 0.05),0);
+        //$iva = round(($utilidad * .19), 0);
+        $pdf->SetY($ye);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(160, 7, '', 0, 0, 'C');
+        $pdf->Cell(26, 7, 'SUBTOTAL', 1, 0, 'L');
+        $pdf->Cell(26, 7, number_format($total, 2, '.', ','), 1, 1, 'R');
+
+        $pdf->SetFont('Arial', '', 10);
+        $this->linea("Descto", $p_dct, $dct_vr, $pdf);
+        $this->linea("Iva", $p_iva, $ivagral_vr, $pdf);
+        $this->linea("Admon", $p_adm, $adm_vr, $pdf);
+        $this->linea("Imprevisto", $p_imp, $imp_vr, $pdf);
+        $this->linea("Utilidad", $p_uti, $uti_vr, $pdf);
+        $this->linea("Iva/Util", $p_poriva, $iva_vr, $pdf);
+
+        $gTOTAL = $total - $dct_vr + $ivagral_vr + $adm_vr +  $imp_vr + $uti_vr + $iva_vr;
+        $pdf->SetFillColor(255, 255, 0);
+        $pdf->SetX(2);
+        $pdf->Cell(160, 7, '', 0, 0, 'C');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(26, 7, 'T O T A L', 1, 0, 'L', 1);
+        $pdf->Cell(26, 7, number_format($gTOTAL, 2, '.', ','), 1, 1, 'R', 1);
+        $pdf->Ln();
+        $this->Footer($pdf, $empresas);
+    }
+
+    function linea($tit, $porc, $valor, $pdf)
+    {
+        if ($porc != 0) {
+            $pdf->SetX(2);
+            $pdf->Cell(160, 7, '', 0, 0, 'C');
+            $pdf->Cell(26, 7, $tit . " " . number_format($porc, 0, '.', ',') . " %", 1, 0, 'L');
+            $pdf->Cell(26, 7, number_format($valor, 2, '.', ','), 1, 1, 'R');
+        }
+    }
+
+    function Header($pdf, $mrg_lf, $mrg_tp, $empresas, $terceros, $cotizaciones)
+    {
+        //$pdf->AddPage();
+        $pdf->SetMargins(5, 10, 5);
+        $pdf->SetY(5);
+        $pdf->SetX(35);
+        $pdf->image(base_url() . '/image/logoTransparente.png', 10, 5, 18, 18, 'png');
+        $pdf->SetY(24);
+        $pdf->SetX(3);
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->Cell(10, 5, utf8_decode($empresas['nombre']), 0, 1, 'L');
+        $pdf->Rect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 19, '');
+        $pdf->line($mrg_lf + 35, $mrg_tp, $mrg_lf + 35, $mrg_tp + 24);
+        $pdf->SetTitle(utf8_decode('Cotización'));
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->SetY(5);
+        $pdf->SetX(60);
+        $pdf->Cell(10, 25, 'FORMATO DE COTIZACION A CLIENTE   ', 0, 1, 'L');
+        $pdf->line(165, $mrg_tp, 165, $mrg_tp + 24);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->SetY($mrg_tp + 2);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 5, utf8_decode('Código: FO-COT-02'), 0, 1, 'L');
+        $pdf->SetY($mrg_tp);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 24, utf8_decode('Versión: 02'), 0, 1, 'L');
+        $pdf->SetY(5);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 40, utf8_decode('Fecha: '), 0, 1, 'L');
+        $pdf->SetFillColor(15, 221, 62);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetY(31);
+        $pdf->SetX(3);
+        $pdf->Cell(210, 5, utf8_decode('Descripción de la Cotización'), 1, 1, 'C', 1);
+        $pdf->Rect(2, 38, 120, 26, '');
+        $pdf->Rect(124, 38, 90, 26, '');
+        $pdf->SetY(40);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Cliente'), 1, 1, 'L', 1);
+
+        $pdf->SetY(46);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Nit o C.C'), 1, 1, 'L', 1);
+
+        $pdf->SetY(52);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Dirección'), 1, 1, 'L', 1);
+
+        $pdf->SetY(58);
+        $pdf->SetX(3);
+        $pdf->Cell(25, 5, utf8_decode('Teléfonos'), 1, 1, 'L', 1);
+
+        $pdf->SetY(41);
+        $pdf->SetX(30);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, utf8_decode($terceros['razon_social']), 0, 1, 'L');
+
+        $pdf->SetY(47);
+        $pdf->SetX(30);
+        $pdf->Cell(25, 5, utf8_decode($terceros['numero_documento']), 0, 1, 'L');
+
+        $pdf->SetY(53);
+        $pdf->SetX(30);
+        $pdf->Cell(25, 5, utf8_decode($terceros['direccion']), 0, 1, 'L');
+
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetY(40);
+        $pdf->SetX(127);
+        $pdf->Cell(30, 5, utf8_decode('Cotización Nro.'), 1, 1, 'L', 1);
+        $pdf->SetY(46);
+        $pdf->SetX(127);
+        $pdf->Cell(30, 5, utf8_decode('Fecha'), 1, 1, 'L', 1);
+        //$pdf->SetY(52);
+        //$pdf->SetX(127);
+        //$pdf->Cell(30, 5, utf8_decode('Proyecto'), 1, 1, 'L', 1);
+
+        $pdf->SetY(40);
+        $pdf->SetX(159);
+        $pdf->SetTextColor(252, 10, 10);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(25, 5, utf8_decode('COT' . $cotizaciones['secuencia'] . ' -'), 0, 1, 'L');
+
+        $pdf->SetY(40);
+        $pdf->SetX(177);
+        $pdf->SetTextColor(252, 10, 10);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(25, 5, utf8_decode($cotizaciones['nro_cotizacion']), 0, 1, 'L');
+
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetY(47);
+        $pdf->SetX(159);
+        $pdf->Cell(25, 5, utf8_decode($cotizaciones['fecha']), 0, 1, 'L');
+
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetY(54);
+        $pdf->SetX(127);
+        $pdf->multiCell(82, 5, utf8_decode($cotizaciones['obra']), 0, 1, 'L');
+
+        $pdf->SetFillColor(15, 221, 62);
+        $pdf->SetTextColor(0, 0, 0);
+
+        $pdf->SetY(66);
+        $pdf->SetX(2);
+        $pdf->Cell(10, 5, 'Item', 1, 0, 'C', 1);
+        $pdf->Cell(120, 5, utf8_decode('Descripción'), 1, 0, 'C', 1);
+        $pdf->Cell(15, 5, 'U.Med', 1, 0, 'C', 1);
+        $pdf->Cell(15, 5, 'Cnt', 1, 0, 'C', 1);
+        $pdf->Cell(26, 5, utf8_decode('Vr.Unitario'), 1, 0, 'C', 1);
+        $pdf->Cell(26, 5, 'SubTotal', 1, 0, 'C', 1);
+        $pdf->SetFont('Arial', '', 8);
+    }
+
+    function Footer($pdf, $empresas)
+    {
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->SetY(-33);
+        $pdf->line(2, 245, 212, 245);
+        $pdf->Cell(200, 2, utf8_decode($empresas['direccion']), 0, 1, 'C');
+        $pdf->Cell(200, 5, utf8_decode('Barranquilla-Colombia'), 0, 1, 'C');
+        $pdf->Cell(200, 5, utf8_decode('Gracias... Por Preferirnos'), 0, 1, 'C');
+    }
+
+
+
+***************************** EXPORTAR A EXCEL ******************************
+
+function imprimir_Plantilla(jsonData) {
+        let str = '<tr style="font-weight:bold;font-size;20px;"> <td> PLANTILLAS DE A.P.U.S </td></tr>';
+        let sw = 0;
+        let ref_ant = "";
+        let gtotal = 0;
+        for (let i = 0; i < jsonData.length; i++) {
+            for (let item in jsonData[i]) {
+                if (ref_ant != jsonData[i][item]["referencia"]) {
+                    if (ref_ant != "") {
+                        str += '<tr style="font-weight:bold;font-size;20px;">';
+                        str += `<td> </td>`;
+                        str += `<td></td>`;
+                        str += `<td></td>`;
+                        str += `<td></td>`;
+                        str += `<td> </td>`;
+                        str += `<td> Total</td>`;
+                        str += `<td>${ gtotal + '\t'}</td>`;
+                        str += '</tr>';
+                        gtotal = 0;
+                    }
+                    str += `<tr></tr><tr style="font-weight:bold;font-size;20px;"><td>${jsonData[i][item]["referencia"]} ==> ${jsonData[i][item]["nombre_plantilla"]} </td></tr>`;
+                    ref_ant = jsonData[i][item]["referencia"];
+                    str += '<tr></tr><tr style="font-weight:bold;font-size;20px;"><td>Tipo</td><td>Codigo</td><td> Nombre del Material</td><td>Cnt</td><td>Porc</td><td>Costo</td><td>SubTotal</td></tr>';
+                }
+
+                let stotal = parseFloat(jsonData[i][item]["cantidad"]) * parseFloat(jsonData[i][item]["porcentaje"] * parseFloat(jsonData[i][item]["vr_unitario"]));
+                str += '<tr>';
+                // Agrega \ t para evitar que la tabla muestre notación científica u otros formatos
+                str += `<td>${ jsonData[i][item]["tipo_material"] + '\t'}</td>`;
+                str += `<td>${ jsonData[i][item]["codigo"] + '\t'}</td>`;
+                str += `<td>${ jsonData[i][item]["nombre_material"] + '\t'}</td>`;
+                str += `<td>${ jsonData[i][item]["cantidad"] + '\t'}</td>`;
+                str += `<td>${ jsonData[i][item]["porcentaje"] + '\t'}</td>`;
+                str += `<td>${ jsonData[i][item]["vr_unitario"] + '\t'}</td>`;
+                str += `<td>${ stotal + '\t'}</td>`;
+                str += '</tr>';
+                gtotal += stotal;
+            }
+        }
+        str += '<tr style="font-weight:bold;font-size;20px;">';
+        str += `<td> </td>`;
+        str += `<td></td>`;
+        str += `<td></td>`;
+        str += `<td></td>`;
+        str += `<td> </td>`;
+        str += `<td> Total</td>`;
+        str += `<td>${ gtotal + '\t'}</td>`;
+        str += '</tr>';
+        let worksheet = 'APUS'
+        let uri = 'data:application/vnd.ms-excel;base64,';
+
+        // Datos de plantilla de formulario descargados
+        let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+      xmlns:x="urn:schemas-microsoft-com:office:excel" 
+      xmlns="http://www.w3.org/TR/REC-html40">
+      <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+        <x:Name>${worksheet}</x:Name>
+        <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+        </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+        </head><body><table>${str}</table></body></html>`;
+        // Descargar plantilla
+        window.location.href = uri + base64(template)
+    }
+
+    function tableToExcel() {
+        dataURL = "<?php echo base_url(); ?>/apu/mostrarPlantillas/" + 1
+        $.ajax({
+            type: "POST",
+            url: dataURL,
+            dataType: "json",
+            success: function(jsonData) {
+                imprimir_Plantilla(jsonData);
+                // Nombre de la hoja de trabajo
+
+            },
+            error: function() {
+                Swal.fire("", "No se ha podido obtener la información");
+            }
+        })
+
+    }
+
