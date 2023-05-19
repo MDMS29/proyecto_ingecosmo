@@ -63,6 +63,14 @@ class FilasModel extends Model
       $datos = $this->findAll();
       return $datos;
    }
+   
+   public function traerDetalles($id_material){
+      $this->select('materiales.*');
+      $this->where('id_material', $id_material);
+      $datos = $this->first(); 
+      return $datos;
+  }
+
    public function contadorFilas($id)
    {
 /*       $query = "SELECT COUNT(num) as total FROM (SELECT COUNT(*) as num FROM materiales WHERE estante =' .  $id . ' GROUP BY fila) as fila";
