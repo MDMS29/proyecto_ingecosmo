@@ -38,7 +38,8 @@ class MaterialesModel extends Model{
     }
     
     public function traerDetalles($id_material){
-        $this->select('materiales.*');
+        $this->select('materiales.* ,estanteria.nombre as nombreEstante' );
+        $this->join('estanteria', 'estanteria.id = materiales.estante');
         $this->where('id_material', $id_material);
         $datos = $this->first(); 
         return $datos;
