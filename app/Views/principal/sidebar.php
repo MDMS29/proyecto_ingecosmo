@@ -24,11 +24,7 @@
     <script src="<?= base_url('dataTable/dataTables.bootstrap5.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
 
-    <script src="<?= base_url('dataTable/Buttons-2.3.6/js/dataTables.buttons.min.js') ?>"></script>
-    <script src="<?= base_url('dataTable/JSZip-2.5.0/jszip.min.js') ?>"></script>
     <!-- -->
-    <script src="<?= base_url('dataTable/pdfmake-0.2.7/vfs_fonts.js') ?>"></script>
-    <script src="<?= base_url('dataTable/Buttons-2.3.6/js/buttons.html5.min.js') ?>"></script>
 </head>
 
 <body class=" d-flex align-items-stretch">

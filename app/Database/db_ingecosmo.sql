@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2023 a las 05:09:21
+-- Tiempo de generación: 19-05-2023 a las 03:26:22
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,15 +30,14 @@ USE `db_ingecosmo`;
 --
 
 DROP TABLE IF EXISTS `acciones`;
-CREATE TABLE IF NOT EXISTS `acciones` (
-  `id_accion` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `acciones` (
+  `id_accion` smallint(2) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(300) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_accion`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `acciones`
@@ -77,15 +76,14 @@ INSERT INTO `acciones` (`id_accion`, `nombre`, `descripcion`, `estado`, `fecha_c
 --
 
 DROP TABLE IF EXISTS `cargos`;
-CREATE TABLE IF NOT EXISTS `cargos` (
-  `id_cargo` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cargos` (
+  `id_cargo` smallint(2) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cargos`
@@ -106,18 +104,16 @@ INSERT INTO `cargos` (`id_cargo`, `nombre`, `descripcion`, `estado`, `fecha_crea
 --
 
 DROP TABLE IF EXISTS `email`;
-CREATE TABLE IF NOT EXISTS `email` (
-  `id_email` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `email` (
+  `id_email` smallint(2) NOT NULL,
   `id_usuario` smallint(2) NOT NULL,
   `email` varchar(50) NOT NULL,
   `prioridad` char(1) NOT NULL COMMENT 'P = Primaria - S = Secundaria',
   `tipo_usuario` smallint(2) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_email`),
-  KEY `tipo_usuario` (`tipo_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `email`
@@ -164,15 +160,14 @@ INSERT INTO `email` (`id_email`, `id_usuario`, `email`, `prioridad`, `tipo_usuar
 --
 
 DROP TABLE IF EXISTS `estanteria`;
-CREATE TABLE IF NOT EXISTS `estanteria` (
+CREATE TABLE `estanteria` (
   `id` smallint(2) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `usuario_crea` smallint(2) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A',
   `n_iconos` varchar(30) NOT NULL,
-  `tipo_estante` smallint(2) NOT NULL,
-  PRIMARY KEY (`id`)
+  `tipo_estante` smallint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -200,14 +195,13 @@ INSERT INTO `estanteria` (`id`, `nombre`, `fecha_crea`, `usuario_crea`, `estado`
 --
 
 DROP TABLE IF EXISTS `marca_vehiculo`;
-CREATE TABLE IF NOT EXISTS `marca_vehiculo` (
-  `id_marca` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `marca_vehiculo` (
+  `id_marca` smallint(2) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_marca`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `marca_vehiculo`
@@ -232,7 +226,7 @@ INSERT INTO `marca_vehiculo` (`id_marca`, `nombre`, `estado`, `fecha_crea`, `usu
 --
 
 DROP TABLE IF EXISTS `materiales`;
-CREATE TABLE IF NOT EXISTS `materiales` (
+CREATE TABLE `materiales` (
   `id_material` smallint(2) NOT NULL,
   `id_vehiculo` smallint(2) DEFAULT NULL,
   `id_proveedor` smallint(2) DEFAULT NULL,
@@ -249,13 +243,7 @@ CREATE TABLE IF NOT EXISTS `materiales` (
   `estado` char(1) NOT NULL DEFAULT 'A',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp(),
   `usuario_crea` smallint(2) NOT NULL,
-  `cantidad_vendida` decimal(7,0) NOT NULL,
-  PRIMARY KEY (`id_material`),
-  KEY `tipo_material` (`tipo_material`),
-  KEY `id_proveedor` (`id_proveedor`),
-  KEY `categoria_material` (`categoria_material`),
-  KEY `estante` (`estante`),
-  KEY `id_vehiculo` (`id_vehiculo`)
+  `cantidad_vendida` decimal(7,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -292,8 +280,8 @@ INSERT INTO `materiales` (`id_material`, `id_vehiculo`, `id_proveedor`, `nombre`
 --
 
 DROP TABLE IF EXISTS `movimiento_det`;
-CREATE TABLE IF NOT EXISTS `movimiento_det` (
-  `id_movimientodet` smallint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `movimiento_det` (
+  `id_movimientodet` smallint(4) NOT NULL,
   `id_movimientoenc` smallint(2) NOT NULL,
   `id_material` smallint(2) NOT NULL,
   `item` smallint(2) NOT NULL,
@@ -301,11 +289,8 @@ CREATE TABLE IF NOT EXISTS `movimiento_det` (
   `costo` decimal(11,2) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_movimientodet`),
-  KEY `enc_detalle` (`id_movimientoenc`),
-  KEY `material_det` (`id_material`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `movimiento_det`
@@ -321,8 +306,8 @@ INSERT INTO `movimiento_det` (`id_movimientodet`, `id_movimientoenc`, `id_materi
 --
 
 DROP TABLE IF EXISTS `movimiento_enc`;
-CREATE TABLE IF NOT EXISTS `movimiento_enc` (
-  `id_movimientoenc` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `movimiento_enc` (
+  `id_movimientoenc` smallint(2) NOT NULL,
   `id_tercero` smallint(2) DEFAULT NULL,
   `id_vehiculo` smallint(2) NOT NULL,
   `id_trabajador` smallint(2) DEFAULT NULL,
@@ -330,13 +315,8 @@ CREATE TABLE IF NOT EXISTS `movimiento_enc` (
   `tipo_movimiento` smallint(2) NOT NULL,
   `estado` char(2) NOT NULL DEFAULT 'A',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_movimientoenc`),
-  KEY `tercero_enc` (`id_tercero`),
-  KEY `id_trabajador` (`id_trabajador`),
-  KEY `id_vehiculo` (`id_vehiculo`),
-  KEY `tipo_movimiento` (`tipo_movimiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `movimiento_enc`
@@ -345,7 +325,9 @@ CREATE TABLE IF NOT EXISTS `movimiento_enc` (
 INSERT INTO `movimiento_enc` (`id_movimientoenc`, `id_tercero`, `id_vehiculo`, `id_trabajador`, `fecha_movimiento`, `tipo_movimiento`, `estado`, `fecha_crea`, `usuario_crea`) VALUES
 (1, 4, 1, NULL, '2023-05-14', 57, '45', '2023-05-15 04:53:14', 4),
 (2, 4, 1, NULL, '2023-05-14', 58, '38', '2023-05-15 04:54:52', 0),
-(3, 4, 1, NULL, '2023-05-16', 59, '43', '2023-05-16 16:44:45', 0);
+(3, 4, 1, NULL, '2023-05-16', 59, '43', '2023-05-16 16:44:45', 0),
+(6, 4, 0, NULL, '0000-00-00', 0, 'A', '2023-05-19 00:43:32', 0),
+(7, 7, 2, NULL, '2023-05-18', 57, '39', '2023-05-19 01:43:53', 1);
 
 -- --------------------------------------------------------
 
@@ -354,18 +336,16 @@ INSERT INTO `movimiento_enc` (`id_movimientoenc`, `id_tercero`, `id_vehiculo`, `
 --
 
 DROP TABLE IF EXISTS `param_detalle`;
-CREATE TABLE IF NOT EXISTS `param_detalle` (
-  `id_param_det` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `param_detalle` (
+  `id_param_det` smallint(2) NOT NULL,
   `id_param_enc` smallint(2) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `resumen` char(5) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp(),
   `usuario_crea` smallint(2) NOT NULL,
-  `n_iconos` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_param_det`) USING BTREE,
-  KEY `id_param_enc` (`id_param_enc`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `n_iconos` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `param_detalle`
@@ -418,14 +398,13 @@ INSERT INTO `param_detalle` (`id_param_det`, `id_param_enc`, `nombre`, `resumen`
 --
 
 DROP TABLE IF EXISTS `param_encabezado`;
-CREATE TABLE IF NOT EXISTS `param_encabezado` (
-  `id_param_enc` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `param_encabezado` (
+  `id_param_enc` smallint(2) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_param_enc`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `param_encabezado`
@@ -448,17 +427,14 @@ INSERT INTO `param_encabezado` (`id_param_enc`, `nombre`, `estado`, `fecha_crea`
 --
 
 DROP TABLE IF EXISTS `permisos`;
-CREATE TABLE IF NOT EXISTS `permisos` (
-  `id_permiso` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permisos` (
+  `id_permiso` smallint(2) NOT NULL,
   `id_rol` smallint(2) NOT NULL,
   `id_accion` smallint(2) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo \r\n',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_permiso`),
-  KEY `id_accion` (`id_accion`),
-  KEY `id_rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -497,23 +473,20 @@ INSERT INTO `permisos` (`id_permiso`, `id_rol`, `id_accion`, `estado`, `fecha_cr
 --
 
 DROP TABLE IF EXISTS `propietarios`;
-CREATE TABLE IF NOT EXISTS `propietarios` (
-  `id_propietario` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `propietarios` (
+  `id_propietario` smallint(2) NOT NULL,
   `id_vehiculo` smallint(2) NOT NULL,
   `id_tercero` smallint(2) NOT NULL,
-  `tipo_propietario` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_propietario`),
-  KEY `tercero_propietario` (`id_tercero`),
-  KEY `vehiculo_propietario` (`id_vehiculo`),
-  KEY `tipo_tercero` (`tipo_propietario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `tipo_propietario` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `propietarios`
 --
 
 INSERT INTO `propietarios` (`id_propietario`, `id_vehiculo`, `id_tercero`, `tipo_propietario`) VALUES
-(1, 1, 4, 5);
+(1, 1, 4, 5),
+(2, 2, 7, 56);
 
 -- --------------------------------------------------------
 
@@ -522,15 +495,14 @@ INSERT INTO `propietarios` (`id_propietario`, `id_vehiculo`, `id_tercero`, `tipo
 --
 
 DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id_rol` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+  `id_rol` smallint(2) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -548,8 +520,8 @@ INSERT INTO `roles` (`id_rol`, `nombre`, `descripcion`, `estado`, `fecha_crea`, 
 --
 
 DROP TABLE IF EXISTS `telefonos`;
-CREATE TABLE IF NOT EXISTS `telefonos` (
-  `id_telefono` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `telefonos` (
+  `id_telefono` smallint(2) NOT NULL,
   `id_usuario` smallint(2) NOT NULL,
   `numero` varchar(30) NOT NULL,
   `tipo_telefono` smallint(2) NOT NULL,
@@ -557,11 +529,8 @@ CREATE TABLE IF NOT EXISTS `telefonos` (
   `prioridad` char(1) NOT NULL COMMENT 'P = Primaria - S = Secundaria',
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_telefono`),
-  KEY `tipo_telefono` (`tipo_telefono`),
-  KEY `tipo_usuario` (`tipo_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `telefonos`
@@ -600,8 +569,8 @@ INSERT INTO `telefonos` (`id_telefono`, `id_usuario`, `numero`, `tipo_telefono`,
 --
 
 DROP TABLE IF EXISTS `terceros`;
-CREATE TABLE IF NOT EXISTS `terceros` (
-  `id_tercero` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `terceros` (
+  `id_tercero` smallint(2) NOT NULL,
   `tipo_doc` smallint(2) NOT NULL,
   `razon_social` varchar(200) NOT NULL,
   `n_identificacion` varchar(15) NOT NULL,
@@ -613,11 +582,8 @@ CREATE TABLE IF NOT EXISTS `terceros` (
   `tipo_tercero` smallint(2) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` datetime NOT NULL DEFAULT current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_tercero`) USING BTREE,
-  KEY `tipo_doc` (`tipo_doc`) USING BTREE,
-  KEY `tipo_tercero` (`tipo_tercero`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `terceros`
@@ -639,8 +605,8 @@ INSERT INTO `terceros` (`id_tercero`, `tipo_doc`, `razon_social`, `n_identificac
 --
 
 DROP TABLE IF EXISTS `trabajadores`;
-CREATE TABLE IF NOT EXISTS `trabajadores` (
-  `id_trabajador` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `trabajadores` (
+  `id_trabajador` smallint(2) NOT NULL,
   `id_cargo` smallint(2) NOT NULL,
   `tipo_identificacion` smallint(2) NOT NULL,
   `n_identificacion` varchar(15) NOT NULL,
@@ -651,11 +617,8 @@ CREATE TABLE IF NOT EXISTS `trabajadores` (
   `direccion` varchar(150) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_usuario` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_trabajador`),
-  KEY `tipo_identificacion` (`tipo_identificacion`),
-  KEY `id_cargo` (`id_cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `trabajadores`
@@ -672,8 +635,8 @@ INSERT INTO `trabajadores` (`id_trabajador`, `id_cargo`, `tipo_identificacion`, 
 --
 
 DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id_usuario` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id_usuario` smallint(2) NOT NULL,
   `id_rol` smallint(2) NOT NULL,
   `tipo_doc` smallint(2) NOT NULL,
   `n_identificacion` varchar(15) NOT NULL,
@@ -683,11 +646,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `apellido_s` varchar(30) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Activo - I = Inactivo',
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp(),
-  `contrasena` varchar(300) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  KEY `id_rol` (`id_rol`),
-  KEY `tipo_doc` (`tipo_doc`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `contrasena` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -704,8 +664,8 @@ INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `tipo_doc`, `n_identificacion`, 
 --
 
 DROP TABLE IF EXISTS `vehiculos`;
-CREATE TABLE IF NOT EXISTS `vehiculos` (
-  `id_vehiculo` smallint(2) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vehiculos` (
+  `id_vehiculo` smallint(2) NOT NULL,
   `n_orden` varchar(15) NOT NULL,
   `id_marca` smallint(2) NOT NULL,
   `placa` varchar(10) NOT NULL,
@@ -718,19 +678,16 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
   `fecha_entrada` date NOT NULL,
   `fecha_salida` date NOT NULL,
   `fecha_crea` timestamp NOT NULL DEFAULT current_timestamp(),
-  `usuario_crea` smallint(2) NOT NULL,
-  PRIMARY KEY (`id_vehiculo`),
-  KEY `id_marca` (`id_marca`),
-  KEY `n_combustible` (`n_combustible`),
-  KEY `estado` (`estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `usuario_crea` smallint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `vehiculos`
 --
 
 INSERT INTO `vehiculos` (`id_vehiculo`, `n_orden`, `id_marca`, `placa`, `linea`, `modelo`, `color`, `kms`, `n_combustible`, `estado`, `fecha_entrada`, `fecha_salida`, `fecha_crea`, `usuario_crea`) VALUES
-(1, '1', 1, 'qwe123', '', '2023', 'Azul', '79844', 35, 43, '2023-05-14', '2023-05-14', '2023-05-15 04:53:14', 4);
+(1, '43001', 1, 'qwe123', '', '2023', 'Azul', '79844', 35, 43, '2023-05-14', '2023-05-14', '2023-05-15 04:53:14', 1),
+(2, '43002', 1, 'QWE122', '', '2019', 'Azul', '744589', 33, 39, '2023-05-16', '2023-05-19', '2023-05-19 01:43:53', 1);
 
 -- --------------------------------------------------------
 
@@ -739,7 +696,7 @@ INSERT INTO `vehiculos` (`id_vehiculo`, `n_orden`, `id_marca`, `placa`, `linea`,
 -- (Véase abajo para la vista actual)
 --
 DROP VIEW IF EXISTS `vw_param_det`;
-CREATE TABLE IF NOT EXISTS `vw_param_det` (
+CREATE TABLE `vw_param_det` (
 `id_param_det` smallint(2)
 ,`id_param_enc` smallint(2)
 ,`nombre` varchar(50)
@@ -757,7 +714,7 @@ CREATE TABLE IF NOT EXISTS `vw_param_det` (
 -- (Véase abajo para la vista actual)
 --
 DROP VIEW IF EXISTS `vw_param_det2`;
-CREATE TABLE IF NOT EXISTS `vw_param_det2` (
+CREATE TABLE `vw_param_det2` (
 `id_param_det` smallint(2)
 ,`id_param_enc` smallint(2)
 ,`nombre` varchar(50)
@@ -787,6 +744,247 @@ DROP TABLE IF EXISTS `vw_param_det2`;
 
 DROP VIEW IF EXISTS `vw_param_det2`;
 CREATE OR REPLACE VIEW `vw_param_det2`  AS SELECT `param_detalle`.`id_param_det` AS `id_param_det`, `param_detalle`.`id_param_enc` AS `id_param_enc`, `param_detalle`.`nombre` AS `nombre`, `param_detalle`.`resumen` AS `resumen`, `param_detalle`.`estado` AS `estado`, `param_detalle`.`fecha_crea` AS `fecha_crea`, `param_detalle`.`usuario_crea` AS `usuario_crea`, `param_detalle`.`n_iconos` AS `n_iconos` FROM `param_detalle` ;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `acciones`
+--
+ALTER TABLE `acciones`
+  ADD PRIMARY KEY (`id_accion`);
+
+--
+-- Indices de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  ADD PRIMARY KEY (`id_cargo`);
+
+--
+-- Indices de la tabla `email`
+--
+ALTER TABLE `email`
+  ADD PRIMARY KEY (`id_email`),
+  ADD KEY `tipo_usuario` (`tipo_usuario`);
+
+--
+-- Indices de la tabla `estanteria`
+--
+ALTER TABLE `estanteria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `marca_vehiculo`
+--
+ALTER TABLE `marca_vehiculo`
+  ADD PRIMARY KEY (`id_marca`);
+
+--
+-- Indices de la tabla `materiales`
+--
+ALTER TABLE `materiales`
+  ADD PRIMARY KEY (`id_material`),
+  ADD KEY `tipo_material` (`tipo_material`),
+  ADD KEY `id_proveedor` (`id_proveedor`),
+  ADD KEY `categoria_material` (`categoria_material`),
+  ADD KEY `estante` (`estante`),
+  ADD KEY `id_vehiculo` (`id_vehiculo`);
+
+--
+-- Indices de la tabla `movimiento_det`
+--
+ALTER TABLE `movimiento_det`
+  ADD PRIMARY KEY (`id_movimientodet`),
+  ADD KEY `enc_detalle` (`id_movimientoenc`),
+  ADD KEY `material_det` (`id_material`);
+
+--
+-- Indices de la tabla `movimiento_enc`
+--
+ALTER TABLE `movimiento_enc`
+  ADD PRIMARY KEY (`id_movimientoenc`),
+  ADD KEY `tercero_enc` (`id_tercero`),
+  ADD KEY `id_trabajador` (`id_trabajador`),
+  ADD KEY `id_vehiculo` (`id_vehiculo`),
+  ADD KEY `tipo_movimiento` (`tipo_movimiento`);
+
+--
+-- Indices de la tabla `param_detalle`
+--
+ALTER TABLE `param_detalle`
+  ADD PRIMARY KEY (`id_param_det`) USING BTREE,
+  ADD KEY `id_param_enc` (`id_param_enc`);
+
+--
+-- Indices de la tabla `param_encabezado`
+--
+ALTER TABLE `param_encabezado`
+  ADD PRIMARY KEY (`id_param_enc`);
+
+--
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`id_permiso`),
+  ADD KEY `id_accion` (`id_accion`),
+  ADD KEY `id_rol` (`id_rol`);
+
+--
+-- Indices de la tabla `propietarios`
+--
+ALTER TABLE `propietarios`
+  ADD PRIMARY KEY (`id_propietario`),
+  ADD KEY `tercero_propietario` (`id_tercero`),
+  ADD KEY `vehiculo_propietario` (`id_vehiculo`),
+  ADD KEY `tipo_tercero` (`tipo_propietario`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_rol`);
+
+--
+-- Indices de la tabla `telefonos`
+--
+ALTER TABLE `telefonos`
+  ADD PRIMARY KEY (`id_telefono`),
+  ADD KEY `tipo_telefono` (`tipo_telefono`),
+  ADD KEY `tipo_usuario` (`tipo_usuario`);
+
+--
+-- Indices de la tabla `terceros`
+--
+ALTER TABLE `terceros`
+  ADD PRIMARY KEY (`id_tercero`) USING BTREE,
+  ADD KEY `tipo_doc` (`tipo_doc`) USING BTREE,
+  ADD KEY `tipo_tercero` (`tipo_tercero`);
+
+--
+-- Indices de la tabla `trabajadores`
+--
+ALTER TABLE `trabajadores`
+  ADD PRIMARY KEY (`id_trabajador`),
+  ADD KEY `tipo_identificacion` (`tipo_identificacion`),
+  ADD KEY `id_cargo` (`id_cargo`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `id_rol` (`id_rol`),
+  ADD KEY `tipo_doc` (`tipo_doc`);
+
+--
+-- Indices de la tabla `vehiculos`
+--
+ALTER TABLE `vehiculos`
+  ADD PRIMARY KEY (`id_vehiculo`),
+  ADD KEY `id_marca` (`id_marca`),
+  ADD KEY `n_combustible` (`n_combustible`),
+  ADD KEY `estado` (`estado`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `acciones`
+--
+ALTER TABLE `acciones`
+  MODIFY `id_accion` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  MODIFY `id_cargo` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `email`
+--
+ALTER TABLE `email`
+  MODIFY `id_email` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT de la tabla `marca_vehiculo`
+--
+ALTER TABLE `marca_vehiculo`
+  MODIFY `id_marca` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `movimiento_det`
+--
+ALTER TABLE `movimiento_det`
+  MODIFY `id_movimientodet` smallint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `movimiento_enc`
+--
+ALTER TABLE `movimiento_enc`
+  MODIFY `id_movimientoenc` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `param_detalle`
+--
+ALTER TABLE `param_detalle`
+  MODIFY `id_param_det` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT de la tabla `param_encabezado`
+--
+ALTER TABLE `param_encabezado`
+  MODIFY `id_param_enc` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `id_permiso` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `propietarios`
+--
+ALTER TABLE `propietarios`
+  MODIFY `id_propietario` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_rol` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `telefonos`
+--
+ALTER TABLE `telefonos`
+  MODIFY `id_telefono` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT de la tabla `terceros`
+--
+ALTER TABLE `terceros`
+  MODIFY `id_tercero` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `trabajadores`
+--
+ALTER TABLE `trabajadores`
+  MODIFY `id_trabajador` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `vehiculos`
+--
+ALTER TABLE `vehiculos`
+  MODIFY `id_vehiculo` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -819,8 +1017,6 @@ ALTER TABLE `movimiento_det`
 --
 ALTER TABLE `movimiento_enc`
   ADD CONSTRAINT `movimiento_enc_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajadores` (`id_trabajador`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `movimiento_enc_ibfk_2` FOREIGN KEY (`id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `movimiento_enc_ibfk_3` FOREIGN KEY (`tipo_movimiento`) REFERENCES `param_detalle` (`id_param_det`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tercero_enc` FOREIGN KEY (`id_tercero`) REFERENCES `terceros` (`id_tercero`) ON UPDATE CASCADE;
 
 --

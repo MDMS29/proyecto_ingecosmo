@@ -30,126 +30,201 @@ class Vehiculos extends BaseController
         $this->movimiento = new MoviEncModel();
         helper('sistema');
     }
-    public function pdf()
+    public function pdf($id)
     {
+        $res = $this->vehiculos->buscarVehiculo('', '', $id);
         //TODO: CAMBIAR AUTOLOAD AL MONTAR EN HOSTING
         $mrg_tp = 5;
         $mrg_lf = 5;
         $pdf = new \FPDF('P', 'mm', 'letter');
         $pdf->AddPage();
         $pdf->SetMargins(5, 10, 5);
+        $pdf->SetTitle('Orden de Trabajo - ' . $res['n_orden']);
         $pdf->SetY(5);
         $pdf->SetX(35);
-        $pdf->image(base_url() . 'img/logo_empresa.png', 10, 5, 18, 18, 'png');
-        $pdf->SetY(24);
-        $pdf->SetX(3);
-        $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(10, 5, utf8_decode('a'), 0, 1, 'L');
-        $pdf->Rect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 19, '');
-        $pdf->line($mrg_lf + 35, $mrg_tp, $mrg_lf + 35, $mrg_tp + 24);
-        $pdf->SetTitle(utf8_decode('Cotización'));
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->SetY(5);
-        $pdf->SetX(60);
-        $pdf->Cell(10, 25, 'FORMATO DE COTIZACION A CLIENTE   ', 0, 1, 'L');
-        $pdf->line(165, $mrg_tp, 165, $mrg_tp + 24);
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->SetY($mrg_tp + 2);
-        $pdf->SetX(167);
-        $pdf->Cell(10, 5, utf8_decode('Código: FO-COT-02'), 0, 1, 'L');
-        $pdf->SetY($mrg_tp);
-        $pdf->SetX(167);
-        $pdf->Cell(10, 24, utf8_decode('Versión: 02'), 0, 1, 'L');
-        $pdf->SetY(5);
-        $pdf->SetX(167);
-        $pdf->Cell(10, 40, utf8_decode('Fecha: '), 0, 1, 'L');
-        $pdf->SetFillColor(15, 221, 62);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetY(31);
-        $pdf->SetX(3);
-        $pdf->Cell(210, 5, utf8_decode('Descripción de la Cotización'), 1, 1, 'C', 1);
-        $pdf->Rect(2, 38, 120, 26, '');
-        $pdf->Rect(124, 38, 90, 26, '');
-        $pdf->SetY(40);
-        $pdf->SetX(3);
-        $pdf->Cell(25, 5, utf8_decode('Cliente'), 1, 1, 'L', 1);
+        $pdf->image(base_url() . 'img/logo_empresa.png', 2, $mrg_lf, 50, 18, 'png');
 
-        $pdf->SetY(46);
-        $pdf->SetX(3);
-        $pdf->Cell(25, 5, utf8_decode('Nit o C.C'), 1, 1, 'L', 1);
+        $pdf->SetFont('Arial', 'B', 5);
+        $pdf->SetY(23);
+        $pdf->SetX(18);
+        // $pdf->SetXY(18, 23);
+        $pdf->Cell(10, 0, 'NIT: 802.001.848 - 2 ', 0, 1, 'L');
 
-        $pdf->SetY(52);
-        $pdf->SetX(3);
-        $pdf->Cell(25, 5, utf8_decode('Dirección'), 1, 1, 'L', 1);
+        $pdf->SetY(25);
+        $pdf->SetX(8);
+        $pdf->Cell(10, 0, 'Cra 52 No. 70 - 110 Tels: 3585445 * Fax: 3583180', 0, 1, 'L');
 
-        $pdf->SetY(58);
-        $pdf->SetX(3);
-        $pdf->Cell(25, 5, utf8_decode('Teléfonos'), 1, 1, 'L', 1);
-
-        $pdf->SetY(41);
-        $pdf->SetX(30);
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(25, 5, utf8_decode('sadasd'), 0, 1, 'L');
-
-        $pdf->SetY(47);
-        $pdf->SetX(30);
-        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
-
-        $pdf->SetY(53);
-        $pdf->SetX(30);
-        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
-
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->SetY(40);
-        $pdf->SetX(127);
-        $pdf->Cell(30, 5, utf8_decode('Cotización Nro.'), 1, 1, 'L', 1);
-        $pdf->SetY(46);
-        $pdf->SetX(127);
-        $pdf->Cell(30, 5, utf8_decode('Fecha'), 1, 1, 'L', 1);
-        //$pdf->SetY(52);
-        //$pdf->SetX(127);
-        //$pdf->Cell(30, 5, utf8_decode('Proyecto'), 1, 1, 'L', 1);
-
-        $pdf->SetY(40);
-        $pdf->SetX(159);
-        $pdf->SetTextColor(252, 10, 10);
-        $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(25, 5, utf8_decode('COT' . 'waos' . ' -'), 0, 1, 'L');
-
-        $pdf->SetY(40);
-        $pdf->SetX(177);
-        $pdf->SetTextColor(252, 10, 10);
-        $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
-
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetY(47);
-        $pdf->SetX(159);
-        $pdf->Cell(25, 5, utf8_decode('waos'), 0, 1, 'L');
-
-        $pdf->SetFont('Arial', 'B', 8);
-        $pdf->SetFillColor(255, 255, 255);
-        $pdf->SetY(54);
-        $pdf->SetX(127);
-        $pdf->multiCell(82, 5, utf8_decode('waos'), 0, 1, 'L');
-
-        $pdf->SetFillColor(15, 221, 62);
-        $pdf->SetTextColor(0, 0, 0);
-
-        $pdf->SetY(66);
+        $pdf->SetY(27);
         $pdf->SetX(2);
-        $pdf->Cell(10, 5, 'Item', 1, 0, 'C', 1);
-        $pdf->Cell(120, 5, utf8_decode('Descripción'), 1, 0, 'C', 1);
-        $pdf->Cell(15, 5, 'U.Med', 1, 0, 'C', 1);
-        $pdf->Cell(15, 5, 'Cnt', 1, 0, 'C', 1);
-        $pdf->Cell(26, 5, utf8_decode('Vr.Unitario'), 1, 0, 'C', 1);
-        $pdf->Cell(26, 5, 'SubTotal', 1, 0, 'C', 1);
-        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(10, 0, 'E-mail:Ingecosmos@metrotel.net.co Barranquilla - Colombia', 0, 1, 'L');
+
+        $pdf->Rect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 19, '');
+        $pdf->line($mrg_lf + 50, $mrg_tp, $mrg_lf + 50, $mrg_tp + 64); //Linea despues de logo
+
+        $pdf->SetFont('Arial', 'B', 12);
+
+        $pdf->SetY(2);
+        $pdf->SetX(60);
+        $pdf->Cell(10, 25, 'FECHA DE ENTRADA', 0, 1, 'L');
+        $pdf->line(110, $mrg_tp, 110, $mrg_tp + 24); //Linea despues de fecha entrada
+
+        $pdf->SetY(8);
+        $pdf->SetX(70);
+        $pdf->Cell(10, 25, '' . $res['fecha_entrada'] . '', 0, 1, 'L');
+
+        $pdf->SetY(2);
+        $pdf->SetX(117);
+        $pdf->Cell(10, 25, 'FECHA DE SALIDA', 0, 1, 'L');
+        $pdf->line(165, $mrg_tp, 165, $mrg_tp + 24);//Linea despues de fecha salida
+        $pdf->SetY($mrg_tp + 8);
+
+        $pdf->SetY(8);
+        $pdf->SetX(127);
+        $pdf->Cell(10, 25, '' . $res['fecha_salida'] . '', 0, 1, 'L');
+
+        $pdf->SetY($mrg_tp + 7);
+        $pdf->SetX(167);
+        $pdf->Cell(10, 5, 'ORDEN DE TRABAJO', 0, 1, 'L');
+
+        $pdf->SetX(175);
+        $pdf->Cell(10, 5, 'No. ' . $res['n_orden'], 0, 1, 'L');
+
+        /*****  Detalles orden de trabajo *****/
+        
+        /***** PRIMER RECUADRO ******/
+        $pdf->Rect(2, 29, 108, 40, '');
+        // ---PROPIETARIO
+        $pdf->SetY(29);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'PROPIETARIO', 0, 1, 'L');
+        $pdf->line(2, 34, 110, 34);
+        
+        $pdf->SetY(34);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '' . $res['tipo_tercero'] == 5 ? $res['nomCliente'] : $res['razon_social'] .  '', 0, 1, 'L');
+        $pdf->line(2, 39, 110, 39);
+        
+        // ---CC O NIT
+        $pdf->SetY(39);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(2, 5, 'C.C. o NIT', 0, 1, 'L');
+        $pdf->line(2, 44, 110, 44);
+
+        $pdf->SetY(44);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '' . $res['identificacion'] . '', 0, 1, 'L');
+        $pdf->line(2, 49, 110, 49);
+
+        // ---DIRECCION
+        $pdf->SetY(49);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(2, 5, 'DIRECCION', 0, 1, 'L');
+        $pdf->line(2, 54, 110, 54);
+
+        $pdf->SetY(54);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '' . $res['direccion'] . '', 0, 1, 'L');
+        $pdf->line(2, 59, 110, 59);
+
+        // ---TELEFONO
+        $pdf->SetY(59);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(2, 5, 'TELEFONO', 0, 1, 'L');
+        $pdf->line(2, 64, 110, 64);
+
+        $pdf->SetY(64);
+        $pdf->SetX(2);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '3004432536', 0, 1, 'L');
+        
+        
+        
+        /***** SEGUNDO RECUADRO ******/
+        $pdf->line(71, 29, 71, 69);
+
+        // ---MARCA
+        $pdf->SetY(29);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'MARCA', 0, 1, 'L');
+
+        $pdf->SetY(29);
+        $pdf->SetX(73);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, ''. $res['marca'] .'', 0, 1, 'L');
+
+        // ---TIPO
+        $pdf->SetY(34);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
+
+        // ---No. FAB
+        $pdf->SetY(39);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'No. FAB', 0, 1, 'L');
+
+        $pdf->SetY(39);
+        $pdf->SetX(73);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, ''. $res['modelo'] .'', 0, 1, 'L');
+
+        // ---MOTOR
+        $pdf->SetY(44);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'MOTOR', 0, 1, 'L');
+        
+        // ---CHASIS
+        $pdf->SetY(49);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'CHASIS', 0, 1, 'L');
+
+        // ---COLOR
+        $pdf->SetY(54);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'COLOR', 0, 1, 'L');
+
+        $pdf->SetY(54);
+        $pdf->SetX(73);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, ''. $res['color'] .'', 0, 1, 'L');
+
+        // ---PLACA
+        $pdf->SetY(59);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'PLACA', 0, 1, 'L');
+
+        $pdf->SetY(59);
+        $pdf->SetX(73);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, ''. $res['placa'] .'', 0, 1, 'L');
+
+        // ---KMS
+        $pdf->SetY(64);
+        $pdf->SetX(55);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(25, 5, 'KMS', 0, 1, 'L');
+
+        $pdf->SetY(64);
+        $pdf->SetX(73);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, ''. $res['kms'] .'', 0, 1, 'L');
 
         $this->response->setHeader('Content-Type', 'application/pdf');
-        $pdf->Output("pdf/cotizaciones/cotizacion_V-.pdf", "F");
-        $pdf->Output("cotizacion_.pdf", "I");
+        $pdf->Output('PDFS/orden_trabajo_' . $res['n_orden'] . '.pdf', "F");
+        $pdf->Output('orden_trabajo_' . $res['n_orden'] . '.pdf', "I");
     }
     public function obtenerVehiculos()
     {
