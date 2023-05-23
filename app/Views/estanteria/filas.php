@@ -60,7 +60,7 @@
 
                     <div class="tituloHeader">
                         <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
-                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar insumos</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;">Agregar Insumos</h1>
                     </div>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX" onclick="limpiarCampos()"></button>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="mb-3" style="width: 80%;">
                         <label for="exampleDataList" class="col-form-label">Fila:</label>
-                        <input type="text" class="form-control" id="fila" name="fila" placeholder="" disabled>
+                        <input type="text" class="form-control" id="filaDetalle" name="fila" disabled>
                     </div>
                 </div>
 
@@ -182,7 +182,7 @@
             success: function(res) {
                 var cadena = ""
                 for (let i = 0; i < res.length; i++) {
-                    cadena += `<p class="subTexto"><button data-bs-target="#detallesModal" data-bs-toggle="modal" class="verMas" style="background: transparent; border:transparent;"><i class="bi bi-caret-right-fill"></i></button>${res[i].nombre}</p>`
+                    cadena += `<p class="subTexto"><button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;"><i class="bi bi-caret-right-fill"></i>${res[i].nombre}</button></p>`
                 }
                 $(`#${bloque[i].id}`).html(cadena)
             }
@@ -231,7 +231,7 @@
     })
 
     function limpiarCampos() {
-        $('#fila').val('')
+        $('#fila').val('-- SELECCIONE UNA FILA --')
         $('#nombreProd').val('')
     }
 
@@ -279,7 +279,8 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-
+        console.log(rs[0].fila);
+        $('#detallesModal').modal('show')
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);
@@ -287,8 +288,8 @@
         $("#precioCompra").val(rs[0]['precio_compra']);
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
-        $("#estante").val(rs[0]['estante']);
-        $("#fila").val(rs[0]['fila']);
+        $("#estante").val(rs[0]['nombreEstante']);
+        $("#filaDetalle").val(rs[0].fila);
       }
     })
   }

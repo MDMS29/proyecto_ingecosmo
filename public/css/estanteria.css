@@ -228,6 +228,10 @@
   display: flex;
 }
 
+/* .subTexto:hover{
+  color: #E25050;
+} */
+
 #cerrarX{
   margin: 0;
 }
@@ -290,7 +294,7 @@ label {
   align-items: center;
   position: relative;
   top: 100px;
-  border: 5px solid var(--azulBase) !important;
+  border: 5px solid var(--azulBoton) !important;
   border-radius: 10px;
   background-color: white;
 }
@@ -343,4 +347,8 @@ label {
 .btnCerrar{
   background-color: var(--rojoBoton) !important;
   color: white !important;
+}
+
+.verMas:hover{
+  text-decoration: underline !important;
 }

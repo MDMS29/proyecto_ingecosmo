@@ -430,7 +430,7 @@
   //   } else if (tp == 2 && id_material != 0) {
   //     $.ajax({
   //       type: 'POST',
-  //       url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
+  //       url: "< ?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
   //       dataType: 'JSON',
   //       success: function(res) {
   //         if (res[0]['nombre'] == nombre1) {
@@ -471,7 +471,7 @@
   // function buscarInsumoNom2(id_material, nombre) {
   //   $.ajax({
   //     type: 'POST',
-  //     url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
+  //     url: "< ?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
   //     dataType: 'JSON',
   //     success: function(res) {
   //       if (res[0] == null) {
@@ -500,7 +500,7 @@
   //   $("#estante").removeAttr('disabled', '');
   //   $("#fila").removeAttr('disabled', '');
   //   $("#btnUsar1").attr('hidden', '');
-  //   $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar1.png') ?>');
+  //   $("#imagenDetalle").attr('src', '< ?php echo base_url('/img/editar1.png') ?>');
   //   $("#btnEditar").text('Actualizar');
   //   $("#btnEditar").attr('onclick', 'actualizar()');
 
