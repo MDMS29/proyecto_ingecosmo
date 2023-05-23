@@ -394,4 +394,5 @@ class Vehiculos extends BaseController
             return json_encode(2);
         }
     }
+
 }

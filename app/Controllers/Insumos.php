@@ -6,15 +6,22 @@ use App\Controllers\BaseController;
 // use App\Models\CategoriaModel;
 use App\Models\ParamModel;
 use App\Models\MaterialesModel;
+use App\Models\VehiculosModel;
+use App\Models\TrabajadoresModel;
+
 
 class Insumos extends BaseController
 {
     protected $categorias;
     protected $materiales;
+    protected $vehiculos;
+    protected $trabajadores;
     public function __construct()
     {
         $this->categorias = new ParamModel();
         $this->materiales = new MaterialesModel();
+        $this->vehiculos = new VehiculosModel();
+        $this->trabajadores = new TrabajadoresModel();
     }
     public function index()
     {
@@ -27,17 +34,19 @@ class Insumos extends BaseController
     public  function mostrarInsumo($id, $nombre, $icon, $idCate)
     {
         $materiales = $this->materiales->obtenerInsumo($id);
+        $vehiculos = $this->vehiculos->vehiculosInsumos();
+        $trabajadores = $this->trabajadores->trabajadoresInsumos();
         if (empty($materiales)) {
             $materiales = '';
         }
-        
-        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate];
+
+        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos,"trabajadores" => $trabajadores];
         echo view('/principal/sidebar');
-        
+
         echo view('/materiales/materiales', $data);
     }
 
-    
+
 
     public function insertar()
     {
@@ -107,7 +116,7 @@ class Insumos extends BaseController
             'cantidad_actual' => $cantidadNueva,
             'cantidad_vendida' => $cantidadVendidaActual
         ];
-        if($this->materiales->update($id, $data)){
+        if ($this->materiales->update($id, $data)) {
             return json_encode(1);
         }
     }
@@ -130,6 +139,4 @@ class Insumos extends BaseController
             return json_encode($array);
         }
     }
-
-    
 }

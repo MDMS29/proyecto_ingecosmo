@@ -263,10 +263,14 @@ estilos modal agregar  */
 
 #modalBodyUsar{
     display: flex;
+    padding: 30px;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
+
+
 }
 #modalHeaderUsar{
         width: 100%;
@@ -314,22 +318,6 @@ estilos modal agregar  */
 
 /* USAR */
 
-#nombreInsumo, #cantidadExistente, #PrecioDeVenta, #subtotal{
-    margin-right: 10px;
-    border-radius: 5px;
-    height: 30px;
-    width: 250px;
-    background-color: var(--grisModal);
-}
-
-#cantidadUsar{
-    margin-right: 10px;
-    border-radius: 5px;
-    height: 40px;
-    width: 250px;
-    align-items: center;
-    background: rgb(255, 255, 255);
-}
 
 .invalido{
     color: red;

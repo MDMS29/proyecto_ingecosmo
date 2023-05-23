@@ -68,4 +68,11 @@ class TrabajadoresModel extends Model
         $datos = $this->update($id, ['estado' => $estado]);         
         return $datos;
     }
+
+    public function trabajadoresInsumos(){
+        $this->select("id_trabajador, concat(nombre_p,' ',nombre_s,' ',apellido_p,' ',apellido_s) as nombre");
+        $this->where("estado", "A");
+        $data = $this->findAll();
+        return $data;
+    }
 }

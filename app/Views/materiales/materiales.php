@@ -25,7 +25,7 @@
 
           <div class="contenido2">
             <div class="Imagenes">
-              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material']. ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo" ></input>
+              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo"></input>
 
               <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/usarM.png" width="30" height="30" title="Usar insumo"></input>
             </div>
@@ -52,7 +52,7 @@
   <input type="text" name="tp" id="tp" hidden>
 
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-md">
       <div class="modal-content" id="modalContent" style="border: 5px solid #161666;  border-radius: 10px;">
         <div class="modal-header" id="modalHeader">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
@@ -99,7 +99,7 @@
 
 <!-- Modal Detalles- Editar-->
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
 
@@ -147,12 +147,12 @@
           </div>
 
           <div class="mb-3" style="width: 80%;">
-          <label for="exampleDataList" class="col-form-label">Estante:</label>
-          <input type="text" class="form-control" id="estante" name="estante" placeholder="" disabled>
+            <label for="exampleDataList" class="col-form-label">Estante:</label>
+            <input type="text" class="form-control" id="estante" name="estante" placeholder="" disabled>
           </div>
           <div class="mb-3" style="width: 80%;">
-          <label for="exampleDataList" class="col-form-label">Fila:</label>
-          <input type="text" class="form-control" id="fila" name="fila" placeholder="" disabled>
+            <label for="exampleDataList" class="col-form-label">Fila:</label>
+            <input type="text" class="form-control" id="fila" name="fila" placeholder="" disabled>
           </div>
         </div>
 
@@ -163,7 +163,7 @@
         <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
         <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
 
-       
+
       </div>
 
     </div>
@@ -174,10 +174,10 @@
 <div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <form id="formularioUsar" autocomplete="off">
 
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content modal-lg" id="modalContentUsar">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 
-        <div class="modal-header" id="modalHeaderUsar">
+      <div class="modal-content" id="modalContentUsar">
+        <div class="modal-header flex">
           <input type="text" name="idMaterial" id="idMaterial" hidden>
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div class="HEADER">
@@ -187,54 +187,63 @@
         </div>
 
         <div class="modal-body" id="modalBodyUsar">
-
-
-        <div class="mb-3">
-             <label for="exampleDataList" class="col-form-label">Vehiculos:</label>
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 100%">
+              <label for="exampleDataList" class="col-form-label">Vehiculos:</label>
               <select class="form-select form-select" name="vehiculos" id="vehiculos">
-                 <option id="vehiculo"selected="">-- Seleccione el Vehiculo--</option>
-                 <?php foreach ($data as $vehiculos) { ?>
-                  <option value="<?= $vehiculos['id_material'] ?>"><?= $vehiculos['id_vehiculo'] ?></option>
-                  <?php } ?>
-                    </select>
-            </div>
-        <div class="mb-3">
-             <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
-              <select class="form-select form-select" style="height: 38px; width: 268px" name="trabajadores" id="trabajadores">
-                 <option id="trabajadores"selected="">-- Seleccione un trabajador--</option>
-                 <?php foreach ($data as $fila) { ?>
-                  <option value="<?= $fila['id_material'] ?>"><?= $fila['fila'] ?></option>
-                  <?php } ?>
-                    </select>
+                <option id="vehiculo" selected="">-- Seleccione el Vehiculo--</option>
+                <?php foreach ($vehiculos as $data) { ?>
+                  <option value="<?= $data['id_vehiculo'] ?>"><?= $data['placa'] ?></option>
+                <?php } ?>
+              </select>
             </div>
 
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Nombre del insumo:</label>
-            <input class="form-control" id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
-          </div>
+            <div class="mb-3" style="width: 100%">
+              <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
+              <select class="form-select form-select" name="trabajadores" id="trabajadores">
+                <option id="trabajadores" selected="">-- Seleccione un trabajador--</option>
+                <?php foreach ($trabajadores as $data) { ?>
+                  <option value="<?= $data['id_trabajador'] ?>"><?= $data['nombre'] ?></option>
+                <?php } ?>
 
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Cantidad Existente:</label>
-            <input class="form-control" id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
-            <div>
-              <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
-              <small id="msgUsar" class="invalido"></small>
+              </select>
             </div>
           </div>
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
-            <input class="form-control" id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Subtotal:</label>
-            <input class="form-control" id="subtotal" name="subtotal" placeholder="" disabled>
+
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 50%">
+              <label for="exampleDataList" class="col-form-label">Nombre del insumo:</label>
+              <input class="form-control" id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
+            </div>
+
+            <div class="mb-3" style="width: 50%">
+              <label for="exampleDataList" class="col-form-label">Cantidad Existente:</label>
+              <input class="form-control" id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
+            </div>
           </div>
 
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 50%">
+              <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
+              <input class="form-control" id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
+            </div>
+            <div class="mb-3" style="width: 50%">
+              <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
+              <div>
+                <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
+                <small id="msgUsar" class="invalido"></small>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex column-gap-3" style="width: 50%">
+            <div class="mb-3" style="width: 100%">
+              <label for="exampleDataList" class="col-form-label">Subtotal:</label>
+              <input class="form-control" id="subtotal" name="subtotal" placeholder="" disabled>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer" id="modalFooter">
+        <div class="modal-footer">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btnAccionF" id="btnValidar">Usar</button>
 
@@ -274,8 +283,7 @@
     $("#cantidadUsar").val('');
     $("#subtotal").val('');
     $("#trabajadores").val('');
-    $("#vehiculos").val('');
-    $("#vehiculo").val('');
+
     $('#msgUsar').text('')
     $('#msgAgregar').text('')
     $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
@@ -328,7 +336,7 @@
         cantidadActual.style.background = '#e9ecef';
         estante.style.background = '#e9ecef';
         fila.style.background = '#e9ecef';
-  
+
 
 
       }
@@ -338,7 +346,7 @@
 
   function validarInput() {
     document.getElementById("btnValidar").disabled = !document.getElementById("cantidadUsar").value.length;
-    // document.getElementById("btnEditar").disabled = !document.getElementById("nombre1").value.length;
+
 
   }
 
@@ -419,31 +427,6 @@
     }
   })
 
-  // $('#nombre1').on('input', function(e) {
-  //   nombre1 = $('#nombre1').val()
-  //   tp = $('#tp').val()
-  //   console.log(tp)
-  //   id_material = $('#id').val()
-  //   if (tp == 1 && id_material == 0) {
-  //     console.log('first')
-  //     buscarInsumoNom2(0, nombre1)
-  //   } else if (tp == 2 && id_material != 0) {
-  //     $.ajax({
-  //       type: 'POST',
-  //       url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
-  //       dataType: 'JSON',
-  //       success: function(res) {
-  //         if (res[0]['nombre'] == nombre1) {
-  //           $('#msgEditar').text('')
-  //           validEditar = true
-  //         } else {
-  //           console.log('mmal')
-  //           buscarInsumoNom2(0, nombre)
-  //         }
-  //       }
-  //     })
-  //   }
-  // })
 
   // Validacion de nombre del insumo
 
@@ -468,55 +451,6 @@
 
   }
 
-  // function buscarInsumoNom2(id_material, nombre) {
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
-  //     dataType: 'JSON',
-  //     success: function(res) {
-  //       if (res[0] == null) {
-  //         $('#msgEditar').text('')
-  //         validEditar = true
-  //       } else if (res[0] != null) {
-  //         $('#msgEditar').text('*Este insumo ya existe*')
-  //         $("#btnEditar").attr('disabled', '');
-  //         validEditar = false
-  //       }
-  //     }
-  //   })
-  // }
-
-  // habilitar botones disables
-
-  // function habilitar() {
-  //   $('#tp').val(2)
-  //   $("#titulo").text('Editar');
-  //   $("#nombre1").removeAttr('disabled', '');
-  //   $("#precioVenta").removeAttr('disabled', '');
-  //   $("#precioCompra").removeAttr('disabled', '');
-
-  //   $("#cantidadVendida").removeAttr('hidden', '');
-  //   $("#cantidadActual").removeAttr('disabled', '');
-  //   $("#estante").removeAttr('disabled', '');
-  //   $("#fila").removeAttr('disabled', '');
-  //   $("#btnUsar1").attr('hidden', '');
-  //   $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar1.png') ?>');
-  //   $("#btnEditar").text('Actualizar');
-  //   $("#btnEditar").attr('onclick', 'actualizar()');
-
-  //   precioVenta.style.background = '#ECEAEA';
-  //   nombre1.style.background = '#ECEAEA';
-  //   precioCompra.style.background = '#ECEAEA';
-  //   cantidadActual.style.background = '#ECEAEA';
-
-
-
-
-
-  // }
-
-
-  // funcion de actualizar
 
   function actualizar() {
     id = $("#id").val()
@@ -590,7 +524,7 @@
   // operaciones con el input usar
 
   $('#cantidadUsar').on('input', function(e) {
-     idMaterial = $("#idMaterial").val()
+    idMaterial = $("#idMaterial").val()
     cantidad = $('#cantidadUsar').val()
     valorVenta = $("#PrecioDeVenta").val()
     cantidadExistente = $('#cantidadExistente').val()
