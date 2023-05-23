@@ -13,8 +13,8 @@ class Clientes extends BaseController
 {
 
     protected $clientes;
-    protected $telefonos;
     protected $param;
+    protected $telefonos;
     protected $correos;
     public function __construct()
     {

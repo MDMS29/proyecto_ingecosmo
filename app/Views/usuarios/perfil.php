@@ -179,7 +179,7 @@
                                                 <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
                                                     <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                                     </label>
-                                                    <input type="" name="idUsuario" id="idUsuario">
+                                                    <input type="hidden" name="idUsuario" id="idUsuario">
 
                                                     <div class="flex">
                                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -445,24 +445,32 @@
         if (tipo == 2) {
             if (contra == '' && confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
+
             } else if (contra == '') {
                 input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+
             } else if (confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
         } else {
             if (contra == '' && confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (contra == '' && confirContra) {
                 input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+
             } else if (confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (confirContra && contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
+                
             } else if (confirContra && contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }

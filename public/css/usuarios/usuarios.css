@@ -29,6 +29,7 @@ p {
 .btnAccionF {
   background-color: var(--rojoAcciones) !important;
   color: white !important;
+  /* width: auto; */
 }
 
 /* -- HTML -- */
@@ -276,10 +277,9 @@ h5.permiso {
 }
 
 #bloqueContra2{
-  
+  margin-top: 15px;
   display: flex;
   justify-content: end;
-  margin: 0px;
   padding: 5px;
 }
 

@@ -42,6 +42,14 @@ class TelefonosModel extends Model
         return $data;
     }
 
+    public function obtenerTelefonoProveedor()
+    {
+        $this->select('telefonos.numero as telefono');
+        $this->where('tipo_usuario', '8');
+        $data = $this->first();
+        return $data;
+    }
+
     public function buscarTelefono($numero, $idUsuario, $tipoUsuario)
     {
         $this->select('*');
