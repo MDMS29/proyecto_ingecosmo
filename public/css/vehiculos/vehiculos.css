@@ -1,6 +1,11 @@
 :root {
   --azulBase: #161666;
   --rojoAcciones: #ef434d;
+  --grisInput: #ECEAEA; 
+}
+
+.form-control{
+  background: var(--grisInput);
 }
 
 table {

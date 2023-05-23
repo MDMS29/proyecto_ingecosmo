@@ -179,7 +179,7 @@
                                                 <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
                                                     <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                                     </label>
-                                                    <input type="" name="idUsuario" id="idUsuario">
+                                                    <input type="hidden" name="idUsuario" id="idUsuario">
 
                                                     <div class="flex">
                                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -202,7 +202,7 @@
                                                         <small id="msgConfirRes" class="normal"></small>
                                                     </div>
                                                     <div id="bloqueContra2">
-                                                        <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                                                        <input type="button" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,7 +222,7 @@
 <!-- -------------------modal------------------------- -->
 <form method="POST" id="formularioPerfil" autocomplete="off">
     <div class="modal fade" id="editarPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="bodyP">
                 <div class="modal-content">
                     <div class="modal-header" id="modalHeader">
@@ -283,7 +283,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Actualizar</button>
+                        <button type="button" class="btn btnAccionF" id="btnGuardar">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -298,7 +298,6 @@
     var inputIden = 0;
     var validIdent = true;
     var res
-    ContadorPRC = 0
 
     function limpiarCampos() {
         $('#msgConfirRes').text('')
@@ -419,7 +418,7 @@
         }
     })
 
-    // -----------contrassss----------------
+    // -----------contrassss y su validacion----------------
 
     //Ver contraseñas
     function verContrasena() {
@@ -495,14 +494,34 @@
                 type: 'POST',
                 dataType: 'json'
             }).done(function(data) {
-                ContadorPRC = 0
                 limpiarCampos('msgConfirRes')
                 if (data == 2) {
                     return mostrarMensaje('error', '¡Ha ocurrido un error!')
                 } else {
-                    return mostrarMensaje('success', '¡Se ha actualizado su contraseña!')
+                    mostrarMensaje('success', '¡Se ha actualizado su contraseña!')
+                    $('.salir').on('click', function(e) {
+                        const informacion = {
+                            usuario: '',
+                            contrasena: ''
+                        };
+                        localStorage.setItem("usuario", JSON.stringify(informacion));
+                    })
+                    $.ajax({
+                        url: '<?= base_url('usuarios/salir') ?>'
+                    })
                 }
             })
         }
     })
+
+    //Mostrar mensajes de SwalFire
+    function mostrarMensaje(tipo, msg) {
+        Swal.fire({
+            position: 'center',
+            icon: `${tipo}`,
+            text: `${msg}`,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 </script>

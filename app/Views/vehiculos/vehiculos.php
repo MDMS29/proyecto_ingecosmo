@@ -52,7 +52,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="tipoCliente" class="col-form-label">Tipo Responsable:</label>
-                                    <select class="form-select form-select" name="tipoCliente" id="tipoCliente">
+                                    <select class="form-select form-control" name="tipoCliente" id="tipoCliente">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($tipoClientes as $cliente) { ?>
                                             <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="cliente" class="col-form-label">Responsable:</label>
-                                    <select class="form-select form-select" name="cliente" id="cliente">
+                                    <select class="form-select form-control" name="cliente" id="cliente">
                                         <!-- SELECT DINAMICO -->
                                     </select>
                                 </div>
@@ -82,7 +82,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="marca" class="col-form-label">Marca:</label>
-                                    <select class="form-select form-select" name="marca" id="marca">
+                                    <select class="form-select form-control" name="marca" id="marca">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($marcas as $marca) { ?>
                                             <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
@@ -93,7 +93,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nFabrica" class="col-form-label">No. Fabrica:</label>
-                                    <select class="form-select form-select" name="nFabrica" id="nFabrica">
+                                    <select class="form-select form-control" name="nFabrica" id="nFabrica">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php $years = range(2035, 1990); ?>
                                         <?php foreach ($years as $year) : ?>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="combustible" class="col-form-label">Combustible:</label>
-                                    <select class="form-select form-select" name="combustible" id="combustible">
+                                    <select class="form-select form-control" name="combustible" id="combustible">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($combustible as $com) { ?>
                                             <option value="<?= $com['id'] ?>"><?= $com['nombre'] ?></option>
@@ -130,7 +130,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="estado" class="col-form-label">Estado:</label>
-                                        <select class="form-select form-select" name="estado" id="estado">
+                                        <select class="form-select form-control" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
                                                 <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
@@ -180,7 +180,7 @@
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <label for="prioridad" class="col-form-label">Cambiar Estado:</label>
-                        <select class="form-select form-select" name="estadoVehiculo" id="estadoVehiculo">
+                        <select class="form-select form-control" name="estadoVehiculo" id="estadoVehiculo">
                             <option selected value="">-- Seleccione --</option>
                             <?php foreach ($estadosVehi as $estado) { ?>
                                 <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
