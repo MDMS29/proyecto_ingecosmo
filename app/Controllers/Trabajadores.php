@@ -142,4 +142,5 @@ class Trabajadores extends BaseController
         echo view('/principal/sidebar');
         echo view('/trabajadores/eliminados', $data);
     }
+    
 }

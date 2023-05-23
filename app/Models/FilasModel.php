@@ -31,7 +31,7 @@ class FilasModel extends Model
       $this->select('materiales.*, materiales.estante as nombreFila, estanteria.nombre as estanteria, estanteria.n_iconos as icono');
       $this->join('estanteria', 'materiales.estante = estanteria.id');
       $this->where('estante', $estante);
-   
+
 
       $this->groupBy('fila');
       $datos = $this->findAll();
@@ -63,16 +63,26 @@ class FilasModel extends Model
       $datos = $this->findAll();
       return $datos;
    }
+
+   public function traerDetalles($id_material)
+   {
+      $this->select('materiales.* ,estanteria.nombre as nombreEstante');
+      $this->join('estanteria', 'estanteria.id = materiales.estante');
+      $this->where('id_material', $id_material);
+      $datos = $this->first();
+      return $datos;
+   }
+
    public function contadorFilas($id)
    {
-/*       $query = "SELECT COUNT(num) as total FROM (SELECT COUNT(*) as num FROM materiales WHERE estante =' .  $id . ' GROUP BY fila) as fila";
+      /*       $query = "SELECT COUNT(num) as total FROM (SELECT COUNT(*) as num FROM materiales WHERE estante =' .  $id . ' GROUP BY fila) as fila";
       
       $data = $this->table($query);
       return $data; */
       //$aa="SELECT COUNT(*) as num"
       //FROM materiales WHERE estante = 3 GROUP BY fila) as hhh";
       // $datos =  $this->select('COUNT(fila) as total');
-/*       $data = $this->from(
+      /*       $data = $this->from(
          $aa
       );
       return $data; */
@@ -83,9 +93,9 @@ class FilasModel extends Model
       $datos = $this->findAll();
       return $datos;
    }
-   
 
-   
+
+
 
    //   public function obtenerMaterialesFila($id, $nombre){
    //      $this->where('fila', $id);

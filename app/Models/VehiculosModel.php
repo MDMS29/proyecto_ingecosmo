@@ -64,4 +64,15 @@ class VehiculosModel extends Model
         $data = $this->first();
         return $data;
     }
+
+    public function vehiculosInsumos(){
+        $this->select("id_vehiculo, placa");
+        $this->where("estado", "37");
+        $this->orWhere("estado", "39");
+        $this->orWhere("estado", "40");
+        $this->orWhere("estado", "44");
+        $this->orWhere("estado", "45");
+        $data = $this->findAll();
+        return $data;
+    }
 }

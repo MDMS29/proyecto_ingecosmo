@@ -11,6 +11,7 @@ class Filas extends BaseController
 {
     protected $filas, $estanteria;
     protected $material, $fila;
+    protected $materiales;
 
     public function __construct()
     {
@@ -66,6 +67,16 @@ class Filas extends BaseController
         if (!empty($materiales)) {
             return json_encode($materiales);
         }
+    }
+
+    public function detallesMaterial($id)
+    {
+        $returnData = array();
+        $filas_ = $this->filas->traerDetalles($id);
+        if (!empty($filas_)) {
+            array_push($returnData, $filas_);
+        }
+        echo json_encode($returnData);
     }
 
     public function insertar()
