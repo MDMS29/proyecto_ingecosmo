@@ -444,24 +444,32 @@
         if (tipo == 2) {
             if (contra == '' && confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
+
             } else if (contra == '') {
                 input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+
             } else if (confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
         } else {
             if (contra == '' && confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (contra == '' && confirContra) {
                 input.text('¡Ingrese una contraseña!').removeClass().addClass('normal')
+
             } else if (confirContra == '') {
                 input.text('').removeClass().addClass('normal')
+
             } else if (confirContra && contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
+                
             } else if (confirContra && contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }

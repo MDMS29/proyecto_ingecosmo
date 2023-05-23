@@ -36,7 +36,7 @@
 <!-- -----modal----------     -->
 <form autocomplete="off" id="formularioClientes">
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-dialog-ce    ered modal-xl">
             <div class="body">
 
                 <div class="modal-content">
@@ -102,7 +102,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
-                                        <input type="email" name="email" class="form-control" id="email" disabled>
+                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>

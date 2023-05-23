@@ -65,24 +65,15 @@ class Filters extends BaseConfig
      */
     // public array $filters = [
 
-    //     // 'session' => [
-    //     //     'before' => [ 
-    //     //         'home',
-    //     //         'usuarios',
-    //     //         'usuarios/*'
-    //     //     ]
-    //     // ]
+    //      $session => [
+    //          'before' => [ 
+    //              'home',
+    //              'usuarios',
+    //              'usuarios/*',
+    //              'trabajadores',
+    //              'trabajadores/*'
+    //          ]
+         
 
-
-    //     'session' => [
-    //         'before' => [ 
-    //             'home',
-    //             'usuarios',
-    //             'usuarios/*',
-    //             'trabajadores',
-    //             'trabajadores/*'
-    //         ]
-    //     ]
-
-    // ];
+    //  ];
 }

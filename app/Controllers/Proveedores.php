@@ -4,19 +4,31 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
 use App\Models\TercerosModel;
+use App\Models\TelefonosModel;
+use App\Models\ParamModel;
+use App\Models\EmailModel;
 
 class Proveedores extends BaseController
 {
     protected $proveedores;
+    protected $param;
+    protected $telefonos;
+    protected $correos;
     public function __construct()
     {
+        $this->param = new ParamModel();
         $this->proveedores = new TercerosModel();
+        $this->telefonos = new TelefonosModel();
+        $this->correos = new EmailModel();
     }
     public function index()
     {
-
+        $tipoTel = $this->param->obtenerTipoTel(); 
+        $tel = $this->telefonos->obtenerTelefonoCliente(); 
+        $email = $this->correos->obtenerEmailCliente(); 
+        $data = ['tipoTele' => $tipoTel, 'telefono' => $tel, 'email' => $email];
         echo view('/principal/sidebar');
-        echo view('/proveedores/proveedores');
+        echo view('/proveedores/proveedores',$data);
     }
 
     public function obtenerProveedores()
