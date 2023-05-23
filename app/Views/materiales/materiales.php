@@ -427,6 +427,31 @@
     }
   })
 
+  // $('#nombre1').on('input', function(e) {
+  //   nombre1 = $('#nombre1').val()
+  //   tp = $('#tp').val()
+  //   console.log(tp)
+  //   id_material = $('#id').val()
+  //   if (tp == 1 && id_material == 0) {
+  //     console.log('first')
+  //     buscarInsumoNom2(0, nombre1)
+  //   } else if (tp == 2 && id_material != 0) {
+  //     $.ajax({
+  //       type: 'POST',
+  //       url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre1,
+  //       dataType: 'JSON',
+  //       success: function(res) {
+  //         if (res[0]['nombre'] == nombre1) {
+  //           $('#msgEditar').text('')
+  //           validEditar = true
+  //         } else {
+  //           console.log('mmal')
+  //           buscarInsumoNom2(0, nombre)
+  //         }
+  //       }
+  //     })
+  //   }
+  // })
 
   // Validacion de nombre del insumo
 
@@ -451,6 +476,55 @@
 
   }
 
+  // function buscarInsumoNom2(id_material, nombre) {
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
+  //     dataType: 'JSON',
+  //     success: function(res) {
+  //       if (res[0] == null) {
+  //         $('#msgEditar').text('')
+  //         validEditar = true
+  //       } else if (res[0] != null) {
+  //         $('#msgEditar').text('*Este insumo ya existe*')
+  //         $("#btnEditar").attr('disabled', '');
+  //         validEditar = false
+  //       }
+  //     }
+  //   })
+  // }
+
+  // habilitar botones disables
+
+  // function habilitar() {
+  //   $('#tp').val(2)
+  //   $("#titulo").text('Editar');
+  //   $("#nombre1").removeAttr('disabled', '');
+  //   $("#precioVenta").removeAttr('disabled', '');
+  //   $("#precioCompra").removeAttr('disabled', '');
+
+  //   $("#cantidadVendida").removeAttr('hidden', '');
+  //   $("#cantidadActual").removeAttr('disabled', '');
+  //   $("#estante").removeAttr('disabled', '');
+  //   $("#fila").removeAttr('disabled', '');
+  //   $("#btnUsar1").attr('hidden', '');
+  //   $("#imagenDetalle").attr('src', '<?php echo base_url('/img/editar1.png') ?>');
+  //   $("#btnEditar").text('Actualizar');
+  //   $("#btnEditar").attr('onclick', 'actualizar()');
+
+  //   precioVenta.style.background = '#ECEAEA';
+  //   nombre1.style.background = '#ECEAEA';
+  //   precioCompra.style.background = '#ECEAEA';
+  //   cantidadActual.style.background = '#ECEAEA';
+
+
+
+
+
+  // }
+
+
+  // funcion de actualizar
 
   function actualizar() {
     id = $("#id").val()

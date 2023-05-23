@@ -62,7 +62,7 @@
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0; font-size:17px;" for="message-text">Filas:</label>
-                                    <input class="form-control" id="fila" name="fila" type="number"></input>
+                                    <input class="form-control" id="fila" name="fila" type="number">
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">

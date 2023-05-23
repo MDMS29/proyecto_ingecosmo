@@ -114,8 +114,21 @@
 }
 
 .btnRedireccion {
-  background-color: #161666 !important;
-  color: white !important;
+  color: #161666;
+  text-decoration: none;
+  border: 2px solid #161666;
+  border-radius: 8px;
+  margin-top: 0;
+  padding: 8px;
+  width: 105px;
+  height: auto;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+}
+
+.btnRedireccion:hover{
+  color: rgb(255, 255, 255);
+  background-color: #161666;
 }
 
 .imagenEncab{
@@ -159,7 +172,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 25rem;
-  height: 10rem;
+  height: 13rem;
   margin: 15px;
 }
 
@@ -183,6 +196,14 @@
   flex-direction: column;
   padding: 20px;
   align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.bloque2{
+  display: flex;
+  width: 100%;
+  justify-content: end;
 }
 
 .bloqueFila{
@@ -206,6 +227,10 @@
   flex-wrap: wrap;
   display: flex;
 }
+
+/* .subTexto:hover{
+  color: #E25050;
+} */
 
 #cerrarX{
   margin: 0;
@@ -256,5 +281,74 @@ label {
   background-color: var(--grisInput);
 }
 
+#detalles-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+#modalContentD{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 100px;
+  border: 5px solid var(--azulBoton) !important;
+  border-radius: 10px;
+  background-color: white;
+}
 
+.detalles {
+  width: 50px;
+  margin-left: 10px;
 
+}
+.logoIngecosmo {
+  position: absolute;
+  left: 1rem;
+  top: 10px;
+  width: 70px;
+  padding-bottom: 30px;
+}
+
+#modalHeaderD{
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+#modalFooterD{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#modalBodyD{
+  display: flex;
+  padding: 30px;
+  justify-content:center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 250px;
+
+}
+
+.btnCerrar{
+  background-color: var(--rojoBoton) !important;
+  color: white !important;
+}
+
+.verMas:hover{
+  text-decoration: underline !important;
+}
