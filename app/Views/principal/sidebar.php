@@ -149,9 +149,9 @@
                         </li>
                     <?php } ?>
                     <li>
-                        <!-- <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                         <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                             <p id="pa">Historial</p>
-                        </a> -->
+                        </a> 
                     </li>
                     <li>
                         <a href="<?php echo base_url('salir') ?>" id="aa" class="salir"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
