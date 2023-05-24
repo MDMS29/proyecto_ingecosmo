@@ -36,6 +36,7 @@
                 <div class="modal-content" id="modalContentP">
                     <div class="modal-header d-flex align-items-center justify-content-between">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                        <!-- <img id="logoModal" src="< ?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20"> -->
                         <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
                         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
@@ -97,7 +98,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarAliado" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -148,7 +149,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarAliado" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -159,69 +160,70 @@
 <!-- MODAL AGREGAR - EDITAR CORREO -->
 <div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarUsuario" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
-            </div>
-            <input type="text" name="editCorreo" id="editCorreo" hidden>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                </div>
+                <input type="text" name="editCorreo" id="editCorreo" hidden>
 
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="correoAdd" class="col-form-label">Correo:</label>
-                            <div>
-                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
-                                <small id="msgCorreo" class="invalido"></small>
+                <div class="modal-body">
+
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="mb-2 d-flex gap-3" style="width: 100%;">
+                            <div class="d-flex gap-2" style="width: 100%;">
+                                <label for="correoAdd" class="col-form-label">Correo:</label>
+                                <div>
+                                    <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                    <small id="msgCorreo" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2" style="width: 100%;">
+                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <option value="P">Principal</option>
+                                    <option value="S">Secundaria</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
-                            <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
-                                <option selected value="">-- Seleccione --</option>
-                                <option value="P">Principal</option>
-                                <option value="S">Secundaria</option>
-                            </select>
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Correo</th>
-                                    <th>Prioridad</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyCorre">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY CORREOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarAliado" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
-                <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>q
+</div>
 
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
                     <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
-
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
@@ -231,13 +233,14 @@
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                 <a id="btnSi" class="btn btnAccionF">Eliminar</a>
             </div>
 
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -246,9 +249,10 @@
     var inputNit = 0;
     var ContadorPRC = 0;
     var contador = 0;
-    let telefonos = [] //Telefonos del usuario.
-    let correos = [] //Correos del usuario.
+    let telefonos = [] //Telefonos del Aliado.
+    let correos = [] //Correos del Aliado.
     var validCorreo = true
+    var validTel = true
     var validRazonSocial;
     var validNit = true;
     var objCorreo = {
@@ -281,7 +285,7 @@
             timer: 1500
         })
     }
-    // Tabla de usuarios  
+    // Tabla de Aliados  
     var tableAliados = $("#tableAliados").DataTable({
         ajax: {
             url: '<?= base_url('aliados/obtenerAliados') ?>',
@@ -312,8 +316,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarAliado(' + data.id_tercero + ',2)" data-bs-target="#agregarAliado" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Aliado"></button>' +
-
-                        '<input type="image" class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar" src="<?php echo base_url("img/delete.svg") ?>"></input>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Aliado"></button>'
                     );
                 },
             }
@@ -334,6 +337,24 @@
 
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
+        if (accion == 3) {
+            principalT = telefonos.filter(tel => tel.prioridad == 'P')
+            if (principalT.length == 0) {
+                return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarAliado').modal('show')
+            }
+        }
+        if (accion == 4) {
+            principalC = correos.filter(correo => correo.prioridad == 'P')
+            if (principalC.length == 0) {
+                return mostrarMensaje('error', '¡Debe tener un correo principal!')
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarAliado').modal('show')
+            }
+        }
         if (objCorreo.id != 0) {
             correos.push(objCorreo)
             guardarCorreo()
@@ -362,16 +383,20 @@
         $(`#${input3}`).val('')
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
+        $('#msgTel').text('')
+        $('#msgCorreo').text('')
     }
+
     function seleccionarAliado(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0 + '/' + 0,
                 dataType: 'json',
                 success: function(res) {
                     limpiarCampos()
                     $('#tituloModal').text('Editar Aliado')
+                    // $('#logoModal').attr('src', '< ?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -422,7 +447,7 @@
     function buscarRazonSocial(id, inputRazonSocial) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliadoRzn/') ?>" + id + "/" + inputRazonSocial,
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + 0 + "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -445,7 +470,7 @@
         } else if (tp == 2 && id != 0) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/aliados/buscarAliadoRzn/') ?>" + id + "/" + inputRazonSocial,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + 0 + "/" + inputRazonSocial ,
                 dataType: 'JSON',
                 success: function(res) {
                     if (res[0]['razon_social'] == inputRazonSocial) {
@@ -462,7 +487,7 @@
     function buscarNit(id, inputNit) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit,
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit + "/" + 0 ,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -486,7 +511,7 @@
         } else if (tp == 2 && id != 0) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit + "/" + 0,
                 dataType: 'JSON',
                 success: function(res) {
                     if (res[0]['n_identificacion'] == inputNit) {
@@ -508,8 +533,10 @@
         nit = $('#nit').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false) {
+        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false|| correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else if ([telefono, correo].includes('')) {
+            return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
             $.ajax({
                 url: '<?php echo base_url('aliados/insertar') ?>',
@@ -659,7 +686,7 @@
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 56, //url, valor, idUsuario, tipoUsuario
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 56, //url, valor, idAliado, tipoUsuario
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -681,7 +708,8 @@
     })
     // Funcion para mostrar telefonos en la tabla.
     function guardarTelefono() {
-        $('#telefono').val(telefonos[0]?.numero)
+        principal = telefonos.filter(tel => tel.prioridad == 'P')
+        $('#telefono').val(principal[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -696,7 +724,7 @@
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>  
                                 <td>
                                     <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
-                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
+                                    <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
             }
@@ -800,7 +828,8 @@
     })
 
     function guardarCorreo() {
-        $('#email').val(correos[0]?.correo)
+        principal = correos.filter(correo => correo.prioridad == 'P')
+        $('#email').val(principal[0]?.correo)
         var cadena
         if (correos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -814,7 +843,7 @@
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
-                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
+                                    <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
                                 </td>
                             </tr>`
             }
@@ -838,8 +867,8 @@
         correos = correos.filter(correo => correo.id != fila.attr('id'));
         guardarCorreo()
     }
-        //Eliminar correo de la tabla
-        function eliminarCorreo(id) {
+    //Eliminar correo de la tabla
+    function eliminarCorreo(id) {
         tp = $('#tp').val()
         if (tp == 2) {
             // Consulta tipo delete
@@ -857,7 +886,7 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
-    
+
 
     //Cambiar estado de "Activo" a "Eliminado" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
@@ -876,7 +905,6 @@
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableAliados.ajax.reload(null, false)
-            ContadorPRC = 0
         })
     }
 </script>
