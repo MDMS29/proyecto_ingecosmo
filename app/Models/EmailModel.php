@@ -49,6 +49,15 @@ class EmailModel extends Model
         $data = $this->first();
         return $data;
     }
+    public function EmailPrincipal($idUsuario, $tipoUsuario)
+    {
+        $this->select('email as correo');
+        $this->where('id_usuario', $idUsuario);
+        $this->where('tipo_usuario', $tipoUsuario);
+        $this->where('prioridad', 'P');
+        $data = $this->first();
+        return $data;
+    }
 
     public function buscarEmail($correo, $idUsuario, $tipoUsuario)
     {

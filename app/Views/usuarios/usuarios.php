@@ -37,14 +37,11 @@
         <input type="text" name="tp" id="tp" hidden>
         <div class="modal-dialog modal-xl">
             <div class="body">
-                <div class="logo">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
-                </div>
                 <div class="modal-content">
                     <div class="modal-header flex align-items-center gap-3">
-                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                         <div class="d-flex" style="width: 100%; justify-content: space-between; align-items: center;">
-                            <h1 class="modal-title fs-5" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                            <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                            <h1 class="modal-title fs-5 d-flex align-items-center gap-2"><img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="25"> <span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
                             <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                     </div>
@@ -268,7 +265,7 @@
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
 
                 <div class="modal-body">
-                    
+
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3" style="width: 100%;">
                             <div class="d-flex gap-2" style="width: 100%;">
@@ -456,18 +453,28 @@
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (accion == 3) {
-            principalT = telefonos.filter(tel => tel.prioridad == 'P')
-            if (principalT.length == 0) {
-                return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+            if ($('#tp').val() == 2) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarUsuario').modal('show')
+                }
             } else {
                 $('#agregarTelefono').modal('hide')
                 $('#agregarUsuario').modal('show')
             }
         }
         if (accion == 4) {
-            principalC = correos.filter(correo => correo.prioridad == 'P')
-            if (principalC.length == 0) {
-                return mostrarMensaje('error', '¡Debe tener un correo principal!')
+            if ($('#tp').val() == 2) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarUsuario').modal('show')
+                }
             } else {
                 $('#agregarCorreo').modal('hide')
                 $('#agregarUsuario').modal('show')
