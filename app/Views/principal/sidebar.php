@@ -149,7 +149,7 @@
                         </li>
                     <?php } ?>
                     <li>
-                         <a href="#" id="aa"><span><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                         <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                             <p id="pa">Historial</p>
                         </a> 
                     </li>
