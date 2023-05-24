@@ -20,6 +20,8 @@
                                     </span>
                                 </p>
                             </div>
+                            <a onclick="redireccion()"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                            
                             <a href="<?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                         </div>
                     </div>
@@ -35,6 +37,7 @@
     </div>
 
 </div>
+
 
 <form enctype="multipart/form-data" autocomplete="off" id="agregarEstante">
     <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,7 +72,7 @@
                                     <label class="col-form-label" style="margin:0; font-size:17px;" for="message-text">Imagen:</label>
 
                                     <img src="<?php echo base_url() . '' ?> " class="logo" width="100">
-                                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" ></input>
+                                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*"></input>
                                 </div>
                             </div>
 
@@ -113,28 +116,43 @@
     };
 
     $('#agregarEstante').on('submit', function(e) {
-    e.preventDefault();
-    
-    var formData = new FormData();
-    formData.append('imagen', $('#imagen')[0].files[0]); // Obtener el archivo seleccionado
+        e.preventDefault();
 
-    $.ajax({
-        url: "<?php echo base_url('/estanteria/insertar'); ?>",
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        processData: false, // Evitar que jQuery procese los datos
-        contentType: false, // Evitar que jQuery establezca el tipo de contenido
-        success: function(res) {
-            if (res == 1) {
-                mostrarMensaje('success', '¡Se ha guardado el estante!');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
+        var formData = new FormData();
+        formData.append('imagen', $('#imagen')[0].files[0]); // Obtener el archivo seleccionado
+
+        $.ajax({
+            url: "<?php echo base_url('/estanteria/insertar'); ?>",
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            processData: false, // Evitar que jQuery procese los datos
+            contentType: false, // Evitar que jQuery establezca el tipo de contenido
+            success: function(res) {
+                if (res == 1) {
+                    mostrarMensaje('success', '¡Se ha guardado el estante!');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
             }
-        }
+        });
     });
-});
 
+    function redireccion(){
+        if (empty($data)) {
+            mostrarMensajeVacio()
+        } else {
+            $(".btnVer").attr("href=<?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>","")
+        }
+    }
 
+    function mostrarMensajeVacio(){
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encuentran filas con productos!'
+        })
+    }
 </script>

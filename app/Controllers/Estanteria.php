@@ -38,14 +38,14 @@ class Estanteria extends BaseController
     }
     
 
-    public function buscarEstante($id)
-    {
-        $estante_ = $this->estantes->traerEstantes($id);
-        if (!empty($estante_)) {
-            array_push($returnData, $estante_);
-        }
-        echo json_encode($returnData);
-    }
+    // public function buscarEstante($id)
+    // {
+    //     $estante_ = $this->estantes->traerEstantes($id);
+    //     if (!empty($estante_)) {
+    //         array_push($returnData, $estante_);
+    //     }
+    //     echo json_encode($returnData);
+    // }
 
     public function insertar()
     {

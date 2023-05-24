@@ -58,12 +58,12 @@ class EstanteriaModel extends Model
         return $datos;
     }
 
-    public function traerEstantes($nombre)
-    {
-        $this->select('estanteria.*, estanteria.nombre as nomEstante');
-        $this->where('nombre', $nombre);
-        $datos = $this->findAll();
-        return $datos;
-    }
+    // public function traerEstantes($nombre)
+    // {
+    //     $this->select('estanteria.*, estanteria.nombre as nomEstante');
+    //     $this->where('nombre', $nombre);
+    //     $datos = $this->findAll();
+    //     return $datos;
+    // }
 
 }

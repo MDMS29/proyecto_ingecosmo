@@ -53,9 +53,9 @@ class Filas extends BaseController
         echo json_encode($returnData);
     }
 
-    public function obtenerMaterialesCate($categoria)
+    public function obtenerMaterialesCate($categoria, $fila)
     {
-        $materiales = $this->material->obtenerMaterialesCate($categoria);
+        $materiales = $this->material->obtenerMaterialesCate($categoria, $fila);
         if (!empty($materiales)) {
             return json_encode($materiales);
         }
