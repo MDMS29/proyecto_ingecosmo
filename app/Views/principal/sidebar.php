@@ -35,38 +35,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li><a class="nav-item dropdown" href="#" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
+                    <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " style="color: white; margin-left: 10px;"><img title="Perfil"  style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
                     <hr class="nav-item dropdown" style="border-color: white">
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('trabajadores') ?>" style="color: white; margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('trabajadores') ?>" style="color: white; margin-left: 10px;"><img  title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('clientes') ?>" style="color: white;  margin-left: 10px;"><img title="Clientes" style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestosAdmin') ?>" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestosAdmin') ?>" style="color: white;  margin-left: 10px;"><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('insumos') ?>" style="color: white;  margin-left: 10px;"><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('vehiculos') ?>" style="color: white;  margin-left: 10px;"><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
+                        <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /> Aliados</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /> Aliados</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>" style="color: white; margin-left: 10px; "><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>" style="color: white; margin-left: 10px; "><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } else if (session('idRol') == 3) { ?>
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestosAdmin') ?>" style="color: white;  margin-left: 10px;"><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('insumos') ?>" style="color: white;  margin-left: 10px;"><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
+                        <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
-                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
+                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
-                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown; salir  " href="#" style="color: white;  margin-left:10px;"><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
+                    <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown; salir  " href="#" style="color: white;  margin-left:10px;"><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
                     </li>
                 </ul>
             </div>
@@ -80,81 +80,81 @@
                 <ul id="allElement" class="list-unstyled components mb-5">
 
                     <li class="active">
-                        <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
+                        <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img  title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                             <p id="pa"><?= session('rol') ?></p>
                         </a>
                     </li>
 
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
                         <li>
-                            <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
+                            <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
                                 <p id="pa">Trabajadores</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
+                            <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img title="Clientes" style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
                                 <p id="pa">Clientes</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                            <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                                 <p id="pa">Repuestos</p>
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                                 <p id="pa">Insumos</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
+                            <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
                                 <p id="pa">Vehiculos</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url('proveedores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
+                            <a href="<?= base_url('proveedores') ?>" id="aa"><span><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
                                 <p id="pa">Proveedores</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
+                            <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
                                 <p id="pa">Aliados</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
+                            <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
                                 <p id="pa">Usuarios</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo.png') ?>" /></span>
+                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Vehiculos" style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo.png') ?>" /></span>
                                 <p id="pa">Historial Vehiculos</p>
                             </a>
                         </li>
                     <?php } else if (session('idRol') == 3) { ?>
                         <li>
-                            <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                            <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                                 <p id="pa">Repuestos</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                                 <p id="pa">Insumos</p>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url('estanteria') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                            <a href="<?= base_url('estanteria') ?>" id="aa"><span><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
                                 <p id="pa">Estanteria</p>
                             </a>
                         </li>
                     <?php } ?>
                     <li>
-                        <!-- <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                         <a href="#" id="aa"><span><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                             <p id="pa">Historial</p>
-                        </a> -->
+                        </a> 
                     </li>
                     <li>
-                        <a href="<?php echo base_url('salir') ?>" id="aa" class="salir"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
+                        <a href="<?php echo base_url('salir') ?>" id="aa" class="salir"><span><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
                             <p id="pa">Cerrar Sesion</p>
                         </a>
                     </li>

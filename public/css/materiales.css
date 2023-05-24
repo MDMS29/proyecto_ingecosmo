@@ -4,12 +4,15 @@
     --azulBase: #161666;
     --rojoAcciones: #EF434D;
     --grisModal: #ECEAEA;
-    --grisInput: #D9D9D9; 
+    --grisInput: #ECEAEA; 
     --editarBase: #000000; 
 }
 
 
 /* -- BOTONES GENERALES -- */
+input[class="form-control"] {
+    background-color: var(--grisInput);
+}
 
 .btnRedireccion {
     background-color: var(--rojoAcciones) !important;
@@ -234,9 +237,8 @@ estilos modal agregar  */
 #nombre, #precioC, #precioV, #cantidadA{
     margin-right: 10px;
     border-radius: 5px;
-    height: 30px;
-    width: 250px;
-    background-color: var(--grisModal);
+    height: 38px;
+    width: 300px;
 }
 
 #titulo1{
@@ -244,8 +246,7 @@ estilos modal agregar  */
     display: flex;
     margin-left: 40%;
     font-family: 'Nunito', sans-serif; 
-    text-transform: uppercase;
-    font-weight: bold;
+
     
 
 }
@@ -312,7 +313,6 @@ estilos modal agregar  */
 #nombre1, #precioCompra, #precioVenta, #cantidadActual, #estante,#fila{
     margin-left: 15px;
     border-radius: 5px;
-    background-color: var(--grisModal);
 
 }
 

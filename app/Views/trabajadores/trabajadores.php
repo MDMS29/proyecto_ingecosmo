@@ -135,7 +135,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -186,7 +186,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -194,57 +194,61 @@
     </div>
 </div>
 
+
 <!-- MODAL AGREGAR - EDITAR CORREO -->
 <div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
-            </div>
-            <input type="text" name="editCorreo" id="editCorreo" hidden>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                </div>
+                <input type="text" name="editCorreo" id="editCorreo" hidden>
 
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="correoAdd" class="col-form-label">Correo:</label>
-                            <div>
-                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
-                                <small id="msgCorreo" class="invalido"></small>
+                <div class="modal-body">
+
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="mb-2 d-flex gap-3" style="width: 100%;">
+                            <div class="d-flex gap-2" style="width: 100%;">
+                                <label for="correoAdd" class="col-form-label">Correo:</label>
+                                <div>
+                                    <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                    <small id="msgCorreo" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2" style="width: 100%;">
+                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <option value="P">Principal</option>
+                                    <option value="S">Secundaria</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
-                            <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
-                                <option selected value="">-- Seleccione --</option>
-                                <option value="P">Primaria</option>
-                                <option value="S">Secundaria</option>
-                            </select>
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Correo</th>
-                                    <th>Prioridad</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyCorre">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY CORREOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarTrabajador" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
-                <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -253,7 +257,6 @@
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
@@ -284,8 +287,9 @@
     var contador = 0;
     var contadorCorreo = 0;
     var inputIden = 0;
-    let telefonos = [] //Telefonos del usuario.
-    let correos = [] //Correos del usuario.
+    let telefonos = [] //Telefonos del Trabajador.
+    let correos = [] //Correos del Trabajador.
+    var validTel = true
     var validCorreo = true;
     var validIdent = true;
     var objCorreo = {
@@ -376,7 +380,7 @@
 
     });
 
-    
+
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
         e.preventDefault();
@@ -387,6 +391,24 @@
     });
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
+        if (accion == 3) {
+            principalT = telefonos.filter(tel => tel.prioridad == 'P')
+            if (principalT.length == 0) {
+                return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarAliado').modal('show')
+            }
+        }
+        if (accion == 4) {
+            principalC = correos.filter(correo => correo.prioridad == 'P')
+            if (principalC.length == 0) {
+                return mostrarMensaje('error', '¡Debe tener un correo principal!')
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarAliado').modal('show')
+            }
+        }
         if (objCorreo.id != 0) {
             correos.push(objCorreo)
             guardarCorreo()
@@ -539,6 +561,8 @@
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else if ([telefono, correo].includes('')) {
+            return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
             $.ajax({
                 url: '<?php echo base_url('trabajadores/insertar') ?>',
@@ -639,13 +663,14 @@
         }
         contador += 1
         let info = {
-            id: [editTel].includes('') || editTel == 0 ? `'${contador+=1}e` : editTel,
+            id: [editTel].includes('') || editTel == 0 ? `${contador+=1}e` : editTel,
             tipo,
             numero,
             prioridad
         }
         let filtro = telefonos.filter(tel => tel.prioridad == 'P')
         let filtroTel = telefonos.filter(tel => tel.numero == info.numero)
+
         if (filtroTel.length > 0) {
             filtro = []
             $('#btnEditarTel').removeAttr('disabled')
@@ -689,7 +714,7 @@
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 6, //url, valor, idUsuario, tipoUsuario
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 6, //url, valor, idTrabajador, tipoUsuario
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -711,7 +736,8 @@
     })
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
-        $('#telefono').val(telefonos[0]?.numero)
+        principal = telefonos.filter(tel => tel.prioridad == 'P')
+        $('#telefono').val(principal[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -720,16 +746,16 @@
             $('#bodyTel').html(cadena)
         } else {
             for (let i = 0; i < telefonos.length; i++) {
-                cadena += ` <tr class="text-center" id=${telefonos[i].id}>
+                cadena += ` <tr class="text-center" id='${telefonos[i].id}'>
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
-                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>  
                                 <td>
                                     <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
-                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
+                                    <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
-            }
+            }   
         }
         $('#bodyTel').html(cadena)
     }
@@ -827,7 +853,8 @@
     })
     // Funcion para mostrar correos en la tabla.
     function guardarCorreo() {
-        $('#email').val(correos[0]?.correo)
+        principal = correos.filter(correo => correo.prioridad == 'P')
+        $('#email').val(principal[0]?.correo)
         var cadena
         if (correos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -836,12 +863,12 @@
             $('#bodyCorre').html(cadena)
         } else {
             for (let i = 0; i < correos.length; i++) {
-                cadena += ` <tr class="text-center" id=${correos[i].id}>
+                cadena += ` <tr class="text-center" id='${correos[i].id}'>
                                 <td>${correos[i].correo}</td>
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                                 <td>
-                                    <button class="btn" onclick="editarCorreo(${correos[i].id})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
-                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
+                                    <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
                                 </td>
                             </tr>`
             }

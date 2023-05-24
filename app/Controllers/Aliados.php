@@ -46,7 +46,7 @@ class Aliados extends BaseController
 
         if ($tp == 2) {
             //Actualizar datos
-            $res = $this->aliados->buscarAliado($idTer, 0);
+            $res = $this->aliados->buscarAliado($idTer, 0, 0);
             $aliadoUpdate = [
                 'tipo_doc' => $tipoDoc,
                 'n_identificacion' => $nit,
@@ -72,57 +72,33 @@ class Aliados extends BaseController
         }
     }
 
-    public function buscarAliado($id, $nit)
+    public function buscarAliado($id, $nit, $razonSocial)
     {
         $array = array();
         if ($id != 0) {
-            $data = $this->aliados->buscarAliado($id, 0);
+            $data = $this->aliados->buscarAliado($id, 0, 0);
             if (!empty($data)) {
                 array_push($array, $data);
                 return json_encode($array);
             }
         } else if ($nit != 0) {
-            $data = $this->aliados->buscarAliado(0, $nit);
+            $data = $this->aliados->buscarAliado(0, $nit, 0);
             array_push($array, $data);
             return json_encode($array);
-        } else if ($id != 0 && $nit != 0) {
-            $data = $this->aliados->buscarAliado($id, $nit);
-            array_push($array, $data);
-            return json_encode($array);
-        }
-    }
-    public function buscarAliadoRzn($id, $razonSocial)
-    {
-        $array = array();
-        if ($id != 0) {
-            $data = $this->aliados->buscarAliadoRzn($id, 0);
-            if (!empty($data)) {
-                array_push($array, $data);
-                return json_encode($array);
-            }
         } else if ($razonSocial != 0) {
-            $data = $this->aliados->buscarAliadoRzn(0, $razonSocial);
+            $data = $this->aliados->buscarAliado(0, 0, $razonSocial);
             array_push($array, $data);
             return json_encode($array);
         } else if ($id != 0 && $razonSocial != 0) {
-            $data = $this->aliados->buscarAliadoRzn($id, $razonSocial);
+            $data = $this->aliados->buscarAliado($id, 0, $razonSocial);
+            array_push($array, $data);
+            return json_encode($array);
+        }  else if ($id != 0 && $nit != 0) {
+            $data = $this->aliados->buscarAliado($id, $nit, 0);
             array_push($array, $data);
             return json_encode($array);
         }
     }
-
-    // public function eliminar($id, $estado)
-    // {
-    //     $aliados_ = $this->aliados->eliminaAliados($id, $estado);
-    //     return redirect()->to(base_url('/aliados'));
-    // }
-    // public function eliminados(){
-    //     $aliados = $this->aliados->select('*')->where('estado', 'I')->where('tipo_tercero', '56')->findAll();
-    //     $data = ['aliados' => $aliados];
-    //     echo view('/principal/sidebar');
-    //     echo view('/aliados/eliminados', $data);
-    // }
-
     public function cambiarEstado()
     {
         $id = $this->request->getPost('id');

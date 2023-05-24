@@ -59,7 +59,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
-                                        <select class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
+                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
                                             <option value="1" selected>Cedula de Ciudadania</option>
                                             <option>-- Seleccione --</option>
                                         </select>
@@ -87,21 +87,21 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
-                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                        <input type="email" name="email" class="form-control" id="email" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="rol" class="col-form-label">Tipo de Rol:</label>
-                                        <select class="form-select form-select form-control" name="rol" id="rol">
+                                        <select class="form-select form-select" name="rol" id="rol">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($roles as $r) { ?>
                                                 <option value="<?= $r['id_rol'] ?>"><?= $r['nombre'] ?></option>
@@ -192,7 +192,7 @@
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
@@ -208,7 +208,7 @@
                             </div>
                             <div class=" flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
-                                <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
+                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
                                         <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
@@ -217,7 +217,7 @@
                             </div>
                             <div class="flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
-                                <select class="form-select form-select form-control" name="prioridad" id="prioridad">
+                                <select class="form-select form-select" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
@@ -259,7 +259,7 @@
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
                 </div>
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
@@ -277,7 +277,7 @@
                             </div>
                             <div class="d-flex gap-2" style="width: 100%;">
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
-                                <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
+                                <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
@@ -567,7 +567,6 @@
             }).done(function(res) {
                 limpiarCampos()
                 $('#tituloModal').text('Editar')
-                $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_usuario'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -610,7 +609,6 @@
             guardarCorreo()
             guardarTelefono()
             $('#tituloModal').text('Agregar')
-            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
