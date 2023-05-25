@@ -8,6 +8,7 @@ use App\Models\ParamModel;
 use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TrabajadoresModel;
+use App\Models\EstanteriaModel;
 
 
 class Insumos extends BaseController
@@ -16,12 +17,14 @@ class Insumos extends BaseController
     protected $materiales;
     protected $vehiculos;
     protected $trabajadores;
+    protected $estanteria;
     public function __construct()
     {
         $this->categorias = new ParamModel();
         $this->materiales = new MaterialesModel();
         $this->vehiculos = new VehiculosModel();
         $this->trabajadores = new TrabajadoresModel();
+        $this->estanteria = new EstanteriaModel();
     }
     public function index()
     {
@@ -34,13 +37,14 @@ class Insumos extends BaseController
     public  function mostrarInsumo($id, $nombre, $icon, $idCate)
     {
         $materiales = $this->materiales->obtenerInsumo($id);
-        $vehiculos = $this->vehiculos->vehiculosInsumos();
         $trabajadores = $this->trabajadores->trabajadoresInsumos();
+        $vehiculos = $this->vehiculos->vehiculosInsumos();
+        $estanteria = $this->estanteria->traerEstantes();
         if (empty($materiales)) {
             $materiales = '';
         }
 
-        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos,"trabajadores" => $trabajadores];
+        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos,"trabajadores" => $trabajadores, "estanteria" => $estanteria];
         echo view('/principal/sidebar');
 
         echo view('/materiales/materiales', $data);
@@ -56,6 +60,8 @@ class Insumos extends BaseController
         $precioVenta = $this->request->getPost('precioVenta');
         $tipoMaterial = $this->request->getPost('tipoMaterial');
         $idCategoria = $this->request->getPost('idCategoria');
+        $estante = $this->request->getPost('estante');
+        $fila = $this->request->getPost('fila');
 
         $data = [
             'nombre' => $nombre,
@@ -63,7 +69,9 @@ class Insumos extends BaseController
             'precio_compra' => $precioCompra,
             'precio_venta' => $precioVenta,
             'tipo_material' => $tipoMaterial,
-            'categoria_material' => $idCategoria
+            'categoria_material' => $idCategoria,
+            'estante' => $estante,
+            'fila' => $fila
         ];
 
         $this->materiales->save($data);
