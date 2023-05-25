@@ -4,8 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
 use App\Models\TercerosModel;
-use App\Models\TelefonosModel;
-use App\Models\EmailModel;
 use App\Models\ParamModel;
 
 
@@ -14,14 +12,10 @@ class Clientes extends BaseController
 
     protected $clientes;
     protected $param;
-    protected $telefonos;
-    protected $correos;
     public function __construct()
     {
         $this->clientes = new TercerosModel();
         $this->param = new ParamModel();
-        $this->telefonos = new TelefonosModel();
-        $this->correos = new EmailModel();
     }
 
     public function obtenerClientes()
@@ -34,10 +28,7 @@ class Clientes extends BaseController
     {
         $tipoDoc = $this->param->obtenerTipoDoc();
         $tipoTel = $this->param->obtenerTipoTel(); 
-        $tel = $this->telefonos->obtenerTelefonoCliente(); 
-        $email = $this->correos->obtenerEmailCliente(); 
-
-        $data = [ 'tipoDoc' => $tipoDoc, 'tipoTele' => $tipoTel, 'telefono' => $tel, 'email' => $email];
+        $data = [ 'tipoDoc' => $tipoDoc, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/clientes/clientes', $data);
     }
