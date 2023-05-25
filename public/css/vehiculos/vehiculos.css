@@ -1,10 +1,10 @@
 :root {
   --azulBase: #161666;
   --rojoAcciones: #ef434d;
-  --grisInput: #ECEAEA; 
+  --grisInput: #ECEAEA;
 }
 
-.form-control{
+.form-control {
   background: var(--grisInput);
 }
 
@@ -13,11 +13,13 @@ table {
   border: 5px solid #161666;
   border-radius: 10px;
 }
+
+.modal-content {
+  border: 5px solid var(--azulBase) !important;
+}
 .body-R {
   width: 100%;
-  border: 5px solid var(--azulBase) !important;
   border-radius: 10px;
-  background-color: white;
 }
 
 /* -- BOTONES GENERALES -- */
@@ -25,6 +27,7 @@ table {
   background-color: var(--azulBase) !important;
   color: white !important;
 }
+
 .btnAccionF {
   background-color: var(--rojoAcciones) !important;
   color: white !important;
@@ -34,17 +37,19 @@ table {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   margin: 0px 0px !important;
 }
+
 div.dataTables_wrapper div.dataTables_length select {
   width: 65px;
   background-color: white;
 }
+
 div.dataTables_wrapper div.dataTables_filter input {
   background-color: white;
 }
 
 /* -- DIV OCULTAR COLUMNAS -- */
-.ocultar > a:is(.toggle-vis).active,
-.ocultar > a:is(.toggle-vis):hover {
+.ocultar>a:is(.toggle-vis).active,
+.ocultar>a:is(.toggle-vis):hover {
   border-radius: none !important;
   color: var(--azulBase);
   font-weight: 700;
@@ -54,19 +59,26 @@ div.dataTables_wrapper div.dataTables_filter input {
 /* -- MENSAJES CONFIRMACION -- */
 
 
-#msgOrden.invalido ,
+#msgOrden.invalido,
 #msgPlaca.invalido,
 #msgFecha.invalido,
 #spanValid.pasada,
 #spanCliente.invalido {
   color: red;
-  font-weight : 600;
+  font-weight: 600;
 }
+
 #spanValid.hoy {
-  font-weight : 600;
+  font-weight: 600;
   color: orange;
 }
+
 #spanValid.entregado {
-  font-weight : 600;
+  font-weight: 600;
   color: green;
+}
+
+/* --- DIV RESPONSABLE --- */
+#divResponsable {
+  display: flex;
 }

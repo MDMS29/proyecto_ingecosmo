@@ -73,7 +73,7 @@ class Usuarios extends BaseController
     {
         $session = session();
         $session->destroy();
-        return redirect()->to(base_url('/'));
+        return json_encode(1);
     }
     public function obtenerUsuarios()
     {

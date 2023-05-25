@@ -10,8 +10,6 @@ use App\Models\ParamModel;
 use App\Models\PropietariosModel;
 use App\Models\MoviEncModel;
 
-
-
 class Vehiculos extends BaseController
 {
     protected $vehiculos;
@@ -39,7 +37,7 @@ class Vehiculos extends BaseController
         $pdf = new \FPDF('P', 'mm', 'letter');
         $pdf->AddPage();
         $pdf->SetMargins(5, 10, 5);
-        $pdf->SetTitle('Orden de Trabajo - ' . $res['n_orden']);
+        $pdf->SetTitle(utf8_decode('Ordén de Trabajo - ' . $res['n_orden']));
         $pdf->SetY(5);
         $pdf->SetX(35);
         $pdf->image(base_url() . 'img/logo_empresa.png', 2, $mrg_lf, 50, 18, 'png');
@@ -268,6 +266,10 @@ class Vehiculos extends BaseController
         $idVechiculo = $this->request->getPost('id');
         $tipoCliente = $this->request->getPost('tipoCliente');
         $cliente = $this->request->getPost('cliente');
+
+        $nombreRespon = $this->request->getPost('nombreRespon');
+        $apellidoRespon = $this->request->getPost('apellidoRespon');
+
         $orden = $this->request->getPost('orden');
         $placa = $this->request->getPost('placa');
         $marca = $this->request->getPost('marca');
@@ -319,7 +321,9 @@ class Vehiculos extends BaseController
                 $dataPropie = [
                     'id_vehiculo' => $idVechiculo,
                     'id_tercero' => $cliente,
-                    'tipo_propietario' => $tipoCliente
+                    'tipo_propietario' => $tipoCliente,
+                    'nombres' => $tipoCliente != 5 ? $nombreRespon : null,
+                    'apellidos' => $tipoCliente != 5 ? $apellidoRespon : null 
                 ];
                 if (empty($res)) {
                     if ($this->propietario->save($dataPropie)) {
@@ -350,7 +354,9 @@ class Vehiculos extends BaseController
                 $dataPropie = [
                     'id_vehiculo' => $idVechiulo,
                     'id_tercero' => $cliente,
-                    'tipo_propietario' => $tipoCliente
+                    'tipo_propietario' => $tipoCliente,
+                    'nombres' => $tipoCliente != 5 ? $nombreRespon : null,
+                    'apellidos' => $tipoCliente != 5 ? $apellidoRespon : null 
                 ];
                 $this->movimiento->save($dataMovimiento); //Movimiento
                 if ($this->propietario->save($dataPropie)) {

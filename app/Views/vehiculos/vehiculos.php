@@ -39,12 +39,12 @@
     <div class="modal fade" id="agregarVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" hidden>
         <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="body-R">
                 <div class="modal-content">
                     <div class="modal-header d-flex align-items-center justify-content-between">
-                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
                         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
@@ -66,6 +66,33 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="column-gap-3 d-flex flex-column" style="width: 100%; display:none;" id="divResponsable">
+                                <div class="d-flex gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="nombreRespon" class="col-form-label">Nombres:</label>
+                                        <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
+                                        <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="tipoDocRes" class="col-form-label">Tipo Identificación:</label>
+                                        <select class="form-select form-select" name="tipoDocRes" id="tipoDocRes" disabled>
+                                            <option value="1" selected>Cedula de Ciudadania</option>
+                                            <option>-- Seleccione --</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="nIdentiRes" class="col-form-label">N° Identificación:</label>
+                                        <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="ordenTrabajo" class="col-form-label">Orden de Trabajo:</label>
@@ -89,8 +116,6 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nFabrica" class="col-form-label">No. Fabrica:</label>
                                     <select class="form-select form-control" name="nFabrica" id="nFabrica">
@@ -101,20 +126,22 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
                                         <label for="color" class="col-form-label">Color:</label>
                                         <input type="text" name="color" class="form-control" id="color" minlength="4">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="kms" class="col-form-label">Kilometraje:</label>
                                     <div class="d-flex">
                                         <input type="number" name="kms" class="form-control" id="kms">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="combustible" class="col-form-label">Combustible:</label>
                                     <select class="form-select form-control" name="combustible" id="combustible">
@@ -124,20 +151,18 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="estado" class="col-form-label">Estado:</label>
                                         <select class="form-select form-control" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
-                                                <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
+                                                <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : '' ?>><?= $estado['nombre'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
@@ -151,7 +176,7 @@
                                     <div class="d-flex">
                                         <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
-                                    <small id="msgFecha" class="invalido"></small>
+                                    <small id="msgFecha" class="normal">* La fecha salida debe ser mayor a la de entrada *</small>
                                 </div>
                             </div>
                         </form>
@@ -212,6 +237,11 @@
     var validPlaca = true
     var validFecha = true
 
+    //Limitar fecha de entrada y salida hasta la fecha actual
+    let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
+    let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
+    $('#fechaEntrada').attr('max', fechaLimite)
+
     function limpiarCampos(input) {
         $(`#${input}`).val('')
     }
@@ -246,12 +276,18 @@
                 data: null,
                 render: function(data, type, row) {
                     return `<span id="spanCliente" class=${row.estadoTercer == 'I' ? 'invalido' : ''} >
-                    ${row.tipo_tercero == 5 ? row.cliente : row.razon_social} ${row.estadoTercer == 'I' ? ' - Inactivo' : ''}
+                    ${row.tipo_tercero == 5 ? row.cliente : row.nombreAliado} ${row.estadoTercer == 'I' ? ' - Inactivo' : ''}
                     </span>`
                 }
             },
             {
-                data: "tipo_propietario"
+                data: null,
+                render: function(data, type, row) {
+                    return `<span id="spanCliente" class=${row.estadoTercer == 'I' ? 'invalido' : ''} >
+                    ${row.tipo_tercero == 5 ? 'Cliente' : row.razon_social} ${row.estadoTercer == 'I' ? ' - Inactivo' : ''}
+                    </span>`
+
+                }
             },
             {
                 data: "placa",
@@ -323,7 +359,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarVehiculo(' + data.id_vehiculo + ',2)" data-bs-target="#agregarVehiculo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Vehiculo"></button>' +
                         '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' +
-                        '<button class="btn btn-danger" title="Descargar Orden" onclick="pdf(' + data.id_vehiculo + ')"><i class="bi bi-filetype-pdf"></i></button>'
+                        '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_vehiculo + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
                     )
                 }
             }
@@ -332,7 +368,6 @@
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     });
-
     //Descargar PDF
     function pdf(id) {
         var ruta = "<?php echo base_url(); ?>vehiculos/pdf/" + id;
@@ -340,7 +375,6 @@
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');
     }
-
     //Tomar informacion del vehiculo
     function seleccionarVehiculo(id, tp) {
         if (tp == 2) {
@@ -360,6 +394,15 @@
                     $('#ordenTrabajo').removeAttr('disabled')
                     $('#ordenTrabajo').val(data['n_orden'])
                     $('#tipoCliente').val(data['tipo_propietario'])
+                    if ($('#tipoCliente').val() != 5) {
+                        $('#nombreRespon').val(data['nomRespon'])
+                        $('#apellidoRespon').val(data['apeRespon'])
+                        $('#divResponsable').addClass('d-flex')
+                    } else {
+                        $('#divResponsable').removeClass('d-flex')
+                        $('#nombreRespon').val('')
+                        $('#apellidoRespon').val('')
+                    }
                     $('#placa').val(data['placa'])
                     $('#placaHidden').val(data['placa'])
                     $('#cliente').val(data['cliente'])
@@ -370,8 +413,11 @@
                     $('#combustible').val(data['combustible'])
                     $('#estado').val(data['estado'])
                     $('#fechaEntrada').val(data['fecha_entrada'])
+                    $('#fechaSalida').removeAttr('min', fechaLimite)
                     $('#fechaSalida').val(data['fecha_salida'])
                     $('#tituloModal').text('Editar')
+                    $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
+                    $('#imgModal').attr('width', '25')
                     $('#btnGuardar').text('Actualizar')
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
@@ -392,6 +438,9 @@
             $('#id').val(id)
             $('#tipoCliente').val('')
             $('#cliente').val('')
+            $('#divResponsable').removeClass('d-flex')
+            $('#nombreRespon').val('')
+            $('#apellidoRespon').val('')
             $('#placa').val('')
             $('#marca').val('')
             $('#nFabrica').val('')
@@ -400,9 +449,13 @@
             $('#combustible').val('')
             $('#estado').val('')
             $('#fechaEntrada').val('')
+            $('#fechaSalida').attr('min', fechaLimite)
             $('#fechaSalida').val('')
             $('#btnGuardar').text('Guardar')
-            $('#tituloModal').text('Editar')
+            $('#tituloModal').text('Agregar')
+            $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
+            $('#imgModal').attr('width', '25')
+
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
         }
@@ -431,6 +484,11 @@
     $('#tipoCliente').on('change', function(e) {
         id = $('#tipoCliente').val()
         verTipoCliente(id, '')
+        if (id == 56) {
+            $('#divResponsable').addClass('d-flex')
+        } else {
+            $('#divResponsable').removeClass('d-flex')
+        }
     })
     //Verificacion de Orden de Trabajo y Placa del vehiculo 
     function verificarOrdenPlaca(url, data, input, tipo) {
@@ -479,15 +537,18 @@
     $('#fechaEntrada').on('change', function(e) {
         fechaSalida = $('#fechaSalida').val()
         fechaEntrada = $('#fechaEntrada').val()
+        $('#fechaSalida').attr('min', fechaEntrada)
+
         if (fechaSalida != '') {
             $('#msgFecha').text('')
             validFecha = true
-        } else if (fechaSalida >= fechaEntrada) {
+        } else
+        if (fechaSalida >= fechaEntrada) {
             $('#msgFecha').text('')
             validFecha = true
         } else {
             $('#msgFecha').text('* La fecha salida debe ser mayor a la de entrada *')
-            validFecha = false
+            validFecha = true
         }
     })
     $('#fechaSalida').on('change', function(e) {
@@ -497,8 +558,8 @@
         if (fechaEntrada == '') {
             $('#msgFecha').text('* Ingrese una fecha de entrada *')
             validFecha = false
-        } else if (fechaSalida >= fechaEntrada) {
-            console.log('fechaSalida mayor')
+        } else
+        if (fechaSalida >= fechaEntrada) {
             $('#msgFecha').text('')
             validFecha = true
         } else {
@@ -514,6 +575,8 @@
         orden = $('#ordenTrabajo').val()
         tipoCliente = $('#tipoCliente').val()
         cliente = $('#cliente').val()
+        nombreRespon = $('#nombreRespon').val()
+        apellidoRespon = $('#apellidoRespon').val()
         placa = $('#placa').val()
         marca = $('#marca').val()
         nFabrica = $('#nFabrica').val()
@@ -526,6 +589,9 @@
 
         if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        }
+        if (tipoCliente == 56 && [nombreRespon, apellidoRespon].includes('')) {
+            return mostrarMensaje('error', '¡El debe llenar informacion del responsable!')
         } else {
             $.ajax({
                 url: '<?= base_url('vehiculos/insertar') ?>',
@@ -536,6 +602,8 @@
                     orden,
                     tipoCliente,
                     cliente,
+                    nombreRespon,
+                    apellidoRespon,
                     placa,
                     marca,
                     nFabrica,

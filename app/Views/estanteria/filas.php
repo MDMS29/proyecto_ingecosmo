@@ -33,7 +33,7 @@
                                     <!-- INFORMACION DINAMICA -->
                                 </div>
                                 <div class="bloque2">
-                                    <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> Mover</button>
+                                    <button class="btn btnRedireccion" id="mover"  onclick="selectMateriales('<?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> Mover</button>
                                 </div>
                             </div>
                         </div>
@@ -58,30 +58,31 @@
 
 
                     <div class="tituloHeader">
-                        <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
-                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;">Agregar Insumos</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1>
                     </div>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX" onclick="limpiarCampos()"></button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">N° fila</label>
-                            <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
-                                <option selected>-- SELECCIONE UNA FILA --</option>
-                                <?php foreach ($filas as $fila) { ?>
-                                    <option value=<?php echo $fila['fila']; ?>><?php echo $fila['fila']; ?></option>
-                                <?php } ?>
-                            </select>
-                            <input hidden id="tp" name="tp">
-                            <input hidden id="id" name="id">
-                        </div>
-
+                        
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Nombre Producto</label>
                             <select class="form-select" id="nombreProd" name="nombreProd" style="background: #ECEAEA;">
                             </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Fila</label>
+                            <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
+                                <option selected>-- SELECCIONE UNA FILA --</option>
+                                <?php foreach ($filas as $fila) { ?>
+                                    <option id="<?php echo $fila['fila']; ?>F" value=<?php echo $fila['fila']; ?>>
+                                    <?php echo $fila['fila']; ?></option>
+                                <?php } ?>
+                            </select>
+                            <input hidden id="tp" name="tp">
+                            <input hidden id="id" name="id">
                         </div>
                     </form>
                 </div>
@@ -172,6 +173,7 @@
     var inputNombreProd = 0;
     var validIFila = true;
     var validINombreProd = true;
+    var filasDina = 0
 
     bloque = $('.bloqueTextoE')
     for (let i = 0; i < bloque.length; i++) {
@@ -189,22 +191,25 @@
         })
     }
 
-
-    categoria = $('#categoria').val()
-    $.ajax({
-        url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria,
-        type: 'POST',
-        dataType: 'json',
-        success: function(res) {
-            var cadena
-            cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
-            for (let i = 0; i < res.length; i++) {
-
-                cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
+    function selectMateriales(fila){
+        $.ajax({
+            url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria + '/' + fila,
+            type: 'POST',
+            dataType: 'json',
+            success: function(res) {
+                console.log(filasDina);
+                filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
+                var cadena
+                cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
+                for (let i = 0; i < res.length; i++) {
+    
+                    cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
+                }
+                $('#nombreProd').html(cadena)
             }
-            $('#nombreProd').html(cadena)
-        }
-    })
+        })
+    }
+    categoria = $('#categoria').val()
 
     $('#agregarFila').on('submit', function(e) {
         e.preventDefault();
@@ -220,7 +225,7 @@
             dataType: 'json',
             success: function(res) {
                 if (res == 1) {
-                    mostrarMensaje('success', '¡Se ha guardado el insumo en la fila!');
+                    mostrarMensaje('success', '¡Se ha movido el insumo correctamente!');
                     setTimeout(() => {
                         window.location.reload()
                     }, 2000)
@@ -233,6 +238,8 @@
     function limpiarCampos() {
         $('#fila').val('-- SELECCIONE UNA FILA --')
         $('#nombreProd').val('')
+        filasDina.removeAttr('disabled', '');
+
     }
 
     // ---------------------------validaciones---------------------------
@@ -279,7 +286,6 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-        console.log(rs[0].fila);
         $('#detallesModal').modal('show')
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);

@@ -5,13 +5,13 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo-b.png') ?>" />Historial Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">Responsable</a> - <a class="toggle-vis btn" data-column="1">Tipo Responsable</a> - <a class="toggle-vis btn" data-column="4">Proceso Taller</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">Tipo Responsable</a> - <a class="toggle-vis btn" data-column="1">Responsable</a> - <a class="toggle-vis btn" data-column="4">Proceso Taller</a>
         </div>
         <table class="table table-striped" id="tableHistorial" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Responsable</th>
                     <th scope="col" class="text-center">Tipo Responsable</th>
+                    <th scope="col" class="text-center">Responsable</th>
                     <th scope="col" class="text-center">Orden de Trabajo</th>
                     <th scope="col" class="text-center">Placa</th>
                     <th scope="col" class="text-center">Proceso Taller</th>
@@ -57,19 +57,21 @@
             method: "POST",
             dataSrc: "",
         },
+        // dom: 'Bfrtilp',
+        // buttons: [{
+        //     extend: 'excelHtml5',
+        //     text: '<i class="bi bi-file-earmark-spreadsheet"></i>Excel',
+        //     titleAttr: 'Exportar a Excel',
+        //     className: 'btn btn-success'
+        // }],
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    return `<span>
-                    ${row.tipo_tercero == 5 ? row.cliente : row.nombreAliado} 
-                    </span>`
-                }
+                data: "nom_tipo_terce"
             },
             {
                 data: null,
                 render: function(data, type, row) {
                     return `<span>
-                    ${row.tipo_tercero == 5 ? 'Cliente' : row.razon_social}
+                    ${row.tipo_tercero == 5 ? row.cliente : row.razon_social}
                     </span>`
                 }
             },
@@ -79,7 +81,6 @@
             {
                 data: "placa",
                 render: function(data, type, row) {
-                    console.log(row)
                     return '<span class="text-uppercase">' + row.placa + '</span>';
                 }
             },

@@ -34,18 +34,12 @@ class TelefonosModel extends Model
         return $data;
     }
 
-    public function obtenerTelefonoCliente()
+    public function TelefonoPrincipal($idUsuario, $tipoUsuario)
     {
-        $this->select('telefonos.numero as telefono');
-        $this->where('tipo_usuario', '5');
-        $data = $this->first();
-        return $data;
-    }
-
-    public function obtenerTelefonoProveedor()
-    {
-        $this->select('telefonos.numero as telefono');
-        $this->where('tipo_usuario', '8');
+        $this->select('numero');
+        $this->where('tipo_usuario', $tipoUsuario);
+        $this->where('id_usuario', $idUsuario);
+        $this->where('prioridad', 'P');
         $data = $this->first();
         return $data;
     }

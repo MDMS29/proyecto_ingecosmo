@@ -14,7 +14,7 @@ class PropietariosModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_vehiculo', 'id_tercero', 'tipo_propietario']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_vehiculo', 'id_tercero', 'tipo_propietario', 'nombres', 'apellidos', 'n_identificacion']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = ''; /*fecha automatica para la creacion */

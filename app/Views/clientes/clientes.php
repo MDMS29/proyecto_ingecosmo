@@ -36,12 +36,12 @@
 <!-- -----modal----------     -->
 <form autocomplete="off" id="formularioClientes">
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-ce    ered modal-xl">
-            <div class="body">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="body-R">
 
                 <div class="modal-content">
                     <div class="modal-header" id="modalHeader">
-                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
+                        <img src="<?php echo base_url('img/logo_empresa.png') ?>" width="100" />
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                             <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
@@ -143,7 +143,7 @@
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
-                            <div class=" flex-grow-1">
+                            <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
@@ -289,6 +289,7 @@
     let correos = [] //Correos del usuario.
     var validCorreo = true;
     var validIdent = true;
+    var validTel = true;
     var objCorreo = {
         id: 0,
         correo: '',
@@ -300,7 +301,6 @@
         tipo: '',
         prioridad: ''
     }
-
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
         e.preventDefault();
@@ -309,7 +309,6 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
-
     var botones = $(".ocultar a");
     botones.click(function() {
         if ($(this).attr('class').includes('active')) {
@@ -318,8 +317,6 @@
             $(this).addClass('active');
         }
     })
-
-
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (objCorreo.id != 0) {
@@ -339,7 +336,117 @@
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
     }
+    // ------------------------------ estructura Tabla ------------------------------------- 
+    // Obtener email principal cliente
+    var emailTable = [];
+    var telefonoTable = [];
+    $.ajax({
+        url: '<?= base_url('clientes/obtenerClientes') ?>',
+        method: "POST",
+        data: {
+            estado: 'A'
+        },
+        dataSrc: "",
+    }).done(function(res) {
+        let data = JSON.parse(res)
+        for (let i = 0; i < data.length; i++) {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/5',
+                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                dataType: 'json',
+                success: function(response) {
+                    return emailTable.push({
+                        idCliente: data[i].id_tercero,
+                        correo: response[0]?.correo || 'No se encontro correo'
+                    });
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
+                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                dataType: 'json',
+                success: function(response) {
+                    return telefonoTable.push({
+                        idCliente: data[i].id_tercero,
+                        telefono: response[0]?.numero || 'No se encontro telefono'
+                    });
+                }
+            });
+        }
+    })
 
+    // Tabla   
+    var tableClientes = $("#tableClientes").DataTable({
+        ajax: {
+            url: '<?= base_url('clientes/obtenerClientes') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        },
+        columns: [{
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'tipoDoc'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'direccion'
+            },
+            {
+                data: 'correo',
+                render: function(data, type, row) {
+                    arrayCorreo = emailTable.filter(correo => correo.idCliente == row.id_tercero)[0]?.correo
+                    return arrayCorreo
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    arrayTele = telefonoTable.filter(tel => tel.idCliente == row.id_tercero)[0]?.telefono
+                    return arrayTele
+                }
+            }, 
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
+
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Cliente"></button>'
+                    );
+                },
+            }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+
+    });
     //Insertar y editar clientes
     function seleccionarCliente(id, tp) {
         if (tp == 2) {
@@ -349,6 +456,7 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
             }).done(function(res) {
+                limpiarCampos()
                 $('#tituloModal').text('Editar')
                 $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
@@ -504,9 +612,7 @@
             });
         };
     })
-
     // ---------------------------pura identificacion tipo validacion---------------------------
-
     //Funcion para buscar cliente segun su identificacion
     function buscarClienteIdent(id, inputIden) {
         $.ajax({
@@ -524,7 +630,6 @@
             }
         })
     }
-
     //Identificar si el numero de identificacion no este registrado
     $('#nIdenti').on('input', function(e) {
         inputIden = $('#nIdenti').val()
@@ -548,16 +653,12 @@
             })
         }
     })
-
-
     // --------------------------------------puro telefono----------------------------------
     //Al escribir validar que el numero no este registrado
     $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
-
-
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
         const numero = $('#telefonoAdd').val()
@@ -616,8 +717,6 @@
         }
 
     })
-
-
     //Funcion para buscar el correo o el telefono
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
@@ -637,7 +736,6 @@
             }
         })
     }
-
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono() {
         $('#telefono').val(telefonos[0]?.numero)
@@ -662,7 +760,6 @@
         }
         $('#bodyTel').html(cadena)
     }
-
     //Editar telefono
     function editarTelefono(id) {
         const fila = $(`#${id}`);
@@ -682,7 +779,6 @@
         telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
         guardarTelefono()
     }
-
     //Eliminar telefono de la tabla
     function eliminarTel(id) {
         tp = $('#tp').val()
@@ -702,8 +798,6 @@
         telefonos = telefonos.filter(tel => tel.id != id)
         guardarTelefono() //Actualizar tabla
     }
-
-
     // --------------------------------------puro email----------------------------------
     //Al escribir validar que el correo no este registrado
     $('#correoAdd').on('input', function(e) {
@@ -759,7 +853,6 @@
         }
 
     })
-
     // Funcion para mostrar correos en la tabla.
     function guardarCorreo() {
         $('#email').val(correos[0]?.correo)
@@ -783,7 +876,6 @@
         }
         $('#bodyCorre').html(cadena)
     }
-
     //Editar Correo
     function editarCorreo(id) {
         const fila = $(`#${id}`);
@@ -821,110 +913,10 @@
     }
 
 
-
-
-    // ------------------------------ estructura Tabla ------------------------------------- 
-    var tableClientes = $("#tableClientes").DataTable({
-        ajax: {
-            url: '<?= base_url('clientes/obtenerClientes') ?>',
-            method: "POST",
-            data: {
-                estado: 'A'
-            },
-            dataSrc: "",
-
-        },
-        columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
-                },
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    // Combinar campos
-                    return data.nombre_p + " " + data.nombre_s;
-                }
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    // Combinar campos
-                    return data.apellido_p + " " + data.apellido_s;
-                }
-            },
-            {
-                data: 'tipoDoc'
-            },
-            {
-                data: 'n_identificacion'
-            },
-            {
-                data: 'direccion'
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    var email = '';
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + row.id_tercero + '/' + 5,
-                        dataType: 'json',
-                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                        success: function(response) {
-                            if (response.length > 0) {
-                                email = response[0][0].correo;
-                            }
-                        }
-                    });
-                    return email;
-                }
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    var telefono = '';
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 5,
-                        dataType: 'json',
-                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                        success: function(response) {
-                            if (response.length > 0) {
-                                telefono = response[0][0].numero;
-                            }
-                        }
-                    });
-                    return telefono;
-                }
-
-            }
-
-            , {
-                data: null,
-                render: function(data, type, row) {
-                    return (
-                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
-
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Cliente"></button>'
-                    );
-                },
-            }
-        ],
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        },
-
-    });
-
-
     //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmaP').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `EliminarCliente(${$(e.relatedTarget).data('href')})`)
     })
-
 
     function EliminarCliente(id) {
         $.ajax({
@@ -940,8 +932,6 @@
             tableClientes.ajax.reload(null, false)
         })
     }
-
-
     $('#btnNo').click(function() {
         $("#modalConfirmaP").modal("hide");
     });

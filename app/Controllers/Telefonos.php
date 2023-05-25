@@ -74,4 +74,11 @@ class Telefonos extends BaseController
             return json_encode(1);
         }
     }
+    public function TelefonoPrincipal($idUsuario, $tipoUsuario)
+    {
+        $array = array();
+        $data = $this->telefonos->TelefonoPrincipal($idUsuario, $tipoUsuario);
+        array_push($array, $data);
+        return json_encode($array);
+    }
 }

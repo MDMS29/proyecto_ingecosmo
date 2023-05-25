@@ -35,10 +35,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " style="color: white; margin-left: 10px;"><img title="Perfil"  style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
+                    <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " style="color: white; margin-left: 10px;"><img title="Perfil" style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
                     <hr class="nav-item dropdown" style="border-color: white">
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('trabajadores') ?>" style="color: white; margin-left: 10px;"><img  title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('trabajadores') ?>" style="color: white; margin-left: 10px;"><img title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /> Trabajadores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('clientes') ?>" style="color: white;  margin-left: 10px;"><img title="Clientes" style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /> Clientes</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
@@ -80,7 +80,7 @@
                 <ul id="allElement" class="list-unstyled components mb-5">
 
                     <li class="active">
-                        <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img  title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
+                        <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                             <p id="pa"><?= session('rol') ?></p>
                         </a>
                     </li>
@@ -149,12 +149,12 @@
                         </li>
                     <?php } ?>
                     <li>
-                         <a href="#" id="aa"><span><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                        <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                             <p id="pa">Historial</p>
-                        </a> 
+                        </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('salir') ?>" id="aa" class="salir"><span><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
+                        <a href="" id="aa" class="salir"><span><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
                             <p id="pa">Cerrar Sesion</p>
                         </a>
                     </li>
@@ -176,12 +176,26 @@
     </div>
 
     <script>
+        const informacion = JSON.parse(localStorage.getItem('usuario'));
+        if (informacion == null || informacion?.usuario == '') {
+            window.location.href = '<?= base_url('') ?>'
+        }
         $('.salir').on('click', function(e) {
             const informacion = {
                 usuario: '',
                 contrasena: ''
             };
             localStorage.setItem("usuario", JSON.stringify(informacion));
+            $.ajax({
+                type: 'POST',
+                url: '<?= base_url('usuarios/salir') ?>',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        window.location.href = '<?= base_url('') ?>'
+                    }
+                }
+            })
         })
         document.querySelectorAll(".menu").forEach(el => {
             el.addEventListener("click", () => {
@@ -197,5 +211,14 @@
                 showConfirmButton: false,
                 timer: 1500
             })
+        }
+        const formatearFecha = (fecha) => {
+            let fechaNueva = new Date(fecha)
+            const opciones = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+            }
+            return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
         }
     </script>

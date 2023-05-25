@@ -52,8 +52,8 @@
   <input type="text" name="tp" id="tp" hidden>
 
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content" id="modalContent" style="border: 5px solid #161666;  border-radius: 10px;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="modalContent">
         <div class="modal-header" id="modalHeader">
           <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
           <div id="agregar">
@@ -64,27 +64,51 @@
         </div>
         <div class="modal-body" id="modalAgregar2">
 
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Nombre:</label>
-            <div>
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Nombre:</label>
               <input class="form-control" id="nombre" name="nombre" placeholder="">
               <small id="msgAgregar" class="invalido2"></small>
             </div>
+
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
+              <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
-            <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+              <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
+            </div>
+
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
+              <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
-            <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
-          </div>
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 80%;">
+              <label for="exampleDataList" class="col-form-label">Estante:</label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
+                <option selected value="">-- Seleccione Un Estante--</option>
+                <?php foreach ($estanteria as $data) { ?>
+                  <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
 
-          <div class="mb-3">
-            <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
-            <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+            <div class="mb-3" style="width: 80%;">
+              <label for="exampleDataList" class="col-form-label">Fila:</label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
+              <option selected value="">-- Seleccione una fila--</option>
+                <option value="value1">A1</option>
+                <option value="value2">A2</option>
+                <option value="value3">A3</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
@@ -190,7 +214,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%">
               <label for="exampleDataList" class="col-form-label">Vehiculos:</label>
-              <select class="form-select form-select" name="vehiculos" id="vehiculos">
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="vehiculos" id="vehiculos">
                 <option id="vehiculo" selected="">-- Seleccione el Vehiculo--</option>
                 <?php foreach ($vehiculos as $data) { ?>
                   <option value="<?= $data['id_vehiculo'] ?>"><?= $data['placa'] ?></option>
@@ -200,8 +224,8 @@
 
             <div class="mb-3" style="width: 100%">
               <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
-              <select class="form-select form-select" name="trabajadores" id="trabajadores">
-                <option id="trabajadores" selected="">-- Seleccione un trabajador--</option>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
+                <option selected="">-- Seleccione un trabajador--</option>
                 <?php foreach ($trabajadores as $data) { ?>
                   <option value="<?= $data['id_trabajador'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
@@ -272,6 +296,7 @@
     $("#nombre1").val('');
     $("#nombre").val('');
     $("#precioC").val('');
+
     $("#precioV").val('');
     $("#cantidadA").val('');
 
@@ -281,8 +306,13 @@
     $("#cantidadActual").val('');
 
     $("#cantidadUsar").val('');
+    $("#fila").val('');
+    $("#estante1").val('');
+    $("#fila1").val('');
     $("#subtotal").val('');
-    $("#trabajadores").val('');
+    $("#trabajadores").val('-- Seleccione un trabajador--');
+    $("#vehiculos").val('-- Seleccione el Vehiculo--');
+
 
     $('#msgUsar').text('')
     $('#msgAgregar').text('')
@@ -316,20 +346,6 @@
         $("#fila").val(rs[0]['fila']);
 
 
-        $("#nombre1").attr('disabled', '');
-        $("#precioVenta").attr('disabled', '');
-        $("#precioCompra").attr('disabled', '');
-        $("#cantidadVendida").attr('disabled', '');
-        $("#estante").attr('disabled', '');
-        $("#fila").attr('disabled', '');
-        $("#cantidadActual").attr('disabled', '');
-        $("#btnUsar1").removeAttr('hidden', '');
-        $("#detallesModal").modal("show");
-        $("#btnEditar").text('Editar');
-        $("#btnEditar").attr('onclick', 'habilitar()');
-        $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
-
-
         precioVenta.style.background = '#e9ecef';
         nombre1.style.background = '#e9ecef';
         precioCompra.style.background = '#e9ecef';
@@ -361,7 +377,9 @@
     precioVenta = $("#precioV").val()
     cantidadActual = $("#cantidadA").val()
     idCategoria = $("#idCategoria").val()
-    if ([nombre, precioCompra, cantidadActual].includes("")) {
+    fila = $("#fila").val()
+    estante = 1
+    if ([nombre, precioCompra, cantidadActual, estante, fila].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -379,7 +397,9 @@
         precioVenta: precioVenta,
         cantidadActual: cantidadActual,
         tipoMaterial: 9,
-        idCategoria: idCategoria
+        idCategoria: idCategoria,
+        estante,
+        fila
       },
       success: function(e) {
         Swal.fire({

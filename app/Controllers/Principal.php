@@ -13,7 +13,6 @@ class Principal extends BaseController
 
     public function index()
     {
-
         echo view('login');
         echo view('/principal/footer');
     }
