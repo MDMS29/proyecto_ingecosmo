@@ -24,4 +24,15 @@ class Historial extends BaseController
         echo view('principal/sidebar');
         echo view('historial/historialVehiculos');
     }
+    public function materiales()
+    {
+        echo view('principal/sidebar');
+        echo view('historial/historialMateriales');
+    }
+
+    public function obtenerMovimientoEnc()
+    {
+        $res = $this->historial->historialMateriales();
+        return json_encode($res);
+    }
 }

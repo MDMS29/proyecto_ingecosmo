@@ -46,6 +46,13 @@ class FilasModel extends Model
       return $datos;
    }
 
+   public function traerFila()
+   {
+      $this->select('materiales.*, materiales.fila as numeroFila');
+       $datos = $this->findAll();
+       return $datos;
+   }
+
    public function traerMaterial($nombre)
    {
       $this->select('materiales.*, materiales.nombre as nombreMaterial');

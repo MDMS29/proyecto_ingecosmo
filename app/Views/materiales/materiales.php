@@ -103,10 +103,10 @@
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Fila:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
-              <option selected value="">-- Seleccione una fila--</option>
-                <option value="value1">A1</option>
-                <option value="value2">A2</option>
-                <option value="value3">A3</option>
+                <option selected value="">-- Seleccione una fila--</option>
+                <?php foreach ($fila as $fila) { ?>
+                  <option value="<?= $fila['numeroFila'] ?>"><?= $fila['numeroFila'] ?></option>
+                <?php } ?>
               </select>
             </div>
           </div>
@@ -334,7 +334,6 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);
@@ -377,9 +376,9 @@
     precioVenta = $("#precioV").val()
     cantidadActual = $("#cantidadA").val()
     idCategoria = $("#idCategoria").val()
-    fila = $("#fila").val()
-    estante = 1
-    if ([nombre, precioCompra, cantidadActual, estante, fila].includes("")) {
+    fila = $("#fila1").val()
+    estante = $("#estante1").val()
+    if ([nombre, precioCompra, cantidadActual, ].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -399,20 +398,19 @@
         tipoMaterial: 9,
         idCategoria: idCategoria,
         estante,
-        fila
+        fila: fila
       },
-      success: function(e) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          text: 'Se agrego material',
-          showConfirmButton: false,
-          timer: 1000
-        })
-        $("#id").val(0)
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000);
+      success: function(res) {
+        if (res == 1) {
+          mostrarMensaje('success', '¡Se agrego material!');
+          $("#id").val(0)
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000);
+        } else {
+          return mostrarMensaje('error', '¡No se pudo agregar el material!');
+        }
+
       }
     })
 
@@ -531,6 +529,7 @@
       dataType: "json",
       success: function(rs) {
         $("#idMaterial").val(rs[0]['id_material']);
+
         $("#nombreInsumo").val(rs[0]['nombre']);
         $("#cantidadExistente").val(rs[0]['cantidad_actual']);
         $("#PrecioDeVenta").val(rs[0]['precio_venta']);
@@ -566,6 +565,8 @@
   $("#formularioUsar").on("submit", function(e) {
     e.preventDefault()
     idMaterial = $("#idMaterial").val()
+    trabajador = $("#trabajadores").val()
+    vehiculo = $("#vehiculos").val()
     cantidadExistente = $("#cantidadExistente").val()
     cantidadUsar = $("#cantidadUsar").val()
     precioVenta = $("#PrecioDeVenta").val()
@@ -577,6 +578,8 @@
       url: '<?php echo base_url('insumos/usar') ?>',
       data: {
         idMaterial,
+        trabajador,
+        vehiculo,
         precioVenta,
         cantidadExistente,
         cantidadUsar,

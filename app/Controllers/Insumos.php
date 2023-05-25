@@ -9,6 +9,9 @@ use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TrabajadoresModel;
 use App\Models\EstanteriaModel;
+use App\Models\FilasModel;
+use App\Models\MoviEncModel;
+use App\Models\MoviDetModel;
 
 
 class Insumos extends BaseController
@@ -18,6 +21,9 @@ class Insumos extends BaseController
     protected $vehiculos;
     protected $trabajadores;
     protected $estanteria;
+    protected $fila;
+    protected $movEnc;
+    protected $movDet;
     public function __construct()
     {
         $this->categorias = new ParamModel();
@@ -25,6 +31,9 @@ class Insumos extends BaseController
         $this->vehiculos = new VehiculosModel();
         $this->trabajadores = new TrabajadoresModel();
         $this->estanteria = new EstanteriaModel();
+        $this->fila = new FilasModel();
+        $this->movEnc = new MoviEncModel();
+        $this->movDet = new MoviDetModel();
     }
     public function index()
     {
@@ -40,11 +49,12 @@ class Insumos extends BaseController
         $trabajadores = $this->trabajadores->trabajadoresInsumos();
         $vehiculos = $this->vehiculos->vehiculosInsumos();
         $estanteria = $this->estanteria->traerEstantes();
+        $fila = $this->fila->traerFila();
         if (empty($materiales)) {
             $materiales = '';
         }
 
-        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos,"trabajadores" => $trabajadores, "estanteria" => $estanteria];
+        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos, "trabajadores" => $trabajadores, "estanteria" => $estanteria, "fila" => $fila];
         echo view('/principal/sidebar');
 
         echo view('/materiales/materiales', $data);
@@ -62,6 +72,8 @@ class Insumos extends BaseController
         $idCategoria = $this->request->getPost('idCategoria');
         $estante = $this->request->getPost('estante');
         $fila = $this->request->getPost('fila');
+        $usuarioCrea = session('id');
+        $fechaActual = date('Y-m-d');
 
         $data = [
             'nombre' => $nombre,
@@ -75,6 +87,30 @@ class Insumos extends BaseController
         ];
 
         $this->materiales->save($data);
+        $idMaterial = $this->materiales->getInsertID();
+        $dataEnc = [
+            'tipo_movimiento' => 11,
+            'estado' => 'A',
+            'fecha_movimiento' => $fechaActual,
+            'usuario_crea' => $usuarioCrea
+        ];
+        if ($this->movEnc->save($dataEnc)) {
+            $idMovEnc = $this->movEnc->getInsertID();
+            $dataDet = [
+                'id_movimientoenc' => $idMovEnc,
+                'id_material' => $idMaterial,
+                'item' => 0,
+                'cantidad'=> $cantidadActual,
+                'costo' => $precioCompra,
+                'usuario_crea' => $usuarioCrea
+
+            ];
+            if ($this->movDet->save($dataDet)) {
+                return json_encode(1);
+            }else{
+                return json_encode(2);
+            }
+        }
 
         // return redirect()->to(base_url('/materiales'));
     }
@@ -113,6 +149,7 @@ class Insumos extends BaseController
     public function usar()
     {
         $id =  $this->request->getPost('idMaterial');
+        
         $res = $this->materiales->traerDetalles($id);
         $cantidadExistente = $this->request->getPost('cantidadExistente');
         $cantidadUsar = $this->request->getPost('cantidadUsar');
@@ -124,6 +161,8 @@ class Insumos extends BaseController
             'cantidad_actual' => $cantidadNueva,
             'cantidad_vendida' => $cantidadVendidaActual
         ];
+
+        
         if ($this->materiales->update($id, $data)) {
             return json_encode(1);
         }
