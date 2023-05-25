@@ -55,7 +55,7 @@
                         <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>" style="color: white; margin-left: 10px; "><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } else if (session('idRol') == 3) { ?>
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestosAdmin') ?>" style="color: white;  margin-left: 10px;"><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?>" style="color: white;  margin-left: 10px;"><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('insumos') ?>" style="color: white;  margin-left: 10px;"><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
@@ -149,7 +149,7 @@
                         </li>
                     <?php } ?>
                     <li>
-                        <a href="#" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                        <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                             <p id="pa">Historial</p>
                         </a>
                     </li>
