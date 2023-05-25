@@ -38,7 +38,7 @@ class MoviEncModel extends Model
         $this->where('movimiento_enc.tipo_movimiento', '57');
         $this->orWhere('movimiento_enc.tipo_movimiento', '58');
         $this->orWhere('movimiento_enc.tipo_movimiento', '59');
-        $this->orderBy('id_movimientoenc');
+        $this->orderBy('id_movimientoenc', 'desc');
         $data = $this->findAll();
         return $data;
     }

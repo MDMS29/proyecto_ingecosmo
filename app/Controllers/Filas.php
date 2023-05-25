@@ -37,6 +37,17 @@ class Filas extends BaseController
         // echo view('/materiales/materiales', $data);
     }
 
+    public  function materialesEstante($estante)
+    {
+        $material = $this->filas->obtenerFilas($estante);
+        if (empty($material)) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
+        // echo view('/materiales/materiales', $data);
+    }
+
     // public function mostrarMaterial($estante, $material){
     //     $titulo = $this->estanteria->titulo($estante);
     //     $data = ['titulo' => $titulo,'materiales'=> $material];
@@ -53,9 +64,9 @@ class Filas extends BaseController
         echo json_encode($returnData);
     }
 
-    public function obtenerMaterialesCate($categoria)
+    public function obtenerMaterialesCate($categoria, $fila)
     {
-        $materiales = $this->material->obtenerMaterialesCate($categoria);
+        $materiales = $this->material->obtenerMaterialesCate($categoria, $fila);
         if (!empty($materiales)) {
             return json_encode($materiales);
         }

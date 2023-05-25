@@ -101,9 +101,6 @@ class FilasModel extends Model
       return $datos;
    }
 
-
-
-
    //   public function obtenerMaterialesFila($id, $nombre){
    //      $this->where('fila', $id);
    //      $this->where('nombre', $nombre);

@@ -57,8 +57,7 @@
             method: "POST",
             dataSrc: "",
         },
-        columns: [
-            {
+        columns: [{
                 data: null,
                 render: function(data, type, row) {
                     return `<span>
@@ -80,6 +79,7 @@
             {
                 data: "placa",
                 render: function(data, type, row) {
+                    console.log(row)
                     return '<span class="text-uppercase">' + row.placa + '</span>';
                 }
             },
