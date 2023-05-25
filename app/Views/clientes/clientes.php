@@ -102,7 +102,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
-                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                        <input type="email" name="email" class="form-control" id="email" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>
@@ -340,42 +340,48 @@
     // Obtener email principal cliente
     var emailTable = [];
     var telefonoTable = [];
-    $.ajax({
-        url: '<?= base_url('clientes/obtenerClientes') ?>',
-        method: "POST",
-        data: {
-            estado: 'A'
-        },
-        dataSrc: "",
-    }).done(function(res) {
-        let data = JSON.parse(res)
-        for (let i = 0; i < data.length; i++) {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/5',
-                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                dataType: 'json',
-                success: function(response) {
-                    return emailTable.push({
-                        idCliente: data[i].id_tercero,
-                        correo: response[0]?.correo || 'No se encontro correo'
-                    });
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
-                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                dataType: 'json',
-                success: function(response) {
-                    return telefonoTable.push({
-                        idCliente: data[i].id_tercero,
-                        telefono: response[0]?.numero || 'No se encontro telefono'
-                    });
-                }
-            });
-        }
-    })
+
+    function recargaTelCorreo() {
+        $.ajax({
+            url: '<?= base_url('clientes/obtenerClientes') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        }).done(function(res) {
+            let data = JSON.parse(res)
+            for (let i = 0; i < data.length; i++) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/5',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        return emailTable.push({
+                            idCliente: data[i].id_tercero,
+                            correo: response[0]?.correo || 'No se encontro correo'
+                        });
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        return telefonoTable.push({
+                            idCliente: data[i].id_tercero,
+                            telefono: response[0]?.numero || 'No se encontro telefono'
+                        });
+                    }
+                });
+            }
+        })
+    }
+    recargaTelCorreo()
+
+
 
     // Tabla   
     var tableClientes = $("#tableClientes").DataTable({
@@ -430,7 +436,7 @@
                     arrayTele = telefonoTable.filter(tel => tel.idCliente == row.id_tercero)[0]?.telefono
                     return arrayTele
                 }
-            }, 
+            },
             {
                 data: null,
                 render: function(data, type, row) {
@@ -593,7 +599,10 @@
                 }
             }).done(function(data) {
                 $('#agregarCliente').modal('hide')
-                tableClientes.ajax.reload(null, false); //Recargar tabla
+                recargaTelCorreo()
+                setTimeout(() => {
+                    tableClientes.ajax.reload(null, false); //Recargar tabla
+                }, 2000)
                 ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
