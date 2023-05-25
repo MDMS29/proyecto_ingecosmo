@@ -10,8 +10,6 @@ use App\Models\ParamModel;
 use App\Models\PropietariosModel;
 use App\Models\MoviEncModel;
 
-
-
 class Vehiculos extends BaseController
 {
     protected $vehiculos;

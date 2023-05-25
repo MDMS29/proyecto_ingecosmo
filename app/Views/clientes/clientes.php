@@ -143,7 +143,7 @@
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
-                            <div class=" flex-grow-1">
+                            <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
