@@ -39,7 +39,7 @@
     <div class="modal fade" id="agregarVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" hidden>
         <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="body-R">
                 <div class="modal-content">
                     <div class="modal-header d-flex align-items-center justify-content-between">
@@ -66,16 +66,33 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="column-gap-3" style="width: 100%; display:none;" id="divResponsable">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="nombreRespon" class="col-form-label">Nombres:</label>
-                                    <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
+
+                            <div class="column-gap-3 d-flex flex-column" style="width: 100%; display:none;" id="divResponsable">
+                                <div class="d-flex gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="nombreRespon" class="col-form-label">Nombres:</label>
+                                        <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
+                                        <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
+                                    </div>
                                 </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
-                                    <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
+                                <div class="d-flex gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="tipoDocRes" class="col-form-label">Tipo Identificación:</label>
+                                        <select class="form-select form-select" name="tipoDocRes" id="tipoDocRes" disabled>
+                                            <option value="1" selected>Cedula de Ciudadania</option>
+                                            <option>-- Seleccione --</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="nIdentiRes" class="col-form-label">N° Identificación:</label>
+                                        <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes">
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="ordenTrabajo" class="col-form-label">Orden de Trabajo:</label>
@@ -140,7 +157,7 @@
                                         <select class="form-select form-control" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
-                                                <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : '' ?> ><?= $estado['nombre'] ?></option>
+                                                <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : '' ?>><?= $estado['nombre'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -525,7 +542,7 @@
         if (fechaSalida != '') {
             $('#msgFecha').text('')
             validFecha = true
-        } else 
+        } else
         if (fechaSalida >= fechaEntrada) {
             $('#msgFecha').text('')
             validFecha = true
@@ -541,7 +558,7 @@
         if (fechaEntrada == '') {
             $('#msgFecha').text('* Ingrese una fecha de entrada *')
             validFecha = false
-        } else 
+        } else
         if (fechaSalida >= fechaEntrada) {
             $('#msgFecha').text('')
             validFecha = true
