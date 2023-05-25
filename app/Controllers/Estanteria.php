@@ -21,7 +21,7 @@ class Estanteria extends BaseController
     public function index()
     {
         $estantes = $this->estantes->obtenerAllEstantes();
-
+        
         $data = ['estantes' => $estantes];
         echo view('/principal/sidebar');
         echo view('/estanteria/estanteria', $data);
@@ -30,8 +30,9 @@ class Estanteria extends BaseController
     public  function mostrarEstante($id, $estante, $id_material)
     {
         $titulo = $this->estantes->titulo($estante);
+        $filas = $this->filas->obtenerFilas($estante);
         $estantes = $this->estantes->obtenerEstantes($id);
-        $data = ['data' => $estantes, 'titulo' => $titulo];
+        $data = ['data' => $estantes, 'titulo' => $titulo, 'filas' => $filas];
         echo view('/principal/sidebar');
         echo view('/estanteria/estanteria', $data);
         return json_encode($estantes);

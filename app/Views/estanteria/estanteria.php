@@ -20,19 +20,19 @@
                                     </span>
                                 </p>
                             </div>
-                            <a onclick="redireccion()"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
-                            
-                            <a href="<?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                            <a onclick="redireccion(<?php echo $dato['id'] ?>)" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                         </div>
                     </div>
                 <?php } ?>
             </div>
         </div>
 
+    </div>
+    <div class="bloqueFooter">
         <div class="footer-page">
             <!-- <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="< ?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button> -->
-
-            <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
+    
+            <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
         </div>
     </div>
 
@@ -88,6 +88,9 @@
     </div>
 </form>
 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     cards = $('.bloqueTextoE')
     for (let i = 0; i < cards.length; i++) {
@@ -139,20 +142,22 @@
         });
     });
 
-    function redireccion(){
-        if (empty($data)) {
-            mostrarMensajeVacio()
-        } else {
-            $(".btnVer").attr("href=<?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>","")
-        }
-    }
 
-    function mostrarMensajeVacio(){
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No se encuentran filas con productos!'
-        })
+    function redireccion(id) {
+        // $(".btnVer").attr("href","< ?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>")
+        $.ajax({
+            url: "<?php echo base_url('/filas/materialesEstante/') ?>" + id,
+            type: 'POST',
+            dataType: 'json',
+            processData: false, // Evitar que jQuery procese los datos
+            contentType: false, // Evitar que jQuery establezca el tipo de contenido
+            success: function(res) {
+                if (res == 1) {
+                    return mostrarMensaje('warning', '¡Este estante no tiene materiales!')
+                } else {
+                    window.location.href = "<?php echo base_url('filas/mostrarFila/') ?>" + id
+                }
+            }
+        });
     }
 </script>

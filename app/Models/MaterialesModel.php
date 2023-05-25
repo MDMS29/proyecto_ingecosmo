@@ -59,8 +59,6 @@ class MaterialesModel extends Model{
         return $datos;
     }
     
-
-        
     public function traerMateriales($id_material){
         $this->select('materiales.*');
         $this->where('id_material', $id_material);
