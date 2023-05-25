@@ -41,7 +41,10 @@
                     <div class="modal-header flex align-items-center gap-3">
                         <div class="d-flex" style="width: 100%; justify-content: space-between; align-items: center;">
                             <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
-                            <h1 class="modal-title fs-5 d-flex align-items-center gap-2"><img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="25"> <span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
+                            <h1 class="modal-title fs-5 d-flex align-items-center gap-2">
+                                <img id="imgModal" src="" width="25" />
+                                <span id="tituloModal"><!-- TEXTO DINAMICO--></span>
+                            </h1>
                             <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                     </div>
@@ -190,25 +193,25 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
-                <div class="modal-header flex justify-content-between align-items-center">
+                <div class="modal-header d-flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
-                            <div class=" flex-grow-1">
+                            <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
-                            <div class=" flex-grow-1">
+                            <div class="flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
-                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
                                         <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
@@ -217,7 +220,7 @@
                             </div>
                             <div class="flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
-                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
@@ -259,7 +262,7 @@
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR CORREO</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
                 </div>
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
@@ -453,7 +456,7 @@
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (accion == 3) {
-            if ($('#tp').val() == 2) {
+            if (telefonos.length != 0) {
                 principalT = telefonos.filter(tel => tel.prioridad == 'P')
                 if (principalT.length == 0) {
                     return mostrarMensaje('error', '¡Debe tener un telefono principal!')
@@ -467,7 +470,7 @@
             }
         }
         if (accion == 4) {
-            if ($('#tp').val() == 2) {
+            if (correos.length != 0) {
                 principalC = correos.filter(correo => correo.prioridad == 'P')
                 if (principalC.length == 0) {
                     return mostrarMensaje('error', '¡Debe tener un correo principal!')
@@ -600,6 +603,7 @@
                         guardarCorreo()
                     }
                 })
+                $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
             })
         } else {
             //Insertar datos
@@ -626,6 +630,7 @@
             $('#divContras2').removeAttr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
+            $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
         }
     }
     //Funcion para cambiar contraseña
@@ -1065,7 +1070,7 @@
                 dataType: 'json',
                 success: function(data) {
                     if (data == 1) {
-                        mostrarMensaje('success', '¡Se ha eliminado el correo!!')
+                        mostrarMensaje('success', '¡Se ha eliminado el correo!')
                     }
                 }
             })

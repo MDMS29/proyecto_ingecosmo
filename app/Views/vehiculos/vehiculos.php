@@ -140,7 +140,7 @@
                                         <select class="form-select form-control" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
-                                                <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
+                                                <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : '' ?> ><?= $estado['nombre'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -159,7 +159,7 @@
                                     <div class="d-flex">
                                         <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
-                                    <small id="msgFecha" class="invalido"></small>
+                                    <small id="msgFecha" class="normal">* La fecha salida debe ser mayor a la de entrada *</small>
                                 </div>
                             </div>
                         </form>
@@ -219,6 +219,11 @@
     var validOrden = true
     var validPlaca = true
     var validFecha = true
+
+    //Limitar fecha de entrada y salida hasta la fecha actual
+    let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
+    let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
+    $('#fechaEntrada').attr('max', fechaLimite)
 
     function limpiarCampos(input) {
         $(`#${input}`).val('')
@@ -376,7 +381,7 @@
                         $('#nombreRespon').val(data['nomRespon'])
                         $('#apellidoRespon').val(data['apeRespon'])
                         $('#divResponsable').addClass('d-flex')
-                    }else{
+                    } else {
                         $('#divResponsable').removeClass('d-flex')
                         $('#nombreRespon').val('')
                         $('#apellidoRespon').val('')
@@ -391,6 +396,7 @@
                     $('#combustible').val(data['combustible'])
                     $('#estado').val(data['estado'])
                     $('#fechaEntrada').val(data['fecha_entrada'])
+                    $('#fechaSalida').removeAttr('min', fechaLimite)
                     $('#fechaSalida').val(data['fecha_salida'])
                     $('#tituloModal').text('Editar')
                     $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
@@ -426,6 +432,7 @@
             $('#combustible').val('')
             $('#estado').val('')
             $('#fechaEntrada').val('')
+            $('#fechaSalida').attr('min', fechaLimite)
             $('#fechaSalida').val('')
             $('#btnGuardar').text('Guardar')
             $('#tituloModal').text('Agregar')
@@ -460,7 +467,7 @@
     $('#tipoCliente').on('change', function(e) {
         id = $('#tipoCliente').val()
         verTipoCliente(id, '')
-        if (id != 5) {
+        if (id == 56) {
             $('#divResponsable').addClass('d-flex')
         } else {
             $('#divResponsable').removeClass('d-flex')
@@ -513,15 +520,18 @@
     $('#fechaEntrada').on('change', function(e) {
         fechaSalida = $('#fechaSalida').val()
         fechaEntrada = $('#fechaEntrada').val()
+        $('#fechaSalida').attr('min', fechaEntrada)
+
         if (fechaSalida != '') {
             $('#msgFecha').text('')
             validFecha = true
-        } else if (fechaSalida >= fechaEntrada) {
+        } else 
+        if (fechaSalida >= fechaEntrada) {
             $('#msgFecha').text('')
             validFecha = true
         } else {
             $('#msgFecha').text('* La fecha salida debe ser mayor a la de entrada *')
-            validFecha = false
+            validFecha = true
         }
     })
     $('#fechaSalida').on('change', function(e) {
@@ -531,8 +541,8 @@
         if (fechaEntrada == '') {
             $('#msgFecha').text('* Ingrese una fecha de entrada *')
             validFecha = false
-        } else if (fechaSalida >= fechaEntrada) {
-            console.log('fechaSalida mayor')
+        } else 
+        if (fechaSalida >= fechaEntrada) {
             $('#msgFecha').text('')
             validFecha = true
         } else {
@@ -563,7 +573,7 @@
         if ([orden, cliente, placa, marca, nFabrica, color, kms, combustible, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
-        if (tipoCliente != 5 && [nombreRespon, apellidoRespon].includes('')) {
+        if (tipoCliente == 56 && [nombreRespon, apellidoRespon].includes('')) {
             return mostrarMensaje('error', '¡El debe llenar informacion del responsable!')
         } else {
             $.ajax({
