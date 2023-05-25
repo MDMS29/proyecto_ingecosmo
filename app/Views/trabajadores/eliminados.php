@@ -27,18 +27,19 @@
 
 
 <div class="modal fade" id="verTrabajador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <input type="text" name="id" id="id" hidden>
+    <input type="text" name="id" id="id" value="0" hidden>
     <input type="text" name="tp" id="tp" hidden>
     <div class="modal-dialog modal-xl">
         <div class="body">
-            <div class="logo">
-                <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
-            </div>
             <div class="modal-content">
-                <div class="modal-header flex">
-                    <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
+                <div class="modal-header d-flex align-items-center justify-content-between">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        </div>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
                 <div class="modal-body">
                     <form>
                         <div class="d-flex column-gap-3" style="width: 100%">
@@ -60,7 +61,6 @@
                                 <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
                                 <input type="text" name="apellido_s" class="form-control" id="apellidoS" disabled>
                             </div>
-
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
@@ -79,28 +79,15 @@
                                     <small id="msgDoc" class="invalido"></small>
                                 </div>
                             </div>
-
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="telefono" class="col-form-label">Telefono:</label>
-                                <div class="d-flex">
-                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
-                                </div>
+                                <label for="direccion" class="col-form-label">Direccion:</label>
+                                <input type="text" name="direccion" class="form-control" id="direccion" disabled>
                             </div>
-                            <div class="mb-3" style="width: 100%">
-                                <label for="email" class="col-form-label">Email:</label>
-                                <div class="d-flex">
-                                    <input type="email" name="email" class="form-control" id="email" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <div class="mb-3">
-                                    <label for="cargo" class="col-form-label">Cargo:</label>
+                                    <label for="rol" class="col-form-label">Tipo de Cargo:</label>
                                     <select class="form-select form-select" name="cargo" id="cargo" disabled>
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($cargos as $c) { ?>
@@ -109,15 +96,28 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="direccion" class="col-form-label">Direccion:</label>
-                                <input type="text" name="direccion" class="form-control" id="direccion" disabled>
+                                <label for="telefono" class="col-form-label">Telefono:</label>
+                                <div class="d-flex">
+                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" class="btn" style="border:none;background-color:gray;color:white;" disabled>+</button>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <div class="d-flex">
+                                    <input type="email" name="email" class="form-control" id="email" disabled>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" class="btn" style="border:none;background-color:gray;color:white;" disabled>+</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                 </div>
             </div>
         </div>
@@ -226,10 +226,10 @@
 
 <script>
     var ContadorPRC = 0;
-    let telefonos = [] //Telefonos del usuario.
-    let correos = [] //Correos del usuario.
+    let telefonos = [] //Telefonos del trabajador.
+    let correos = [] //Correos del Trabajador.
 
-    // Tabla de usuarios
+    // Tabla de Trabajadores
     var tableTrabajadores = $("#tableTrabajadores").DataTable({
         ajax: {
             url: '<?= base_url('trabajadores/obtenerTrabajadores') ?>',
@@ -294,7 +294,7 @@
             url: "<?php echo base_url('srchTra/') ?>" + id + "/" + 0,
             dataType: 'json',
             success: function(res) {
-                $('#tituloModal').text('Editar Trabajador')
+                $('#tituloModal').text('Ver Trabajador')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_trabajador'])
                 $('#nombreP').val(res[0]['nombre_p'])

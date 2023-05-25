@@ -10,6 +10,8 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -24,46 +26,64 @@
 
 
 <div class="modal fade" id="verAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <input type="text" name="id" id="id" hidden>
-    <input type="text" name="tp" id="tp" hidden>
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog" id="modalProveedor">
         <div class="body">
-            <div class="logo">
-                <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
-            </div>
-            <div class="modal-content">
-                <div class="modal-header flex">
-                    <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+            <div class="modal-content" id="modalContentP">
+                <div class="modal-header d-flex align-items-center justify-content-between">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                    </div>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="textoP" style="margin:0;">Razon Social:</label>
-                            <input class="form-control inputP" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" disabled>
-                            <small id="msgRaSo" class="invalido"></small>
-                            <input hidden id="tp" name="tp">
-                            <input hidden id="id" name="id">
+                        <div class="modalAgregarP">
+                            <div class="mb-3" style="width: 100%">
+                                <label for="razon_social" class="col-form-label">Razon Social:</label>
+                                <input type="text" name="RazonSocial" class="form-control inputP" id="RazonSocial" min='1' max='300' disabled>
+                                <small id="msgRaSo" class="invalido"></small>
+                                <input hidden id="tp" name="tp">
+                                <input hidden id="id" name="id">
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <div class="">
+                                    <label for="nit" class="col-form-label">NIT:</label>
+                                    <input type="number" name="nit" class="form-control" id="nit" minlength="9" maxlength="11" disabled>
+                                    <small id="msgNit" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="telefono" class="col-form-label">Telefono:</label>
+                                <div class="d-flex">
+                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono" disabled>+</button>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <div class="d-flex">
+                                    <input type="email" name="email" class="form-control" id="email" disabled>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo" disabled>+</button>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="width: 100%">
+                                <div class="">
+                                    <label for="direccion" class="col-form-label">Direccion:</label>
+                                    <input type="text" name="direccion" class="form-control" id="direccion" disabled>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label style="margin:0;" for="message-text" class="col-form-label textoP">NIT:</label>
-                            <input type="number" class="form-control inputP" id="nit" name="nit" disabled>
-                            <small id="msgDoc" class="invalido"></small>
-                        </div>
-                        <div class="mb-3" style="width: 100%">
-                            <label for="direccion" class="col-form-label">Direccion:</label>
-                            <input type="text" name="direccion" class="form-control" id="direccion" disabled>
-                        </div>
+                    </form>
                 </div>
-                </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                    <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Modal Confirma Reestablecer -->
@@ -97,6 +117,8 @@
 
 <script>
     var ContadorPRC = 0;
+    let telefonos = [] //Telefonos del Aliados.
+    let correos = [] //Correos del Aliados.
     // Tabla de Aliados
     var tableAliados = $("#tableAliados").DataTable({
         ajax: {
@@ -126,6 +148,42 @@
             {
                 data: null,
                 render: function(data, type, row) {
+                    var email = '';
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + row.id_tercero + '/' + 56,
+                        dataType: 'json',
+                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                        success: function(response) {
+                            if (response.length > 0) {
+                                email = response[0][0].correo;
+                            }
+                        }
+                    });
+                    return email;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    var telefono = '';
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 56,
+                        dataType: 'json',
+                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                        success: function(response) {
+                            if (response.length > 0) {
+                                telefono = response[0][0].numero;
+                            }
+                        }
+                    });
+                    return telefono;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarAliado(' + data.id_tercero + ')" data-bs-target="#verAliado" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
                         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Aliado" width="20"></button>'
@@ -142,19 +200,78 @@
         //Actualizar datos
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + 0,
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0 + '/' + 0,
             dataType: 'json',
             success: function(res) {
-                $('#tituloModal').text('Editar Aliado')
+                $('#tituloModal').text('Ver Aliado')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_tercero'])
                 $('#RazonSocial').val(res[0]['razon_social'])
                 $('#nit').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
                 $('#btnGuardar').text('Actualizar')
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 56,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        mostrarTelefonos()
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 56,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        mostrarCorreo()
+                    }
+                })
             }
         })
     }
+    // Funcion para mostrar correos en la tabla.
+    function mostrarCorreo() {
+        principal = correos.filter(correo => correo.prioridad == 'P')
+        $('#email').val(principal[0]?.correo)
+        var cadena
+        if (correos.length == 0) {
+            cadena += ` <tr class="text-center">
+                            <td colspan="3">NO HAY CORREOS</td>
+                        </tr>`
+            $('#bodyCorre').html(cadena)
+        } else {
+            for (let i = 0; i < correos.length; i++) {
+                cadena += ` <tr class="text-center">
+                                <td>${correos[i].correo}</td>
+                                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
+                            </tr>`
+            }
+        }
+        $('#bodyCorre').html(cadena)
+    }
+    // Funcion para mostrar telefonos en la tabla.
+    function mostrarTelefonos() {
+        principal = telefonos.filter(tel => tel.prioridad == 'P')
+        $('#telefono').val(principal[0]?.numero)
+        var cadena
+        if (telefonos.length == 0) {
+            cadena += ` <tr class="text-center">
+            <td colspan="3">NO HAY TELEFONOS</td>
+            </tr>`
+            $('#bodyTel').html(cadena)
+        } else {
+            for (let i = 0; i < telefonos.length; i++) {
+                cadena += ` <tr class="text-center">
+                                <td>${telefonos[i].numero}</td>
+                                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
+                            </tr>`
+            }
+        }
+        $('#bodyTel').html(cadena)
+    }
+
     //Cambiar estado de "Inactivo" a "Activo"
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `ReestablecerAliado(${$(e.relatedTarget).data('href')})`)

@@ -11,7 +11,8 @@
             <div class="contenidoCardF">
 
                 <?php if (empty($data)) { ?>
-                    <div class="contenidoCardF">
+
+                    <div class="contenidoCardF">                                                                                                                                        
                         <p>No se encuentran filas - <?php echo $titulo['nombre'] ?></p>
                     </div>
                 <?php } else { ?>
@@ -47,8 +48,6 @@
         </div>
     </div>
 </div>
-
-
 
 <form autocomplete="off" id="agregarFila">
     <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,6 +161,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

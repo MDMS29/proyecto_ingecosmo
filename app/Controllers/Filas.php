@@ -37,6 +37,8 @@ class Filas extends BaseController
         // echo view('/materiales/materiales', $data);
     }
 
+
+
     // public function mostrarMaterial($estante, $material){
     //     $titulo = $this->estanteria->titulo($estante);
     //     $data = ['titulo' => $titulo,'materiales'=> $material];
@@ -100,4 +102,6 @@ class Filas extends BaseController
         $res = $this->filas->contadorFilas($idEstante);
         return json_encode($res);
     }
+
+
 }

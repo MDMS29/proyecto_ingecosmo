@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="6">Direccion</a>
         </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
@@ -37,9 +37,12 @@
         <div class="modal-dialog modal-xl">
             <div class="body">
                 <div class="modal-content">
-                    <div class="modal-header d-flex align-items-center justify-content-between">
+                    <div class="modal-header ">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <img  id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        </div>
                         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
@@ -69,7 +72,7 @@
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
                                         <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                            <option value="1" selected>Cedula de Ciudadania</option>
+                                            <option  value="1" selected>Cedula de Ciudadania</option>
                                             <option>-- Seleccione --</option>
                                         </select>
                                     </div>
@@ -161,7 +164,7 @@
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
                                 <select class="form-select form-select" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
-                                    <option value="P">Primaria</option>
+                                    <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
                                 </select>
                             </div>
@@ -186,7 +189,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -397,7 +400,7 @@
                 return mostrarMensaje('error', '¡Debe tener un telefono principal!')
             } else {
                 $('#agregarTelefono').modal('hide')
-                $('#agregarAliado').modal('show')
+                $('#agregarTrabajador').modal('show')
             }
         }
         if (accion == 4) {
@@ -406,7 +409,7 @@
                 return mostrarMensaje('error', '¡Debe tener un correo principal!')
             } else {
                 $('#agregarCorreo').modal('hide')
-                $('#agregarAliado').modal('show')
+                $('#agregarTrabajador').modal('show')
             }
         }
         if (objCorreo.id != 0) {
@@ -452,13 +455,14 @@
 
             }).done(function(res) {
                 $('#tituloModal').text('Editar Trabajador')
+                $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_trabajador'])
                 $('#nombreP').val(res[0]['nombre_p'])
                 $('#nombreS').val(res[0]['nombre_s'])
                 $('#apellidoP').val(res[0]['apellido_p'])
                 $('#apellidoS').val(res[0]['apellido_s'])
-                $('#tipoDoc').val(1)
+                $('#tipoDoc').attr('disabled', "")
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
                 $('#cargo').val(res[0]['id_cargo'])
@@ -490,6 +494,7 @@
             guardarCorreo()
             guardarTelefono()
             $('#tituloModal').text('Agregar Trabajador')
+            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')
@@ -556,6 +561,8 @@
         apellidoS = $('#apellidoS').val()
         tipoDoc = $('#tipoDoc').val()
         nIdenti = $('#nIdenti').val()
+        telefono = $('#telefono').val()
+        correo = $('#correo').val()
         direccion = $('#direccion').val()
         cargo = $('#cargo').val()
         //Control de campos vacios
@@ -755,7 +762,7 @@
                                     <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>
                             </tr>`
-            }   
+            }
         }
         $('#bodyTel').html(cadena)
     }
@@ -808,7 +815,7 @@
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo+=1}e` : editCorreo,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `${contadorCorreo+=1}e` : editCorreo,
             correo,
             prioridad
         }
@@ -865,7 +872,7 @@
             for (let i = 0; i < correos.length; i++) {
                 cadena += ` <tr class="text-center" id='${correos[i].id}'>
                                 <td>${correos[i].correo}</td>
-                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">

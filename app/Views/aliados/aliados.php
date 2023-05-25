@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="1">Razon Social</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a>  - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Email</a> - <a class="toggle-vis btn" data-column="5">Telefono</a>
         </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
@@ -13,6 +13,8 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -29,15 +31,16 @@
 
 <!-- -----modal----------     -->
 <form method="POST" id="formularioAliados" autocomplete="off">
-
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" id="modalProveedor">
             <div class="body">
                 <div class="modal-content" id="modalContentP">
                     <div class="modal-header d-flex align-items-center justify-content-between">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
-                        <!-- <img id="logoModal" src="< ?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20"> -->
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        </div>
                         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
@@ -249,6 +252,7 @@
     var inputNit = 0;
     var ContadorPRC = 0;
     var contador = 0;
+    var contadorCorreo = 0; //Contador ids correos
     let telefonos = [] //Telefonos del Aliado.
     let correos = [] //Correos del Aliado.
     var validCorreo = true
@@ -310,6 +314,42 @@
             },
             {
                 data: 'direccion'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    var email = '';
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + row.id_tercero + '/' + 56,
+                        dataType: 'json',
+                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                        success: function(response) {
+                            if (response.length > 0) {
+                                email = response[0][0].correo;
+                            }
+                        }
+                    });
+                    return email;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    var telefono = '';
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 56,
+                        dataType: 'json',
+                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                        success: function(response) {
+                            if (response.length > 0) {
+                                telefono = response[0][0].numero;
+                            }
+                        }
+                    });
+                    return telefono;
+                }
             },
             {
                 data: null,
@@ -396,7 +436,7 @@
                 success: function(res) {
                     limpiarCampos()
                     $('#tituloModal').text('Editar Aliado')
-                    // $('#logoModal').attr('src', '< ?php echo base_url('img/editar.png') ?>')
+                    $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -430,7 +470,8 @@
             limpiarCampos(0)
             guardarCorreo()
             guardarTelefono()
-            $('#tituloModal').text(`AGREGAR`)
+            $('#tituloModal').text(`Agregar`)
+            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#RazonSocial').val('')
@@ -470,7 +511,7 @@
         } else if (tp == 2 && id != 0) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + 0 + "/" + inputRazonSocial ,
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + 0 + "/" + inputRazonSocial,
                 dataType: 'JSON',
                 success: function(res) {
                     if (res[0]['razon_social'] == inputRazonSocial) {
@@ -487,7 +528,7 @@
     function buscarNit(id, inputNit) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit + "/" + 0 ,
+            url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + "/" + inputNit + "/" + 0,
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -533,7 +574,7 @@
         nit = $('#nit').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false|| correos.length == 0 || telefonos.length == 0) {
+        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else if ([telefono, correo].includes('')) {
             return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
