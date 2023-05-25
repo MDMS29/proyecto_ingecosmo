@@ -4,29 +4,22 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
 use App\Models\TercerosModel;
-use App\Models\TelefonosModel;
 use App\Models\ParamModel;
-use App\Models\EmailModel;
 
 class Proveedores extends BaseController
 {
     protected $proveedores;
     protected $param;
-    protected $telefonos;
-    protected $correos;
     public function __construct()
     {
         $this->param = new ParamModel();
         $this->proveedores = new TercerosModel();
-        $this->telefonos = new TelefonosModel();
-        $this->correos = new EmailModel();
     }
     public function index()
     {
         $tipoTel = $this->param->obtenerTipoTel(); 
-        $tel = $this->telefonos->obtenerTelefonoCliente(); 
-        $email = $this->correos->obtenerEmailCliente(); 
-        $data = ['tipoTele' => $tipoTel, 'telefono' => $tel, 'email' => $email];
+        $param = $this->param->obtenerTipoDoc();
+        $data = ['tipoDoc' => $param, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/proveedores/proveedores',$data);
     }
@@ -37,49 +30,80 @@ class Proveedores extends BaseController
         $res = $this->proveedores->obtenerProveedores($estado);
         return json_encode($res);
     }
+
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
+        $idProveedor = $this->request->getPost('id');
+        $nit = $this->request->getPost('nit');
+        $razonSocial= $this->request->getPost('RazonSocial');
+        $direccion = $this->request->getPost('direccion');
+        $telefono = $this->request->getPost('telefono');
+        $email = $this->request->getPost('email');
         $tipoTercero = 8;
         $tipoDocumento = 2;
-        $usuCrea = session('id');
-        if ($this->request->getMethod() == "post") {
-            if ($tp == 1) {
-                $this->proveedores->save([
-                    'razon_social' => $this->request->getPost('RazonSocial'),
-                    'n_identificacion' => $this->request->getPost('nit'),
-                    'direccion' => $this->request->getPost('direccion'),
-                    'tipo_tercero' => $tipoTercero,
-                    'tipo_doc' => $tipoDocumento,
-                    'usuario_crea' => $usuCrea
+        $usuarioCrea = session('id');
 
 
-                ]);
-            } else {
-                $this->proveedores->update(
-                    $this->request->getPost('id'),
-                    [
-                        'razon_social' => $this->request->getPost('RazonSocial'),
-                        'n_identificacion' => $this->request->getPost('nit'),
-                        'direccion' => $this->request->getPost('direccion'),
-                        'tipo_tercero' => $tipoTercero,
-                        'tipo_doc' => $tipoDocumento,
-                        'usuario_crea' => $usuCrea
-
-                    ]
-                );
-            }
+        if ($tp == 2) {
+            //Actualizar datos
+            $proveedorUpdate = [
+                'n_identificacion' => $nit,
+                'razon_social' => $razonSocial,
+                'direccion' => $direccion,
+                'telefono' => $telefono,
+                'email' => $email,
+                'tipo_tercero' => $tipoTercero,
+                'tipo_doc' => $tipoDocumento,
+                'usuario_crea' => $usuarioCrea
+            ];
+            $this->proveedores->update($idProveedor, $proveedorUpdate);
+            return $idProveedor;
+        } else {
+            //Insertar datos
+            //Si la respuesta esta vacia - guardar
+            $proveedorSave = [
+                'n_identificacion' => $nit,
+                'razon_social' => $razonSocial,
+                'direccion' => $direccion,
+                'telefono' => $telefono,
+                'email' => $email,
+                'tipo_tercero' => $tipoTercero,
+                'tipo_doc' => $tipoDocumento,
+                'usuario_crea' => $usuarioCrea
+                
+            ];
+            $this->proveedores->save($proveedorSave);
+            return json_encode($this->proveedores->getInsertID());
         }
     }
 
-    public function buscarProveedor($id, $razonSocial, $nit)
+    public function buscarProveedor($id, $nit, $razonSocial)
     {
-        $returnData = array();
-        $proveedores_ = $this->proveedores->traerProveedor($id, $razonSocial, $nit);
-        if (!empty($proveedores_)) {
-            array_push($returnData, $proveedores_);
+        $array = array();
+        if ($id != 0) {
+            $data = $this->proveedores->buscarProveedor($id, 0, 0);
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nit != 0) {
+            $data = $this->proveedores->buscarProveedor(0, $nit, 0);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($razonSocial != 0) {
+            $data = $this->proveedores->buscarProveedor(0, 0, $razonSocial);
+            array_push($array, $data);
+            return json_encode($array);
+        } else if ($id != 0 && $razonSocial != 0) {
+            $data = $this->proveedores->buscarProveedor($id, 0, $razonSocial);
+            array_push($array, $data);
+            return json_encode($array);
+        }  else if ($id != 0 && $nit != 0) {
+            $data = $this->proveedores->buscarProveedor($id, $nit, 0);
+            array_push($array, $data);
+            return json_encode($array);
         }
-        echo json_encode($returnData);
     }
 
 

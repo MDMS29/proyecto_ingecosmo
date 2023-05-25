@@ -47,6 +47,50 @@ class TercerosModel extends Model
         return $data;
     }
 
+    public function buscarProveedor($id, $nit, $razonSocial)
+    {
+        if ($id != 0) {
+
+            $this->select('terceros.*');
+            $this->where('id_tercero', $id);
+            $this->where('tipo_tercero', '8');
+            $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
+        } elseif ($nit != 0) {
+
+            $this->select('terceros.*, ');
+            $this->where('n_identificacion', $nit);
+            $this->where('terceros.estado', 'A');
+            $this->where('tipo_tercero', '8');
+        } elseif ($razonSocial != 0) {
+
+            $this->select('terceros.*, ');
+            $this->where('razon_social', $razonSocial);
+            $this->where('terceros.estado', 'A');
+            $this->where('tipo_tercero', '8');
+        } elseif ($id != 0 && $nit != 0) {
+
+            $this->select('terceros.*');
+            $this->where('id_tercero', $id);
+            $this->where('n_identificacion', $nit);
+        } elseif ($id != 0 && $razonSocial != 0) {
+
+            $this->select('terceros.*');
+            $this->where('id_tercero', $id);
+            $this->where('razon_social', $razonSocial);
+        }
+        $data = $this->first();
+        return $data;
+    }
+
+
+    public function eliminaProveedor($id, $estado)
+    {
+        $data = $this->update($id, ['estado' => $estado]);
+        return $data;
+    }
+
+
+    // -------------Aliados----------------
     public function obtenerAliados($estado)
     {
         $this->select('terceros.*');
@@ -54,21 +98,6 @@ class TercerosModel extends Model
         $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
         $this->where('terceros.estado', $estado);
         $data = $this->findAll();
-        return $data;
-    } 
-
-    public function traerProveedor($id,$nit)
-    {
-        if ($id != 0) {
-            $this->select('terceros.* ');
-            $this->where('id_tercero', $id); 
-
-        }elseif($nit!=0){
-            $this->select('terceros.* ');
-            $this->where('n_identificacion', $nit);
-
-        }
-        $data = $this->first();  // nos trae el registro que cumpla con una condicion dada 
         return $data;
     }
 
@@ -79,30 +108,25 @@ class TercerosModel extends Model
 
             $this->select('terceros.*');
             $this->where('id_tercero', $id);
-            $this->where('tipo_tercero', '56'); 
+            $this->where('tipo_tercero', '56');
             $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
-
         } elseif ($nit != 0) {
 
             $this->select('terceros.*, ');
             $this->where('n_identificacion', $nit);
             $this->where('terceros.estado', 'A');
-            $this->where('tipo_tercero', '56'); 
-
-        } 
-        elseif ($razonSocial != 0) {
+            $this->where('tipo_tercero', '56');
+        } elseif ($razonSocial != 0) {
 
             $this->select('terceros.*, ');
             $this->where('razon_social', $razonSocial);
             $this->where('terceros.estado', 'A');
-            $this->where('tipo_tercero', '56'); 
-
+            $this->where('tipo_tercero', '56');
         } elseif ($id != 0 && $nit != 0) {
 
             $this->select('terceros.*');
             $this->where('id_tercero', $id);
             $this->where('n_identificacion', $nit);
-
         } elseif ($id != 0 && $razonSocial != 0) {
 
             $this->select('terceros.*');
@@ -110,12 +134,6 @@ class TercerosModel extends Model
             $this->where('razon_social', $razonSocial);
         }
         $data = $this->first();
-        return $data;
-
-    } 
-    public function eliminaProveedor($id, $estado)
-    {
-        $data = $this->update($id, ['estado' => $estado]);
         return $data;
     }
 
@@ -126,12 +144,13 @@ class TercerosModel extends Model
     }
 
 
-    // -------------clientes----------------
+
+    // -------------Clientes----------------
     public function obtenerClientes($estado)
     {
         $this->select("terceros.*, param_detalle.resumen as tipoDoc, concat(nombre_p, ' ', nombre_s, ' ', apellido_p, ' ', apellido_s) as nombreCompleto, telefonos.numero as telefono, email.email as email");
-        $this->join('telefonos','telefonos.tipo_usuario = terceros.tipo_tercero', 'left'  );
-        $this->join('email','email.id_usuario = terceros.id_tercero', 'left'  );
+        $this->join('telefonos', 'telefonos.tipo_usuario = terceros.tipo_tercero', 'left');
+        $this->join('email', 'email.id_usuario = terceros.id_tercero', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = terceros.tipo_doc');
         $this->where('terceros.tipo_tercero', '5');
         $this->where('telefonos.tipo_usuario', '5');

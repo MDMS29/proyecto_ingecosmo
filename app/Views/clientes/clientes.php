@@ -143,7 +143,7 @@
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
-                            <div class=" flex-grow-1">
+                            <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
@@ -339,6 +339,7 @@
     // ------------------------------ estructura Tabla ------------------------------------- 
     // Obtener email principal cliente
     var emailTable = [];
+    var telefonoTable = [];
     $.ajax({
         url: '<?= base_url('clientes/obtenerClientes') ?>',
         method: "POST",
@@ -357,24 +358,10 @@
                 success: function(response) {
                     return emailTable.push({
                         idCliente: data[i].id_tercero,
-                        correo: response[0]?.correo
+                        correo: response[0]?.correo || 'No se encontro correo'
                     });
                 }
             });
-        }
-    })
-    // Obtener telefono principal cliente
-    var telefonoTable = [];
-    $.ajax({
-        url: '<?= base_url('clientes/obtenerClientes') ?>',
-        method: "POST",
-        data: {
-            estado: 'A'
-        },
-        dataSrc: "",
-    }).done(function(res) {
-        let data = JSON.parse(res)
-        for (let i = 0; i < data.length; i++) {
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
@@ -383,12 +370,14 @@
                 success: function(response) {
                     return telefonoTable.push({
                         idCliente: data[i].id_tercero,
-                        telefono: response[0]?.numero
+                        telefono: response[0]?.numero || 'No se encontro telefono'
                     });
                 }
             });
         }
     })
+
+    // Tabla   
     var tableClientes = $("#tableClientes").DataTable({
         ajax: {
             url: '<?= base_url('clientes/obtenerClientes') ?>',
@@ -441,8 +430,8 @@
                     arrayTele = telefonoTable.filter(tel => tel.idCliente == row.id_tercero)[0]?.telefono
                     return arrayTele
                 }
-            }
-            , {
+            }, 
+            {
                 data: null,
                 render: function(data, type, row) {
                     return (
@@ -467,6 +456,7 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
             }).done(function(res) {
+                limpiarCampos()
                 $('#tituloModal').text('Editar')
                 $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
@@ -921,6 +911,8 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
+
+
     //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmaP').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `EliminarCliente(${$(e.relatedTarget).data('href')})`)

@@ -34,22 +34,6 @@ class TelefonosModel extends Model
         return $data;
     }
 
-    public function obtenerTelefonoCliente()
-    {
-        $this->select('telefonos.numero as telefono');
-        $this->where('tipo_usuario', '5');
-        $data = $this->first();
-        return $data;
-    }
-
-    public function obtenerTelefonoProveedor()
-    {
-        $this->select('telefonos.numero as telefono');
-        $this->where('tipo_usuario', '8');
-        $data = $this->first();
-        return $data;
-    }
-
     public function TelefonoPrincipal($idUsuario, $tipoUsuario)
     {
         $this->select('numero');

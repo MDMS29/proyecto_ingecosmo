@@ -40,7 +40,7 @@
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#contraseñas" role="tab" aria-controls="profile" aria-selected="false">Contraseñas</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#contraseñas" role="tab" aria-controls="profile" aria-selected="false">Cambiar Contraseña</a>
                             </li>
                         </ul>
                     </div>
@@ -179,7 +179,7 @@
                                                 <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
                                                     <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                                     </label>
-                                                    <input type="hidden" name="idUsuario" id="idUsuario">
+                                                    <input type="hidden" name="idUsuario" id="idUsuario" value="<?= $usuario['id_usuario'] ?>">
 
                                                     <div class="flex">
                                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -283,7 +283,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="button" class="btn btnAccionF" id="btnGuardar">Actualizar</button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -291,8 +291,8 @@
     </div>
 </form>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     // variables
     var inputIden = 0;
@@ -326,7 +326,6 @@
             })
         }
     }
-
     $('#formularioPerfil').on('submit', function(e) {
         e.preventDefault()
         id = $('#id').val()
@@ -376,9 +375,7 @@
             })
         }
     })
-
     // ---------------------------validaciones---------------------------
-
     //Funcion para buscar cliente segun su identificacion
     function buscarUsuarioIdent(id, inputIden) {
         $.ajax({
@@ -417,9 +414,7 @@
             })
         }
     })
-
     // -----------contrassss y su validacion----------------
-
     //Ver contraseñas
     function verContrasena() {
         var check, password;
@@ -469,7 +464,7 @@
 
             } else if (confirContra && contra == confirContra) {
                 input.text('¡Contraseñas valida!').removeClass().addClass('valido')
-                
+
             } else if (confirContra && contra != confirContra) {
                 return input.text('¡Las contraseñas no coinciden!').removeClass().addClass('invalido')
             }
@@ -481,9 +476,8 @@
     $('#contraRes').on('input', function(e) {
         verifiContra(1, 'msgConfirRes', 'contraRes', 'confirContraRes')
     })
-
     //Funcion para cambiar contraseña
-    $('#formularioContraseñas').on('click', function(e) {
+    $('#btnActuContra').on('click', function(e) {
         e.preventDefault()
         idUsuario = $("#idUsuario").val()
         contra = $("#contraRes").val()
@@ -497,7 +491,8 @@
                 data: {
                     idUsuario,
                     contra,
-                    contraConfir
+                    contraConfir,
+                    // rol: '< ?= session('idRol') ?>'
                 },
                 type: 'POST',
                 dataType: 'json'
@@ -507,21 +502,25 @@
                     return mostrarMensaje('error', '¡Ha ocurrido un error!')
                 } else {
                     mostrarMensaje('success', '¡Se ha actualizado su contraseña!')
-                    $('.salir').on('click', function(e) {
-                        const informacion = {
-                            usuario: '',
-                            contrasena: ''
-                        };
-                        localStorage.setItem("usuario", JSON.stringify(informacion));
-                    })
+                    const informacion = {
+                        usuario: '',
+                        contrasena: ''
+                    };
+                    localStorage.setItem("usuario", JSON.stringify(informacion));
                     $.ajax({
-                        url: '<?= base_url('usuarios/salir') ?>'
+                        type: 'POST',
+                        url: '<?= base_url('usuarios/salir') ?>',
+                        dataType: 'json',
+                        success: function(data) {
+                            if(data == 1){
+                                window.location.href = '<?= base_url('') ?>'
+                            }
+                        }
                     })
                 }
             })
         }
     })
-
     //Mostrar mensajes de SwalFire
     function mostrarMensaje(tipo, msg) {
         Swal.fire({
