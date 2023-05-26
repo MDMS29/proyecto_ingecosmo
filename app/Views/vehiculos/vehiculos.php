@@ -70,16 +70,6 @@
                             <div class="column-gap-3 d-flex flex-column" style="width: 100%; display:none;" id="divResponsable">
                                 <div class="d-flex gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="nombreRespon" class="col-form-label">Nombres:</label>
-                                        <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
-                                    </div>
-                                    <div class="mb-3" style="width: 100%">
-                                        <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
-                                        <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3" style="width: 100%">
-                                    <div class="mb-3" style="width: 100%">
                                         <label for="tipoDocRes" class="col-form-label">Tipo Identificación:</label>
                                         <select class="form-select form-select" name="tipoDocRes" id="tipoDocRes" disabled>
                                             <option value="1" selected>Cedula de Ciudadania</option>
@@ -89,6 +79,16 @@
                                     <div class="mb-3" style="width: 100%">
                                         <label for="nIdentiRes" class="col-form-label">N° Identificación:</label>
                                         <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes">
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="nombreRespon" class="col-form-label">Nombres:</label>
+                                        <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
+                                        <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +225,7 @@
 <div class="modal fade" id="modal-pdf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <iframe id="ifr_PDF" width="1140" height="700"></iframe>
+            <iframe id="ifr_PDF" width="1130" height="700"></iframe>
         </div>
     </div>
 </div>
@@ -541,7 +541,6 @@
         fechaSalida = $('#fechaSalida').val()
         fechaEntrada = $('#fechaEntrada').val()
         $('#fechaSalida').attr('min', fechaEntrada)
-
         if (fechaSalida != '') {
             $('#msgFecha').text('')
             validFecha = true

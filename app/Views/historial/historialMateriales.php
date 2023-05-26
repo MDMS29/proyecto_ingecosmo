@@ -2,16 +2,18 @@
 
 <!-- TABLA MOSTRAR VEHICULOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial.png') ?>" />Historial Materiales</h2>
+    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-b.png') ?>" />Historial Materiales</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">Material</a> - <a class="toggle-vis btn" data-column="1">Cantidad</a> - <a class="toggle-vis btn" data-column="4">Fecha Movimiento</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Material</a> - <a class="toggle-vis btn" data-column="5">Fecha de Movimiento</a>
         </div>
         <table class="table table-striped" id="tableHistorial" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
                     <th scope="col" class="text-center">Material</th>
+                    <th scope="col" class="text-center">Vehiculo</th>
+                    <th scope="col" class="text-center">Trabajador</th>
                     <th scope="col" class="text-center">Cantidad</th>
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
@@ -65,6 +67,19 @@
             },
             {
                 data: "nombreMate"
+            },
+            {
+                data : null,
+                render : function(data, type, row) {
+                    return row.placa == null ? "No se encontro auto" : row.placa
+                } 
+            },
+  
+            {
+                data : null,
+                render : function(data, type, row) {
+                    return row.nombreTrabajador == null ? "No se encontro trabajador " : row.nombreTrabajador
+                } 
             },
             {
                 data : 'cantidad'

@@ -205,7 +205,7 @@
                             <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
