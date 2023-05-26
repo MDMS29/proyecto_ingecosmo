@@ -13,6 +13,8 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -92,6 +94,53 @@
         })
     }
 
+
+
+    // ------------------------------ estructura Tabla ------------------------------------- 
+    // Obtener email principal proveedor
+    var emailTable=[]
+    var telefonoTable =[]
+    function recargaTelCorreo() {
+        $.ajax({
+            url: '<?= base_url('proveedores/obtenerProveedores') ?>',
+            method: "POST",
+            data: {
+                estado: 'I'
+            },
+            dataSrc: "",
+        }).done(function(res) {
+            let data = JSON.parse(res)
+            for (let i = 0; i < data.length; i++) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/8',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        return emailTable.push({
+                            idProveedor: data[i].id_tercero,
+                            correo: response[0]?.correo || 'No se encontro correo'
+                        });
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/8',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        return telefonoTable.push({
+                            idProveedor: data[i].id_tercero,
+                            telefono: response[0]?.numero || 'No se encontro telefono'
+                        });
+                    }
+                });
+            }
+        })
+    }
+    recargaTelCorreo()
+
+
     // Tabla   
     var tableProveedores = $("#tableProveedores").DataTable({
         ajax: {
@@ -117,6 +166,20 @@
             },
             {
                 data: 'direccion'
+            },
+            {
+                data: 'correo',
+                render: function(data, type, row) {
+                    arrayCorreo = emailTable.filter(correo => correo.idProveedor == row.id_tercero)[0]?.correo
+                    return arrayCorreo
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    arrayTele = telefonoTable.filter(tel => tel.idProveedor == row.id_tercero)[0]?.telefono
+                    return arrayTele
+                }
             },
             {
                 data: null,

@@ -101,7 +101,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarProveedor" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarProveedor" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -167,7 +167,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarProveedor" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarProveedor" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo','',4)">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -209,7 +209,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="limpiarCampos('correoAdd', 'prioridadCorreo','',4)">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -273,6 +273,36 @@
 
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
+        if (accion == 3) {
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                    console.log("error pero se cerro")
+
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarProveedor').modal('show')
+                }
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarProveedor').modal('show')
+            }
+        }
+        if (accion == 4) {
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarProveedor').modal('show')
+                }
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarProveedor').modal('show')
+            }
+        }
         if (objCorreo.id != 0) {
             correos.push(objCorreo)
             guardarCorreo()
@@ -285,52 +315,72 @@
             telefonos = []
             correos = []
         }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
         guardarTelefono()
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
+        $('#msgTel').text('')
+        $('#msgCorreo').text('')
+        $('#msgNit').text('')
+        $('#msgRaSo').text('')
     }
 
     // ------------------------------ estructura Tabla ------------------------------------- 
     // Obtener email principal proveedor
     var emailTable = [];
     var telefonoTable = [];
-    $.ajax({
-        url: '<?= base_url('proveedores/obtenerProveedores') ?>',
-        method: "POST",
-        data: {
-            estado: 'A'
-        },
-        dataSrc: "",
-    }).done(function(res) {
-        let data = JSON.parse(res)
-        for (let i = 0; i < data.length; i++) {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/8',
-                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                dataType: 'json',
-                success: function(response) {
-                    return emailTable.push({
-                        idProveedor: data[i].id_tercero,
-                        correo: response[0]?.correo || 'No se encontro correo'
-                    });
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/8',
-                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                dataType: 'json',
-                success: function(response) {
-                    return telefonoTable.push({
-                        idProveedor: data[i].id_tercero,
-                        telefono: response[0]?.numero || 'No se encontro telefono'
-                    });
-                }
-            });
-        }
-    })
+
+    function recargaTelCorreo() {
+        $.ajax({
+            url: '<?= base_url('proveedores/obtenerProveedores') ?>',
+            method: "POST",
+            data: {
+                estado: 'A'
+            },
+            dataSrc: "",
+        }).done(function(res) {
+            let data = JSON.parse(res)
+            for (let i = 0; i < data.length; i++) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/8',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        return emailTable.push({
+                            idProveedor: data[i].id_tercero,
+                            correo: response[0]?.correo || 'No se encontro correo'
+                        });
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/8',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        return telefonoTable.push({
+                            idProveedor: data[i].id_tercero,
+                            telefono: response[0]?.numero || 'No se encontro telefono'
+                        });
+                    }
+                });
+            }
+        })
+    }
+    recargaTelCorreo()
+
     // Tabla   
     var tableProveedores = $("#tableProveedores").DataTable({
         ajax: {
@@ -526,7 +576,10 @@
                 }
             }).done(function(data) {
                 $('#agregarProveedor').modal('hide')
-                tableProveedores.ajax.reload(null, false); //Recargar tabla
+                recargaTelCorreo()
+                setTimeout(() => {
+                    tableProveedores.ajax.reload(null, false); //Recargar tabla
+                }, 3000);
                 $('#btnGuardar').removeAttr('disabled') //jumm
                 $('#editTele').val('');
                 objCorreo = {

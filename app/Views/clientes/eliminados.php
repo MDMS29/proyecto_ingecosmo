@@ -266,44 +266,49 @@
     // Obtener email principal cliente
     var emailTable = [];
     var telefonoTable = [];
-    $.ajax({
-        url: '<?= base_url('clientes/obtenerClientes') ?>',
-        method: "POST",
-        data: {
-            estado: 'A'
-        },
-        dataSrc: "",
-    }).done(function(res) {
-        let data = JSON.parse(res)
-        for (let i = 0; i < data.length; i++) {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/5',
-                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response)
-                    return emailTable.push({
-                        idCliente: data[i].id_tercero,
-                        correo: response[0]?.correo || 'No se encontro correo'
-                    });
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
-                async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response)
-                    return telefonoTable.push({
-                        idCliente: data[i].id_tercero,
-                        telefono: response[0]?.numero || 'No se encontro telefono'
-                    });
-                }
-            });
-        }
-    })
+
+    function recargaTelCorreo() {
+        $.ajax({
+            url: '<?= base_url('clientes/obtenerClientes') ?>',
+            method: "POST",
+            data: {
+                estado: 'I'
+            },
+            dataSrc: "",
+        }).done(function(res) {
+            let data = JSON.parse(res)
+            for (let i = 0; i < data.length; i++) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/5',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response)
+                        return emailTable.push({
+                            idCliente: data[i].id_tercero,
+                            correo: response[0]?.correo || 'No se encontro correo'
+                        });
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
+                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response)
+                        return telefonoTable.push({
+                            idCliente: data[i].id_tercero,
+                            telefono: response[0]?.numero || 'No se encontro telefono'
+                        });
+                    }
+                });
+            }
+        })
+    }
+    recargaTelCorreo()
+
 
     // Tabla   
     var tableClientes = $("#tableClientes").DataTable({

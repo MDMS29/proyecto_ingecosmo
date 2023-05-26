@@ -88,7 +88,7 @@
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
-                                    <input class="form-control" id="nIdenti" name="nIdenti"></input>
+                                    <input class="form-control" id="nIdenti" name="nIdenti" type="number"></input>
                                     <small id="msgDoc" class="invalido"></small>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">X</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -146,7 +146,7 @@
                             <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -203,7 +203,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">X</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -245,7 +245,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('correoAdd', 'prioridadCorreo')">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -319,6 +319,34 @@
     })
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
+        if (accion == 3) {
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        }
+        if (accion == 4) {
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        }
         if (objCorreo.id != 0) {
             correos.push(objCorreo)
             guardarCorreo()
@@ -331,10 +359,24 @@
             telefonos = []
             correos = []
         }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
         guardarTelefono()
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
+        $('#msgDoc').text('')
+        $('#msgTel').text('')
+        $('#msgCorreo').text('')
     }
     // ------------------------------ estructura Tabla ------------------------------------- 
     // Obtener email principal cliente
@@ -602,7 +644,7 @@
                 recargaTelCorreo()
                 setTimeout(() => {
                     tableClientes.ajax.reload(null, false); //Recargar tabla
-                }, 2000)
+                }, 3000)
                 ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
