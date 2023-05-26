@@ -40,7 +40,7 @@
                     <div class="modal-header ">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                            <img  id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
                         </div>
                         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
@@ -71,8 +71,8 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
-                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                            <option  value="1" selected>Cedula de Ciudadania</option>
+                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc" disabled>
+                                            <option value="1" selected>Cedula de Ciudadania</option>
                                             <option>-- Seleccione --</option>
                                         </select>
                                     </div>
@@ -395,18 +395,28 @@
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (accion == 3) {
-            principalT = telefonos.filter(tel => tel.prioridad == 'P')
-            if (principalT.length == 0) {
-                return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarTrabajador').modal('show')
+                }
             } else {
                 $('#agregarTelefono').modal('hide')
                 $('#agregarTrabajador').modal('show')
             }
         }
         if (accion == 4) {
-            principalC = correos.filter(correo => correo.prioridad == 'P')
-            if (principalC.length == 0) {
-                return mostrarMensaje('error', '¡Debe tener un correo principal!')
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarTrabajador').modal('show')
+                }
             } else {
                 $('#agregarCorreo').modal('hide')
                 $('#agregarTrabajador').modal('show')

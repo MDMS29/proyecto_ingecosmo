@@ -25,58 +25,63 @@
 </div>
 
 
-<div class="modal fade" id="verAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" id="modalProveedor">
-        <div class="body">
-            <div class="modal-content" id="modalContentP">
-                <div class="modal-header d-flex align-items-center justify-content-between">
+
+
+
+<!-- -----modal----------     -->
+    <div class="modal fade" id="verAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header flex align-items-center gap-3">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!--TEXTO DINAMICO--></h1>
                     </div>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="modalAgregarP">
-                            <div class="mb-3" style="width: 100%">
-                                <label for="razon_social" class="col-form-label">Razon Social:</label>
-                                <input type="text" name="RazonSocial" class="form-control inputP" id="RazonSocial" min='1' max='300' disabled>
-                                <small id="msgRaSo" class="invalido"></small>
-                                <input hidden id="tp" name="tp">
-                                <input hidden id="id" name="id">
-                            </div>
-                            <div class="mb-3" style="width: 100%">
-                                <div class="">
-                                    <label for="nit" class="col-form-label">NIT:</label>
-                                    <input type="number" name="nit" class="form-control" id="nit" minlength="9" maxlength="11" disabled>
-                                    <small id="msgNit" class="invalido"></small>
-                                </div>
-                            </div>
-                            <div class="mb-3" style="width: 100%">
-                                <label for="telefono" class="col-form-label">Telefono:</label>
-                                <div class="d-flex">
-                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono" disabled>+</button>
-                                </div>
-                            </div>
-                            <div class="mb-3" style="width: 100%">
-                                <label for="email" class="col-form-label">Email:</label>
-                                <div class="d-flex">
-                                    <input type="email" name="email" class="form-control" id="email" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo" disabled>+</button>
-                                </div>
-                            </div>
-                            <div class="mb-3" style="width: 100%">
-                                <div class="">
-                                    <label for="direccion" class="col-form-label">Direccion:</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" disabled>
-                                </div>
+
+                <form>
+                    <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                        <div class="mb-3" style="width: 100%;">
+                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" disabled>
+                            <small id="msgRaSo" class="invalido"></small>
+
+                            <input hidden id="tp" name="tp">
+                            <input hidden id="id" name="id">
+                        </div>
+
+                        <div class="mb-3" style="width: 100%; ">
+                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                            <input type="text" class="form-control" id="nit" name="nit" disabled></input>
+                            <small id="msgNit" class="invalido"></small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" style="width: 100%; padding-inline:20px;">
+                        <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
+                        <input class="form-control" id="direccion" name="direccion" disabled></input>
+                    </div>
+
+                    <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                        <div class="mb-3" style="width: 100%">
+                            <label for="telefono" class="col-form-label">Telefono:</label>
+                            <div class="d-flex">
+                                <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono" disabled>+</button>
                             </div>
                         </div>
-                    </form>
-                </div>
+
+                        <div class="mb-3" style="width: 100%">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <div class="d-flex">
+                                <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo" disabled>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
                     <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
@@ -84,7 +89,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <!-- Modal Confirma Reestablecer -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -42,11 +42,14 @@ class MoviEncModel extends Model
         $data = $this->findAll();
         return $data;
     }
-    public function historialMateriales(){
-        $this->select("movimiento_enc.id_movimientoenc, materiales.nombre as nombreMate , movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento");
+    public function historialMateriales()
+    {
+        $this->select("movimiento_enc.id_movimientoenc, concat(trabajadores.nombre_p , ' ' , trabajadores.nombre_s , ' ' , trabajadores.apellido_p , ' ' , trabajadores.apellido_s) as nombreTrabajador, materiales.nombre as nombreMate , movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento, vehiculos.placa");
         $this->join('param_detalle', 'param_detalle.id_param_det = movimiento_enc.tipo_movimiento');
         $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc');
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = movimiento_enc.id_vehiculo', 'left');
+        $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '11');
         $this->orWhere('movimiento_enc.tipo_movimiento', '12');
         $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
