@@ -31,12 +31,12 @@
     <input type="text" name="tp" id="tp" hidden>
     <div class="modal-dialog modal-xl">
         <div class="body">
-            <div class="logo">
-                <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa">
-            </div>
             <div class="modal-content">
-                <div class="modal-header flex">
-                    <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                <div class="modal-header flex align-items-center">
+                    <div class="logo">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    </div>
+                    <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">

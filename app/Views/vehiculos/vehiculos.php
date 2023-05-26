@@ -397,11 +397,13 @@
                     if ($('#tipoCliente').val() != 5) {
                         $('#nombreRespon').val(data['nomRespon'])
                         $('#apellidoRespon').val(data['apeRespon'])
+                        $('#nIdentiRes').val(data['n_identificacion'])
                         $('#divResponsable').addClass('d-flex')
                     } else {
                         $('#divResponsable').removeClass('d-flex')
                         $('#nombreRespon').val('')
                         $('#apellidoRespon').val('')
+                        $('#nIdentiRes').val('')
                     }
                     $('#placa').val(data['placa'])
                     $('#placaHidden').val(data['placa'])
@@ -441,6 +443,7 @@
             $('#divResponsable').removeClass('d-flex')
             $('#nombreRespon').val('')
             $('#apellidoRespon').val('')
+            $('#nIdentiRes').val('')
             $('#placa').val('')
             $('#marca').val('')
             $('#nFabrica').val('')
@@ -577,6 +580,8 @@
         cliente = $('#cliente').val()
         nombreRespon = $('#nombreRespon').val()
         apellidoRespon = $('#apellidoRespon').val()
+        tipoDocRes = $('#tipoDocRes').val()
+        nIdentiRes = $('#nIdentiRes').val()
         placa = $('#placa').val()
         marca = $('#marca').val()
         nFabrica = $('#nFabrica').val()
@@ -604,6 +609,8 @@
                     cliente,
                     nombreRespon,
                     apellidoRespon,
+                    tipoDocRes,
+                    nIdentiRes,
                     placa,
                     marca,
                     nFabrica,
