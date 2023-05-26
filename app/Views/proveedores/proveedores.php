@@ -251,8 +251,8 @@
     var ContadorPRC = 0; //Contador DataTable
     var contador = 0; //Contador ids telefono
     var contadorCorreo = 0; //Contador ids correos
-    let telefonos = [] //Telefonos del usuario.
-    let correos = [] //Correos del usuario.
+    let telefonos = [] //Telefonos del proveedor.
+    let correos = [] //Correos del proveedor.
     var inputRazonSocial = 0;
     var inputNit = 0;
     var validRazonSocial = true;
@@ -705,7 +705,7 @@
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 8, //url, valor, idUsuario, tipoUsuario
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 8, //url, valor, idProveedor, tipoUsuario
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
