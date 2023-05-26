@@ -100,14 +100,14 @@ class Insumos extends BaseController
                 'id_movimientoenc' => $idMovEnc,
                 'id_material' => $idMaterial,
                 'item' => 0,
-                'cantidad'=> $cantidadActual,
+                'cantidad' => $cantidadActual,
                 'costo' => $precioCompra,
                 'usuario_crea' => $usuarioCrea
 
             ];
             if ($this->movDet->save($dataDet)) {
                 return json_encode(1);
-            }else{
+            } else {
                 return json_encode(2);
             }
         }
@@ -141,19 +141,24 @@ class Insumos extends BaseController
 
         $this->materiales->update($id, $data);
 
-        return json_encode($data);
-        // return redirect()->to(base_url('/materiales'));
+        return json_encode($data); // return redirect()->to(base_url('/materiales'));
+
+        $idMaterial = $this->materiales->getInsertID();
     }
 
 
     public function usar()
     {
         $id =  $this->request->getPost('idMaterial');
-        
+
         $res = $this->materiales->traerDetalles($id);
         $cantidadExistente = $this->request->getPost('cantidadExistente');
+        $vehiculo = $this->request->getPost('vehiculo');
+        $trabajador = $this->request->getPost('trabajador');
         $cantidadUsar = $this->request->getPost('cantidadUsar');
         $subtotal = $this->request->getPost('subtotal');
+        $usuarioCrea = session('id');
+        $fechaActual = date('Y-m-d');
 
         $cantidadNueva =  $cantidadExistente - $cantidadUsar; //Nueva cantidad existente del material
         $cantidadVendidaActual = $res['cantidad_vendida'] + $cantidadUsar; //Nueva cantidad vendida del material
@@ -162,9 +167,34 @@ class Insumos extends BaseController
             'cantidad_vendida' => $cantidadVendidaActual
         ];
 
-        
+
         if ($this->materiales->update($id, $data)) {
-            return json_encode(1);
+            $dataEnc = [
+                'tipo_movimiento' => 12,
+                'estado' => 'A',
+                'id_vehiculo' => $vehiculo,
+                'id_trabajador' => $trabajador,
+                'fecha_movimiento' => $fechaActual,
+                'usuario_crea' => $usuarioCrea
+            ];
+            if ($this->movEnc->save($dataEnc)) {
+                $idMovEnc = $this->movEnc->getInsertID();
+                $dataDet = [
+                    'id_movimientoenc' => $idMovEnc,
+                    'id_material' => $id,
+                    'item' => 1,
+                    'cantidad' => $cantidadUsar,
+                    'costo' => $subtotal,
+                    'usuario_crea' => $usuarioCrea
+                ];
+                if ($this->movDet->save($dataDet)) {
+                    return json_encode(1);
+                } else {
+                    return json_encode(2);
+                }
+            }
+        }else{
+            return json_encode(2);
         }
     }
 
