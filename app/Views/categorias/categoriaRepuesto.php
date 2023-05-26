@@ -3,7 +3,6 @@
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
         <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>" width="50"> REPUESTOS</h1>
-        <a href="<?php echo base_url('/home'); ?>" class="btn btnRedireccion" id="Regresar"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
 
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
@@ -65,6 +64,11 @@
                 <div class="swiper-button-prev" style="color:black"></div>
             </div>
 
+        </div>
+    </div>
+    <div class="bloqueFooter">
+        <div class="footer-page">
+            <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
         </div>
     </div>
 </div>
