@@ -56,7 +56,7 @@
 
                         <div class="mb-3" style="width: 100%; ">
                             <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                            <input type="text" class="form-control" id="nit" name="nit"></input>
+                            <input type="number" class="form-control" id="nit" name="nit"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarProveedor" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -110,7 +110,7 @@
                             <div class=" flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -167,7 +167,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarProveedor" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo','',4)">X</button>
+                <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -209,7 +209,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="limpiarCampos('correoAdd', 'prioridadCorreo','',4)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -447,6 +447,8 @@
                 url: "<?php echo base_url('srchPro/') ?>" + id + '/' + 0 + '/' + 0,
                 dataType: 'json',
             }).done(function(res) {
+                console.log(res)
+                console.log('pasa a editar')
                 limpiarCampos()
                 $('#tp').val(2)
                 $('#tituloModal').text('Editar')
@@ -510,8 +512,6 @@
         //Control de campos vacios
         if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else if ([telefono, correo].includes('')) {
-            return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
             $.ajax({
                 url: '<?php echo base_url('proveedores/insertar') ?>',
@@ -579,7 +579,8 @@
                 recargaTelCorreo()
                 setTimeout(() => {
                     tableProveedores.ajax.reload(null, false); //Recargar tabla
-                }, 3000);
+                }, 3000)
+                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled') //jumm
                 $('#editTele').val('');
                 objCorreo = {
@@ -593,7 +594,6 @@
                     tipo: '',
                     prioridad: ''
                 }
-                ContadorPRC = 0
             });
         };
     })

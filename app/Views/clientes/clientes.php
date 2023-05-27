@@ -137,7 +137,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -188,7 +188,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -203,7 +203,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarCliente" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -245,7 +245,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
