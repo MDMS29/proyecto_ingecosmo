@@ -28,13 +28,13 @@
 </head>
 
 <body class=" d-flex align-items-stretch">
-    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 999;">
+    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 999; position: absolute">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" />
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0" >
                     <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " style="color: white; margin-left: 10px;"><img title="Perfil" style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
                     <hr class="nav-item dropdown" style="border-color: white">
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
@@ -48,13 +48,15 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('vehiculos') ?>" style="color: white;  margin-left: 10px;"><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img title="Ordenes servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio-b.png') ?>" /> Aliados</a></li>
+                        <li><a class="nav-item dropdown" href="" style="color: white;  margin-left: 10px;"><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /> Ordenes de Servicio</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /> Aliados</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios') ?>" style="color: white; margin-left: 10px; "><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /> Usuarios</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('historial/vehiculos') ?>" style="color: white; margin-left: 5px; "><img title="Historial Ordenes Servicio" style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /> Historial Ordenes</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } else if (session('idRol') == 3) { ?>
                         <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?>" style="color: white;  margin-left: 10px;"><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
@@ -134,7 +136,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Ordenes Servicio" style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
+                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Ordenes Servicio" style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
                                 <p id="pa">Historial Ordenes</p>
                             </a>
                         </li>
