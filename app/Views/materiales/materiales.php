@@ -104,9 +104,11 @@
               <label for="exampleDataList" class="col-form-label">Fila:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
                 <option selected value="">-- Seleccione una fila--</option>
-                <?php foreach ($fila as $fila) { ?>
+
+
+                <!-- <?php foreach ($fila as $fila) { ?>
                   <option value="<?= $fila['numeroFila'] ?>"><?= $fila['numeroFila'] ?></option>
-                <?php } ?>
+                <?php } ?> -->
               </select>
             </div>
           </div>
@@ -320,6 +322,27 @@
 
 
   }
+
+
+  $('#estante1').on("change", function(e) {
+   estante= $('#estante1').val()
+    $.ajax({
+      url: '<?php echo base_url('insumos/obtenerFilasInsumos/') ?>' + estante,
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        console.log(res)
+
+        var cadena
+        cadena = `<option value="" selected>-- Seleccione una fila --</option>`
+        for (let i = 0; i < res.length; i++) {
+
+          cadena += `<option value=${res[i].id_material}>${res[i].fila}</option>`
+        }
+        $('#fila1').html(cadena)
+      }
+    })
+  })
 
   // funcion traer detalles del material
 
