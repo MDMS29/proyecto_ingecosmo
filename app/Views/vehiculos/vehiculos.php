@@ -9,7 +9,7 @@
         <table class="table table-striped" id="tableVehiculos" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Orden de Trabajo</th>
+                    <th scope="col" class="text-center">N° Orden</th>
                     <th scope="col" class="text-center">Responsable</th>
                     <th scope="col" class="text-center">Tipo Responsable</th>
                     <th scope="col" class="text-center">Placa</th>
@@ -95,7 +95,7 @@
 
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="ordenTrabajo" class="col-form-label">Orden de Trabajo:</label>
+                                    <label for="ordenTrabajo" class="col-form-label">Orden de Servicio:</label>
                                     <input type="number" name="ordenTrabajo" class="form-control" id="ordenTrabajo">
                                     <small id="msgOrden" class="invalido"></small>
                                 </div>
