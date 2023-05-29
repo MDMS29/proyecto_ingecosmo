@@ -48,6 +48,8 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('vehiculos') ?>" style="color: white;  margin-left: 10px;"><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img title="Ordenes servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio-b.png') ?>" /> Aliados</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('proveedores') ?>" style="color: white; margin-left: 10px;  "><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /> Proveedores</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('aliados') ?>" style="color: white; margin-left: 10px; "><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /> Aliados</a></li>
@@ -109,6 +111,11 @@
                         <li>
                             <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
                                 <p id="pa">Vehiculos</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
+                                <p id="pa">Ordenes de Servicio</p>
                             </a>
                         </li>
                         <li>

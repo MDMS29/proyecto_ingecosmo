@@ -8,7 +8,6 @@ use App\Models\ParamModel;
 use App\Models\RolesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
-use CodeIgniter\CLI\Console;
 
 class Usuarios extends BaseController
 {

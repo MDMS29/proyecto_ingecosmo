@@ -93,18 +93,19 @@
                 contrasena
             },
             success: function(data) {
+                console.log(data)
                 const informacion = {
                     usuario,
                     contrasena
                 };
                 localStorage.setItem("usuario", JSON.stringify(informacion));
                 const alerta = document.querySelector(".alerta");
-                setTimeout(() => {
-                    alerta.remove();
-                }, 2000);
                 if (data == 1) {
                     window.location.href = "<?php echo base_url('/home') ?>"
                 }
+                setTimeout(() => {
+                    alerta.remove();
+                }, 2000);
             }
         })
     }   
