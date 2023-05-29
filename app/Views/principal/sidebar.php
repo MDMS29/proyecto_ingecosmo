@@ -44,7 +44,7 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('repuestosAdmin') ?>" style="color: white;  margin-left: 10px;"><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /> Respuestos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('insumos') ?>" style="color: white;  margin-left: 10px;"><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('insumosAdmin') ?>" style="color: white;  margin-left: 10px;"><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /> Insumos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?php echo base_url('vehiculos') ?>" style="color: white;  margin-left: 10px;"><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /> Vehiculos</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
@@ -102,7 +102,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <a href="<?php echo base_url('insumosAdmin') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                                 <p id="pa">Insumos</p>
                             </a>
                         </li>
