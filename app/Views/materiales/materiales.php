@@ -84,7 +84,7 @@
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
+              <label for="exampleDataList" class="col-form-label">Cantidad Ingresada:</label>
               <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
             </div>
           </div>
