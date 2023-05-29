@@ -15,7 +15,7 @@ class VehiculosModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['n_orden', 'id_marca', 'placa', 'modelo', 'color', 'kms', 'n_combustible', 'estado', 'fecha_entrada', 'fecha_salida','fecha_crea','usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = [ 'id_marca', 'placa', 'modelo', 'color', 'kms', 'n_combustible', 'estado', 'fecha_crea','usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -28,9 +28,8 @@ class VehiculosModel extends Model
 
     public function obtenerVehiculos()
     {
-        $this->select("vehiculos.id_vehiculo, n_orden, vehiculos.id_marca, marca_vehiculo.nombre as marca, placa,  modelo, color, kms, param_detalle.nombre as combustible, vw_param_det.nombre as estado, vw_param_det.id_param_det as idEstado, vehiculos.fecha_entrada, vehiculos.fecha_salida, terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.estado as estadoTercer, vw_param_det2.nombre as tipo_propietario, concat(propietarios.nombres, ' ', propietarios.apellidos) as nombreAliado");
+        $this->select("vehiculos.id_vehiculo, vehiculos.id_marca, marca_vehiculo.nombre as marca, placa,  modelo, color, kms, param_detalle.nombre as combustible,  terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.estado as estadoTercer, vw_param_det2.nombre as tipo_propietario");
         $this->join('param_detalle', 'param_detalle.id_param_det = vehiculos.n_combustible', 'left');
-        $this->join('vw_param_det', 'vw_param_det.id_param_det = vehiculos.estado', 'left');
         $this->join('marca_vehiculo', 'marca_vehiculo.id_marca = vehiculos.id_marca', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
         $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
@@ -40,10 +39,10 @@ class VehiculosModel extends Model
     }
     public function buscarVehiculo($orden, $placa, $id)
     {
-        $this->select("vehiculos.id_vehiculo as id, n_orden, propietarios.id_tercero as cliente, placa, vehiculos.id_marca, marca_vehiculo.nombre as marca, modelo, color, kms, param_detalle.id_param_det as combustible, vw_param_det.id_param_det as estado, fecha_entrada, vehiculos.fecha_salida, propietarios.tipo_propietario, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as nomCliente, terceros.tipo_tercero, terceros.razon_social, terceros.n_identificacion as identificacion, terceros.direccion, propietarios.nombres as nomRespon, propietarios.apellidos as apeRespon, concat(propietarios.nombres, ' ', propietarios.apellidos), propietarios.n_identificacion");
+        $this->select("vehiculos.id_vehiculo as id, propietarios.id_tercero as cliente, placa, vehiculos.id_marca, marca_vehiculo.nombre as marca, modelo, color, kms, param_detalle.id_param_det as combustible, propietarios.tipo_propietario, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as nomCliente, terceros.tipo_tercero, terceros.razon_social, terceros.n_identificacion as identificacion, terceros.direccion");
         $this->join('param_detalle', 'param_detalle.id_param_det = vehiculos.n_combustible', 'left');
         $this->join('marca_vehiculo', 'marca_vehiculo.id_marca = vehiculos.id_marca', 'left');
-        $this->join('vw_param_det', 'vw_param_det.id_param_det = vehiculos.estado', 'left');
+        
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
         $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
 
