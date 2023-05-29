@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
+                            <a href="<?php echo base_url('') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
                                 <p id="pa">Ordenes de Servicio</p>
                             </a>
                         </li>
@@ -134,8 +134,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Vehiculos" style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-vehiculo.png') ?>" /></span>
-                                <p id="pa">Historial Vehiculos</p>
+                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Ordenes Servicio" style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
+                                <p id="pa">Historial Ordenes</p>
                             </a>
                         </li>
                     <?php } else if (session('idRol') == 3) { ?>
