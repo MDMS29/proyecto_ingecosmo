@@ -35,7 +35,7 @@ class InsumosAdminModel extends Model{
     }
     
     public function ObtenerDetallesInsumos(){
-        $this->select('materiales.*, param_detalle.nombre as nombre_categoria ,estanteria.nombre as nombreEstante' );
+        $this->select('materiales.*,estanteria.nombre as nombreEstante' );
         $this->join('estanteria', 'estanteria.id = materiales.estante');
         $this->where('id_material','A');
         $datos = $this->first(); 
