@@ -15,8 +15,8 @@ input[type=number] {
 :root{
     --azulBoton: #161666;
     --rojoBoton: #E25050;
-    --grisModal: #ECEAEA;
-    --grisInput: #D9D9D9;  /* gris mas oscuro */
+    --grisInput: #ECEAEA;
+    --grisModal: #D9D9D9;  /* gris mas oscuro */
 }
 
 * {
@@ -31,7 +31,6 @@ body {
 
 .login {
     position: absolute;
-    bottom: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,6 +48,9 @@ form{
     justify-content: center;
     flex-direction: column;
 }
+.form-control {
+    background-color: var(--grisInput) !important; 
+  }
 
 .logo {
     position: absolute;
