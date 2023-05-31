@@ -26,11 +26,7 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-<<<<<<< HEAD
-        'hostname' => '10.230.16.149',//10.230.16.37 o termina en 149
-=======
-        'hostname' => '10.230.16.149',//10.230.16.37
->>>>>>> c760ce993ad21afd6bb10051443850a76574c707
+        'hostname' => '10.230.16.213',//10.230.16.213
         'username' => 'ingecosmos',//ingecosmos
         'password' => '123456789',//123456789
         'database' => 'db_ingecosmo',
