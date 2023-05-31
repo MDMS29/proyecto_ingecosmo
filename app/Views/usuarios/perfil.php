@@ -431,6 +431,7 @@
             password2.type = "password";
         }
     }
+    
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
         input = $(`#${inputMsg}`)

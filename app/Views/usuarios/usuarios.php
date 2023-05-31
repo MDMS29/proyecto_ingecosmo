@@ -195,7 +195,7 @@
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
@@ -570,6 +570,7 @@
             }).done(function(res) {
                 limpiarCampos()
                 $('#tituloModal').text('Editar')
+                $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_usuario'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -613,6 +614,7 @@
             guardarCorreo()
             guardarTelefono()
             $('#tituloModal').text('Agregar')
+            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombreP').val('')

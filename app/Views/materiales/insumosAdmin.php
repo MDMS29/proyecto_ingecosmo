@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" />Insumos</h2>
     <div class="table-responsive p-2">
+    <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Categoria del insumo</a> - <a class="toggle-vis btn" data-column="6">Estante</a> - <a class="toggle-vis btn" data-column="7">Fila</a>
+        </div>
         <table class="table table-striped" id="tableInsumosAdmin" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -134,7 +137,7 @@
                     $('#tituloModal').text('Editar')
                     $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
-                    $('#id').val(res[0]['id_tercero'])
+                    $('#id').val(res[0]['id_material'])
                     $('#RazonSocial').val(res[0]['razon_social'])
                     $('#nit').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
@@ -187,16 +190,16 @@
             {
                 data: 'fila'
             },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return (
-                        '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+            // {
+            //     data: null,
+            //     render: function(data, type, row) {
+            //         return (
+            //             '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
 
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
-                    );
-                },
-            }
+            //             '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
+            //         );
+            //     },
+            // }
  
         ],
         "language": {

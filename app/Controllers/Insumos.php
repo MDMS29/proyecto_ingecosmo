@@ -60,6 +60,22 @@ class Insumos extends BaseController
         echo view('/materiales/materiales', $data);
     }
 
+    public function obtenerFilasInsumos( $estante)
+    {
+        $materiales = $this->materiales->obtenerFilasInsumos( $estante);
+        if (!empty($materiales)) {
+            return json_encode($materiales);
+        }
+    }
+    public function obtenerMaterialesFila($fila)
+    {
+        $materiales = $this->materiales->obtenerMaterialesFila($fila);
+        if (!empty($materiales)) {
+            return json_encode($materiales);
+        }
+    }
+
+
 
 
     public function insertar()

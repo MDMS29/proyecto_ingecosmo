@@ -12,7 +12,7 @@
 
                 <?php if (empty($data)) { ?>
 
-                    <div class="contenidoCardF">                                                                                                                                        
+                    <div class="contenidoCardF">
                         <p>No se encuentran filas - <?php echo $titulo['nombre'] ?></p>
                     </div>
                 <?php } else { ?>
@@ -49,25 +49,26 @@
 
 <form autocomplete="off" id="agregarFila">
     <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div style="background:white; border:5px solid #161666; border-radius:10px; height:420px; width:800px;" class="modal-content">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-sm">
+            <div style="background:white; border:5px solid #161666; border-radius:10px; height:350px; width:800px;" class="modal-content">
                 <div class="modal-header">
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
 
+                    <div class="bloqueHeader">
+                        <img class="iconosModal" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
+                        <div class="tituloHeader">
 
-                    <div class="tituloHeader">
-                        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos < ?php echo $dato['fila'] ?></h1> -->
+                            <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1> -->
+                        </div>
                     </div>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX" onclick="limpiarCampos()"></button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        
+
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Nombre Producto</label>
-                            <select class="form-select" id="nombreProd" name="nombreProd" style="background: #ECEAEA;">
-                            </select>
+                            <input type="text" hidden class="" id="nombreProd" name="nombreProd">
                         </div>
 
                         <div class="mb-3">
@@ -76,7 +77,7 @@
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
                                     <option id="<?php echo $fila['fila']; ?>F" value=<?php echo $fila['fila']; ?>>
-                                    <?php echo $fila['fila']; ?></option>
+                                        <?php echo $fila['fila']; ?></option>
                                 <?php } ?>
                             </select>
                             <input hidden id="tp" name="tp">
@@ -155,6 +156,8 @@
 
             <div class="modal-footer" id="modalFooterD">
                 <button type="button" class="btn btnCerrar" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
+
+                <button type="button" class="btn btnEditar" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Editar</button>
             </div>
 
         </div>
@@ -172,17 +175,19 @@
     var validIFila = true;
     var validINombreProd = true;
     var filasDina = 0
+    var tituloMover = $(".tituloHeader")
+
 
     bloque = $('.bloqueTextoE')
     for (let i = 0; i < bloque.length; i++) {
+        let fila = $(`#${bloque[i].id}`)
+        fila = fila[0].id
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + bloque[i].id,
             type: 'POST',
             dataType: 'json',
             success: function(res) {
                 var cadena = ""
-                var tituloModal = ""
-                tituloMover = $(".tituloHeader")
                 for (let i = 0; i < res.length; i++) {
                     cadena += `<p class="subTexto">
                     
@@ -191,18 +196,20 @@
                     <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
                     </summary>
 
-                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('<?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> </button>
+                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
                     </details></p>`;
-
-                    tituloModal =`<h3>${res[i].nombre}</h3>`
                 }
-                tituloMover.html(tituloModal)
                 $(`#${bloque[i].id}`).html(cadena)
             }
         })
     }
 
-    function selectMateriales(fila){
+    function selectMateriales(fila, nombre) {
+        var tituloMover = $(".tituloHeader")
+        tituloMover.text(nombre)
+        $('#nombreProd').val(nombre)
+
+
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria + '/' + fila,
             type: 'POST',
@@ -213,7 +220,7 @@
                 var cadena
                 cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
                 for (let i = 0; i < res.length; i++) {
-    
+
                     cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
                 }
                 $('#nombreProd').html(cadena)
@@ -225,7 +232,7 @@
     $('#agregarFila').on('submit', function(e) {
         e.preventDefault();
         fila = $('#fila').val() //Esto toma el valor por medio del id
-        nombreProd = $('#nombreProd').val() //Esto toma el valor por medio del id
+        id_material = $('#nombreProd').val() //Esto toma el valor por medio del id
         $.ajax({
             url: "<?php echo base_url('/filas/insertar'); ?>",
             type: 'POST',
@@ -291,23 +298,23 @@
     }
 
     function detallesMaterial(id_material) {
-    dataURL = "<?php echo base_url('/filas/detallesMaterial'); ?>" + "/" + id_material;
-    $.ajax({
-      type: "POST",
-      url: dataURL,
-      dataType: "json",
-      success: function(rs) {
-        $('#detallesModal').modal('show')
-        $("#titulo").text('Detalles');
-        $("#idMaterial").val(rs[0]['id_material']);
-        $("#nombre1").val(rs[0]['nombre']);
-        $("#precioVenta").val(rs[0]['precio_venta']);
-        $("#precioCompra").val(rs[0]['precio_compra']);
-        $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
-        $("#cantidadActual").val(rs[0]['cantidad_actual']);
-        $("#estante").val(rs[0]['nombreEstante']);
-        $("#filaDetalle").val(rs[0].fila);
-      }
-    })
-  }
+        dataURL = "<?php echo base_url('/filas/detallesMaterial'); ?>" + "/" + id_material;
+        $.ajax({
+            type: "POST",
+            url: dataURL,
+            dataType: "json",
+            success: function(rs) {
+                $('#detallesModal').modal('show')
+                $("#titulo").text('Detalles');
+                $("#idMaterial").val(rs[0]['id_material']);
+                $("#nombre1").val(rs[0]['nombre']);
+                $("#precioVenta").val(rs[0]['precio_venta']);
+                $("#precioCompra").val(rs[0]['precio_compra']);
+                $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
+                $("#cantidadActual").val(rs[0]['cantidad_actual']);
+                $("#estante").val(rs[0]['nombreEstante']);
+                $("#filaDetalle").val(rs[0].fila);
+            }
+        })
+    }
 </script>
