@@ -76,7 +76,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(2);
         $pdf->SetX(117);
         $pdf->Cell(10, 25, 'FECHA DE SALIDA', 0, 1, 'L');
-        $pdf->line(165, $mrg_tp, 165, $mrg_tp + 24);//Linea despues de fecha salida
+        $pdf->line(165, $mrg_tp, 165, $mrg_tp + 24); //Linea despues de fecha salida
         $pdf->SetY($mrg_tp + 8);
 
         $pdf->SetY(8);
@@ -91,7 +91,7 @@ class OrdenServicio extends BaseController
         $pdf->Cell(10, 5, 'No. ' . $res['n_orden'], 0, 1, 'L');
 
         /*****  Detalles orden de trabajo *****/
-        
+
         /***** PRIMER RECUADRO ******/
         $pdf->Rect(2, 29, 108, 40, '');
         // ---PROPIETARIO
@@ -100,13 +100,13 @@ class OrdenServicio extends BaseController
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(25, 5, 'PROPIETARIO', 0, 1, 'L');
         $pdf->line(2, 34, 110, 34);
-        
+
         $pdf->SetY(34);
         $pdf->SetX(2);
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(2, 5, '' . $res['tipo_tercero'] == 5 ? $res['nomCliente'] : $res['razon_social'] .  '', 0, 1, 'L');
         $pdf->line(2, 39, 110, 39);
-        
+
         // ---CC O NIT
         $pdf->SetY(39);
         $pdf->SetX(2);
@@ -144,9 +144,9 @@ class OrdenServicio extends BaseController
         $pdf->SetX(2);
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(2, 5, '3004432536', 0, 1, 'L');
-        
-        
-        
+
+
+
         /***** SEGUNDO RECUADRO ******/
         $pdf->line(71, 29, 71, 69);
 
@@ -159,7 +159,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(29);
         $pdf->SetX(73);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, ''. $res['marca'] .'', 0, 1, 'L');
+        $pdf->Cell(2, 5, '' . $res['marca'] . '', 0, 1, 'L');
 
         // ---TIPO
         $pdf->SetY(34);
@@ -176,14 +176,14 @@ class OrdenServicio extends BaseController
         $pdf->SetY(39);
         $pdf->SetX(73);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, ''. $res['modelo'] .'', 0, 1, 'L');
+        $pdf->Cell(2, 5, '' . $res['modelo'] . '', 0, 1, 'L');
 
         // ---MOTOR
         $pdf->SetY(44);
         $pdf->SetX(55);
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(25, 5, 'MOTOR', 0, 1, 'L');
-        
+
         // ---CHASIS
         $pdf->SetY(49);
         $pdf->SetX(55);
@@ -199,7 +199,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(54);
         $pdf->SetX(73);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, ''. $res['color'] .'', 0, 1, 'L');
+        $pdf->Cell(2, 5, '' . $res['color'] . '', 0, 1, 'L');
 
         // ---PLACA
         $pdf->SetY(59);
@@ -210,7 +210,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(59);
         $pdf->SetX(73);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, ''. $res['placa'] .'', 0, 1, 'L');
+        $pdf->Cell(2, 5, '' . $res['placa'] . '', 0, 1, 'L');
 
         // ---KMS
         $pdf->SetY(64);
@@ -221,7 +221,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(64);
         $pdf->SetX(73);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, ''. $res['kms'] .'', 0, 1, 'L');
+        $pdf->Cell(2, 5, '' . $res['kms'] . '', 0, 1, 'L');
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_trabajo_' . $res['n_orden'] . '.pdf', "F");
@@ -255,108 +255,115 @@ class OrdenServicio extends BaseController
         $placa = $this->request->getPost('placa');
         $id = $this->request->getPost('id');
         if ($orden != '') {
-            $res = $this->vehiculos->buscarVehiculo($orden, '', 0);
+            $res = $this->ordenes->buscarOrden($orden, '', 0);
             return json_encode($res);
         } else if ($placa != '') {
-            $res = $this->vehiculos->buscarVehiculo('', $placa, 0);
+            $res = $this->ordenes->buscarOrden('', $placa, 0);
             return json_encode($res);
         } else if ($id != 0) {
-            $res = $this->vehiculos->buscarVehiculo('', '', $id);
+            $res = $this->ordenes->buscarOrden('', '', $id);
             return json_encode($res);
         }
     }
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
-        $idVechiculo = $this->request->getPost('id');
-        // $tipoCliente = $this->request->getPost('tipoCliente');
-        // $cliente = $this->request->getPost('cliente');
+        $idOrden = $this->request->getPost('id');
+        $tipoCliente = $this->request->getPost('tipoCliente');
+        $cliente = $this->request->getPost('cliente');
 
-        // $nombreRespon = $this->request->getPost('nombreRespon');
-        // $apellidoRespon = $this->request->getPost('apellidoRespon');
-        // $tipoDocRes = $this->request->getPost('tipoDocRes');
-        // $nIdentiRes = $this->request->getPost('nIdentiRes');
+        $nombreRespon = $this->request->getPost('nombreRespon');
+        $apellidoRespon = $this->request->getPost('apellidoRespon');
+        $tipoDocRes = $this->request->getPost('tipoDocRes');
+        $nIdentiRes = $this->request->getPost('nIdentiRes');
 
         $vehiculo = $this->request->getVar('vehiculo');
-        
+
         $orden = $this->request->getPost('orden');
-       
+
         $estado = $this->request->getPost('estado');
 
         $fechaEntrada = $this->request->getPost('fechaEntrada');
         $fechaSalida = $this->request->getPost('fechaSalida');
         $usuarioCrea = session('id');
-        // $fechaActual = date('Y-m-d');
-        // $tipoMov = 0;
+        $fechaActual = date('Y-m-d');
+        $tipoMov = 0;
 
         $data = [
             'n_orden' => $orden,
-            'id_vehiculo' => $vehiculo,           
+            'id_vehiculo' => $vehiculo,
+            'nombres' => empty($nombreRespon) || $tipoCliente == 5 ? null : $nombreRespon,
+            'apellidos' =>  empty($apellidoRespon) || $tipoCliente == 5 ? null : $apellidoRespon,
+            'n_identificacion' =>  empty($nIdentiRes) || $tipoCliente == 5 ? null : $nIdentiRes,
             'estado' => $estado,
             'fecha_entrada' => $fechaEntrada,
             'fecha_salida' => $fechaSalida,
             'usuario_crea' => $usuarioCrea
         ];
 
-        // $estado == 38 ? $tipoMov = 58 : $tipoMov = 0;
+        $estado == 38 ? $tipoMov = 58 : $tipoMov = 0;
 
-        // $dataMovimiento = [
-        //     'id_tercero' => $cliente,
-        // ];
+        $dataMovimiento = [
+            'id_tercero' => $cliente,
+        ];
 
 
         if ($tp == 2) {
-            if ($this->ordenes->update($idVechiculo, $data)) {
-                
-                // $res = $this->propietario->obtenerPropietario($idVechiculo);
-                // array_push($dataMovimiento, [
-                //     'estado' => $estado,
-                //     'id_vehiculo' => $idVechiculo,
-                //     'fecha_movimiento' => $fechaActual,
-                //     'tipo_movimiento' => $tipoMov
-                // ]);
-                // $this->movimiento->save($dataMovimiento); //Movimiento
-                // //Propietario
-                // $dataPropie = [
-                //     'id_vehiculo' => $idVechiculo,
-                //     'id_tercero' => $cliente,
-                //     'tipo_propietario' => $tipoCliente
-                // ];
-                // if (empty($res)) {
-                //     if ($this->propietario->save($dataPropie)) {
+            if ($this->ordenes->update($idOrden, $data)) {
+
+                $res = $this->propietario->obtenerPropietario($vehiculo);
+                $dataPropie = [
+                    'id_vehiculo' => $vehiculo,
+                    'id_tercero' => $cliente,
+                    'tipo_propietario' => $tipoCliente,
+
+                ];
+                if (empty($res)) {
+                    //Propietario
+                    if ($this->propietario->save($dataPropie)) {
+                        array_push($dataMovimiento, [
+                            'estado' => $estado,
+                            'id_vehiculo' => $vehiculo,
+                            'fecha_movimiento' => $fechaActual,
+                            'tipo_movimiento' => $tipoMov
+                        ]);
+                        $this->movimiento->save($dataMovimiento); //Movimiento
                         return json_encode(1);
-                    // } else {
-                        // return json_encode(2);
-                    // }
-                // } else {
-                    // if ($this->propietario->update($res['id_propietario'], $dataPropie)) {
-                        // return json_encode(1);
-                    // } else {
-                        // return json_encode(2);
-                    // }
-                // }
+                    } else {
+                        return json_encode(2);
+                    }
+                } else {
+                    if ($this->propietario->update($res['id_propietario'], $dataPropie)) {
+                        return json_encode(1);
+                    } else {
+                        return json_encode(2);
+                    }
+                }
             }
         } else {
             if ($this->ordenes->save($data)) {
-                // $idVechiulo = $this->vehiculos->getInsertID();
-
-                // $dataMovimiento = [
-                //     'id_tercero' => $cliente,
-                //     'id_vehiculo' => $idVechiulo,
-                //     'fecha_movimiento' => $fechaActual,
-                //     'estado' => $estado,
-                //     'tipo_movimiento' => 57,
-                //     'usuario_crea' => $usuarioCrea
-                // ];
-                // $dataPropie = [
-                //     'id_vehiculo' => $idVechiulo,
-                //     'id_tercero' => $cliente,
-                //     'tipo_propietario' => $tipoCliente                   
-                // ];
-                // $this->movimiento->save($dataMovimiento); //Movimiento
-                // if ($this->propietario->save($dataPropie)) {
+                $dataPropie = [
+                    'id_vehiculo' => $vehiculo,
+                    'id_tercero' => $cliente,
+                    'tipo_propietario' => $tipoCliente
+                ];
+                $res = $this->propietario->obtenerPropietario($vehiculo);
+                if (!empty($res)) {
                     return json_encode(1);
-                // }
+                } else {
+                    if ($this->propietario->save($dataPropie)) {
+                        $dataMovimiento = [
+                            'id_tercero' => $cliente,
+                            'id_vehiculo' => $vehiculo,
+                            'fecha_movimiento' => $fechaActual,
+                            'estado' => $estado,
+                            'tipo_movimiento' => 57,
+                            'usuario_crea' => $usuarioCrea
+                        ];
+                        $this->movimiento->save($dataMovimiento); //Movimiento
+                        return json_encode(1);
+                    }
+                }
             } else {
                 return json_encode(2);
             }
@@ -388,12 +395,11 @@ class OrdenServicio extends BaseController
         ];
 
 
-        if ($this->vehiculos->update($id, ['estado' => $estado])) {
+        if ($this->ordenes->update($id, ['estado' => $estado])) {
             $this->movimiento->save($dataMovimiento); //Movimiento
             return json_encode(1);
         } else {
             return json_encode(2);
         }
     }
-
 }
