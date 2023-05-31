@@ -31,7 +31,7 @@
 </div>
 
 <!-- FORMULARIO PARA AGREGAR - EDITAR USUARIO -->
-<form autocomplete="off" id="formularioUsuarios">
+<form autocomplete="off" id="formularioUsuarios" enctype="multipart/form-data">
     <div class="modal fade" id="agregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" hidden>
         <input type="text" name="tp" id="tp" hidden>
@@ -127,6 +127,10 @@
                                         <input type="password" name="confirContra" class="form-control" id="confirContra" minlength="5">
                                     </div>
                                     <small id="msgConfir" class="normal"></small>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                        <label for="nombres" class="col-form-label">Foto de Usuario:</label>
+                                        <input type="file" name="foto" id="foto">
                                 </div>
                             </div>
                         </form>

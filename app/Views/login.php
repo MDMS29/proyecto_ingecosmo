@@ -32,7 +32,7 @@
                     <div class="input-group-text">
                         <!-- <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()"> -->
                         <button type="button" style="border: none; background-color:none;" id="verContrasena">
-                            <i id="eye" class="bi bi-eye-fill fs-4" style="font-size: 18px !important;"></i>
+                            <i id="eye" class="bi bi-eye-fill fs-4" style="font-size: 18px !important; background-color: none !important;"></i>
                         </button>
                     </div>
                 </div>
