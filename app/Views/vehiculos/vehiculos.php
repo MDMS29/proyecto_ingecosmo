@@ -158,7 +158,7 @@
         }
     })
     //Tabla de vehiculos
-    var contador = 1;
+    var contador = 0;
     var tablaVehiculos = $('#tableVehiculos').DataTable({
         ajax: {
             url: '<?= base_url('vehiculos/obtenerVehiculos') ?>',
@@ -168,7 +168,7 @@
         columns: [{
                 data: null,
                 render: function(data, type, row) {
-                    contador =+1
+                    contador = contador + 1
                     return '<b>' + contador + '</b>'
                 }
             }, {
@@ -368,7 +368,7 @@
                     color,
                     kms,
                     combustible,
-                    estado : 'A'
+                    estado: 'A'
                 },
                 success: function(data) {
                     if (tp == 2) {
@@ -377,6 +377,7 @@
 
                         data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
                     }
+                    contador = 0
                     tablaVehiculos.ajax.reload(null, false)
                     $('#agregarVehiculo').modal('hide')
                 }

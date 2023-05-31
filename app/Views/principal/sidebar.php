@@ -116,7 +116,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
+                            <a href="<?php echo base_url('ordenServicio') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
                                 <p id="pa">Ordenes de Servicio</p>
                             </a>
                         </li>
