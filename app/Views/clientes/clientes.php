@@ -865,7 +865,7 @@
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: [editCorreo].includes('') || editCorreo == 0 ? `'${contadorCorreo}111e'` : editCorreo,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,
             prioridad
         }
@@ -920,7 +920,7 @@
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
                                 <td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
-                                    <button class="btn" onclick="eliminarCorreo(${correos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
+                                    <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
                                 </td>
                             </tr>`
             }

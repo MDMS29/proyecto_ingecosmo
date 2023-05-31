@@ -59,7 +59,7 @@
           <div id="agregar">
             <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/img/plus-b.png" alt="icon-plus" width="20">
           </div>
-          <h1 class="modal-title" id="titulo1">Agregar</h1>
+          <h1 class="modal-title fs-5 text-center" id="titulo1">Agregar</h1>
           <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="modalAgregar2">
@@ -93,7 +93,7 @@
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Estante:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
-                <option selected value="">-- Seleccione Un Estante--</option>
+                <option selected value="">-- Seleccione un estante--</option>
                 <?php foreach ($estanteria as $data) { ?>
                   <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
@@ -104,9 +104,8 @@
               <label for="exampleDataList" class="col-form-label">Fila:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
                 <option selected value="">-- Seleccione una fila--</option>
-                <?php foreach ($fila as $fila) { ?>
-                  <option value="<?= $fila['numeroFila'] ?>"><?= $fila['numeroFila'] ?></option>
-                <?php } ?>
+
+
               </select>
             </div>
           </div>
@@ -321,6 +320,28 @@
 
   }
 
+
+  $('#estante1').on("change", function(e) {
+    estante = $('#estante1').val()
+    $.ajax({
+      url: '<?php echo base_url('insumos/obtenerFilasInsumos/') ?>' + estante,
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        console.log(res)
+
+        var cadena
+        cadena = `<option value="" selected>-- Seleccione una fila --</option>`
+        for (let i = 0; i < res.length; i++) {
+
+          cadena += `<option value=${res[i].fila
+          }>${res[i].fila}</option>`
+        }
+        $('#fila1').html(cadena)
+      }
+    })
+  })
+
   // funcion traer detalles del material
 
 
@@ -378,7 +399,7 @@
     idCategoria = $("#idCategoria").val()
     fila = $("#fila1").val()
     estante = $("#estante1").val()
-    if ([nombre, precioCompra, cantidadActual, ].includes("")) {
+    if ([nombre, precioCompra, cantidadActual, fila, estante ].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",

@@ -62,7 +62,7 @@
                 data : null, 
                 render : function(data, type, row) {
                     contador = contador + 1;
-                    return "<b>" + '1' + "</b>";
+                    return "<b>" + contador + "</b>";
                 }
             },
             {
