@@ -151,9 +151,10 @@ html {
   }
 }
 
+
 /* Estilos para pantallas grandes */
 @media (min-width: 768px) {
-  #sidebar {
+   #sidebar {
     display: block;
   }
 
@@ -165,7 +166,7 @@ html {
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 767px) {
-  #sidebar {
+   #sidebar {
     display: none;
     pointer-events: none;
   }
@@ -176,7 +177,7 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-  }
+  } 
 
   #content {
     margin-top: 8vh;

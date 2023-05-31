@@ -2,7 +2,7 @@
 
 <!-- TABLA MOSTRAR VEHICULOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-orden-b.png') ?>" />Historial Ordenes de Servicio</h2>
+    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-orden-b.png') ?>" /> Historial Ordenes de Servicio</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
             <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">Responsable</a> - <a class="toggle-vis btn" data-column="1">Tipo Responsable</a> - <a class="toggle-vis btn" data-column="4">Proceso Taller</a>
