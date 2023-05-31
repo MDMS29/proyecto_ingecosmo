@@ -32,9 +32,9 @@
                                     </div>
                                     <!-- INFORMACION DINAMICA -->
                                 </div>
-                                <div class="bloque2">
-                                    <button class="btn btnRedireccion" id="mover"  onclick="selectMateriales('<?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> Mover</button>
-                                </div>
+                                <!-- <div class="bloque2">
+                                    <button class="btn btnRedireccion" id="mover"  onclick="selectMateriales('< ?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> Mover</button>
+                                </div> -->
                             </div>
                         </div>
                     <?php } ?>
@@ -42,8 +42,6 @@
             </div>
         </div>
         <div class="footer-page">
-
-
             <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
         </div>
     </div>
@@ -58,7 +56,7 @@
 
 
                     <div class="tituloHeader">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1>
+                        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos < ?php echo $dato['fila'] ?></h1> -->
                     </div>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarX" onclick="limpiarCampos()"></button>
@@ -183,9 +181,22 @@
             dataType: 'json',
             success: function(res) {
                 var cadena = ""
+                var tituloModal = ""
+                tituloMover = $(".tituloHeader")
                 for (let i = 0; i < res.length; i++) {
-                    cadena += `<p class="subTexto"><button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;"><i class="bi bi-caret-right-fill"></i>${res[i].nombre}</button></p>`
+                    cadena += `<p class="subTexto">
+                    
+                    <details>
+                    <summary>
+                    <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
+                    </summary>
+
+                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('<?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> </button>
+                    </details></p>`;
+
+                    tituloModal =`<h3>${res[i].nombre}</h3>`
                 }
+                tituloMover.html(tituloModal)
                 $(`#${bloque[i].id}`).html(cadena)
             }
         })

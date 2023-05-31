@@ -123,7 +123,7 @@
 .btnRedireccion {
   color: #161666;
   text-decoration: none;
-  border: 2px solid #161666;
+  border: 2px solid #161666 !important;
   border-radius: 8px;
   margin-top: 0;
   padding: 8px;
@@ -136,6 +136,33 @@
 .btnRedireccion:hover{
   color: rgb(255, 255, 255);
   background-color: #161666;
+}
+
+summary{
+  display: list-item;
+  cursor: pointer;
+  margin: 5px;
+  height: 10px !important;
+}
+
+details{
+  height: 20px;
+}
+
+/* details.detalles{
+  padding: 1em;
+  border: 1px solid #121212;
+  border-radius: 4px;
+} */
+
+.btnMover{
+  color: #161666;
+  font-size: 15px;
+}
+
+.btnMover:hover{
+  color: #161666;
+  font-size: 17px;
 }
 
 .imagenEncab{
