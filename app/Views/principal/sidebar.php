@@ -34,7 +34,8 @@
                 <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" />
             </button>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0" >
+                <ul id="list" class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <hr class="nav-item dropdown" style="border-color: white">
                     <li><a class="nav-item dropdown" href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " style="color: white; margin-left: 10px;"><img title="Perfil" style=" width:40px; height:40px; display:inline-block " src="<?php echo base_url('/img/usuario.png') ?>" /> <?= session('rol') ?></a></li>
                     <hr class="nav-item dropdown" style="border-color: white">
                     <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
@@ -77,108 +78,119 @@
         </div>
     </nav>
 
-    <div>
-        <nav id="sidebar" class="active" style="position: sticky;top:0px;">
-            <!-- <h1><a class="logo"></a></h1> -->
-            <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
-                <ul id="allElement" class="list-unstyled components mb-5">
 
-                    <li class="active">
-                        <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
-                            <p id="pa"><?= session('rol') ?></p>
-                        </a>
-                    </li>
 
-                    <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
-                        <li>
-                            <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
-                                <p id="pa">Trabajadores</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img title="Clientes" style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
-                                <p id="pa">Clientes</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
-                                <p id="pa">Repuestos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('insumosAdmin') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
-                                <p id="pa">Insumos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
-                                <p id="pa">Vehiculos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
-                                <p id="pa">Ordenes de Servicio</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('proveedores') ?>" id="aa"><span><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
-                                <p id="pa">Proveedores</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
-                                <p id="pa">Aliados</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
-                                <p id="pa">Usuarios</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Ordenes Servicio" style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
-                                <p id="pa">Historial Ordenes</p>
-                            </a>
-                        </li>
-                    <?php } else if (session('idRol') == 3) { ?>
-                        <li>
-                            <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
-                                <p id="pa">Repuestos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
-                                <p id="pa">Insumos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('estanteria') ?>" id="aa"><span><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
-                                <p id="pa">Estanteria</p>
-                            </a>
-                        </li>
-                    <?php } ?>
+
+    <nav id="sidebar" class="active" style="position: sticky; ">
+        <!-- <h1><a class="logo"></a></h1> -->
+        <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
+            <ul id="allElement" class="list-unstyled components mb-5">
+
+                <li class="active">
+                    <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
+                        <p id="pa"><?= session('rol') ?></p>
+                    </a>
+                </li>
+
+                <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
                     <li>
-                        <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
-                            <p id="pa">Historial</p>
+                        <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
+                            <p id="pa">Trabajadores</p>
                         </a>
                     </li>
                     <li>
-                        <a href="" id="aa" class="salir"><span><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
-                            <p id="pa">Cerrar Sesion</p>
+                        <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img title="Clientes" style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
+                            <p id="pa">Clientes</p>
                         </a>
                     </li>
-                </ul>
-                <nav>
-                    <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top:5px">
-                        <button type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
-                            <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" /></i>
-                            <span class="sr-only">Toggle Menu</span>
-                        </button>
-                    </div>
-                </nav>
-            </div>
-        </nav>
-    </div>
+                    <li>
+                        <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                            <p id="pa">Repuestos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('insumosAdmin') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <p id="pa">Insumos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
+                            <p id="pa">Vehiculos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
+                            <p id="pa">Ordenes de Servicio</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('proveedores') ?>" id="aa"><span><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
+                            <p id="pa">Proveedores</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
+                            <p id="pa">Aliados</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
+                            <p id="pa">Usuarios</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Ordenes Servicio" style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
+                            <p id="pa">Historial Ordenes</p>
+                        </a>
+                    </li>
+                <?php } else if (session('idRol') == 3) { ?>
+                    <li>
+                        <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                            <p id="pa">Repuestos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                            <p id="pa">Insumos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('estanteria') ?>" id="aa"><span><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                            <p id="pa">Estanteria</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" id="aa"><span><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /></span>
+                            <p id="pa">Carrito de Materiales</p>
+                        </a>
+                    </li>
+                <?php } ?>
+                <li>
+                    <a href="" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
+                        <p id="pa">Peticiones</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                        <p id="pa">Historial</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="" id="aa" class="salir"><span><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
+                        <p id="pa">Cerrar Sesion</p>
+                    </a>
+                </li>
+            </ul>
+            <nav>
+                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top:5px">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
+                        <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" /></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </nav>
 
     <div>
         <a href="<?= base_url('/home') ?>"><img class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>" /></a>
