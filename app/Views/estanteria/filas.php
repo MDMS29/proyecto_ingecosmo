@@ -68,7 +68,7 @@
                     <form>
 
                         <div class="mb-3">
-                            <input type="text" hidden class="" id="nombreProd" name="nombreProd">
+                            <input type="text"  class="" id="nombreProd" name="nombreProd">
                         </div>
 
                         <div class="mb-3">
@@ -263,22 +263,22 @@
     // ---------------------------validaciones---------------------------
 
     //Identificar si el numero de identificacion no este registrado
-    $('#fila').on('input', function(e) {
-        inputFila = $('#fila').val()
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputFila,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0]['fila'] == inputFila) {
-                    $('#msgDoc').text('')
-                    validIFila = true
-                } else {
-                    buscarFila(0, inputFila)
-                }
-            }
-        })
-    })
+    // $('#fila').on('input', function(e) {
+    //     inputFila = $('#fila').val()
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: "< ?php echo base_url('srchUsu/') ?>" + id + "/" + inputFila,
+    //         dataType: 'JSON',
+    //         success: function(res) {
+    //             if (res[0]['fila'] == inputFila) {
+    //                 $('#msgDoc').text('')
+    //                 validIFila = true
+    //             } else {
+    //                 buscarFila(0, inputFila)
+    //             }
+    //         }
+    //     })
+    // })
 
     function buscarFila(fila, inputFila) {
         $.ajax({

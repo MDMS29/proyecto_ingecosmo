@@ -9,18 +9,23 @@
     <div class="container emp-profile">
         <form method="post">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
-                        <div class="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file" accept="image/png" />
+
+                <form  action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img style="border-radius: 5px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                            <div style="border-radius: 5px;" class="file btn btn-lg btn-primary">
+                                Inserte foto
+                                <input type="file" name="upload" accept="image/png" />
+                            </div>
                         </div>
+                        <input type="submit" value="cambiar">
                     </div>
-                </div>
+                </form>
+
                 <div class="col-md-7" id="encP">
                     <div class="profile-head">
-                        <h5>
+                        <h5 style="font-weight: bold;">
                             <?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
                         </h5>
 
@@ -431,7 +436,7 @@
             password2.type = "password";
         }
     }
-    
+
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
         input = $(`#${inputMsg}`)
@@ -513,7 +518,7 @@
                         url: '<?= base_url('usuarios/salir') ?>',
                         dataType: 'json',
                         success: function(data) {
-                            if(data == 1){
+                            if (data == 1) {
                                 window.location.href = '<?= base_url('') ?>'
                             }
                         }

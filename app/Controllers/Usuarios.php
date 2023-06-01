@@ -25,6 +25,26 @@ class Usuarios extends BaseController
         $this->correos = new EmailModel();
         helper('sistema');
     }
+    
+    public function guardarFoto(){
+        $uploads='upload';
+        $config['upload_path']="uploads/";
+        $config['file_name']="nombre_archivo";
+        $config['allowed_types']="jpg|png|jpeg|gif";
+        $config['max_size']="5000";
+        $config['max_width']="2000";
+        $config['max_height']="2000";
+
+        $this->load->library('uploads', $config);
+
+        if (!$this->upload->do_upload($uploads)) {
+            // $data['uploadError']=$this->upload->display_errors();
+            echo $this->upload->display_errors();
+            return;
+        }
+        var_dump($this->upload->data());
+    }
+    
     public function login()
     {
         $usuario = $this->request->getPost('usuario');
@@ -113,6 +133,21 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('nIdenti');
         $rol = $this->request->getVar('rol');
         $contra = $this->request->getVar('contra');
+        $foto = "";
+        if (isset($_FILES["foto"])) {
+            $file=$_FILES["foto"];
+            $nombre=$file["name"];
+            $tipo=$file["type"];
+            $ruta_provisional=$file["tmp_name"];
+            $size=$file["size"];
+            $dimensiones=getimagesize($ruta_provisional);
+            $width=$dimensiones[0];
+            $height=$dimensiones[1];
+            $carpeta="/public/img/fotos/";
+            if ($tipo != 'image.jpg/' && $tipo != 'image.jpeg/' && $tipo != 'image.gif/'&& $tipo != 'image.png/') {
+                # code...
+            }
+        }
 
         if ($tp == 2) {
             //Actualizar datos

@@ -56,7 +56,7 @@
 
                         <div class="mb-3" style="width: 100%; ">
                             <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                            <input type="number" class="form-control" id="nit" name="nit"></input>
+                            <input type="text" class="form-control" id="nit" name="nit"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
                     </div>

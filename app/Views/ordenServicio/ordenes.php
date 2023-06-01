@@ -4,14 +4,14 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/orden-servicio-b.png') ?>" /> Ordenes de Servicio</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Responsable</a> - <a class="toggle-vis btn" data-column="2">Tipo Responsable</a> - <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Kilometraje</a> - <a class="toggle-vis btn" data-column="8">Combustible</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Cliente</a> - <a class="toggle-vis btn" data-column="2">Responsable</a> - <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Kilometraje</a> - <a class="toggle-vis btn" data-column="8">Combustible</a>
         </div>
         <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">N° Orden</th>
+                    <th scope="col" class="text-center">Cliente</th>
                     <th scope="col" class="text-center">Responsable</th>
-                    <th scope="col" class="text-center">Tipo Responsable</th>
                     <th scope="col" class="text-center">Placa</th>
                     <th scope="col" class="text-center">Modelo</th>
                     <th scope="col" class="text-center">Marca</th>
@@ -340,7 +340,7 @@
                     //Validar fecha
                     var fechaTem = (dia < 10 ? dia : dia) + "/" + (mes < 10 ? mes : mes) + "/" + anio;
                     var fechaActual = new Date();
-                    if (row.estado == 'Entregado') {
+                    if (row.proceso == 'Entregado') {
                         fechaValid = 'entregado'
                     } else if (fechaActual.toLocaleDateString() === fecha.toLocaleDateString()) {
                         fechaValid = 'hoy';
@@ -361,8 +361,8 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarVehiculo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Vehiculo"></button>' +
-                        '<button class="btn" data-href=' + data.id_vehiculo + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' +
-                        '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_vehiculo + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
+                        '<button class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' +
+                        '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_orden + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
                     )
                 }
             }
@@ -378,11 +378,47 @@
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');
     }
+    //Seleccionar vehiculo
+    $('#vehiculo').on('change', function(e) {
+        id = $('#vehiculo').val()
+        $.ajax({
+            url: "<?= base_url('vehiculos/buscarVehiculo') ?>",
+            type: 'POST',
+            data: {
+                orden: '',
+                placa: '',
+                id
+            },
+            success: function(data) {
+                data = JSON.parse(data)
+                verTipoCliente(data['tipo_propietario'], data['cliente'])
+                $('#tipoCliente').val(data['tipo_propietario'])
+                if ($('#tipoCliente').val() != 5) {
+                    $('#nombreRespon').val(data['nomRespon'])
+                    $('#apellidoRespon').val(data['apeRespon'])
+                    $('#nIdentiRes').val(data['n_identificacion'])
+                    $('#divResponsable').addClass('d-flex')
+                } else {
+                    $('#divResponsable').removeClass('d-flex')
+                    $('#nombreRespon').val('')
+                    $('#apellidoRespon').val('')
+                    $('#nIdentiRes').val('')
+                }
+                $('#tipoCliente').val(data['tipo_propietario'])
+                $('#cliente').val(data['cliente'])
+                $('#marca').val(data['id_marca'])
+                $('#nFabrica').val(data['modelo'])
+                $('#color').val(data['color'])
+                $('#kms').val(data['kms'])
+                $('#combustible').val(data['combustible'])
+            }
+        })
+    })
     //Tomar informacion del vehiculo
     function seleccionarOrden(id, tp) {
         if (tp == 2) {
             $.ajax({
-                url: "<?= base_url('OrdenServicio/buscarOrden') ?>",
+                url: "<?= base_url('ordenServicio/buscarOrden') ?>",
                 type: 'POST',
                 data: {
                     orden: '',
@@ -397,6 +433,7 @@
                     $('#ordenTrabajo').removeAttr('disabled')
                     $('#ordenTrabajo').val(data['n_orden'])
                     $('#tipoCliente').val(data['tipo_propietario'])
+                    $('#cliente').val(data['cliente'])
                     if ($('#tipoCliente').val() != 5) {
                         $('#nombreRespon').val(data['nomRespon'])
                         $('#apellidoRespon').val(data['apeRespon'])
@@ -408,15 +445,14 @@
                         $('#apellidoRespon').val('')
                         $('#nIdentiRes').val('')
                     }
-                    $('#placa').val(data['placa'])
+                    $('#vehiculo').val(data['id_vehiculo'])
                     $('#placaHidden').val(data['placa'])
-                    $('#cliente').val(data['cliente'])
                     $('#marca').val(data['id_marca'])
                     $('#nFabrica').val(data['modelo'])
                     $('#color').val(data['color'])
                     $('#kms').val(data['kms'])
                     $('#combustible').val(data['combustible'])
-                    $('#estado').val(data['estado'])
+                    $('#estado').val(data['proceso'])
                     $('#fechaEntrada').val(data['fecha_entrada'])
                     $('#fechaSalida').removeAttr('min', fechaLimite)
                     $('#fechaSalida').val(data['fecha_salida'])
@@ -426,6 +462,16 @@
                     $('#btnGuardar').text('Actualizar')
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
+
+                    //Disabled
+                    $('#tipoCliente').attr('disabled', '')
+                    $('#cliente').attr('disabled', '')
+                    $('#placaHidden').attr('disabled', '')
+                    $('#marca').attr('disabled', '')
+                    $('#nFabrica').attr('disabled', '')
+                    $('#color').attr('disabled', '')
+                    $('#kms').attr('disabled', '')
+                    $('#combustible').attr('disabled', '')
                 }
             })
         } else {
@@ -447,7 +493,7 @@
             $('#nombreRespon').val('')
             $('#apellidoRespon').val('')
             $('#nIdentiRes').val('')
-            $('#placa').val('')
+            $('#vehiculo').val('')
             $('#marca').val('')
             $('#nFabrica').val('')
             $('#color').val('')
@@ -464,6 +510,16 @@
 
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
+
+            //Disabled
+            $('#tipoCliente').attr('disabled', '')
+            $('#cliente').attr('disabled', '')
+            $('#placaHidden').attr('disabled', '')
+            $('#marca').attr('disabled', '')
+            $('#nFabrica').attr('disabled', '')
+            $('#color').attr('disabled', '')
+            $('#kms').attr('disabled', '')
+            $('#combustible').attr('disabled', '')
         }
     }
     //Input dinamico para los clientes
@@ -584,10 +640,10 @@
 
         vehiculo = $('#vehiculo').val()
 
-        // nombreRespon = $('#nombreRespon').val()
-        // apellidoRespon = $('#apellidoRespon').val()
-        // tipoDocRes = $('#tipoDocRes').val()
-        // nIdentiRes = $('#nIdentiRes').val()
+        nombreRespon = $('#nombreRespon').val()
+        apellidoRespon = $('#apellidoRespon').val()
+        tipoDocRes = $('#tipoDocRes').val()
+        nIdentiRes = $('#nIdentiRes').val()
 
         estado = $('#estado').val()
         fechaEntrada = $('#fechaEntrada').val()
@@ -609,10 +665,10 @@
                     tipoCliente,
                     cliente,
 
-                    // nombreRespon,
-                    // apellidoRespon,
-                    // tipoDocRes,
-                    // nIdentiRes,
+                    nombreRespon,
+                    apellidoRespon,
+                    tipoDocRes,
+                    nIdentiRes,
 
                     estado,
                     fechaEntrada,
@@ -634,15 +690,15 @@
     // Cambiar estado del vehiculo
     $('#cambiarEstado').on('show.bs.modal', function(e) {
         $.ajax({
-            url: '<?= base_url('vehiculos/buscarVehiculo') ?>',
+            url: '<?= base_url('ordenServicio/buscarOrden') ?>',
             type: 'POST',
             dataType: 'json',
             data: {
                 id: $(e.relatedTarget).data('href')
             },
             success: function(data) {
-                $('#tituloModalEstado').text('CAMBIAR ESTADO - ' + data.placa)
-                $('#estadoVehiculo').val(data.estado)
+                $('#tituloModalEstado').text('Cambiar Estado - ' + data.n_orden)
+                $('#estadoVehiculo').val(data.proceso)
                 $('#idVehi').val($(e.relatedTarget).data('href'))
             }
         })
@@ -654,7 +710,7 @@
             return mostrarMensaje('error', '¡Hay campos vacios!')
         } else {
             $.ajax({
-                url: '<?= base_url('vehiculos/cambiarEstado') ?>',
+                url: '<?= base_url('ordenServicio/cambiarEstado') ?>',
                 dataType: 'json',
                 type: 'POST',
                 data: {

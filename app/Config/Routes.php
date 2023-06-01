@@ -40,7 +40,7 @@ $routes->post('/instrPro', 'Proveedor::insertar'); //Buscar CLiente
 $routes->post('/srchUsu/(:num)/(:num)', 'Usuarios::buscarUsuario/$1/$2'); //Buscar Usuario
 $routes->post('/srchCli/(:num)/(:num)', 'Clientes::buscarCliente/$1/$2'); //Buscar Cliente
 $routes->post('/srchIns/(:num)/(:any)', 'Insumos::buscarInsumo/$1/$2'); //Buscar Insumo
-$routes->post('/srchPro/(:num)/(:num)/(:num)', 'Proveedores::buscarProveedor/$1/$2/$3'); //Buscar Cliente el segundo num puedeser alpha para pasar el nit que numero con caracter especial, aunque por eso es que no recoge ningun dato, pero si es num, al momento de recoger un nit con caracter especial como -, pues no lo recoge
+$routes->post('/srchPro/(:num)/(:any)/(:num)', 'Proveedores::buscarProveedor/$1/$2/$3'); //Buscar Cliente el segundo num puedeser alpha para pasar el nit que numero con caracter especial, aunque por eso es que no recoge ningun dato, pero si es num, al momento de recoger un nit con caracter especial como -, pues no lo recoge
 $routes->post('/srchTra/(:num)/(:num)', 'Trabajadores::buscarTrabajador/$1/$2'); //Buscar Aliado
 $routes->post('/srchAli/(:num)/(:num)/(:num)', 'Aliados::buscarAliado/$1/$2/$3'); //Buscar Aliado
 $routes->post('/login', 'Usuarios::login');

@@ -1,11 +1,9 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
+<link rel="stylesheet" href="<?= base_url('css/materiales.css') ?>">
 
-<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.002);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" />Insumos</h2>
+<div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" /> Insumos</h2>
     <div class="table-responsive p-2">
-    <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Categoria del insumo</a> - <a class="toggle-vis btn" data-column="6">Estante</a> - <a class="toggle-vis btn" data-column="7">Fila</a>
-        </div>
         <table class="table table-striped" id="tableInsumosAdmin" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -21,77 +19,92 @@
             </thead>
             <tbody class="text-center">
                 <!-- TABLA PROVEDOORES -->
-                
+
             </tbody>
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarProveedor" onclick="seleccionarProveedor(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('/proveedores/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarInsumo" onclick="seleccionarInsumo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="<?php echo base_url('/insumos/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
-<!-- -----modal----------     -->
-<form method="POST" id="formularioProveedores" autocomplete="off">
-    <div class="modal fade" id="agregarProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+<!-- modal agregar -->
 
-                <div class="modal-header" id="modalHeader">
-                    <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>"/>
+<form id="formularioAgregar" autocomplete="off">
+  <input class="form-control" id="id" name="id" type="text" value="0" hidden>
+  <!-- <input type="text" value="< ?= $idCate ?>" id="idCategoria" hidden> -->
 
-                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus">
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"></h1>
-                    </div>
+  <input type="text" name="id" id="id" hidden>
+  <input type="text" name="tp" id="tp" hidden>
 
-                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <form>
-                    <div class="modal-body d-flex">
-                        <div class="column-gap-3" style="width: 100%; padding-inline: 15px;">
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label" style="margin:0;">Nombre:</label>
-                                <input class="form-control" type="text" min='1' max='300' id="nombre" name="nombre">
-                                <small id="msgRaSo" class="invalido"></small>
-
-                                <input hidden id="tp" name="tp">
-                                <input hidden id="id" name="id">
-                            </div>
-
-                            <div class="mb-3">
-                                <label style="margin:0;" for="message-text" class="col-form-label">Existencia:</label>
-                                <input type="text" class="form-control" id="existencia" name="existencia"></input>
-                                <small id="msgNit" class="invalido"></small>
-                            </div>
-
-                            <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Placa de vehiculo:</label>
-                                <input class="form-control" id="placa" name="placa"></input>
-                            </div>
-
-                            <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Precio:</label>
-                                <input class="form-control" id="precio" name="precio"></input>
-                            </div>
-
-                            <div class="mb-3">
-                                <label style="margin:0;" class="col-form-label" for="message-text">proveedores:</label>
-                                <input class="form-control" id="proveedores" name="proveedores"></input>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
-                </div>
-            </div>
+  <div class="modal fade" id="agregarInsumo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="modalContent">
+        <div class="modal-header" id="modalHeader">
+          <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
+          <div id="agregar">
+            <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/img/plus-b.png" alt="icon-plus" width="20">
+          </div>
+          <h1 class="modal-title" id="titulo1">Agregar</h1>
+          <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body" id="modalAgregar2">
+
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Nombre:</label>
+              <input class="form-control" id="nombre" name="nombre" placeholder="">
+              <small id="msgAgregar" class="invalido2"></small>
+            </div>
+
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
+              <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+            </div>
+          </div>
+
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+              <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
+            </div>
+
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Cantidad Ingresada:</label>
+              <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+            </div>
+          </div>
+
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 80%;">
+              <label for="exampleDataList" class="col-form-label">Estante:</label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
+                <option selected value="">-- Seleccione Un Estante--</option>
+                <!-- < ?php foreach ($estanteria as $data) { ?>
+                  <option value="< ?= $data['id'] ?>">< ?= $data['nombre'] ?></option> -->
+                <!-- < ?php } ?> -->
+              </select>
+            </div>
+
+            <div class="mb-3" style="width: 80%;">
+              <label for="exampleDataList" class="col-form-label">Fila:</label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
+                <option selected value="">-- Seleccione una fila--</option>
+                <!-- < ?php foreach ($fila as $fila) { ?>
+                  <option value="< ?= $fila['numeroFila'] ?>">< ?= $fila['numeroFila'] ?></option>
+                < ?php } ?> -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="modalFooter">
+          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
+        </div>
+      </div>
     </div>
+  </div>
 </form>
 
 <!-- Modal Confirma Eliminar -->
@@ -125,7 +138,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-   
     //Editar o Agregar Proveedor
     function seleccionarProveedor(id, tp) {
         if (tp == 2) {
@@ -171,8 +183,7 @@
             },
             dataSrc: "",
         },
-        columns: [
-            {
+        columns: [{
                 data: 'nombre'
             },
             {
@@ -196,9 +207,9 @@
             //         return (
             //             '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
 
-            //             '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
-            //         );
-            //     },
+                //         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
+                //     );
+                // },
             // }
  
         ],
@@ -208,5 +219,4 @@
 
     });
     //Validacion de Razon Social
-    
 </script>
