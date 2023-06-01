@@ -12,10 +12,11 @@
                 <tr>
                     <th scope="col" class="text-center">#</th>
                     <th scope="col" class="text-center">Material</th>
-                    <th scope="col" class="text-center">Vehiculo</th>
+                    <th scope="col" class="text-center">Orden de trabajo</th>
                     <th scope="col" class="text-center">Trabajador</th>
                     <th scope="col" class="text-center">Cantidad</th>
                     <th scope="col" class="text-center">Fecha Movimiento</th>
+                    <th scope="col" class="text-center">Subtotal</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
                 </tr>
             </thead>
@@ -71,7 +72,7 @@
             {
                 data : null,
                 render : function(data, type, row) {
-                    return row.placa == null ? "No se encontro auto" : row.placa
+                    return row.placa == null ? "No se encontro oden de trabajo" : row.placa
                 } 
             },
   
@@ -86,6 +87,9 @@
             },
             {
                 data: "fecha_movimiento"
+            },
+            {
+                data: "subtotal"
             },
             {
                 data: "tipo_movimiento"
