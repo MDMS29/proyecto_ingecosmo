@@ -26,24 +26,24 @@ class Usuarios extends BaseController
         helper('sistema');
     }
     
-    public function guardarFoto(){
-        $uploads='upload';
-        $config['upload_path']="uploads/";
-        $config['file_name']="nombre_archivo";
-        $config['allowed_types']="jpg|png|jpeg|gif";
-        $config['max_size']="5000";
-        $config['max_width']="2000";
-        $config['max_height']="2000";
+    // public function guardarFoto(){ pruebitas jijijiji
+    //     $uploads='upload';
+    //     $config['upload_path']="uploads/";
+    //     $config['file_name']="nombre_archivo";
+    //     $config['allowed_types']="jpg|png|jpeg|gif";
+    //     $config['max_size']="5000";
+    //     $config['max_width']="2000";
+    //     $config['max_height']="2000";
 
-        $this->load->library('uploads', $config);
+    //     $this->load->library('uploads', $config);
 
-        if (!$this->upload->do_upload($uploads)) {
-            // $data['uploadError']=$this->upload->display_errors();
-            echo $this->upload->display_errors();
-            return;
-        }
-        var_dump($this->upload->data());
-    }
+    //     if (!$this->upload->do_upload($uploads)) {
+    //         // $data['uploadError']=$this->upload->display_errors();
+    //         echo $this->upload->display_errors();
+    //         return;
+    //     }
+    //     var_dump($this->upload->data());
+    // }
     
     public function login()
     {
@@ -133,7 +133,8 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('nIdenti');
         $rol = $this->request->getVar('rol');
         $contra = $this->request->getVar('contra');
-        $foto = "";
+        $foto = $this->request->getPost('foto');
+        $foto = "hola";
         if (isset($_FILES["foto"])) {
             $file=$_FILES["foto"];
             $nombre=$file["name"];
@@ -145,7 +146,13 @@ class Usuarios extends BaseController
             $height=$dimensiones[1];
             $carpeta="/public/img/fotos/";
             if ($tipo != 'image.jpg/' && $tipo != 'image.jpeg/' && $tipo != 'image.gif/'&& $tipo != 'image.png/') {
-                # code...
+                echo "Error, el archivo no es una imagen";
+            }else if($size>3*1024*1024){
+                echo "Error, el tamaño maximo permitido es de 3MB";
+            }else{
+                $src=$carpeta.$nombre;
+                move_uploaded_file($ruta_provisional, $src);
+                $foto="/public/img/fotos/".$nombre;
             }
         }
 
@@ -161,6 +168,7 @@ class Usuarios extends BaseController
                 'nombre_s' => $nombreS,
                 'apellido_p' => $apellidoP,
                 'apellido_s' => $apellidoS,
+                'foto' => $foto,
                 'contrasena' => $contra
             ];
             $this->usuarios->update($idUser, $usuarioUpdate);
@@ -176,6 +184,7 @@ class Usuarios extends BaseController
                 'nombre_s' => $nombreS,
                 'apellido_p' => $apellidoP,
                 'apellido_s' => $apellidoS,
+                'foto' => $foto,
                 'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
             ];
             $this->usuarios->save($usuarioSave);

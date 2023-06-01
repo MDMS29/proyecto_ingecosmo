@@ -584,6 +584,7 @@
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#rol').val(res[0]['id_rol'])
+                $('#foto').val(res[0]['foto'])
                 $('#labelNom').text('Cambiar Contraseña:')
                 $('#contra').val('')
                 $('#divContras').attr('hidden', '')
@@ -630,6 +631,7 @@
             $('#telefono').val('')
             $('#email').val('')
             $('#rol').val('')
+            $('#foto').val('')
             $('#contra').val('')
             $('#confirContra').val('')
             $('#divContras').removeAttr('hidden')
@@ -729,6 +731,7 @@
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
+        foto = $('#foto').val()
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -749,7 +752,8 @@
                     nIdenti,
                     rol,
                     contra,
-                    telefonos
+                    telefonos,
+                    foto
                 },
                 success: function(idUser) {
                     telefonos.forEach(tel => {

@@ -13,7 +13,7 @@
                 <form  action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img style="border-radius: 5px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                            <img style="border-radius: 5px;" <?= $usuario['foto'] ?> alt="Foto Usuario" />
                             <div style="border-radius: 5px;" class="file btn btn-lg btn-primary">
                                 Inserte foto
                                 <input type="file" name="upload" accept="image/png" />
