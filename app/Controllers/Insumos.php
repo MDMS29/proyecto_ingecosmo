@@ -60,6 +60,20 @@ class Insumos extends BaseController
         echo view('/materiales/materiales', $data);
     }
 
+    
+    public  function materialesCategoria($id)
+    {
+        $material = $this->materiales->obtenerInsumo($id);
+        if (empty($material)) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
+        // echo view('/materiales/materiales', $data);
+    }
+
+
+
     public function obtenerFilasInsumos( $estante)
     {
         $materiales = $this->materiales->obtenerFilasInsumos($estante);
