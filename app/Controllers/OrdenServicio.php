@@ -40,7 +40,7 @@ class OrdenServicio extends BaseController
         $pdf = new \FPDF('P', 'mm', 'letter');
         $pdf->AddPage();
         $pdf->SetMargins(5, 10, 5);
-        $pdf->SetTitle(utf8_decode('Ordén de Trabajo - ' . $res['n_orden']));
+        $pdf->SetTitle(utf8_decode('Orden de Trabajo - ' . $res['n_orden']));
         $pdf->SetY(5);
         $pdf->SetX(35);
         $pdf->image(base_url() . 'img/logo_empresa.png', 2, $mrg_lf, 50, 18, 'png');

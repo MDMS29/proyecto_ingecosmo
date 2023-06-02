@@ -128,9 +128,10 @@
                                     </div>
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
-                                <div class="mb-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="bloqueFoto">
                                     <label for="nombres" class="col-form-label">Foto de Usuario:</label>
                                     <input type="file" name="foto" id="foto">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario"></button>
                                 </div>
                             </div>
                         </form>
@@ -144,6 +145,28 @@
         </div>
     </div>
 </form>
+
+<!-- MODAL VER FOTO -->
+<div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h5 style="font-weight: bold;" id="tituloFoto"><?php echo $titulo; ?></h5>
+                    <button type="button" class="btn" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3" style="width: 50%">
+                    <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- MODAL EDITAR CONTRASEÑA -->
 <form autocomplete="off" id="formularioContraseñas">
@@ -581,6 +604,7 @@
                 $('#nombreS').val(res[0]['nombre_s'])
                 $('#apellidoP').val(res[0]['apellido_p'])
                 $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tituloFoto').val(res[0]['nombre_p'] + ['nombre_s'] + ['apellido_p'] + ['apellido_s'])
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#rol').val(res[0]['id_rol'])
@@ -631,11 +655,13 @@
             $('#telefono').val('')
             $('#email').val('')
             $('#rol').val('')
-            $('#foto').val('')
+            $('#tituloFoto').val(['nombre_p'] + ['nombre_s'] + ['apellido_p'] + ['apellido_s'])
+            // $('#foto').val('')
             $('#contra').val('')
             $('#confirContra').val('')
             $('#divContras').removeAttr('hidden')
             $('#divContras2').removeAttr('hidden')
+            $('#bloqueFoto').attr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')

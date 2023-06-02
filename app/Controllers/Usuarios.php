@@ -102,12 +102,14 @@ class Usuarios extends BaseController
     }
     public function index()
     {
+        $nombreP = session( 'nombre_p' );
+        $nombreS = session( 'nombre_s' );
+        $apellidoP = session('apellido_p');
+        $apellidoS = session('apellido_s');
         $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
         $tipoTel = $this->param->obtenerTipoTel();
-
-        $data = ['tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
-
+        $data = ['titulo' => $nombreP . ' ' . $nombreS. ' ' . $apellidoP. ' ' . $apellidoS,'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }
@@ -158,10 +160,7 @@ class Usuarios extends BaseController
                 mkdir($uploadPath, 0777, true);
             }
 
-
             $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-
-
             $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
 
             if ($tp == 2) {
