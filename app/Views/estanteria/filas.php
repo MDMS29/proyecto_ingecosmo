@@ -53,7 +53,6 @@
             <div style="background:white; border:5px solid #161666; border-radius:10px; height:350px; width:800px;" class="modal-content">
                 <div class="modal-header">
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
-
                     <div class="bloqueHeader">
                         <img class="iconosModal" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
                         <div class="tituloHeader">
@@ -68,7 +67,7 @@
                     <form>
 
                         <div class="mb-3">
-                            <input type="text"  class="" id="nombreProd" name="nombreProd">
+                            <input type="text" hidden class="" id="idMaterialMove" name="idMaterialMove">
                         </div>
 
                         <div class="mb-3">
@@ -190,13 +189,13 @@
                 var cadena = ""
                 for (let i = 0; i < res.length; i++) {
                     cadena += `<p class="subTexto">
-                    
+
                     <details>
-                    <summary>
+                    <summary data-summary-id="' . $i . '">' . $res[$i]['nombre'] . '</summary>'
                     <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
                     </summary>
 
-                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
+                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}','${res[i].id_material}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
                     </details></p>`;
                 }
                 $(`#${bloque[i].id}`).html(cadena)
@@ -204,10 +203,26 @@
         })
     }
 
-    function selectMateriales(fila, nombre) {
+    // Obtén todos los elementos <summary>
+    const summaries = document.querySelectorAll('summary');
+
+    // Recorre cada elemento <summary>
+    summaries.forEach(summary => {
+        // Añade un controlador de eventos al hacer clic en el <summary>
+        summary.addEventListener('click', () => {
+            // Desactiva todos los <summary> excepto el actual
+            summaries.forEach(s => {
+                if (s !== summary) {
+                    s.removeAttribute('open');
+                }
+            });
+        });
+    });
+
+    function selectMateriales(fila, nombre, id_material) {
         var tituloMover = $(".tituloHeader")
         tituloMover.text(nombre)
-        $('#nombreProd').val(nombre)
+        $('#idMaterialMove').val(id_material)
 
 
         $.ajax({
@@ -217,13 +232,13 @@
             success: function(res) {
                 console.log(filasDina);
                 filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
-                var cadena
-                cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
-                for (let i = 0; i < res.length; i++) {
+                // var cadena
+                // cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
+                // for (let i = 0; i < res.length; i++) {
 
-                    cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
-                }
-                $('#nombreProd').html(cadena)
+                //     cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
+                // // }
+                // $('#nombreProd').html(cadena)
             }
         })
     }
@@ -231,14 +246,14 @@
 
     $('#agregarFila').on('submit', function(e) {
         e.preventDefault();
-        fila = $('#fila').val() //Esto toma el valor por medio del id
-        id_material = $('#nombreProd').val() //Esto toma el valor por medio del id
+        fila = $('#fila').val()
+        id_material = $('#idMaterialMove').val()
         $.ajax({
-            url: "<?php echo base_url('/filas/insertar'); ?>",
+            url: "<?php echo base_url('/filas/moverMaterial'); ?>",
             type: 'POST',
             data: {
                 fila,
-                nombreProd
+                id_material
             },
             dataType: 'json',
             success: function(res) {
@@ -280,22 +295,23 @@
     //     })
     // })
 
-    function buscarFila(fila, inputFila) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('filas/buscarFilas') ?>" + fila + "/" + inputFila,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgDoc').text('')
-                    validIFila = true
-                } else if (res[0] != null) {
-                    $('#msgDoc').text('* Numero de fila invalido *')
-                    validIFila = false
-                }
-            }
-        })
-    }
+    // function buscarFila(fila, inputFila) {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: "< ?php echo base_url('filas/buscarFilas') ?>" + fila + "/" + inputFila,
+    //         dataType: 'JSON',
+    //         success: function(res) {
+    //             if (res[0] == null) {
+    //                 $('#msgDoc').text('')
+    //                 validIFila = true
+    //             } else if (res[0] != null) {
+
+    //                 $('#msgDoc').text('* Numero de fila invalido *')
+    //                 validIFila = false
+    //             }
+    //         }
+    //     })
+    // }
 
     function detallesMaterial(id_material) {
         dataURL = "<?php echo base_url('/filas/detallesMaterial'); ?>" + "/" + id_material;

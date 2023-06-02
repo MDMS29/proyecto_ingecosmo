@@ -90,13 +90,13 @@ class Filas extends BaseController
         echo json_encode($returnData);
     }
 
-    public function insertar()
+    public function moverMaterial()
     {
-        $this->filas->update($this->request->getPost('nombreProd'), [
+        $this->filas->update($this->request->getPost('id_material'), [
             'fila' => $this->request->getPost('fila')
         ]);
         return json_encode(1);
-        // return redirect()->to(base_url('/filas'));
+
     }
 
     public function contadorArticulos()
