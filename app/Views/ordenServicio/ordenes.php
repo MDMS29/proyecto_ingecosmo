@@ -30,13 +30,13 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarVehiculo" onclick="seleccionarOrden(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarOrden" onclick="seleccionarOrden(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
     </div>
 </div>
 
 <!-- FORMULARIO PARA AGREGAR - EDITAR VEHICULO -->
 <form autocomplete="off" id="formularioOrdenes">
-    <div class="modal fade" id="agregarVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="agregarOrden" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" hidden>
         <input type="text" name="tp" id="tp" hidden>
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -57,12 +57,17 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="vehiculo" class="col-form-label">Placa:</label>
-                                    <select class="form-select form-control" name="vehiculo" id="vehiculo">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($vehiculos as $vehi) { ?>
-                                            <option value="<?= $vehi['id_vehiculo'] ?>"><?= $vehi['placa'] ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <!-- INPUT PARA SABER CUANDO SE AGREGA UN VEHICULO NUEVO -->
+                                    <input type="text" id="aggVehi" value="0" placeholder="Ej: QWE123" hidden>
+                                    <div class="d-flex">
+                                        <input type="text" maxlength="6" class="form-control" id="vehiculoT" hidden>
+                                        <select class="form-select form-control" name="vehiculo" id="vehiculo">
+                                            <option selected value="">-- Seleccione --</option>
+                                            <!-- SELECT DINAMICO -->
+                                        </select>
+                                        <button class="btn" type="button" style="border:none;background-color:gray;color:white;" id="btnAgg" title="Agregar Vehiculo">+</button>
+                                    </div>
+                                    <small id="msgPlaca" class="invalido"></small>
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
@@ -78,7 +83,9 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="cliente" class="col-form-label">Responsable:</label>
                                     <select class="form-select form-control" name="cliente" id="cliente">
+                                        <option value="" selected="selected">-- Seleccione --</option>
                                         <!-- SELECT DINAMICO -->
+
                                     </select>
                                 </div>
                             </div>
@@ -203,7 +210,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModalEstado"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"><!-- TEXTO DINAMICO  --></h1>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('estadoVehiculo')">X</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('#estadoVehiculo')">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -217,7 +224,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('estadoVehiculo')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('#estadoVehiculo')">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnCambiarEstado">Agregar</button>
                 </div>
             </div>
@@ -244,9 +251,40 @@
     let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
     let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
     $('#fechaEntrada').attr('max', fechaLimite)
+    // Agregar atributo disabled
+    function agregarDisabled() {
+        //Disabled
+        $('#tipoCliente').attr('disabled', '')
+        $('#cliente').attr('disabled', '')
+        $('#placaHidden').attr('disabled', '')
+        $('#marca').attr('disabled', '')
+        $('#nFabrica').attr('disabled', '')
+        $('#color').attr('disabled', '')
+        $('#kms').attr('disabled', '')
+        $('#combustible').attr('disabled', '')
+    }
+    //Limpiar campos
+    function limpiarCampos(input, accion) {
+        $(`${input}`).val('')
+        if (accion == 1) {
 
-    function limpiarCampos(input) {
-        $(`#${input}`).val('')
+            $('#tipoCliente').val('')
+            $('#cliente').val('')
+            $('#divResponsable').removeClass('d-flex')
+            $('#nombreRespon').val('')
+            $('#apellidoRespon').val('')
+            $('#nIdentiRes').val('')
+            $('#vehiculo').val('')
+            $('#marca').val('')
+            $('#nFabrica').val('')
+            $('#color').val('')
+            $('#kms').val('')
+            $('#combustible').val('')
+            $('#estado').val('')
+            $('#fechaEntrada').val('')
+            $('#fechaSalida').attr('min', fechaLimite)
+            $('#fechaSalida').val('')
+        }
     }
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
@@ -265,6 +303,24 @@
             $(this).addClass('active');
         }
     })
+    //Select placa de vehiculos
+    function obtenerVehiculos() {
+        $.ajax({
+            url: '<?= base_url('vehiculos/obtenerVehiculos'); ?>',
+            type: 'POST',
+            success: function(res) {
+                res = JSON.parse(res)
+                var cadena
+                cadena = `<option selected value=""> -- Seleccione -- </option>`
+                for (let i = 0; i < res.length; i++) {
+
+                    cadena += `<option value=${res[i].id_vehiculo}>${res[i].placa }</option>`
+                }
+                $('#vehiculo').html(cadena)
+            }
+        })
+    }
+    obtenerVehiculos()
     //Tabla de vehiculos
     var tablaOrdenes = $('#tableOrdenes').DataTable({
         ajax: {
@@ -360,7 +416,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarVehiculo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Vehiculo"></button>' +
+                        '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarOrden" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Vehiculo"></button>' +
                         '<button class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Boton Eliminar" title="Cambiar Estado" width="20"></button>' +
                         '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_orden + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
                     )
@@ -463,15 +519,11 @@
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
 
-                    //Disabled
-                    $('#tipoCliente').attr('disabled', '')
-                    $('#cliente').attr('disabled', '')
-                    $('#placaHidden').attr('disabled', '')
-                    $('#marca').attr('disabled', '')
-                    $('#nFabrica').attr('disabled', '')
-                    $('#color').attr('disabled', '')
-                    $('#kms').attr('disabled', '')
-                    $('#combustible').attr('disabled', '')
+                    $('#aggVehi').val(0)
+                    $('#vehiculo').removeClass('d-none')
+                    $('#btnAgg').attr('hidden', '')
+                    $('#vehiculoT').attr('hidden', '')
+
                 }
             })
         } else {
@@ -487,40 +539,22 @@
             })
             $('#tp').val(1)
             $('#id').val(id)
-            $('#tipoCliente').val('')
-            $('#cliente').val('')
-            $('#divResponsable').removeClass('d-flex')
-            $('#nombreRespon').val('')
-            $('#apellidoRespon').val('')
-            $('#nIdentiRes').val('')
-            $('#vehiculo').val('')
-            $('#marca').val('')
-            $('#nFabrica').val('')
-            $('#color').val('')
-            $('#kms').val('')
-            $('#combustible').val('')
-            $('#estado').val('')
-            $('#fechaEntrada').val('')
-            $('#fechaSalida').attr('min', fechaLimite)
-            $('#fechaSalida').val('')
+            $('#aggVehi').val(0)
+            $('#vehiculo').removeClass('d-none')
+            $('#vehiculoT').attr('hidden', '')
+            limpiarCampos('', 1)
+
             $('#btnGuardar').text('Guardar')
             $('#tituloModal').text('Agregar')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
             $('#imgModal').attr('width', '25')
+            $('#btnAgg').removeAttr('hidden')
 
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
 
-            //Disabled
-            $('#tipoCliente').attr('disabled', '')
-            $('#cliente').attr('disabled', '')
-            $('#placaHidden').attr('disabled', '')
-            $('#marca').attr('disabled', '')
-            $('#nFabrica').attr('disabled', '')
-            $('#color').attr('disabled', '')
-            $('#kms').attr('disabled', '')
-            $('#combustible').attr('disabled', '')
         }
+        agregarDisabled()
     }
     //Input dinamico para los clientes
     function verTipoCliente(id, idCliente) {
@@ -588,10 +622,10 @@
         }
         verificarOrdenPlaca("<?= base_url('vehiculos/buscarVehiculo') ?>", data, 'msgOrden', 'Orden de Trabajo')
     })
-    $('#placa').on('input', function(e) {
+    $('#vehiculoT').on('input', function(e) {
         data = {
             orden: '',
-            placa: $('#placa').val()
+            placa: $('#vehiculoT').val()
         }
         verificarOrdenPlaca("<?= base_url('vehiculos/buscarVehiculo') ?>", data, 'msgPlaca', 'Placa')
     })
@@ -615,7 +649,6 @@
     $('#fechaSalida').on('change', function(e) {
         fechaSalida = $('#fechaSalida').val()
         fechaEntrada = $('#fechaEntrada').val()
-        console.log(fechaSalida >= fechaEntrada)
         if (fechaEntrada == '') {
             $('#msgFecha').text('* Ingrese una fecha de entrada *')
             validFecha = false
@@ -628,9 +661,35 @@
             validFecha = false
         }
     })
+    //Agregar vehiculo
+    $('#btnAgg').on('click', function(e) {
+        if ($('#aggVehi').val() == 1) {
+            $('#aggVehi').val(0)
+            $('#vehiculo').removeClass('d-none')
+            $('#vehiculoT').attr('hidden', '')
+            agregarDisabled()
+        } else {
+            $('#aggVehi').val(1)
+            $('#vehiculo').addClass('d-none')
+            $('#vehiculoT').attr('placeholder', 'Ej: QWE123')
+            $('#vehiculoT').removeAttr('hidden')
+            //Quitar disabled
+            $('#tipoCliente').removeAttr('disabled')
+            $('#cliente').removeAttr('disabled')
+            $('#placaHidden').removeAttr('disabled')
+            $('#marca').removeAttr('disabled')
+            $('#nFabrica').removeAttr('disabled')
+            $('#color').removeAttr('disabled')
+            $('#kms').removeAttr('disabled')
+            $('#combustible').removeAttr('disabled')
+
+            limpiarCampos('', 1)
+        }
+    })
     //Formulario para agregar o editar Vehiculo
     $('#formularioOrdenes').on('submit', function(e) {
         e.preventDefault()
+        aggVehi = $('#aggVehi').val()
         tp = $('#tp').val()
         id = $('#id').val()
         orden = $('#ordenTrabajo').val()
@@ -638,7 +697,16 @@
         tipoCliente = $('#tipoCliente').val()
         cliente = $('#cliente').val()
 
-        vehiculo = $('#vehiculo').val()
+        vehiculo = $('#vehiculo').val() //Select
+        nuevoVehiculo = $('#vehiculoT').val() //Input
+
+        // Si se agrega un nuevo vehiculo
+        placa = $('#placa').val()
+        marca = $('#marca').val()
+        nFabrica = $('#nFabrica').val()
+        color = $('#color').val()
+        kms = $('#kms').val()
+        combustible = $('#combustible').val()
 
         nombreRespon = $('#nombreRespon').val()
         apellidoRespon = $('#apellidoRespon').val()
@@ -649,18 +717,28 @@
         fechaEntrada = $('#fechaEntrada').val()
         fechaSalida = $('#fechaSalida').val()
 
-        if ([orden, vehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
+        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
                 url: '<?= base_url('ordenServicio/insertar') ?>',
                 type: 'POST',
                 data: {
+                    aggVehi,
                     tp,
                     id,
                     orden,
 
-                    vehiculo,
+                    vehiculo: aggVehi == 0 ? vehiculo : nuevoVehiculo,
+
+                    infoVehi: aggVehi == 0 ? null : {
+                        placa,
+                        marca,
+                        nFabrica,
+                        color,
+                        kms,
+                        combustible
+                    },
 
                     tipoCliente,
                     cliente,
@@ -675,14 +753,26 @@
                     fechaSalida
                 },
                 success: function(data) {
-                    if (tp == 2) {
-                        data == 1 ? mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
-                    } else {
-
-                        data == 1 ? mostrarMensaje('success', '¡Se ha registrado la orden se servicio!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
-                    }
                     tablaOrdenes.ajax.reload(null, false)
-                    $('#agregarVehiculo').modal('hide')
+                    if (tp == 2) {
+                        if (data == 1) {
+                            $('#agregarOrden').modal('hide')
+                            mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
+                        } else {
+                            mostrarMensaje('error', '¡Ha ocurrido un error!')
+                        }
+                    } else {
+                        if (data == 1) {
+                            $('#agregarOrden').modal('hide')
+                            mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
+                            $('#vehiculo').removeClass('d-none')
+                            $('#vehiculoT').val('')
+                            $('#vehiculoT').attr('hidden', '')
+                            obtenerVehiculos()
+                        } else {
+                            mostrarMensaje('error', '¡Ha ocurrido un error!')
+                        }
+                    }
                 }
             })
         }

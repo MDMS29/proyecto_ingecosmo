@@ -18,6 +18,7 @@ class Vehiculos extends BaseController
     protected $param;
     protected $propietario;
     protected $movimiento;
+
     public function __construct()
     {
         $this->vehiculos = new VehiculosModel();
@@ -128,7 +129,6 @@ class Vehiculos extends BaseController
             }
         }
     }
-
     public function buscarResponsable()
     {
         $tipo = $this->request->getPost('idTipo');
