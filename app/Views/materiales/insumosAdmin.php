@@ -39,7 +39,6 @@
 
 <form id="formularioAgregar" autocomplete="off">
   <input class="form-control" id="id" name="id" type="text" value="0" hidden>
-  <!-- <input type="text" value="< ?= $idCate ?>" id="idCategoria" hidden> -->
 
   <input type="text" name="id" id="id" hidden>
   <input type="text" name="tp" id="tp" hidden>
@@ -47,14 +46,13 @@
   <div class="modal fade" id="agregarInsumo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" id="modalContent">
-        <div class="modal-header" id="modalHeader">
-          <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-          <div id="agregar">
-            <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/img/plus-b.png" alt="icon-plus" width="20">
-          </div>
-          <h1 class="modal-title" id="titulo1">Agregar</h1>
-          <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+
+      <div class="modal-header d-flex align-items-center justify-content-between">
+        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div> 
+
         <div class="modal-body" id="modalAgregar2">
 
           <div class="d-flex column-gap-3" style="width: 100%">
@@ -85,21 +83,19 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Estante:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
+              <select style=" margin-left: 0px !important;" class="form-control form-select" name="estante" id="estante">
                 <option selected value="">-- Seleccione Un Estante--</option>
-                <!-- < ?php foreach ($estanteria as $data) { ?>
-                  <option value="< ?= $data['id'] ?>">< ?= $data['nombre'] ?></option> -->
-                <!-- < ?php } ?> -->
+                <?php foreach ($estantes as $data) { ?>
+                  <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
+                <?php } ?>
               </select>
             </div>
 
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Fila:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
+              <select style=" margin-left: 0px !important;" class="form-control form-select" name="fila" id="fila">
                 <option selected value="">-- Seleccione una fila--</option>
-                <!-- < ?php foreach ($fila as $fila) { ?>
-                  <option value="< ?= $fila['numeroFila'] ?>">< ?= $fila['numeroFila'] ?></option>
-                < ?php } ?> -->
+               
               </select>
             </div>
           </div>
@@ -145,17 +141,46 @@
         },
         dataType: 'json',
         success : function(data){
+          $('#tituloModal').text('Editar')
+          $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
+          $('#imgModal').attr('width', '25')
           $('#nombre').val(data['nombre'])
           $('#precioC').val(data['precio_compra'])
           $('#precioV').val(data['precio_venta'])
           $('#cantidadA').val(data['cantidad_actual'])
           $('#estante').val(data['nomEstante'])
+          $('#btnAgregar').text('Actualizar')
         }
       })
     }else{
-
+      $('#tituloModal').text('Agregar')
+      $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
+      $('#imgModal').attr('width', '25')
+      $('#btnAgregar').text('Guardar')
+      
     }
   }
+  //Obtener filas del estante
+  $('#estante').on("change", function(e) {
+    estante = $('#estante').val()
+    $.ajax({
+      url: '<?php echo base_url('insumos/obtenerFilasInsumos/') ?>' + estante,
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        console.log(res)
+
+        var cadena
+        cadena = `<option value="" selected>-- Seleccione una fila --</option>`
+        for (let i = 0; i < res.length; i++) {
+
+          cadena += `<option value=${res[i].fila
+          }>${res[i].fila}</option>`
+        }
+        $('#fila').html(cadena)
+      }
+    })
+  })
   // Tabla de inusmos
   var tableInsumosAdmin = $("#tableInsumosAdmin").DataTable({
     ajax: {

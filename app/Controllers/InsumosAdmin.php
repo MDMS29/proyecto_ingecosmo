@@ -6,25 +6,29 @@ use App\Controllers\BaseController; /*la plantilla del controlador general de co
 use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
+use App\Models\EstanteriaModel;
 
 class InsumosAdmin extends BaseController
 {
     protected $insumos;
     protected $placa;
     protected $razonSocial;
+    protected $estantes;
 
     public function __construct()
     {
         $this->insumos = new MaterialesModel();
         $this->placa = new VehiculosModel();
         $this->razonSocial = new TercerosModel();
+        $this->estantes = new EstanteriaModel();
 
     }
     public function index()
     {
-
+        $estantes = $this->estantes->traerEstantes();
+        $data = ['estantes' => $estantes];
         echo view('/principal/sidebar');
-        echo view('/materiales/insumosAdmin');
+        echo view('/materiales/insumosAdmin', $data);
     }
 
     public function obtenerInsumos()
@@ -39,6 +43,11 @@ class InsumosAdmin extends BaseController
         
         $res = $this->insumos->buscarInsumo($id, '');
         return json_encode($res);
+    }
+
+    public function insertar()
+    {
+        
     }
 
     // public function editarMaterial($id)
