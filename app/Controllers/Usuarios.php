@@ -100,16 +100,13 @@ class Usuarios extends BaseController
         $res = $this->usuarios->obtenerUsuarios($estado);
         return json_encode($res);
     }
-    public function index()
+    public function index($id)
     {
-        $nombreP = session( 'nombre_p' );
-        $nombreS = session( 'nombre_s' );
-        $apellidoP = session('apellido_p');
-        $apellidoS = session('apellido_s');
+        $usuarios = $this->usuarios->buscarUsuario($id, 0);
         $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
         $tipoTel = $this->param->obtenerTipoTel();
-        $data = ['titulo' => $nombreP . ' ' . $nombreS. ' ' . $apellidoP. ' ' . $apellidoS,'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
+        $data = ['usuario' => $usuarios,'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }
@@ -122,6 +119,7 @@ class Usuarios extends BaseController
         $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
+        echo view('usuarios/usuarios', $data);
     }
     public function mostrarImagen($id)
     {
