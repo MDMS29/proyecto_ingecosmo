@@ -28,7 +28,11 @@ class Database extends Config
         'DSN'      => '',
         'hostname' => 'localhost',//10.230.16.213
         'username' => 'root',//ingecosmos
+<<<<<<< HEAD
         'password' => '',//123456789 
+=======
+        'password' => '',//123456789
+>>>>>>> 235b2d8a0833507b6cb060a1e0768e42415ffe1c
         'database' => 'db_ingecosmo',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',

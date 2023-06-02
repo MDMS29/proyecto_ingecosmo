@@ -3,49 +3,62 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
-use App\Models\InsumosAdminModel;
+use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
+use App\Models\EstanteriaModel;
 
 class InsumosAdmin extends BaseController
 {
-    protected $insumosAdmin;
+    protected $insumos;
     protected $placa;
     protected $razonSocial;
+    protected $estantes;
 
     public function __construct()
     {
-        $this->insumosAdmin = new InsumosAdminModel();
+        $this->insumos = new MaterialesModel();
         $this->placa = new VehiculosModel();
         $this->razonSocial = new TercerosModel();
+        $this->estantes = new EstanteriaModel();
 
     }
     public function index()
     {
-
+        $estantes = $this->estantes->traerEstantes();
+        $data = ['estantes' => $estantes];
         echo view('/principal/sidebar');
-        echo view('/materiales/insumosAdmin');
+        echo view('/materiales/insumosAdmin', $data);
     }
 
-    public function ObtenerDetallesInsumos()
+    public function obtenerInsumos()
     {
-        $returnData = array();
-        $insumosAdmin_ = $this->insumosAdmin->ObtenerDetallesInsumos();
-        if (!empty($materiales_)) {
-            array_push($returnData, $insumosAdmin_);
-        }
-        echo json_encode($returnData);
+        $estado = $this->request->getPost('estado');
+        $insumos = $this->insumos->obtenerInsumoAdmin($estado);
+        echo json_encode($insumos);
+    }
+    public function buscarInsumo()
+    {
+        $id = $this->request->getPost('id');
+        
+        $res = $this->insumos->buscarInsumo($id, '');
+        return json_encode($res);
     }
 
-    public function editarMaterial($id)
+    public function insertar()
     {
-        $returnData = array();
-        $insumosAdmin_ = $this->insumosAdmin->traerEditar($id);
-        if (!empty($materiales_)) {
-            array_push($returnData, $insumosAdmin_);
-        }
-        echo json_encode($returnData);
+        
     }
+
+    // public function editarMaterial($id)
+    // {
+    //     $returnData = array();
+    //     $insumosAdmin_ = $this->insumosAdmin->traerEditar($id);
+    //     if (!empty($materiales_)) {
+    //         array_push($returnData, $insumosAdmin_);
+    //     }
+    //     echo json_encode($returnData);
+    // }
     
 
     // public function insertar()
