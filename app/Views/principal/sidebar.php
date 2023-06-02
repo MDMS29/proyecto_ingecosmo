@@ -66,11 +66,13 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="" style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
+                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
+                    <li><hr class="nav-item dropdown" style="border: solid 1px white"></li>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
-                    <li>
-                        <hr class="nav-item dropdown" style="border: solid 1px white">
-                    </li>
+                    <li><hr class="nav-item dropdown" style="border: solid 1px white"></li>
                     <li><a href="<?php echo base_url('salir') ?>" class="nav-item dropdown; salir  " href="#" style="color: white;  margin-left:10px;"><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /> Cerrar Sesion</a></li>
                     </li>
                 </ul>

@@ -135,4 +135,17 @@ class MaterialesModel extends Model{
     //     $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
     //     return $datos;
     // }
+
+    public function obtenerRepuestos($estado)
+    {
+        $this->select('materiales.*, param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social,  ');
+        $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
+        $this->join('estanteria', 'estanteria.id = materiales.estante');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = materiales.id_vehiculo','left');
+        $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor', 'left');
+        $this->where('materiales.tipo_material', '10');
+        $this->where('materiales.estado', $estado);
+        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
 }
