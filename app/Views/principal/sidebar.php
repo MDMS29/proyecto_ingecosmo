@@ -83,7 +83,7 @@
 
     <nav id="sidebar" class="active" style="position: sticky; ">
         <!-- <h1><a class="logo"></a></h1> -->
-        <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
+        <div class="d-flex justify-content-between flex-column" style="height: 100%;">
             <ul id="allElement" class="list-unstyled components mb-5">
 
                 <li class="active">
@@ -182,7 +182,7 @@
                 </li>
             </ul>
             <nav>
-                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top:5px">
+                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top: -50px">
                     <button type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
                         <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" /></i>
                         <span class="sr-only">Toggle Menu</span>

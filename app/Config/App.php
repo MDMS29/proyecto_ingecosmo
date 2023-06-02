@@ -442,4 +442,9 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+    // Config images
+    public $maxFileSize = 2048; // 2 MB
+    public $uploadedFiles = ['jpg', 'jpeg', 'png', 'gif'];
+    public $defaultFileUploadPath = WRITEPATH . 'uploads'; // Ruta de ejemplo, reemplaza con tu ruta deseada
+
 }

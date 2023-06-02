@@ -25,26 +25,26 @@ class Usuarios extends BaseController
         $this->correos = new EmailModel();
         helper('sistema');
     }
-    
-    public function guardarFoto(){
-        $uploads='upload';
-        $config['upload_path']="uploads/";
-        $config['file_name']="nombre_archivo";
-        $config['allowed_types']="jpg|png|jpeg|gif";
-        $config['max_size']="5000";
-        $config['max_width']="2000";
-        $config['max_height']="2000";
 
-        $this->load->library('uploads', $config);
+    // public function guardarFoto(){ pruebitas jijijiji
+    //     $uploads='upload';
+    //     $config['upload_path']="uploads/";
+    //     $config['file_name']="nombre_archivo";
+    //     $config['allowed_types']="jpg|png|jpeg|gif";
+    //     $config['max_size']="5000";
+    //     $config['max_width']="2000";
+    //     $config['max_height']="2000";
 
-        if (!$this->upload->do_upload($uploads)) {
-            // $data['uploadError']=$this->upload->display_errors();
-            echo $this->upload->display_errors();
-            return;
-        }
-        var_dump($this->upload->data());
-    }
-    
+    //     $this->load->library('uploads', $config);
+
+    //     if (!$this->upload->do_upload($uploads)) {
+    //         // $data['uploadError']=$this->upload->display_errors();
+    //         echo $this->upload->display_errors();
+    //         return;
+    //     }
+    //     var_dump($this->upload->data());
+    // }
+
     public function login()
     {
         $usuario = $this->request->getPost('usuario');
@@ -121,6 +121,18 @@ class Usuarios extends BaseController
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
     }
+    public function mostrarImagen($id)
+    {
+        $res = $this->usuarios->buscarUsuario($id, 0);
+        $rutaImagen = '/uploads/' . $res['foto'];
+        $rutaCompleta = WRITEPATH . $rutaImagen;
+
+        $fp = fopen($rutaCompleta, 'rb');
+
+        header("Content-Type: image/png");
+        header("Content-Length: " . filesize($rutaCompleta));
+        fpassthru($fp);
+    }
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
@@ -133,53 +145,59 @@ class Usuarios extends BaseController
         $nIdenti = $this->request->getPost('nIdenti');
         $rol = $this->request->getVar('rol');
         $contra = $this->request->getVar('contra');
-        $foto = "";
-        if (isset($_FILES["foto"])) {
-            $file=$_FILES["foto"];
-            $nombre=$file["name"];
-            $tipo=$file["type"];
-            $ruta_provisional=$file["tmp_name"];
-            $size=$file["size"];
-            $dimensiones=getimagesize($ruta_provisional);
-            $width=$dimensiones[0];
-            $height=$dimensiones[1];
-            $carpeta="/public/img/fotos/";
-            if ($tipo != 'image.jpg/' && $tipo != 'image.jpeg/' && $tipo != 'image.gif/'&& $tipo != 'image.png/') {
-                # code...
-            }
-        }
 
-        if ($tp == 2) {
-            //Actualizar datos
-            $res = $this->usuarios->buscarUsuario($idUser, 0);
-            $contra = $res['contrasena'];
-            $usuarioUpdate = [
-                'id_rol' => $rol,
-                'tipo_doc' => $tipoDoc,
-                'n_identificacion' => $nIdenti,
-                'nombre_p' => $nombreP,
-                'nombre_s' => $nombreS,
-                'apellido_p' => $apellidoP,
-                'apellido_s' => $apellidoS,
-                'contrasena' => $contra
-            ];
-            $this->usuarios->update($idUser, $usuarioUpdate);
-            return $idUser;
-        } else {
-            //Insertar datos
-            //Si la respuesta esta vacia - guardar
-            $usuarioSave = [
-                'id_rol' => $rol,
-                'tipo_doc' => $tipoDoc,
-                'n_identificacion' => $nIdenti,
-                'nombre_p' => $nombreP,
-                'nombre_s' => $nombreS,
-                'apellido_p' => $apellidoP,
-                'apellido_s' => $apellidoS,
-                'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
-            ];
-            $this->usuarios->save($usuarioSave);
-            return json_encode($this->usuarios->getInsertID());
+        $foto = $this->request->getFile('foto');
+
+        if ($foto->isValid() && !$foto->hasMoved()) {
+            $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+
+            $uploadPath = 'fotoUser';
+
+            // Verificar si el directorio existe, si no, crearlo
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+
+            $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+
+
+            $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
+
+            if ($tp == 2) {
+                //Actualizar datos
+                $res = $this->usuarios->buscarUsuario($idUser, 0);
+                $contra = $res['contrasena'];
+                $usuarioUpdate = [
+                    'id_rol' => $rol,
+                    'tipo_doc' => $tipoDoc,
+                    'n_identificacion' => $nIdenti,
+                    'nombre_p' => $nombreP,
+                    'nombre_s' => $nombreS,
+                    'apellido_p' => $apellidoP,
+                    'apellido_s' => $apellidoS,
+                    'foto' => $rutaImagen,
+                    'contrasena' => $contra
+                ];
+                $this->usuarios->update($idUser, $usuarioUpdate);
+                return $idUser;
+            } else {
+                //Insertar datos
+                //Si la respuesta esta vacia - guardar
+                $usuarioSave = [
+                    'id_rol' => $rol,
+                    'tipo_doc' => $tipoDoc,
+                    'n_identificacion' => $nIdenti,
+                    'nombre_p' => $nombreP,
+                    'nombre_s' => $nombreS,
+                    'apellido_p' => $apellidoP,
+                    'apellido_s' => $apellidoS,
+                    'foto' => $rutaImagen,
+                    'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
+                ];
+                $this->usuarios->save($usuarioSave);
+                return json_encode($this->usuarios->getInsertID());
+            }
         }
     }
     public function cambiarContrasena()
@@ -205,7 +223,6 @@ class Usuarios extends BaseController
             return json_encode(2);
         }
     }
-
     public function buscarUsuario($id, $nIdenti)
     {
         $array = array();
@@ -225,7 +242,6 @@ class Usuarios extends BaseController
             return json_encode($array);
         }
     }
-
     public function cambiarEstado()
     {
         $id = $this->request->getPost('id');
