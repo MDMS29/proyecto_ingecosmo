@@ -129,8 +129,8 @@
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                        <label for="nombres" class="col-form-label">Foto de Usuario:</label>
-                                        <input type="file" name="foto" id="foto">
+                                    <label for="nombres" class="col-form-label">Foto de Usuario:</label>
+                                    <input type="file" name="foto" id="foto">
                                 </div>
                             </div>
                         </form>
@@ -584,6 +584,7 @@
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#rol').val(res[0]['id_rol'])
+                $('#foto').val(res[0]['foto'])
                 $('#labelNom').text('Cambiar Contraseña:')
                 $('#contra').val('')
                 $('#divContras').attr('hidden', '')
@@ -630,6 +631,7 @@
             $('#telefono').val('')
             $('#email').val('')
             $('#rol').val('')
+            $('#foto').val('')
             $('#contra').val('')
             $('#confirContra').val('')
             $('#divContras').removeAttr('hidden')
@@ -735,22 +737,26 @@
         } else if ([telefono, correo].includes('')) {
             return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('tp', tp);
+            formData.append('nombreP', nombreP);
+            formData.append('nombreS', nombreS);
+            formData.append('apellidoP', apellidoP);
+            formData.append('apellidoS', apellidoS);
+            formData.append('tipoDoc', tipoDoc);
+            formData.append('nIdenti', nIdenti);
+            formData.append('rol', rol);
+            formData.append('contra', contra);
+            formData.append('telefonos', telefonos);
+            formData.append('foto', $('#foto')[0].files[0]);
             $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
                 type: 'POST',
-                data: {
-                    id,
-                    tp,
-                    nombreP,
-                    nombreS,
-                    apellidoP,
-                    apellidoS,
-                    tipoDoc,
-                    nIdenti,
-                    rol,
-                    contra,
-                    telefonos
-                },
+                data: formData,
+                dataType: 'json',
+                contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                processData: false, // Importante: no proceses los datos
                 success: function(idUser) {
                     telefonos.forEach(tel => {
                         //Insertar Telefonos
