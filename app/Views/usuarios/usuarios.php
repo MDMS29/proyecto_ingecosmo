@@ -129,8 +129,8 @@
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                        <label for="nombres" class="col-form-label">Foto de Usuario:</label>
-                                        <input type="file" name="foto" id="foto">
+                                    <label for="nombres" class="col-form-label">Foto de Usuario:</label>
+                                    <input type="file" name="foto" id="foto">
                                 </div>
                             </div>
                         </form>
@@ -731,30 +731,32 @@
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
-        foto = $('#foto').val()
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else if ([telefono, correo].includes('')) {
             return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('tp', tp);
+            formData.append('nombreP', nombreP);
+            formData.append('nombreS', nombreS);
+            formData.append('apellidoP', apellidoP);
+            formData.append('apellidoS', apellidoS);
+            formData.append('tipoDoc', tipoDoc);
+            formData.append('nIdenti', nIdenti);
+            formData.append('rol', rol);
+            formData.append('contra', contra);
+            formData.append('telefonos', telefonos);
+            formData.append('foto', $('#foto')[0].files[0]);
             $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
                 type: 'POST',
-                data: {
-                    id,
-                    tp,
-                    nombreP,
-                    nombreS,
-                    apellidoP,
-                    apellidoS,
-                    tipoDoc,
-                    nIdenti,
-                    rol,
-                    contra,
-                    telefonos,
-                    foto
-                },
+                data: formData,
+                dataType: 'json',
+                contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                processData: false, // Importante: no proceses los datos
                 success: function(idUser) {
                     telefonos.forEach(tel => {
                         //Insertar Telefonos
