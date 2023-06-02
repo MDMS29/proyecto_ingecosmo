@@ -2,31 +2,37 @@
 <link rel="stylesheet" href="<?= base_url('css/materiales.css') ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" /> Insumos</h2>
-    <div class="table-responsive p-2">
-        <table class="table table-striped" id="tableInsumosAdmin" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">Nombre</th>
-                    <th scope="col" class="text-center">Categoria del Insumo</th>
-                    <th scope="col" class="text-center">Tipo de material</th>
-                    <th scope="col" class="text-center">Cantidad Actual</th>
-                    <th scope="col" class="text-center">Estante </th>
-                    <th scope="col" class="text-center">Fila</th>
-                    <th scope="col" class="text-center">Acciones </th>
-                </tr>
-            </thead>
-            <tbody class="text-center">
-                <!-- TABLA PROVEDOORES -->
+  <h2 class="text-center mb-4">
+    <img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" />Administrar Insumos
+  </h2>
+  <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+    <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">Categoria Insumo</a> - <a class="toggle-vis btn" data-column="6">Precio
+      Venta</a>
+  </div>
+  <div class="table-responsive p-2">
+    <table class="table table-striped" id="tableInsumosAdmin" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-center">Nombre</th>
+          <th scope="col" class="text-center">Categoria Insumo</th>
+          <th scope="col" class="text-center">Cantidad Actual</th>
+          <th scope="col" class="text-center">Estante </th>
+          <th scope="col" class="text-center">Fila</th>
+          <th scope="col" class="text-center">Precio Venta</th>
+          <th scope="col" class="text-center">Acciones </th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <!-- TABLA ADMINSITRAR INSUMO -->
 
-            </tbody>
-        </table>
-    </div>
-    <div class="footer-page">
-        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarInsumo" onclick="seleccionarInsumo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('/insumos/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
-    </div>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer-page">
+    <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarInsumo" onclick="seleccionarInsumo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+    <a href="<?php echo base_url('/insumos/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+  </div>
 </div>
 
 <!-- modal agregar -->
@@ -107,116 +113,107 @@
   </div>
 </form>
 
-<!-- Modal Confirma Eliminar -->
-<div class="modal fade" id="modalConfirmarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-
-        <div class="modal-content" id="modalEliminarContentP">
-            <div class="modalContenedorP">
-                <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
-                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="contenidoEliminarP">
-                    <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar el repuesto?</p>
-                    </div>
-
-                </div>
-            </div>
-            <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnAccionF">Eliminar</a>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    //Editar o Agregar Proveedor
-    function seleccionarProveedor(id, tp) {
-        if (tp == 2) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0 + '/' + 0,
-                dataType: 'json',
-                success: function(res) {
-                    $('#tituloModal').text('Editar')
-                    $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
-                    $('#tp').val(2)
-                    $('#id').val(res[0]['id_material'])
-                    $('#RazonSocial').val(res[0]['razon_social'])
-                    $('#nit').val(res[0]['n_identificacion'])
-                    $('#direccion').val(res[0]['direccion'])
-                    $('#btnGuardar').text('Actualizar')
-                    $('#msgRaSo').text('')
-                    $('#msgNit').text('')
-                }
-            })
-
-        } else {
-            //Insertar datos
-            $('#tituloModal').text('Agregar')
-            $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
-            $('#tp').val(1)
-            $('#id').val(0)
-            $('#RazonSocial').val('')
-            $('#nit').val('')
-            $('#direccion').val('')
-            $('#btnGuardar').text('Agregar')
-            $('#msgRaSo').text('')
-            $('#msgNit').text('')
-        }
+  var contador = 0
+  //Mostrar Ocultar Columnas
+  $('a.toggle-vis').on('click', function(e) {
+    e.preventDefault();
+    // Get the column API object
+    var column = tableInsumosAdmin.column($(this).attr('data-column'));
+    // Toggle the visibility
+    column.visible(!column.visible());
+  });
+  //Div ocualtar columnas de la tabla
+  var botones = $(".ocultar a");
+  botones.click(function() {
+    if ($(this).attr('class').includes('active')) {
+      $(this).removeClass('active');
+    } else {
+      $(this).addClass('active');
     }
-    // Tabla   
-    var tableInsumosAdmin = $("#tableInsumosAdmin").DataTable({
-        ajax: {
-            url: '<?= base_url('insumosAdmin/ObtenerDetallesInsumos') ?>',
-            method: "POST",
-            data: {
-                estado: 'A'
-            },
-            dataSrc: "",
-        },
-        columns: [{
-                data: 'nombre'
-            },
-            {
-                data: 'categoria_material'
-            },
-            {
-                data: 'nombre_categoria'
-            },
-            {
-                data: 'cantidad_actual'
-            },
-            {
-                data: 'nombreEstante'
-            },
-            {
-                data: 'fila'
-            },
-            // {
-            //     data: null,
-            //     render: function(data, type, row) {
-            //         return (
-            //             '<button class="btn" onclick="seleccionarProveedor(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+  })
 
-                //         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
-                //     );
-                // },
-            // }
- 
-        ],
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+  function seleccionarInsumo(id, tp) {
+    if (tp == 2) {
+      $.ajax({
+        type: 'POST',
+        url : "<?= base_url('insumosAdmin/buscarInsumo')?>",
+        data : {
+          id
         },
+        dataType: 'json',
+        success : function(data){
+          $('#nombre').val(data['nombre'])
+          $('#precioC').val(data['precio_compra'])
+          $('#precioV').val(data['precio_venta'])
+          $('#cantidadA').val(data['cantidad_actual'])
+          $('#estante').val(data['nomEstante'])
+        }
+      })
+    }else{
 
-    });
-    //Validacion de Razon Social
+    }
+  }
+  // Tabla de inusmos
+  var tableInsumosAdmin = $("#tableInsumosAdmin").DataTable({
+    ajax: {
+      url: '<?= base_url('insumosAdmin/obtenerInsumos') ?>',
+      method: "POST",
+      data: {
+        estado: 'A'
+      },
+      dataSrc: "",
+    },
+    columns: [{
+        data: null,
+        render: function(data, type, row) {
+          contador = contador + 1
+          return '<b>' + contador + '</b>'
+        }
+      },
+      {
+        data: 'nombre'
+      },
+      {
+        data: 'categoria'
+      },
+      {
+        data: null,
+        render: function(data, type, row) {
+          var estado = ''
+          row.cantidad_actual < 5 ? estado = 'invalidoInsumo' : estado = 'valido'
+          return `<span class="${estado}" id="spanInsu">${row.cantidad_actual}</span>`
+        }
+      },
+      {
+        data: 'nomEstante'
+      },
+      {
+        data: 'fila'
+      },
+      {
+        data: 'precio_venta',
+        render: function(data, type, row) {
+          return '$' + row.precio_venta
+        }
+      },
+      {
+        data: null,
+        render: function(data, type, row) {
+          return (
+            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+
+            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
+          );
+        },
+      }
+
+    ],
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+    },
+
+  });
 </script>

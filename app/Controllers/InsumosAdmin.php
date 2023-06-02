@@ -3,19 +3,19 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
-use App\Models\InsumosAdminModel;
+use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
 
 class InsumosAdmin extends BaseController
 {
-    protected $insumosAdmin;
+    protected $insumos;
     protected $placa;
     protected $razonSocial;
 
     public function __construct()
     {
-        $this->insumosAdmin = new InsumosAdminModel();
+        $this->insumos = new MaterialesModel();
         $this->placa = new VehiculosModel();
         $this->razonSocial = new TercerosModel();
 
@@ -27,25 +27,29 @@ class InsumosAdmin extends BaseController
         echo view('/materiales/insumosAdmin');
     }
 
-    public function ObtenerDetallesInsumos()
+    public function obtenerInsumos()
     {
-        $returnData = array();
-        $insumosAdmin_ = $this->insumosAdmin->ObtenerDetallesInsumos();
-        if (!empty($materiales_)) {
-            array_push($returnData, $insumosAdmin_);
-        }
-        echo json_encode($returnData);
+        $estado = $this->request->getPost('estado');
+        $insumos = $this->insumos->obtenerInsumoAdmin($estado);
+        echo json_encode($insumos);
+    }
+    public function buscarInsumo()
+    {
+        $id = $this->request->getPost('id');
+        
+        $res = $this->insumos->buscarInsumo($id, '');
+        return json_encode($res);
     }
 
-    public function editarMaterial($id)
-    {
-        $returnData = array();
-        $insumosAdmin_ = $this->insumosAdmin->traerEditar($id);
-        if (!empty($materiales_)) {
-            array_push($returnData, $insumosAdmin_);
-        }
-        echo json_encode($returnData);
-    }
+    // public function editarMaterial($id)
+    // {
+    //     $returnData = array();
+    //     $insumosAdmin_ = $this->insumosAdmin->traerEditar($id);
+    //     if (!empty($materiales_)) {
+    //         array_push($returnData, $insumosAdmin_);
+    //     }
+    //     echo json_encode($returnData);
+    // }
     
 
     // public function insertar()
