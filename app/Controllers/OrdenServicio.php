@@ -232,9 +232,13 @@ class OrdenServicio extends BaseController
         $res = $this->ordenes->obtenerOrdenes();
         return json_encode($res);
     }
+    public function obtenerVehiculos()
+    {
+        $res = $this->vehiculos->obtenerVehiculos();
+        return json_encode($res);
+    }
     public function index()
     {
-        $vehiculos = $this->vehiculos->obtenerVehiculos();
         $clientes = $this->clientes->obtenerClientes('A');
         $marcas = $this->marcas->obtenerMarcas('A');
         $estados = $this->param->obtenerEstadosVehi('A');
@@ -243,8 +247,7 @@ class OrdenServicio extends BaseController
         $data = [
             'clientes' => $clientes, 'marcas' => $marcas,
             'estadosVehi' => $estados, 'combustible' => $combustible,
-            'tipoClientes' => $tipoCliente,
-            'vehiculos' => $vehiculos
+            'tipoClientes' => $tipoCliente
         ];
         echo view('principal/sidebar');
         echo view('ordenServicio/ordenes', $data);
@@ -267,6 +270,7 @@ class OrdenServicio extends BaseController
     }
     public function insertar()
     {
+        $aggVehi = $this->request->getPost('aggVehi');
         $tp = $this->request->getPost('tp');
         $idOrden = $this->request->getPost('id');
         $tipoCliente = $this->request->getPost('tipoCliente');
@@ -279,6 +283,14 @@ class OrdenServicio extends BaseController
 
         $vehiculo = $this->request->getVar('vehiculo');
 
+        //Vehiculo nuevo
+        $infoVehi = $this->request->getPost('infoVehi');
+        // $marca = $this->request->getPost('marca');
+        // $nFabrica = $this->request->getPost('nFabrica');
+        // $color = $this->request->getPost('color');
+        // $kms = $this->request->getPost('kms');
+        // $combustible = $this->request->getPost('combustible');
+
         $orden = $this->request->getPost('orden');
 
         $estado = $this->request->getPost('estado');
@@ -289,7 +301,30 @@ class OrdenServicio extends BaseController
         $fechaActual = date('Y-m-d');
         $tipoMov = 0;
 
-        $data = [
+
+        $estado == 38 ? $tipoMov = 58 : $tipoMov = 0;
+
+        $dataMovimiento = [
+            'id_tercero' => $cliente,
+        ];
+
+        if ($aggVehi != 0) {
+            // Agregar vehiculo
+            $dataVehi = [
+                'id_marca' => $infoVehi['marca'],
+                'placa' => $vehiculo,
+                'linea' => '',
+                'modelo' => $infoVehi['nFabrica'],
+                'color' => $infoVehi['color'],
+                'kms' => $infoVehi['kms'],
+                'n_combustible' => $infoVehi['combustible'],
+                'estado' => 'A',
+                'usuario_crea' => $usuarioCrea
+            ];
+            $this->vehiculos->save($dataVehi);
+            $vehiculo = $this->vehiculos->getInsertID();
+        }
+        $dataOrden = [
             'n_orden' => $orden,
             'id_vehiculo' => $vehiculo,
             'nombres' => empty($nombreRespon) || $tipoCliente == 5 ? null : $nombreRespon,
@@ -301,15 +336,8 @@ class OrdenServicio extends BaseController
             'usuario_crea' => $usuarioCrea
         ];
 
-        $estado == 38 ? $tipoMov = 58 : $tipoMov = 0;
-
-        $dataMovimiento = [
-            'id_tercero' => $cliente,
-        ];
-
-
         if ($tp == 2) {
-            if ($this->ordenes->update($idOrden, $data)) {
+            if ($this->ordenes->update($idOrden, $dataOrden)) {
 
                 $res = $this->propietario->obtenerPropietario($vehiculo);
                 $dataPropie = [
@@ -341,7 +369,7 @@ class OrdenServicio extends BaseController
                 }
             }
         } else {
-            if ($this->ordenes->save($data)) {
+            if ($this->ordenes->save($dataOrden)) {
                 $dataPropie = [
                     'id_vehiculo' => $vehiculo,
                     'id_tercero' => $cliente,

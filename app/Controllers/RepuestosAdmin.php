@@ -3,21 +3,21 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
-use App\Models\RepuestosAdminModel;
+use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
 
 class RepuestosAdmin extends BaseController
 {
     protected $respuestosAdmin;
-    protected $placa;
-    protected $razonSocial;
+    protected $vehiculo;
+    protected $proveedor;
 
     public function __construct()
     {
-        $this->respuestosAdmin = new RepuestosAdminModel();
-        $this->placa = new VehiculosModel();
-        $this->razonSocial = new TercerosModel();
+        $this->respuestosAdmin = new MaterialesModel();
+        $this->vehiculo = new VehiculosModel();
+        $this->proveedor = new TercerosModel();
 
     }
     public function index()
@@ -25,6 +25,12 @@ class RepuestosAdmin extends BaseController
 
         echo view('/principal/sidebar');
         echo view('/materiales/repuestosAdmin');
+    }
+    public function obtenerRepuestos()
+    {
+        $estado = $this->request->getPost('estado');
+        $res = $this->respuestosAdmin->obtenerRepuestos($estado);
+        return json_encode($res);
     }
 
     
