@@ -403,7 +403,7 @@
     estante = $('#estante').val()
     fila = $('#fila').val()
 
-    if ([nombre, categoria, precioC, precioV, cantidadA, cantidadV, estante, fila].includes('') || !validNom) {
+    if ([nombre, categoria, precioC, precioV, cantidadA, estante, fila].includes('') || !validNom) {
       mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
     } else {
       $.ajax({
@@ -418,7 +418,7 @@
           precioC,
           precioV,
           cantidadA,
-          cantidadV,
+          cantidadV : cantidadV == '' ? 0 : cantidadV,
           estante,
           fila
         },
