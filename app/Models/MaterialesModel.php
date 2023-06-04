@@ -14,7 +14,7 @@ class MaterialesModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
 
     protected $useTimestamps = true;
 
@@ -100,16 +100,16 @@ class MaterialesModel extends Model
     public function buscarInsumo($id_material, $nombre)
     {
         if ($id_material != 0) {
-            $this->select('materiales.*,materiales.nombre as nombre_insumo, estanteria.nombre as nomEstante');
+            $this->select('materiales.*,materiales.nombre as nombre_insumo, estanteria.nombre as nomEstante, estanteria.id as idEstante');
             $this->where('id_material', $id_material);
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
 
         } else if ($nombre != '') {
             $this->select('materiales.*,param_detalle.nombre as nombre_categoria');
+            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->where('materiales.nombre', $nombre);
             $this->where('materiales.estado', 'A');
-            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
 
         } else if ($id_material != 0 && $nombre != '') {
 
@@ -138,6 +138,7 @@ class MaterialesModel extends Model
     //     $datos = $this->first();  // nos trae el registro que cumpla con una condicion dada 
     //     return $datos;
     // }
+
     public function obtenerRepuestos($estado)
     {
         $this->select('materiales.*, param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social,  ');
@@ -154,29 +155,13 @@ class MaterialesModel extends Model
     //Insumos
     public function obtenerInsumoAdmin($estado)
     {
-        $this->select('materiales.id_material, materiales.nombre, materiales.cantidad_actual, materiales.fila, materiales.precio_venta, param_detalle.nombre as categoria, vw_param_det.nombre as tipo, estanteria.nombre as nomEstante');
+        $this->select('materiales.id_material, materiales.nombre, materiales.cantidad_actual, materiales.fila, materiales.precio_venta, materiales.precio_compra, materiales.cantidad_vendida, param_detalle.nombre as categoria, vw_param_det.nombre as tipo, estanteria.nombre as nomEstante');
         $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = materiales.tipo_material', 'left');
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
         $this->where('tipo_material', '9');
+        $this->where('materiales.estado', $estado);
         $data = $this->findAll();
         return $data;
     }
-
-    // public function ObtenerDetallesInsumos()
-    // {
-    //     $this->select('materiales.*,estanteria.nombre as nombreEstante');
-    //     $this->join('estanteria', 'estanteria.id = materiales.estante');
-    //     $this->where('id_material', 'A');
-    //     $datos = $this->first();
-    //     return $datos;
-    // }
-
-    // public function traerEditar($id_material)
-    // {
-    //     $this->select('materiales.*');
-    //     $this->where('id_material', $id_material);
-    //     $datos = $this->first(); // nos trae el registro que cumpla con una condicion dada 
-    //     return $datos;
-    // }
 }

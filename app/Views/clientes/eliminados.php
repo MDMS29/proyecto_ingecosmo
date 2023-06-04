@@ -218,7 +218,7 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:100px; height:80px; margin:10px; " src="<?php echo base_url('/img/icon-activar.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de reestablece este cliente?</p>
+                        <p class="textoModalP">¿Estas seguro de reestablecer este cliente?</p>
                     </div>
 
                 </div>

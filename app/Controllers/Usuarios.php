@@ -100,13 +100,12 @@ class Usuarios extends BaseController
         $res = $this->usuarios->obtenerUsuarios($estado);
         return json_encode($res);
     }
-    public function index($id)
+    public function index()
     {
-        $usuarios = $this->usuarios->buscarUsuario($id, 0);
         $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
         $tipoTel = $this->param->obtenerTipoTel();
-        $data = ['usuario' => $usuarios,'tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
+        $data = ['tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }

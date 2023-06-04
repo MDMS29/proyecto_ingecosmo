@@ -345,8 +345,9 @@ estilos modal agregar  */
     font-weight: 600;
 }
 
-/* --- INSUMOS ADMINISTRADO ---*/
-#spanInsu.invalidoInsumo {
+/* --- INSUMOS ADMINISTRADOR ---*/
+#spanInsu.invalidoInsumo,
+#msgAgregar.invalidoInsumo {
     color: red;
     font-weight: 600;
 }

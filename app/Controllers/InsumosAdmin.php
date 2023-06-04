@@ -7,6 +7,7 @@ use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
 use App\Models\EstanteriaModel;
+use App\Models\ParamModel;
 
 class InsumosAdmin extends BaseController
 {
@@ -14,6 +15,7 @@ class InsumosAdmin extends BaseController
     protected $placa;
     protected $razonSocial;
     protected $estantes;
+    protected $param;
 
     public function __construct()
     {
@@ -21,12 +23,13 @@ class InsumosAdmin extends BaseController
         $this->placa = new VehiculosModel();
         $this->razonSocial = new TercerosModel();
         $this->estantes = new EstanteriaModel();
-
+        $this->param = new ParamModel();
     }
     public function index()
     {
+        $categorias = $this->param->obtenerCategorias();
         $estantes = $this->estantes->traerEstantes();
-        $data = ['estantes' => $estantes];
+        $data = ['estantes' => $estantes, 'categorias' => $categorias];
         echo view('/principal/sidebar');
         echo view('/materiales/insumosAdmin', $data);
     }
@@ -40,58 +43,80 @@ class InsumosAdmin extends BaseController
     public function buscarInsumo()
     {
         $id = $this->request->getPost('id');
-        
-        $res = $this->insumos->buscarInsumo($id, '');
+        $nombre = $this->request->getPost('nombre');
+
+        $res = $this->insumos->buscarInsumo($id, $nombre);
         return json_encode($res);
     }
-
     public function insertar()
     {
-        
+        $id = $this->request->getPost('id');
+        $tp = $this->request->getPost('tp');
+        $nombre = $this->request->getPost('nombre');
+        $categoria = $this->request->getPost('categoria');
+        $precioC = $this->request->getPost('precioC');
+        $precioV = $this->request->getPost('precioV');
+        $cantidadA = $this->request->getPost('cantidadA');
+        $cantidadV = $this->request->getPost('cantidadV');
+        $estante = $this->request->getPost('estante');
+        $fila = $this->request->getPost('fila');
+        $usuarioCrea = session('id');
+        $dataInsumo = [
+            'nombre' => $nombre,
+            'categoria_material' => $categoria,
+            'tipo_material' => 9,
+            'cantidad_vendida' => $cantidadV,
+            'cantidad_actual' => $cantidadA,
+            'precio_venta' => $precioV,
+            'precio_compra' => $precioC,
+            'estante' => $estante,
+            'fila' => $fila,
+            'usuario_crea' => $usuarioCrea
+        ];
+        if ($tp == 2) {
+            if ($this->insumos->update($id, $dataInsumo)) {
+                return json_encode(1);
+            } else {
+                return json_encode(1);
+            }
+        } else {
+            if ($this->insumos->save($dataInsumo)) {
+                return json_encode(1);
+            } else {
+                return json_encode(1);
+            }
+        }
     }
-
-    // public function editarMaterial($id)
-    // {
-    //     $returnData = array();
-    //     $insumosAdmin_ = $this->insumosAdmin->traerEditar($id);
-    //     if (!empty($materiales_)) {
-    //         array_push($returnData, $insumosAdmin_);
-    //     }
-    //     echo json_encode($returnData);
-    // }
-    
-
-    // public function insertar()
-    // {
-    //     $tp = $this->request->getPost('tp');
-    //     $usuCrea = session('id');
-    //     if ($this->request->getMethod() == "post") {
-    //         if ($tp == 1) {
-    //             $this->insumosAdmin->save([
-    //                 'nombre' => $this->request->getPost('nombre'),
-    //                 'cantidad_actual' => $this->request->getPost('existencia'),
-    //                 'placa' => $this->request->getPost('placa'),
-    //                 'precio_venta' => $this->request->getPost('precio'),
-    //                 'razon_social' => $this->request->getPost('proveedores'),
-    //                 'usuario_crea' => $usuCrea 
-
-    //             ]);
-    //         } else {
-    //             $this->insumosAdmin->update(
-    //                 $this->request->getPost('id'),
-    //                 [
-    //                 'nombre' => $this->request->getPost('nombre'),
-    //                 'cantidad_actual' => $this->request->getPost('existencia'),
-    //                 'placa' => $this->request->getPost('placa'),
-    //                 'precio_venta' => $this->request->getPost('precio'),
-    //                 'razon_social' => $this->request->getPost('proveedores'),
-    //                 'usuario_crea' => $usuCrea 
-
-    //                 ]
-    //             );
-    //         }
-    //     }
-    // }
-
-  
+    public function restockMaterial()
+    {
+        $id = $this->request->getPost('id');
+        $cantActual = $this->request->getPost('cantActual');
+        $cantAgregar = $this->request->getPost('cantAgregar');
+        $nuevaCant = $cantActual + $cantAgregar;
+        if ($this->insumos->update($id, ['cantidad_actual' => $nuevaCant])) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
+    }
+    public function cambiarEstado()
+    {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
+        if ($this->insumos->update($id, ['estado' => $estado])) {
+            if ($estado == 'A') {
+                return '¡Se ha reestablecido el Material!';
+            } else {
+                return '¡Se ha eliminado el Material!';
+            }
+        }
+    }
+    public function eliminados()
+    {
+        $categorias = $this->param->obtenerCategorias();
+        $estantes = $this->estantes->traerEstantes();
+        $data = ['estantes' => $estantes, 'categorias' => $categorias];
+        echo view('/principal/sidebar');
+        echo view('/materiales/insumosAdminEliminados', $data);
+    }
 }

@@ -166,27 +166,27 @@
 </form>
 
 <!-- MODAL VER FOTO -->
-<div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+<!-- <div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <img src="< ?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h5 style="font-weight: bold;">
-                            <?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
+                            < ?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
                         </h5>
                     <button type="button" class="btn" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3" style="width: 50%">
-                    <img style="border-radius: 5px;" <?= $usuario['foto'] ?> alt="Foto Usuario" />
+                    <img style="border-radius: 5px;" < ?= $usuario['foto'] ?> alt="Foto Usuario" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

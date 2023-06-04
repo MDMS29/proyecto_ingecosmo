@@ -3,7 +3,7 @@
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
   <h2 class="text-center mb-4">
-    <img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" />Administrar Insumos
+    <img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" />Administrar Insumos Eliminados
   </h2>
   <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
     <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">Categoria Insumo</a> - <a class="toggle-vis btn" data-column="4">Cantidad Vendida</a> - <a class="toggle-vis btn" data-column="7">Precio Venta</a> - <a class="toggle-vis btn" data-column="8">Precio Compra</a>
@@ -26,13 +26,11 @@
       </thead>
       <tbody class="text-center">
         <!-- TABLA ADMINSITRAR INSUMO -->
-
       </tbody>
     </table>
   </div>
   <div class="footer-page">
-    <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarInsumo" onclick="seleccionarInsumo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-    <a href="<?php echo base_url('/insumosAdmin/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+  <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
   </div>
 </div>
 
@@ -48,7 +46,7 @@
       <div class="modal-content" id="modalContent">
         <div class="modal-header d-flex align-items-center justify-content-between">
           <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
-          <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
+          <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4 text-primary"></i><span id="tituloModal">Ver Material</span> </h1>
           <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
 
@@ -56,14 +54,12 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Nombre:</label>
-              <input class="form-control" id="nombre" name="nombre" placeholder="">
-              <input class="form-control" id="nombreHidden" name="nombreHidden" hidden>
-              <small id="msgAgregar" class="invalidoInsumo"></small>
+              <input class="form-control" id="nombre" name="nombre" disabled>
             </div>
             <div class="mb-3" style="width: 90%;">
               <label for="categoria" class="col-form-label">Categoria:</label>
-              <select class="form-control form-select" name="estante" id="categoria">
-                <option selected value="">-- Seleccione --</option>
+              <select class="form-control form-select" name="estante" id="categoria" disabled>
+                <option selected value="" >-- Seleccione --</option>
                 <?php foreach ($categorias as $data) { ?>
                   <option value="<?= $data['id_param_det'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
@@ -73,12 +69,12 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
-              <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+              <input class="form-control" type="number" id="cantidadA" name="cantidadA" disabled >
             </div>
 
             <div class="mb-3" style="width: 100%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
-              <input class="form-control" type="number" id="cantidadV" name="cantidadV" placeholder="">
+              <input class="form-control" type="number" id="cantidadV" name="cantidadV" disabled>
             </div>
           </div>
 
@@ -87,7 +83,7 @@
               <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">$</span>
-                <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
+                <input class="form-control" type="number" id="precioV" name="precioV" disabled>
               </div>
             </div>
 
@@ -95,7 +91,7 @@
               <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">$</span>
-                <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+                <input class="form-control" type="number" id="precioC" name="precioC" disabled>
               </div>
 
             </div>
@@ -104,7 +100,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Estante:</label>
-              <select style=" margin-left: 0px !important;" class="form-control form-select" name="estante" id="estante">
+              <select style=" margin-left: 0px !important;" class="form-control form-select" name="estante" id="estante" disabled>
                 <option selected value="">-- Seleccione --</option>
                 <?php foreach ($estantes as $data) { ?>
                   <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
@@ -114,7 +110,7 @@
 
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Fila:</label>
-              <select style=" margin-left: 0px !important;" class="form-control form-select" name="fila" id="fila">
+              <select style=" margin-left: 0px !important;" class="form-control form-select" name="fila" id="fila" disabled>
                 <option selected value="">-- Seleccione --</option>
 
               </select>
@@ -123,47 +119,13 @@
         </div>
         <div class="modal-footer" id="modalFooter">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<!-- MODAL RESTOCK DEL MATERIAL -->
-<div class="modal fade" id="restockMaterial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
-      <input type="hidden" name="idMate" id="idMate">
-      <div class="modal-header flex justify-content-between align-items-center">
-        <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
-        <h1 class="modal-title fs-5 text-center ">
-          <img src="<?= base_url('img/restock.png') ?>" alt="" width="30" height="30">
-          <span id="tituloRestock"><!-- TEXTO DINAMICO  --></span>
-        </h1>
-        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos()">X</button>
-      </div>
-      <div class="modal-body">
-        <div class=" column-gap-3" style="width: 100%">
-          <div class="mb-3 w-100">
-            <label for="cantActu" class="col-form-label">Cantidad Actual :</label>
-            <input type="number" class="form-control text-center" id="cantActu" disabled>
-          </div>
-          <div class="mb-3 w-100">
-            <label for="cantRestock" class="col-form-label">Cantidad a Agregar:</label>
-            <input type="number" class="form-control text-center" id="cantRestock" name="cantRestock">
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos()">Cerrar</button>
-        <button type="button" class="btn btnAccionF" id="btnRestock">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Confirmar Eliminar -->
+<!-- MODAL REESTABLECER ELIMINAR -->
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
@@ -176,14 +138,14 @@
 
         <div class="contenidoEliminarP">
           <div class="bloqueModalP">
-            <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-            <p class="textoModalP">¿Estas seguro de eliminar este Material?</p>
+            <img style=" width:100px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
+            <p class="textoModalP">¿Estas seguro de reestablecer este Material?</p>
           </div>
         </div>
       </div>
       <div id="bloqueBtnP" class="modal-footer">
         <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
-        <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+        <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
       </div>
 
     </div>
@@ -212,12 +174,6 @@
       $(this).addClass('active');
     }
   })
-  // Limpiar campos
-  function limpiarCampos() {
-    validNom = true
-    $('#msgAgregar').text('')
-    $('#cantRestock').text('')
-  }
   //Mostrar filas al seleccionar el estante
   function mostrarFilas(estante, fila) {
     var cadena
@@ -252,7 +208,7 @@
         },
         dataType: 'json',
         success: function(data) {
-          $('#tituloModal').text('Editar')
+          $('#tituloModal').text('Ver Insumo')
           $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
           $('#imgModal').attr('width', '25')
           $('#id').val(data['id_material'])
@@ -266,66 +222,17 @@
           $('#cantidadV').val(data['cantidad_vendida'])
           $('#estante').val(data['idEstante'])
           mostrarFilas(data['idEstante'], data['fila'])
-          $('#btnAgregar').text('Actualizar')
         }
       })
-    } else {
-      $('#tituloModal').text('Agregar')
-      $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
-      $('#imgModal').attr('width', '25')
-      $('#id').val(0)
-      $('#tp').val(1)
-      $('#nombre').val('')
-      $('#nombreHidden').val('')
-      $('#categoria').val('')
-      $('#precioC').val('')
-      $('#precioV').val('')
-      $('#cantidadA').val('')
-      $('#cantidadV').val('')
-      $('#estante').val('')
-      mostrarFilas('', '')
-      $('#btnAgregar').text('Guardar')
-
     }
   }
-  //Obtener filas del estante
-  $('#estante').on("change", function(e) {
-    estante = $('#estante').val()
-    mostrarFilas(estante, '')
-  })
-  //Validar nombre de material
-  $('#nombre').on("input", function(e) {
-    nombre = $('#nombre').val()
-    nomHidden = $('#nombreHidden').val()
-    $.ajax({
-      type: 'POST',
-      url: "<?= base_url('insumosAdmin/buscarInsumo') ?>",
-      dataType: 'json',
-      data: {
-        id: 0,
-        nombre
-      },
-      success: function(res) {
-        if (nombre == nomHidden) {
-          $('#msgAgregar').text('')
-          validNom = true
-        } else if (res != null) {
-          $('#msgAgregar').text('* Este insumo fue registrado *')
-          validNom = false
-        } else {
-          $('#msgAgregar').text('')
-          validNom = true
-        }
-      }
-    })
-  })
   // Tabla de inusmos
   var tableInsumosAdmin = $("#tableInsumosAdmin").DataTable({
     ajax: {
       url: '<?= base_url('insumosAdmin/obtenerInsumos') ?>',
       method: "POST",
       data: {
-        estado: 'A'
+        estado: 'I'
       },
       dataSrc: "",
     },
@@ -375,11 +282,9 @@
         data: null,
         render: function(data, type, row) {
           return (
-            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Material"></button>' +
+            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal" title="Ver Insumo"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>' +
 
-            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalEliminar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Material"></button>' +
-
-            `<button class="btn" onclick="restockMaterial('${row.nombre}', ${row.cantidad_actual}, ${row.id_material})" data-bs-toggle="modal" data-bs-target="#restockMaterial"><img src="<?php echo base_url("img/restock.png") ?>" alt="Boton Reestock" title="Restock Material" width="25"></button>`
+            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalEliminar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restaurar" title="Restaurar Insumo" width="20"></button>'
           );
         },
       }
@@ -390,109 +295,17 @@
     },
 
   });
-  $('#formularioInsumo').on('submit', function(e) {
-    e.preventDefault()
-    tp = $('#tp').val()
-    id = $('#id').val()
-    nombre = $('#nombre').val()
-    categoria = $('#categoria').val()
-    precioC = $('#precioC').val()
-    precioV = $('#precioV').val()
-    cantidadA = $('#cantidadA').val()
-    cantidadV = $('#cantidadV').val()
-    estante = $('#estante').val()
-    fila = $('#fila').val()
-
-    if ([nombre, categoria, precioC, precioV, cantidadA, cantidadV, estante, fila].includes('') || !validNom) {
-      mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-    } else {
-      $.ajax({
-        url: "<?= base_url('insumosAdmin/insertar') ?>",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          tp,
-          id,
-          nombre,
-          categoria,
-          precioC,
-          precioV,
-          cantidadA,
-          cantidadV,
-          estante,
-          fila
-        },
-        success: function(res) {
-          contador = 0
-          if (tp == 2) {
-            if (res == 1) {
-              tableInsumosAdmin.ajax.reload(null, false)
-              $('#agregarInsumo').modal('hide')
-              mostrarMensaje('success', '¡Se ha actualizado el insumo!')
-            } else {
-              mostrarMensaje('error', '¡Ha ocurrido un error!')
-            }
-          } else {
-            if (res == 1) {
-              tableInsumosAdmin.ajax.reload(null, false)
-              $('#agregarInsumo').modal('hide')
-              mostrarMensaje('success', '¡Se ha guardado el insumo!')
-            } else {
-              mostrarMensaje('error', '¡Ha ocurrido un error!')
-            }
-          }
-        }
-      })
-    }
-  })
-  // Mostrar info modal
-  function restockMaterial(nombre, cantActual, id) {
-    $('#tituloRestock').text('Reestock - ' + nombre)
-    $('#cantActu').val(cantActual)
-    $('#idMate').val(id)
-  }
-  //Hacer restock material
-  $('#btnRestock').on('click', function(e) {
-    cantActual = $('#cantActu').val()
-    cantAgregar = $('#cantRestock').val()
-    id = $('#idMate').val()
-
-    if ([cantAgregar].includes('')) {
-      mostrarMensaje('error', '¡Ingrese una cantidad valida!')
-    } else {
-      $.ajax({
-        type: 'POST',
-        url: "<?= base_url('insumosAdmin/restockMaterial') ?>",
-        dataType: 'json',
-        data: {
-          id,
-          cantActual,
-          cantAgregar
-        },
-        success: function(res) {
-          if (res == 1) {
-            contador = 0
-            tableInsumosAdmin.ajax.reload(null, false)
-            $('#restockMaterial').modal('hide')
-            mostrarMensaje('success', '¡Se realizo el restock!')
-          } else {
-            mostrarMensaje('error', '¡Ingrese una cantidad valida!')
-          }
-        }
-      })
-    }
-  })
-  // Cambiar estado de "Activo" a "Inactivo"
+  // Cambiar estado de "Inactivo" a "Activo"
   $('#modalEliminar').on('shown.bs.modal', function(e) {
-    $(this).find('#btnSi').attr('onclick', `EliminarMaterial(${$(e.relatedTarget).data('href')})`)
+    $(this).find('#btnSi').attr('onclick', `ReestablerMaterial(${$(e.relatedTarget).data('href')})`)
   })
-  function EliminarMaterial(id) {
+  function ReestablerMaterial(id) {
     $.ajax({
       type: "POST",
       url: "<?php echo base_url('insumosAdmin/cambiarEstado') ?>",
       data: {
         id,
-        estado: 'I'
+        estado: 'A'
       }
     }).done(function(data) {
       mostrarMensaje('success', data)
