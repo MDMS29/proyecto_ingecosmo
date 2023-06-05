@@ -47,6 +47,14 @@ class ParamModel extends Model
         return $datos;
     }
 
+    public function obtenerTipoEstante()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '14');
+        $datos = $this->findAll();
+        return $datos;
+    }
+
     public function obtenerTipoTel()
     {
         $this->select('id_param_det as id, nombre');

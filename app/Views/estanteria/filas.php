@@ -54,7 +54,8 @@
                 <div class="modal-header">
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
                     <div class="bloqueHeader">
-                        <img class="iconosModal" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
+                        <!-- <img class="iconosModal" src="< ?php echo base_url('/img/') . $dato['icono'] ?>"> -->
+                        <label class="tituloMover"><i class="bi bi-arrow-left-right"></i> Mover </label> 
                         <div class="tituloHeader">
 
                             <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1> -->
@@ -191,7 +192,7 @@
                     cadena += `<p class="subTexto">
 
                     <details>
-                    <summary data-summary-id="' . $i . '">' . $res[$i]['nombre'] . '</summary>'
+                    <summary >
                     <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
                     </summary>
 
