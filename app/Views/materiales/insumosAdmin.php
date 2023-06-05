@@ -31,8 +31,8 @@
     </table>
   </div>
   <div class="footer-page">
-    <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarInsumo" onclick="seleccionarInsumo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-    <a href="<?php echo base_url('/insumosAdmin/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+    <button class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#agregarInsumo" onclick="seleccionarInsumo(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+    <a href="<?php echo base_url('/insumosAdmin/eliminados'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
   </div>
 </div>
 
@@ -122,8 +122,8 @@
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
+          <button type="button" class="btn btnAccionF" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btnRedireccion " id="btnAgregar">Agregar</button>
         </div>
       </div>
     </div>
@@ -156,8 +156,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos()">Cerrar</button>
-        <button type="button" class="btn btnAccionF" id="btnRestock">Guardar</button>
+        <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos()">Cerrar</button>
+        <button type="button" class="btn btnRedireccion " id="btnRestock">Guardar</button>
       </div>
     </div>
   </div>
@@ -177,13 +177,13 @@
         <div class="contenidoEliminarP">
           <div class="bloqueModalP">
             <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-            <p class="textoModalP">¿Estas seguro de eliminar este Material?</p>
+            <p class="textoModalP">¿Estas seguro de eliminar este Insumo?</p>
           </div>
         </div>
       </div>
       <div id="bloqueBtnP" class="modal-footer">
-        <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
-        <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+        <button id="btnNo" class="btn btnAccionF " data-dismiss="modal">Cerrar</button>
+        <a id="btnSi" class="btn btnRedireccion">Eliminar</a>
       </div>
 
     </div>
@@ -375,11 +375,11 @@
         data: null,
         render: function(data, type, row) {
           return (
-            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Material"></button>' +
+            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Insumo"></button>' +
 
-            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalEliminar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Material"></button>' +
+            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalEliminar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Insumo"></button>' +
 
-            `<button class="btn" onclick="restockMaterial('${row.nombre}', ${row.cantidad_actual}, ${row.id_material})" data-bs-toggle="modal" data-bs-target="#restockMaterial"><img src="<?php echo base_url("img/restock.png") ?>" alt="Boton Reestock" title="Restock Material" width="25"></button>`
+            `<button class="btn" onclick="restockMaterial('${row.nombre}', ${row.cantidad_actual}, ${row.id_material})" data-bs-toggle="modal" data-bs-target="#restockMaterial"><img src="<?php echo base_url("img/restock.png") ?>" alt="Boton Reestock" title="Restock Insumo" width="25"></button>`
           );
         },
       }
@@ -418,7 +418,7 @@
           precioC,
           precioV,
           cantidadA,
-          cantidadV : cantidadV == '' ? 0 : cantidadV,
+          cantidadV: cantidadV == '' ? 0 : cantidadV,
           estante,
           fila
         },
@@ -486,6 +486,7 @@
   $('#modalEliminar').on('shown.bs.modal', function(e) {
     $(this).find('#btnSi').attr('onclick', `EliminarMaterial(${$(e.relatedTarget).data('href')})`)
   })
+
   function EliminarMaterial(id) {
     $.ajax({
       type: "POST",

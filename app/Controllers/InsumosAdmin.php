@@ -105,9 +105,9 @@ class InsumosAdmin extends BaseController
         $estado = $this->request->getPost('estado');
         if ($this->insumos->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
-                return '¡Se ha reestablecido el Material!';
+                return '¡Se ha reestablecido el Insumo!';
             } else {
-                return '¡Se ha eliminado el Material!';
+                return '¡Se ha eliminado el Insumo!';
             }
         }
     }

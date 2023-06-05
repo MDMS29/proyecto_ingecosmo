@@ -244,9 +244,9 @@ class Usuarios extends BaseController
         $estado = $this->request->getPost('estado');
         if ($this->usuarios->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
-                return '¡Se ha reestablecido el usuario!';
+                return '¡Se ha reestablecido el Usuario!';
             } else {
-                return '¡Se ha eliminado el usuario!';
+                return '¡Se ha eliminado el Usuario!';
             }
         }
     }
