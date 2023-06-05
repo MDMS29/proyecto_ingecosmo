@@ -92,6 +92,15 @@ class MaterialesModel extends Model
         return $datos;
     }
 
+    public function obtenerFilasRepuestos($estante)
+    {
+        $this->select('fila, id_material');
+        $this->where('materiales.estante', $estante);
+        $this->groupBy('materiales.fila');
+        $datos = $this->findAll();
+        return $datos;
+    }
+
     public function obtenerMateriales($id_material)
     {
         $this->select('materiales.*');
@@ -108,6 +117,32 @@ class MaterialesModel extends Model
         } else if ($nombre != '') {
             $this->select('materiales.*,param_detalle.nombre as nombre_categoria');
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
+            $this->where('materiales.nombre', $nombre);
+            $this->where('materiales.estado', 'A');
+
+        } else if ($id_material != 0 && $nombre != '') {
+
+            $this->select('materiales.*');
+            $this->where('id_material', $id_material);
+            $this->where('nombre', $nombre);
+
+        }
+        $data = $this->first();
+        return $data;
+    }
+
+    public function buscarRepuesto($id_material, $nombre)
+    {
+        if ($id_material != 0) {
+            $this->select('materiales.*, param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social  ');
+            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
+            $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+            $this->where('id_material', $id_material);
+
+        } else if ($nombre != '') {
+            $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
+            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
+            $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
             $this->where('materiales.nombre', $nombre);
             $this->where('materiales.estado', 'A');
 

@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" />Administrar Repuestos</h2>
     <div class="table-responsive p-2">
+    <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+        <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Categoria</a> - <a class="toggle-vis btn" data-column="6">P. Compra</a> - <a class="toggle-vis btn" data-column="7">P. Venta</a>
+    </div>
         <table class="table table-striped" id="tableRepuestos" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -31,101 +34,98 @@
 </div>
 
 
-<form autocomplete="off" id="formularioRepuestos" enctype="multipart/form-data">
-    <div class="modal fade" id="agregarRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <input type="text" name="id" id="id" hidden>
-        <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-xl">
-            <div class="body">
-                <div class="modal-content">
-                    <div class="modal-header flex align-items-center gap-3">
-                        <div class="d-flex" style="width: 100%; justify-content: space-between; align-items: center;">
-                            <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
-                            <h1 class="modal-title fs-5 d-flex align-items-center gap-2">
-                                <img id="imgModal" src="" width="25" />
-                                <span id="tituloModal"><!-- TEXTO DINAMICO--></span>
-                            </h1>
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="nombre_p" class="col-form-label">Nombre:</label>
-                                    <input type="text" name="nombre_p" class="form-control" id="nombreP">
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="nombre_s" class="col-form-label">Vehiculo:</label>
-                                    <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                        <option value="1" selected></option>
-                                        <option>-- Seleccione --</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="mb-3">
-                                        <label for="tipoDoc" class="col-form-label">Proveedor:</label>
-                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                            <option value="1" selected></option>
-                                            <option>-- Seleccione --</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_p" class="col-form-label">Categoria:</label>
-                                    <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                        <option value="1" selected></option>
-                                        <option>-- Seleccione --</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_s" class="col-form-label">Existencias:</label>
-                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS">
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="">
-                                        <label for="nIdenti" class="col-form-label">Precio de comppra:</label>
-                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11">
-                                        <small id="msgDoc" class="invalido"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="telefono" class="col-form-label">Precio de venta:</label>
-                                    <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11">
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="email" class="col-form-label">Estante:</label>
-                                    <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
-                                        <option value="1" selected></option>
-                                        <option>-- Seleccione --</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="mb-3">
-                                        <label for="rol" class="col-form-label">Fila:</label>
-                                        <select class="form-select form-select" name="rol" id="rol">
-                                            <!-- <option selected value="">-- Seleccione --</option>
-                                        < ?php foreach ($roles as $r) { ?>
-                                            <option value="< ?= $r['id_rol'] ?>">< ?= $r['nombre'] ?></option>
-                                        < ?php } ?> -->
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
-                    </div>
-                </div>
-            </div>
+<!-- AGREGAR O EDITAR REPUESTO -->
+<form id="formularioRepuesto" autocomplete="off">
+  <input class="form-control" id="id" name="id" type="text" value="0" hidden>
+
+  <input type="text" name="id" id="id" hidden>
+  <input type="text" name="tp" id="tp" hidden>
+
+  <div class="modal fade" id="agregarRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="modalContent">
+        <div class="modal-header d-flex align-items-center justify-content-between">
+          <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+          <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
+          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
+
+        <div class="modal-body">
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Nombre:</label>
+              <input class="form-control" id="nombre" name="nombre" placeholder="">
+              <input class="form-control" id="nombreHidden" name="nombreHidden" hidden>
+              <small id="msgAgregar" class="invalidoInsumo"></small>
+            </div>
+            <div class="mb-3" style="width: 90%;">
+              <label for="categoria" class="col-form-label">Categoria:</label>
+              <select class="form-control form-select" name="estante" id="categoria">
+                <option selected value="">-- Seleccione --</option>
+                <?php foreach ($categorias as $data) { ?>
+                  <option value="<?= $data['id_param_det'] ?>"><?= $data['nombre'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 100%;">
+              <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
+              <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+            </div>
+
+            <div class="mb-3" style="width: 100%;">
+              <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
+              <input class="form-control" type="number" id="cantidadV" name="cantidadV" placeholder="">
+            </div>
+          </div>
+
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">$</span>
+                <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
+              </div>
+            </div>
+
+            <div class="mb-3" style="width: 90%;">
+              <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">$</span>
+                <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 80%;">
+              <label for="exampleDataList" class="col-form-label">Estante:</label>
+              <select style=" margin-left: 0px !important;" class="form-control form-select" name="estante" id="estante">
+                <option selected value="">-- Seleccione --</option>
+                <?php foreach ($estantes as $data) { ?>
+                  <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
+
+            <div class="mb-3" style="width: 80%;">
+              <label for="exampleDataList" class="col-form-label">Fila:</label>
+              <select style=" margin-left: 0px !important;" class="form-control form-select" name="fila" id="fila">
+                <option selected value="">-- Seleccione --</option>
+
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="modalFooter">
+          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
+        </div>
+      </div>
     </div>
+  </div>
 </form>
 
 <!-- Modal Confirma Eliminar -->
@@ -159,25 +159,85 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-        var ContadorPRC = 0;
-    //Editar o Agregar Proveedor
-    function seleccionarProveedor(id, tp) {
+    var ContadorPRC = 0;
+
+      //Mostrar Ocultar Columnas
+  $('a.toggle-vis').on('click', function(e) {
+    e.preventDefault();
+    // Get the column API object
+    var column = tableRepuestos.column($(this).attr('data-column'));
+    // Toggle the visibility
+    column.visible(!column.visible());
+  });
+  //Div ocualtar columnas de la tabla
+  var botones = $(".ocultar a");
+  botones.click(function() {
+    if ($(this).attr('class').includes('active')) {
+      $(this).removeClass('active');
+    } else {
+      $(this).addClass('active');
+    }
+  })
+  // Limpiar campos
+  function limpiarCampos() {
+    validNom = true
+    $('#msgAgregar').text('')
+    $('#cantRestock').text('')
+  }
+
+        
+     //Mostrar filas al seleccionar el estante
+  function mostrarFilas(estante, fila) {
+    var cadena
+    if (estante == '') {
+      cadena = `<option value="" selected>-- Seleccione --</option>`
+      $('#fila').html(cadena)
+      $('#fila').val(fila)
+    } else {
+      $.ajax({
+        url: '<?php echo base_url('repuestos/obtenerFilasRepuestos/') ?>' + estante,
+        type: 'POST',
+        dataType: 'json',
+        success: function(res) {
+          cadena = `<option value="" selected>-- Seleccione  --</option>`
+          for (let i = 0; i < res.length; i++) {
+            cadena += `<option value=${res[i].fila}>${res[i].fila}</option>`
+          }
+          $('#fila').html(cadena)
+          $('#fila').val(fila)
+        }
+      })
+    }
+  }
+    //Obtener filas del estante
+    $('#estante').on("change", function(e) {
+    estante = $('#estante').val()
+    mostrarFilas(estante, '')
+  })
+    function seleccionarRepuesto(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0 + '/' + 0,
-                dataType: 'json',
-                success: function(res) {
+                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>",
+                data:{
+                    id
+                },
+                dataType: 'json', 
+                success: function(data) {
                     $('#tituloModal').text('Editar')
                     $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
-                    $('#id').val(res[0]['id_tercero'])
-                    $('#RazonSocial').val(res[0]['razon_social'])
-                    $('#nit').val(res[0]['n_identificacion'])
-                    $('#direccion').val(res[0]['direccion'])
+                    $('#nombre').val(data[0]['nombre'])
+                    $('#vehiculo').val(data[0]['placa'])
+                    $('#proveedor').val(data[0]['razon_social'])
+                    $('#categoria').val(data[0]['nombre_categoria'])
+                    $('#categoria').val(data[0]['nombre_categoria'])
+                    $('#existencias').val(data[0]['cantidad_actual'])
+                    $('#pCompra').val(data[0]['precio_compra'])
+                    $('#pVenta').val(data[0]['precio_venta'])
+                    $('#estante').val(data[0]['estante'])
+                    mostrarFilas(data['idEstante'], data['fila'])
                     $('#btnGuardar').text('Actualizar')
-                    $('#msgRaSo').text('')
-                    $('#msgNit').text('')
                 }
             })
 
@@ -187,12 +247,17 @@
             $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
-            $('#RazonSocial').val('')
-            $('#nit').val('')
-            $('#direccion').val('')
+            $('#nombre').val('')
+            $('#vehiculo').val('')
+            $('#proveedor').val('')
+            $('#categoria').val('')
+            $('#categoria').val('')
+            $('#existencias').val('')
+            $('#pCompra').val('')
+            $('#pVenta').val('')
+            $('#estante').val('')  
+            mostrarFilas('', '')
             $('#btnGuardar').text('Agregar')
-            $('#msgRaSo').text('')
-            $('#msgNit').text('')
         }
     }
     // Tabla   
@@ -243,7 +308,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarRepuestos(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarProveedor" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Proveedor"></button>' +
+                        '<button class="btn" onclick="seleccionarRepuesto(' + data.material + ' , 2 )" data-bs-target="#agregarRepuesto" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Repuesto"></button>' +
 
                         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );
