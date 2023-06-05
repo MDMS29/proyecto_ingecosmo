@@ -214,7 +214,8 @@ class Insumos extends BaseController
                     'id_material' => $id,
                     'item' => 1,
                     'cantidad' => $cantidadUsar,
-                    'costo' => $subtotal,
+                    'costo' => $s
+                    ubtotal,
                     'usuario_crea' => $usuarioCrea
                 ];
                 if ($this->movDet->save($dataDet)) {
