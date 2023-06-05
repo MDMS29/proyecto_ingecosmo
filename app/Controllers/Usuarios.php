@@ -105,9 +105,7 @@ class Usuarios extends BaseController
         $tipoDoc = $this->param->obtenerTipoDoc();
         $roles = $this->roles->obtenerRoles();
         $tipoTel = $this->param->obtenerTipoTel();
-
         $data = ['tipoDoc' => $tipoDoc, 'roles' => $roles, 'tipoTele' => $tipoTel];
-
         echo view('/principal/sidebar');
         echo view('/usuarios/usuarios', $data);
     }
@@ -120,6 +118,7 @@ class Usuarios extends BaseController
         $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
+        echo view('usuarios/usuarios', $data);
     }
     public function mostrarImagen($id)
     {
@@ -158,10 +157,7 @@ class Usuarios extends BaseController
                 mkdir($uploadPath, 0777, true);
             }
 
-
             $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-
-
             $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
 
             if ($tp == 2) {
@@ -248,9 +244,9 @@ class Usuarios extends BaseController
         $estado = $this->request->getPost('estado');
         if ($this->usuarios->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
-                return '¡Se ha reestablecido el usuario!';
+                return '¡Se ha reestablecido el Usuario!';
             } else {
-                return '¡Se ha eliminado el usuario!';
+                return '¡Se ha eliminado el Usuario!';
             }
         }
     }

@@ -12,6 +12,7 @@ use App\Models\EstanteriaModel;
 use App\Models\FilasModel;
 use App\Models\MoviEncModel;
 use App\Models\MoviDetModel;
+use App\Models\OrdenesModel;
 
 
 class Insumos extends BaseController
@@ -24,6 +25,7 @@ class Insumos extends BaseController
     protected $fila;
     protected $movEnc;
     protected $movDet;
+    protected $ordenes;
     public function __construct()
     {
         $this->categorias = new ParamModel();
@@ -34,6 +36,7 @@ class Insumos extends BaseController
         $this->fila = new FilasModel();
         $this->movEnc = new MoviEncModel();
         $this->movDet = new MoviDetModel();
+        $this->ordenes = new OrdenesModel();
     }
     public function index()
     {
@@ -48,13 +51,14 @@ class Insumos extends BaseController
         $materiales = $this->materiales->obtenerInsumo($id);
         $trabajadores = $this->trabajadores->trabajadoresInsumos();
         $vehiculos = $this->vehiculos->vehiculosInsumos();
+        $ordenes = $this->ordenes->obtenerOrdenes();
         $estanteria = $this->estanteria->traerEstantes();
         $fila = $this->fila->traerFila();
         if (empty($materiales)) {
             $materiales = '';
         }
 
-        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos, "trabajadores" => $trabajadores, "estanteria" => $estanteria, "fila" => $fila];
+        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos, "ordenes" => $ordenes, "trabajadores" => $trabajadores, "estanteria" => $estanteria, "fila" => $fila];
         echo view('/principal/sidebar');
 
         echo view('/materiales/materiales', $data);
@@ -183,13 +187,11 @@ class Insumos extends BaseController
 
         $res = $this->materiales->traerDetalles($id);
         $cantidadExistente = $this->request->getPost('cantidadExistente');
-        $vehiculo = $this->request->getPost('vehiculo');
+        $ordenes = $this->request->getPost('ordenes');
         $trabajador = $this->request->getPost('trabajador');
         $cantidadUsar = $this->request->getPost('cantidadUsar');
-        $subtotal = $this->request->getPost('subtotal');
         $usuarioCrea = session('id');
         $fechaActual = date('Y-m-d');
-
         $cantidadNueva =  $cantidadExistente - $cantidadUsar; //Nueva cantidad existente del material
         $cantidadVendidaActual = $res['cantidad_vendida'] + $cantidadUsar; //Nueva cantidad vendida del material
         $data = [
@@ -202,7 +204,7 @@ class Insumos extends BaseController
             $dataEnc = [
                 'tipo_movimiento' => 12,
                 'estado' => 'A',
-                'id_vehiculo' => $vehiculo,
+                'id_vehiculo' => $ordenes,
                 'id_trabajador' => $trabajador,
                 'fecha_movimiento' => $fechaActual,
                 'usuario_crea' => $usuarioCrea
@@ -214,7 +216,7 @@ class Insumos extends BaseController
                     'id_material' => $id,
                     'item' => 1,
                     'cantidad' => $cantidadUsar,
-                    'costo' => $subtotal,
+                    'costo' => $cantidadVendidaActual,
                     'usuario_crea' => $usuarioCrea
                 ];
                 if ($this->movDet->save($dataDet)) {

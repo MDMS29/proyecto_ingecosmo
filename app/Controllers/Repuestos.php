@@ -18,7 +18,7 @@ class Repuestos extends BaseController
     {
         $this->categorias = new ParamModel();
         $this->estanteria = new EstanteriaModel();
-        $this->materiales = new MaterialesModel();
+        $this->repuestos = new MaterialesModel();
     }
     public function index()
     {
@@ -48,5 +48,32 @@ class Repuestos extends BaseController
         $this->materiales->save($data);
 
         // return redirect()->to(base_url('/materiales'));
+    }
+
+    public function obtenerFilasRepuestos($estante)
+    {
+        $materiales = $this->materiales->obtenerFilasRepuestos($estante);
+        if (!empty($materiales)) {
+            return json_encode($materiales);
+        }
+    }
+
+    public function buscarRepuesto($id_material, $nombre)
+    {
+        $array = array();
+        if ($id_material != 0) {
+            $data = $this->materiales->buscarRepuesto($id_material, '');
+            if (!empty($data)) {
+                array_push($array, $data);
+                return json_encode($array);
+            }
+        } else if ($nombre != '') {
+            $data = $this->materiales->buscarRepuesto(0, $nombre);
+            return json_encode($data);
+        } else if ($id_material != 0 && $nombre != '') {
+            $data = $this->materiales->buscarRepuesto($id_material, $nombre);
+            array_push($array, $data);
+            return json_encode($array);
+        }
     }
 }

@@ -5,19 +5,20 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/historial-b.png') ?>" /> Historial Materiales</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Material</a> - <a class="toggle-vis btn" data-column="5">Fecha de Movimiento</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="2">Trabajador</a> - <a class="toggle-vis btn" data-column="4">Fecha de Movimiento</a>
         </div>
         <table class="table table-striped" id="tableHistorial" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">Material</th>
-                    <th scope="col" class="text-center">Orden de trabajo</th>
+                    <!-- <th scope="col" class="text-center">Material</th> -->
+                    <th scope="col" class="text-center">Orden de Servicio</th>
                     <th scope="col" class="text-center">Trabajador</th>
                     <th scope="col" class="text-center">Cantidad</th>
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Subtotal</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
+                    <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -66,13 +67,13 @@
                     return "<b>" + contador + "</b>";
                 }
             },
-            {
-                data: "nombreMate"
-            },
+            // {
+            //     data: "nombreMate"
+            // },
             {
                 data : null,
                 render : function(data, type, row) {
-                    return row.placa == null ? "No se encontro oden de trabajo" : row.placa
+                    return row.nombreOrden == null ? "No se encontro orden de servicio" : row.nombreOrden; //
                 } 
             },
   
@@ -93,7 +94,17 @@
             },
             {
                 data: "tipo_movimiento"
-            }
+            },
+            {
+        data: null,
+        render: function(data, type, row) {
+          return (
+            '<button class="btn" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
+          );
+        },
+      }
+            
+            
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"

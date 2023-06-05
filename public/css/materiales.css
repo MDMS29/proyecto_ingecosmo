@@ -4,8 +4,8 @@
     --azulBase: #161666;
     --rojoAcciones: #EF434D;
     --grisModal: #ECEAEA;
-    --grisInput: #ECEAEA; 
-    --editarBase: #000000; 
+    --grisInput: #ECEAEA;
+    --editarBase: #000000;
 }
 
 
@@ -24,13 +24,13 @@ input[class="form-control"] {
     color: white !important;
 }
 
-.btnEditar{
+.btnEditar {
     background-color: var(--editarBase) !important;
     color: white !important;
 }
 
 
-.footer-page{
+.footer-page {
     display: flex;
     justify-content: flex-end;
     padding-top: 1em;
@@ -46,26 +46,27 @@ input[class="form-control"] {
     font-size: 18px;
 }
 
-.titulo{
+.titulo {
     text-transform: uppercase;
-    font-family: 'Nunito', sans-serif; 
+    font-family: 'Nunito', sans-serif;
     font-weight: bold;
 }
 
-#MasBaterias{
+#MasBaterias {
     display: flex;
     justify-content: center;
 }
 
 
-.contenedor-d{
+.contenedor-d {
     display: flex;
     justify-content: start;
     align-items: center;
     flex-wrap: wrap
 }
+
 @media screen and (max-width: 1140px) {
-    .contenedor-d{
+    .contenedor-d {
         justify-content: center;
     }
 }
@@ -76,8 +77,8 @@ input[class="form-control"] {
     align-items: center;
     background: linear-gradient(to bottom right, white 50%, #3F48CC 50.2%);
     margin: 15px;
-    width: 13rem; 
-    height:18rem;
+    width: 13rem;
+    height: 18rem;
     font-family: Nunito sans-serif;
 }
 
@@ -102,6 +103,7 @@ input[class="form-control"] {
     display: end;
     align-items: flex-end;
 }
+
 .baterias {
     height: 85px;
     width: 70px;
@@ -114,8 +116,9 @@ input[class="form-control"] {
 .detalles {
     width: 50px;
     margin-left: 10px;
-  
+
 }
+
 .logoIngecosmo {
     position: absolute;
     left: 1rem;
@@ -131,7 +134,8 @@ input[class="form-control"] {
     flex-direction: row;
     flex-wrap: wrap
 }
-#modalContentD{
+
+#modalContentD {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,36 +146,37 @@ input[class="form-control"] {
     background-color: white;
 }
 
-#modalHeaderD{
+#modalHeaderD {
     width: 100%;
     display: flex;
     align-items: center;
     padding-right: 10px;
 
 }
-#modalFooterD{
+
+#modalFooterD {
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.header2{
+.header2 {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-#modalBodyD{
+#modalBodyD {
     display: flex;
     padding: 30px;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     height: 250px;
-   
+
 }
 
 .d-flex {
@@ -180,27 +185,28 @@ input[class="form-control"] {
     display: flex !important;
 }
 
-label{
+label {
     color: #1b335b;
     font-weight: 600;
-    
+
 }
 
-input[type="text"]{
+input[type="text"] {
     text-align: center;
     margin-bottom: 15px;
     margin-left: 15px;
 }
 
 
-#agregar{
+#agregar {
     position: absolute;
     display: flex;
     justify-content: center;
     left: 30%;
     height: 30px;
 }
-.activar{
+
+.activar {
     position: absolute;
     height: 85px;
     width: 70px;
@@ -208,14 +214,15 @@ input[type="text"]{
     bottom: 5px;
 
 }
+
 /* 
 estilos modal agregar  */
 
 
-#modalAgregar2{
+#modalAgregar2 {
     display: flex;
     padding: 30px;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
@@ -223,13 +230,13 @@ estilos modal agregar  */
 }
 
 
-#modalFooter{
+#modalFooter {
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-#modalContent{
+#modalContent {
     display: flex;
     justify-content: center;
     top: 100px;
@@ -239,15 +246,16 @@ estilos modal agregar  */
 }
 
 
-#titulo1{
+#titulo1 {
     font-size: 20px;
     display: flex;
     margin-left: 40%;
-    font-family: 'Nunito', sans-serif; 
+    font-family: 'Nunito', sans-serif;
 
-    
+
 
 }
+
 .form-label {
     margin-bottom: 0.5rem;
     width: 100px;
@@ -255,12 +263,12 @@ estilos modal agregar  */
     color: black;
     font-weight: bold;
     font-family: 'Nunito', sans-serif;
-  
+
 }
 
 /* estilos modal usar */
 
-#modalBodyUsar{
+#modalBodyUsar {
     display: flex;
     padding: 30px;
     justify-content: flex-start;
@@ -271,19 +279,22 @@ estilos modal agregar  */
 
 
 }
-#modalHeaderUsar{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding-right: 10px;
-}
-#modalContentUsar{
 
-    border: 5px solid var(--azulBase); 
-    border-radius:10px; 
+#modalHeaderUsar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
 }
 
-#nombreI, #cantidadU{
+#modalContentUsar {
+
+    border: 5px solid var(--azulBase);
+    border-radius: 10px;
+}
+
+#nombreI,
+#cantidadU {
     margin-right: 10px;
     border-radius: 5px;
     height: 30px;
@@ -291,7 +302,7 @@ estilos modal agregar  */
 
 }
 
-.HEADER{
+.HEADER {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -300,7 +311,7 @@ estilos modal agregar  */
 
 
 
-.modalTitulo{
+.modalTitulo {
     font-family: 'Nunito';
     font-weight: 600;
     margin-top: 10px;
@@ -308,7 +319,12 @@ estilos modal agregar  */
 
 /* detalles */
 
-#nombre1, #precioCompra, #precioVenta, #cantidadActual, #estante,#fila{
+#nombre1,
+#precioCompra,
+#precioVenta,
+#cantidadActual,
+#estante,
+#fila {
     margin-left: 15px;
     border-radius: 5px;
 
@@ -317,13 +333,21 @@ estilos modal agregar  */
 /* USAR */
 
 
-.invalido{
+.invalido {
     color: red;
     font-size: 9px;
     font-weight: 600;
 }
-.invalido2{
+
+.invalido2 {
     color: red;
     font-size: 9px;
+    font-weight: 600;
+}
+
+/* --- INSUMOS ADMINISTRADOR ---*/
+#spanInsu.invalidoInsumo,
+#msgAgregar.invalidoInsumo {
+    color: red;
     font-weight: 600;
 }

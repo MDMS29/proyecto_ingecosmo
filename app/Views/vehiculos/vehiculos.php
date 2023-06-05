@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/vehiculo-b.png') ?>" /> Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="3">Modelo</a> - <a class="toggle-vis btn" data-column="4">Marca</a> - <a class="toggle-vis btn" data-column="5">Color</a> - <a class="toggle-vis btn" data-column="6">Kilometraje</a> - <a class="toggle-vis btn" data-column="7">Combustible</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Kilometraje</a> - <a class="toggle-vis btn" data-column="8">Combustible</a>
         </div>
         <table class="table table-striped" id="tableVehiculos" width="100%" cellspacing="0">
             <thead>

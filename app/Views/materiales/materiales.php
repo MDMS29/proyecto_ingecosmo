@@ -212,11 +212,11 @@
         <div class="modal-body" id="modalBodyUsar">
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%">
-              <label for="exampleDataList" class="col-form-label">Vehiculos:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="vehiculos" id="vehiculos">
-                <option id="vehiculo" selected="">-- Seleccione el Vehiculo--</option>
-                <?php foreach ($vehiculos as $data) { ?>
-                  <option value="<?= $data['id_vehiculo'] ?>"><?= $data['placa'] ?></option>
+              <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
+                <option selected="">Seleccione:</option>
+                <?php foreach ($ordenes as $data) { ?>
+                  <option value="<?= $data['id_orden'] ?>"><?= $data['n_orden'] ?></option>
                 <?php } ?>
               </select>
             </div>
@@ -224,7 +224,7 @@
             <div class="mb-3" style="width: 100%">
               <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
-                <option selected="">-- Seleccione un trabajador--</option>
+                <option selected="">Seleccione:</option>
                 <?php foreach ($trabajadores as $data) { ?>
                   <option value="<?= $data['id_trabajador'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
@@ -309,8 +309,8 @@
     $("#estante1").val('');
     $("#fila1").val('');
     $("#subtotal").val('');
-    $("#trabajadores").val('-- Seleccione un trabajador--');
-    $("#vehiculos").val('-- Seleccione el Vehiculo--');
+    $("#trabajadores").val('Seleccione:');
+    $("#ordenes").val('Seleccione:');
 
 
     $('#msgUsar').text('')
@@ -585,14 +585,16 @@
 
   $("#formularioUsar").on("submit", function(e) {
     e.preventDefault()
+
     idMaterial = $("#idMaterial").val()
     trabajador = $("#trabajadores").val()
-    vehiculo = $("#vehiculos").val()
+    ordenes = $("#ordenes").val()
     cantidadExistente = $("#cantidadExistente").val()
     cantidadUsar = $("#cantidadUsar").val()
     precioVenta = $("#PrecioDeVenta").val()
     subtotal = $("#subtotal").val()
-    if ([subtotal, cantidadExistente, cantidadUsar, precioVenta].includes("")) {
+    console.log(ordenes)
+    if ([subtotal, cantidadExistente, cantidadUsar, precioVenta, trabajador, ordenes].includes("")) {
       return mostrarMensaje('error', '¡Campos Vacios!')
     }
     $.post({
@@ -600,7 +602,7 @@
       data: {
         idMaterial,
         trabajador,
-        vehiculo,
+        ordenes,
         precioVenta,
         cantidadExistente,
         cantidadUsar,

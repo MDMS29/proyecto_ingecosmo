@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +66,13 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="" style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
+                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
+                    <li>
+                        <hr class="nav-item dropdown" style="border: solid 1px white">
+                    </li>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
@@ -134,7 +140,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
+                        <a href="<?php echo base_url('ConsultarUsuarios/') . session('id')  ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
                             <p id="pa">Usuarios</p>
                         </a>
                     </li>
@@ -242,4 +248,10 @@
             }
             return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
         }
+        const formatearCantidad = (cantidad) => {
+            return Number(cantidad).toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP'
+            })
+        };
     </script>
