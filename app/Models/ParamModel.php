@@ -39,13 +39,13 @@ class ParamModel extends Model
         $datos = $this->findAll();
         return $datos;
     }
-    // public function obtenerFilas()
-    // {
-    //     $this->select('param_detalle.*');
-    //     $this->where('id_param_enc', '10');
-    //     $datos = $this->findAll();
-    //     return $datos;
-    // }
+    public function obtenerFilas()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '10');
+        $datos = $this->findAll();
+        return $datos;
+    }
 
     public function obtenerTipoTel()
     {

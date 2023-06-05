@@ -118,7 +118,7 @@
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btnAccionF" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -139,13 +139,13 @@
         <div class="contenidoEliminarP">
           <div class="bloqueModalP">
             <img style=" width:100px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-            <p class="textoModalP">¿Estas seguro de reestablecer este Material?</p>
+            <p class="textoModalP">¿Estas seguro de reestablecer este Insumo?</p>
           </div>
         </div>
       </div>
       <div id="bloqueBtnP" class="modal-footer">
-        <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
-        <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+        <button id="btnNo" class="btn btnAccionF" data-dismiss="modal">Cerrar</button>
+        <a id="btnSi" class="btn btnRedireccion">Reestablecer</a>
       </div>
 
     </div>

@@ -2,13 +2,10 @@
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; "
-            src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios del Sistema</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a
-                class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn"
-                data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
         </div>
         <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
@@ -28,11 +25,8 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario"
-            onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus"
-                width="20"> Agregar</button>
-        <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img
-                src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -46,8 +40,7 @@
                 <div class="modal-content">
                     <div class="modal-header flex align-items-center gap-3">
                         <div class="d-flex" style="width: 100%; justify-content: space-between; align-items: center;">
-                            <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa"
-                                width="100">
+                            <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                             <h1 class="modal-title fs-5 d-flex align-items-center gap-2">
                                 <img id="imgModal" src="" width="25" />
                                 <span id="tituloModal"><!-- TEXTO DINAMICO--></span>
@@ -88,8 +81,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
                                         <label for="nIdenti" class="col-form-label">N° Identificación:</label>
-                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti"
-                                            minlength="9" maxlength="11">
+                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11">
                                         <small id="msgDoc" class="invalido"></small>
                                     </div>
                                 </div>
@@ -98,22 +90,15 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Telefono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="telefono" class="form-control" id="telefono"
-                                            disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono"
-                                            data-bs-target="#staticBackdrop" class="btn"
-                                            style="border:none;background-color:gray;color:white;"
-                                            title="Agregar Telefono">+</button>
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
                                         <input type="email" name="email" class="form-control" id="email" disabled>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo"
-                                            data-bs-target="#staticBackdrop" class="btn"
-                                            style="border:none;background-color:gray;color:white;"
-                                            title="Agregar Correo">+</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -139,18 +124,14 @@
                                 <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
                                         <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
-                                        <input type="password" name="confirContra" class="form-control"
-                                            id="confirContra" minlength="5">
+                                        <input type="password" name="confirContra" class="form-control" id="confirContra" minlength="5">
                                     </div>
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="bloqueFoto">
                                     <label for="nombres" class="col-form-label">Foto de Usuario:</label>
                                     <input type="file" name="foto" id="foto">
-                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#verFoto"
-                                        data-bs-target="#staticBackdrop" class="btn"><img
-                                            src="<?php echo base_url("img/image.svg") ?>"
-                                            alt="Boton Foto Usuario"></button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario"></button>
                                 </div>
                             </div>
                         </form>
@@ -192,54 +173,49 @@
 
 <!-- MODAL EDITAR CONTRASEÑA -->
 <form autocomplete="off" id="formularioContraseñas">
-    <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img
-                            src="<?= base_url('img/restorePass.png') ?>" alt="" width="30" height="30"> Restablecer
-                        Contraseña</h1>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"
-                        onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="idUsuario" id="idUsuario">
-                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                        <div class="d-flex column-gap-3" style="width: 100%">
-                            <div class="mb-3" style="width: 100%" id="divContras">
-                                <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
-                                </label>
-                                <div class="flex">
-                                    <input type="password" name="contraRes" class="form-control" id="contraRes"
-                                        minlength="5">
-                                    <small class="normal">¡La contraseña debe contar con un minimo de 6
-                                        caracteres!</small>
-                                </div>
-                                <div class="form-check" style="margin-top: 10px;">
-                                    <input class="form-check-input" type="checkbox" value="" id="ver"
-                                        onchange="verContrasena()">
-                                    <label class="form-check-label" for="ver">
-                                        Ver Contraseña
+            <div class="body-R">
+                <div class="modal-content">
+                    <div class="modal-header flex justify-content-between align-items-center">
+                        <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                        <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/restorePass.png') ?>" alt="" width="30" height="30"> Restablecer
+                            Contraseña</h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="idUsuario" id="idUsuario">
+                        <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="divContras">
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                     </label>
+                                    <div class="flex">
+                                        <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
+                                        <small class="normal">¡La contraseña debe contar con un minimo de 6
+                                            caracteres!</small>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 10px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
+                                        <label class="form-check-label" for="ver">
+                                            Ver Contraseña
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mb-3" style="width: 100%" id="divContras2">
-                                <div>
-                                    <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
-                                    <input type="password" name="confirContraRes" class="form-control"
-                                        id="confirContraRes" minlength="5">
+                                <div class="mb-3" style="width: 100%" id="divContras2">
+                                    <div>
+                                        <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                        <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                    </div>
+                                    <small id="msgConfirRes" class="normal"></small>
                                 </div>
-                                <small id="msgConfirRes" class="normal"></small>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close"
-                        onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
-                    <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
+                        <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                    </div>
                 </div>
             </div>
         </div>
@@ -247,17 +223,14 @@
 </form>
 
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
-<div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img id="logoModal"
-                            src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" aria-label="Close"
-                        onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -266,8 +239,7 @@
                             <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd"
-                                        minlength="7" maxlength="10">
+                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -289,10 +261,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="table-responsive"
-                            style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%"
-                                cellspacing="0">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Telefono</th>
@@ -311,8 +281,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion"
-                        onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -321,17 +290,14 @@
 </div>
 
 <!-- MODAL AGREGAR - EDITAR CORREO -->
-<div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img
-                            src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                    <button type="button" class="btn" aria-label="Close"
-                        onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
                 </div>
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -355,10 +321,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="table-responsive"
-                            style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%"
-                                cellspacing="0">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Correo</th>
@@ -376,8 +340,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion"
-                        onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
                 </div>
             </div>
@@ -385,21 +348,18 @@
     </div>
 </div>
 <!-- Modal Confirma Eliminar -->
-<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; "
-                        src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; "
-                            src="<?php echo base_url('/img/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de eliminar este Usuario?</p>
                     </div>
 
@@ -439,13 +399,21 @@
     }
     //Marcar botones ocultar columnas
     var botones = $(".ocultar a");
-    botones.click(function () {
+    botones.click(function() {
         if ($(this).attr('class').includes('active')) {
             $(this).removeClass('active');
         } else {
             $(this).addClass('active');
         }
     })
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableUsuarios.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
     //Ver contraseñas
     function verContrasena() {
         var password1, password2, check;
@@ -473,59 +441,52 @@
             dataSrc: "",
         },
         columns: [{
-            data: null,
-            render: function (data, type, row) {
-                ContadorPRC = ContadorPRC + 1;
-                return "<b>" + ContadorPRC + "</b>";
+                data: null,
+                render: function(data, type, row) {
+                    ContadorPRC = ContadorPRC + 1;
+                    return "<b>" + ContadorPRC + "</b>";
+                },
             },
-        },
-        {
-            data: null,
-            render: function (data, type, row) {
-                // Combinar campos
-                return data.nombre_p + " " + data.nombre_s;
-            }
-        },
-        {
-            data: null,
-            render: function (data, type, row) {
-                // Combinar campos
-                return data.apellido_p + " " + data.apellido_s;
-            }
-        },
-        {
-            data: 'doc_res'
-        },
-        {
-            data: 'n_identificacion'
-        },
-        {
-            data: 'nombre_rol'
-        },
-        {
-            data: null,
-            render: function (data, type, row) {
-                return (
-                    '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar"></button>' +
-                    '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
-                    '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("img/restorePass.png") ?>" width="25" heigth="25"/></button>'
-                );
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.nombre_p + " " + data.nombre_s;
+                }
             },
-        }
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Combinar campos
+                    return data.apellido_p + " " + data.apellido_s;
+                }
+            },
+            {
+                data: 'doc_res'
+            },
+            {
+                data: 'n_identificacion'
+            },
+            {
+                data: 'nombre_rol'
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
+                        '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
+                        '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("img/restorePass.png") ?>" width="25" heigth="25"  title="Restablecer Contraseña"/></button>'
+                    );
+                },
+            }
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
 
     });
-    //Mostrar Ocultar Columnas
-    $('a.toggle-vis').on('click', function (e) {
-        e.preventDefault();
-        // Get the column API object
-        var column = tableUsuarios.column($(this).attr('data-column'));
-        // Toggle the visibility
-        column.visible(!column.visible());
-    });
+
 
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
@@ -621,16 +582,16 @@
             }
         }
     }
-    $('#confirContra').on('input', function (e) {
+    $('#confirContra').on('input', function(e) {
         verifiContra(2, 'msgConfir', 'contra', 'confirContra')
     })
-    $('#contra').on('input', function (e) {
+    $('#contra').on('input', function(e) {
         verifiContra(1, 'msgConfir', 'contra', 'confirContra')
     })
-    $('#confirContraRes').on('input', function (e) {
+    $('#confirContraRes').on('input', function(e) {
         verifiContra(2, 'msgConfirRes', 'contraRes', 'confirContraRes')
     })
-    $('#contraRes').on('input', function (e) {
+    $('#contraRes').on('input', function(e) {
         verifiContra(1, 'msgConfirRes', 'contraRes', 'confirContraRes')
     })
     //Insertar y editar Usuario
@@ -642,7 +603,7 @@
                 url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + 0,
                 dataType: 'json',
 
-            }).done(function (res) {
+            }).done(function(res) {
                 limpiarCampos()
                 $('#tituloModal').text('Editar')
                 $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
@@ -668,7 +629,7 @@
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
                     dataType: 'json',
-                    success: function (data) {
+                    success: function(data) {
                         telefonos = data[0]
                         guardarTelefono()
                     }
@@ -677,7 +638,7 @@
                     type: 'POST',
                     url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 7,
                     dataType: 'json',
-                    success: function (data) {
+                    success: function(data) {
                         correos = data[0]
                         guardarCorreo()
                     }
@@ -716,7 +677,7 @@
         }
     }
     //Funcion para cambiar contraseña
-    $('#formularioContraseñas').on('submit', function (e) {
+    $('#formularioContraseñas').on('submit', function(e) {
         e.preventDefault()
         $('#btnGuardar').attr('disabled', '')
         idUsuario = $("#idUsuario").val()
@@ -735,7 +696,7 @@
                 },
                 type: 'POST',
                 dataType: 'json'
-            }).done(function (data) {
+            }).done(function(data) {
                 $('#cambiarContra').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
                 ContadorPRC = 0
@@ -754,7 +715,7 @@
             type: 'POST',
             url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
             dataType: 'JSON',
-            success: function (res) {
+            success: function(res) {
                 if (res[0] == null) {
                     $('#msgDoc').text('')
                     validIdent = true
@@ -766,7 +727,7 @@
         })
     }
     //Identificar si el numero de identificacion no este registrado
-    $('#nIdenti').on('input', function (e) {
+    $('#nIdenti').on('input', function(e) {
         inputIden = $('#nIdenti').val()
         tp = $('#tp').val()
         id = $('#id').val()
@@ -777,7 +738,7 @@
                 type: 'POST',
                 url: "<?php echo base_url('srchUsu/') ?>" + id + "/" + inputIden,
                 dataType: 'JSON',
-                success: function (res) {
+                success: function(res) {
                     if (res[0]['n_identificacion'] == inputIden) {
                         $('#msgDoc').text('')
                         validIdent = true
@@ -789,7 +750,7 @@
         }
     })
     //Envio de formulario
-    $('#formularioUsuarios').on('submit', function (e) {
+    $('#formularioUsuarios').on('submit', function(e) {
         e.preventDefault()
         tp = $('#tp').val()
         $('#btnActuContra').attr('disabled', '')
@@ -831,7 +792,7 @@
                 dataType: 'json',
                 contentType: false, // Importante: desactiva el tipo de contenido predeterminado
                 processData: false, // Importante: no proceses los datos
-                success: function (idUser) {
+                success: function(idUser) {
                     telefonos.forEach(tel => {
                         //Insertar Telefonos
                         $.post({
@@ -845,7 +806,7 @@
                                 tipoUsu: 7,
                                 tipoTel: tel.tipo,
                             },
-                            success: function (res) {
+                            success: function(res) {
                                 if (res != 1) {
                                     mostrarMensaje('error', '¡Ha ocurrido un error!')
                                 }
@@ -864,7 +825,7 @@
                                 prioridad: correo.prioridad,
                                 tipoUsu: 7,
                             },
-                            success: function (res) {
+                            success: function(res) {
                                 if (res != 1) {
                                     mostrarMensaje('error', '¡Ha ocurrido un error!')
                                     setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
@@ -882,7 +843,7 @@
                         mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
                     }
                 }
-            }).done(function (data) {
+            }).done(function(data) {
                 limpiarCampos()
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla
@@ -905,7 +866,7 @@
         };
     })
     // Agregar Telefono a la tabla
-    $('#btnAddTel').on('click', function (e) {
+    $('#btnAddTel').on('click', function(e) {
 
         const numero = $('#telefonoAdd').val()
         const tipo = $('#tipoTele').val()
@@ -969,7 +930,7 @@
             type: 'POST',
             url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 7, //url, valor, idUsuario, tipoUsuario
             dataType: 'JSON',
-            success: function (res) {
+            success: function(res) {
                 if (res[0] == null) {
                     $(`#${inputName}`).text('')
                     validTel = true
@@ -983,7 +944,7 @@
         })
     }
     //Al escribir validar que el numero no este registrado
-    $('#telefonoAdd').on('input', function (e) {
+    $('#telefonoAdd').on('input', function(e) {
         numero = $('#telefonoAdd').val()
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
@@ -1040,7 +1001,7 @@
                 url: '<?php echo base_url('telefonos/eliminarTelefono/') ?>' + id,
                 type: 'POST',
                 dataType: 'json',
-                success: function (data) {
+                success: function(data) {
                     if (data == 1) {
                         return mostrarMensaje('success', '¡Se ha eliminado el telefono!')
                     }
@@ -1051,7 +1012,7 @@
         guardarTelefono() //Actualizar tabla
     }
     //Agregar Correo a la tabla
-    $('#btnAddCorre').on('click', function (e) {
+    $('#btnAddCorre').on('click', function(e) {
         const tp = $('#tp').val()
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
@@ -1101,7 +1062,7 @@
 
     })
     //Al escribir validar que el correo no este registrado
-    $('#correoAdd').on('input', function (e) {
+    $('#correoAdd').on('input', function(e) {
         correo = $('#correoAdd').val()
         buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
     })
@@ -1154,7 +1115,7 @@
                 url: '<?php echo base_url('email/eliminarEmail/') ?>' + id,
                 type: 'POST',
                 dataType: 'json',
-                success: function (data) {
+                success: function(data) {
                     if (data == 1) {
                         mostrarMensaje('success', '¡Se ha eliminado el correo!')
                     }
@@ -1165,7 +1126,7 @@
         guardarCorreo() //Actualizar tabla
     }
     //Cambiar estado de "Activo" a "Inactivo" 
-    $('#modalConfirmar').on('shown.bs.modal', function (e) {
+    $('#modalConfirmar').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `EliminarUsuario(${$(e.relatedTarget).data('href')})`)
     })
 
@@ -1177,7 +1138,8 @@
                 id,
                 estado: 'I'
             }
-        }).done(function (data) {
+        }).done(function(data) {
+            ContadorPRC = 0
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)

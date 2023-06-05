@@ -208,7 +208,7 @@
             <div class="modal-content">
                 <input type="hidden" name="idVehi" id="idVehi">
                 <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModalEstado"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"><!-- TEXTO DINAMICO  --></h1>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('#estadoVehiculo')">X</button>
                 </div>
