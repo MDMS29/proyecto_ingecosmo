@@ -122,8 +122,13 @@ class Usuarios extends BaseController
     public function mostrarImagen($id)
     {
         $res = $this->usuarios->buscarUsuario($id, 0);
-        $rutaImagen = '/uploads/' . $res['foto'];
-        $rutaCompleta = WRITEPATH . $rutaImagen;
+        if ($res['foto'] == '') {
+            $rutaImagen = '/uploads/fotoUser/default.png';
+            $rutaCompleta = WRITEPATH . $rutaImagen;
+        } else {
+            $rutaImagen = '/uploads/' . $res['foto'];
+            $rutaCompleta = WRITEPATH . $rutaImagen;
+        }
 
         $fp = fopen($rutaCompleta, 'rb');
 

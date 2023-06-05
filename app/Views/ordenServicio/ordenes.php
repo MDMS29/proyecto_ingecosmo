@@ -429,7 +429,7 @@
     });
     //Descargar PDF
     function pdf(id) {
-        var ruta = "<?php echo base_url(); ?>vehiculos/pdf/" + id;
+        var ruta = "<?php echo base_url(); ?>ordenServicio/pdf/" + id;
         var iframe = document.getElementById("ifr_PDF");
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');

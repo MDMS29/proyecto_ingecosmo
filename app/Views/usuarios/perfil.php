@@ -10,10 +10,10 @@
         <form method="post">
             <div class="row">
 
-                <form  action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img style="border-radius: 5px;" <?= $usuario['foto'] ?> alt="Foto Usuario" />
+                            <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
                             <div style="border-radius: 5px;" class="file btn btn-lg btn-primary">
                                 Inserte foto
                                 <input type="file" name="upload" accept="image/png" />
@@ -303,6 +303,9 @@
     var validIdent = true;
     var res
 
+    var foto = '<?= base_url('usuarios/mostrarImagen/') . $usuario['id_usuario'] ?>';
+    $('#fotoPerfil').attr('src', `${foto}`)
+
     function limpiarCampos() {
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
@@ -435,7 +438,6 @@
             password2.type = "password";
         }
     }
-
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
         input = $(`#${inputMsg}`)
