@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -19,7 +19,6 @@
                                 <input type="file" name="upload" accept="image/png" />
                             </div>
                         </div>
-                        <input type="submit" value="cambiar">
                     </div>
                 </form>
 

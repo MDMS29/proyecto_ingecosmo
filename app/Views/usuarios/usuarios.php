@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
@@ -25,6 +25,7 @@
         </table>
     </div>
     <div class="footer-page mt-4">
+        
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
         <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
@@ -128,10 +129,13 @@
                                     </div>
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
-                                <div class="mb-3" style="width: 100%" id="bloqueFoto">
+                                <div class="mb-3" style="width: 100%">
                                     <label for="nombres" class="col-form-label">Foto de Usuario:</label>
-                                    <input type="file" name="foto" id="foto">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario"></button>
+                                    <input type="file" name="foto" id="foto" class="form-control">
+                                    <!-- <input name="" class="form-control" id="tituloFoto"> -->
+                                </div>
+                                <div class="mb-3" style="width: 100%" id="bloqueFoto">
+                                    <button hidden type="button" data-bs-toggle="modal" id="fotoModal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario" class="iconFoto"></button>
                                 </div>
                             </div>
                         </form>
@@ -147,27 +151,27 @@
 </form>
 
 <!-- MODAL VER FOTO -->
-<!-- <div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md">
+<div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-center">
-                    <img src="< ?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h5 style="font-weight: bold;">
-                            < ?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
-                        </h5>
-                    <button type="button" class="btn" aria-label="Close">X</button>
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h5 style="font-weight: bold;" ><!-- NOMBRE DIANMICO --></h5>
+                    <input name="" class="form-control" id="tituloFoto">
+                    <button type="button" class="btn" aria-label="Close" data-bs-toggle="modal" data-bs-target="#agregarUsuario">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3" style="width: 50%">
-                    <img style="border-radius: 5px;" < ?= $usuario['foto'] ?> alt="Foto Usuario" />
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
 
@@ -497,11 +501,15 @@
                     return mostrarMensaje('error', '¡Debe tener un telefono principal!')
                 } else {
                     $('#agregarTelefono').modal('hide')
+                    // $('#fotoModal').attr('hidden', '')
                     $('#agregarUsuario').modal('show')
+
                 }
             } else {
                 $('#agregarTelefono').modal('hide')
+                // $('#fotoModal').attr('hidden', '')
                 $('#agregarUsuario').modal('show')
+
             }
         }
         if (accion == 4) {
@@ -512,10 +520,12 @@
                 } else {
                     $('#agregarCorreo').modal('hide')
                     $('#agregarUsuario').modal('show')
+                    // $('#fotoModal').attr('hidden')
                 }
             } else {
                 $('#agregarCorreo').modal('hide')
                 $('#agregarUsuario').modal('show')
+                // $('#fotoModal').attr('hidden')
             }
         }
         if (objCorreo.id != 0) {
@@ -549,6 +559,7 @@
         $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+        // $('#fotoModal').removeAttr('hidden')
         $('#foto').text('')
     }
     //Verificacion de contraseñas
@@ -613,11 +624,12 @@
                 $('#nombreS').val(res[0]['nombre_s'])
                 $('#apellidoP').val(res[0]['apellido_p'])
                 $('#apellidoS').val(res[0]['apellido_s'])
-                $('#tituloFoto').val(res[0]['nombre_p'] + ['nombre_s'] + ['apellido_p'] + ['apellido_s'])
+                $('#tituloFoto').val(res[0]['nombre_p'] +' '+ res[0]['nombre_s'] +' '+ res[0]['apellido_p'] +' '+ res[0]['apellido_s'])
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#rol').val(res[0]['id_rol'])
-                $('#foto').removeAttr('hidden')
+                $('#fotoModal').removeAttr('hidden')
+                $('#bloqueFoto').removeAttr('hidden')
                 $('#foto').val(res[0]['foto'])
                 $('#labelNom').text('Cambiar Contraseña:')
                 $('#contra').val('')
@@ -665,8 +677,8 @@
             $('#telefono').val('')
             $('#email').val('')
             $('#rol').val('')
-            $('#tituloFoto').val(['nombre_p'] + ['nombre_s'] + ['apellido_p'] + ['apellido_s'])
-            // $('#foto').val('')
+            $('#fotoModal').attr('hidden', '')
+            $('#bloqueFoto').attr('hidden', '')
             $('#contra').val('')
             $('#confirContra').val('')
             $('#divContras').removeAttr('hidden')

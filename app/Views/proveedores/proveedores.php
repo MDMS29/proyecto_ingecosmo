@@ -10,7 +10,6 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -408,13 +407,6 @@
                 data: 'direccion'
             },
             {
-                data: 'correo',
-                render: function(data, type, row) {
-                    arrayCorreo = emailTable.filter(correo => correo.idProveedor == row.id_tercero)[0]?.correo
-                    return arrayCorreo
-                }
-            },
-            {
                 data: null,
                 render: function(data, type, row) {
                     arrayTele = telefonoTable.filter(tel => tel.idProveedor == row.id_tercero)[0]?.telefono
@@ -448,7 +440,6 @@
                 dataType: 'json',
             }).done(function(res) {
                 console.log(res)
-                console.log('pasa a editar')
                 limpiarCampos()
                 $('#tp').val(2)
                 $('#tituloModal').text('Editar')
@@ -950,14 +941,6 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo() //Actualizar tabla
     }
-
-
-
-
-
-
-
-
 
 
     //Cambiar estado de "Activo" a "Inactivo" 

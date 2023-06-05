@@ -53,9 +53,9 @@ label {
   width: 100%;
 }
 
-.form-control {
+/* .form-control {
   background-color: var(--grisInput);
-}
+} */
 
 #logoModal {
   width: 25px;

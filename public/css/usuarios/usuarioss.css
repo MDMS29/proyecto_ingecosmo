@@ -126,9 +126,9 @@ table {
   margin: 0px;
 }
 
-.form-control{
+/* .form-control{
   background-color: var(--grisInput);
-}
+} */
 
 .rowBtn{
   margin-top: 10px;
@@ -325,4 +325,16 @@ table {
   margin-right: 30px;
 }
 
-/* modal confirmar eliminar */
+.iconFoto{
+  border: 2px solid var(--azulBase);
+  border-radius: 5px;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+#bloqueFoto{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}

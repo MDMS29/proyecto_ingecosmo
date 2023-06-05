@@ -13,7 +13,6 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -40,8 +39,8 @@
     </div>
 
 </div>
-<!-- Modal Confirma activar -->
-<div class="modal fade" id="modalActivarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Confirma reestablecer -->
+<div class="modal fade" id="verProveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
         <div class="modal-content" id="modalEliminarContentP">
@@ -54,7 +53,7 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de activar este Proveedor?</p>
+                        <p class="textoModalP">¿Estas seguro de restableceer este Proveedor?</p>
                     </div>
 
                 </div>
@@ -68,13 +67,89 @@
     </div>
 </div>
 
+<!-- MODAL AGREGAR - EDITAR TELEFONO -->
+<div class="modal fade" id="verTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4"></i> Ver Telefonos</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verProveedor" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verProveedor">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VER CORREOS -->
+<div class="modal fade" id="verCorreos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4"></i> Ver Correos</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verProveedor" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verProveedor">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     var ContadorPRC = 0
 
     //Cambiar estado de "Inactivo" a "Activo"
-    $('#modalActivarP').on('shown.bs.modal', function(e) {
+    $('#verProveedor').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `ReestablecerProveedor(${$(e.relatedTarget).data('href')})`)
     })
 
@@ -89,7 +164,7 @@
         }).done(function(data) {
             mostrarMensaje('success', data)
             ContadorPRC = 0
-            $('#modalActivarP').modal('hide')
+            $('#verProveedor').modal('hide')
             tableProveedores.ajax.reload(null, false)
         })
     }
@@ -98,8 +173,9 @@
 
     // ------------------------------ estructura Tabla ------------------------------------- 
     // Obtener email principal proveedor
-    var emailTable=[]
-    var telefonoTable =[]
+    var emailTable = []
+    var telefonoTable = []
+
     function recargaTelCorreo() {
         $.ajax({
             url: '<?= base_url('proveedores/obtenerProveedores') ?>',
@@ -168,13 +244,6 @@
                 data: 'direccion'
             },
             {
-                data: 'correo',
-                render: function(data, type, row) {
-                    arrayCorreo = emailTable.filter(correo => correo.idProveedor == row.id_tercero)[0]?.correo
-                    return arrayCorreo
-                }
-            },
-            {
                 data: null,
                 render: function(data, type, row) {
                     arrayTele = telefonoTable.filter(tel => tel.idProveedor == row.id_tercero)[0]?.telefono
@@ -185,7 +254,8 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalActivarP"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Proveedor" width="20"></button>'
+                        '<button class="btn text-primary" onclick="seleccionarProveedor(' + data.id_tercero + ')" data-bs-target="#verProveedor" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4" title="Ver Proveedor"></i></button>' +
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#verProveedor"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Proveedor" width="20"></button>'
                     );
                 },
             }
@@ -196,8 +266,84 @@
 
     });
 
+    function seleccionarProveedor(id) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('srchPro/') ?>" + id + "/" + 0,
+            dataType: 'json'
+        }).done(function(res) {
+            $('#tp').val(2)
+            $('#tituloModal').text('Editar')
+            $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
+            $('#id').val(res[0]['id_tercero'])
+            $('#RazonSocial').val(res[0]['razon_social'])
+            $('#nit').val(res[0]['n_identificacion'])
+            $('#direccion').val(res[0]['direccion'])
+            $('#btnGuardar').text('Actualizar')
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 8,
+                dataType: 'json',
+                success: function(data) {
+                    telefonos = data[0]
+                    mostrarTelefonos()
+                }
+            })
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 8,
+                dataType: 'json',
+                success: function(data) {
+                    correos = data[0]
+                    mostrarCorreo()
+                }
+            })
+        })
+    }
+
+    // Funcion para mostrar telefonos en la tabla.
+    function mostrarTelefonos() {
+        $('#telefono').val(telefonos[0]?.numero)
+        var cadena
+        if (telefonos.length == 0) {
+            cadena += ` <tr class="text-center">
+            <td colspan="3">NO HAY TELEFONOS</td>
+            </tr>`
+            $('#bodyTel').html(cadena)
+        } else {
+            for (let i = 0; i < telefonos.length; i++) {
+                cadena += ` <tr class="text-center">
+                                <td>${telefonos[i].numero}</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo'}</td>
+                                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
+                            </tr>`
+            }
+        }
+        $('#bodyTel').html(cadena)
+    }
+
+    // Funcion para mostrar correos en la tabla.
+    function mostrarCorreo() {
+        $('#email').val(correos[0]?.correo)
+        var cadena
+        if (correos.length == 0) {
+            cadena += ` <tr class="text-center">
+                            <td colspan="3">NO HAY CORREOS</td>
+                        </tr>`
+            $('#bodyCorre').html(cadena)
+        } else {
+            for (let i = 0; i < correos.length; i++) {
+                cadena += ` <tr class="text-center">
+                                <td>${correos[i].correo}</td>
+                                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
+                            </tr>`
+            }
+        }
+        $('#bodyCorre').html(cadena)
+    }
+
 
     $('.btnNo').click(function() {
-        $("#modalActivarP").modal("hide");
+        $("#verProveedor").modal("hide");
     });
 </script>

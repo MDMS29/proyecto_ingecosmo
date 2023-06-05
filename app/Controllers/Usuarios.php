@@ -118,7 +118,6 @@ class Usuarios extends BaseController
         $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
-        echo view('usuarios/usuarios', $data);
     }
     public function mostrarImagen($id)
     {

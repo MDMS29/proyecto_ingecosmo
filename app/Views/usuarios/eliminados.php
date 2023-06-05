@@ -313,9 +313,6 @@
             $('#tipoDoc').val(1)
             $('#nIdenti').val(res[0]['n_identificacion'])
             $('#rol').val(res[0]['id_rol'])
-            $('#labelNom').text('Cambiar Contraseña:')
-            $('#contra').val('')
-            $('#confirContra').val('')
             $('#btnGuardar').text('Actualizar')
             $.ajax({
                 type: 'POST',

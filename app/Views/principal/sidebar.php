@@ -140,7 +140,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('ConsultarUsuarios/') . session('id')  ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
+                        <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
                             <p id="pa">Usuarios</p>
                         </a>
                     </li>
