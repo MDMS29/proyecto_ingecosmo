@@ -18,7 +18,7 @@ class Repuestos extends BaseController
     {
         $this->categorias = new ParamModel();
         $this->estanteria = new EstanteriaModel();
-        $this->materiales = new MaterialesModel();
+        $this->materiales= new MaterialesModel();
     }
     public function index()
     {
