@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?= base_url('css/materiales.css') ?>">
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" />Administrar Repuestos</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" />Administrar Repuestos Eliminados</h2>
     <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
         <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Categoria</a> - <a class="toggle-vis btn" data-column="6">P. Compra</a> - <a class="toggle-vis btn" data-column="7">P. Venta</a>
     </div>
@@ -29,8 +29,7 @@
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#agregarRepuesto" onclick="seleccionarRepuesto(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('/materiales/repuestosAdminEliminados'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+    <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 

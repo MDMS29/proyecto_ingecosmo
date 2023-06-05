@@ -38,7 +38,7 @@
         <div class="body">
             <div class="modal-content">
                 <div class="modal-header flex align-items-center gap-3">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
                         <h1 class="modal-title fs-5 text-center" id="tituloModal"><!--TEXTO DINAMICO--></h1>

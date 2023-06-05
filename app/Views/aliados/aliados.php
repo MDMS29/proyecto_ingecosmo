@@ -36,8 +36,8 @@
         <div class="modal-dialog modal-xl">
             <div class="body">
                 <div class="modal-content">
-                    <div class="modal-header ">
-                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <div class="modal-header flex align-items-center gap-3 ">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                             <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
@@ -98,13 +98,13 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
-            <div class="modal-header ">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+            <div class="modal-header flex align-items-center gap-3">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                         <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Telefono</h1>
                     </div>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -168,13 +168,13 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
-                <div class="modal-header ">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                <div class="modal-header flex align-items-center gap-3">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                         <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Correo</h1>
                     </div>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)" aria-label="Close">X</button>
                 </div>
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -231,7 +231,7 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
                 </div>
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
