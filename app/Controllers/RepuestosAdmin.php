@@ -46,9 +46,9 @@ class RepuestosAdmin extends BaseController
     public function buscarRepuesto()
     {
         $id = $this->request->getPost('id');
-        $nombre = $this->request->getPost('nombre');
+        // $nombre = $this->request->getPost('nombre');
 
-        $res = $this->respuestosAdmin->buscarRepuesto($id, $nombre);
+        $res = $this->respuestosAdmin->buscarRepuesto($id);
         return json_encode($res);
     }
 
