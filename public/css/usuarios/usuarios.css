@@ -127,7 +127,7 @@ table {
 }
 
 .form-control{
-  background-color: var(--grisInput);
+  background-color: var(--grisInput) !important; 
 }
 
 .rowBtn{

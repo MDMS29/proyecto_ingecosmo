@@ -131,26 +131,26 @@ class MaterialesModel extends Model
         return $data;
     }
 
-    public function buscarRepuesto($id_material, $nombre)
+    public function buscarRepuesto($id_material)
     {
         if ($id_material != 0) {
-            $this->select('materiales.*, param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social  ');
+            $this->select('materiales.*, param_detalle.nombre as nombre_categoria');
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
             $this->where('id_material', $id_material);
 
-        } else if ($nombre != '') {
-            $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
-            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
-            $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-            $this->where('materiales.nombre', $nombre);
-            $this->where('materiales.estado', 'A');
+        // } else if ($nombre != '') {
+        //     $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
+        //     $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
+        //     $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+        //     $this->where('materiales.nombre', $nombre);
+        //     $this->where('materiales.estado', 'A');
 
-        } else if ($id_material != 0 && $nombre != '') {
+        // } else if ($id_material != 0 && $nombre != '') {
 
-            $this->select('materiales.*');
-            $this->where('id_material', $id_material);
-            $this->where('nombre', $nombre);
+        //     $this->select('materiales.*');
+        //     $this->where('id_material', $id_material);
+        //     $this->where('nombre', $nombre);
 
         }
         $data = $this->first();
