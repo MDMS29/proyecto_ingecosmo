@@ -28,65 +28,65 @@
     </div>
 </div>
 
-<!-- -----modal----------     -->
-<form method="POST" id="formularioAliados" autocomplete="off">
+<!-- modal -->
+<form autocomplete="off" id="formularioAliados">
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header flex align-items-center gap-3">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
-                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <img id="logoModal" src="< ?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!--TEXTO DINAMICO--></h1>
+        <input type="text" name="id" id="id" value="0" hidden>
+        <input type="text" name="tp" id="tp" hidden>
+        <div class="modal-dialog modal-xl">
+            <div class="body">
+                <div class="modal-content">
+                    <div class="modal-header ">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        </div>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
-                            <div class="mb-3" style="width: 100%;">
-                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
-                                <small id="msgRaSo" class="invalido"></small>
-
-                                <input hidden id="tp" name="tp">
-                                <input hidden id="id" name="id">
-                            </div>
-
-                            <div class="mb-3" style="width: 100%; ">
-                                <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                                <input type="text" class="form-control" id="nit" name="nit"></input>
-                                <small id="msgNit" class="invalido"></small>
-                            </div>
-                        </div>
-
-                        <div class="mb-3" style="width: 100%; padding-inline:20px;">
-                            <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                            <input class="form-control" id="direccion" name="direccion"></input>
-                        </div>
-
-                        <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
-                            <div class="mb-3" style="width: 100%">
-                                <label for="telefono" class="col-form-label">Telefono:</label>
-                                <div class="d-flex">
-                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                                    <small id="msgRaSo" class="invalido"></small>
+                                </div>
+                                <div class="mb-3" style="width: 100%; ">
+                                    <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                                    <input type="text" class="form-control" id="nit" name="nit"></input>
+                                    <small id="msgNit" class="invalido"></small>
                                 </div>
                             </div>
 
-                            <div class="mb-3" style="width: 100%">
-                                <label for="email" class="col-form-label">Email:</label>
-                                <div class="d-flex">
-                                    <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                            <div class="mb-3" style="width: 100%; padding-inline:20px;">
+                                <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
+                                <input class="form-control" id="direccion" name="direccion"></input>
+                            </div>
+
+                            <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="telefono" class="col-form-label">Telefono:</label>
+                                    <div class="d-flex">
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="email" class="col-form-label">Email:</label>
+                                    <div class="d-flex">
+                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,10 +98,13 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
-                <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+            <div class="modal-header ">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Telefono</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -116,7 +119,7 @@
                             </div>
                             <div class=" flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
-                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
                                         <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
@@ -125,7 +128,7 @@
                             </div>
                             <div class="flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
-                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
@@ -165,10 +168,13 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
-                <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                <div class="modal-header ">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Correo</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -427,7 +433,7 @@
                 dataType: 'json',
                 success: function(res) {
                     limpiarCampos()
-                    $('#tituloModal').text('Editar Aliado')
+                    $('#tituloModal').text('Editar')
                     $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
@@ -935,6 +941,7 @@
                 estado: 'I'
             }
         }).done(function(data) {
+            ContadorPRC = 0
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableAliados.ajax.reload(null, false)

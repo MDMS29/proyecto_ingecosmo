@@ -228,7 +228,7 @@
                     $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
                     $('#nombre').val(data[0]['nombre'])
-                    $('#vehiculo').val(data[0]['placa'])
+                    $('#vehiculo').val(data[0]['id_vehiculo'])
                     $('#proveedor').val(data[0]['razon_social'])
                     $('#categoria').val(data[0]['nombre_categoria'])
                     $('#categoria').val(data[0]['nombre_categoria'])
@@ -308,7 +308,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarRepuesto(' + data.material + ' , 2 )" data-bs-target="#agregarRepuesto" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Repuesto"></button>' +
+                        '<button class="btn" onclick="seleccionarRepuesto(' + data.id_material + ' , 2 )" data-bs-target="#agregarRepuesto" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Repuesto"></button>' +
 
                         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );
