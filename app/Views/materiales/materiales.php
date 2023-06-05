@@ -37,8 +37,9 @@
   </div>
 
   <div class="footer-page">
+    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
+      Agregar</button>
     <a href="<?php echo base_url('/insumos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
-    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
   </div>
 </div>
 
@@ -53,15 +54,21 @@
 
   <div class="modal fade" id="materialesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
+
       <div class="modal-content" id="modalContent">
-        <div class="modal-header" id="modalHeader">
-          <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-          <div id="agregar">
-            <img style="margin-right: 10px; width:30px;" src="http://localhost/ingecosmo/public/img/plus-b.png" alt="icon-plus" width="20">
-          </div>
-          <h1 class="modal-title fs-5 text-center" id="titulo1">Agregar</h1>
-          <button type="button" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+       <div class="modal-header flex justify-content-between align-items-center w-100">
+       <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
+        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+          <img src="<?= base_url('img/botonAgregar.png') ?>" width="30" height="30" style="margin-right: 5px;" />
+          <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar</h1>
         </div>
+          <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
+
+        </div>
+
+
+      
         <div class="modal-body" id="modalAgregar2">
 
           <div class="d-flex column-gap-3" style="width: 100%">
@@ -93,7 +100,7 @@
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Estante:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
-                <option selected value="">-- Seleccione un estante--</option>
+                <option selected value="">--Seleccione--</option>
                 <?php foreach ($estanteria as $data) { ?>
                   <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
@@ -103,7 +110,7 @@
             <div class="mb-3" style="width: 80%;">
               <label for="exampleDataList" class="col-form-label">Fila:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
-                <option selected value="">-- Seleccione una fila--</option>
+                <option selected value="">--Seleccione--</option>
 
 
               </select>
@@ -128,16 +135,16 @@
 
     <div class="modal-content" id="modalContentD">
 
-      <div class="modal-header" id="modalHeaderD">
-        <div class="header2">
-          <img src="<?php echo base_url('/img/masDetalles.png') ?>" id="imagenDetalle" class="detalles" />
-          <h5 class="modal-title text-center" id="titulo">Detalles</h5>
+      <div class="modal-header flex justify-content-between align-items-center w-100">
+        <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
+        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+          <img src="<?= base_url('img/MasDetalles2.png') ?>" width="30" height="30" style="margin-right: 5px;" />
+          <h1 class="modal-title fs-5 text-center" id="tituloModal">Detalles</h1>
         </div>
-        <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detallesModal" aria-label="Close">X</button>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
       </div>
 
-      <div class="modal-body" id="modalBodyD">
+      <div class="modal-body w-100" id="modalBodyD">
 
         <div class="d-flex column-gap-3" style="width: 100%">
           <div class="mb-3" style="width: 90%;">
@@ -200,23 +207,25 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 
       <div class="modal-content" id="modalContentUsar">
-        <div class="modal-header flex">
-          <input type="text" name="idMaterial" id="idMaterial" hidden>
-          <img src="<?php echo base_url('/img/ingecosmo.png') ?>" class="logoIngecosmo" />
-          <div class="HEADER">
-            <h1 class="modal-title fs-5 w-100 text-center">Usar Insumo</h1>
-            <button type="button" class="btn" data-bs-toggle="modal" onclick="limpiarCampos()" aria-label="Close">X</button>
+
+        <div class="modal-header flex justify-content-between align-items-center w-100">
+          <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
+          <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+            <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
+            <h1 class="modal-title fs-5 text-center" id="tituloModal">Usar Insumo</h1>
           </div>
+          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
+
 
         <div class="modal-body" id="modalBodyUsar">
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%">
-              <label for="exampleDataList" class="col-form-label">Vehiculos:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="vehiculos" id="vehiculos">
-                <option id="vehiculo" selected="">-- Seleccione el Vehiculo--</option>
-                <?php foreach ($vehiculos as $data) { ?>
-                  <option value="<?= $data['id_vehiculo'] ?>"><?= $data['placa'] ?></option>
+              <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
+                <option selected="">--Seleccione--</option>
+                <?php foreach ($ordenes as $data) { ?>
+                  <option value="<?= $data['id_orden'] ?>"><?= $data['n_orden'] ?></option>
                 <?php } ?>
               </select>
             </div>
@@ -224,7 +233,7 @@
             <div class="mb-3" style="width: 100%">
               <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
-                <option selected="">-- Seleccione un trabajador--</option>
+                <option selected="">--Seleccione--</option>
                 <?php foreach ($trabajadores as $data) { ?>
                   <option value="<?= $data['id_trabajador'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
@@ -309,8 +318,8 @@
     $("#estante1").val('');
     $("#fila1").val('');
     $("#subtotal").val('');
-    $("#trabajadores").val('-- Seleccione un trabajador--');
-    $("#vehiculos").val('-- Seleccione el Vehiculo--');
+    $("#trabajadores").val('--Seleccione--');
+    $("#ordenes").val('--Seleccione--');
 
 
     $('#msgUsar').text('')
@@ -399,7 +408,7 @@
     idCategoria = $("#idCategoria").val()
     fila = $("#fila1").val()
     estante = $("#estante1").val()
-    if ([nombre, precioCompra, cantidadActual, fila, estante ].includes("")) {
+    if ([nombre, precioCompra, cantidadActual, fila, estante].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -585,14 +594,16 @@
 
   $("#formularioUsar").on("submit", function(e) {
     e.preventDefault()
+
     idMaterial = $("#idMaterial").val()
     trabajador = $("#trabajadores").val()
-    vehiculo = $("#vehiculos").val()
+    ordenes = $("#ordenes").val()
     cantidadExistente = $("#cantidadExistente").val()
     cantidadUsar = $("#cantidadUsar").val()
     precioVenta = $("#PrecioDeVenta").val()
     subtotal = $("#subtotal").val()
-    if ([subtotal, cantidadExistente, cantidadUsar, precioVenta].includes("")) {
+    console.log(ordenes)
+    if ([subtotal, cantidadExistente, cantidadUsar, precioVenta, trabajador, ordenes].includes("")) {
       return mostrarMensaje('error', '¡Campos Vacios!')
     }
     $.post({
@@ -600,7 +611,7 @@
       data: {
         idMaterial,
         trabajador,
-        vehiculo,
+        ordenes,
         precioVenta,
         cantidadExistente,
         cantidadUsar,

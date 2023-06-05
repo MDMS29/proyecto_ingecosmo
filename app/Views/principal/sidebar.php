@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +66,13 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
+                        <li><a class="nav-item dropdown" href="" style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
+                        <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
+                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
+                    <li>
+                        <hr class="nav-item dropdown" style="border: solid 1px white">
+                    </li>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
@@ -83,7 +89,7 @@
 
     <nav id="sidebar" class="active" style="position: sticky; ">
         <!-- <h1><a class="logo"></a></h1> -->
-        <div class="d-flex justify-content-between flex-column" style="height: 100vh;">
+        <div class="d-flex justify-content-between flex-column" style="height: 100%;">
             <ul id="allElement" class="list-unstyled components mb-5">
 
                 <li class="active">
@@ -119,7 +125,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
+                        <a href="<?php echo base_url('ordenServicio') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
                             <p id="pa">Ordenes de Servicio</p>
                         </a>
                     </li>
@@ -134,7 +140,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
+                        <a href="<?php echo base_url('ConsultarUsuarios/') . session('id')  ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
                             <p id="pa">Usuarios</p>
                         </a>
                     </li>
@@ -182,7 +188,7 @@
                 </li>
             </ul>
             <nav>
-                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top:5px">
+                <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top: -50px">
                     <button type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
                         <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" /></i>
                         <span class="sr-only">Toggle Menu</span>
@@ -242,4 +248,10 @@
             }
             return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
         }
+        const formatearCantidad = (cantidad) => {
+            return Number(cantidad).toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP'
+            })
+        };
     </script>

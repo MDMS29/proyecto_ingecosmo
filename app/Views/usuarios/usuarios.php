@@ -2,7 +2,7 @@
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Del Sistema</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios del Sistema</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
             <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
@@ -128,9 +128,10 @@
                                     </div>
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
-                                <div class="mb-3" style="width: 100%">
-                                        <label for="nombres" class="col-form-label">Foto de Usuario:</label>
-                                        <input type="file" name="foto" id="foto">
+                                <div class="mb-3" style="width: 100%" id="bloqueFoto">
+                                    <label for="nombres" class="col-form-label">Foto de Usuario:</label>
+                                    <input type="file" name="foto" id="foto">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario"></button>
                                 </div>
                             </div>
                         </form>
@@ -145,47 +146,76 @@
     </div>
 </form>
 
+<!-- MODAL VER FOTO -->
+<!-- <div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <img src="< ?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h5 style="font-weight: bold;">
+                            < ?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
+                        </h5>
+                    <button type="button" class="btn" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3" style="width: 50%">
+                    <img style="border-radius: 5px;" < ?= $usuario['foto'] ?> alt="Foto Usuario" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
 <!-- MODAL EDITAR CONTRASEÑA -->
 <form autocomplete="off" id="formularioContraseñas">
     <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/restorePass.png') ?>" alt="" width="30" height="30"> Restablecer Contraseña</h1>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="idUsuario" id="idUsuario">
-                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                        <div class="d-flex column-gap-3" style="width: 100%">
-                            <div class="mb-3" style="width: 100%" id="divContras">
-                                <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
-                                </label>
-                                <div class="flex">
-                                    <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
-                                    <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
-                                </div>
-                                <div class="form-check" style="margin-top: 10px;">
-                                    <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
-                                    <label class="form-check-label" for="ver">
-                                        Ver Contraseña
+            <div class="body-R">
+                <div class="modal-content">
+                    <div class="modal-header flex justify-content-between align-items-center">
+                        <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                        <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/restorePass.png') ?>" alt="" width="30" height="30"> Restablecer
+                            Contraseña</h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="idUsuario" id="idUsuario">
+                        <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="divContras">
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                     </label>
+                                    <div class="flex">
+                                        <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
+                                        <small class="normal">¡La contraseña debe contar con un minimo de 6
+                                            caracteres!</small>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 10px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
+                                        <label class="form-check-label" for="ver">
+                                            Ver Contraseña
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mb-3" style="width: 100%" id="divContras2">
-                                <div>
-                                    <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
-                                    <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                <div class="mb-3" style="width: 100%" id="divContras2">
+                                    <div>
+                                        <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                        <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                    </div>
+                                    <small id="msgConfirRes" class="normal"></small>
                                 </div>
-                                <small id="msgConfirRes" class="normal"></small>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
-                    <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
+                        <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                    </div>
                 </div>
             </div>
         </div>
@@ -376,6 +406,14 @@
             $(this).addClass('active');
         }
     })
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableUsuarios.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
     //Ver contraseñas
     function verContrasena() {
         var password1, password2, check;
@@ -436,9 +474,9 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar"></button>' +
+                        '<button class="btn" onclick="seleccionarUsuario(' + data.id_usuario + ' , 2 )" data-bs-target="#agregarUsuario" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Usuario"></button>' +
                         '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Usuario"></button>' +
-                        '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("img/restorePass.png") ?>" width="25" heigth="25"/></button>'
+                        '<button class="btn" data-bs-toggle="modal" data-bs-target="#cambiarContra" data-bs-target="#staticBackdrop" onclick=$("#idUsuario").val(' + data.id_usuario + ') ><img src="<?php echo base_url("img/restorePass.png") ?>" width="25" heigth="25"  title="Restablecer Contraseña"/></button>'
                     );
                 },
             }
@@ -448,14 +486,7 @@
         },
 
     });
-    //Mostrar Ocultar Columnas
-    $('a.toggle-vis').on('click', function(e) {
-        e.preventDefault();
-        // Get the column API object
-        var column = tableUsuarios.column($(this).attr('data-column'));
-        // Toggle the visibility
-        column.visible(!column.visible());
-    });
+
 
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
@@ -518,6 +549,7 @@
         $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+        $('#foto').text('')
     }
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
@@ -581,9 +613,12 @@
                 $('#nombreS').val(res[0]['nombre_s'])
                 $('#apellidoP').val(res[0]['apellido_p'])
                 $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tituloFoto').val(res[0]['nombre_p'] + ['nombre_s'] + ['apellido_p'] + ['apellido_s'])
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#rol').val(res[0]['id_rol'])
+                $('#foto').removeAttr('hidden')
+                $('#foto').val(res[0]['foto'])
                 $('#labelNom').text('Cambiar Contraseña:')
                 $('#contra').val('')
                 $('#divContras').attr('hidden', '')
@@ -630,6 +665,8 @@
             $('#telefono').val('')
             $('#email').val('')
             $('#rol').val('')
+            $('#tituloFoto').val(['nombre_p'] + ['nombre_s'] + ['apellido_p'] + ['apellido_s'])
+            // $('#foto').val('')
             $('#contra').val('')
             $('#confirContra').val('')
             $('#divContras').removeAttr('hidden')
@@ -735,22 +772,26 @@
         } else if ([telefono, correo].includes('')) {
             return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('tp', tp);
+            formData.append('nombreP', nombreP);
+            formData.append('nombreS', nombreS);
+            formData.append('apellidoP', apellidoP);
+            formData.append('apellidoS', apellidoS);
+            formData.append('tipoDoc', tipoDoc);
+            formData.append('nIdenti', nIdenti);
+            formData.append('rol', rol);
+            formData.append('contra', contra);
+            formData.append('telefonos', telefonos);
+            formData.append('foto', $('#foto')[0].files[0]);
             $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
                 type: 'POST',
-                data: {
-                    id,
-                    tp,
-                    nombreP,
-                    nombreS,
-                    apellidoP,
-                    apellidoS,
-                    tipoDoc,
-                    nIdenti,
-                    rol,
-                    contra,
-                    telefonos
-                },
+                data: formData,
+                dataType: 'json',
+                contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                processData: false, // Importante: no proceses los datos
                 success: function(idUser) {
                     telefonos.forEach(tel => {
                         //Insertar Telefonos
@@ -836,7 +877,7 @@
         }
         contador += 1
         let info = {
-            id: [editTel].includes('') || editTel == 0 ? `${contador+=1}e` : editTel,
+            id: [editTel].includes('') || editTel == 0 ? `${contador += 1}e` : editTel,
             tipo,
             numero,
             prioridad
@@ -921,7 +962,7 @@
             for (let i = 0; i < telefonos.length; i++) {
                 cadena += ` <tr class="text-center" id='${telefonos[i].id}'>
                                 <td>${telefonos[i].numero}</td>
-                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo'}</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>  
                                 <td>
                                     <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
@@ -981,7 +1022,7 @@
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
-            id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
+            id: [editCorreo].includes('') || editCorreo == 0 ? `${contador += 1}e` : editCorreo,
             correo,
             prioridad
         }
@@ -1098,6 +1139,7 @@
                 estado: 'I'
             }
         }).done(function(data) {
+            ContadorPRC = 0
             mostrarMensaje('success', data)
             $('#modalConfirmar').modal('hide')
             tableUsuarios.ajax.reload(null, false)

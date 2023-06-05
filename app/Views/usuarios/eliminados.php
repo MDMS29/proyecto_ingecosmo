@@ -4,6 +4,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS-n.png') ?>" /> Usuarios Eliminados</h2>
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Rol</a>
+        </div>
         <table class="table table-striped" id="tableUsuarios" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -36,7 +39,7 @@
                     <div class="logo">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     </div>
-                    <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
+                    <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4 text-primary"></i><span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
@@ -117,33 +120,36 @@
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
 <div class="modal fade" id="verTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Telefono</th>
-                                    <th>Prioridad</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyTel">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY TELEFONOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4"></i> Ver Telefonos</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -152,33 +158,35 @@
 <!-- MODAL VER CORREOS -->
 <div class="modal fade" id="verCorreos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Correo</th>
-                                    <th>Prioridad</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyCorre">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY CORREOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4"></i> Ver Correos</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verUsuario" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verUsuario">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -216,6 +224,23 @@
     var ContadorPRC = 0;
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
+    //Marcar botones ocultar columnas
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableUsuarios.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
     // Tabla de usuarios
     var tableUsuarios = $("#tableUsuarios").DataTable({
         ajax: {
@@ -261,7 +286,7 @@
                 render: function(data, type, row) {
                     return (
 
-                        '<button class="btn text-primary" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
+                        '<button class="btn text-primary" onclick="seleccionarUsuario(' + data.id_usuario + ')" data-bs-target="#verUsuario" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4" title="Ver Usuario"></i></button>' +
                         '<button class="btn" data-href=' + data.id_usuario + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restablecer" title="Restablecer Usuario" width="20"></button>'
                     );
                 },
@@ -325,7 +350,7 @@
             for (let i = 0; i < correos.length; i++) {
                 cadena += ` <tr class="text-center">
                                 <td>${correos[i].correo}</td>
-                                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                             </tr>`
             }
         }
@@ -344,7 +369,8 @@
             for (let i = 0; i < telefonos.length; i++) {
                 cadena += ` <tr class="text-center">
                                 <td>${telefonos[i].numero}</td>
-                                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo'}</td>
+                                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                             </tr>`
             }
         }

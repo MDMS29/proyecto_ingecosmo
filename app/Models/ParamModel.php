@@ -36,15 +36,16 @@ class ParamModel extends Model
     {
         $this->select('param_detalle.*');
         $this->where('id_param_enc', '10');
-        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
+        $datos = $this->findAll();
         return $datos;
     }
     public function obtenerFilas()
     {
         $this->select('param_detalle.*');
         $this->where('id_param_enc', '10');
-        $datos = $this->findAll();  // nos trae el registro que cumpla con una condicion dada 
-        return $datos;}
+        $datos = $this->findAll();
+        return $datos;
+    }
 
     public function obtenerTipoTel()
     {
@@ -74,7 +75,7 @@ class ParamModel extends Model
         $this->select('id_param_det as id, nombre');
         $this->where('id_param_det', '5');
         $this->orWhere('id_param_det', '56');
-        $this->where('estado', 'A'); 
+        $this->where('estado', 'A');
         $data = $this->findAll();
         return $data;
     }
