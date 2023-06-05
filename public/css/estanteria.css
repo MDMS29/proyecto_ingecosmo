@@ -87,20 +87,24 @@
 
 .btnVer {
   color: #161666 !important;
+  background: transparent !important;
   text-decoration: none;
   border: 2px solid #161666;
   border-radius: 8px;
   margin-top: 0;
-  padding: 8px;
-  width: 105px;
-  height: 35px;
+  width: 100px;
+  height: auto;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .btnVer:hover {
   color: rgb(255, 255, 255) !important;
-  background-color: #161666;
+  background-color: #161666 !important;
+  cursor: pointer;
+
 }
 
 .iconoBroca {
@@ -311,10 +315,10 @@ details{
   color: white !important;
 } 
 
-label {
+/* label {
   color: #1b335b;
   font-weight: 600;
-}
+} */
 
 * {
   font-family: 'Nunito', sans-serif;
@@ -401,4 +405,10 @@ label {
 
 .verMas:hover{
   text-decoration: underline !important;
+}
+
+.tituloMover{
+  color: #000000;
+  margin-bottom: 0px;
+  margin-right: 10px;
 }
