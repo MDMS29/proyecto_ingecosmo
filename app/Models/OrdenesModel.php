@@ -72,4 +72,11 @@ class OrdenesModel extends Model
         $data = $this->first();
         return $data;
     }
+
+    public function ordenesInsumos(){
+        $this->select("id_trabajador, concat(nombre_p,' ',nombre_s,' ',apellido_p,' ',apellido_s) as nombre");
+        $this->where("estado", "A");
+        $data = $this->findAll();
+        return $data;
+    }
 }
