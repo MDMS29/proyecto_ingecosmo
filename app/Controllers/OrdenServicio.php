@@ -218,21 +218,45 @@ class OrdenServicio extends BaseController
 
         $pdf->SetY(76);
         $pdf->SetX(10);
-        $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(25, 5, $res['marca'], 0, 1, 'L');
 
         $pdf->SetXY(50, 68.5);
         $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
+
+        // ---MODELO
         $pdf->SetXY(82, 68.5);
         $pdf->Cell(25, 5, 'MODELO', 0, 1, 'L');
+
+        $pdf->SetY(76);
+        $pdf->SetX(85);
+        $pdf->Cell(2, 5, '' . $res['modelo'] . '', 0, 1, 'L');
+
+        // ---COLOR
         $pdf->SetXY(118, 68.5);
         $pdf->Cell(25, 5, 'COLOR', 0, 1, 'L');
-        $pdf->SetXY(118, 68.5);
-        $pdf->Cell(25, 5, 'COLOR', 0, 1, 'L');
+
+        $pdf->SetY(76);
+        $pdf->SetX(118);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '' . $res['color'] . '', 0, 1, 'L');
+
+        // ---PLACA
         $pdf->SetXY(154, 68.5);
         $pdf->Cell(25, 5, 'PLACA', 0, 1, 'L');
+        
+        $pdf->SetY(76);
+        $pdf->SetX(155);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '' . $res['placa'] . '', 0, 1, 'L');
+
+        // ---KMS
         $pdf->SetXY(183, 68.5);
         $pdf->Cell(25, 5, 'KILOMETRAJE', 0, 1, 'L');
+
+        $pdf->SetY(76);
+        $pdf->SetX(187);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(2, 5, '' . $res['kms'] . '', 0, 1, 'L');
 
         $pdf->line(2, 73, 214, 73);
 
@@ -248,17 +272,6 @@ class OrdenServicio extends BaseController
         // $pdf->SetFont('Arial', 'B', 10);
         // $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
 
-        // // ---No. FAB
-        // $pdf->SetY(39);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'No. FAB', 0, 1, 'L');
-
-        // $pdf->SetY(39);
-        // $pdf->SetX(73);
-        // $pdf->SetFont('Arial', '', 10);
-        // // $pdf->Cell(2, 5, '' . $res['modelo'] . '', 0, 1, 'L');
-
         // // ---MOTOR
         // $pdf->SetY(44);
         // $pdf->SetX(55);
@@ -270,39 +283,6 @@ class OrdenServicio extends BaseController
         // $pdf->SetX(55);
         // $pdf->SetFont('Arial', 'B', 10);
         // $pdf->Cell(25, 5, 'CHASIS', 0, 1, 'L');
-
-        // // ---COLOR
-        // $pdf->SetY(54);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'COLOR', 0, 1, 'L');
-
-        // $pdf->SetY(54);
-        // $pdf->SetX(73);
-        // $pdf->SetFont('Arial', '', 10);
-        // // $pdf->Cell(2, 5, '' . $res['color'] . '', 0, 1, 'L');
-
-        // // ---PLACA
-        // $pdf->SetY(59);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'PLACA', 0, 1, 'L');
-
-        // $pdf->SetY(59);
-        // $pdf->SetX(73);
-        // $pdf->SetFont('Arial', '', 10);
-        // // $pdf->Cell(2, 5, '' . $res['placa'] . '', 0, 1, 'L');
-
-        // // ---KMS
-        // $pdf->SetY(64);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'KMS', 0, 1, 'L');
-
-        // $pdf->SetY(64);
-        // $pdf->SetX(73);
-        // $pdf->SetFont('Arial', '', 10);
-        // // $pdf->Cell(2, 5, '' . $res['kms'] . '', 0, 1, 'L');
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_trabajo_' . $res['n_orden'] . '.pdf', "F");
