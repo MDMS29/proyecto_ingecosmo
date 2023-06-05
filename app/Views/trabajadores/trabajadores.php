@@ -37,8 +37,8 @@
         <div class="modal-dialog modal-xl">
             <div class="body">
                 <div class="modal-content">
-                    <div class="modal-header ">
-                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <div class="modal-header flex align-items-center gap-3">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                             <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
@@ -136,9 +136,12 @@
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> AGREGAR TELEFONO</h1>
-                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Telefono</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -153,7 +156,7 @@
                             </div>
                             <div class=" flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
-                                <select class="form-select form-select" name="tipoTele" id="tipoTele">
+                                <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
                                         <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
@@ -162,7 +165,7 @@
                             </div>
                             <div class="flex-grow-1">
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
-                                <select class="form-select form-select" name="prioridad" id="prioridad">
+                                <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
@@ -204,12 +207,14 @@
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Correo</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
                 </div>
                 <input type="text" name="editCorreo" id="editCorreo" hidden>
-
                 <div class="modal-body">
 
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -263,7 +268,7 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100">
                 </div>
 
                 <div class="contenidoEliminarP">

@@ -199,7 +199,7 @@
     </nav>
 
     <div>
-        <a href="<?= base_url('/home') ?>"><img class="log" id="log" style="" src="<?php echo base_url('/img/ingecosmo.png') ?>" /></a>
+        <a href="<?= base_url('/home') ?>"><img class="log" id="log" src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/></a>
     </div>
 
     <script>

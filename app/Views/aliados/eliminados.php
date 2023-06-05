@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Email</a> - <a class="toggle-vis btn" data-column="5">Telefono</a>
+        </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -10,7 +13,6 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -29,66 +31,70 @@
 
 
 <!-- -----modal----------     -->
-    <div class="modal fade" id="verAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="verAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <input type="text" name="id" id="id" value="0" hidden>
+    <input type="text" name="tp" id="tp" hidden>
+    <div class="modal-dialog modal-xl">
+        <div class="body">
             <div class="modal-content">
                 <div class="modal-header flex align-items-center gap-3">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
                         <h1 class="modal-title fs-5 text-center" id="tituloModal"><!--TEXTO DINAMICO--></h1>
                     </div>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                            <div class="mb-3" style="width: 100%;">
+                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                                <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" disabled>
+                                <small id="msgRaSo" class="invalido"></small>
 
-                <form>
-                    <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
-                        <div class="mb-3" style="width: 100%;">
-                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" disabled>
-                            <small id="msgRaSo" class="invalido"></small>
+                                <input hidden id="tp" name="tp">
+                                <input hidden id="id" name="id">
+                            </div>
 
-                            <input hidden id="tp" name="tp">
-                            <input hidden id="id" name="id">
-                        </div>
-
-                        <div class="mb-3" style="width: 100%; ">
-                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                            <input type="text" class="form-control" id="nit" name="nit" disabled></input>
-                            <small id="msgNit" class="invalido"></small>
-                        </div>
-                    </div>
-
-                    <div class="mb-3" style="width: 100%; padding-inline:20px;">
-                        <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                        <input class="form-control" id="direccion" name="direccion" disabled></input>
-                    </div>
-
-                    <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
-                        <div class="mb-3" style="width: 100%">
-                            <label for="telefono" class="col-form-label">Telefono:</label>
-                            <div class="d-flex">
-                                <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono" disabled>+</button>
+                            <div class="mb-3" style="width: 100%; ">
+                                <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                                <input type="text" class="form-control" id="nit" name="nit" disabled></input>
+                                <small id="msgNit" class="invalido"></small>
                             </div>
                         </div>
 
-                        <div class="mb-3" style="width: 100%">
-                            <label for="email" class="col-form-label">Email:</label>
-                            <div class="d-flex">
-                                <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo" disabled>+</button>
+                        <div class="mb-3" style="width: 100%; padding-inline:20px;">
+                            <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
+                            <input class="form-control" id="direccion" name="direccion" disabled></input>
+                        </div>
+
+                        <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                            <div class="mb-3" style="width: 100%">
+                                <label for="telefono" class="col-form-label">Telefono:</label>
+                                <div class="d-flex">
+                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono" disabled>+</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" style="width: 100%">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <div class="d-flex">
+                                    <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo" disabled>+</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <!-- Modal Confirma Reestablecer -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -123,6 +129,23 @@
     var ContadorPRC = 0;
     let telefonos = [] //Telefonos del Aliados.
     let correos = [] //Correos del Aliados.
+
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableAliados.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
     // Tabla de Aliados
     var tableAliados = $("#tableAliados").DataTable({
         ajax: {
@@ -148,24 +171,6 @@
             },
             {
                 data: 'direccion'
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    var email = '';
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + row.id_tercero + '/' + 56,
-                        dataType: 'json',
-                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                        success: function(response) {
-                            if (response.length > 0) {
-                                email = response[0][0].correo;
-                            }
-                        }
-                    });
-                    return email;
-                }
             },
             {
                 data: null,
