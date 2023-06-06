@@ -14,13 +14,10 @@
                     <th scope="col" class="text-center">Nombre</th>
                     <th scope="col" class="text-center">Orden de Servicio</th>
                     <th scope="col" class="text-center">Proveedor</th>
-                    <th scope="col" class="text-center">Categoria</th>
-                    <th scope="col" class="text-center">Existencias</th>
-                    <th scope="col" class="text-center">P. Compra</th>
-                    <th scope="col" class="text-center">P. Venta</th>
-                    <th scope="col" class="text-center">Estante</th>
+                    <!-- <th scope="col" class="text-center">Existencias</th> -->
+                    <th scope="col" class="text-center">Bodega</th>
                     <th scope="col" class="text-center">Fila</th>
-                    <th scope="col" class="text-center">Acciones </th>
+                    <th scope="col" class="text-center">Acciones </th>  
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -287,20 +284,11 @@
             {
                 data: 'razon_social'
             },
+            // {
+            //     data: 'cantidad_actual'
+            // },
             {
-                data: 'nombre_categoria'
-            },
-            {
-                data: 'cantidad_actual'
-            },
-            {
-                data: 'precio_compra'
-            },
-            {
-                data: 'precio_venta'
-            },
-            {
-                data: 'estante'
+                data: 'bodega'
             },
             {
                 data: 'fila'
