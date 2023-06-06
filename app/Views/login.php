@@ -31,8 +31,8 @@
                     <input type="password" class="form-control" name="contrasena" id="contrasena" aria-label="Text input with checkbox">
                     <div class="input-group-text">
                         <!-- <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()"> -->
-                        <button type="button" style="border: none; background-color:none;" id="verContrasena">
-                            <i id="eye" class="bi bi-eye-fill fs-4" style="font-size: 18px !important; background-color: none !important;"></i>
+                        <button type="button" style="border: none; background-color:#f8f9fa !important;" id="verContrasena">
+                            <i id="eye" class="bi bi-eye-fill fs-4" style="font-size: 18px !important;"></i>
                         </button>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
 </html>
 <script>
     let ver = true
-    $("#verContrasena").click(function (e){
+    $("#verContrasena").click(function(e) {
         ver = !ver
         var check, password, ojo;
         password = document.getElementById("contrasena");
@@ -66,7 +66,7 @@
             password.type = "password";
         }
 
-    }) 
+    })
 
 
     const informacion = JSON.parse(localStorage.getItem('usuario'));
@@ -76,9 +76,6 @@
             e.preventDefault();
             usuario = $('#usuario').val();
             contrasena = $('#contrasena').val();
-            if ([usuario, contrasena].includes('')) {
-                return alert('Campos Vacios')
-            }
             $.ajax({
                 url: '<?php echo base_url('/login') ?>',
                 type: 'POST',
@@ -88,8 +85,8 @@
                     contrasena
                 },
                 success: function(data) {
-                    if (data == 2) {
-                        $('#error').html("<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> Usuario o Contraseña Incorrecta </div>")
+                    if (data == 2 ||[usuario, contrasena].includes('')) {
+                        $('#error').html("<div class='alerta'> <i class='bi bi-exclamation-circle-fill'></i> ¡Hay campos vacios o invalidos! </div>")
                         const alerta = document.querySelector(".alerta");
                         setTimeout(() => {
                             alerta.remove();

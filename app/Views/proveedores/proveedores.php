@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/icon-proveedores.png') ?>" /> Proveedores</h2>
     <div class="table-responsive p-2">
+    <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Telefono</a> 
+        </div>
         <table class="table table-striped" id="tableProveedores" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -126,7 +129,7 @@
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
                                 <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
-                                    <option value="P">Primaria</option>
+                                    <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
                                 </select>
                             </div>
@@ -184,7 +187,7 @@
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
                             <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
-                                <option value="P">Primaria</option>
+                                <option value="P">Principal</option>
                                 <option value="S">Secundaria</option>
                             </select>
                         </div>
@@ -269,6 +272,24 @@
         tipo: '',
         prioridad: ''
     }
+
+    //Marcar botones ocultar columnas
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableProveedores.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
 
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
@@ -960,6 +981,7 @@
                 estado: 'I'
             }
         }).done(function(data) {
+            ContadorPRC = 0
             mostrarMensaje('success', data)
             $('#modalConfirmarP').modal('hide')
             tableProveedores.ajax.reload(null, false)

@@ -103,7 +103,7 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:100px;  margin-bottom: 0px; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
                 <div class="contenidoEliminarP">

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
@@ -25,7 +25,7 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        
+
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="seleccionarUsuario(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
         <a href="<?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
@@ -119,8 +119,14 @@
                                     <label id="labelNom" for="nombres" class="col-form-label"> <!-- TEXTO DINAMICO -->
                                     </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
-                                    <small class="normal">¡La contraseña debe contar con un minimo de 6
-                                        caracteres!</small>
+                                    <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
+
+                                    <div class="form-check" style="margin-top: 10px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
+                                        <label class="form-check-label" for="ver">
+                                            Ver Contraseña
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
@@ -135,7 +141,7 @@
                                     <!-- <input name="" class="form-control" id="tituloFoto"> -->
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="bloqueFoto">
-                                    <button hidden type="button" data-bs-toggle="modal" id="fotoModal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario" class="iconFoto"></button>
+                                    <button hidden type="button" data-bs-toggle="modal" id="fotoModal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario" class="iconFoto" id="iconoFoto"></button>
                                 </div>
                             </div>
                         </form>
@@ -156,13 +162,14 @@
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                    <h5 style="font-weight: bold;" ><!-- NOMBRE DIANMICO --></h5>
-                    <input name="" class="form-control" id="tituloFoto">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100">
+                    <!-- <h5 style="font-weight: bold;" >NOMBRE DIANMICO</h5> -->
+                    <input name="" class="tituloFoto" id="tituloFoto">
                     <button type="button" class="btn" aria-label="Close" data-bs-toggle="modal" data-bs-target="#agregarUsuario">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3" style="width: 50%">
+                        <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -189,7 +196,7 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="idUsuario" id="idUsuario">
-                        <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="container p-4" style="background-color: #dfe6f2;border-radius:10px;">
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%" id="divContras">
                                     <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
@@ -385,6 +392,7 @@
     var contador = 0;
     var contadorCorreo = 0;
     var inputIden = 0;
+    var id_usuario = $('#id');
     let telefonos = [] //Telefonos del usuario.
     let correos = [] //Correos del usuario.
     var validTel = true
@@ -401,6 +409,11 @@
         tipo: '',
         prioridad: ''
     }
+
+    // foto perfil
+    var foto = '<?= base_url('usuarios/mostrarImagen/') ?>' + id_usuario;
+    $('#fotoPerfil').attr('src', `${foto}`)
+
     //Marcar botones ocultar columnas
     var botones = $(".ocultar a");
     botones.click(function() {
@@ -422,15 +435,21 @@
     function verContrasena() {
         var password1, password2, check;
         password1 = document.getElementById("contraRes");
+        passwordModal1 = document.getElementById("contra");
         password2 = document.getElementById("confirContraRes");
+        passwordModal2 = document.getElementById("confirContra");
         check = document.getElementById("ver");
         if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
         {
             password1.type = "text";
+            passwordModal1.type = "text";
+            passwordModal2.type = "text";
             password2.type = "text";
         } else // Si no está activada 
         {
             password1.type = "password";
+            passwordModal1.type = "password";
+            passwordModal2.type = "password";
             password2.type = "password";
         }
     }
@@ -560,7 +579,7 @@
         $('#msgTel').text('')
         $('#msgCorreo').text('')
         // $('#fotoModal').removeAttr('hidden')
-        $('#foto').text('')
+        $('#foto').val('')
     }
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
@@ -624,7 +643,7 @@
                 $('#nombreS').val(res[0]['nombre_s'])
                 $('#apellidoP').val(res[0]['apellido_p'])
                 $('#apellidoS').val(res[0]['apellido_s'])
-                $('#tituloFoto').val(res[0]['nombre_p'] +' '+ res[0]['nombre_s'] +' '+ res[0]['apellido_p'] +' '+ res[0]['apellido_s'])
+                $('#tituloFoto').val(res[0]['nombre_p'] + ' ' + res[0]['nombre_s'] + ' ' + res[0]['apellido_p'] + ' ' + res[0]['apellido_s'])
                 $('#tipoDoc').val(1)
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#rol').val(res[0]['id_rol'])

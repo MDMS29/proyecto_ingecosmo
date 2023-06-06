@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes Eliminados</h2>
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a>
+        </div>
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -12,7 +15,6 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -202,49 +204,67 @@
 </div>
 
 
-<!-- Modal Confirma activar -->
+<!-- Modal Confirma Reestablecer -->
 <div class="modal fade" id="modalActivarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:80px; margin:0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
-                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:100px; height:80px; margin:10px; " src="<?php echo base_url('/img/icon-activar.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de reestablecer este cliente?</p>
+                        <img style=" width:100px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
+                        <p class="textoModalP">¿Estas seguro de reestablecer este Cliente?</p>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                 <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
             </div>
 
         </div>
-
-
     </div>
-
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     ContadorPRC = 0
+    let telefonos = [] //Telefonos del usuario.
+    let correos = [] //Correos del usuario.
+
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableClientes.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
 
 
     //Cambiar estado de "Inactivo" a "Activo"
     $('#modalActivarP').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `ReestablecerCLiente(${$(e.relatedTarget).data('href')})`)
     })
+
+    $('.btnNo').click(function() {
+        $("#modalActivarP").modal("hide");
+    });
+
 
     function ReestablecerCLiente(id) {
         $.ajax({
@@ -351,13 +371,6 @@
                 data: 'direccion'
             },
             {
-                data: 'correo',
-                render: function(data, type, row) {
-                    arrayCorreo = emailTable.filter(correo => correo.idCliente == row.id_tercero)[0]?.correo
-                    return arrayCorreo
-                }
-            },
-            {
                 data: null,
                 render: function(data, type, row) {
                     arrayTele = telefonoTable.filter(tel => tel.idCliente == row.id_tercero)[0]?.telefono
@@ -457,11 +470,4 @@
         }
         $('#bodyTel').html(cadena)
     }
-
-
-
-
-    $('.btnNo').click(function() {
-        $("#modalActivarP").modal("hide");
-    });
 </script>

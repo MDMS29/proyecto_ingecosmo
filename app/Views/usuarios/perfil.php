@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -14,7 +14,7 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
-                            <div style="border-radius: 5px;" class="file btn btn-lg btn-primary">
+                            <div id="filePerfil" style="border-radius: 5px;" class="file btn btn-lg btn-primary">
                                 Inserte foto
                                 <input type="file" name="upload" accept="image/png" />
                             </div>
@@ -303,6 +303,7 @@
     var validIdent = true;
     var res
 
+    // foto perfil
     var foto = '<?= base_url('usuarios/mostrarImagen/') . $usuario['id_usuario'] ?>';
     $('#fotoPerfil').attr('src', `${foto}`)
 
