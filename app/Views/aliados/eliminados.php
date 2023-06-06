@@ -27,9 +27,6 @@
 </div>
 
 
-
-
-
 <!-- -----modal----------     -->
 <div class="modal fade" id="verAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <input type="text" name="id" id="id" value="0" hidden>
@@ -195,7 +192,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarAliado(' + data.id_tercero + ')" data-bs-target="#verAliado" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Aliado" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Activar Aliado" width="20"></button>'
                     );
                 },
             }

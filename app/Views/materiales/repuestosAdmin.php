@@ -27,7 +27,7 @@
     </div>
     <div class="footer-page">
         <button class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#agregarRepuesto" onclick="seleccionarRepuesto(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('/materiales/repuestosAdminEliminados'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?php echo base_url('repuestosAdmin/eliminados'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -35,10 +35,8 @@
 <!-- AGREGAR O EDITAR REPUESTO -->
 <form id="formularioRepuesto" autocomplete="off">
     <input class="form-control" id="id" name="id" type="text" value="0" hidden>
-
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
-
     <div class="modal fade" id="agregarRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="modalContent">
@@ -189,7 +187,6 @@
                     $('#pCompra').val(data[0]['precio_compra'])
                     $('#pVenta').val(data[0]['precio_venta'])
                     $('#estante').val(data[0]['estante'])
-                    mostrarFilas(data['idEstante'], data['fila'])
                     $('#btnGuardar').text('Actualizar')
                 }
             })
@@ -210,7 +207,6 @@
             $('#pCompra').val('')
             $('#pVenta').val('')
             $('#estante').val('')
-            mostrarFilas('', '')
             $('#btnGuardar').text('Agregar')
         }
     }

@@ -89,5 +89,15 @@ class RepuestosAdmin extends BaseController
         }
     }
 
+    public function eliminados()
+    {
+        $proveedores = $this->proveedor->obtenerProveedores('A');
+        $bodegas = $this->bodegas->obtenerBodega();
+        $ordenes = $this->ordenes->obtenerOrdenes();
+        $data = ["ordenes" => $ordenes, "bodegas" => $bodegas, "proveedores" => $proveedores];
+        echo view('/principal/sidebar');
+        echo view('/materiales/repuestosAdminEliminados', $data);
+    }
+
   
 }

@@ -305,7 +305,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarTrabajador(' + data.id_trabajador + ')" data-bs-target="#verTrabajador" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_trabajador + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Trabajador" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_trabajador + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Activar Trabajador" width="20"></button>'
                     );
                 },
             }
