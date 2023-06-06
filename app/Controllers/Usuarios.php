@@ -168,21 +168,16 @@ class Usuarios extends BaseController
                 'contrasena' => $contra
             ];
             if ($foto) {
-                $foto->move(WRITEPATH . 'uploads/fotosUsuarios', 'fotoUser/' . $foto->getName());
-                $usuarioUpdate['foto'] = $foto->getName();
-
                 $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+                // $uploadPath = 'fotoUser';
 
-                $uploadPath = 'fotoUser';
-
-                // Verificar si el directorio existe, si no, crearlo
-                if (!is_dir($uploadPath)) {
-                    mkdir($uploadPath, 0777, true);
-                }
-
-                $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-                $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
-
+                // // Verificar si el directorio existe, si no, crearlo
+                // if (!is_dir($uploadPath)) {
+                //     mkdir($uploadPath, 0777, true);
+                // }
+                // $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+                $foto->move(WRITEPATH . 'uploads/fotosUser' . $foto->$newName);
+                $usuarioUpdate['foto'] = $foto->getName();
             }
 
             $this->usuarios->update($idUser, $usuarioUpdate);
@@ -200,6 +195,18 @@ class Usuarios extends BaseController
                 'apellido_s' => $apellidoS,
                 'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
             ];
+            if ($foto) {
+                 $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+                // $uploadPath = 'fotoUser';
+
+                // // Verificar si el directorio existe, si no, crearlo
+                // if (!is_dir($uploadPath)) {
+                //     mkdir($uploadPath, 0777, true);
+                // }
+                // $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+                $foto->move(WRITEPATH . 'uploads/fotosUser' . $foto->$newName);
+                $usuarioUpdate['foto'] = $foto->getName();
+            }
             $this->usuarios->save($usuarioSave);
             return json_encode($this->usuarios->getInsertID());
         }
