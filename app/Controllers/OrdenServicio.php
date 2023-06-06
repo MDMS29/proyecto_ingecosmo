@@ -285,8 +285,8 @@ class OrdenServicio extends BaseController
         // $pdf->Cell(25, 5, 'CHASIS', 0, 1, 'L');
 
         $this->response->setHeader('Content-Type', 'application/pdf');
-        $pdf->Output('PDFS/orden_trabajo_' . $res['n_orden'] . '.pdf', "F");
-        $pdf->Output('orden_trabajo_' . $res['n_orden'] . '.pdf', "I");
+        $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");
+        $pdf->Output('orden_servicio_' . $res['n_orden'] . '.pdf', "I");
     }
     public function obtenerOrdenes()
     {

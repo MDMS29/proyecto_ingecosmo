@@ -150,9 +150,24 @@ class Usuarios extends BaseController
         $contra = $this->request->getVar('contra');
 
         $foto = $this->request->getFile('foto');
+        $res = $this->usuarios->buscarUsuario($idUser, 0);
+        if ($foto == null && $tp == 1) {
+            $rutaImagen = 'fotoUser/default.png';
+        } else if ($foto == null && $tp == 2) {
+            $rutaImagen = $res['foto'];
+        } else if ($foto->isValid() && !$foto->hasMoved()) {
+            $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
 
-        // if ($foto->isValid() && !$foto->hasMoved()) {
+            $uploadPath = 'fotoUser';
 
+            // Verificar si el directorio existe, si no, crearlo
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+            $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
+        }
         if ($tp == 2) {
             //Actualizar datos
             $res = $this->usuarios->buscarUsuario($idUser, 0);
@@ -165,21 +180,9 @@ class Usuarios extends BaseController
                 'nombre_s' => $nombreS,
                 'apellido_p' => $apellidoP,
                 'apellido_s' => $apellidoS,
+                'foto' => $rutaImagen,
                 'contrasena' => $contra
             ];
-            if ($foto) {
-                $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
-                // $uploadPath = 'fotoUser';
-
-                // // Verificar si el directorio existe, si no, crearlo
-                // if (!is_dir($uploadPath)) {
-                //     mkdir($uploadPath, 0777, true);
-                // }
-                // $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-                $foto->move(WRITEPATH . 'uploads/fotosUser' . $foto->$newName);
-                $usuarioUpdate['foto'] = $foto->getName();
-            }
-
             $this->usuarios->update($idUser, $usuarioUpdate);
             return $idUser;
         } else {
@@ -193,20 +196,9 @@ class Usuarios extends BaseController
                 'nombre_s' => $nombreS,
                 'apellido_p' => $apellidoP,
                 'apellido_s' => $apellidoS,
+                'foto' => $rutaImagen,
                 'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
             ];
-            if ($foto) {
-                 $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
-                // $uploadPath = 'fotoUser';
-
-                // // Verificar si el directorio existe, si no, crearlo
-                // if (!is_dir($uploadPath)) {
-                //     mkdir($uploadPath, 0777, true);
-                // }
-                // $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-                $foto->move(WRITEPATH . 'uploads/fotosUser' . $foto->$newName);
-                $usuarioUpdate['foto'] = $foto->getName();
-            }
             $this->usuarios->save($usuarioSave);
             return json_encode($this->usuarios->getInsertID());
         }

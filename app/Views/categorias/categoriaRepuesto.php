@@ -99,7 +99,7 @@
             contentType: false, // Evitar que jQuery establezca el tipo de contenido
             success: function(res) {
                 if (res == 1) {
-                    return mostrarMensaje('warning', 'Esta categoria no tiene materiales!')
+                    return mostrarMensaje('warning', '¡Esta bodega no tiene materiales!')
                 } else {
                     window.location.href = url
                 }
