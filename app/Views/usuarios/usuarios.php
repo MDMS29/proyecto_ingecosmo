@@ -207,8 +207,8 @@
                                             caracteres!</small>
                                     </div>
                                     <div class="form-check" style="margin-top: 10px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
-                                        <label class="form-check-label" for="ver">
+                                        <input class="form-check-input" type="checkbox" value="" id="verModal" onchange="verContrasenaModal()">
+                                        <label class="form-check-label" for="verModal">
                                             Ver Contraseña
                                         </label>
                                     </div>
@@ -433,24 +433,34 @@
     });
     //Ver contraseñas
     function verContrasena() {
-        var password1, password2, check, passwordModal1, passwordModal2;
-        password1 = document.getElementById("contraRes");
-        passwordModal1 = document.getElementById("contra");
-        password2 = document.getElementById("confirContraRes");
-        passwordModal2 = document.getElementById("confirContra");
+        var password1, password2, check;
+        password1 = document.getElementById("contra");
+        password2 = document.getElementById("confirContra");
         check = document.getElementById("ver");
         if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
         {
             password1.type = "text";
-            passwordModal1.type = "text";
-            passwordModal2.type = "text";
             password2.type = "text";
         } else // Si no está activada 
         {
             password1.type = "password";
+            password2.type = "password";
+        }
+    }
+    //Ver contraseñas
+    function verContrasenaModal() {
+        var check, passwordModal1, passwordModal2;
+        passwordModal1 = document.getElementById("contraRes");
+        passwordModal2 = document.getElementById("confirContraRes");
+        check = document.getElementById("verModal");
+        if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
+        {
+            passwordModal1.type = "text";
+            passwordModal2.type = "text";
+        } else // Si no está activada 
+        {
             passwordModal1.type = "password";
             passwordModal2.type = "password";
-            password2.type = "password";
         }
     }
     // Tabla de usuarios  
