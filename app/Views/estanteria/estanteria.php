@@ -11,7 +11,16 @@
                             <img class="iconos" src="<?php echo base_url('/img/') . $dato['n_iconos'] ?>">
                         </div>
                         <div class="textoCard">
-                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0"><?php echo $dato['n1'] . $dato['nombre'] ?></h5>
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0"><?php echo  $dato['n1'] ." " . $dato['nombre']?></h5>
+                        <div class="bloqueTextoE" id="<?= $dato['id'] ?>">
+                                <p class="subTexto">Contiene 4 Filas</p>
+                                <p class="subTexto">
+                                    <span id="contador">
+                                        <!-- CONTADOS DINAMICO -->
+                                    </span>
+                                </p>
+                            </div>
+                            <a onclick="redireccion(<?php echo $dato['id'] ?>)" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                         </div>
                     </div>
             <?php } ?>

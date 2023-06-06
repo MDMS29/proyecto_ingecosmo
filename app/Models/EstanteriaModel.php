@@ -27,8 +27,8 @@ class EstanteriaModel extends Model
 
     public function obtenerAllEstantes()
     {
-        $this->select('estanteria.*');
-        
+        $this->select('estanteria.*, param_detalle.nombre as n1');    
+        $this->join('param_detalle','param_detalle.id_param_det=estanteria.tipo_estante');
         $datos = $this->findAll();
         return $datos;
     }
@@ -53,8 +53,8 @@ class EstanteriaModel extends Model
     public function obtenerEstantes($id)
     {
 
-        $this->select('estanteria.*', 'param_detalle.nombre as n1');
-        $this->where('id', $id);
+        $this->select('estanteria.*, param_detalle.nombre as n1');
+        $this->where('estanteria.id', $id);
         $this->join('param_detalle','param_detalle.id_param_det=estanteria.tipo_estante');
         $datos = $this->findAll();
         return $datos;
