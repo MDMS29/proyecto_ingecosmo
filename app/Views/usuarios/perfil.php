@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -175,8 +175,8 @@
                                 </div>
                             </div>
 
-                            <form autocomplete="off" id="formularioContraseñas">
-                                <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
+                                <form autocomplete="off" id="formularioContraseñas">
                                     <div class="container" style="background-color: #dfe6f2;border-radius:10px;">
                                         <div class="d-flex column-gap-3" style="width: 100%" id="contenedorPerfil">
                                             <div class="mb-3" style="width: 100%; margin: 0;" id="contenidoPerfil">
@@ -212,8 +212,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
 
                     </div>

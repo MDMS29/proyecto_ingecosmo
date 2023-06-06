@@ -151,53 +151,57 @@ class Usuarios extends BaseController
 
         $foto = $this->request->getFile('foto');
 
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+        // if ($foto->isValid() && !$foto->hasMoved()) {
 
-            $uploadPath = 'fotoUser';
+        if ($tp == 2) {
+            //Actualizar datos
+            $res = $this->usuarios->buscarUsuario($idUser, 0);
+            $contra = $res['contrasena'];
+            $usuarioUpdate = [
+                'id_rol' => $rol,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombreP,
+                'nombre_s' => $nombreS,
+                'apellido_p' => $apellidoP,
+                'apellido_s' => $apellidoS,
+                'contrasena' => $contra
+            ];
+            if ($foto) {
+                $foto->move(WRITEPATH . 'uploads/fotosUsuarios', 'fotoUser/' . $foto->getName());
+                $usuarioUpdate['foto'] = $foto->getName();
 
-            // Verificar si el directorio existe, si no, crearlo
-            if (!is_dir($uploadPath)) {
-                mkdir($uploadPath, 0777, true);
+                $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+
+                $uploadPath = 'fotoUser';
+
+                // Verificar si el directorio existe, si no, crearlo
+                if (!is_dir($uploadPath)) {
+                    mkdir($uploadPath, 0777, true);
+                }
+
+                $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+                $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
+
             }
 
-            $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-            $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
-
-            if ($tp == 2) {
-                //Actualizar datos
-                $res = $this->usuarios->buscarUsuario($idUser, 0);
-                $contra = $res['contrasena'];
-                $usuarioUpdate = [
-                    'id_rol' => $rol,
-                    'tipo_doc' => $tipoDoc,
-                    'n_identificacion' => $nIdenti,
-                    'nombre_p' => $nombreP,
-                    'nombre_s' => $nombreS,
-                    'apellido_p' => $apellidoP,
-                    'apellido_s' => $apellidoS,
-                    'foto' => $rutaImagen,
-                    'contrasena' => $contra
-                ];
-                $this->usuarios->update($idUser, $usuarioUpdate);
-                return $idUser;
-            } else {
-                //Insertar datos
-                //Si la respuesta esta vacia - guardar
-                $usuarioSave = [
-                    'id_rol' => $rol,
-                    'tipo_doc' => $tipoDoc,
-                    'n_identificacion' => $nIdenti,
-                    'nombre_p' => $nombreP,
-                    'nombre_s' => $nombreS,
-                    'apellido_p' => $apellidoP,
-                    'apellido_s' => $apellidoS,
-                    'foto' => $rutaImagen,
-                    'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
-                ];
-                $this->usuarios->save($usuarioSave);
-                return json_encode($this->usuarios->getInsertID());
-            }
+            $this->usuarios->update($idUser, $usuarioUpdate);
+            return $idUser;
+        } else {
+            //Insertar datos
+            //Si la respuesta esta vacia - guardar
+            $usuarioSave = [
+                'id_rol' => $rol,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombreP,
+                'nombre_s' => $nombreS,
+                'apellido_p' => $apellidoP,
+                'apellido_s' => $apellidoS,
+                'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
+            ];
+            $this->usuarios->save($usuarioSave);
+            return json_encode($this->usuarios->getInsertID());
         }
     }
     public function cambiarContrasena()
