@@ -4,7 +4,6 @@
         <div class="verFilas" id="verFilas">
 
             <h1 class="titulo" style="text-transform:uppercase;">ESTANTERIA DE <?php echo $titulo['nombre'] ?></h1>
-
         </div>
 
         <div class="contenedorE">
@@ -24,10 +23,10 @@
                                 <img class="iconos" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
                             </div>
                             <div class="Isabella">
-                            <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila <?php echo $dato['fila']; ?></h5>
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila <?php echo $dato['fila']; ?></h5>
                                 <div class="textoFilaF" id="Contenedor">
                                     <div class="bloque1">
-                                        
+
                                         <input id='nombreFila' value="<?php echo $dato['fila']; ?>" hidden>
                                         <div class="bloqueTextoEF" id="<?php echo $dato['fila']; ?>">
                                         </div>
@@ -194,7 +193,7 @@
                     cadena += `
                     <div class="sumary-flex">
                     <p class="subTexto">
-                    <details>
+                    <details class="detail">
                     <summary >
                     <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
                     </summary>
@@ -208,19 +207,24 @@
         })
     }
 
-    // Obtén todos los elementos <summary>
-    const summaries = document.querySelectorAll('summary');
+    // Obtén todos los elementos <details>
+    const detailsElements = document.getElementsByClassName('detail');
 
-    // Recorre cada elemento <summary>
-    summaries.forEach(summary => {
-        // Añade un controlador de eventos al hacer clic en el <summary>
-        summary.addEventListener('click', () => {
-            // Desactiva todos los <summary> excepto el actual
-            summaries.forEach(s => {
-                if (s !== summary) {
-                    s.removeAttribute('open');
-                }
-            });
+    // Añade un controlador de eventos a cada elemento <details>
+    console.log(detailsElements);
+    detailsElements.forEach(details => {
+        details.addEventListener('click', () => {
+            console.log(details);
+            // Verifica si el elemento actual está abierto
+            if (details.open) {
+                // Recorre todos los elementos <details> y cierra los que no sean el actual
+                detailsElements.forEach(d => {
+                    console.log(d);
+                    if (d !== details) {
+                        d.open = false;
+                    }
+                });
+            }
         });
     });
 

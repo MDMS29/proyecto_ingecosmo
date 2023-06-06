@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
@@ -116,7 +116,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%" id="divContras">
-                                    <label id="labelNom" for="nombres" class="col-form-label"> <!-- TEXTO DINAMICO -->
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
                                     </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
@@ -207,8 +207,8 @@
                                             caracteres!</small>
                                     </div>
                                     <div class="form-check" style="margin-top: 10px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
-                                        <label class="form-check-label" for="ver">
+                                        <input class="form-check-input" type="checkbox" value="" id="verModal" onchange="verContrasenaModal()">
+                                        <label class="form-check-label" for="verModal">
                                             Ver Contraseña
                                         </label>
                                     </div>
@@ -434,23 +434,33 @@
     //Ver contraseñas
     function verContrasena() {
         var password1, password2, check;
-        password1 = document.getElementById("contraRes");
-        passwordModal1 = document.getElementById("contra");
-        password2 = document.getElementById("confirContraRes");
-        passwordModal2 = document.getElementById("confirContra");
+        password1 = document.getElementById("contra");
+        password2 = document.getElementById("confirContra");
         check = document.getElementById("ver");
         if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
         {
             password1.type = "text";
-            passwordModal1.type = "text";
-            passwordModal2.type = "text";
             password2.type = "text";
         } else // Si no está activada 
         {
             password1.type = "password";
+            password2.type = "password";
+        }
+    }
+    //Ver contraseñas
+    function verContrasenaModal() {
+        var check, passwordModal1, passwordModal2;
+        passwordModal1 = document.getElementById("contraRes");
+        passwordModal2 = document.getElementById("confirContraRes");
+        check = document.getElementById("verModal");
+        if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
+        {
+            passwordModal1.type = "text";
+            passwordModal2.type = "text";
+        } else // Si no está activada 
+        {
             passwordModal1.type = "password";
             passwordModal2.type = "password";
-            password2.type = "password";
         }
     }
     // Tabla de usuarios  
@@ -650,7 +660,6 @@
                 $('#fotoModal').removeAttr('hidden')
                 $('#bloqueFoto').removeAttr('hidden')
                 $('#foto').val(res[0]['foto'])
-                $('#labelNom').text('Cambiar Contraseña:')
                 $('#contra').val('')
                 $('#divContras').attr('hidden', '')
                 $('#divContras2').attr('hidden', '')
