@@ -29,6 +29,9 @@ class Database extends Config
         'hostname' => '192.168.43.97',//10.230.16.213
         'username' => 'ingecosmos',//ingecosmos
         'password' => '123456789',//123456789
+        'hostname' => '10.230.16.144',//10.230.16.213
+        'username' => 'ingecosmos',//ingecosmos
+        'password' => '123456789',//123456789
         'database' => 'db_ingecosmo',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',

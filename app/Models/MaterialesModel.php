@@ -182,6 +182,16 @@ class MaterialesModel extends Model
         return $datos;
     }
 
+    public function obtenerRepuestosCate($estado)
+    {
+        $this->select('materiales.*, estanteria.nombre as bodega');
+        $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+        $this->where('materiales.tipo_material', '10');
+        $this->where('materiales.estado', $estado);
+        $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+
     //Insumos
     public function obtenerInsumoAdmin($estado)
     {

@@ -38,6 +38,18 @@ class Repuestos extends BaseController
         echo view('/materiales/repuestos', $data);
     }
 
+    public  function materialesCategoriaRepuestos($id)
+    {
+        $material = $this->materiales->obtenerRepuestosCate($id);
+        if (empty($material)) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
+        // echo view('/materiales/materiales', $data);
+    }
+
+
     public function insertar()
     {
         $nombre =  $this->request->getPost('nombre');
