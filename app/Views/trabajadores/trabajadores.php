@@ -469,7 +469,7 @@
                 dataType: 'json',
 
             }).done(function(res) {
-                $('#tituloModal').text('Editar Trabajador')
+                $('#tituloModal').text('Editar')
                 $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_trabajador'])
@@ -508,7 +508,7 @@
             limpiarCampos(0)
             guardarCorreo()
             guardarTelefono()
-            $('#tituloModal').text('Agregar Trabajador')
+            $('#tituloModal').text('Agregar')
             $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
