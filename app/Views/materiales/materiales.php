@@ -209,6 +209,7 @@
       <div class="modal-content" id="modalContentUsar">
 
         <div class="modal-header flex justify-content-between align-items-center w-100">
+        <input type="text" name="idMaterial" id="idMaterial" hidden>
           <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
           <div class="d-flex align-items-center justify-content-center" style="width:auto;">
             <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
@@ -221,7 +222,9 @@
         <div class="modal-body" id="modalBodyUsar">
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%">
+
               <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label>
+              
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
                 <option selected="">--Seleccione--</option>
                 <?php foreach ($ordenes as $data) { ?>
@@ -559,7 +562,6 @@
       dataType: "json",
       success: function(rs) {
         $("#idMaterial").val(rs[0]['id_material']);
-
         $("#nombreInsumo").val(rs[0]['nombre']);
         $("#cantidadExistente").val(rs[0]['cantidad_actual']);
         $("#PrecioDeVenta").val(rs[0]['precio_venta']);
@@ -573,6 +575,7 @@
 
   $('#cantidadUsar').on('input', function(e) {
     idMaterial = $("#idMaterial").val()
+
     cantidad = $('#cantidadUsar').val()
     valorVenta = $("#PrecioDeVenta").val()
     cantidadExistente = $('#cantidadExistente').val()
@@ -602,7 +605,7 @@
     cantidadUsar = $("#cantidadUsar").val()
     precioVenta = $("#PrecioDeVenta").val()
     subtotal = $("#subtotal").val()
-    console.log(ordenes)
+    console.log(idMaterial)
     if ([subtotal, cantidadExistente, cantidadUsar, precioVenta, trabajador, ordenes].includes("")) {
       return mostrarMensaje('error', '¡Campos Vacios!')
     }
