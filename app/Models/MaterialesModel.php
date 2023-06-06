@@ -113,19 +113,16 @@ class MaterialesModel extends Model
             $this->where('id_material', $id_material);
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-
         } else if ($nombre != '') {
             $this->select('materiales.*,param_detalle.nombre as nombre_categoria');
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->where('materiales.nombre', $nombre);
             $this->where('materiales.estado', 'A');
-
         } else if ($id_material != 0 && $nombre != '') {
 
             $this->select('materiales.*');
             $this->where('id_material', $id_material);
             $this->where('nombre', $nombre);
-
         }
         $data = $this->first();
         return $data;
@@ -139,18 +136,18 @@ class MaterialesModel extends Model
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
             $this->where('id_material', $id_material);
 
-        // } else if ($nombre != '') {
-        //     $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
-        //     $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
-        //     $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-        //     $this->where('materiales.nombre', $nombre);
-        //     $this->where('materiales.estado', 'A');
+            // } else if ($nombre != '') {
+            //     $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
+            //     $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
+            //     $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+            //     $this->where('materiales.nombre', $nombre);
+            //     $this->where('materiales.estado', 'A');
 
-        // } else if ($id_material != 0 && $nombre != '') {
+            // } else if ($id_material != 0 && $nombre != '') {
 
-        //     $this->select('materiales.*');
-        //     $this->where('id_material', $id_material);
-        //     $this->where('nombre', $nombre);
+            //     $this->select('materiales.*');
+            //     $this->where('id_material', $id_material);
+            //     $this->where('nombre', $nombre);
 
         }
         $data = $this->first();
@@ -174,9 +171,9 @@ class MaterialesModel extends Model
 
     public function obtenerRepuestos($estado)
     {
-        $this->select('materiales.*,  vehiculos.placa, terceros.razon_social, estanteria.nombre as bodega');
+        $this->select('materiales.*, terceros.razon_social, estanteria.nombre as bodega, ordenes_servicio.n_orden as numeroOrden');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = materiales.id_orden', 'left');
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-        $this->join('vehiculos', 'vehiculos.id_vehiculo = materiales.id_vehiculo', 'left');
         $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor', 'left');
         $this->where('materiales.tipo_material', '10');
         // $this->where('estanteria.tipo_estante', '61');

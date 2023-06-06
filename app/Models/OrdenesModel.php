@@ -29,7 +29,6 @@ class OrdenesModel extends Model
     public function obtenerOrdenes()
     {
         $this->select("id_orden, n_orden, vehiculos.placa, vehiculos.modelo, marca_vehiculo.nombre as marca, vehiculos.color, vehiculos.kms, vw_param_det2.nombre as combustible, fecha_entrada, fecha_salida, vw_param_det.nombre as proceso, terceros.nombre_p, terceros.nombre_s,terceros.apellido_p,terceros.apellido_s, concat(terceros.nombre_p,' ', terceros.nombre_s, ' ', terceros.apellido_p, ' ', terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.razon_social, concat(ordenes_servicio.nombres, ' ', ordenes_servicio.apellidos) as nombreAliado");
-
         $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo', 'left');
         $this->join('marca_vehiculo', 'marca_vehiculo.id_marca = vehiculos.id_marca', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
