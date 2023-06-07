@@ -105,14 +105,14 @@
                                 <label for="telefono" class="col-form-label">Telefono:</label>
                                 <div class="d-flex">
                                     <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefonos" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefonos" class="btn" style="border:none;background-color:gray;color:white;" title="Ver Telefonos">+</button>
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 100%">
                                 <label for="email" class="col-form-label">Email:</label>
                                 <div class="d-flex">
                                     <input type="email" name="email" class="form-control" id="email" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos" class="btn" style="border:none;background-color:gray;color:white;">+</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos" class="btn" style="border:none;background-color:gray;color:white;" title="Ver Correos">+</button>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Agregar Telefono</h1>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Telefonos</h1>
                     </div>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
                 </div>
@@ -175,7 +175,7 @@
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Agregar Correo</h1>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Correos</h1>
                     </div>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
                 </div>

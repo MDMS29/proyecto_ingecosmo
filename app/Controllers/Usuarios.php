@@ -136,6 +136,30 @@ class Usuarios extends BaseController
         header("Content-Length: " . filesize($rutaCompleta));
         fpassthru($fp);
     }
+
+
+    public function insertarFotoPerfil(){
+        $idUser = $this->request->getPost('id');
+        $nombreP = $this->request->getPost('nombreP');
+        $foto = $this->request->getFile('foto');
+        $res = $this->usuarios->buscarUsuario($idUser, 0);
+        $foto->isValid() && !$foto->hasMoved();
+        $rutaImagen = $res['foto'];
+        $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+            $uploadPath = 'fotoUser';
+            if (!is_dir($uploadPath)) { // Verificar si el directorio existe, si no, crearlo
+                mkdir($uploadPath, 0777, true);
+            }
+            $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+            $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
+            $usuarioUpdate = [
+                'foto' => $rutaImagen
+            ];
+            $this->usuarios->update($idUser, $usuarioUpdate);
+            return $idUser;
+    }
+
+
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
@@ -151,26 +175,23 @@ class Usuarios extends BaseController
 
         $foto = $this->request->getFile('foto');
         $res = $this->usuarios->buscarUsuario($idUser, 0);
+        
         if ($foto == null && $tp == 1) {
             $rutaImagen = 'fotoUser/default.png';
         } else if ($foto == null && $tp == 2) {
             $rutaImagen = $res['foto'];
         } else if ($foto->isValid() && !$foto->hasMoved()) {
+
             $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
-
             $uploadPath = 'fotoUser';
-
-            // Verificar si el directorio existe, si no, crearlo
-            if (!is_dir($uploadPath)) {
+            if (!is_dir($uploadPath)) { // Verificar si el directorio existe, si no, crearlo
                 mkdir($uploadPath, 0777, true);
             }
-
             $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
             $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
         }
         if ($tp == 2) {
             //Actualizar datos
-            $res = $this->usuarios->buscarUsuario($idUser, 0);
             $contra = $res['contrasena'];
             $usuarioUpdate = [
                 'id_rol' => $rol,

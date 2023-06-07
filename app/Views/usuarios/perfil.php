@@ -2,22 +2,18 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <div class="container emp-profile">
         <form method="post">
             <div class="row">
 
-                <form action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
+                <form id="formularioPerfil" autocomplete="off" enctype="multipart/form-data">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
-                            <div id="filePerfil" style="border-radius: 5px;" class="file btn btn-lg btn-primary">
-                                Inserte foto
-                                <input type="file" name="upload" accept="image/png" />
-                            </div>
                         </div>
                     </div>
                 </form>
@@ -281,6 +277,14 @@
                                     <input class="form-control" id="nIdenti" name="nIdenti"></input>
                                     <small id="msgDoc" class="invalido"></small>
                                 </div>
+
+                            </div>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="nombres" id="FotoUsuario" class="col-form-label">Foto de Usuario:</label>
+                                    <input type="file" name="foto" id="foto" class="form-control" accept="image/png">
+                                </div>
                             </div>
 
                         </form>
@@ -357,20 +361,24 @@
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('tp', tp);
+            formData.append('nombreP', nombreP);
+            formData.append('nombreS', nombreS);
+            formData.append('apellidoP', apellidoP);
+            formData.append('apellidoS', apellidoS);
+            formData.append('tipoDoc', tipoDoc);
+            formData.append('nIdenti', nIdenti);
+            formData.append('rol', '<?= session('idRol') ?>');
+            formData.append('foto', $('#foto')[0].files[0]);
             $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
                 type: 'POST',
-                data: {
-                    id,
-                    tp,
-                    nombreP,
-                    nombreS,
-                    apellidoP,
-                    apellidoS,
-                    tipoDoc,
-                    nIdenti,
-                    rol: '<?= session('idRol') ?>'
-                },
+                data: formData,
+                dataType: 'json',
+                contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                processData: false, // Importante: no proceses los datos
                 success: function(idUser) {
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')

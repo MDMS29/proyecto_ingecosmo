@@ -112,7 +112,7 @@
                             <div class=" flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
+                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -917,7 +917,7 @@
             for (let i = 0; i < correos.length; i++) {
                 cadena += ` <tr class="text-center" id=${correos[i].id}>
                                 <td>${correos[i].correo}</td>
-                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">

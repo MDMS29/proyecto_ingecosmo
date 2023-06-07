@@ -46,7 +46,7 @@
                                 <img id="imgModal" src="" width="25" />
                                 <span id="tituloModal"><!-- TEXTO DINAMICO--></span>
                             </h1>
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('')">X</button>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -136,19 +136,18 @@
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombres" class="col-form-label">Foto de Usuario:</label>
-                                    <input type="file" name="foto" id="foto" class="form-control">
-                                    <!-- <input name="" class="form-control" id="tituloFoto"> -->
+                                    <label for="nombres" id="FotoUsuario" class="col-form-label">Foto de Usuario:</label>
+                                    <input type="file" name="foto" id="foto" class="form-control" accept="image/png">
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="bloqueFoto">
-                                    <button hidden type="button" data-bs-toggle="modal" id="fotoModal" data-bs-target="#verFoto" data-bs-target="#staticBackdrop" class="btn"><img src="<?php echo base_url("img/image.svg") ?>" alt="Boton Foto Usuario" class="iconFoto" id="iconoFoto"></button>
+                                    <img style=" width: auto; height: 100px;" alt="Foto Usuario" id="fotoPerfil" />
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar" onclick="limpiarCampos('')"><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -156,29 +155,6 @@
     </div>
 </form>
 
-<!-- MODAL VER FOTO -->
-<div class="modal fade" id="verFoto" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="body-R">
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100">
-                    <!-- <h5 style="font-weight: bold;" >NOMBRE DIANMICO</h5> -->
-                    <input name="" class="tituloFoto" id="tituloFoto">
-                    <button type="button" class="btn" aria-label="Close" data-bs-toggle="modal" data-bs-target="#agregarUsuario">X</button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3" style="width: 50%">
-                        <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -250,7 +226,7 @@
                             <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -409,10 +385,6 @@
         tipo: '',
         prioridad: ''
     }
-
-    // foto perfil
-    var foto = '<?= base_url('usuarios/mostrarImagen/') ?>' + id_usuario;
-    $('#fotoPerfil').attr('src', `${foto}`)
 
     //Marcar botones ocultar columnas
     var botones = $(".ocultar a");
@@ -588,6 +560,7 @@
         $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+        $('#FotoUsuario').text('')
         // $('#fotoModal').removeAttr('hidden')
         $('#foto').val('')
     }
@@ -659,12 +632,12 @@
                 $('#rol').val(res[0]['id_rol'])
                 $('#fotoModal').removeAttr('hidden')
                 $('#bloqueFoto').removeAttr('hidden')
-                $('#foto').val(res[0]['foto'])
                 $('#contra').val('')
                 $('#divContras').attr('hidden', '')
                 $('#divContras2').attr('hidden', '')
                 $('#confirContra').val('')
                 $('#btnGuardar').text('Actualizar')
+                $('#FotoUsuario').text('Cambiar foto de Usuario:')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
@@ -684,6 +657,8 @@
                     }
                 })
                 $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
+                var foto = '<?= base_url('usuarios/mostrarImagen/') ?>' + res[0]['id_usuario'];
+                $('#fotoPerfil').attr('src', `${foto}`)
             })
         } else {
             //Insertar datos
@@ -713,6 +688,7 @@
             $('#divContras2').removeAttr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
+            $('#FotoUsuario').text('Foto de Usuario:')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
         }
     }
@@ -806,8 +782,9 @@
         rol = $('#rol').val()
         contra = $('#contra').val()
         confirContra = $('#confirContra').val()
+
         //Control de campos vacios
-        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else if ([telefono, correo].includes('')) {
             return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
@@ -823,7 +800,6 @@
             formData.append('nIdenti', nIdenti);
             formData.append('rol', rol);
             formData.append('contra', contra);
-            formData.append('telefonos', telefonos);
             formData.append('foto', $('#foto')[0].files[0]);
             $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
@@ -833,19 +809,24 @@
                 contentType: false, // Importante: desactiva el tipo de contenido predeterminado
                 processData: false, // Importante: no proceses los datos
                 success: function(idUser) {
+                    console.log(idUser)
                     telefonos.forEach(tel => {
                         //Insertar Telefonos
-                        $.post({
+                        var formData = new FormData();
+                        formData.append('tp', tp);
+                        formData.append('idUsuario', idUser);
+                        formData.append('idTele', tel.id);
+                        formData.append('numero', tel.numero);
+                        formData.append('prioridad', tel.prioridad);
+                        formData.append('tipoUsu', 7);
+                        formData.append('tipoTel', tel.tipo);
+                        $.ajax({
                             url: '<?php echo base_url('telefonos/insertar') ?>',
-                            data: {
-                                tp,
-                                idUsuario: idUser,
-                                idTele: tel.id,
-                                numero: tel.numero,
-                                prioridad: tel.prioridad,
-                                tipoUsu: 7,
-                                tipoTel: tel.tipo,
-                            },
+                            type: 'POST',
+                            data: formData,
+                            dataType: 'json',
+                            contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                            processData: false, // Importante: no proceses los datos
                             success: function(res) {
                                 if (res != 1) {
                                     mostrarMensaje('error', '¡Ha ocurrido un error!')
@@ -855,16 +836,20 @@
                     });
                     correos.forEach(correo => {
                         //Insertar Correos
-                        $.post({
+                        var formData = new FormData();
+                        formData.append('tp', tp);
+                        formData.append('idCorreo', correo.id);
+                        formData.append('idUsuario', idUser);
+                        formData.append('correo', correo.correo);
+                        formData.append('prioridad', correo.prioridad);
+                        formData.append('tipoUsu', 7);
+                        $.ajax({
                             url: '<?php echo base_url('email/insertar') ?>',
-                            data: {
-                                tp,
-                                idCorreo: correo.id,
-                                idUsuario: idUser,
-                                correo: correo.correo,
-                                prioridad: correo.prioridad,
-                                tipoUsu: 7,
-                            },
+                            type: 'POST',
+                            data: formData,
+                            dataType: 'json',
+                            contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                            processData: false, // Importante: no proceses los datos
                             success: function(res) {
                                 if (res != 1) {
                                     mostrarMensaje('error', '¡Ha ocurrido un error!')

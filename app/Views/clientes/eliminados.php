@@ -211,12 +211,12 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:100px;  margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:100px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de reestablecer este Cliente?</p>
                     </div>
 
@@ -235,8 +235,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     ContadorPRC = 0
-    let telefonos = [] //Telefonos del usuario.
-    let correos = [] //Correos del usuario.
+    let telefonos = [] //Telefonos del cliente.
+    let correos = [] //Correos del cliente.
 
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
@@ -445,7 +445,7 @@
             for (let i = 0; i < correos.length; i++) {
                 cadena += ` <tr class="text-center">
                                 <td>${correos[i].correo}</td>
-                                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                             </tr>`
             }
         }
@@ -464,7 +464,7 @@
             for (let i = 0; i < telefonos.length; i++) {
                 cadena += ` <tr class="text-center">
                                 <td>${telefonos[i].numero}</td>
-                                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                             </tr>`
             }
         }

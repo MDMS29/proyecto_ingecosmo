@@ -16,7 +16,6 @@
                     <th scope="col" class="text-center">Proveedor</th>
                     <th scope="col" class="text-center">Existencias</th>
                     <th scope="col" class="text-center">Bodega</th>
-                    <th scope="col" class="text-center">Fila</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>
@@ -240,9 +239,6 @@
             },
             {
                 data: 'bodega'
-            },
-            {
-                data: 'fila'
             },
             {
                 data: null,
