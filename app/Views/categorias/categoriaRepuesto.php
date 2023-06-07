@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <div id="content" class="p-4 p-md-5">
     <div class="contenedor">
-        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/imagen11.png'); ?>" width="50"> REPUESTOS</h1>
+        <h1 class="titulo"><img class="logo" src="<?php echo base_url('/img/repuestos-b.png'); ?>" width="50"> REPUESTOS</h1>
 
         <div class="fondoCarrusel">
             <div class="swiper mySwiper">
@@ -89,14 +89,10 @@
     });
 
     function redireccion(id, url) {
-        console.log("<<as")
-        // $(".btnVer").attr("href","< ?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>")
         $.ajax({
             url: "<?php echo base_url('/repuestos/materialesCategoriaRepuestos/') ?>" + id,
             type: 'POST',
             dataType: 'json',
-            processData: false, // Evitar que jQuery procese los datos
-            contentType: false, // Evitar que jQuery establezca el tipo de contenido
             success: function(res) {
                 if (res == 1) {
                     return mostrarMensaje('warning', '¡Esta bodega no tiene materiales!')

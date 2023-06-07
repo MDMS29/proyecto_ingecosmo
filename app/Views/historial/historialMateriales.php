@@ -90,7 +90,10 @@
                 data: "fecha_movimiento"
             },
             {
-                data: "subtotal"
+                data : null,
+                render : function(data, type, row) {
+                   return formatearCantidad(row.subtotal)
+                } 
             },
             {
                 data: "tipo_movimiento"
