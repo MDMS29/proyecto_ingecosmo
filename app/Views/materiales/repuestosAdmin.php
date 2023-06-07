@@ -16,7 +16,6 @@
                     <th scope="col" class="text-center">Proveedor</th>
                     <th scope="col" class="text-center">Existencias</th>
                     <th scope="col" class="text-center">Bodega</th>
-                    <th scope="col" class="text-center">Fila</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>
@@ -55,14 +54,14 @@
                             <small id="msgAgregar" class="invalidoInsumo"></small>
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="Existencias" class="col-form-label">Existencias:</label>
-                            <input class="form-control" type="number" id="Existencias" name="Existencias" placeholder="">
+                            <label for="existencias" class="col-form-label">Existencias:</label>
+                            <input class="form-control" type="number" id="existencias" name="existencias" placeholder="">
                         </div>
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="Orden" class="col-form-label">Proveedor:</label>
-                            <select class="form-control form-select" name="Orden" id="Orden">
+                            <label for="proveedor" class="col-form-label">Proveedor:</label>
+                            <select class="form-control form-select" name="proveedor" id="proveedor">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($proveedores as $data) { ?>
                                     <option value="<?= $data['id_tercero'] ?>"><?= $data['razon_social'] ?></option>
@@ -70,8 +69,8 @@
                             </select>
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="Orden" class="col-form-label">Orden de Servicio:</label>
-                            <select class="form-control form-select" name="Orden" id="Orden">
+                            <label for="orden" class="col-form-label">Orden de Servicio:</label>
+                            <select class="form-control form-select" name="orden" id="orden">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($ordenes as $data) { ?>
                                     <option value="<?= $data['id_orden'] ?>"><?= $data['n_orden'] ?></option>
@@ -81,26 +80,19 @@
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="Orden" class="col-form-label">Bodega:</label>
-                            <select class="form-control form-select" name="Orden" id="Orden">
+                            <label for="bodega" class="col-form-label">Bodega:</label>
+                            <select class="form-control form-select" name="bodega" id="bodega">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($bodegas as $data) { ?>
                                     <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="mb-3" style="width: 100%;">
-                            <label for="exampleDataList" class="col-form-label">Fila:</label>
-                            <select style=" margin-left: 0px !important;" class="form-control form-select" name="fila" id="fila">
-                                <option selected value="">-- Seleccione --</option>
-
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer" id="modalFooter">
                     <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
+                    <button type="button" class="btn btnAccionF" id="btnAgregar">Agregar</button>
                 </div>
             </div>
         </div>
@@ -168,25 +160,18 @@
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>",
-                data: {
-                    id
-                },
+                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id ,
                 dataType: 'json',
                 success: function(data) {
+                    $('#tp').val(2)
                     $('#tituloModal').text('Editar')
                     $('#imgModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#imgModal').attr('width', '25')
-                    $('#tp').val(2)
-                    $('#nombre').val(data[0]['nombre'])
-                    $('#vehiculo').val(data[0]['id_vehiculo'])
-                    $('#proveedor').val(data[0]['razon_social'])
-                    $('#categoria').val(data[0]['nombre_categoria'])
-                    $('#categoria').val(data[0]['nombre_categoria'])
-                    $('#existencias').val(data[0]['cantidad_actual'])
-                    $('#pCompra').val(data[0]['precio_compra'])
-                    $('#pVenta').val(data[0]['precio_venta'])
-                    $('#estante').val(data[0]['estante'])
+                    $('#nombre').val(data['nombre'])
+                    $('#existencias').val(data['cantidad_actual'])
+                    $('#proveedor').val(data['razon_social'])
+                    $('#orden').val(data['numeroOrden'])
+                    $('#bodega').val(data['bodega'])
                     $('#btnGuardar').text('Actualizar')
                 }
             })
@@ -199,14 +184,10 @@
             $('#tp').val(1)
             $('#id').val(0)
             $('#nombre').val('')
-            $('#vehiculo').val('')
-            $('#proveedor').val('')
-            $('#categoria').val('')
-            $('#categoria').val('')
             $('#existencias').val('')
-            $('#pCompra').val('')
-            $('#pVenta').val('')
-            $('#estante').val('')
+            $('#proveedor').val('')
+            $('#orden').val('')
+            $('#bodega').val('')
             $('#btnGuardar').text('Agregar')
         }
     }
@@ -241,9 +222,6 @@
             },
             {
                 data: 'bodega'
-            },
-            {
-                data: 'fila'
             },
             {
                 data: null,
