@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -10,16 +10,15 @@
         <form method="post">
             <div class="row">
 
-                <form  action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?php echo base_url('/usuarios/guardarFoto'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img style="border-radius: 5px;" <?= $usuario['foto'] ?> alt="Foto Usuario" />
-                            <div style="border-radius: 5px;" class="file btn btn-lg btn-primary">
+                            <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
+                            <div id="filePerfil" style="border-radius: 5px;" class="file btn btn-lg btn-primary">
                                 Inserte foto
                                 <input type="file" name="upload" accept="image/png" />
                             </div>
                         </div>
-                        <input type="submit" value="cambiar">
                     </div>
                 </form>
 
@@ -176,8 +175,8 @@
                                 </div>
                             </div>
 
-                            <form autocomplete="off" id="formularioContraseñas">
-                                <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
+                                <form autocomplete="off" id="formularioContraseñas">
                                     <div class="container" style="background-color: #dfe6f2;border-radius:10px;">
                                         <div class="d-flex column-gap-3" style="width: 100%" id="contenedorPerfil">
                                             <div class="mb-3" style="width: 100%; margin: 0;" id="contenidoPerfil">
@@ -213,8 +212,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
 
                     </div>
@@ -303,6 +302,10 @@
     var inputIden = 0;
     var validIdent = true;
     var res
+
+    // foto perfil
+    var foto = '<?= base_url('usuarios/mostrarImagen/') . $usuario['id_usuario'] ?>';
+    $('#fotoPerfil').attr('src', `${foto}`)
 
     function limpiarCampos() {
         $('#msgConfirRes').text('')
@@ -436,7 +439,6 @@
             password2.type = "password";
         }
     }
-
     //Verificacion de contraseñas
     function verifiContra(tipo, inputMsg, inputContra, inputConfir) {
         input = $(`#${inputMsg}`)

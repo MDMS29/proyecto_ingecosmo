@@ -14,7 +14,7 @@ class MaterialesModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_orden', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
 
     protected $useTimestamps = true;
 
@@ -113,54 +113,49 @@ class MaterialesModel extends Model
             $this->where('id_material', $id_material);
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-
         } else if ($nombre != '') {
             $this->select('materiales.*,param_detalle.nombre as nombre_categoria');
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->where('materiales.nombre', $nombre);
             $this->where('materiales.estado', 'A');
-
         } else if ($id_material != 0 && $nombre != '') {
 
             $this->select('materiales.*');
             $this->where('id_material', $id_material);
             $this->where('nombre', $nombre);
-
         }
         $data = $this->first();
         return $data;
     }
 
-    public function buscarRepuesto($id_material, $nombre)
+    public function buscarRepuesto($id_material)
     {
         if ($id_material != 0) {
-            $this->select('materiales.*, param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social  ');
+            $this->select('materiales.*, param_detalle.nombre as nombre_categoria');
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
             $this->where('id_material', $id_material);
 
-        } else if ($nombre != '') {
-            $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
-            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
-            $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-            $this->where('materiales.nombre', $nombre);
-            $this->where('materiales.estado', 'A');
+            // } else if ($nombre != '') {
+            //     $this->select('materiales.*,param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social');
+            //     $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
+            //     $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+            //     $this->where('materiales.nombre', $nombre);
+            //     $this->where('materiales.estado', 'A');
 
-        } else if ($id_material != 0 && $nombre != '') {
+            // } else if ($id_material != 0 && $nombre != '') {
 
-            $this->select('materiales.*');
-            $this->where('id_material', $id_material);
-            $this->where('nombre', $nombre);
+            //     $this->select('materiales.*');
+            //     $this->where('id_material', $id_material);
+            //     $this->where('nombre', $nombre);
 
         }
         $data = $this->first();
         return $data;
     }
-
 
     public function obtenerRepuestoBodega($id)
     {
-
         $this->select('*');
         $this->where('estante', $id);
         $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
@@ -176,11 +171,21 @@ class MaterialesModel extends Model
 
     public function obtenerRepuestos($estado)
     {
-        $this->select('materiales.*, param_detalle.nombre as nombre_categoria, vehiculos.placa, terceros.razon_social,  ');
-        $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
-        $this->join('estanteria', 'estanteria.id = materiales.estante');
-        $this->join('vehiculos', 'vehiculos.id_vehiculo = materiales.id_vehiculo', 'left');
+        $this->select('materiales.*, terceros.razon_social, estanteria.nombre as bodega, ordenes_servicio.n_orden as numeroOrden');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = materiales.id_orden', 'left');
+        $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
         $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor', 'left');
+        $this->where('materiales.tipo_material', '10');
+        // $this->where('estanteria.tipo_estante', '61');
+        $this->where('materiales.estado', $estado);
+        $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+
+    public function obtenerRepuestosCate($estado)
+    {
+        $this->select('materiales.*, estanteria.nombre as bodega');
+        $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
         $this->where('materiales.tipo_material', '10');
         $this->where('materiales.estado', $estado);
         $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 

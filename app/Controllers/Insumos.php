@@ -77,7 +77,6 @@ class Insumos extends BaseController
     }
 
 
-
     public function obtenerFilasInsumos( $estante)
     {
         $materiales = $this->materiales->obtenerFilasInsumos($estante);

@@ -118,13 +118,17 @@ class Usuarios extends BaseController
         $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
-        echo view('usuarios/usuarios', $data);
     }
     public function mostrarImagen($id)
     {
         $res = $this->usuarios->buscarUsuario($id, 0);
-        $rutaImagen = '/uploads/' . $res['foto'];
-        $rutaCompleta = WRITEPATH . $rutaImagen;
+        if ($res['foto'] == '') {
+            $rutaImagen = '/uploads/fotoUser/default.png';
+            $rutaCompleta = WRITEPATH . $rutaImagen;
+        } else {
+            $rutaImagen = '/uploads/' . $res['foto'];
+            $rutaCompleta = WRITEPATH . $rutaImagen;
+        }
 
         $fp = fopen($rutaCompleta, 'rb');
 
@@ -146,8 +150,12 @@ class Usuarios extends BaseController
         $contra = $this->request->getVar('contra');
 
         $foto = $this->request->getFile('foto');
-
-        if ($foto->isValid() && !$foto->hasMoved()) {
+        $res = $this->usuarios->buscarUsuario($idUser, 0);
+        if ($foto == null && $tp == 1) {
+            $rutaImagen = 'fotoUser/default.png';
+        } else if ($foto == null && $tp == 2) {
+            $rutaImagen = $res['foto'];
+        } else if ($foto->isValid() && !$foto->hasMoved()) {
             $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
 
             $uploadPath = 'fotoUser';
@@ -159,41 +167,40 @@ class Usuarios extends BaseController
 
             $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
             $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
-
-            if ($tp == 2) {
-                //Actualizar datos
-                $res = $this->usuarios->buscarUsuario($idUser, 0);
-                $contra = $res['contrasena'];
-                $usuarioUpdate = [
-                    'id_rol' => $rol,
-                    'tipo_doc' => $tipoDoc,
-                    'n_identificacion' => $nIdenti,
-                    'nombre_p' => $nombreP,
-                    'nombre_s' => $nombreS,
-                    'apellido_p' => $apellidoP,
-                    'apellido_s' => $apellidoS,
-                    'foto' => $rutaImagen,
-                    'contrasena' => $contra
-                ];
-                $this->usuarios->update($idUser, $usuarioUpdate);
-                return $idUser;
-            } else {
-                //Insertar datos
-                //Si la respuesta esta vacia - guardar
-                $usuarioSave = [
-                    'id_rol' => $rol,
-                    'tipo_doc' => $tipoDoc,
-                    'n_identificacion' => $nIdenti,
-                    'nombre_p' => $nombreP,
-                    'nombre_s' => $nombreS,
-                    'apellido_p' => $apellidoP,
-                    'apellido_s' => $apellidoS,
-                    'foto' => $rutaImagen,
-                    'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
-                ];
-                $this->usuarios->save($usuarioSave);
-                return json_encode($this->usuarios->getInsertID());
-            }
+        }
+        if ($tp == 2) {
+            //Actualizar datos
+            $res = $this->usuarios->buscarUsuario($idUser, 0);
+            $contra = $res['contrasena'];
+            $usuarioUpdate = [
+                'id_rol' => $rol,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombreP,
+                'nombre_s' => $nombreS,
+                'apellido_p' => $apellidoP,
+                'apellido_s' => $apellidoS,
+                'foto' => $rutaImagen,
+                'contrasena' => $contra
+            ];
+            $this->usuarios->update($idUser, $usuarioUpdate);
+            return $idUser;
+        } else {
+            //Insertar datos
+            //Si la respuesta esta vacia - guardar
+            $usuarioSave = [
+                'id_rol' => $rol,
+                'tipo_doc' => $tipoDoc,
+                'n_identificacion' => $nIdenti,
+                'nombre_p' => $nombreP,
+                'nombre_s' => $nombreS,
+                'apellido_p' => $apellidoP,
+                'apellido_s' => $apellidoS,
+                'foto' => $rutaImagen,
+                'contrasena' => password_hash($contra, PASSWORD_DEFAULT)
+            ];
+            $this->usuarios->save($usuarioSave);
+            return json_encode($this->usuarios->getInsertID());
         }
     }
     public function cambiarContrasena()

@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a> - <a class="toggle-vis btn" data-column="7">Correo</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a> 
         </div>
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
@@ -15,7 +15,6 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">Identificacion</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Telefono</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -163,7 +162,7 @@
                                 <label for="prioridad" class="col-form-label">Prioridad:</label>
                                 <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
-                                    <option value="P">Primaria</option>
+                                    <option value="P">Principal</option>
                                     <option value="S">Secundaria</option>
                                 </select>
                             </div>
@@ -221,7 +220,7 @@
                             <label for="prioridad" class="col-form-label">Prioridad:</label>
                             <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
-                                <option value="P">Primaria</option>
+                                <option value="P">Principal</option>
                                 <option value="S">Secundaria</option>
                             </select>
                         </div>
@@ -464,13 +463,6 @@
             },
             {
                 data: 'direccion'
-            },
-            {
-                data: 'correo',
-                render: function(data, type, row) {
-                    arrayCorreo = emailTable.filter(correo => correo.idCliente == row.id_tercero)[0]?.correo
-                    return arrayCorreo
-                }
             },
             {
                 data: null,
@@ -978,6 +970,7 @@
                 estado: 'I'
             }
         }).done(function(data) {
+            ContadorPRC = 0
             mostrarMensaje('success', data)
             $('#modalConfirmaP').modal('hide')
             tableClientes.ajax.reload(null, false)

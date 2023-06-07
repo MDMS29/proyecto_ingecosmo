@@ -12,11 +12,12 @@ use App\Controllers\BaseController;
 
 class Estanteria extends BaseController
 {
-    protected $estantes, $filas, $materiales, $categorias;
+    protected $estantes, $filas, $materiales, $categorias, $param, $tipoEstante;
     public function __construct()
     {
         $this->estantes = new EstanteriaModel();
         $this->filas = new FilasModel();
+        $this->param = new ParamModel();
     }
     public function index()
     {
@@ -32,6 +33,7 @@ class Estanteria extends BaseController
         $titulo = $this->estantes->titulo($estante);
         $filas = $this->filas->obtenerFilas($estante);
         $estantes = $this->estantes->obtenerEstantes($id);
+        // $tipoEstante = $this->param->obtenerTipoEstante($id);
         $data = ['data' => $estantes, 'titulo' => $titulo, 'filas' => $filas];
         echo view('/principal/sidebar');
         echo view('/estanteria/estanteria', $data);

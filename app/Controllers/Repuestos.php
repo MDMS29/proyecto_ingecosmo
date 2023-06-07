@@ -18,7 +18,7 @@ class Repuestos extends BaseController
     {
         $this->categorias = new ParamModel();
         $this->estanteria = new EstanteriaModel();
-        $this->repuestos = new MaterialesModel();
+        $this->materiales= new MaterialesModel();
     }
     public function index()
     {
@@ -37,6 +37,18 @@ class Repuestos extends BaseController
         
         echo view('/materiales/repuestos', $data);
     }
+
+    public  function materialesCategoriaRepuestos($id)
+    {
+        $material = $this->materiales->obtenerRepuestosCate($id);
+        if (empty($material)) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
+        // echo view('/materiales/materiales', $data);
+    }
+
 
     public function insertar()
     {

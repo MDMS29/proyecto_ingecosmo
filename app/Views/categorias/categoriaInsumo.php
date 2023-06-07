@@ -23,7 +23,7 @@
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$i]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "onclick="redireccion(<?php echo $salida[$i]['id_param_enc'] ?>)"></i>Ver mas</a>
+                                        <button onclick="redireccion(<?php echo $salida[$i]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                     </div>
                                 </div>
                                 <?php if ($e == 8) { ?>
@@ -53,7 +53,7 @@
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "onclick="redireccion(<?php echo $salida[$r]['id_param_enc'] ?>)"></i>Ver mas</a>
+                                        <button onclick="redireccion(<?php echo $salida[$r]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                     </div>
                                 </div>
                                 <?php if ($e == 8) { ?>
@@ -84,7 +84,7 @@
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
 
-                                        <button onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>)" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</button>
+                                        <button onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                     </div>
                                 </div>
                                 <?php if ($e == 8) { ?>
@@ -165,7 +165,7 @@
         },
     });
 
-    function redireccion(id_param_enc) {
+    function redireccion(id_param_enc, url) {
         console.log("<<as")
         // $(".btnVer").attr("href","< ?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>")
         $.ajax({
@@ -176,10 +176,9 @@
             contentType: false, // Evitar que jQuery establezca el tipo de contenido
             success: function(res) {
                 if (res == 1) {
-                    return mostrarMensaje('warning', 'Esta categoria no tiene materiales!')
+                    return mostrarMensaje('warning', '¡Esta categoria no tiene materiales!')
                 } else {
-                    window.location.href = "<?php echo base_url('insumos/mostrarInsumo/')?>" + $salida[$j]['id_param_det'] + '/' + $salida[$j]['nombre'] + '/' + $salida[$j]['n_iconos'] + '/' + $salida[$j]['id_param_det'] 
-                    
+                    window.location.href = url
                 }
             }
         });

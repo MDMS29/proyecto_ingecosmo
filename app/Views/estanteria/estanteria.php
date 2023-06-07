@@ -11,8 +11,8 @@
                             <img class="iconos" src="<?php echo base_url('/img/') . $dato['n_iconos'] ?>">
                         </div>
                         <div class="textoCard">
-                            <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0">Estanteria <?php echo $dato['nombre'] ?></h5>
-                            <div class="bloqueTextoE" id="<?= $dato['id'] ?>">
+                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0"><?php echo  $dato['n1'] ." " . $dato['nombre']?></h5>
+                        <div class="bloqueTextoE" id="<?= $dato['id'] ?>">
                                 <p class="subTexto">Contiene 4 Filas</p>
                                 <p class="subTexto">
                                     <span id="contador">
@@ -23,7 +23,7 @@
                             <a onclick="redireccion(<?php echo $dato['id'] ?>)" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
                         </div>
                     </div>
-                <?php } ?>
+            <?php } ?>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
     <div class="bloqueFooter">
         <div class="footer-page">
             <!-- <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="< ?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button> -->
-    
+
             <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
         </div>
     </div>

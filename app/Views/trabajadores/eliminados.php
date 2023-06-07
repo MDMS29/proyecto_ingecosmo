@@ -3,6 +3,9 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="6">Direccion</a>
+        </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -33,13 +36,13 @@
         <div class="body">
             <div class="modal-content">
                 <div class="modal-header d-flex align-items-center justify-content-between">
-                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="90">
-                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
                         <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
-                        </div>
-                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
                 <div class="modal-body">
                     <form>
                         <div class="d-flex column-gap-3" style="width: 100%">
@@ -102,14 +105,14 @@
                                 <label for="telefono" class="col-form-label">Telefono:</label>
                                 <div class="d-flex">
                                     <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" class="btn" style="border:none;background-color:gray;color:white;" disabled>+</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefonos" class="btn" style="border:none;background-color:gray;color:white;">+</button>
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 100%">
                                 <label for="email" class="col-form-label">Email:</label>
                                 <div class="d-flex">
                                     <input type="email" name="email" class="form-control" id="email" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" class="btn" style="border:none;background-color:gray;color:white;" disabled>+</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos" class="btn" style="border:none;background-color:gray;color:white;">+</button>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +120,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                 </div>
             </div>
         </div>
@@ -125,35 +127,40 @@
 </div>
 
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
-<div class="modal fade" id="verTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="verTelefonos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> VER TELEFONOS</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Telefono</th>
-                                    <th>Prioridad</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyTel">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY TELEFONOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Agregar Telefono</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -162,33 +169,38 @@
 <!-- MODAL VER CORREOS -->
 <div class="modal fade" id="verCorreos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> VER CORREO</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Correo</th>
-                                    <th>Prioridad</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyCorre">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY CORREOS</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Agregar Correo</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -202,7 +214,7 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:100px;  margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
                 <div class="contenidoEliminarP">
@@ -228,7 +240,23 @@
     var ContadorPRC = 0;
     let telefonos = [] //Telefonos del trabajador.
     let correos = [] //Correos del Trabajador.
-
+    //Marcar botones ocultar columnas
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableTrabajadores.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
     // Tabla de Trabajadores
     var tableTrabajadores = $("#tableTrabajadores").DataTable({
         ajax: {
@@ -277,7 +305,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarTrabajador(' + data.id_trabajador + ')" data-bs-target="#verTrabajador" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_trabajador + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Eliminar Trabajador" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_trabajador + ' data-bs-toggle="modal" data-bs-target="#modalConfirmar"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Eliminar" title="Activar Trabajador" width="20"></button>'
                     );
                 },
             }
@@ -294,7 +322,7 @@
             url: "<?php echo base_url('srchTra/') ?>" + id + "/" + 0,
             dataType: 'json',
             success: function(res) {
-                $('#tituloModal').text('Ver Trabajador')
+                $('#tituloModal').text(' Ver Trabajador')
                 $('#tp').val(2)
                 $('#id').val(res[0]['id_trabajador'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -305,7 +333,6 @@
                 $('#nIdenti').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
                 $('#cargo').val(res[0]['id_cargo'])
-                $('#btnGuardar').text('Actualizar')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,

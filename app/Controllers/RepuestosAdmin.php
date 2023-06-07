@@ -8,30 +8,33 @@ use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
 use App\Models\EstanteriaModel;
 use App\Models\ParamModel;
+use App\Models\OrdenesModel;
 
 class RepuestosAdmin extends BaseController
 {
     protected $respuestosAdmin;
     protected $vehiculo;
     protected $proveedor;
-    protected $estantes;
+    protected $bodegas;
     protected $param;
+    protected $ordenes;
 
     public function __construct()
     {
         $this->respuestosAdmin = new MaterialesModel();
         $this->vehiculo = new VehiculosModel();
         $this->proveedor = new TercerosModel();
-        $this->estantes = new EstanteriaModel();
+        $this->bodegas = new EstanteriaModel();
         $this->param = new ParamModel();
+        $this->ordenes = new OrdenesModel();
 
     }
     public function index()
     {
-        
-        $categorias = $this->param->obtenerCategorias();
-        $estantes = $this->estantes->traerEstantes();
-        $data = ['estantes' => $estantes, 'categorias' => $categorias];
+        $proveedores = $this->proveedor->obtenerProveedores('A');
+        $bodegas = $this->bodegas->obtenerBodega();
+        $ordenes = $this->ordenes->obtenerOrdenes();
+        $data = ["ordenes" => $ordenes, "bodegas" => $bodegas, "proveedores" => $proveedores];
         echo view('/principal/sidebar');
         echo view('/materiales/repuestosAdmin', $data);
     }
@@ -46,9 +49,9 @@ class RepuestosAdmin extends BaseController
     public function buscarRepuesto()
     {
         $id = $this->request->getPost('id');
-        $nombre = $this->request->getPost('nombre');
+        // $nombre = $this->request->getPost('nombre');
 
-        $res = $this->respuestosAdmin->buscarRepuesto($id, $nombre);
+        $res = $this->respuestosAdmin->buscarRepuesto($id);
         return json_encode($res);
     }
 
@@ -84,6 +87,16 @@ class RepuestosAdmin extends BaseController
                 );
             }
         }
+    }
+
+    public function eliminados()
+    {
+        $proveedores = $this->proveedor->obtenerProveedores('A');
+        $bodegas = $this->bodegas->obtenerBodega();
+        $ordenes = $this->ordenes->obtenerOrdenes();
+        $data = ["ordenes" => $ordenes, "bodegas" => $bodegas, "proveedores" => $proveedores];
+        echo view('/principal/sidebar');
+        echo view('/materiales/repuestosAdminEliminados', $data);
     }
 
   

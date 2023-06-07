@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
@@ -199,7 +199,7 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:100px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                 </div>
 
                 <div class="contenidoEliminarP">
@@ -313,9 +313,6 @@
             $('#tipoDoc').val(1)
             $('#nIdenti').val(res[0]['n_identificacion'])
             $('#rol').val(res[0]['id_rol'])
-            $('#labelNom').text('Cambiar Contraseña:')
-            $('#contra').val('')
-            $('#confirContra').val('')
             $('#btnGuardar').text('Actualizar')
             $.ajax({
                 type: 'POST',

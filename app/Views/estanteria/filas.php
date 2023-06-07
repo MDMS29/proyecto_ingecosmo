@@ -4,7 +4,6 @@
         <div class="verFilas" id="verFilas">
 
             <h1 class="titulo" style="text-transform:uppercase;">ESTANTERIA DE <?php echo $titulo['nombre'] ?></h1>
-
         </div>
 
         <div class="contenedorE">
@@ -23,18 +22,20 @@
                             <div class="imagenes">
                                 <img class="iconos" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
                             </div>
+                            <div class="Isabella">
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila <?php echo $dato['fila']; ?></h5>
+                                <div class="textoFilaF" id="Contenedor">
+                                    <div class="bloque1">
 
-                            <div class="textoFila" id="Contenedor">
-                                <div class="bloque1">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0;">Fila <?php echo $dato['fila']; ?></h5>
-                                    <input id='nombreFila' value="<?php echo $dato['fila']; ?>" hidden>
-                                    <div class="bloqueTextoE" id="<?php echo $dato['fila']; ?>">
+                                        <input id='nombreFila' value="<?php echo $dato['fila']; ?>" hidden>
+                                        <div class="bloqueTextoEF" id="<?php echo $dato['fila']; ?>">
+                                        </div>
+                                        <!-- INFORMACION DINAMICA -->
                                     </div>
-                                    <!-- INFORMACION DINAMICA -->
-                                </div>
-                                <!-- <div class="bloque2">
+                                    <!-- <div class="bloque2">
                                     <button class="btn btnRedireccion" id="mover"  onclick="selectMateriales('< ?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> Mover</button>
                                 </div> -->
+                                </div>
                             </div>
                         </div>
                     <?php } ?>
@@ -54,7 +55,8 @@
                 <div class="modal-header">
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
                     <div class="bloqueHeader">
-                        <img class="iconosModal" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
+                        <!-- <img class="iconosModal" src="< ?php echo base_url('/img/') . $dato['icono'] ?>"> -->
+                        <label class="tituloMover"><i class="bi bi-arrow-left-right"></i> Mover </label>
                         <div class="tituloHeader">
 
                             <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1> -->
@@ -177,7 +179,7 @@
     var tituloMover = $(".tituloHeader")
 
 
-    bloque = $('.bloqueTextoE')
+    bloque = $('.bloqueTextoEF')
     for (let i = 0; i < bloque.length; i++) {
         let fila = $(`#${bloque[i].id}`)
         fila = fila[0].id
@@ -188,34 +190,41 @@
             success: function(res) {
                 var cadena = ""
                 for (let i = 0; i < res.length; i++) {
-                    cadena += `<p class="subTexto">
-
-                    <details>
-                    <summary data-summary-id="' . $i . '">' . $res[$i]['nombre'] . '</summary>'
+                    cadena += `
+                    <div class="sumary-flex">
+                    <p class="subTexto">
+                    <details class="detail">
+                    <summary >
                     <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
                     </summary>
 
                     <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}','${res[i].id_material}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
-                    </details></p>`;
+                    </details></p>
+                    </div>`;
                 }
                 $(`#${bloque[i].id}`).html(cadena)
             }
         })
     }
 
-    // Obtén todos los elementos <summary>
-    const summaries = document.querySelectorAll('summary');
+    // Obtén todos los elementos <details>
+    const detailsElements = document.getElementsByClassName('detail');
 
-    // Recorre cada elemento <summary>
-    summaries.forEach(summary => {
-        // Añade un controlador de eventos al hacer clic en el <summary>
-        summary.addEventListener('click', () => {
-            // Desactiva todos los <summary> excepto el actual
-            summaries.forEach(s => {
-                if (s !== summary) {
-                    s.removeAttribute('open');
-                }
-            });
+    // Añade un controlador de eventos a cada elemento <details>
+    console.log(detailsElements);
+    detailsElements.forEach(details => {
+        details.addEventListener('click', () => {
+            console.log(details);
+            // Verifica si el elemento actual está abierto
+            if (details.open) {
+                // Recorre todos los elementos <details> y cierra los que no sean el actual
+                detailsElements.forEach(d => {
+                    console.log(d);
+                    if (d !== details) {
+                        d.open = false;
+                    }
+                });
+            }
         });
     });
 

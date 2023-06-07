@@ -22,7 +22,9 @@
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Bodega <?= $salida[$s]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                        
+                                        <button onclick="redireccion(<?php echo $salida[$s]['id'] ?>, '<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] . '/' . $salida[$s]['id'] ?>')" data-href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] . '/' . $salida[$s]['id'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
+
                                     </div>
                                 </div>
                                 <?php if ($e == 4) { ?>
@@ -48,7 +50,7 @@
                                     <div class="textoCard">
                                         <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;">Bodega <?= $salida[$t]['nombre'] ?></h5>
 
-                                        <a href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$t]['id'] . '/' . $salida[$t]['nombre'] . '/' . $salida[$t]['n_iconos'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver mas</a>
+                                        <button onclick="redireccion(<?php echo $salida[$t]['id'] ?>, '<?php echo base_url('repuestos/mostrarBodega/') . $salida[$t]['id'] . '/' . $salida[$t]['nombre'] . '/' . $salida[$t]['n_iconos'] . '/' . $salida[$t]['id'] ?>')" data-href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$t]['id'] . '/' . $salida[$t]['nombre'] . '/' . $salida[$t]['n_iconos'] . '/' . $salida[$t]['id'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                     </div>
                                 </div>
                                 <?php if ($o == 4) { ?>
@@ -77,6 +79,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     var swiper = new Swiper(".mySwiper", {
         navigation: {
@@ -84,4 +87,24 @@
             prevEl: ".swiper-button-prev",
         },
     });
+
+    function redireccion(id, url) {
+        console.log("<<as")
+        // $(".btnVer").attr("href","< ?php echo base_url('filas/mostrarFila/') . $dato['id'] ?>")
+        $.ajax({
+            url: "<?php echo base_url('/repuestos/materialesCategoriaRepuestos/') ?>" + id,
+            type: 'POST',
+            dataType: 'json',
+            processData: false, // Evitar que jQuery procese los datos
+            contentType: false, // Evitar que jQuery establezca el tipo de contenido
+            success: function(res) {
+                if (res == 1) {
+                    return mostrarMensaje('warning', '¡Esta bodega no tiene materiales!')
+                } else {
+                    window.location.href = url
+                }
+            }
+        });
+    }
+
 </script>
