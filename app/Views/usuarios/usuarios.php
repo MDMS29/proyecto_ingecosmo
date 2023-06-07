@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarioss.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
 
 <!-- TABLA MOSTRAR USUARIOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">

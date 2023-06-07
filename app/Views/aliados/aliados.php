@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="5">Telefono</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Telefono</a>
         </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
@@ -27,14 +27,13 @@
         <a href="<?php echo base_url('/aliados/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
-
 <!-- modal -->
 <form autocomplete="off" id="formularioAliados">
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-xl">
-            <div class="body">
+        <div class="modal-dialog modal-lg">
+            <div class="body-R" style="position: relative; top: 100px;">
                 <div class="modal-content">
                     <div class="modal-header flex align-items-center gap-3 ">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
@@ -92,7 +91,6 @@
         </div>
     </div>
 </form>
-
 <!-- MODAL AGREGAR - EDITAR TELEFONO -->
 <div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -162,7 +160,6 @@
         </div>
     </div>
 </div>
-
 <!-- MODAL AGREGAR - EDITAR CORREO -->
 <div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -301,7 +298,7 @@
             url: '<?= base_url('aliados/obtenerAliados') ?>',
             method: "POST",
             data: {
-                estado: 'A'
+                estado: 'I'
             },
             dataSrc: "",
         },
@@ -433,7 +430,7 @@
                 dataType: 'json',
                 success: function(res) {
                     limpiarCampos()
-                    $('#tituloModal').text('Editar')
+                    $('#tituloModal').text(`Editar`)
                     $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#tp').val(2)
                     $('#id').val(res[0]['id_tercero'])
