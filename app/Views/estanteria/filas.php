@@ -189,8 +189,14 @@
             dataType: 'json',
             success: function(res) {
                 var cadena = ""
-                for (let i = 0; i < res.length; i++) {
-                    cadena += `
+                var vacio = ""
+                if (res.length == 0) {
+                    cadena += `No hay materiales en la fila`;
+                    $(`#${bloque[i].id}`).html(cadena)
+
+                } else {
+                    for (let i = 0; i < res.length; i++) {
+                        cadena += `
                     <div class="sumary-flex">
                     <p class="subTexto">
                     <details class="detail">
@@ -201,32 +207,14 @@
                     <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}','${res[i].id_material}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
                     </details></p>
                     </div>`;
+                    }
+                    $(`#${bloque[i].id}`).html(cadena)
                 }
-                $(`#${bloque[i].id}`).html(cadena)
             }
         })
     }
 
-    // Obtén todos los elementos <details>
-    const detailsElements = document.getElementsByClassName('detail');
 
-    // Añade un controlador de eventos a cada elemento <details>
-    console.log(detailsElements);
-    detailsElements.forEach(details => {
-        details.addEventListener('click', () => {
-            console.log(details);
-            // Verifica si el elemento actual está abierto
-            if (details.open) {
-                // Recorre todos los elementos <details> y cierra los que no sean el actual
-                detailsElements.forEach(d => {
-                    console.log(d);
-                    if (d !== details) {
-                        d.open = false;
-                    }
-                });
-            }
-        });
-    });
 
     function selectMateriales(fila, nombre, id_material) {
         var tituloMover = $(".tituloHeader")

@@ -29,7 +29,7 @@ class FilasModel extends Model
    public function obtenerFilas($estante)
    {
       $this->select('materiales.*, materiales.estante as nombreFila, estanteria.nombre as estanteria, estanteria.n_iconos as icono');
-      $this->join('estanteria', 'materiales.estante = estanteria.id');
+      $this->join('estanteria', 'materiales.x = estanteria.id', 'left');
       $this->where('estante', $estante);
 
 
