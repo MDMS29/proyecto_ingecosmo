@@ -79,8 +79,8 @@
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
-                                    <select class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
-                                        <option value="1" selected>Cedula de Ciudadania</option>
+                                    <select disabled class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
+                                        <option value="1" selected >Cedula de Ciudadania</option>
                                         <option>-- Seleccione --</option>
                                     </select>
                                 </div>
@@ -909,7 +909,7 @@
             for (let i = 0; i < correos.length; i++) {
                 cadena += ` <tr class="text-center" id=${correos[i].id}>
                                 <td>${correos[i].correo}</td>
-                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Primaria'}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 <td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
@@ -946,7 +946,7 @@
                 dataType: 'json',
                 success: function(data) {
                     if (data == 1) {
-                        mostrarMensaje('success', '¡Se ha eliminado el correo!!')
+                        mostrarMensaje('success', '¡Se ha eliminado el correo!')
                     }
                 }
             })
