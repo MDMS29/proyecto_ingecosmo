@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados Eliminados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="5">Telefono</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Telefono</a>
         </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
@@ -71,7 +71,7 @@
                                 <label for="telefono" class="col-form-label">Telefono:</label>
                                 <div class="d-flex">
                                     <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono" disabled>+</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefonos" class="btn" style="border:none;background-color:gray;color:white;" title="Ver Telefonos" >+</button>
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@
                                 <label for="email" class="col-form-label">Email:</label>
                                 <div class="d-flex">
                                     <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo" disabled>+</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos"  class="btn" style="border:none;background-color:gray;color:white;" title="Ver Correos" >+</button>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +87,86 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR - EDITAR TELEFONO -->
+<div class="modal fade" id="verTelefonos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Telefonos</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verAliado" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verAliado">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VER CORREOS -->
+<div class="modal fade" id="verCorreos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Correos</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verAliado" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verAliado">Cerrar</button>
                 </div>
             </div>
         </div>
