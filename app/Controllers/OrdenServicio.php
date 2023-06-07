@@ -100,7 +100,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(31);
         $pdf->SetX(19);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, $res['tipo_propietario'] == 5 ? $res['nomCliente'] . ' - Cliente' : $res['nomAliado'] . ' - ' . $res['razon_social'], 0, 1, 'L');
+        $pdf->Cell(2, 5,  utf8_decode($res['tipo_propietario'] == 5 ? $res['nomCliente'] . ' - Cliente' : $res['nomAliado'] . ' - ' . $res['razon_social']), 0, 1, 'L');
 
         // ---CC O NIT
         $pdf->SetY(37);
@@ -124,7 +124,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(43);
         $pdf->SetX(22);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5, '' . $res['direccion'] . '', 0, 1, 'L');
+        $pdf->Cell(2, 5,  utf8_decode($res['direccion']), 0, 1, 'L');
 
         // ---TELEFONO
         $pdf->SetY(49);
@@ -168,13 +168,13 @@ class OrdenServicio extends BaseController
         $pdf->SetY(31);
         $pdf->SetX(170);
         $pdf->Cell(2, 5, '' . $res['n_orden'] . '', 0, 1, 'L');
-        
+
         //Fecha de entrada
         $pdf->SetY(37);
         $pdf->SetX(124);
         $pdf->setFont('Arial', '', '10');
         $pdf->Cell(25, 5, 'FECHA INGRESO', 0, 1, 'L');
-        
+
         $pdf->SetY(37);
         $pdf->SetX(170);
         $pdf->Cell(2, 5, '' . $res['fecha_entrada'] . '', 0, 1, 'L');
@@ -191,17 +191,21 @@ class OrdenServicio extends BaseController
         $pdf->SetY(49);
         $pdf->SetX(124);
         $pdf->Cell(25, 5, utf8_decode('INGRESO EN GRÚA'), 0, 1, 'L');
+        
+        $pdf->SetY(49);
+        $pdf->SetX(170);
+        $pdf->Cell(25, 5,  $res['grua'] == 1 ? 'SI' :  'NO', 0, 1, 'L');
 
         /* --- TERCER RECUADRO --- */
         $pdf->Rect(123, 56, 91, 7, '');
 
         $pdf->SetY(57);
         $pdf->SetX(131);
-        $pdf->Cell(25, 5, 'Llaves (    )', 0, 1, 'L');
+        $pdf->Cell(25, 5,  $res['llaves'] == 1 ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         $pdf->SetY(57);
         $pdf->SetX(160);
-        $pdf->Cell(25, 5, 'Documentos (    )', 0, 1, 'L');
+        $pdf->Cell(25, 5, $res['documentos'] == 1 ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         /* --- CUARTO RECUADRO --- */
         $pdf->Rect(2, 64, 212, 20, '');
@@ -243,7 +247,7 @@ class OrdenServicio extends BaseController
         // ---PLACA
         $pdf->SetXY(154, 68.5);
         $pdf->Cell(25, 5, 'PLACA', 0, 1, 'L');
-        
+
         $pdf->SetY(76);
         $pdf->SetX(155);
         $pdf->SetFont('Arial', '', 10);
@@ -265,7 +269,7 @@ class OrdenServicio extends BaseController
         $pdf->line(107.9, 68.5, 107.9, 84);
         $pdf->line(143.2, 68.5, 143.2, 84);
         $pdf->line(178.5, 68.5, 178.5, 84);
-        
+
         // // ---TIPO
         // $pdf->SetY(34);
         // $pdf->SetX(55);
@@ -445,7 +449,7 @@ class OrdenServicio extends BaseController
                             'usuario_crea' => $usuarioCrea
                         ];
                         $this->movimiento->save($dataMovimiento); //Movimiento
-                        return json_encode(1);
+                        return json_encode($this->ordenes->getInsertID());
                     }
                 }
             } else {
