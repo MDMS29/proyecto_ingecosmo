@@ -84,7 +84,8 @@ class Filas extends BaseController
     public function detallesMaterial($id)
     {
         $returnData = array();
-        $filas_ = $this->filas->traerDetalles($id);
+        // $filas_ = $this->material->traerMateriales($id);
+        $filas_ = $this->material->traerDetalles($id);
         if (!empty($filas_)) {
             array_push($returnData, $filas_);
         }

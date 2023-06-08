@@ -392,7 +392,7 @@
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
         $("#estante").val(rs[0]['nombreEstante']);
-        $("#fila").val(rs[0]['fila']);
+        $("#fila").val(rs[0]['filaNombre']);
 
 
         precioVenta.style.background = '#e9ecef';
