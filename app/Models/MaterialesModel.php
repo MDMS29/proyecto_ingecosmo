@@ -37,8 +37,10 @@ class MaterialesModel extends Model
     }
     public function traerDetalles($id_material)
     {
-        $this->select('materiales.* ,estanteria.nombre as nombreEstante');
+        $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
         $this->join('estanteria', 'estanteria.id = materiales.estante');
+        $this->join('filas', 'filas.id_estante = materiales.fila');
+
         $this->where('id_material', $id_material);
         $datos = $this->first();
         return $datos;
@@ -169,12 +171,12 @@ class MaterialesModel extends Model
         return $datos;
     }
 
-    public function obtenerRepuestosCate($estado)
+    public function obtenerRepuestosCate($id)
     {
         $this->select('materiales.*, estanteria.nombre as bodega');
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
-        $this->where('materiales.tipo_material', '10');
-        $this->where('materiales.estado', $estado);
+        $this->where('materiales.estante', $id);
+        $this->where('materiales.estado', 'A');
         $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }

@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EstanteriaModel;
-use App\Models\FilasModel;
+use App\Models\FilassModel;
 use App\Models\ParamModel;
 use App\Models\MaterialesModel;
 
@@ -16,7 +16,7 @@ class Estanteria extends BaseController
     public function __construct()
     {
         $this->estantes = new EstanteriaModel();
-        $this->filas = new FilasModel();
+        $this->filas = new FilassModel();
         $this->param = new ParamModel();
     }
     public function index()

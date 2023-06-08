@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\FilasModel;
+use App\Models\FilassModel;
 use App\Models\EstanteriaModel;
 use App\Models\MaterialesModel;
 
@@ -15,7 +16,7 @@ class Filas extends BaseController
 
     public function __construct()
     {
-        $this->filas = new FilasModel();
+        $this->filas = new FilassModel();
         $this->estanteria = new EstanteriaModel();
         $this->material = new MaterialesModel();
     }
@@ -55,9 +56,9 @@ class Filas extends BaseController
     //     echo view('/estanteria/filas', $data);
     // }
 
-    public function buscarFilas($fila)
+    public function buscarFilas($id)
     {
-        $filas_ = $this->filas->traerFilas($fila);
+        $filas_ = $this->filas->traerFilas($id);
         if (!empty($filas_)) {
             array_push($returnData, $filas_);
         }
@@ -83,7 +84,8 @@ class Filas extends BaseController
     public function detallesMaterial($id)
     {
         $returnData = array();
-        $filas_ = $this->filas->traerDetalles($id);
+        // $filas_ = $this->material->traerMateriales($id);
+        $filas_ = $this->material->traerDetalles($id);
         if (!empty($filas_)) {
             array_push($returnData, $filas_);
         }

@@ -44,12 +44,12 @@
 </div>
 
 
-<!-- Modal Confirma reestablecer -->
+<!-- Modal ver mas -->
 <div class="modal fade" id="verProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
-    <div class="modal-dialog modal-xl">
-        <div class="body">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header flex align-items-center">
                     <div class="logo">
@@ -116,13 +116,13 @@
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" width:80px; height:60px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <img style=" width:100px; margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                     <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:100px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
+                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
                         <p class="textoModalP">¿Estas seguro de restableceer este Proveedor?</p>
                     </div>
 
@@ -217,8 +217,8 @@
 
 <script>
     var ContadorPRC = 0
-    let telefonos = [] //Telefonos del usuario.
-    let correos = [] //Correos del usuario.
+    let telefonos = [] //Telefonos del proveedores.
+    let correos = [] //Correos del proveedores.
     var emailTable = []
     var telefonoTable = []
 
@@ -365,7 +365,7 @@
             url: "<?php echo base_url('srchPro/') ?>" + id + '/' + 0 + '/' + 0,
             dataType: 'json'
         }).done(function(res) {
-            $('#tituloModal').text('Ver Usuario')
+            $('#tituloModal').text('Ver Proveedor')
             $('#tp').val(2)
             $('#id').val(res[0]['id_tercero'])
             $('#RazonSocial').val(res[0]['razon_social'])

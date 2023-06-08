@@ -25,9 +25,9 @@
 
           <div class="contenido2">
             <div class="Imagenes">
-              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/detalles.png" width="30" height="30" title="Mas detalles del insumo"></input>
+              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/MasDetallesW.png" width="30" height="30" title="Mas detalles del insumo"></input>
 
-              <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/usarM.png" width="30" height="30" title="Usar insumo"></input>
+              <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/grifo.png" width="30" height="30" title="Usar insumo"></input>
             </div>
           </div>
 
@@ -56,19 +56,19 @@
     <div class="modal-dialog modal-lg">
 
       <div class="modal-content" id="modalContent">
-        
-       <div class="modal-header flex justify-content-between align-items-center w-100">
-       <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
-        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-          <img src="<?= base_url('img/botonAgregar.png') ?>" width="30" height="30" style="margin-right: 5px;" />
-          <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar</h1>
-        </div>
+
+        <div class="modal-header flex justify-content-between align-items-center w-100">
+          <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
+          <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+            <img src="<?= base_url('img/botonAgregar.png') ?>" width="30" height="30" style="margin-right: 5px;" />
+            <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar</h1>
+          </div>
           <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
 
         </div>
 
 
-      
+
         <div class="modal-body" id="modalAgregar2">
 
           <div class="d-flex column-gap-3" style="width: 100%">
@@ -155,12 +155,18 @@
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
-            <input type="text" class="form-control" id="precioVenta" name="precioVenta" placeholder="" disabled>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">$</span>
+                <input class="form-control" type="number" id="precioVenta" name="precioVenta" disabled>
+              </div>
           </div>
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Precio de Compra:</label>
-            <input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="" disabled>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">$</span>
+                <input class="form-control" type="number" id="precioCompra" name="precioCompra" disabled>
+              </div>
           </div>
 
           <div class="mb-3" style="width: 90%;">
@@ -209,7 +215,7 @@
       <div class="modal-content" id="modalContentUsar">
 
         <div class="modal-header flex justify-content-between align-items-center w-100">
-        <input type="text" name="idMaterial" id="idMaterial" hidden>
+          <input type="text" name="idMaterial" id="idMaterial" hidden>
           <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
           <div class="d-flex align-items-center justify-content-center" style="width:auto;">
             <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
@@ -223,25 +229,25 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%">
 
-              <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label>
-              
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
+              <!-- <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label> -->
+
+              <!-- <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
                 <option selected="">--Seleccione--</option>
                 <?php foreach ($ordenes as $data) { ?>
                   <option value="<?= $data['id_orden'] ?>"><?= $data['n_orden'] ?></option>
                 <?php } ?>
-              </select>
+              </select> -->
             </div>
 
             <div class="mb-3" style="width: 100%">
-              <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
+              <!-- <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
                 <option selected="">--Seleccione--</option>
                 <?php foreach ($trabajadores as $data) { ?>
                   <option value="<?= $data['id_trabajador'] ?>"><?= $data['nombre'] ?></option>
                 <?php } ?>
 
-              </select>
+              </select> -->
             </div>
           </div>
 
@@ -258,10 +264,15 @@
           </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
-            <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
-              <input class="form-control" id="PrecioDeVenta" name="PrecioDeVenta" placeholder="" disabled>
+
+            <div class="mb-3" style="width: 50%;">
+              <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">$</span>
+                <input class="form-control" type="number" id="PrecioDeVenta" name="PrecioDeVenta" disabled>
+              </div>
             </div>
+
             <div class="mb-3" style="width: 50%">
               <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
               <div>
@@ -272,11 +283,17 @@
           </div>
 
           <div class="d-flex column-gap-3" style="width: 50%">
+
             <div class="mb-3" style="width: 100%">
               <label for="exampleDataList" class="col-form-label">Subtotal:</label>
-              <input class="form-control" id="subtotal" name="subtotal" placeholder="" disabled>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">$</span>
+                <input class="form-control" type="number" id="subtotal" name="subtotal" disabled>
+              </div>
             </div>
           </div>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
@@ -319,7 +336,7 @@
     $("#cantidadUsar").val('');
     $("#fila").val('');
     $("#estante1").val('');
-    $("#fila1").val('');
+    $("#fila1").val('aaaa');
     $("#subtotal").val('');
     $("#trabajadores").val('--Seleccione--');
     $("#ordenes").val('--Seleccione--');
@@ -343,7 +360,7 @@
         console.log(res)
 
         var cadena
-        cadena = `<option value="" selected>-- Seleccione una fila --</option>`
+        cadena = `<option value="" selected>-- Seleccione--</option>`
         for (let i = 0; i < res.length; i++) {
 
           cadena += `<option value=${res[i].fila
@@ -375,7 +392,7 @@
         $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
         $("#cantidadActual").val(rs[0]['cantidad_actual']);
         $("#estante").val(rs[0]['nombreEstante']);
-        $("#fila").val(rs[0]['fila']);
+        $("#fila").val(rs[0]['filaNombre']);
 
 
         precioVenta.style.background = '#e9ecef';

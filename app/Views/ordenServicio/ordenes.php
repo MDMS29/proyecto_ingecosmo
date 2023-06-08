@@ -70,97 +70,138 @@
                                     <small id="msgPlaca" class="invalido"></small>
                                 </div>
                             </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="tipoCliente" class="col-form-label">Tipo Responsable:</label>
-                                    <select class="form-select form-control" name="tipoCliente" id="tipoCliente">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($tipoClientes as $cliente) { ?>
-                                            <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="cliente" class="col-form-label">Responsable:</label>
-                                    <select class="form-select form-control" name="cliente" id="cliente">
-                                        <option value="" selected="selected">-- Seleccione --</option>
-                                        <!-- SELECT DINAMICO -->
-
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="column-gap-3 d-flex flex-column" style="width: 100%; display:none;" id="divResponsable">
-                                <div class="d-flex gap-3" style="width: 100%">
+                            <details open>
+                                <summary>Informacion Responsable</summary>
+                                <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="tipoDocRes" class="col-form-label">Tipo Identificación:</label>
-                                        <select class="form-select form-select" name="tipoDocRes" id="tipoDocRes" disabled>
-                                            <option value="1" selected>Cedula de Ciudadania</option>
-                                            <option>-- Seleccione --</option>
+                                        <label for="tipoCliente" class="col-form-label">Tipo Responsable:</label>
+                                        <select class="form-select form-control" name="tipoCliente" id="tipoCliente">
+                                            <option selected value="">-- Seleccione --</option>
+                                            <?php foreach ($tipoClientes as $cliente) { ?>
+                                                <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="nIdentiRes" class="col-form-label">N° Identificación:</label>
-                                        <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes">
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3" style="width: 100%">
-                                    <div class="mb-3" style="width: 100%">
-                                        <label for="nombreRespon" class="col-form-label">Nombres:</label>
-                                        <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
-                                    </div>
-                                    <div class="mb-3" style="width: 100%">
-                                        <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
-                                        <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
-                                    </div>
-                                </div>
-                            </div>
+                                        <label for="cliente" class="col-form-label">Responsable:</label>
+                                        <select class="form-select form-control" name="cliente" id="cliente">
+                                            <option value="" selected="selected">-- Seleccione --</option>
+                                            <!-- SELECT DINAMICO -->
 
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="marca" class="col-form-label">Marca:</label>
-                                    <select class="form-select form-control" name="marca" id="marca">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($marcas as $marca) { ?>
-                                            <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="nFabrica" class="col-form-label">No. Fabrica:</label>
-                                    <select class="form-select form-control" name="nFabrica" id="nFabrica">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <?php $years = range(2035, 1990); ?>
-                                        <?php foreach ($years as $year) : ?>
-                                            <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <div class="">
-                                        <label for="color" class="col-form-label">Color:</label>
-                                        <input type="text" name="color" class="form-control" id="color" minlength="4">
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="kms" class="col-form-label">Kilometraje:</label>
-                                    <div class="d-flex">
-                                        <input type="number" name="kms" class="form-control" id="kms">
+
+                                <div class="column-gap-3 d-flex flex-column" style="width: 100%; display:none;" id="divResponsable">
+                                    <div class="d-flex gap-3" style="width: 100%">
+                                        <div class="mb-3" style="width: 100%">
+                                            <label for="tipoDocRes" class="col-form-label">Tipo Identificación:</label>
+                                            <select class="form-select form-select" name="tipoDocRes" id="tipoDocRes" disabled>
+                                                <option value="1" selected>Cedula de Ciudadania</option>
+                                                <option>-- Seleccione --</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3" style="width: 100%">
+                                            <label for="nIdentiRes" class="col-form-label">N° Identificación:</label>
+                                            <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-3" style="width: 100%">
+                                        <div class="mb-3" style="width: 100%">
+                                            <label for="nombreRespon" class="col-form-label">Nombres:</label>
+                                            <input type="text" name="nombreRespon" class="form-control" id="nombreRespon">
+                                        </div>
+                                        <div class="mb-3" style="width: 100%">
+                                            <label for="apellidoRespon" class="col-form-label">Apellidos:</label>
+                                            <input type="text" class="form-control" name="apellidoRespon" id="apellidoRespon">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="combustible" class="col-form-label">Combustible:</label>
-                                    <select class="form-select form-control" name="combustible" id="combustible">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($combustible as $com) { ?>
-                                            <option value="<?= $com['id'] ?>"><?= $com['nombre'] ?></option>
-                                        <?php } ?>
-                                    </select>
+                            </details>
+
+                            <details open>
+                                <summary>Informacion Automovil</summary>
+                                <div class="d-flex column-gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="marca" class="col-form-label">Marca:</label>
+                                        <select class="form-select form-control" name="marca" id="marca">
+                                            <option selected value="">-- Seleccione --</option>
+                                            <?php foreach ($marcas as $marca) { ?>
+                                                <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="nFabrica" class="col-form-label">No. Fabrica:</label>
+                                        <select class="form-select form-control" name="nFabrica" id="nFabrica">
+                                            <option selected value="">-- Seleccione --</option>
+                                            <?php $years = range(2035, 1990); ?>
+                                            <?php foreach ($years as $year) : ?>
+                                                <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
+                                <div class="d-flex column-gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <div class="">
+                                            <label for="color" class="col-form-label">Color:</label>
+                                            <input type="text" name="color" class="form-control" id="color" minlength="4">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="kms" class="col-form-label">Kilometraje:</label>
+                                        <div class="d-flex">
+                                            <input type="number" name="kms" class="form-control" id="kms">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex column-gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%">
+                                        <label for="combustible" class="col-form-label">Combustible:</label>
+                                        <select class="form-select form-control" name="combustible" id="combustible">
+                                            <option selected value="">-- Seleccione --</option>
+                                            <?php foreach ($combustible as $com) { ?>
+                                                <option value="<?= $com['id'] ?>"><?= $com['nombre'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </details>
+                            <details id="datailInv">
+                                <summary>Inventario Vehiculo</summary>
+                                <input type="text" id="tpInventario">
+                                <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Item</th>
+                                            <th>Check</th>
+                                            <th>Observacion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <input type="text" id="idGrua">
+                                        <input type="text" id="idLlaves">
+                                        <input type="text" id="idDocu">
+                                        <tr class="text-center">
+                                            <td>Grua</td>
+                                            <td><input type="checkbox" name="grua" id="grua"></td>
+                                            <td><textarea rows="1" cols="40"></textarea></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td>Llaves</td>
+                                            <td><input type="checkbox" name="llaves" id="llaves"></td>
+                                            <td><textarea rows="1" cols="40"></textarea></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td>Documentos</td>
+                                            <td><input type="checkbox" name="documentos" id="documentos"></td>
+                                            <td><textarea rows="1" cols="40"></textarea></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </details>
+                            <div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="estado" class="col-form-label">Estado:</label>
@@ -172,7 +213,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
@@ -246,7 +286,7 @@
     var validOrden = true
     var validPlaca = true
     var validFecha = true
-
+    var arrayInven = []
     //Limitar fecha de entrada y salida hasta la fecha actual
     let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
     let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
@@ -484,6 +524,7 @@
                 dataType: 'json',
                 success: function(data) {
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
+                    $('#datailInv').removeAttr('open')
                     $('#tp').val(2)
                     $('#id').val(id)
                     $('#ordenTrabajo').removeAttr('disabled')
@@ -519,6 +560,30 @@
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
 
+                    //Inventario de orden
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= base_url('inventarioOrden/buscarInventario') ?>',
+                        dataType: 'json',
+                        data: {
+                            id: data['id_orden']
+                        },
+                        success: function(res) {
+                            if (res.filter(r => r.item == 'Grua')[0] == undefined) {
+                                $('#tpInventario').val(1)
+                            } else {
+                                $('#tpInventario').val(2)
+                                $('#idGrua').val(res.filter(r => r.item == 'Grua')[0].id_inv_orden)
+                                $('#idLlaves').val(res.filter(r => r.item == 'Llaves')[0].id_inv_orden)
+                                $('#idDocu').val(res.filter(r => r.item == 'Documentos')[0].id_inv_orden)
+
+                                $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked == 'true' ? true : false
+                                $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked == 'true' ? true : false
+                                $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked == 'true' ? true : false
+                            }
+                        }
+                    })
+
                     $('#aggVehi').val(0)
                     $('#vehiculo').removeClass('d-none')
                     $('#btnAgg').attr('hidden', '')
@@ -537,6 +602,7 @@
                     $('#ordenTrabajo').val(parseInt(data['n_orden']) + 1)
                 }
             })
+            $('#datailInv').removeAttr('open')
             $('#tp').val(1)
             $('#id').val(id)
             $('#aggVehi').val(0)
@@ -691,6 +757,7 @@
         e.preventDefault()
         aggVehi = $('#aggVehi').val()
         tp = $('#tp').val()
+        tpInv = $('#tpInventario').val()
         id = $('#id').val()
         orden = $('#ordenTrabajo').val()
 
@@ -717,6 +784,30 @@
         fechaEntrada = $('#fechaEntrada').val()
         fechaSalida = $('#fechaSalida').val()
 
+
+        //Inventario
+        idGrua = $('#idGrua').val()
+        idLlaves = $('#idLlaves').val()
+        idDocs = $('#idDocu').val()
+
+        grua = $('#grua')[0].checked
+        llaves = $('#llaves')[0].checked
+        documentos = $('#documentos')[0].checked
+        arrayInven = [{
+                idInv: idGrua,
+                item: 'Grua',
+                checked: grua
+            },
+            {
+                idInv: idLlaves,
+                item: 'Llaves',
+                checked: llaves
+            }, {
+                idInv: idDocs,
+                item: 'Documentos',
+                checked: documentos
+            }
+        ]
         if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
@@ -753,26 +844,40 @@
                     fechaSalida
                 },
                 success: function(data) {
+                    console.log(data)
                     tablaOrdenes.ajax.reload(null, false)
-                    if (tp == 2) {
-                        if (data == 1) {
-                            $('#agregarOrden').modal('hide')
-                            mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
-                        } else {
-                            mostrarMensaje('error', '¡Ha ocurrido un error!')
-                        }
-                    } else {
-                        if (data == 1) {
-                            $('#agregarOrden').modal('hide')
-                            mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
-                            $('#vehiculo').removeClass('d-none')
-                            $('#vehiculoT').val('')
-                            $('#vehiculoT').attr('hidden', '')
-                            obtenerVehiculos()
-                        } else {
-                            mostrarMensaje('error', '¡Ha ocurrido un error!')
-                        }
-                    }
+                    arrayInven.forEach(elem => {
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?= base_url('inventarioOrden/insertar') ?>",
+                            data: {
+                                tp: tpInv,
+                                id_orden: Number(data),
+                                item: elem.item,
+                                checked: elem.checked,
+                                idInv: elem.idInv
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                if (data == 1) {
+                                    if (tp == 1) {
+                                        mostrarMensaje('success', '¡Se ha Guardado la Orden se Servicio!')
+                                    } else {
+                                        mostrarMensaje('success', '¡Se ha Actualizado la Orden se Servicio!')
+                                    }
+                                    $('#agregarOrden').modal('hide')
+                                    $('#agregarOrden').modal('hide')
+                                    $('#vehiculo').removeClass('d-none')
+                                    $('#vehiculoT').val('')
+                                    $('#vehiculoT').attr('hidden', '')
+                                    obtenerVehiculos()
+                                } else {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                }
+                            }
+                        })
+                    })
+
                 }
             })
         }

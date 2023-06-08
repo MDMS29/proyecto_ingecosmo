@@ -17,18 +17,18 @@
                 <?php } else { ?>
                     <?php foreach ($data as $dato) { ?>
 
-                        <input type="hidden" name="categoria" id="categoria" value="<?= $dato['categoria_material'] ?>">
+                        <input type="hidden" name="categoria" id="categoria" value="<?= $dato['id_estante'] ?>">
                         <div class="card2">
                             <div class="imagenes">
                                 <img class="iconos" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
                             </div>
                             <div class="Isabella">
-                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila <?php echo $dato['fila']; ?></h5>
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila<?php echo $dato['nombre']; ?></h5>
                                 <div class="textoFilaF" id="Contenedor">
                                     <div class="bloque1">
 
-                                        <input id='nombreFila' value="<?php echo $dato['fila']; ?>" hidden>
-                                        <div class="bloqueTextoEF" id="<?php echo $dato['fila']; ?>">
+                                        <input id='nombreFila' value="<?php echo $dato['id_fila']; ?>" hidden>
+                                        <div class="bloqueTextoEF" id="<?php echo $dato['id_fila']; ?>">
                                         </div>
                                         <!-- INFORMACION DINAMICA -->
                                     </div>
@@ -56,7 +56,7 @@
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
                     <div class="bloqueHeader">
                         <!-- <img class="iconosModal" src="< ?php echo base_url('/img/') . $dato['icono'] ?>"> -->
-                        <label class="tituloMover"><i class="bi bi-arrow-left-right"></i> Mover </label>
+                        <label class="tituloMover"><i class="bi bi-arrow-left-right"></i> Mover -</label>
                         <div class="tituloHeader">
 
                             <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1> -->
@@ -77,8 +77,8 @@
                             <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
-                                    <option id="<?php echo $fila['fila']; ?>F" value=<?php echo $fila['fila']; ?>>
-                                        <?php echo $fila['fila']; ?></option>
+                                    <option id="<?php echo $fila['id_fila']; ?>F" value=<?php echo $fila['id_fila']; ?>>
+                                        <?php echo $fila['nombre']; ?></option>
                                 <?php } ?>
                             </select>
                             <input hidden id="tp" name="tp">
@@ -95,6 +95,7 @@
     </div>
 </form>
 
+<!-- modal ver detalles -->
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <input type="text" name="id" id="id" hidden>
@@ -158,11 +159,89 @@
             <div class="modal-footer" id="modalFooterD">
                 <button type="button" class="btn btnCerrar" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
 
-                <button type="button" class="btn btnEditar" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Editar</button>
+                <button type="button" class="btn btnEditar" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
             </div>
 
         </div>
     </div>
+</div>
+
+<!-- modal usar -->
+<div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="formularioUsar" autocomplete="off">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+            <div class="modal-content" id="modalContentUsar">
+
+                <div class="modal-header flex justify-content-between align-items-center w-100">
+                    <input type="text" name="idMaterial" id="idMaterial" hidden>
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
+                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                        <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Usar Insumo</h1>
+                    </div>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+
+
+                <div class="modal-body" id="modalBodyUsar">
+                    <div class="d-flex column-gap-3" style="width: 100%">
+                    </div>
+
+                    <div class="d-flex column-gap-3" style="width: 100%">
+                        <div class="mb-3" style="width: 50%">
+                            <label for="exampleDataList" class="col-form-label">Nombre del insumo:</label>
+                            <input class="form-control" id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
+                        </div>
+
+                        <div class="mb-3" style="width: 50%">
+                            <label for="exampleDataList" class="col-form-label">Cantidad Existente:</label>
+                            <input class="form-control" id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
+                        </div>
+                    </div>
+
+                    <div class="d-flex column-gap-3" style="width: 100%">
+
+                        <div class="mb-3" style="width: 50%;">
+                            <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">$</span>
+                                <input class="form-control" type="number" id="PrecioDeVenta" name="PrecioDeVenta" disabled>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" style="width: 50%">
+                            <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
+                            <div>
+                                <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
+                                <small id="msgUsar" class="invalido"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex column-gap-3" style="width: 50%">
+
+                        <div class="mb-3" style="width: 100%">
+                            <label for="exampleDataList" class="col-form-label">Subtotal:</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">$</span>
+                                <input class="form-control" type="number" id="subtotal" name="subtotal" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnCerrar" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btnEditar" id="btnValidar">Usar</button>
+
+
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 
@@ -221,6 +300,7 @@
         tituloMover.text(nombre)
         $('#idMaterialMove').val(id_material)
 
+        categoria = $('#categoria').val()
 
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria + '/' + fila,
@@ -239,7 +319,6 @@
             }
         })
     }
-    categoria = $('#categoria').val()
 
     $('#agregarFila').on('submit', function(e) {
         e.preventDefault();
@@ -269,6 +348,12 @@
         $('#fila').val('-- SELECCIONE UNA FILA --')
         $('#nombreProd').val('')
         filasDina.removeAttr('disabled', '');
+
+        $("#subtotal").val('');
+        $("#cantidadUsar").val('');
+        $('#msgUsar').text('')
+        $('#msgAgregar').text('')
+        $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
 
     }
 
@@ -311,6 +396,9 @@
     // }
 
     function detallesMaterial(id_material) {
+
+        $('#btnUsar1').attr('onclick', `usarMaterial(${id_material},2)`)
+
         dataURL = "<?php echo base_url('/filas/detallesMaterial'); ?>" + "/" + id_material;
         $.ajax({
             type: "POST",
@@ -326,8 +414,88 @@
                 $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
                 $("#cantidadActual").val(rs[0]['cantidad_actual']);
                 $("#estante").val(rs[0]['nombreEstante']);
-                $("#filaDetalle").val(rs[0].fila);
+                $("#filaDetalle").val(rs[0]['filaNombre']);
             }
         })
     }
+
+    function usarMaterial(id_material) {
+        dataURL = "<?php echo base_url('/materiales/usarMaterial'); ?>" + "/" + id_material;
+        $.ajax({
+            type: "POST",
+            url: dataURL,
+            dataType: "json",
+            success: function(rs) {
+                $("#idMaterial").val(rs[0]['id_material']);
+                $("#nombreInsumo").val(rs[0]['nombre']);
+                $("#cantidadExistente").val(rs[0]['cantidad_actual']);
+                $("#PrecioDeVenta").val(rs[0]['precio_venta']);
+                $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
+
+            }
+        })
+    }
+
+    // operaciones con el input usar
+
+    $('#cantidadUsar').on('input', function(e) {
+        idMaterial = $("#idMaterial").val()
+
+        cantidad = $('#cantidadUsar').val()
+        valorVenta = $("#PrecioDeVenta").val()
+        cantidadExistente = $('#cantidadExistente').val()
+        if (parseInt(cantidad) > parseInt(cantidadExistente)) {
+            $('#msgUsar').text(' *Valor invalido*')
+            $("#btnValidar").attr('disabled', '');
+            validUsar = false
+            $('#subtotal').val(0)
+        } else {
+            $('#msgUsar').text('')
+            validUsar = true
+            $('#subtotal').val(cantidad * valorVenta)
+        }
+    })
+
+
+
+    // formulario usar
+
+    $("#formularioUsar").on("submit", function(e) {
+        e.preventDefault()
+
+        idMaterial = $("#idMaterial").val()
+        trabajador = $("#trabajadores").val()
+        ordenes = $("#ordenes").val()
+        cantidadExistente = $("#cantidadExistente").val()
+        cantidadUsar = $("#cantidadUsar").val()
+        precioVenta = $("#PrecioDeVenta").val()
+        subtotal = $("#subtotal").val()
+        console.log(idMaterial)
+        if ([subtotal, cantidadExistente, cantidadUsar, precioVenta, trabajador, ordenes].includes("")) {
+            return mostrarMensaje('error', '¡Campos Vacios!')
+        }
+        $.post({
+            url: '<?php echo base_url('insumos/usar') ?>',
+            data: {
+                idMaterial,
+                trabajador,
+                ordenes,
+                precioVenta,
+                cantidadExistente,
+                cantidadUsar,
+                subtotal
+            },
+            success: function(data) {
+                if (data == 1) {
+                    mostrarMensaje('success', '¡Insumo usado con exito!')
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000)
+                } else {
+                    return mostrarMensaje('error', '¡Ha ocurrido un error!')
+                }
+            }
+        })
+
+    })
 </script>
