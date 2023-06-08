@@ -437,7 +437,7 @@ class OrdenServicio extends BaseController
                 ];
                 $res = $this->propietario->obtenerPropietario($vehiculo);
                 if (!empty($res)) {
-                    return json_encode(1);
+                    return json_encode($this->ordenes->getInsertID());
                 } else {
                     if ($this->propietario->save($dataPropie)) {
                         $dataMovimiento = [

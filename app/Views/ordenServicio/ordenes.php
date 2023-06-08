@@ -182,17 +182,17 @@
                                         <tr class="text-center">
                                             <td>Grua</td>
                                             <td><input type="checkbox" name="grua" id="grua"></td>
-                                            <td><textarea rows="1" cols="50"></textarea></td>
+                                            <td><textarea rows="1" cols="40"></textarea></td>
                                         </tr>
                                         <tr class="text-center">
                                             <td>Llaves</td>
                                             <td><input type="checkbox" name="llaves" id="llaves"></td>
-                                            <td><textarea rows="1" cols="50"></textarea></td>
+                                            <td><textarea rows="1" cols="40"></textarea></td>
                                         </tr>
                                         <tr class="text-center">
                                             <td>Documentos</td>
                                             <td><input type="checkbox" name="documentos" id="documentos"></td>
-                                            <td><textarea rows="1" cols="50"></textarea></td>
+                                            <td><textarea rows="1" cols="40"></textarea></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -283,7 +283,6 @@
     var validPlaca = true
     var validFecha = true
     var arrayInven = []
-
     //Limitar fecha de entrada y salida hasta la fecha actual
     let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
     let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
@@ -556,6 +555,21 @@
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
 
+                    //Inventario de orden
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= base_url('inventarioOrden/buscarInventario') ?>',
+                        dataType: 'json',
+                        data: {
+                            id: data['id_orden']
+                        },
+                        success: function(res) {
+                            $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked
+                            $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked
+                            $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked
+                        }
+                    })
+
                     $('#aggVehi').val(0)
                     $('#vehiculo').removeClass('d-none')
                     $('#btnAgg').attr('hidden', '')
@@ -756,9 +770,9 @@
 
 
         //Inventario
-        grua = $('#grua').val()
-        llaves = $('#llaves').val()
-        documentos = $('#documentos').val()
+        grua = $('#grua')[0].checked
+        llaves = $('#llaves')[0].checked
+        documentos = $('#documentos')[0].checked
         arrayInven = [{
                 item: 'Grua',
                 checked: grua
@@ -808,37 +822,37 @@
                 },
                 success: function(data) {
                     tablaOrdenes.ajax.reload(null, false)
-                    if (tp == 2) {
-                        if (data == 1) {
-                            $('#agregarOrden').modal('hide')
-                            mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
-                        } else {
-                            mostrarMensaje('error', '¡Ha ocurrido un error!')
-                        }
-                    } else {
-                        arrayInven.forEach(elem => {
-                            $.ajax({
-                                type: 'POST',
-                                url: "<?= base_url('inventarioOrden/insertar') ?>",
-                                data: {
-                                    tp,
-                                    id_orden : data,
-                                    item: elem.item,
-                                    checked: elem.checked
-                                },
-                                dataType : 'json',
-                                success: function(data) {
-                                    console.log(data)
-                                }
-                            })
+                    // if (tp == 2) {
+                    //     if (data == 1) {
+                    //         $('#agregarOrden').modal('hide')
+                    //         mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
+                    //     } else {
+                    //         mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    //     }
+                    // } else {
+                    arrayInven.forEach(elem => {
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?= base_url('inventarioOrden/insertar') ?>",
+                            data: {
+                                tp,
+                                id_orden: data,
+                                item: elem.item,
+                                checked: elem.checked
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                console.log(data)
+                            }
                         })
-                        $('#agregarOrden').modal('hide')
-                        mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
-                        $('#vehiculo').removeClass('d-none')
-                        $('#vehiculoT').val('')
-                        $('#vehiculoT').attr('hidden', '')
-                        obtenerVehiculos()
-                    }
+                    })
+                    $('#agregarOrden').modal('hide')
+                    mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
+                    $('#vehiculo').removeClass('d-none')
+                    $('#vehiculoT').val('')
+                    $('#vehiculoT').attr('hidden', '')
+                    obtenerVehiculos()
+                    // }
                 }
             })
         }

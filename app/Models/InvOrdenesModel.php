@@ -26,5 +26,11 @@ class InvOrdenesModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-
+    public function buscarInventario($id)
+    {
+        $this->select('*');
+        $this->where('id_orden', $id);
+        $data = $this->findAll();
+        return $data;
+    }
 }

@@ -14,6 +14,12 @@ class InventarioOrden extends BaseController
         $this->invOrden = new InvOrdenesModel();
         helper('sistema');
     }
+    public function buscarInventario()
+    {
+        $id = $this->request->getPost('id');
+        $res = $this->invOrden->buscarInventario($id);
+        return json_encode($res);
+    }
     public function insertar()
     {
 
@@ -34,9 +40,9 @@ class InventarioOrden extends BaseController
 
         if ($tp == 2) {
         } else {
-            if($this->invOrden->save($dataInventario)){
+            if ($this->invOrden->save($dataInventario)) {
                 return json_encode(1);
-            }else{
+            } else {
                 return json_encode(2);
             }
         }
