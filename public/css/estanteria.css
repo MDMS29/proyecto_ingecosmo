@@ -351,10 +351,15 @@ details {
   color: white !important;
 }
 
-/* label {
+ label {
   color: #1b335b;
   font-weight: 600;
-} */
+} 
+
+#modalContentUsar {
+  border: 5px solid var(--azulBoton);
+  border-radius: 10px;
+}
 
 * {
   font-family: 'Nunito', sans-serif;

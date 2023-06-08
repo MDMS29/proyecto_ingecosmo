@@ -14,7 +14,7 @@ class MaterialesModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_orden', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
 
     protected $useTimestamps = true;
 
@@ -37,8 +37,10 @@ class MaterialesModel extends Model
     }
     public function traerDetalles($id_material)
     {
-        $this->select('materiales.* ,estanteria.nombre as nombreEstante');
+        $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
         $this->join('estanteria', 'estanteria.id = materiales.estante');
+        $this->join('filas', 'filas.id_fila = materiales.fila');
+
         $this->where('id_material', $id_material);
         $datos = $this->first();
         return $datos;

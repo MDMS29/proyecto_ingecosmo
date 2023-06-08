@@ -66,14 +66,14 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="" style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?> style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
-                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Hisotrial</a></li>
+                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Historial" style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /> Historial</a></li>
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
@@ -165,8 +165,9 @@
                             <p id="pa">Estanteria</p>
                         </a>
                     </li>
+                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div>
                     <li>
-                        <a href="" id="aa"><span><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /></span>
+                        <a href="<?php echo base_url('carrito') ?>" id="aa"><span><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /></span>
                             <p id="pa">Carrito de Materiales</p>
                         </a>
                     </li>
@@ -199,7 +200,7 @@
     </nav>
 
     <div>
-        <a href="<?= base_url('/home') ?>"><img class="log" id="log" src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/></a>
+        <a href="<?= base_url('/home') ?>"><img class="log" id="log" src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100" /></a>
     </div>
 
     <script>
@@ -254,4 +255,12 @@
                 currency: 'COP'
             })
         };
+       
+
+        function mostrarMensajeCarrito(icon, text) {
+            Toast.fire({
+                icon: `${icon}`,
+                title: `${text}`
+            })
+        }
     </script>

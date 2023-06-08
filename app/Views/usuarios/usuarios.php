@@ -46,7 +46,7 @@
                                 <img id="imgModal" src="" width="25" />
                                 <span id="tituloModal"><!-- TEXTO DINAMICO--></span>
                             </h1>
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('')">X</button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -63,7 +63,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
-                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
+                                        <select disabled class="form-select form-select" name="tipoDoc" id="tipoDoc">
                                             <option value="1" selected>Cedula de Ciudadania</option>
                                             <option>-- Seleccione --</option>
                                         </select>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar" onclick="limpiarCampos('')"><!-- TEXTO DIANMICO --></button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar" ><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -801,6 +801,7 @@
             formData.append('rol', rol);
             formData.append('contra', contra);
             formData.append('foto', $('#foto')[0].files[0]);
+            var idUserT = ''
             $.ajax({
                 url: '<?php echo base_url('usuarios/insertar') ?>',
                 type: 'POST',
@@ -808,67 +809,65 @@
                 dataType: 'json',
                 contentType: false, // Importante: desactiva el tipo de contenido predeterminado
                 processData: false, // Importante: no proceses los datos
-                success: function(idUser) {
-                    console.log(idUser)
-                    telefonos.forEach(tel => {
-                        //Insertar Telefonos
-                        var formData = new FormData();
-                        formData.append('tp', tp);
-                        formData.append('idUsuario', idUser);
-                        formData.append('idTele', tel.id);
-                        formData.append('numero', tel.numero);
-                        formData.append('prioridad', tel.prioridad);
-                        formData.append('tipoUsu', 7);
-                        formData.append('tipoTel', tel.tipo);
-                        $.ajax({
-                            url: '<?php echo base_url('telefonos/insertar') ?>',
-                            type: 'POST',
-                            data: formData,
-                            dataType: 'json',
-                            contentType: false, // Importante: desactiva el tipo de contenido predeterminado
-                            processData: false, // Importante: no proceses los datos
-                            success: function(res) {
-                                if (res != 1) {
-                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                }
-                            }
-                        })
-                    });
-                    correos.forEach(correo => {
-                        //Insertar Correos
-                        var formData = new FormData();
-                        formData.append('tp', tp);
-                        formData.append('idCorreo', correo.id);
-                        formData.append('idUsuario', idUser);
-                        formData.append('correo', correo.correo);
-                        formData.append('prioridad', correo.prioridad);
-                        formData.append('tipoUsu', 7);
-                        $.ajax({
-                            url: '<?php echo base_url('email/insertar') ?>',
-                            type: 'POST',
-                            data: formData,
-                            dataType: 'json',
-                            contentType: false, // Importante: desactiva el tipo de contenido predeterminado
-                            processData: false, // Importante: no proceses los datos
-                            success: function(res) {
-                                if (res != 1) {
-                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                    setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
-                                }
-                            }
-                        })
-                    });
-                    if (tp == 2) {
-                        mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')
-                        validTel = true
-                        validCorreo = true
-                    } else {
-                        validTel = true
-                        validCorreo = true
-                        mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
-                    }
-                }
+               
             }).done(function(data) {
+                console.log(data)
+                telefonos.forEach(tel => {
+                    console.log(tel)
+                    //Insertar Telefonos
+                    formData.append('tp', tp);
+                    formData.append('idUsuario', data);
+                    formData.append('idTele', tel.id);
+                    formData.append('numero', tel.numero);
+                    formData.append('prioridad', tel.prioridad);
+                    formData.append('tipoUsu', 7);
+                    formData.append('tipoTel', tel.tipo);
+                    $.ajax({
+                        url: '<?php echo base_url('telefonos/insertar') ?>',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                        processData: false, // Importante: no proceses los datos
+                        success: function(res) {
+                            if (res != 1) {
+                                mostrarMensaje('error', '¡Ha ocurrido un error!')
+                            }
+                        }
+                    })
+                });
+                correos.forEach(correo => {
+                    //Insertar Correos
+                    formData.append('tp', tp);
+                    formData.append('idUsuario', data);
+                    formData.append('idCorreo', correo.id);
+                    formData.append('correo', correo.correo);
+                    formData.append('prioridad', correo.prioridad);
+                    formData.append('tipoUsu', 7);
+                    $.ajax({
+                        url: '<?php echo base_url('email/insertar') ?>',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false, // Importante: desactiva el tipo de contenido predeterminado
+                        processData: false, // Importante: no proceses los datos
+                        success: function(res) {
+                            if (res != 1) {
+                                mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                setTimeout(() => window.location.href = "<?= base_url('usuarios') ?>", 2000)
+                            }
+                        }
+                    })
+                });
+                if (tp == 2) {
+                    mostrarMensaje('success', '¡Se ha Actualizado el Usuario!')
+                    validTel = true
+                    validCorreo = true
+                } else {
+                    validTel = true
+                    validCorreo = true
+                    mostrarMensaje('success', '¡Se ha Registrado el Usuario!')
+                }
                 limpiarCampos()
                 $('#agregarUsuario').modal('hide')
                 tableUsuarios.ajax.reload(null, false); //Recargar tabla

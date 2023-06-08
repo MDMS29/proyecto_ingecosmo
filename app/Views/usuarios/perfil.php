@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <div class="container emp-profile">
@@ -60,7 +60,9 @@
                         <?php if (session('idRol') == 3) { ?>
                             <div class="profile-work">
                                 <p>Permisos</p>
-                                <p>Podrás ver los Insumos, Historial, Organizacion y Estanteria, tendrá el poder de agregar, editar y eliminar cualquiera de sus datos almacenados.</p>
+                                <p>Podrás ver los Insumos y Repuestos, Historial, Organizacion y Estanteria, Carrito para el uso de materiales.</p>
+                                <p>Tendrá el poder de
+                                    agregar y usar Materiales y verlos reflejados en el carrito, cambiar materiales de fila, ver la ubicacion de los productos en los estantes.</p>
                             </div>
                         <?php } ?>
                     </div>
