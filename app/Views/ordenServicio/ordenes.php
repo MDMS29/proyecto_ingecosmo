@@ -822,37 +822,53 @@
                 },
                 success: function(data) {
                     tablaOrdenes.ajax.reload(null, false)
-                    // if (tp == 2) {
-                    //     if (data == 1) {
-                    //         $('#agregarOrden').modal('hide')
-                    //         mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
-                    //     } else {
-                    //         mostrarMensaje('error', '¡Ha ocurrido un error!')
-                    //     }
-                    // } else {
-                    arrayInven.forEach(elem => {
-                        $.ajax({
-                            type: 'POST',
-                            url: "<?= base_url('inventarioOrden/insertar') ?>",
-                            data: {
-                                tp,
-                                id_orden: data,
-                                item: elem.item,
-                                checked: elem.checked
-                            },
-                            dataType: 'json',
-                            success: function(data) {
-                                console.log(data)
-                            }
+                    if (tp == 2) {
+                        arrayInven.forEach(elem => {
+                            $.ajax({
+                                type: 'POST',
+                                url: "<?= base_url('inventarioOrden/insertar') ?>",
+                                data: {
+                                    tp,
+                                    id_orden: data,
+                                    item: elem.item,
+                                    checked: elem.checked
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log(data)
+                                }
+                            })
                         })
-                    })
-                    $('#agregarOrden').modal('hide')
-                    mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
-                    $('#vehiculo').removeClass('d-none')
-                    $('#vehiculoT').val('')
-                    $('#vehiculoT').attr('hidden', '')
-                    obtenerVehiculos()
-                    // }
+                        if (data == 1) {
+                            $('#agregarOrden').modal('hide')
+                            mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
+                        } else {
+                            mostrarMensaje('error', '¡Ha ocurrido un error!')
+                        }
+                    } else {
+                        arrayInven.forEach(elem => {
+                            $.ajax({
+                                type: 'POST',
+                                url: "<?= base_url('inventarioOrden/insertar') ?>",
+                                data: {
+                                    tp,
+                                    id_orden: data,
+                                    item: elem.item,
+                                    checked: elem.checked
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log(data)
+                                }
+                            })
+                        })
+                        $('#agregarOrden').modal('hide')
+                        mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
+                        $('#vehiculo').removeClass('d-none')
+                        $('#vehiculoT').val('')
+                        $('#vehiculoT').attr('hidden', '')
+                        obtenerVehiculos()
+                    }
                 }
             })
         }

@@ -39,6 +39,11 @@ class InventarioOrden extends BaseController
         ];
 
         if ($tp == 2) {
+            if ($this->invOrden->update($idOrden, $dataInventario)) {
+                return json_encode(1);
+            } else {
+                return json_encode(2);
+            }
         } else {
             if ($this->invOrden->save($dataInventario)) {
                 return json_encode(1);
