@@ -33,7 +33,7 @@ class FilassModel extends Model
       $this->where('id_estante', $estante);
 
 
-      $this->groupBy('fila');
+      $this->groupBy('id_fila');
       $datos = $this->findAll();
       return $datos;
    }
@@ -48,7 +48,7 @@ class FilassModel extends Model
 
    public function traerFila()
    {
-      $this->select('filas.*, filas.fila as numeroFila');
+      $this->select('filas.*, filas.id_fila as numeroFila');
        $datos = $this->findAll();
        return $datos;
    }
@@ -79,6 +79,15 @@ class FilassModel extends Model
       $datos = $this->first();
       return $datos;
    }
+
+   public function obtenerMaterialesCate($categoria, $fila)
+    {
+        $this->select('id_material, nombre, fila');
+        $this->where('materiales.categoria_material', $categoria);
+        $this->where('materiales.fila', $fila);
+        $datos = $this->findAll();
+        return $datos;
+    }
 
    public function contadorFilas($id)
    {
