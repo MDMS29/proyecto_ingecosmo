@@ -463,9 +463,9 @@
                 }
             }
         ],
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        }
+        // "language": {
+        //     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        // }
     });
     //Descargar PDF
     function pdf(id) {
@@ -569,6 +569,7 @@
                             id: data['id_orden']
                         },
                         success: function(res) {
+                            console.log(res)
                             if (res.filter(r => r.item == 'Grua')[0] == undefined) {
                                 $('#tpInventario').val(1)
                             } else {
@@ -609,6 +610,8 @@
             $('#vehiculo').removeClass('d-none')
             $('#vehiculoT').attr('hidden', '')
             limpiarCampos('', 1)
+
+            $('#tpInventario').val(1)
 
             $('#btnGuardar').text('Guardar')
             $('#tituloModal').text('Agregar')
@@ -844,40 +847,39 @@
                     fechaSalida
                 },
                 success: function(data) {
+                    data = JSON.parse(data)
                     console.log(data)
-                    tablaOrdenes.ajax.reload(null, false)
                     arrayInven.forEach(elem => {
                         $.ajax({
                             type: 'POST',
                             url: "<?= base_url('inventarioOrden/insertar') ?>",
                             data: {
                                 tp: tpInv,
-                                id_orden: Number(data),
+                                idInv: elem.idInv,
+                                idOrden: data,
                                 item: elem.item,
                                 checked: elem.checked,
-                                idInv: elem.idInv
                             },
                             dataType: 'json',
                             success: function(data) {
-                                if (data == 1) {
-                                    if (tp == 1) {
-                                        mostrarMensaje('success', '¡Se ha Guardado la Orden se Servicio!')
-                                    } else {
-                                        mostrarMensaje('success', '¡Se ha Actualizado la Orden se Servicio!')
-                                    }
-                                    $('#agregarOrden').modal('hide')
-                                    $('#agregarOrden').modal('hide')
-                                    $('#vehiculo').removeClass('d-none')
-                                    $('#vehiculoT').val('')
-                                    $('#vehiculoT').attr('hidden', '')
-                                    obtenerVehiculos()
-                                } else {
-                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                if (data == 2) {
+                                    return mostrarMensaje('error', '¡Ha ocurrido un error!')
                                 }
                             }
                         })
                     })
-
+                    if (tp == 1) {
+                        mostrarMensaje('success', '¡Se ha Guardado la Orden se Servicio!')
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Actualizado la Orden se Servicio!')
+                    }
+                    $('#agregarOrden').modal('hide')
+                    $('#agregarOrden').modal('hide')
+                    $('#vehiculo').removeClass('d-none')
+                    $('#vehiculoT').val('')
+                    $('#vehiculoT').attr('hidden', '')
+                    obtenerVehiculos()
+                    tablaOrdenes.ajax.reload(null, false)
                 }
             })
         }
