@@ -39,7 +39,7 @@ class MaterialesModel extends Model
     {
         $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
         $this->join('estanteria', 'estanteria.id = materiales.estante');
-        $this->join('filas', 'filas.id_estante = materiales.fila');
+        $this->join('filas', 'filas.id_fila = materiales.fila');
 
         $this->where('id_material', $id_material);
         $datos = $this->first();
