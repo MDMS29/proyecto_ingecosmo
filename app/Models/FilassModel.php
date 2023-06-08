@@ -5,17 +5,17 @@ namespace App\Models;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Model;
 
-class FilasModel extends Model
+class FilassModel extends Model
 {
-   protected $table        = 'materiales';
-   protected $primaryKey   = 'id_material';
+   protected $table        = 'filas';
+   protected $primaryKey   = 'id_fila';
 
    protected $useAutoIncrement = true;
 
    protected $returnType     = 'array';
    protected $useSoftDeletes = false;
 
-   protected $allowedFields = ['id_vehiculo', 'id_proovedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'usuario_crea', 'fecha_crea', 'estado'];
+   protected $allowedFields = ['nombre', 'id_estante',  'usuario_crea', 'fecha_crea', 'estado'];
 
    protected $useTimestamps = true;
    protected $createdField  = 'fecha_crea';
@@ -28,9 +28,9 @@ class FilasModel extends Model
 
    public function obtenerFilas($estante)
    {
-      $this->select('materiales.*, materiales.estante as nombreFila, estanteria.nombre as estanteria, estanteria.n_iconos as icono');
-      $this->join('estanteria', 'materiales.estante = estanteria.id', 'left');
-      $this->where('estante', $estante);
+      $this->select('filas.*, filas.id_estante as nombreFila, estanteria.nombre as estanteria, estanteria.n_iconos as icono');
+      $this->join('estanteria', 'filas.id_estante = estanteria.id', 'left');
+      $this->where('id_estante', $estante);
 
 
       $this->groupBy('fila');
@@ -38,17 +38,17 @@ class FilasModel extends Model
       return $datos;
    }
 
-   public function traerFilas($fila)
+   public function traerFilas($id)
    {
-      $this->select('materiales.*, materiales.fila as numeroFila');
-      $this->where('fila', $fila);
+      $this->select('filas.*, filas.id_fila as numeroFila');
+      $this->where('fila', $id);
       $datos = $this->findAll();
       return $datos;
    }
 
    public function traerFila()
    {
-      $this->select('materiales.*, materiales.fila as numeroFila');
+      $this->select('filas.*, filas.fila as numeroFila');
        $datos = $this->findAll();
        return $datos;
    }
@@ -64,17 +64,17 @@ class FilasModel extends Model
    public function contadorArticulos($id)
    {
       $this->select('COUNT(*) as numeroFila');
-      $this->join('estanteria', 'materiales.estante = estanteria.id');
-      $this->groupBy('estante');
-      $this->where('estante', $id);
+      $this->join('estanteria', 'filas.id_estante = estanteria.id');
+      $this->groupBy('id_estante');
+      $this->where('id_estante', $id);
       $datos = $this->findAll();
       return $datos;
    }
 
    public function traerDetalles($id_material)
    {
-      $this->select('materiales.* ,estanteria.nombre as nombreEstante');
-      $this->join('estanteria', 'estanteria.id = materiales.estante');
+      $this->select('filas.* ,estanteria.nombre as nombreEstante');
+      $this->join('estanteria', 'estanteria.id = filas.id_estante');
       $this->where('id_material', $id_material);
       $datos = $this->first();
       return $datos;
