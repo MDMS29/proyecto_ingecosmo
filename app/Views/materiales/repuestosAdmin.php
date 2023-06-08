@@ -7,7 +7,7 @@
         <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Exixtencias</a> - <a class="toggle-vis btn" data-column="6">Fila</a>
     </div>
     <div class="table-responsive p-2">
-        <table class="table table-striped" id="tableRepuestos" width="100%" cellspacing="0">
+        <table class="table table-striped" id="tableRepuestosAdmin" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="modal-footer" id="modalFooter">
                     <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btnAccionF" id="btnAgregar">Agregar</button>
+                    <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
                 </div>
             </div>
         </div>
@@ -130,13 +130,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    var ContadorPRC = 0;
+    var Contador = 0;
 
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
         e.preventDefault();
         // Get the column API object
-        var column = tableRepuestos.column($(this).attr('data-column'));
+        var column = tableRepuestosAdmin.column($(this).attr('data-column'));
         // Toggle the visibility
         column.visible(!column.visible());
     });
@@ -160,13 +160,14 @@
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id ,
+                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
                 dataType: 'json',
                 success: function(data) {
                     $('#tp').val(2)
                     $('#tituloModal').text('Editar')
                     $('#imgModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
                     $('#imgModal').attr('width', '25')
+                    $('#id').val(data['id_material'])
                     $('#nombre').val(data['nombre'])
                     $('#existencias').val(data['cantidad_actual'])
                     $('#proveedor').val(data['razon_social'])
@@ -192,7 +193,7 @@
         }
     }
     // Tabla   
-    var tableRepuestos = $("#tableRepuestos").DataTable({
+    var tableRepuestosAdmin = $("#tableRepuestosAdmin").DataTable({
         ajax: {
             url: '<?= base_url('repuestosAdmin/obtenerRepuestos') ?>',
             method: "POST",
@@ -204,8 +205,8 @@
         columns: [{
                 data: null,
                 render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
+                    Contador = Contador + 1;
+                    return "<b>" + Contador + "</b>";
                 },
             },
             {
@@ -229,7 +230,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarRepuesto(' + data.id_material + ' , 2 )" data-bs-target="#agregarRepuesto" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Repuesto"></button>' +
 
-                        '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
                     );
                 },
             }
@@ -239,144 +240,66 @@
         },
 
     });
-    //Validacion de Razon Social
-    function buscarRazonSocial(id, inputRazonSocial) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + inputRazonSocial + '/' + 0,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgRaSo').text('')
-                    validRazonSocial = true
-                } else if (res[0] != null) {
-                    $('#msgRaSo').text('* Razon Social ya existente *')
-                    validRazonSocial = false
-                }
-            }
-        })
-    }
-    //Identificar si la Razon Social esta registrado
-    $('#RazonSocial').on('input', function(e) {
-        inputRazonSocial = $('#RazonSocial').val()
-        tp = $('#tp').val()
-        id = $('#id').val()
-        if (inputRazonSocial == '') {
-            $('#msgRaSo').text('')
-            validRazonSocial = true
-        }
-        if (tp == 1 && id == 0) {
-            buscarRazonSocial(0, inputRazonSocial)
-        } else if (tp == 2 && id != 0) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('proveedores/buscarProveedor/') ?>" + id + "/" + inputRazonSocial + '/' + 0,
 
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res[0].razon_social == inputRazonSocial) {
-                        $('#msgRaSo').text('')
-                        validRazonSocial = true
-                    } else {
-                        buscarRazonSocial(0, inputRazonSocial)
-                    }
-                }
-            })
-        }
-    })
-    //Validacion de Nit
-    function buscarNit(id, inputNit) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + 0 + "/" + 0 + '/' + inputNit,
-            dataType: 'JSON',
-            success: function(res) {
-                if (res[0] == null) {
-                    $('#msgNit').text('')
-                    validNit = true
-                } else if (res[0] != null) {
-                    $('#msgNit').text('* NIT ya existente *')
-                    validNit = false
-                }
-            }
-        })
-    }
-    //Identificar si el NIT esta registrado
-    $('#nit').on('input', function(e) {
-        inputNit = $('#nit').val()
-        tp = $('#tp').val()
-        id = $('#id').val()
-        if (tp == 1 && id == 0) {
-            buscarNit(0, inputNit)
-        } else if (tp == 2 && id != 0) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0 + '/' + inputNit,
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res[0].n_identificacion == inputNit) {
-                        $('#msgNit').text('')
-                        validNit = true
-                    } else {
-                        buscarNit(0, inputNit)
-                    }
-                }
-            })
-        }
-    })
-    //Envio de formulario
-    $('#formularioProveedores').on('submit', function(e) {
+    $('#formularioRepuesto').on('submit', function(e) {
         e.preventDefault()
-        $('#btnGuardar').text('Agregar')
         tp = $('#tp').val()
         id = $('#id').val()
-        RazonSocial = $('#RazonSocial').val()
-        nit = $('#nit').val()
-        direccion = $('#direccion').val()
+        nombre = $('#nombre').val()
+        existencias = $('#existencias').val()
+        proveedor = $('#proveedor').val()
+        orden = $('#orden').val()
+        bodega = $('#bodega').val()
 
-        //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial != true || validNit != true) {
-            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        if ([nombre, existencias, proveedor, orden, bodega].includes('')) {
+            mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
-                url: '<?php echo base_url('proveedores/insertar') ?>',
+                url: "<?= base_url('repuestosAdmin/insertar') ?>",
                 type: 'POST',
+                dataType: 'json',
                 data: {
-                    id,
                     tp,
-                    RazonSocial,
-                    nit,
-                    direccion
+                    id,
+                    nombre,
+                    existencias,
+                    proveedor,
+                    orden,
+                    bodega
                 },
-                success: function(idUser) {
+                success: function(res) {
+                    contador = 0
                     if (tp == 2) {
-                        mostrarMensaje('success', '¡Se ha Actualizado el Proveedor!')
+                        if (res == 1) {
+                            tableRepuestosAdmin.ajax.reload(null, false)
+                            $('#agregarRepuesto').modal('hide')
+                            mostrarMensaje('success', '¡Se ha actualizado el repuesto!')
+                        } else {
+                            mostrarMensaje('error', '¡Ha ocurrido un error!')
+                        }
                     } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Proveedor!')
+                        if (res == 1) {
+                            tableRepuestosAdmin.ajax.reload(null, false)
+                            $('#agregarRepuesto').modal('hide')
+                            mostrarMensaje('success', '¡Se ha guardado el repuesto!')
+                        } else {
+                            mostrarMensaje('error', '¡Ha ocurrido un error!')
+                        }
                     }
                 }
-            }).done(function(data) {
-                $('#agregarProveedor').modal('hide')
-                tableProveedores.ajax.reload(null, false); //Recargar tabla
-                $('#btnGuardar').removeAttr('disabled') //Desabilitar boton para evitar registros dobles
-                ContadorPRC = 0;
-                validRazonSocial = true;
-                validNit = true;
-                $('#msgRaSo').text('')
-                $('#msgNit').text('')
-            });
-        };
-
+            })
+        }
     })
+
     //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `EliminarProveedor(${$(e.relatedTarget).data('href')})`)
+        $(this).find('#btnSi').attr('onclick', `EliminarRepuesto(${$(e.relatedTarget).data('href')})`)
     })
 
-    function EliminarProveedor(id) {
+    function EliminarRepuesto(id) {
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('proveedores/cambiarEstado') ?>",
+            url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
             data: {
                 id,
                 estado: 'I'
@@ -384,7 +307,10 @@
         }).done(function(data) {
             mostrarMensaje('success', data)
             $('#modalConfirmarP').modal('hide')
-            tableProveedores.ajax.reload(null, false)
+            tableRepuestosAdmin.ajax.reload(null, false)
         })
     }
+    $('#btnNo').click(function() {
+        $("#modalConfirmarP").modal("hide");
+    });
 </script>

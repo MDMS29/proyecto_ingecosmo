@@ -27,7 +27,6 @@ class RepuestosAdmin extends BaseController
         $this->bodegas = new EstanteriaModel();
         $this->param = new ParamModel();
         $this->ordenes = new OrdenesModel();
-
     }
     public function index()
     {
@@ -40,7 +39,7 @@ class RepuestosAdmin extends BaseController
     }
     public function obtenerRepuestos()
     {
-        
+
         $estado = $this->request->getPost('estado');
         $res = $this->respuestosAdmin->obtenerRepuestos($estado);
         return json_encode($res);
@@ -51,42 +50,55 @@ class RepuestosAdmin extends BaseController
         // $id = $this->request->getPost('id');
         $res = $this->respuestosAdmin->buscarRepuesto($id);
         return json_encode($res);
-    
     }
-
-    
 
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
+        $id = $this->request->getPost('id');
+        $nombre = $this->request->getPost('nombre');
+        $existencias = $this->request->getPost('existencias');
+        $proveedor = $this->request->getPost('proveedor');
+        $orden = $this->request->getPost('orden');
+        $bodega = $this->request->getPost('bodega');
         $usuCrea = session('id');
-        if ($this->request->getMethod() == "post") {
-            if ($tp == 1) {
-                $this->respuestosAdmin->save([
-                    'nombre' => $this->request->getPost('nombre'),
-                    'cantidad_actual' => $this->request->getPost('existencia'),
-                    'placa' => $this->request->getPost('placa'),
-                    'precio_venta' => $this->request->getPost('precio'),
-                    'razon_social' => $this->request->getPost('proveedores'),
-                    'usuario_crea' => $usuCrea 
-
-                ]);
+        $dataRepuesto = [
+            'nombre' => $nombre,
+            'id_orden' => $orden,
+            'id_proveedor' => $proveedor,
+            'tipo_material' => 10,
+            'cantidad_actual' => $existencias,
+            'estante' => $bodega,
+            'usuario_crea' => $usuCrea
+        ];
+        if ($tp == 2) {
+            if ($this->respuestosAdmin->update($id, $dataRepuesto)) {
+                return json_encode(1);
             } else {
-                $this->respuestosAdmin->update(
-                    $this->request->getPost('id'),
-                    [
-                    'nombre' => $this->request->getPost('nombre'),
-                    'cantidad_actual' => $this->request->getPost('existencia'),
-                    'placa' => $this->request->getPost('placa'),
-                    'precio_venta' => $this->request->getPost('precio'),
-                    'razon_social' => $this->request->getPost('proveedores'),
-                    'usuario_crea' => $usuCrea 
-
-                    ]
-                );
+                return json_encode(1);
+            }
+        } else {
+            if ($this->respuestosAdmin->save($dataRepuesto)) {
+                return json_encode(1);
+            } else {
+                return json_encode(1);
             }
         }
     }
+
+    public function cambiarEstado()
+    {
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
+        if ($this->respuestosAdmin->update($id, ['estado' => $estado])) {
+            if ($estado == 'A') {
+                return '¡Se ha reestablecido el Repuesto!';
+            } else {
+                return '¡Se ha eliminado el Repuesto!';
+            }
+        }
+    }
+
 
     public function eliminados()
     {
@@ -97,6 +109,4 @@ class RepuestosAdmin extends BaseController
         echo view('/principal/sidebar');
         echo view('/materiales/repuestosAdminEliminados', $data);
     }
-
-  
 }
