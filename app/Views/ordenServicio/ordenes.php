@@ -168,8 +168,9 @@
                                     </div>
                                 </div>
                             </details>
-                            <details>
+                            <details id="datailInv">
                                 <summary>Inventario Vehiculo</summary>
+                                <input type="text" id="tpInventario">
                                 <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="text-center">
@@ -179,6 +180,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <input type="text" id="idGrua">
+                                        <input type="text" id="idLlaves">
+                                        <input type="text" id="idDocu">
                                         <tr class="text-center">
                                             <td>Grua</td>
                                             <td><input type="checkbox" name="grua" id="grua"></td>
@@ -520,6 +524,7 @@
                 dataType: 'json',
                 success: function(data) {
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
+                    $('#datailInv').removeAttr('open')
                     $('#tp').val(2)
                     $('#id').val(id)
                     $('#ordenTrabajo').removeAttr('disabled')
@@ -564,9 +569,18 @@
                             id: data['id_orden']
                         },
                         success: function(res) {
-                            $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked
-                            $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked
-                            $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked
+                            if (res.filter(r => r.item == 'Grua')[0] == undefined) {
+                                $('#tpInventario').val(1)
+                            } else {
+                                $('#tpInventario').val(2)
+                                $('#idGrua').val(res.filter(r => r.item == 'Grua')[0].id_inv_orden)
+                                $('#idLlaves').val(res.filter(r => r.item == 'Llaves')[0].id_inv_orden)
+                                $('#idDocu').val(res.filter(r => r.item == 'Documentos')[0].id_inv_orden)
+
+                                $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked == 'true' ? true : false
+                                $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked == 'true' ? true : false
+                                $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked == 'true' ? true : false
+                            }
                         }
                     })
 
@@ -588,6 +602,7 @@
                     $('#ordenTrabajo').val(parseInt(data['n_orden']) + 1)
                 }
             })
+            $('#datailInv').removeAttr('open')
             $('#tp').val(1)
             $('#id').val(id)
             $('#aggVehi').val(0)
@@ -742,6 +757,7 @@
         e.preventDefault()
         aggVehi = $('#aggVehi').val()
         tp = $('#tp').val()
+        tpInv = $('#tpInventario').val()
         id = $('#id').val()
         orden = $('#ordenTrabajo').val()
 
@@ -770,17 +786,24 @@
 
 
         //Inventario
+        idGrua = $('#idGrua').val()
+        idLlaves = $('#idLlaves').val()
+        idDocs = $('#idDocu').val()
+
         grua = $('#grua')[0].checked
         llaves = $('#llaves')[0].checked
         documentos = $('#documentos')[0].checked
         arrayInven = [{
+                idInv: idGrua,
                 item: 'Grua',
                 checked: grua
             },
             {
+                idInv: idLlaves,
                 item: 'Llaves',
                 checked: llaves
             }, {
+                idInv: idDocs,
                 item: 'Documentos',
                 checked: documentos
             }
@@ -821,54 +844,40 @@
                     fechaSalida
                 },
                 success: function(data) {
+                    console.log(data)
                     tablaOrdenes.ajax.reload(null, false)
-                    if (tp == 2) {
-                        arrayInven.forEach(elem => {
-                            $.ajax({
-                                type: 'POST',
-                                url: "<?= base_url('inventarioOrden/insertar') ?>",
-                                data: {
-                                    tp,
-                                    id_orden: data,
-                                    item: elem.item,
-                                    checked: elem.checked
-                                },
-                                dataType: 'json',
-                                success: function(data) {
-                                    console.log(data)
+                    arrayInven.forEach(elem => {
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?= base_url('inventarioOrden/insertar') ?>",
+                            data: {
+                                tp: tpInv,
+                                id_orden: Number(data),
+                                item: elem.item,
+                                checked: elem.checked,
+                                idInv: elem.idInv
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                if (data == 1) {
+                                    if (tp == 1) {
+                                        mostrarMensaje('success', '¡Se ha Guardado la Orden se Servicio!')
+                                    } else {
+                                        mostrarMensaje('success', '¡Se ha Actualizado la Orden se Servicio!')
+                                    }
+                                    $('#agregarOrden').modal('hide')
+                                    $('#agregarOrden').modal('hide')
+                                    $('#vehiculo').removeClass('d-none')
+                                    $('#vehiculoT').val('')
+                                    $('#vehiculoT').attr('hidden', '')
+                                    obtenerVehiculos()
+                                } else {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
                                 }
-                            })
+                            }
                         })
-                        if (data == 1) {
-                            $('#agregarOrden').modal('hide')
-                            mostrarMensaje('success', '¡Se ha actualizado la orden se servicio!')
-                        } else {
-                            mostrarMensaje('error', '¡Ha ocurrido un error!')
-                        }
-                    } else {
-                        arrayInven.forEach(elem => {
-                            $.ajax({
-                                type: 'POST',
-                                url: "<?= base_url('inventarioOrden/insertar') ?>",
-                                data: {
-                                    tp,
-                                    id_orden: data,
-                                    item: elem.item,
-                                    checked: elem.checked
-                                },
-                                dataType: 'json',
-                                success: function(data) {
-                                    console.log(data)
-                                }
-                            })
-                        })
-                        $('#agregarOrden').modal('hide')
-                        mostrarMensaje('success', '¡Se ha registrado la orden se servicio!')
-                        $('#vehiculo').removeClass('d-none')
-                        $('#vehiculoT').val('')
-                        $('#vehiculoT').attr('hidden', '')
-                        obtenerVehiculos()
-                    }
+                    })
+
                 }
             })
         }

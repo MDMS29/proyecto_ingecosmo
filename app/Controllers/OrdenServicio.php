@@ -191,7 +191,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(49);
         $pdf->SetX(124);
         $pdf->Cell(25, 5, utf8_decode('INGRESO EN GRÚA'), 0, 1, 'L');
-        
+
         $pdf->SetY(49);
         $pdf->SetX(170);
         $pdf->Cell(25, 5,  $res['grua'] == 1 ? 'SI' :  'NO', 0, 1, 'L');
@@ -416,13 +416,13 @@ class OrdenServicio extends BaseController
                             'tipo_movimiento' => $tipoMov
                         ]);
                         $this->movimiento->save($dataMovimiento); //Movimiento
-                        return json_encode(1);
+                        return json_encode((int)$idOrden);
                     } else {
                         return json_encode(2);
                     }
                 } else {
                     if ($this->propietario->update($res['id_propietario'], $dataPropie)) {
-                        return json_encode(1);
+                        return json_encode((int)$idOrden);
                     } else {
                         return json_encode(2);
                     }
