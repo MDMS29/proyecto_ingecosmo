@@ -295,7 +295,6 @@
                 $('#RazonSocial').val(res[0]['razon_social'])
                 $('#nit').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
-                $('#btnGuardar').text('Actualizar')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 56,

@@ -4,7 +4,7 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" />Administrar Repuestos</h2>
     <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-        <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Exixtencias</a> - <a class="toggle-vis btn" data-column="6">Fila</a>
+        <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Exixtencias</a>
     </div>
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tableRepuestosAdmin" width="100%" cellspacing="0">
@@ -50,7 +50,6 @@
                         <div class="mb-3" style="width: 100%;">
                             <label for="exampleDataList" class="col-form-label">Nombre:</label>
                             <input class="form-control" id="nombre" name="nombre" placeholder="">
-                            <input class="form-control" id="nombreHidden" name="nombreHidden" hidden>
                             <small id="msgAgregar" class="invalidoInsumo"></small>
                         </div>
                         <div class="mb-3" style="width: 100%;">
@@ -307,6 +306,7 @@
         }).done(function(data) {
             mostrarMensaje('success', data)
             $('#modalConfirmarP').modal('hide')
+            contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
         })
     }
