@@ -4,19 +4,21 @@
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
-:root{
+:root {
     --azulBoton: #161666;
     --rojoBoton: #E25050;
+    --rojoHover: #ec6363;
     --grisInput: #ECEAEA;
-    --grisModal: #D9D9D9;  /* gris mas oscuro */
+    --grisModal: #D9D9D9;
+    /* gris mas oscuro */
 }
 
 * {
@@ -40,17 +42,22 @@ body {
     border-radius: 10px;
     width: 400px;
     height: 460px;
+    background-color: #ffffff69;
+    box-shadow: -5px 7px 20px 9px rgba(0, 0, 0, 10%);
 }
 
-form{
+form {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+    padding: 35px;
 }
+
 .form-control {
-    background-color: var(--grisInput) !important; 
-  }
+    background-color: var(--grisInput) !important;
+}
 
 .logo {
     position: absolute;
@@ -64,12 +71,13 @@ form{
     width: 160px;
 }
 
-.texto{
+.texto {
     font-weight: bolder;
     font-size: 20px;
+    margin-bottom: 3px;
 }
 
-.texto-titulo{
+.texto-titulo {
     font-weight: bolder;
     font-size: 25px;
 }
@@ -78,30 +86,40 @@ form{
     color: #1B335B;
 }
 
-input, input:focus {
+input,
+input:focus {
     background-color: var(--grisInput);
 }
 
 .botones-login {
     padding-top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.btn-ingresar{
+.btn-ingresar {
     font-weight: bolder;
     /* text-align: center; */
     font-family: 'Nunito', sans-serif;
     color: #FFFFFF;
     border-radius: 5px;
     border: none;
-    width: 100px;
-    padding: 3px;
-    background-color:var(--rojoBoton);
+    width: 90%;
+    padding: 5px;
+    background-color: var(--rojoBoton);
+    transition: all .3s ease;
 }
 
-.alerta{
+.btn-ingresar:hover {
+    background-color: var(--rojoHover);
+    transform: translateY(-2px);
+}
+
+.alerta {
     border: 1px solid var(--rojoBoton);
     border-radius: 5px;
     text-align: center;
-    color:var(--rojoBoton) ;
+    color: var(--rojoBoton);
     margin-top: 10px;
 }

@@ -17,12 +17,12 @@
 <body class="container-lg d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="login">
         <form id="formulario">
-            <p class="texto-titulo" style="padding-bottom: 15px;">LOGIN</p>
+            <p class="texto-titulo" >LOGIN</p>
             <div class="logo">
                 <img class="logo-ingecosmo" src="<?php echo base_url('/img/logo.png'); ?>">
             </div>
-            <div class="bloque-items">
-                <p class="texto">NUMERO DE IDENTIFICACION</p>
+            <div class="bloque-items" style="width: 100%;">
+                <p class="texto">USUARIO</p>
                 <input type="number" name="usuario" id="usuario" class="form-control">
                 <br>
                 <p class="texto">CONTRASEÑA</p>

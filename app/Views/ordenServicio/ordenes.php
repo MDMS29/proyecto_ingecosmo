@@ -70,6 +70,7 @@
                                     <small id="msgPlaca" class="invalido"></small>
                                 </div>
                             </div>
+                            <!-- INFORMACION RESPONSABLE -->
                             <details open>
                                 <summary>Informacion Responsable</summary>
                                 <div class="d-flex column-gap-3" style="width: 100%">
@@ -118,7 +119,7 @@
                                     </div>
                                 </div>
                             </details>
-
+                            <!-- INFORMACION VEHICULO  -->
                             <details open>
                                 <summary>Informacion Automovil</summary>
                                 <div class="d-flex column-gap-3" style="width: 100%">
@@ -168,35 +169,78 @@
                                     </div>
                                 </div>
                             </details>
+                            <!-- INVENTARIO DE VEHICULO -->
                             <details id="datailInv">
                                 <summary>Inventario Vehiculo</summary>
                                 <input type="text" id="tpInventario">
                                 <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="text-center">
+                                            <th hidden></th>
                                             <th>Item</th>
                                             <th>Check</th>
-                                            <th>Observacion</th>
+                                            <th colspan="1" style="width:20px;">Cantidad</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <input type="text" id="idGrua">
-                                        <input type="text" id="idLlaves">
-                                        <input type="text" id="idDocu">
                                         <tr class="text-center">
+                                            <td hidden><input type="text" id="idGrua"></td>
                                             <td>Grua</td>
                                             <td><input type="checkbox" name="grua" id="grua"></td>
-                                            <td><textarea rows="1" cols="40"></textarea></td>
+                                            <td></td>
                                         </tr>
                                         <tr class="text-center">
+                                            <td hidden><input type="text" id="idLlaves"></td>
                                             <td>Llaves</td>
                                             <td><input type="checkbox" name="llaves" id="llaves"></td>
-                                            <td><textarea rows="1" cols="40"></textarea></td>
+                                            <td></td>
                                         </tr>
                                         <tr class="text-center">
+                                            <td hidden><input type="text" id="idDocu"></td>
                                             <td>Documentos</td>
                                             <td><input type="checkbox" name="documentos" id="documentos"></td>
-                                            <td><textarea rows="1" cols="40"></textarea></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idRetro"></td>
+                                            <td>Retrovisores</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="retrovisores" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><!-- <input class="text-center" type="number" id="cantRetro" style="width:35px; padding:1px 2px;"> --></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idRetroInter"></td>
+                                            <td>Retrovisores Internos</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="retroInter" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><!-- <input class="text-center" type="number" id="cantRetro" style="width:35px; padding:1px 2px;"> --></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idPanora"></td>
+                                            <td>Panorámicos</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="panoramicos" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><input class="text-center" type="number" id="cantPano" style="width:35px; padding:1px 2px;"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -280,7 +324,8 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?= base_url('js/swalfire.js')?>"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
 <script>
     var validOrden = true
@@ -569,7 +614,6 @@
                             id: data['id_orden']
                         },
                         success: function(res) {
-                            console.log(res)
                             if (res.filter(r => r.item == 'Grua')[0] == undefined) {
                                 $('#tpInventario').val(1)
                             } else {
@@ -577,10 +621,19 @@
                                 $('#idGrua').val(res.filter(r => r.item == 'Grua')[0].id_inv_orden)
                                 $('#idLlaves').val(res.filter(r => r.item == 'Llaves')[0].id_inv_orden)
                                 $('#idDocu').val(res.filter(r => r.item == 'Documentos')[0].id_inv_orden)
+                                $('#idRetro').val(res.filter(r => r.item == 'Retrovisores')[0].id_inv_orden)
+                                $('#idRetroInter').val(res.filter(r => r.item == 'RetroInter')[0].id_inv_orden)
+                                $('#idPanora').val(res.filter(r => r.item == 'Panoramicos')[0].id_inv_orden)
 
                                 $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked == 'true' ? true : false
                                 $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked == 'true' ? true : false
                                 $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked == 'true' ? true : false
+
+                                $('#retrovisores').val(res.filter(r => r.item == 'Retrovisores')[0].checked)
+                                $('#retroInter').val(res.filter(r => r.item == 'RetroInter')[0].checked)
+                                $('#panoramicos').val(res.filter(r => r.item == 'Panoramicos')[0].checked)
+
+                                $('#cantPano').val(res.filter(r => r.item == 'Panoramicos')[0].cantidad)
                             }
                         }
                     })
@@ -789,26 +842,60 @@
 
 
         //Inventario
+        // IDs
         idGrua = $('#idGrua').val()
         idLlaves = $('#idLlaves').val()
         idDocs = $('#idDocu').val()
+        idRetro = $('#idRetro').val()
+        idRetroInter = $('#idRetroInter').val()
+        idPanora = $('#idPanora').val()
 
+        // Checkeds
         grua = $('#grua')[0].checked
         llaves = $('#llaves')[0].checked
         documentos = $('#documentos')[0].checked
+
+        // Selects
+        retrovisores = $('#retrovisores').val()
+        retroInter = $('#retroInter').val()
+        panoramicos = $('#panoramicos').val()
+        
+        //Cantidades
+        cantPano = $('#cantPano').val()
+        
+
         arrayInven = [{
                 idInv: idGrua,
                 item: 'Grua',
-                checked: grua
+                checked: grua,
+                cantidad : 0
             },
             {
                 idInv: idLlaves,
                 item: 'Llaves',
-                checked: llaves
+                checked: llaves,
+                cantidad : 0
             }, {
                 idInv: idDocs,
                 item: 'Documentos',
-                checked: documentos
+                checked: documentos,
+                cantidad : 0
+            }, {
+                idInv: idRetro,
+                item: 'Retrovisores',
+                checked: retrovisores,
+                cantidad : 0
+            }, {
+                idInv: idRetroInter,
+                item: 'RetroInter',
+                checked: retroInter,
+                cantidad : 0
+            },
+            {
+                idInv: idPanora,
+                item: 'Panoramicos',
+                checked: panoramicos,
+                cantidad : cantPano
             }
         ]
         if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
@@ -858,6 +945,7 @@
                                 idOrden: data,
                                 item: elem.item,
                                 checked: elem.checked,
+                                cantidad : Number(elem.cantidad)
                             },
                             dataType: 'json',
                             success: function(data) {

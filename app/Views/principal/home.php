@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url("css/principal/homee.css") ?>">
+<link rel="stylesheet" href="<?php echo base_url("css/principal/home.css") ?>">
 </link>
 
 

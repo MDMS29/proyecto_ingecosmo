@@ -21,6 +21,8 @@ body {
   border-radius: 10px;
   padding: 40px;
   flex-wrap: wrap;
+  background-color: #ffffff69;
+  box-shadow: -5px 7px 20px 9px rgba(0, 0, 0, 10%);
 }
 
 .contenido1 {
