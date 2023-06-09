@@ -137,7 +137,6 @@ class MaterialesModel extends Model
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
         $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor', 'left');
         $this->where('materiales.tipo_material', '10');
-        $this->where('materiales.estado', 'A');
         $this->where('id_material', $id_material);
         $data = $this->first();
         return $data;
