@@ -50,9 +50,17 @@ input[class="form-control"] {
   }
 
 
-  .select{
+  .select1{
     margin-bottom: 10px;
     margin-right: 40px;
+    background-color: #161666;
+    color: white;
+  }
+  .contadorProductos{
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: auto;
+    gap: 10px;
   }
 
 .product-detail {
@@ -98,7 +106,7 @@ input[class="form-control"] {
   .shopping-cart {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
-    gap: 30px;
+    gap: 10px;
     margin-bottom: 24px;
     align-items: center;
   }
@@ -123,8 +131,9 @@ input[class="form-control"] {
     background-color: var(--azulBase);
     border-radius: 8px;
     border: none;
+    align-items: center;
     color: var(--white);
-    width: 100%;
+    width: 80%;
     cursor: pointer;
     font-size: var(--md);
     font-weight: bold;
@@ -134,4 +143,11 @@ input[class="form-control"] {
     .product-detail {
       width: 100%;
     }
+  }
+
+  .botonCheckout{
+      display: flex;
+      justify-content: center;
+      width: 80%;
+      margin-top: 20px;
   }
