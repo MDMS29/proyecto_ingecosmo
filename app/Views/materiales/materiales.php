@@ -156,17 +156,17 @@
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Precio de Venta:</label>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">$</span>
-                <input class="form-control" type="number" id="precioVenta" name="precioVenta" disabled>
-              </div>
+              <span class="input-group-text" id="basic-addon1">$</span>
+              <input class="form-control" type="number" id="precioVenta" name="precioVenta" disabled>
+            </div>
           </div>
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Precio de Compra:</label>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">$</span>
-                <input class="form-control" type="number" id="precioCompra" name="precioCompra" disabled>
-              </div>
+              <span class="input-group-text" id="basic-addon1">$</span>
+              <input class="form-control" type="number" id="precioCompra" name="precioCompra" disabled>
+            </div>
           </div>
 
           <div class="mb-3" style="width: 90%;">
@@ -297,7 +297,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF" id="btnValidar" ><img src="<?= base_url('img/carrito.png') ?>" alt="icon-plus" width="20">Agregar al carrito </button>
+          <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/carrito.png') ?>" alt="icon-plus" width="20">Agregar al carrito </button>
 
 
         </div>
@@ -639,10 +639,25 @@
       },
       success: function(data) {
         if (data == 1) {
-          mostrarMensaje('success', '¡Insumo usado con exito!')
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Insumo agregado al carrito'
+          })
           setTimeout(() => {
             window.location.reload();
-          }, 2000)
+          }, 2500)
         } else {
           return mostrarMensaje('error', '¡Ha ocurrido un error!')
         }

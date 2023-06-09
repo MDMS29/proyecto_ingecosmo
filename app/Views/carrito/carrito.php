@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="<?= base_url('css/carrito.css') ?>">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <!-- contenedor card -->
 <div id="content" class="p-4 p-md-5">
-    <div class="MasBaterias" id="MasBaterias">
-        <h2>Carrito Insumos</h2>
+    <div class="detallesCarrito" id="detallesCarrito">
+        <h2>Detalles</h2>
     </div>
+
 
     <div class="contenedor-d">
         <aside class="product-detail">
@@ -27,8 +28,8 @@
                         </figure>
                         <p>Remache3</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -39,14 +40,14 @@
 
                         <p>Pintura34</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
 
-                         <div class="cerrar">
+                        <div class="cerrar">
 
-                             <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
-                         </div>
+                            <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
+                        </div>
                     </div>
                     <div class="shopping-cart">
                         <figure>
@@ -56,8 +57,10 @@
                         <p>Lubricante23</p>
 
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+
+
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
 
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
@@ -69,8 +72,8 @@
 
                         <p>Disco32</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -82,8 +85,8 @@
                         <p>Remache3</p>
 
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
 
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
@@ -95,8 +98,8 @@
 
                         <p>Pintura34</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -107,8 +110,8 @@
 
                         <p>Lubricante23</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -119,8 +122,8 @@
 
                         <p>Disco32</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -131,8 +134,8 @@
 
                         <p>Remache3</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -143,8 +146,8 @@
 
                         <p>Pintura34</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -155,8 +158,8 @@
 
                         <p>Lubricante23</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -167,8 +170,8 @@
 
                         <p>Disco32</p>
                         <div class="contadorProductos">
-                        <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
-                        <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
+                            <input class="btn btnAccionF btn-sm" type="button" title="Agregar Producto" Value="+" onclick="agregar()"> 1
+                            <input class="btn btnRedireccion btn-sm" type="button" title="Borrar Producto" Value="-" onclick="borrar()">
                         </div>
                         <button class="btn btnRegresar"><img src="<?= base_url('img/cerrar-ventana.png') ?>" width="30" height="30" alt="icon-plus"></button>
                     </div>
@@ -176,14 +179,74 @@
                 </div>
             </scroll-container>
             <div class=botonCheckout>
-            <button class="primary-button">
+                <button class="primary-button">
                     Checkout
                 </button>
             </div>
     </div>
+
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/remaches.png" width="50" height="50" alt="remaches">
+        <p>Remache3</p>
+        
+    </div>
+    <hr class="lala" />
+
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/pinturas.png" width="50" height="50" alt="remaches">
+        <p>Pintura34</p>
+    </div>
+    <hr class="lala" />
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/lubricantes.png" width="50" height="50" alt="remaches">
+        <p>Lubricante23</p>
+    </div>
+    <hr class="lala" />
+
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/discos.png" width="50" height="50" alt="remaches">
+        <p>Disco32</p>
+    </div>
+    <hr class="lala" />
+
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/remaches.png" width="50" height="50" alt="remaches">
+        <p>Remache3</p>
+    </div>
+    <hr class="lala" />
+
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/pinturas.png" width="50" height="50" alt="remaches">
+        <p>Pintura34</p>
+    </div>
+    <hr class="lala" />
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/lubricantes.png" width="50" height="50" alt="remaches">
+        <p>Lubricante23</p>
+    </div>
+    <hr class="lala" />
+
+    <div class="shopping-cart1">
+
+        <img src="<?php echo base_url(); ?>/img/discos.png" width="50" height="50" alt="remaches">
+        <p>Disco32</p>
+    </div>
+    <hr class="lala" />
+
     </aside>
 
 </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+
+</script>

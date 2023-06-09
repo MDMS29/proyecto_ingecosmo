@@ -106,7 +106,7 @@ input[class="form-control"] {
   .shopping-cart {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 24px;
     align-items: center;
   }
@@ -150,4 +150,32 @@ input[class="form-control"] {
       justify-content: center;
       width: 80%;
       margin-top: 20px;
+  }
+
+  .contenerDetalles{
+      display: flex;
+      gap: 20px;
+      margin-top: 5%;
+  }
+
+  .shopping-cart1 {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    align-items: center;
+  }
+
+  .shopping-cart1 p:nth-child(2) {
+    color: var(--azulBase);
+    font-weight: 700;
+
+  }
+  .shopping-cart1 p:nth-child(3) {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .lala{
+    background-color: black;
+    width: 70%;
   }
