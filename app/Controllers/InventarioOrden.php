@@ -31,6 +31,7 @@ class InventarioOrden extends BaseController
         $usuarioCrea = session('id');
 
         $dataInventario = [
+            'id_orden' => $idOrden,
             'item' => $item,
             'checked' => $checked,
             'observacion' => '',
@@ -43,8 +44,6 @@ class InventarioOrden extends BaseController
                 return json_encode(2);
             }
         } else {
-            array_push($dataInventario, ['id_orden' => $idOrden]);
-            echo $dataInventario;
             if ($this->invOrden->save($dataInventario)) {
                 return json_encode(1);
             } else {

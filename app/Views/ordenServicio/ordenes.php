@@ -848,7 +848,6 @@
                 },
                 success: function(data) {
                     data = JSON.parse(data)
-                    console.log(data)
                     arrayInven.forEach(elem => {
                         $.ajax({
                             type: 'POST',
