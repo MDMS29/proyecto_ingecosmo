@@ -24,19 +24,19 @@ class InventarioOrden extends BaseController
     {
         $tp = $this->request->getPost('tp');
         $idInv = $this->request->getPost('idInv');
-        $idOrden = $this->request->getPost('id_orden');
+        $idOrden = $this->request->getVar('idOrden');
         $item = $this->request->getPost('item');
         $checked = $this->request->getPost('checked');
         $observacion = $this->request->getPost('observacion');
         $usuarioCrea = session('id');
 
         $dataInventario = [
+            'id_orden' => $idOrden,
             'item' => $item,
             'checked' => $checked,
-            'observacion' => $observacion,
+            'observacion' => '',
             'usuario_crea' => $usuarioCrea
         ];
-
         if ($tp == 2) {
             if ($this->invOrden->update($idInv, $dataInventario)) {
                 return json_encode(1);
@@ -44,8 +44,6 @@ class InventarioOrden extends BaseController
                 return json_encode(2);
             }
         } else {
-            array_push($dataInventario, ['id_orden' => $idOrden]);
-            var_dump($dataInventario);
             if ($this->invOrden->save($dataInventario)) {
                 return json_encode(1);
             } else {

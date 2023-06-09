@@ -39,7 +39,7 @@ class MaterialesModel extends Model
     {
         $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
         $this->join('estanteria', 'estanteria.id = materiales.estante');
-        $this->join('filas', 'filas.id_estante = materiales.fila');
+        $this->join('filas', 'filas.id_fila = materiales.fila');
 
         $this->where('id_material', $id_material);
         $datos = $this->first();
@@ -183,7 +183,8 @@ class MaterialesModel extends Model
     //Insumos
     public function obtenerInsumoAdmin($estado)
     {
-        $this->select('materiales.id_material, materiales.nombre, materiales.cantidad_actual, materiales.fila, materiales.precio_venta, materiales.precio_compra, materiales.cantidad_vendida, param_detalle.nombre as categoria, vw_param_det.nombre as tipo, estanteria.nombre as nomEstante');
+        $this->select('materiales.id_material, materiales.nombre, materiales.cantidad_actual, materiales.fila, materiales.precio_venta, materiales.precio_compra, materiales.cantidad_vendida, param_detalle.nombre as categoria, vw_param_det.nombre as tipo, estanteria.nombre as nomEstante, filas.nombre as fila');
+        $this->join('filas', 'filas.id_fila = materiales.fila', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = materiales.tipo_material', 'left');
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');

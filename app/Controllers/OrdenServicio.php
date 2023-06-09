@@ -416,13 +416,13 @@ class OrdenServicio extends BaseController
                             'tipo_movimiento' => $tipoMov
                         ]);
                         $this->movimiento->save($dataMovimiento); //Movimiento
-                        return json_encode((int)$idOrden);
+                        return json_encode($idOrden);
                     } else {
                         return json_encode(2);
                     }
                 } else {
                     if ($this->propietario->update($res['id_propietario'], $dataPropie)) {
-                        return json_encode((int)$idOrden);
+                        return json_encode($idOrden);
                     } else {
                         return json_encode(2);
                     }
