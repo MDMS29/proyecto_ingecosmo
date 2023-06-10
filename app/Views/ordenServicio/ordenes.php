@@ -1018,11 +1018,11 @@
                                 $('#idLlaves').val(res.filter(r => r.item == 'Llaves')[0].id_inv_orden)
                                 $('#idDocu').val(res.filter(r => r.item == 'Documentos')[0].id_inv_orden)
                                 $('#idRetro').val(res.filter(r => r.item == 'Retrovisores')[0].id_inv_orden)
-                                $('#idRetroInter').val(res.filter(r => r.item == 'Retrovisores Internos')[0].id_inv_orden)
+                                $('#idRetroInter').val(res.filter(r => r.item == 'Retrovisor Interno')[0].id_inv_orden)
                                 $('#idPanora').val(res.filter(r => r.item == 'Panoramicos')[0].id_inv_orden)
                                 $('#idRadio').val(res.filter(r => r.item == 'Radio')[0].id_inv_orden)
                                 $('#idParlan').val(res.filter(r => r.item == 'Parlantes')[0].id_inv_orden)
-                                $('#idRejillas').val(res.filter(r => r.item == 'Rejillas')[0].id_inv_orden)
+                                $('#idRejillas').val(res.filter(r => r.item == 'Rejillas A/A')[0].id_inv_orden)
                                 $('#idEncen').val(res.filter(r => r.item == 'Encendedor')[0].id_inv_orden)
                                 $('#idPito').val(res.filter(r => r.item == 'Pito')[0].id_inv_orden)
                                 $('#idPlumi').val(res.filter(r => r.item == 'Plumillas')[0].id_inv_orden)
@@ -1040,7 +1040,7 @@
                                 $('#idGato').val(res.filter(r => r.item == 'Gato')[0].id_inv_orden)
                                 $('#idExtintor').val(res.filter(r => r.item == 'Extintor')[0].id_inv_orden)
                                 $('#idSensores').val(res.filter(r => r.item == 'Sensores')[0].id_inv_orden)
-                                $('#idCamara').val(res.filter(r => r.item == 'CamaraRever')[0].id_inv_orden)
+                                $('#idCamara').val(res.filter(r => r.item == 'Camara Rever')[0].id_inv_orden)
                                 $('#idControl').val(res.filter(r => r.item == 'Control Alarma')[0].id_inv_orden)
                                 $('#idBateria').val(res.filter(r => r.item == 'Bateria')[0].id_inv_orden)
 
@@ -1049,11 +1049,11 @@
                                 $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked == 'true' ? true : false
 
                                 $('#retrovisores').val(res.filter(r => r.item == 'Retrovisores')[0].checked)
-                                $('#retroInter').val(res.filter(r => r.item == 'Retrovisores Internos')[0].checked)
+                                $('#retroInter').val(res.filter(r => r.item == 'Retrovisor Interno')[0].checked)
                                 $('#panoramicos').val(res.filter(r => r.item == 'Panoramicos')[0].checked)
                                 $('#radio').val(res.filter(r => r.item == 'Radio')[0].checked)
                                 $('#parlantes').val(res.filter(r => r.item == 'Parlantes')[0].checked)
-                                $('#rejillas').val(res.filter(r => r.item == 'Rejillas')[0].checked)
+                                $('#rejillas').val(res.filter(r => r.item == 'Rejillas A/A')[0].checked)
                                 $('#encendedor').val(res.filter(r => r.item == 'Encendedor')[0].checked)
                                 $('#pito').val(res.filter(r => r.item == 'Pito')[0].checked)
                                 $('#plumillas').val(res.filter(r => r.item == 'Plumillas')[0].checked)
@@ -1071,13 +1071,13 @@
                                 $('#gato').val(res.filter(r => r.item == 'Gato')[0].checked)
                                 $('#extintor').val(res.filter(r => r.item == 'Extintor')[0].checked)
                                 $('#sensores').val(res.filter(r => r.item == 'Sensores')[0].checked)
-                                $('#camaraRe').val(res.filter(r => r.item == 'CamaraRever')[0].checked)
+                                $('#camaraRe').val(res.filter(r => r.item == 'Camara Rever')[0].checked)
                                 $('#controlAlarma').val(res.filter(r => r.item == 'Control Alarma')[0].checked)
                                 $('#bateria').val(res.filter(r => r.item == 'Bateria')[0].checked)
 
                                 $('#cantPano').val(res.filter(r => r.item == 'Panoramicos')[0].cantidad)
                                 $('#cantParlan').val(res.filter(r => r.item == 'Parlantes')[0].cantidad)
-                                $('#cantRejillas').val(res.filter(r => r.item == 'Rejillas')[0].cantidad)
+                                $('#cantRejillas').val(res.filter(r => r.item == 'Rejillas A/A')[0].cantidad)
                                 $('#cantPlumi').val(res.filter(r => r.item == 'Plumillas')[0].cantidad)
                                 $('#cantCintu').val(res.filter(r => r.item == 'Cinturones')[0].cantidad)
                                 $('#cantMani').val(res.filter(r => r.item == 'Manijas')[0].cantidad)
@@ -1393,7 +1393,7 @@
             },
             {
                 idInv: idRetroInter,
-                item: 'Retrovisores Internos',
+                item: 'Retrovisor Interno',
                 checked: retroInter,
                 cantidad: 0
             },
@@ -1417,7 +1417,7 @@
             },
             {
                 idInv: idRejillas,
-                item: 'Rejillas',
+                item: 'Rejillas A/A',
                 checked: rejillas,
                 cantidad: cantRejillas
             },
@@ -1525,7 +1525,7 @@
             },
             {
                 idInv: idCamara,
-                item: 'CamaraRever',
+                item: 'Camara Rever',
                 checked: camaraRe,
                 cantidad: 0
             },

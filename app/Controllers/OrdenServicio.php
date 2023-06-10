@@ -12,6 +12,7 @@ use App\Models\MoviEncModel;
 use App\Models\OrdenesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
+use App\Models\InvOrdenesModel;
 
 class OrdenServicio extends BaseController
 {
@@ -24,6 +25,7 @@ class OrdenServicio extends BaseController
     protected $ordenes;
     protected $telefono;
     protected $email;
+    protected $inventario;
     public function __construct()
     {
         $this->vehiculos = new VehiculosModel();
@@ -35,6 +37,7 @@ class OrdenServicio extends BaseController
         $this->movimiento = new MoviEncModel();
         $this->telefono = new TelefonosModel();
         $this->email = new EmailModel();
+        $this->inventario = new InvOrdenesModel();
         helper('sistema');
     }
     public function pdf($id)
@@ -42,12 +45,16 @@ class OrdenServicio extends BaseController
         $res = $this->ordenes->buscarOrden('', '', $id);
         $telefono = $this->telefono->TelefonoPrincipal($res['cliente'], $res['tipo_propietario']);
         $email = $this->email->EmailPrincipal($res['cliente'], $res['tipo_propietario']);
+        $inven = $this->inventario->buscarInventario($id);
         //TODO: CAMBIAR AUTOLOAD AL MONTAR EN HOSTING
+        // rgb(2, 2, 104)
         $mrg_tp = 5;
         $mrg_lf = 5;
         $pdf = new \FPDF('P', 'mm', 'letter');
         $pdf->AddPage();
         $pdf->SetMargins(5, 10, 5);
+        $pdf->SetTextColor(2, 2, 104);
+        $pdf->SetFillColor(2, 2, 104);
 
         $pdf->SetTitle(utf8_decode('Orden de Servicio - ' . $res['n_orden']));
 
@@ -220,9 +227,9 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(12, 68.5);
         $pdf->Cell(25, 5, 'MARCA', 0, 1, 'L');
 
-        $pdf->SetY(76);
-        $pdf->SetX(10);
-        $pdf->Cell(25, 5, $res['marca'], 0, 1, 'L');
+        $pdf->SetY(74);
+        $pdf->SetX(7);
+        $pdf->MultiCell(25, 5, $res['marca'], 0, 'C', false);
 
         $pdf->SetXY(50, 68.5);
         $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
@@ -271,18 +278,52 @@ class OrdenServicio extends BaseController
         $pdf->line(178.5, 68.5, 178.5, 84);
 
         /* --- INVENTARIO VEHICULO --- */
-        $pdf->Rect(2, 85, 212, 100, '');
+        $pdf->Rect(2, 85, 212, 70, '');
         $pdf->line(2, 89.5, 214, 89.5);
 
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->SetXY(84, 85);
         $pdf->Cell(25, 5, 'INVENTARIO DEL VEHICULO', 0, 1, 'L');
 
-        $pdf->Image(base_url() . 'img/vista_auto_pdf.png', -15, 93, 90, 95, 'png');
-        $pdf->line(60, 89.5, 60, 185);
+        $pdf->Image(base_url() . 'img/vista_auto_pdf.png', -10, 93, 75, 65, 'png');
+        $pdf->line(60, 89.5, 60, 155);
 
+        $xIni = 60;
+        $yIni = 80;
+        $contador = 0;
 
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetXY($xIni + 30.5, $yIni + 9.8);
+        $pdf->Cell(25, 5, 'B', 0, 1, 'L');
+        $pdf->SetXY($xIni + 35.5, $yIni + 9.8);
+        $pdf->Cell(25, 5, 'R', 0, 1, 'L');
+        $pdf->SetXY($xIni + 40.5, $yIni + 9.8);
+        $pdf->Cell(25, 5, 'G', 0, 1, 'L');
 
+        $pdf->SetFont('Arial', '', 10);
+        foreach ($inven as $inv) {
+            $contador =  $contador + 1;
+            if ($contador == 15) {
+                $xIni = 110;
+                $yIni = 94.5;
+            } else if ($contador == 26) {
+                $xIni = 160;
+                $yIni = 94.5;
+            }
+            $pdf->SetXY($xIni, $yIni);
+            $pdf->Cell(25, 5, $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : $inv['item'])), 0, 1, 'L');
+            $pdf->SetXY($xIni + 30, $yIni);
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Rect($xIni + 31, $yIni, 4, 4, $inv['checked'] == 1 ? 'F' : ''))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Rect($xIni + 36, $yIni, 4, 4, $inv['checked'] == 2 ? 'F' : ''))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : ''))));
+            $pdf->SetXY($xIni + 22, $yIni);
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Cell(25, 5, $inv['cantidad'] == 0 ? '' : '( ' . $inv['cantidad'] . ' )', 0, 1, 'L'))));
+            $yIni =  $yIni + 5;
+        }
+
+        /* --- RADAR COMBUSTIBLE ---- */
+        
+        $pdf->Image(base_url() . 'img/radar_combustible.png', 155, 105, 60, 40, 'png');
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");
