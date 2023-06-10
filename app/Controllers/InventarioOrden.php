@@ -23,6 +23,7 @@ class InventarioOrden extends BaseController
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
+        $n = $this->request->getPost('n');
         $idInv = $this->request->getPost('idInv');
         $idOrden = $this->request->getVar('idOrden');
         $item = $this->request->getPost('item');
@@ -31,6 +32,7 @@ class InventarioOrden extends BaseController
 
         $usuarioCrea = session('id');
         $dataInventario = [
+            'n' => $n,
             'id_orden' => $idOrden,
             'item' => $item,
             'checked' => $checked,

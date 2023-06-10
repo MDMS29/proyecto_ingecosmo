@@ -654,6 +654,7 @@
     var validOrden = true
     var validPlaca = true
     var validFecha = true
+    var validInv = true
     var arrayInven = []
     //Limitar fecha de entrada y salida hasta la fecha actual
     let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
@@ -1368,182 +1369,215 @@
 
 
         arrayInven = [{
+                n: 1,
                 idInv: idGrua,
                 item: 'Grua',
                 checked: grua,
                 cantidad: 0
             },
             {
+                n: 2,
                 idInv: idLlaves,
                 item: 'Llaves',
                 checked: llaves,
                 cantidad: 0
             },
             {
+                n: 3,
                 idInv: idDocs,
                 item: 'Documentos',
                 checked: documentos,
                 cantidad: 0
             },
             {
+                n: 4,
                 idInv: idRetro,
                 item: 'Retrovisores',
                 checked: retrovisores,
                 cantidad: 0
             },
             {
+                n: 5,
                 idInv: idRetroInter,
                 item: 'Retrovisor Interno',
                 checked: retroInter,
                 cantidad: 0
             },
             {
+                n: 6,
                 idInv: idPanora,
                 item: 'Panoramicos',
                 checked: panoramicos,
                 cantidad: cantPano
             },
             {
+                n: 7,
                 idInv: idRadio,
                 item: 'Radio',
                 checked: radio,
                 cantidad: 0
             },
             {
+                n: 8,
                 idInv: idParlan,
                 item: 'Parlantes',
                 checked: parlantes,
                 cantidad: cantParlan
             },
             {
+                n: 9,
                 idInv: idRejillas,
                 item: 'Rejillas A/A',
                 checked: rejillas,
                 cantidad: cantRejillas
             },
             {
+                n: 10,
                 idInv: idEncen,
                 item: 'Encendedor',
                 checked: encendedor,
                 cantidad: 0
             },
             {
+                n: 11,
                 idInv: idPito,
                 item: 'Pito',
                 checked: pito,
                 cantidad: 0
             },
             {
+                n: 12,
                 idInv: idPlumi,
                 item: 'Plumillas',
                 checked: plumillas,
                 cantidad: cantPlumi
             },
             {
+                n: 13,
                 idInv: idCintu,
                 item: 'Cinturones',
                 checked: cinturones,
                 cantidad: cantCintu
             },
             {
+                n: 14,
                 idInv: idMani,
                 item: 'Manijas',
                 checked: manijas,
                 cantidad: cantMani
             },
             {
+                n: 15,
                 idInv: idComando,
                 item: 'Comando ptas',
                 checked: comando,
                 cantidad: 0
             },
             {
+                n: 16,
                 idInv: idTaSol,
                 item: 'Tapa Soles',
                 checked: tapaSoles,
                 cantidad: cantTaSol
             },
             {
+                n: 17,
                 idInv: idTape,
                 item: 'Tapetes',
                 checked: tapetes,
                 cantidad: cantTape
             },
             {
+                n: 18,
                 idInv: idTapi,
                 item: 'Tapizado',
                 checked: tapizado,
                 cantidad: 0
             },
             {
+                n: 19,
                 idInv: idLuz,
                 item: 'Luz Techo',
                 checked: luzTecho,
                 cantidad: 0
             },
             {
+                n: 20,
                 idInv: idTapa,
                 item: 'Tapa Gasolina',
                 checked: tapaGaso,
                 cantidad: 0
             },
             {
+                n: 21,
                 idInv: idLlavePer,
                 item: 'Llave Pernos',
                 checked: llavePer,
                 cantidad: 0
             },
             {
+                n: 22,
                 idInv: idHerra,
                 item: 'Herramientas',
                 checked: herramientas,
                 cantidad: 0
             },
             {
+                n: 23,
                 idInv: idKit,
                 item: 'Kit Carretera',
                 checked: kitCarrete,
                 cantidad: 0
             },
             {
+                n: 24,
                 idInv: idGato,
                 item: 'Gato',
                 checked: gato,
                 cantidad: 0
             },
             {
+                n: 25,
                 idInv: idExtintor,
                 item: 'Extintor',
                 checked: extintor,
                 cantidad: 0
             },
             {
+                n: 26,
                 idInv: idSensores,
                 item: 'Sensores',
                 checked: sensores,
                 cantidad: 0
             },
             {
+                n: 27,
                 idInv: idCamara,
                 item: 'Camara Rever',
                 checked: camaraRe,
                 cantidad: 0
             },
             {
+                n: 27,
                 idInv: idControl,
                 item: 'Control Alarma',
                 checked: controlAlarma,
                 cantidad: 0
             },
             {
+                n: 28,
                 idInv: idBateria,
                 item: 'Bateria',
                 checked: bateria,
                 cantidad: 0
             },
         ]
-        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
+        arrayInven.forEach(elem => elem.checked == '' ? validInv = false : validInv = true)
+        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha ) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        }
+        else if( !validInv) {
+            return mostrarMensaje('error', '¡Debe completar todos los campos del inventario!')
         } else {
             $.ajax({
                 url: '<?= base_url('ordenServicio/insertar') ?>',
@@ -1585,6 +1619,7 @@
                             url: "<?= base_url('inventarioOrden/insertar') ?>",
                             data: {
                                 tp: tpInv,
+                                n: elem.n,
                                 idInv: elem.idInv,
                                 idOrden: data,
                                 item: elem.item,

@@ -201,18 +201,18 @@ class OrdenServicio extends BaseController
 
         $pdf->SetY(49);
         $pdf->SetX(170);
-        // $pdf->Cell(25, 5,  $res['grua'] == 1 ? 'SI' :  'NO', 0, 1, 'L');
+        $pdf->Cell(25, 5,  $inven[0]['checked'] == 'true' ? 'SI' : 'NO', 0, 1, 'L');
 
         /* --- TERCER RECUADRO --- */
         $pdf->Rect(123, 56, 91, 7, '');
 
         $pdf->SetY(57);
         $pdf->SetX(131);
-        // $pdf->Cell(25, 5,  $res['llaves'] == 1 ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        $pdf->Cell(25, 5,  $inven[1]['checked'] == 'true'? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         $pdf->SetY(57);
         $pdf->SetX(160);
-        // $pdf->Cell(25, 5, $res['documentos'] == 1 ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        $pdf->Cell(25, 5, $inven[2]['checked'] == 'true' ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         /* --- CUARTO RECUADRO --- */
         $pdf->Rect(2, 64, 212, 20, '');
