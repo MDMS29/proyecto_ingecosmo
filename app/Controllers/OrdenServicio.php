@@ -54,7 +54,7 @@ class OrdenServicio extends BaseController
         /* --- HEADER DOCUMENTOS ---*/
         $pdf->SetY(5);
         $pdf->SetX(35);
-        $pdf->image(base_url() . 'img/logo_empresa.png', 2, $mrg_lf, 45, 18, 'png');
+        $pdf->Image(base_url() . 'img/logo_empresa.png', 2, $mrg_lf, 45, 18, 'png');
 
         $pdf->Rect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 14, '');
 
@@ -194,18 +194,18 @@ class OrdenServicio extends BaseController
 
         $pdf->SetY(49);
         $pdf->SetX(170);
-        $pdf->Cell(25, 5,  $res['grua'] == 1 ? 'SI' :  'NO', 0, 1, 'L');
+        // $pdf->Cell(25, 5,  $res['grua'] == 1 ? 'SI' :  'NO', 0, 1, 'L');
 
         /* --- TERCER RECUADRO --- */
         $pdf->Rect(123, 56, 91, 7, '');
 
         $pdf->SetY(57);
         $pdf->SetX(131);
-        $pdf->Cell(25, 5,  $res['llaves'] == 1 ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        // $pdf->Cell(25, 5,  $res['llaves'] == 1 ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         $pdf->SetY(57);
         $pdf->SetX(160);
-        $pdf->Cell(25, 5, $res['documentos'] == 1 ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        // $pdf->Cell(25, 5, $res['documentos'] == 1 ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         /* --- CUARTO RECUADRO --- */
         $pdf->Rect(2, 64, 212, 20, '');
@@ -270,23 +270,19 @@ class OrdenServicio extends BaseController
         $pdf->line(143.2, 68.5, 143.2, 84);
         $pdf->line(178.5, 68.5, 178.5, 84);
 
-        // // ---TIPO
-        // $pdf->SetY(34);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
+        /* --- INVENTARIO VEHICULO --- */
+        $pdf->Rect(2, 85, 212, 100, '');
+        $pdf->line(2, 89.5, 214, 89.5);
 
-        // // ---MOTOR
-        // $pdf->SetY(44);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'MOTOR', 0, 1, 'L');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetXY(84, 85);
+        $pdf->Cell(25, 5, 'INVENTARIO DEL VEHICULO', 0, 1, 'L');
 
-        // // ---CHASIS
-        // $pdf->SetY(49);
-        // $pdf->SetX(55);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(25, 5, 'CHASIS', 0, 1, 'L');
+        $pdf->Image(base_url() . 'img/vista_auto_pdf.png', -15, 93, 90, 95, 'png');
+        $pdf->line(60, 89.5, 60, 185);
+
+
+
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");

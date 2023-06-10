@@ -172,7 +172,7 @@
                             <!-- INVENTARIO DE VEHICULO -->
                             <details id="datailInv">
                                 <summary>Inventario Vehiculo</summary>
-                                <input type="text" id="tpInventario">
+                                <input type="text" id="tpInventario" hidden>
                                 <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="text-center">
@@ -241,6 +241,329 @@
                                                 </select>
                                             </td>
                                             <td><input class="text-center" type="number" id="cantPano" style="width:35px; padding:1px 2px;"></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idRadio"></td>
+                                            <td>Radio</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="radio" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>0
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idParlan"></td>
+                                            <td>Parlantes</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="parlantes" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><input class="text-center" type="number" id="cantParlan" style="width:35px; padding:1px 2px;"></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idRejillas"></td>
+                                            <td>Rejillas A/A</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="rejillas" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><input class="text-center" type="number" id="cantRejillas" style="width:35px; padding:1px 2px;"></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idEncen"></td>
+                                            <td>Encendedor</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="encendedor" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>0
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idPito"></td>
+                                            <td>Pito</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="pito" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>0
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idPlumi"></td>
+                                            <td>Plumillas</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="plumillas" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><input class="text-center" type="number" id="cantPlumi" style="width:35px; padding:1px 2px;"></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idCintu"></td>
+                                            <td>Cinturones</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="cinturones" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><input class="text-center" type="number" id="cantCintu" style="width:35px; padding:1px 2px;"></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idMani"></td>
+                                            <td>Manijas</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="manijas" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td><input class="text-center" type="number" id="cantMani" style="width:35px; padding:1px 2px;"></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idComando"></td>
+                                            <td>Comando ptas</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="comando" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idTaSol"></td>
+                                            <td>Tapa Soles</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="tapaSoles" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input class="text-center" type="number" id="cantTaSol" style="width:35px; padding:1px 2px;">
+                                            </td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idTape"></td>
+                                            <td>Tapetes</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="tapetes" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input class="text-center" type="number" id="cantTape" style="width:35px; padding:1px 2px;">
+                                            </td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idTapi"></td>
+                                            <td>Tapizado</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="tapizado" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idLuz"></td>
+                                            <td>Luz Techo</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="luzTecho" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idTapa"></td>
+                                            <td>Tapa Gasolina</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="tapaGaso" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idLlavePer"></td>
+                                            <td>Llave Pernos</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="llavePer" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idHerra"></td>
+                                            <td>Herramientas</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="herramientas" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idKit"></td>
+                                            <td>Kit de Carretera</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="kitCarrete" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idGato"></td>
+                                            <td>Gato</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="gato" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idExtintor"></td>
+                                            <td>Extintor</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="extintor" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idSensores"></td>
+                                            <td>Sensores</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="sensores" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idCamara"></td>
+                                            <td>Camara de Rever</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="camaraRe" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idControl"></td>
+                                            <td>Control de Alarma</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="controlAlarma" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idBateria"></td>
+                                            <td>Bateria</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="bateria" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">B</option>
+                                                    <option value="2">R</option>
+                                                    <option value="3">G</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -324,7 +647,7 @@
     </div>
 </div>
 
-<script src="<?= base_url('js/swalfire.js')?>"></script>
+<script src="<?= base_url('js/swalfire.js') ?>"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
 <script>
@@ -555,6 +878,78 @@
             }
         })
     })
+
+    function limpiarInventario() {
+        $('#idGrua').val('')
+        $('#idLlaves').val('')
+        $('#idDocu').val('')
+        $('#idRetro').val('')
+        $('#idRetroInter').val('')
+        $('#idPanora').val('')
+        $('#idRadio').val('')
+        $('#idParlan').val('')
+        $('#idRejillas').val('')
+        $('#idEncen').val('')
+        $('#idPito').val('')
+        $('#idPlumi').val('')
+        $('#idCintu').val('')
+        $('#idMani').val('')
+        $('#idComando').val('')
+        $('#idTaSol').val('')
+        $('#idTape').val('')
+        $('#idTapi').val('')
+        $('#idLuz').val('')
+        $('#idTapa').val('')
+        $('#idLlavePer').val('')
+        $('#idHerra').val('')
+        $('#idKit').val('')
+        $('#idGato').val('')
+        $('#idExtintor').val('')
+        $('#idSensores').val('')
+        $('#idCamara').val('')
+        $('#idControl').val('')
+        $('#idBateria').val('')
+
+        $('#grua')[0].checked = false
+        $('#llaves')[0].checked = false
+        $('#documentos')[0].checked = false
+
+        $('#retrovisores').val('')
+        $('#retroInter').val('')
+        $('#panoramicos').val('')
+        $('#radio').val('')
+        $('#parlantes').val('')
+        $('#rejillas').val('')
+        $('#encendedor').val('')
+        $('#pito').val('')
+        $('#plumillas').val('')
+        $('#cinturones').val('')
+        $('#manijas').val('')
+        $('#comando').val('')
+        $('#tapaSoles').val('')
+        $('#tapetes').val('')
+        $('#tapizado').val('')
+        $('#luzTecho').val('')
+        $('#tapaGaso').val('')
+        $('#llavePer').val('')
+        $('#herramientas').val('')
+        $('#kitCarrete').val('')
+        $('#gato').val('')
+        $('#extintor').val('')
+        $('#sensores').val('')
+        $('#camaraRe').val('')
+        $('#controlAlarma').val('')
+        $('#bateria').val('')
+
+        $('#cantPano').val('')
+        $('#cantParlan').val('')
+        $('#cantRejillas').val('')
+        $('#cantPlumi').val('')
+        $('#cantCintu').val('')
+        $('#cantMani').val('')
+        $('#cantTaSol').val('')
+        $('#cantTape').val('')
+    }
     //Tomar informacion del vehiculo
     function seleccionarOrden(id, tp) {
         if (tp == 2) {
@@ -616,24 +1011,78 @@
                         success: function(res) {
                             if (res.filter(r => r.item == 'Grua')[0] == undefined) {
                                 $('#tpInventario').val(1)
+                                limpiarInventario()
                             } else {
                                 $('#tpInventario').val(2)
                                 $('#idGrua').val(res.filter(r => r.item == 'Grua')[0].id_inv_orden)
                                 $('#idLlaves').val(res.filter(r => r.item == 'Llaves')[0].id_inv_orden)
                                 $('#idDocu').val(res.filter(r => r.item == 'Documentos')[0].id_inv_orden)
                                 $('#idRetro').val(res.filter(r => r.item == 'Retrovisores')[0].id_inv_orden)
-                                $('#idRetroInter').val(res.filter(r => r.item == 'RetroInter')[0].id_inv_orden)
+                                $('#idRetroInter').val(res.filter(r => r.item == 'Retrovisores Internos')[0].id_inv_orden)
                                 $('#idPanora').val(res.filter(r => r.item == 'Panoramicos')[0].id_inv_orden)
+                                $('#idRadio').val(res.filter(r => r.item == 'Radio')[0].id_inv_orden)
+                                $('#idParlan').val(res.filter(r => r.item == 'Parlantes')[0].id_inv_orden)
+                                $('#idRejillas').val(res.filter(r => r.item == 'Rejillas')[0].id_inv_orden)
+                                $('#idEncen').val(res.filter(r => r.item == 'Encendedor')[0].id_inv_orden)
+                                $('#idPito').val(res.filter(r => r.item == 'Pito')[0].id_inv_orden)
+                                $('#idPlumi').val(res.filter(r => r.item == 'Plumillas')[0].id_inv_orden)
+                                $('#idCintu').val(res.filter(r => r.item == 'Cinturones')[0].id_inv_orden)
+                                $('#idMani').val(res.filter(r => r.item == 'Manijas')[0].id_inv_orden)
+                                $('#idComando').val(res.filter(r => r.item == 'Comando ptas')[0].id_inv_orden)
+                                $('#idTaSol').val(res.filter(r => r.item == 'Tapa Soles')[0].id_inv_orden)
+                                $('#idTape').val(res.filter(r => r.item == 'Tapetes')[0].id_inv_orden)
+                                $('#idTapi').val(res.filter(r => r.item == 'Tapizado')[0].id_inv_orden)
+                                $('#idLuz').val(res.filter(r => r.item == 'Luz Techo')[0].id_inv_orden)
+                                $('#idTapa').val(res.filter(r => r.item == 'Tapa Gasolina')[0].id_inv_orden)
+                                $('#idLlavePer').val(res.filter(r => r.item == 'Llave Pernos')[0].id_inv_orden)
+                                $('#idHerra').val(res.filter(r => r.item == 'Herramientas')[0].id_inv_orden)
+                                $('#idKit').val(res.filter(r => r.item == 'Kit Carretera')[0].id_inv_orden)
+                                $('#idGato').val(res.filter(r => r.item == 'Gato')[0].id_inv_orden)
+                                $('#idExtintor').val(res.filter(r => r.item == 'Extintor')[0].id_inv_orden)
+                                $('#idSensores').val(res.filter(r => r.item == 'Sensores')[0].id_inv_orden)
+                                $('#idCamara').val(res.filter(r => r.item == 'CamaraRever')[0].id_inv_orden)
+                                $('#idControl').val(res.filter(r => r.item == 'Control Alarma')[0].id_inv_orden)
+                                $('#idBateria').val(res.filter(r => r.item == 'Bateria')[0].id_inv_orden)
 
                                 $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked == 'true' ? true : false
                                 $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked == 'true' ? true : false
                                 $('#documentos')[0].checked = res.filter(r => r.item == 'Documentos')[0].checked == 'true' ? true : false
 
                                 $('#retrovisores').val(res.filter(r => r.item == 'Retrovisores')[0].checked)
-                                $('#retroInter').val(res.filter(r => r.item == 'RetroInter')[0].checked)
+                                $('#retroInter').val(res.filter(r => r.item == 'Retrovisores Internos')[0].checked)
                                 $('#panoramicos').val(res.filter(r => r.item == 'Panoramicos')[0].checked)
+                                $('#radio').val(res.filter(r => r.item == 'Radio')[0].checked)
+                                $('#parlantes').val(res.filter(r => r.item == 'Parlantes')[0].checked)
+                                $('#rejillas').val(res.filter(r => r.item == 'Rejillas')[0].checked)
+                                $('#encendedor').val(res.filter(r => r.item == 'Encendedor')[0].checked)
+                                $('#pito').val(res.filter(r => r.item == 'Pito')[0].checked)
+                                $('#plumillas').val(res.filter(r => r.item == 'Plumillas')[0].checked)
+                                $('#cinturones').val(res.filter(r => r.item == 'Cinturones')[0].checked)
+                                $('#manijas').val(res.filter(r => r.item == 'Manijas')[0].checked)
+                                $('#comando').val(res.filter(r => r.item == 'Comando ptas')[0].checked)
+                                $('#tapaSoles').val(res.filter(r => r.item == 'Tapa Soles')[0].checked)
+                                $('#tapetes').val(res.filter(r => r.item == 'Tapetes')[0].checked)
+                                $('#tapizado').val(res.filter(r => r.item == 'Tapizado')[0].checked)
+                                $('#luzTecho').val(res.filter(r => r.item == 'Luz Techo')[0].checked)
+                                $('#tapaGaso').val(res.filter(r => r.item == 'Tapa Gasolina')[0].checked)
+                                $('#llavePer').val(res.filter(r => r.item == 'Llave Pernos')[0].checked)
+                                $('#herramientas').val(res.filter(r => r.item == 'Herramientas')[0].checked)
+                                $('#kitCarrete').val(res.filter(r => r.item == 'Kit Carretera')[0].checked)
+                                $('#gato').val(res.filter(r => r.item == 'Gato')[0].checked)
+                                $('#extintor').val(res.filter(r => r.item == 'Extintor')[0].checked)
+                                $('#sensores').val(res.filter(r => r.item == 'Sensores')[0].checked)
+                                $('#camaraRe').val(res.filter(r => r.item == 'CamaraRever')[0].checked)
+                                $('#controlAlarma').val(res.filter(r => r.item == 'Control Alarma')[0].checked)
+                                $('#bateria').val(res.filter(r => r.item == 'Bateria')[0].checked)
 
                                 $('#cantPano').val(res.filter(r => r.item == 'Panoramicos')[0].cantidad)
+                                $('#cantParlan').val(res.filter(r => r.item == 'Parlantes')[0].cantidad)
+                                $('#cantRejillas').val(res.filter(r => r.item == 'Rejillas')[0].cantidad)
+                                $('#cantPlumi').val(res.filter(r => r.item == 'Plumillas')[0].cantidad)
+                                $('#cantCintu').val(res.filter(r => r.item == 'Cinturones')[0].cantidad)
+                                $('#cantMani').val(res.filter(r => r.item == 'Manijas')[0].cantidad)
+                                $('#cantTaSol').val(res.filter(r => r.item == 'Tapa Soles')[0].cantidad)
+                                $('#cantTape').val(res.filter(r => r.item == 'Tapetes')[0].cantidad)
                             }
                         }
                     })
@@ -663,6 +1112,7 @@
             $('#vehiculo').removeClass('d-none')
             $('#vehiculoT').attr('hidden', '')
             limpiarCampos('', 1)
+            limpiarInventario()
 
             $('#tpInventario').val(1)
 
@@ -849,6 +1299,29 @@
         idRetro = $('#idRetro').val()
         idRetroInter = $('#idRetroInter').val()
         idPanora = $('#idPanora').val()
+        idRadio = $('#idRadio').val()
+        idParlan = $('#idParlan').val()
+        idRejillas = $('#idRejillas').val()
+        idEncen = $('#idEncen').val()
+        idPito = $('#idPito').val()
+        idPlumi = $('#idPlumi').val()
+        idCintu = $('#idCintu').val()
+        idMani = $('#idMani').val()
+        idComando = $('#idComando').val()
+        idTaSol = $('#idTaSol').val()
+        idTape = $('#idTape').val()
+        idTapi = $('#idTapi').val()
+        idLuz = $('#idLuz').val()
+        idTapa = $('#idTapa').val()
+        idLlavePer = $('#idLlavePer').val()
+        idHerra = $('#idHerra').val()
+        idKit = $('#idKit').val()
+        idGato = $('#idGato').val()
+        idExtintor = $('#idExtintor').val()
+        idSensores = $('#idSensores').val()
+        idCamara = $('#idCamara').val()
+        idControl = $('#idControl').val()
+        idBateria = $('#idBateria').val()
 
         // Checkeds
         grua = $('#grua')[0].checked
@@ -859,44 +1332,215 @@
         retrovisores = $('#retrovisores').val()
         retroInter = $('#retroInter').val()
         panoramicos = $('#panoramicos').val()
-        
+        radio = $('#radio').val()
+        parlantes = $('#parlantes').val()
+        rejillas = $('#rejillas').val()
+        encendedor = $('#encendedor').val()
+        pito = $('#pito').val()
+        plumillas = $('#plumillas').val()
+        cinturones = $('#cinturones').val()
+        manijas = $('#manijas').val()
+        comando = $('#comando').val()
+        tapaSoles = $('#tapaSoles').val()
+        tapetes = $('#tapetes').val()
+        tapizado = $('#tapizado').val()
+        luzTecho = $('#luzTecho').val()
+        tapaGaso = $('#tapaGaso').val()
+        llavePer = $('#llavePer').val()
+        herramientas = $('#herramientas').val()
+        kitCarrete = $('#kitCarrete').val()
+        gato = $('#gato').val()
+        extintor = $('#extintor').val()
+        sensores = $('#sensores').val()
+        camaraRe = $('#camaraRe').val()
+        controlAlarma = $('#controlAlarma').val()
+        bateria = $('#controlAlarma').val()
+
         //Cantidades
         cantPano = $('#cantPano').val()
-        
+        cantParlan = $('#cantParlan').val()
+        cantRejillas = $('#cantRejillas').val()
+        cantPlumi = $('#cantPlumi').val()
+        cantCintu = $('#cantCintu').val()
+        cantMani = $('#cantMani').val()
+        cantTaSol = $('#cantTaSol').val()
+        cantTape = $('#cantTape').val()
+
 
         arrayInven = [{
                 idInv: idGrua,
                 item: 'Grua',
                 checked: grua,
-                cantidad : 0
+                cantidad: 0
             },
             {
                 idInv: idLlaves,
                 item: 'Llaves',
                 checked: llaves,
-                cantidad : 0
-            }, {
+                cantidad: 0
+            },
+            {
                 idInv: idDocs,
                 item: 'Documentos',
                 checked: documentos,
-                cantidad : 0
-            }, {
+                cantidad: 0
+            },
+            {
                 idInv: idRetro,
                 item: 'Retrovisores',
                 checked: retrovisores,
-                cantidad : 0
-            }, {
+                cantidad: 0
+            },
+            {
                 idInv: idRetroInter,
-                item: 'RetroInter',
+                item: 'Retrovisores Internos',
                 checked: retroInter,
-                cantidad : 0
+                cantidad: 0
             },
             {
                 idInv: idPanora,
                 item: 'Panoramicos',
                 checked: panoramicos,
-                cantidad : cantPano
-            }
+                cantidad: cantPano
+            },
+            {
+                idInv: idRadio,
+                item: 'Radio',
+                checked: radio,
+                cantidad: 0
+            },
+            {
+                idInv: idParlan,
+                item: 'Parlantes',
+                checked: parlantes,
+                cantidad: cantParlan
+            },
+            {
+                idInv: idRejillas,
+                item: 'Rejillas',
+                checked: rejillas,
+                cantidad: cantRejillas
+            },
+            {
+                idInv: idEncen,
+                item: 'Encendedor',
+                checked: encendedor,
+                cantidad: 0
+            },
+            {
+                idInv: idPito,
+                item: 'Pito',
+                checked: pito,
+                cantidad: 0
+            },
+            {
+                idInv: idPlumi,
+                item: 'Plumillas',
+                checked: plumillas,
+                cantidad: cantPlumi
+            },
+            {
+                idInv: idCintu,
+                item: 'Cinturones',
+                checked: cinturones,
+                cantidad: cantCintu
+            },
+            {
+                idInv: idMani,
+                item: 'Manijas',
+                checked: manijas,
+                cantidad: cantMani
+            },
+            {
+                idInv: idComando,
+                item: 'Comando ptas',
+                checked: comando,
+                cantidad: 0
+            },
+            {
+                idInv: idTaSol,
+                item: 'Tapa Soles',
+                checked: tapaSoles,
+                cantidad: cantTaSol
+            },
+            {
+                idInv: idTape,
+                item: 'Tapetes',
+                checked: tapetes,
+                cantidad: cantTape
+            },
+            {
+                idInv: idTapi,
+                item: 'Tapizado',
+                checked: tapizado,
+                cantidad: 0
+            },
+            {
+                idInv: idLuz,
+                item: 'Luz Techo',
+                checked: luzTecho,
+                cantidad: 0
+            },
+            {
+                idInv: idTapa,
+                item: 'Tapa Gasolina',
+                checked: tapaGaso,
+                cantidad: 0
+            },
+            {
+                idInv: idLlavePer,
+                item: 'Llave Pernos',
+                checked: llavePer,
+                cantidad: 0
+            },
+            {
+                idInv: idHerra,
+                item: 'Herramientas',
+                checked: herramientas,
+                cantidad: 0
+            },
+            {
+                idInv: idKit,
+                item: 'Kit Carretera',
+                checked: kitCarrete,
+                cantidad: 0
+            },
+            {
+                idInv: idGato,
+                item: 'Gato',
+                checked: gato,
+                cantidad: 0
+            },
+            {
+                idInv: idExtintor,
+                item: 'Extintor',
+                checked: extintor,
+                cantidad: 0
+            },
+            {
+                idInv: idSensores,
+                item: 'Sensores',
+                checked: sensores,
+                cantidad: 0
+            },
+            {
+                idInv: idCamara,
+                item: 'CamaraRever',
+                checked: camaraRe,
+                cantidad: 0
+            },
+            {
+                idInv: idControl,
+                item: 'Control Alarma',
+                checked: controlAlarma,
+                cantidad: 0
+            },
+            {
+                idInv: idBateria,
+                item: 'Bateria',
+                checked: bateria,
+                cantidad: 0
+            },
         ]
         if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -945,7 +1589,7 @@
                                 idOrden: data,
                                 item: elem.item,
                                 checked: elem.checked,
-                                cantidad : Number(elem.cantidad)
+                                cantidad: Number(elem.cantidad)
                             },
                             dataType: 'json',
                             success: function(data) {
