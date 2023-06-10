@@ -311,19 +311,37 @@ class OrdenServicio extends BaseController
                 $yIni = 94.5;
             }
             $pdf->SetXY($xIni, $yIni);
-            $pdf->Cell(25, 5, $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : $inv['item'])), 0, 1, 'L');
+            $pdf->Cell(25, 5, $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : $inv['item']))), 0, 1, 'L');
             $pdf->SetXY($xIni + 30, $yIni);
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Rect($xIni + 31, $yIni, 4, 4, $inv['checked'] == 1 ? 'F' : ''))));
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Rect($xIni + 36, $yIni, 4, 4, $inv['checked'] == 2 ? 'F' : ''))));
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : ''))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 31, $yIni, 4, 4, $inv['checked'] == 1 ? 'F' : '')))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 36, $yIni, 4, 4, $inv['checked'] == 2 ? 'F' : '')))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : '')))));
             $pdf->SetXY($xIni + 22, $yIni);
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($pdf->Cell(25, 5, $inv['cantidad'] == 0 ? '' : '( ' . $inv['cantidad'] . ' )', 0, 1, 'L'))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Cell(25, 5, $inv['cantidad'] == 0 ? '' : '( ' . $inv['cantidad'] . ' )', 0, 1, 'L')))));
+
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : '')))));
+
             $yIni =  $yIni + 5;
         }
 
         /* --- RADAR COMBUSTIBLE ---- */
-
         $pdf->Image(base_url() . 'img/radar_combustible.png', 155, 105, 60, 40, 'png');
+        $pdf->SetXY(160, 138);
+        $pdf->Cell(2, 5, 'ID', 0, 1, 'L');
+        $pdf->Rect(165, 137, 8, 6, $inven[28]['checked'] == 1 ? 'F' : '');
+        $pdf->SetXY(160, 146);
+        $pdf->Cell(2, 5, 'IT', 0, 1, 'L');
+        $pdf->Rect(165, 145, 8, 6, $inven[28]['checked'] == 2 ? 'F' : '');
+        $pdf->SetXY(182, 146);
+        $pdf->Cell(2, 5, 'R', 0, 1, 'L');
+        $pdf->Rect(180, 140, 8, 6, $inven[28]['checked'] == 3 ? 'F' : '');
+        $pdf->SetXY(203, 138);
+        $pdf->Cell(2, 5, 'DD', 0, 1, 'L');
+        $pdf->Rect(195, 137, 8, 6, $inven[28]['checked'] == 4 ? 'F' : '');
+        $pdf->SetXY(203, 146);
+        $pdf->Cell(2, 5, 'DT', 0, 1, 'L');
+        $pdf->Rect(195, 145, 8, 6, $inven[28]['checked'] == 5 ? 'F' : '');
+
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");

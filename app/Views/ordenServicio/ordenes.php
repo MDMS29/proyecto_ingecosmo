@@ -565,6 +565,22 @@
                                             </td>
                                             <td></td>
                                         </tr>
+
+                                        <tr class="text-center">
+                                            <td hidden><input type="text" id="idCombustible"></td>
+                                            <td>Combustible</td>
+                                            <td style="display: flex;justify-content: center;">
+                                                <select class="text-center form-select form-control" id="tipocombustible" style="width: 155px;">
+                                                    <option value="" selected>-- Seleccione --</option>
+                                                    <option value="1">ID</option>
+                                                    <option value="2">IT</option>
+                                                    <option value="3">R</option>
+                                                    <option value="4">DD</option>
+                                                    <option value="5">DT</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </details>
@@ -910,6 +926,7 @@
         $('#idCamara').val('')
         $('#idControl').val('')
         $('#idBateria').val('')
+        $('#idCombustible').val('')
 
         $('#grua')[0].checked = false
         $('#llaves')[0].checked = false
@@ -941,6 +958,7 @@
         $('#camaraRe').val('')
         $('#controlAlarma').val('')
         $('#bateria').val('')
+        $('#tipocombustible').val('')
 
         $('#cantPano').val('')
         $('#cantParlan').val('')
@@ -1044,6 +1062,7 @@
                                 $('#idCamara').val(res.filter(r => r.item == 'Camara Rever')[0].id_inv_orden)
                                 $('#idControl').val(res.filter(r => r.item == 'Control Alarma')[0].id_inv_orden)
                                 $('#idBateria').val(res.filter(r => r.item == 'Bateria')[0].id_inv_orden)
+                                $('#idCombustible').val(res.filter(r => r.item == 'TipoCombustible')[0].id_inv_orden)
 
                                 $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked == 'true' ? true : false
                                 $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked == 'true' ? true : false
@@ -1075,6 +1094,7 @@
                                 $('#camaraRe').val(res.filter(r => r.item == 'Camara Rever')[0].checked)
                                 $('#controlAlarma').val(res.filter(r => r.item == 'Control Alarma')[0].checked)
                                 $('#bateria').val(res.filter(r => r.item == 'Bateria')[0].checked)
+                                $('#tipocombustible').val(res.filter(r => r.item == 'TipoCombustible')[0].checked)
 
                                 $('#cantPano').val(res.filter(r => r.item == 'Panoramicos')[0].cantidad)
                                 $('#cantParlan').val(res.filter(r => r.item == 'Parlantes')[0].cantidad)
@@ -1323,6 +1343,7 @@
         idCamara = $('#idCamara').val()
         idControl = $('#idControl').val()
         idBateria = $('#idBateria').val()
+        idCombustible = $('#idCombustible').val()
 
         // Checkeds
         grua = $('#grua')[0].checked
@@ -1355,7 +1376,8 @@
         sensores = $('#sensores').val()
         camaraRe = $('#camaraRe').val()
         controlAlarma = $('#controlAlarma').val()
-        bateria = $('#controlAlarma').val()
+        bateria = $('#bateria').val()
+        tipocombustible = $('#tipocombustible').val()
 
         //Cantidades
         cantPano = $('#cantPano').val()
@@ -1571,12 +1593,19 @@
                 checked: bateria,
                 cantidad: 0
             },
+            {
+                n: 29,
+                idInv: idCombustible,
+                item: 'TipoCombustible',
+                checked: tipocombustible,
+                cantidad: 0
+            },
         ]
         arrayInven.forEach(elem => elem.checked == '' ? validInv = false : validInv = true)
         if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha ) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
-        else if( !validInv) {
+        else if(!validInv) {
             return mostrarMensaje('error', '¡Debe completar todos los campos del inventario!')
         } else {
             $.ajax({
