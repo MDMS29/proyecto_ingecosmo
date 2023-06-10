@@ -63,7 +63,7 @@ class OrdenServicio extends BaseController
         $pdf->SetX(35);
         $pdf->Image(base_url() . 'img/logo_empresa.png', 2, $mrg_lf, 45, 18, 'png');
 
-        $pdf->Rect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 14, '');
+        $pdf->RoundedRect($mrg_lf - 3, $mrg_tp, 212, $mrg_tp + 14, 2);
 
         $pdf->setFont('Arial', 'B', 15);
         $pdf->SetY(2);
@@ -90,7 +90,7 @@ class OrdenServicio extends BaseController
         /*****  Detalles orden de trabajo *****/
 
         /* --- PRIMER RECUADRO --- */
-        $pdf->Rect(2, 25, 120, 38, '');
+        $pdf->RoundedRect(2, 25, 120, 38, 2);
 
         $pdf->SetY(25);
         $pdf->SetX(35);
@@ -158,7 +158,7 @@ class OrdenServicio extends BaseController
         $pdf->Cell(2, 5, '' . $email['correo'] . '', 0, 1, 'L');
 
         // /* --- SEGUNDO RECUADRO --- */
-        $pdf->Rect(123, 25, 91, 30, '');
+        $pdf->RoundedRect(123, 25, 91, 30, 2);
 
         $pdf->SetY(25);
         $pdf->SetX(145);
@@ -204,18 +204,18 @@ class OrdenServicio extends BaseController
         $pdf->Cell(25, 5,  $inven[0]['checked'] == 'true' ? 'SI' : 'NO', 0, 1, 'L');
 
         /* --- TERCER RECUADRO --- */
-        $pdf->Rect(123, 56, 91, 7, '');
+        $pdf->RoundedRect(123, 56, 91, 7, 2);
 
         $pdf->SetY(57);
         $pdf->SetX(131);
-        $pdf->Cell(25, 5,  $inven[1]['checked'] == 'true'? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        $pdf->Cell(25, 5,  $inven[1]['checked'] == 'true' ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         $pdf->SetY(57);
         $pdf->SetX(160);
         $pdf->Cell(25, 5, $inven[2]['checked'] == 'true' ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         /* --- CUARTO RECUADRO --- */
-        $pdf->Rect(2, 64, 212, 20, '');
+        $pdf->RoundedRect(2, 64, 212, 20, 2);
 
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->SetXY(87, 64);
@@ -278,7 +278,7 @@ class OrdenServicio extends BaseController
         $pdf->line(178.5, 68.5, 178.5, 84);
 
         /* --- INVENTARIO VEHICULO --- */
-        $pdf->Rect(2, 85, 212, 70, '');
+        $pdf->RoundedRect(2, 85, 212, 70, 2);
         $pdf->line(2, 89.5, 214, 89.5);
 
         $pdf->SetFont('Arial', 'B', 10);
@@ -322,7 +322,7 @@ class OrdenServicio extends BaseController
         }
 
         /* --- RADAR COMBUSTIBLE ---- */
-        
+
         $pdf->Image(base_url() . 'img/radar_combustible.png', 155, 105, 60, 40, 'png');
 
         $this->response->setHeader('Content-Type', 'application/pdf');
