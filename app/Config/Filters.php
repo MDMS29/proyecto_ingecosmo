@@ -23,7 +23,7 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        // 'session'       => SessionFilter::class //Archivo en la carpeta Filters
+        'session'       => SessionFilter::class //Archivo en la carpeta Filters
     ];
 
     /**
@@ -63,17 +63,45 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    // public array $filters = [
-
-    //      $session => [
-    //          'before' => [ 
-    //              'home',
-    //              'usuarios',
-    //              'usuarios/*',
-    //              'trabajadores',
-    //              'trabajadores/*'
-    //          ]
-         
-
-    //  ];
+    public array $filters = [
+        'session' => [
+            'before' => [
+                'home',
+                'usuarios',
+                'usuarios/*',
+                'trabajadores',
+                'trabajadores/*',
+                'cargos',
+                'cargos/*',
+                'email',
+                'email/*',
+                'filas',
+                'filas/*',
+                'historial',
+                'historial/*',
+                'insumos',
+                'insumos/*',
+                'insumosAdmin',
+                'insumosAdmin/*',
+                'inventarioOrden',
+                'inventarioOrden/*',
+                'materiales',
+                'materiales/*',
+                'ordenServicio',
+                'ordenServicio/*',
+                'perfil',
+                'perfil/*',
+                'proveedores',
+                'proveedores/*',
+                'respuestos',
+                'respuestos/*',
+                'respuestosAdmin',
+                'respuestosAdmin/*',
+                'telefonos',
+                'telefonos/*',
+                'vehiculos',
+                'vehiculos/*'
+            ]
+        ]
+    ];
 }

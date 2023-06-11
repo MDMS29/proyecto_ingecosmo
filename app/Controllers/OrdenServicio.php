@@ -328,19 +328,19 @@ class OrdenServicio extends BaseController
         $pdf->Image(base_url() . 'img/radar_combustible.png', 155, 105, 60, 40, 'png');
         $pdf->SetXY(160, 138);
         $pdf->Cell(2, 5, 'ID', 0, 1, 'L');
-        $pdf->Rect(165, 137, 8, 6, $inven[28]['checked'] == 1 ? 'F' : '');
+        $pdf->Rect(165, 137, 8, 6, $inven[29]['checked'] == 1 ? 'F' : '');
         $pdf->SetXY(160, 146);
         $pdf->Cell(2, 5, 'IT', 0, 1, 'L');
-        $pdf->Rect(165, 145, 8, 6, $inven[28]['checked'] == 2 ? 'F' : '');
+        $pdf->Rect(165, 145, 8, 6, $inven[29]['checked'] == 2 ? 'F' : '');
         $pdf->SetXY(182, 146);
         $pdf->Cell(2, 5, 'R', 0, 1, 'L');
-        $pdf->Rect(180, 140, 8, 6, $inven[28]['checked'] == 3 ? 'F' : '');
+        $pdf->Rect(180, 140, 8, 6, $inven[29]['checked'] == 3 ? 'F' : '');
         $pdf->SetXY(203, 138);
         $pdf->Cell(2, 5, 'DD', 0, 1, 'L');
-        $pdf->Rect(195, 137, 8, 6, $inven[28]['checked'] == 4 ? 'F' : '');
+        $pdf->Rect(195, 137, 8, 6, $inven[29]['checked'] == 4 ? 'F' : '');
         $pdf->SetXY(203, 146);
         $pdf->Cell(2, 5, 'DT', 0, 1, 'L');
-        $pdf->Rect(195, 145, 8, 6, $inven[28]['checked'] == 5 ? 'F' : '');
+        $pdf->Rect(195, 145, 8, 6, $inven[29]['checked'] == 5 ? 'F' : '');
 
 
         $this->response->setHeader('Content-Type', 'application/pdf');
