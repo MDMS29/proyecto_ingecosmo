@@ -381,18 +381,18 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(2, 246);
         $pdf->Cell(90, 1, utf8_decode('1. Los materiales y plazos de repuestos son suministrados por la empresa, salvo estipulación en el contrado.'), 0, 'J', false);
         $pdf->SetXY(2, 248.5);
-        $pdf->Cell(90, 1, utf8_decode('2. La empresa queda autorizada para efectuar las pruebas necesarias del vehiculo fuera del taller.'), 0, 'J', false);
+        $pdf->Cell(90, 1, utf8_decode('2. La empresa queda autorizada para efectuar las pruebas necesarias del vehículo fuera del taller.'), 0, 'J', false);
         $pdf->SetXY(2, 250.5);
-        $pdf->MultiCell(150, 2.2, utf8_decode('3. La empresa no responde en ningún caso por objetos en el vehiculo, salvo que se hubieran entregado bajo recibo a la Gerencia.'), 0, 'J', false);
+        $pdf->MultiCell(150, 2.2, utf8_decode('3. La empresa no responde en ningún caso por objetos en el vehículo, salvo que se hubieran entregado bajo recibo a la Gerencia.'), 0, 'J', false);
        
         $pdf->SetXY(2, 253);
-        $pdf->MultiCell(150, 2.2, utf8_decode('4. En caso de fuerza mayor o caso fortuito la empresa no responde por perdidas o deterioro en los vehiculos o de los objetos dejado en su cuidado.'), 0, 'L', false);
+        $pdf->MultiCell(150, 2.2, utf8_decode('4. En caso de fuerza mayor o caso fortuito la empresa no responde por perdidas o deterioro en los vehículos o de los objetos dejado en su cuidado.'), 0, 'L', false);
         
         $pdf->SetXY(2, 257.5);
-        $pdf->MultiCell(150, 2.2, utf8_decode('5. La empresa queda facultada para ejercer el derecho de retención de vehiculo mientras este pendiente a la cancelación de la cuenta.'), 0, 'L', false);
+        $pdf->MultiCell(150, 2.2, utf8_decode('5. La empresa queda facultada para ejercer el derecho de retención de vehículo mientras este pendiente a la cancelación de la cuenta.'), 0, 'L', false);
         
         $pdf->SetXY(2, 260);
-        $pdf->MultiCell(150, 2.2, utf8_decode('6. Todo vehiculo cancelará la suma de  $5.000 pesos diarios por concepto de parqueo a partir del dia siguiente en que de terminado al trabjo su propietario no lo retire de los talleres de la empresa, o si luego de 5 días del presupuesto del daño, su recuperación no ha sido autorizada.'), 0, 'L', false);
+        $pdf->MultiCell(150, 2.2, utf8_decode('6. Todo vehículo cancelará la suma de  $5.000 pesos diarios por concepto de parqueo a partir del día siguiente en que de terminado al trabjo su propietario no lo retire de los talleres de la empresa, o si luego de 5 días del presupuesto del daño, su recuperación no ha sido autorizada.'), 0, 'L', false);
         
         $pdf->SetXY(3, 268);
         $pdf->MultiCell(150, 2.2, utf8_decode('Autorizo a INGECOSMOS LTDA, a consultar, reportar o informar a cualquier control de riesgos más daños personales contenidos en la presente Orden de Servicio así como el trabajo d elas obligaciones contraídas con dica empresa.'), 0, 'L', false);
