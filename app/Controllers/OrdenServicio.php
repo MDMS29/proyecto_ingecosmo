@@ -26,6 +26,7 @@ class OrdenServicio extends BaseController
     protected $telefono;
     protected $email;
     protected $inventario;
+    protected $movEnc;
     public function __construct()
     {
         $this->vehiculos = new VehiculosModel();
@@ -46,6 +47,7 @@ class OrdenServicio extends BaseController
         $telefono = $this->telefono->TelefonoPrincipal($res['cliente'], $res['tipo_propietario']);
         $email = $this->email->EmailPrincipal($res['cliente'], $res['tipo_propietario']);
         $inven = $this->inventario->buscarInventario($id);
+        $materiales = $this->movimiento->buscarDetEnc($id);
         //TODO: CAMBIAR AUTOLOAD AL MONTAR EN HOSTING
         // rgb(2, 2, 104)
         $mrg_tp = 5;
@@ -342,6 +344,36 @@ class OrdenServicio extends BaseController
         $pdf->Cell(2, 5, 'DT', 0, 1, 'L');
         $pdf->Rect(195, 145, 8, 6, $inven[29]['checked'] == 5 ? 'F' : '');
 
+        /* --- OBERVACIONES --- */
+        $pdf->RoundedRect(2, 156, 212, 89, 2);
+        $pdf->line(2, 160.5, 214, 160.5);
+
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetXY(90, 156);
+        $pdf->Cell(25, 5, 'OBSERVACIONES', 0, 1, 'L');
+
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY(2, 153);
+        $pdf->Cell(90, 20, 'Se utilizaron los siguientes materiales:', 0, 'J', false);
+
+        $yLine = 165;
+        for ($i = 0; $i < 16; $i++) {
+            $pdf->line(2, $yLine, 214, $yLine);
+            $yLine = $yLine + 5;
+        }
+    
+        $xIni = 2;
+        $yIni = 158;
+        foreach ($materiales as $mats) {
+            $pdf->SetXY($xIni, $yIni);
+            $pdf->MultiCell(90, 20, 'Material: ' . $mats['nombre'] . ' - Cantidad:' . $mats['cantidad'] . ' - Fecha: ' . $mats['fecha_movimiento'] . ' ', 0, 'J', false);
+            $yIni =  $yIni + 5;
+        }
+
+        /* --- TERMINOS Y CONDICIONES --- */
+        $pdf->RoundedRect(2, 246, 150, 30, 2);
+        /* --- FIRMA --- */
+        $pdf->RoundedRect(153, 246, 61, 30, 2);
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");

@@ -64,44 +64,44 @@ class Filters extends BaseConfig
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
     public array $filters = [
-        'session' => [
-            'before' => [
-                'home',
-                'usuarios',
-                'usuarios/*',
-                'trabajadores',
-                'trabajadores/*',
-                'cargos',
-                'cargos/*',
-                'email',
-                'email/*',
-                'filas',
-                'filas/*',
-                'historial',
-                'historial/*',
-                'insumos',
-                'insumos/*',
-                'insumosAdmin',
-                'insumosAdmin/*',
-                'inventarioOrden',
-                'inventarioOrden/*',
-                'materiales',
-                'materiales/*',
-                'ordenServicio',
-                'ordenServicio/*',
-                'perfil',
-                'perfil/*',
-                'proveedores',
-                'proveedores/*',
-                'respuestos',
-                'respuestos/*',
-                'respuestosAdmin',
-                'respuestosAdmin/*',
-                'telefonos',
-                'telefonos/*',
-                'vehiculos',
-                'vehiculos/*'
-            ]
-        ]
+        // 'session' => [
+        //     'before' => [
+        //         'home',
+        //         'usuarios',
+        //         'usuarios/*',
+        //         'trabajadores',
+        //         'trabajadores/*',
+        //         'cargos',
+        //         'cargos/*',
+        //         'email',
+        //         'email/*',
+        //         'filas',
+        //         'filas/*',
+        //         'historial',
+        //         'historial/*',
+        //         'insumos',
+        //         'insumos/*',
+        //         'insumosAdmin',
+        //         'insumosAdmin/*',
+        //         'inventarioOrden',
+        //         'inventarioOrden/*',
+        //         'materiales',
+        //         'materiales/*',
+        //         'ordenServicio',
+        //         'ordenServicio/*',
+        //         'perfil',
+        //         'perfil/*',
+        //         'proveedores',
+        //         'proveedores/*',
+        //         'respuestos',
+        //         'respuestos/*',
+        //         'respuestosAdmin',
+        //         'respuestosAdmin/*',
+        //         'telefonos',
+        //         'telefonos/*',
+        //         'vehiculos',
+        //         'vehiculos/*'
+        //     ]
+        // ]
     ];
 }
