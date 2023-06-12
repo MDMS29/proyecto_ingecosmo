@@ -658,7 +658,7 @@
 <div class="modal fade" id="modal-pdf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <iframe id="ifr_PDF" width="1130" height="700"></iframe>
+            <iframe id="ifr_PDF" width="auto" height="700"></iframe>
         </div>
     </div>
 </div>
