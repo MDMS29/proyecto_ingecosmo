@@ -87,4 +87,11 @@ class ParamModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function obtenerTipoValidacion()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '15');
+        $data = $this->findAll();
+        return $data;
+    }
 }
