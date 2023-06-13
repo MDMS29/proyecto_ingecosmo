@@ -70,7 +70,7 @@
                         <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?> style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
-                    <li><a class="nav-item dropdown" href="#" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
+                    <li><a class="nav-item dropdown" href="<?php echo base_url('peticiones') ?>" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
                     <li>
                         <hr class="nav-item dropdown" style="border: solid 1px white">
                     </li>
@@ -174,7 +174,7 @@
                     </li>
                 <?php } ?>
                 <li>
-                    <a href="" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
+                    <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                         <p id="pa">Peticiones</p>
                     </a>
                 </li>
