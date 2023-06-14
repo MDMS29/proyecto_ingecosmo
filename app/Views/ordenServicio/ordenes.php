@@ -634,7 +634,7 @@
 </form>
 
 <!-- MODAL CAMBIAR ESTADO DEL VEHICULO -->
-<div class="modal fade" id="cambiarEstado" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="body-R">
             <div class="modal-content">
