@@ -67,7 +67,7 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?> style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /> Carrito de Materiales</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?> style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /> Orden de entrega</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="<?php echo base_url('peticiones') ?>" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
@@ -168,8 +168,8 @@
                     </li>
                     <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div>
                     <li>
-                        <a href="<?php echo base_url('carrito') ?>" id="aa"><span><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/carrito.png') ?>" /></span>
-                            <p id="pa">Carrito de Materiales</p>
+                        <a href="<?php echo base_url('ordenEntrega') ?>" id="aa"><span><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /></span>
+                            <p id="pa">Orden de entrega</p>
                         </a>
                     </li>
                 <?php } ?>

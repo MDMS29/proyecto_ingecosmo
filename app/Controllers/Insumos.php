@@ -9,7 +9,7 @@ use App\Models\MaterialesModel;
 use App\Models\VehiculosModel;
 use App\Models\TrabajadoresModel;
 use App\Models\EstanteriaModel;
-use App\Models\FilasModel;
+use App\Models\FilassModel;
 use App\Models\MoviEncModel;
 use App\Models\MoviDetModel;
 use App\Models\OrdenesModel;
@@ -33,7 +33,7 @@ class Insumos extends BaseController
         $this->vehiculos = new VehiculosModel();
         $this->trabajadores = new TrabajadoresModel();
         $this->estanteria = new EstanteriaModel();
-        $this->fila = new FilasModel();
+        $this->fila = new FilassModel();
         $this->movEnc = new MoviEncModel();
         $this->movDet = new MoviDetModel();
         $this->ordenes = new OrdenesModel();

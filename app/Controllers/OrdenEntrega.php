@@ -5,10 +5,10 @@ namespace App\Controllers;
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
 use App\Controllers\Materiales;
 
-class Carrito extends BaseController
+class ordenEntrega extends BaseController
 {
 
-    protected $carrito;
+    protected $ordenEntrega;
     protected $materiales;
   
     public function __construct()
@@ -20,7 +20,7 @@ class Carrito extends BaseController
     {
 
         echo view('/principal/sidebar');
-        echo view('/carrito/carrito');
+        echo view('/ordenEntrega/ordenEntrega');
     }
 
 }
