@@ -229,12 +229,14 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(12, 68.5);
         $pdf->Cell(25, 5, 'MARCA', 0, 1, 'L');
 
-        $pdf->SetY(74);
-        $pdf->SetX(7);
-        $pdf->MultiCell(25, 5, $res['marca'], 0, 'C', false);
-
+        
+        $pdf->SetXY(7, 74);
+        $pdf->MultiCell(25, 5, $res['nombreMarca'], 0, 'C', false);
+        
         $pdf->SetXY(50, 68.5);
         $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
+        $pdf->SetXY(43, 74);
+        $pdf->MultiCell(25, 5, $res['marca'], 0, 'C', false);
 
         // ---MODELO
         $pdf->SetXY(82, 68.5);
@@ -313,15 +315,15 @@ class OrdenServicio extends BaseController
                 $yIni = 94.5;
             }
             $pdf->SetXY($xIni, $yIni);
-            $pdf->Cell(25, 5, $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : $inv['item']))), 0, 1, 'L');
+            $pdf->Cell(25, 5, $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : $inv['item'])))), 0, 1, 'L');
             $pdf->SetXY($xIni + 30, $yIni);
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 31, $yIni, 4, 4, $inv['checked'] == 1 ? 'F' : '')))));
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 36, $yIni, 4, 4, $inv['checked'] == 2 ? 'F' : '')))));
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : '')))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : ($pdf->Rect($xIni + 31, $yIni, 4, 4, $inv['checked'] == 1 ? 'F' : ''))))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : ($pdf->Rect($xIni + 36, $yIni, 4, 4, $inv['checked'] == 2 ? 'F' : ''))))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : ''))))));
             $pdf->SetXY($xIni + 22, $yIni);
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Cell(25, 5, $inv['cantidad'] == 0 ? '' : '( ' . $inv['cantidad'] . ' )', 0, 1, 'L')))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : ($pdf->Cell(25, 5, $inv['cantidad'] == 0 ? '' : '( ' . $inv['cantidad'] . ' )', 0, 1, 'L'))))));
 
-            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : '')))));
+            $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : ''))))));
 
             $yIni =  $yIni + 5;
         }
@@ -354,7 +356,6 @@ class OrdenServicio extends BaseController
 
         $pdf->SetFont('Arial', '', 10);
         $pdf->SetXY(2, 153);
-        $pdf->Cell(90, 20, 'Se utilizaron los siguientes materiales:', 0, 'J', false);
 
         $yLine = 165;
         for ($i = 0; $i < 15; $i++) {
@@ -362,17 +363,12 @@ class OrdenServicio extends BaseController
             $yLine = $yLine + 5;
         }
 
-        $xIni = 2;
-        $yIni = 158;
-        foreach ($materiales as $mats) {
-            $pdf->SetXY($xIni, $yIni);
-            $pdf->MultiCell(90, 20, 'Material: ' . $mats['nombre'] . ' - Cantidad:' . $mats['cantidad'] . ' - Fecha: ' . $mats['fecha_movimiento'] . ' ', 0, 'J', false);
-            $yIni =  $yIni + 5;
-        }
+        $pdf->SetAutoPageBreak(false);
+        $pdf->SetXY(2, 161);
+        $pdf->MultiCell(210, 5, utf8_decode($inven[30]['observacion']), 0, 'J', false);
 
         $pdf->SetFont('Arial', '', 8);
-        $pdf->SetAutoPageBreak(false);
-        
+
         /* --- TERMINOS Y CONDICIONES --- */
         $pdf->SetFont('Arial', 'B', 6.5);
         $pdf->RoundedRect(2, 241, 150, 35, 2);
@@ -384,28 +380,29 @@ class OrdenServicio extends BaseController
         $pdf->Cell(90, 1, utf8_decode('2. La empresa queda autorizada para efectuar las pruebas necesarias del vehículo fuera del taller.'), 0, 'J', false);
         $pdf->SetXY(2, 250.5);
         $pdf->MultiCell(150, 2.2, utf8_decode('3. La empresa no responde en ningún caso por objetos en el vehículo, salvo que se hubieran entregado bajo recibo a la Gerencia.'), 0, 'J', false);
-       
+
         $pdf->SetXY(2, 253);
         $pdf->MultiCell(150, 2.2, utf8_decode('4. En caso de fuerza mayor o caso fortuito la empresa no responde por perdidas o deterioro en los vehículos o de los objetos dejado en su cuidado.'), 0, 'L', false);
-        
+
         $pdf->SetXY(2, 257.5);
         $pdf->MultiCell(150, 2.2, utf8_decode('5. La empresa queda facultada para ejercer el derecho de retención de vehículo mientras este pendiente a la cancelación de la cuenta.'), 0, 'L', false);
-        
+
         $pdf->SetXY(2, 260);
         $pdf->MultiCell(150, 2.2, utf8_decode('6. Todo vehículo cancelará la suma de  $5.000 pesos diarios por concepto de parqueo a partir del día siguiente en que de terminado al trabjo su propietario no lo retire de los talleres de la empresa, o si luego de 5 días del presupuesto del daño, su recuperación no ha sido autorizada.'), 0, 'L', false);
-        
+
         $pdf->SetXY(3, 268);
         $pdf->MultiCell(150, 2.2, utf8_decode('Autorizo a INGECOSMOS LTDA, a consultar, reportar o informar a cualquier control de riesgos más daños personales contenidos en la presente Orden de Servicio así como el trabajo d elas obligaciones contraídas con dica empresa.'), 0, 'L', false);
-        
-        
+
+
         /* --- FIRMA --- */
+        $pdf->SetFont('Arial', '', 8);
         $pdf->RoundedRect(153, 241, 61, 35, 2);
         $pdf->SetXY(153, 242);
         $pdf->MultiCell(61, 3, utf8_decode('ACEPTO LAS CONDICIONES INDICADAS EN ESTA ORDEN DE SERVICIO'), 0, 'C', false);
         $pdf->line(155, 270, 212, 270);
         $pdf->SetXY(175, 272);
         $pdf->Cell(90, 1, 'CLIENTES', 0, 'J', false);
-        
+
 
 
         $this->response->setHeader('Content-Type', 'application/pdf');

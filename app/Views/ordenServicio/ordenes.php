@@ -587,6 +587,15 @@
                             <div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
+                                        <input type="text" id="idObser" hidden>
+                                        <label for="observaciones" class="col-form-label d-block">Observaciones:</label>
+                                        <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mb-3" style="width: 100%">
+                                    <div class="mb-3">
                                         <label for="estado" class="col-form-label">Estado:</label>
                                         <select class="form-select form-control" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
@@ -625,7 +634,7 @@
 </form>
 
 <!-- MODAL CAMBIAR ESTADO DEL VEHICULO -->
-<div class="modal fade" id="cambiarEstado" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="body-R">
             <div class="modal-content">
@@ -927,6 +936,7 @@
         $('#idControl').val('')
         $('#idBateria').val('')
         $('#idCombustible').val('')
+        $('#idObser').val('')
 
         $('#grua')[0].checked = false
         $('#llaves')[0].checked = false
@@ -959,6 +969,7 @@
         $('#controlAlarma').val('')
         $('#bateria').val('')
         $('#tipocombustible').val('')
+        $('#txtObser').val('')
 
         $('#cantPano').val('')
         $('#cantParlan').val('')
@@ -1063,6 +1074,7 @@
                                 $('#idControl').val(res.filter(r => r.item == 'Control Alarma')[0].id_inv_orden)
                                 $('#idBateria').val(res.filter(r => r.item == 'Bateria')[0].id_inv_orden)
                                 $('#idCombustible').val(res.filter(r => r.item == 'TipoCombustible')[0].id_inv_orden)
+                                $('#idObser').val(res.filter(r => r.item == 'Observacion')[0].id_inv_orden)
 
                                 $('#grua')[0].checked = res.filter(r => r.item == 'Grua')[0].checked == 'true' ? true : false
                                 $('#llaves')[0].checked = res.filter(r => r.item == 'Llaves')[0].checked == 'true' ? true : false
@@ -1095,6 +1107,7 @@
                                 $('#controlAlarma').val(res.filter(r => r.item == 'Control Alarma')[0].checked)
                                 $('#bateria').val(res.filter(r => r.item == 'Bateria')[0].checked)
                                 $('#tipocombustible').val(res.filter(r => r.item == 'TipoCombustible')[0].checked)
+                                $('#txtObser').val(res.filter(r => r.item == 'Observacion')[0].observacion)
 
                                 $('#cantPano').val(res.filter(r => r.item == 'Panoramicos')[0].cantidad)
                                 $('#cantParlan').val(res.filter(r => r.item == 'Parlantes')[0].cantidad)
@@ -1344,6 +1357,7 @@
         idControl = $('#idControl').val()
         idBateria = $('#idBateria').val()
         idCombustible = $('#idCombustible').val()
+        idObser = $('#idObser').val()
 
         // Checkeds
         grua = $('#grua')[0].checked
@@ -1378,6 +1392,7 @@
         controlAlarma = $('#controlAlarma').val()
         bateria = $('#bateria').val()
         tipocombustible = $('#tipocombustible').val()
+        txtObser = $('#txtObser').val()
 
         //Cantidades
         cantPano = $('#cantPano').val()
@@ -1395,6 +1410,7 @@
                 idInv: idGrua,
                 item: 'Grua',
                 checked: grua,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1402,6 +1418,7 @@
                 idInv: idLlaves,
                 item: 'Llaves',
                 checked: llaves,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1409,6 +1426,7 @@
                 idInv: idDocs,
                 item: 'Documentos',
                 checked: documentos,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1416,6 +1434,7 @@
                 idInv: idRetro,
                 item: 'Retrovisores',
                 checked: retrovisores,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1423,6 +1442,7 @@
                 idInv: idRetroInter,
                 item: 'Retrovisor Interno',
                 checked: retroInter,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1430,6 +1450,7 @@
                 idInv: idPanora,
                 item: 'Panoramicos',
                 checked: panoramicos,
+                observacion: '',
                 cantidad: cantPano
             },
             {
@@ -1437,6 +1458,7 @@
                 idInv: idRadio,
                 item: 'Radio',
                 checked: radio,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1444,6 +1466,7 @@
                 idInv: idParlan,
                 item: 'Parlantes',
                 checked: parlantes,
+                observacion: '',
                 cantidad: cantParlan
             },
             {
@@ -1451,6 +1474,7 @@
                 idInv: idRejillas,
                 item: 'Rejillas A/A',
                 checked: rejillas,
+                observacion: '',
                 cantidad: cantRejillas
             },
             {
@@ -1458,6 +1482,7 @@
                 idInv: idEncen,
                 item: 'Encendedor',
                 checked: encendedor,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1465,6 +1490,7 @@
                 idInv: idPito,
                 item: 'Pito',
                 checked: pito,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1472,6 +1498,7 @@
                 idInv: idPlumi,
                 item: 'Plumillas',
                 checked: plumillas,
+                observacion: '',
                 cantidad: cantPlumi
             },
             {
@@ -1479,6 +1506,7 @@
                 idInv: idCintu,
                 item: 'Cinturones',
                 checked: cinturones,
+                observacion: '',
                 cantidad: cantCintu
             },
             {
@@ -1486,6 +1514,7 @@
                 idInv: idMani,
                 item: 'Manijas',
                 checked: manijas,
+                observacion: '',
                 cantidad: cantMani
             },
             {
@@ -1493,6 +1522,7 @@
                 idInv: idComando,
                 item: 'Comando ptas',
                 checked: comando,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1500,6 +1530,7 @@
                 idInv: idTaSol,
                 item: 'Tapa Soles',
                 checked: tapaSoles,
+                observacion: '',
                 cantidad: cantTaSol
             },
             {
@@ -1507,6 +1538,7 @@
                 idInv: idTape,
                 item: 'Tapetes',
                 checked: tapetes,
+                observacion: '',
                 cantidad: cantTape
             },
             {
@@ -1514,6 +1546,7 @@
                 idInv: idTapi,
                 item: 'Tapizado',
                 checked: tapizado,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1521,6 +1554,7 @@
                 idInv: idLuz,
                 item: 'Luz Techo',
                 checked: luzTecho,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1528,6 +1562,7 @@
                 idInv: idTapa,
                 item: 'Tapa Gasolina',
                 checked: tapaGaso,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1535,6 +1570,7 @@
                 idInv: idLlavePer,
                 item: 'Llave Pernos',
                 checked: llavePer,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1542,6 +1578,7 @@
                 idInv: idHerra,
                 item: 'Herramientas',
                 checked: herramientas,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1549,6 +1586,7 @@
                 idInv: idKit,
                 item: 'Kit Carretera',
                 checked: kitCarrete,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1556,6 +1594,7 @@
                 idInv: idGato,
                 item: 'Gato',
                 checked: gato,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1563,6 +1602,7 @@
                 idInv: idExtintor,
                 item: 'Extintor',
                 checked: extintor,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1570,6 +1610,7 @@
                 idInv: idSensores,
                 item: 'Sensores',
                 checked: sensores,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1577,6 +1618,7 @@
                 idInv: idCamara,
                 item: 'Camara Rever',
                 checked: camaraRe,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1584,6 +1626,7 @@
                 idInv: idControl,
                 item: 'Control Alarma',
                 checked: controlAlarma,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1591,6 +1634,7 @@
                 idInv: idBateria,
                 item: 'Bateria',
                 checked: bateria,
+                observacion: '',
                 cantidad: 0
             },
             {
@@ -1598,14 +1642,22 @@
                 idInv: idCombustible,
                 item: 'TipoCombustible',
                 checked: tipocombustible,
+                observacion: '',
+                cantidad: 0
+            },
+            {
+                n: 30,
+                idInv: idObser,
+                item: 'Observacion',
+                checked: true,
+                observacion: txtObser,
                 cantidad: 0
             },
         ]
         arrayInven.forEach(elem => elem.checked == '' ? validInv = false : validInv = true)
-        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha ) {
+        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        }
-        else if(!validInv) {
+        } else if (!validInv) {
             return mostrarMensaje('error', '¡Debe completar todos los campos del inventario!')
         } else {
             $.ajax({
@@ -1653,6 +1705,7 @@
                                 idOrden: data,
                                 item: elem.item,
                                 checked: elem.checked,
+                                observacion: elem.observacion,
                                 cantidad: Number(elem.cantidad)
                             },
                             dataType: 'json',
