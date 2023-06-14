@@ -229,10 +229,10 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(12, 68.5);
         $pdf->Cell(25, 5, 'MARCA', 0, 1, 'L');
 
-        
+
         $pdf->SetXY(7, 74);
         $pdf->MultiCell(25, 5, $res['nombreMarca'], 0, 'C', false);
-        
+
         $pdf->SetXY(50, 68.5);
         $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
         $pdf->SetXY(43, 74);
@@ -464,7 +464,7 @@ class OrdenServicio extends BaseController
         $nIdentiRes = $this->request->getPost('nIdentiRes');
 
         $vehiculo = $this->request->getVar('vehiculo');
-
+        $kms = $this->request->getPost('kms');
         //Vehiculo nuevo
         $infoVehi = $this->request->getPost('infoVehi');
 
@@ -493,7 +493,6 @@ class OrdenServicio extends BaseController
                 'linea' => '',
                 'modelo' => $infoVehi['nFabrica'],
                 'color' => $infoVehi['color'],
-                'kms' => $infoVehi['kms'],
                 'n_combustible' => $infoVehi['combustible'],
                 'estado' => 'A',
                 'usuario_crea' => $usuarioCrea
@@ -504,6 +503,7 @@ class OrdenServicio extends BaseController
         $dataOrden = [
             'n_orden' => $orden,
             'id_vehiculo' => $vehiculo,
+            'kms' => $kms,
             'nombres' => empty($nombreRespon) || $tipoCliente == 5 ? null : $nombreRespon,
             'apellidos' =>  empty($apellidoRespon) || $tipoCliente == 5 ? null : $apellidoRespon,
             'n_identificacion' =>  empty($nIdentiRes) || $tipoCliente == 5 ? null : $nIdentiRes,
@@ -560,6 +560,7 @@ class OrdenServicio extends BaseController
                         $dataMovimiento = [
                             'id_tercero' => $cliente,
                             'id_vehiculo' => $vehiculo,
+                            'kms' => $kms,
                             'fecha_movimiento' => $fechaActual,
                             'estado' => $estado,
                             'tipo_movimiento' => 57,

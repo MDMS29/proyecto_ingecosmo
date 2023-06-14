@@ -24,6 +24,7 @@
     <script src="<?= base_url('dataTable/jquery.dataTables.js') ?>"></script>
     <script src="<?= base_url('dataTable/dataTables.bootstrap5.min.js') ?>"></script>
     <script src="<?= base_url('js/main.js') ?>"></script>
+    <script src="<?= base_url('js/swalfire.js') ?>"></script>
 
     <!-- -->
 </head>

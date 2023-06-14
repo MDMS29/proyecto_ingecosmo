@@ -16,7 +16,6 @@
                     <th scope="col" class="text-center">Modelo</th>
                     <th scope="col" class="text-center">Marca</th>
                     <th scope="col" class="text-center">Color</th>
-                    <th scope="col" class="text-center">Kilometraje</th>
                     <th scope="col" class="text-center">Combustible</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -100,12 +99,6 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="kms" class="col-form-label">Kilometraje:</label>
-                                    <div class="d-flex">
-                                        <input type="number" name="kms" class="form-control" id="kms">
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="width: 100%">
                                     <label for="combustible" class="col-form-label">Combustible:</label>
                                     <select class="form-select form-control" name="combustible" id="combustible">
                                         <option selected value="">-- Seleccione --</option>
@@ -129,8 +122,6 @@
         </div>
     </div>
 </form>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     var validOrden = true
@@ -206,9 +197,6 @@
                 data: 'color'
             },
             {
-                data: 'kms'
-            },
-            {
                 data: 'combustible'
             },
             {
@@ -247,7 +235,6 @@
                     $('#marca').val(data['id_marca'])
                     $('#nFabrica').val(data['modelo'])
                     $('#color').val(data['color'])
-                    $('#kms').val(data['kms'])
                     $('#combustible').val(data['combustible'])
 
                     $('#tituloModal').text('Editar')
@@ -267,7 +254,6 @@
             $('#marca').val('')
             $('#nFabrica').val('')
             $('#color').val('')
-            $('#kms').val('')
             $('#combustible').val('')
             $('#btnGuardar').text('Guardar')
             $('#tituloModal').text('Agregar')
@@ -349,7 +335,6 @@
         marca = $('#marca').val()
         nFabrica = $('#nFabrica').val()
         color = $('#color').val()
-        kms = $('#kms').val()
         combustible = $('#combustible').val()
         if ([tipoCliente, cliente, placa, marca, nFabrica, color, kms, combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -366,7 +351,6 @@
                     marca,
                     nFabrica,
                     color,
-                    kms,
                     combustible,
                     estado: 'A'
                 },

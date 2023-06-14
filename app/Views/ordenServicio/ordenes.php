@@ -672,9 +672,6 @@
     </div>
 </div>
 
-<script src="<?= base_url('js/swalfire.js') ?>"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-
 <script>
     var validOrden = true
     var validPlaca = true
@@ -694,7 +691,6 @@
         $('#marca').attr('disabled', '')
         $('#nFabrica').attr('disabled', '')
         $('#color').attr('disabled', '')
-        $('#kms').attr('disabled', '')
         $('#combustible').attr('disabled', '')
     }
     //Limpiar campos
@@ -762,6 +758,9 @@
             method: "POST",
             dataSrc: "",
         },
+        order: [
+            [0, 'desc']
+        ],
         columns: [{
                 data: "n_orden"
             },
@@ -857,9 +856,9 @@
                 }
             }
         ],
-        // "language": {
-        //     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        // }
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
     });
     //Descargar PDF
     function pdf(id) {
@@ -1670,13 +1669,13 @@
                     orden,
 
                     vehiculo: aggVehi == 0 ? vehiculo : nuevoVehiculo,
-
+                    
+                    kms,
                     infoVehi: aggVehi == 0 ? null : {
                         placa,
                         marca,
                         nFabrica,
                         color,
-                        kms,
                         combustible
                     },
 
