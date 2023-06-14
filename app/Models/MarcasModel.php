@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class MarcasModel extends Model
 {
-    protected $table = 'marca_vehiculo'; /* nombre de la tabla modelada/*/
+    protected $table = 'tipo_marca'; /* nombre de la tabla modelada/*/
     protected $primaryKey = 'id_marca';
 
     protected $useAutoIncrement = true; /* Si la llave primaria se genera con autoincremento*/
@@ -14,7 +14,7 @@ class MarcasModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['nombre', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['nombre', 'marca', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -27,10 +27,9 @@ class MarcasModel extends Model
 
     public function obtenerMarcas($estado)
     {
-        $this->select('id_marca, nombre');
+        $this->select('id_marca, nombre, marca');
         $this->where('estado', $estado);
         $data = $this->findAll();
         return $data;
     }
-
 }

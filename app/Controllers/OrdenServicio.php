@@ -229,12 +229,14 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(12, 68.5);
         $pdf->Cell(25, 5, 'MARCA', 0, 1, 'L');
 
-        $pdf->SetY(74);
-        $pdf->SetX(7);
-        $pdf->MultiCell(25, 5, $res['marca'], 0, 'C', false);
-
+        
+        $pdf->SetXY(7, 74);
+        $pdf->MultiCell(25, 5, $res['nombreMarca'], 0, 'C', false);
+        
         $pdf->SetXY(50, 68.5);
         $pdf->Cell(25, 5, 'TIPO', 0, 1, 'L');
+        $pdf->SetXY(43, 74);
+        $pdf->MultiCell(25, 5, $res['marca'], 0, 'C', false);
 
         // ---MODELO
         $pdf->SetXY(82, 68.5);
@@ -363,7 +365,7 @@ class OrdenServicio extends BaseController
 
         $pdf->SetAutoPageBreak(false);
         $pdf->SetXY(2, 161);
-        $pdf->MultiCell(210, 5, $inven[30]['observacion'], 0, 'J', false);
+        $pdf->MultiCell(210, 5, utf8_decode($inven[30]['observacion']), 0, 'J', false);
 
         $pdf->SetFont('Arial', '', 8);
 
