@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\FilasModel;
 use App\Models\FilassModel;
 use App\Models\EstanteriaModel;
 use App\Models\MaterialesModel;
@@ -76,9 +75,7 @@ class Filas extends BaseController
     public function obtenerMaterialesFila($fila)
     {
         $materiales = $this->material->obtenerMaterialesFila($fila);
-        if (!empty($materiales)) {
             return json_encode($materiales);
-        }
     }
 
     public function detallesMaterial($id)

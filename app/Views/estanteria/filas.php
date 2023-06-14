@@ -23,7 +23,7 @@
                                 <img class="iconos" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
                             </div>
                             <div class="Isabella">
-                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila<?php echo $dato['nombre']; ?></h5>
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila <?php echo $dato['nombre']; ?></h5>
                                 <div class="textoFilaF" id="Contenedor">
                                     <div class="bloque1">
 
@@ -56,7 +56,7 @@
                     <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
                     <div class="bloqueHeader">
                         <!-- <img class="iconosModal" src="< ?php echo base_url('/img/') . $dato['icono'] ?>"> -->
-                        <label class="tituloMover"><i class="bi bi-arrow-left-right"></i> Mover -</label>
+                        <label class="tituloMover" style="font-weight: 400;"><i class="bi bi-arrow-left-right"></i> Mover -</label>
                         <div class="tituloHeader">
 
                             <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-size:40px;"><i class="bi bi-arrow-left-right" style="margin-right: 8px;"></i>Mover Insumos</h1> -->
@@ -262,15 +262,21 @@
     for (let i = 0; i < bloque.length; i++) {
         let fila = $(`#${bloque[i].id}`)
         fila = fila[0].id
+        console.log(fila);
         $.ajax({
-            url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + bloque[i].id,
+            url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + fila,
             type: 'POST',
             dataType: 'json',
             success: function(res) {
                 var cadena = ""
                 var vacio = ""
+                console.log(res);
                 if (res.length == 0) {
-                    cadena += `No hay materiales en la fila`;
+                    cadena += `
+                    <div class="textoVacio " style="color: #000000; font-size:15px; margin-left: 60px; display:flex; justify-content:center;  align-items:center; flex-direction:column;">
+                    <i class="bi bi-exclamation-circle" style="color:#fab83c; font-size:25px;"></i>
+                    <p> ¡No hay materiales en la fila! </p> 
+                    </div>`;
                     $(`#${bloque[i].id}`).html(cadena)
 
                 } else {
@@ -308,7 +314,12 @@
             dataType: 'json',
             success: function(res) {
                 console.log(filasDina);
-                filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
+                if (id_fila == fila) {
+                    filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
+                    
+                } else {
+                    
+                }
                 // var cadena
                 // cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
                 // for (let i = 0; i < res.length; i++) {
