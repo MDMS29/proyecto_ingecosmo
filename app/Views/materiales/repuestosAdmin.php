@@ -16,6 +16,7 @@
                     <th scope="col" class="text-center">Proveedor</th>
                     <th scope="col" class="text-center">Existencias</th>
                     <th scope="col" class="text-center">Bodega</th>
+                    <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>
@@ -222,6 +223,9 @@
             },
             {
                 data: 'bodega'
+            },
+            {
+                
             },
             {
                 data: null,
