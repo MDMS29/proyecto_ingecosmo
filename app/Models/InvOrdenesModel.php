@@ -15,7 +15,7 @@ class InvOrdenesModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_orden', 'n', 'item', 'checked', 'cantidad', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_orden', 'n', 'item', 'checked', 'cantidad', 'observacion', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */

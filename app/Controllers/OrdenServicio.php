@@ -354,7 +354,6 @@ class OrdenServicio extends BaseController
 
         $pdf->SetFont('Arial', '', 10);
         $pdf->SetXY(2, 153);
-        $pdf->Cell(90, 20, 'Se utilizaron los siguientes materiales:', 0, 'J', false);
 
         $yLine = 165;
         for ($i = 0; $i < 15; $i++) {
@@ -362,16 +361,11 @@ class OrdenServicio extends BaseController
             $yLine = $yLine + 5;
         }
 
-        $xIni = 2;
-        $yIni = 158;
-        foreach ($materiales as $mats) {
-            $pdf->SetXY($xIni, $yIni);
-            $pdf->MultiCell(90, 20, 'Material: ' . $mats['nombre'] . ' - Cantidad:' . $mats['cantidad'] . ' - Fecha: ' . $mats['fecha_movimiento'] . ' ', 0, 'J', false);
-            $yIni =  $yIni + 5;
-        }
+        $pdf->SetAutoPageBreak(false);
+        $pdf->SetXY(2, 161);
+        $pdf->MultiCell(210, 5, $inven[30]['observacion'], 0, 'J', false);
 
         $pdf->SetFont('Arial', '', 8);
-        $pdf->SetAutoPageBreak(false);
         
         /* --- TERMINOS Y CONDICIONES --- */
         $pdf->SetFont('Arial', 'B', 6.5);
@@ -399,6 +393,7 @@ class OrdenServicio extends BaseController
         
         
         /* --- FIRMA --- */
+        $pdf->SetFont('Arial', '', 8);
         $pdf->RoundedRect(153, 241, 61, 35, 2);
         $pdf->SetXY(153, 242);
         $pdf->MultiCell(61, 3, utf8_decode('ACEPTO LAS CONDICIONES INDICADAS EN ESTA ORDEN DE SERVICIO'), 0, 'C', false);

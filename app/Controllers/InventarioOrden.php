@@ -29,6 +29,7 @@ class InventarioOrden extends BaseController
         $item = $this->request->getPost('item');
         $checked = $this->request->getPost('checked');
         $cantidad = $this->request->getPost('cantidad');
+        $observacion = $this->request->getVar('observacion');
 
         $usuarioCrea = session('id');
         $dataInventario = [
@@ -37,6 +38,7 @@ class InventarioOrden extends BaseController
             'item' => $item,
             'checked' => $checked,
             'cantidad' => $cantidad,
+            'observacion' => $observacion == '' ? null : $observacion,
             'usuario_crea' => $usuarioCrea
         ];
         if ($tp == 2) {
