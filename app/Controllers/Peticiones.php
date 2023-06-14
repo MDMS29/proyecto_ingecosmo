@@ -23,6 +23,12 @@ class Peticiones extends BaseController
         echo view('/peticiones/peticiones',$data);
     }
 
+    public function obtenerPeticiones()
+    {
+        $res = $this->peticiones->obtenerPeticiones();
+        return json_encode($res);
+    }
+
     // public function insertar()
     // {
     //     $tp = $this->request->getPost('tp');

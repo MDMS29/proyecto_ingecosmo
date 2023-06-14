@@ -14,7 +14,7 @@ class PeticionesModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_peticion', 'emisor', 'receptor', 'asunto', 'msg_emisor', 'msg_receptor', 'tipo_validacion', 'fecha_envio_pet', 'fecha_res_pet', 'hora_envio_pet', 'hora_res_pet', 'usuario_crea','fecha_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_peticion', 'emisor', 'receptor', 'asunto', 'msg_emisor', 'msg_receptor', 'tipo_validacion', 'fecha_envio_pet', 'fecha_res_pet', 'hora_envio_pet', 'hora_res_pet', 'usuario_crea', 'fecha_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = ''; /*fecha automatica para la creacion */
@@ -25,10 +25,11 @@ class PeticionesModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    public function obtenerPropietario($id){
-        $this->select('*');
-        $this->where('id_vehiculo', $id);
-        $data = $this->first();
+
+    public function obtenerPeticiones()
+    {
+        $this->select('peticiones.*');
+        $data = $this->findAll();
         return $data;
     }
 }
