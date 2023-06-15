@@ -147,7 +147,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar" ><!-- TEXTO DIANMICO --></button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -215,7 +215,7 @@
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
@@ -282,7 +282,7 @@
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header flex justify-content-between align-items-center">
-                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
                     <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
                 </div>
@@ -491,8 +491,6 @@
         },
 
     });
-
-
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (accion == 3) {
@@ -809,7 +807,7 @@
                 dataType: 'json',
                 contentType: false, // Importante: desactiva el tipo de contenido predeterminado
                 processData: false, // Importante: no proceses los datos
-               
+
             }).done(function(data) {
                 console.log(data)
                 telefonos.forEach(tel => {
@@ -891,11 +889,16 @@
     })
     // Agregar Telefono a la tabla
     $('#btnAddTel').on('click', function(e) {
-
         const numero = $('#telefonoAdd').val()
         const tipo = $('#tipoTele').val()
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
+
+        const regex = /^\d{10,10}$/;
+        if (!regex.test(parseInt(numero))) {
+            return mostrarMensaje('error', '¡Telefono invalido!')
+        }
+
         if ([numero, prioridad].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
@@ -1041,6 +1044,12 @@
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
+
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(correo)) {
+            validCorreo = false
+            return mostrarMensaje('error', '¡Tipo de correo invalido!')
+        }
 
         if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')

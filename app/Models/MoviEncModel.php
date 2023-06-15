@@ -30,16 +30,16 @@ class MoviEncModel extends Model
     {
         $this->select("id_movimientoenc, terceros.id_tercero, terceros.razon_social, fecha_movimiento, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, vw_param_det2.nombre as nom_tipo_terce,  ordenes_servicio.id_vehiculo, vehiculos.placa, param_detalle.nombre as tipo_movimiento, movimiento_enc.tipo_movimiento as id_tipo_mov, vw_param_det.nombre as estado, ordenes_servicio.n_orden, concat(ordenes_servicio.nombres, ' ', ordenes_servicio.apellidos) as nombreAliado");
         $this->join('terceros', 'terceros.id_tercero = movimiento_enc.id_tercero');
-        $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo');
-        $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = movimiento_enc.id_vehiculo', 'left');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
-        $this->join('param_detalle', 'param_detalle.id_param_det = movimiento_enc.tipo_movimiento');
-        $this->join('vw_param_det', 'vw_param_det.id_param_det = movimiento_enc.estado');
-        $this->join('vw_param_det2', 'vw_param_det2.id_param_det = terceros.tipo_tercero');
+        $this->join('param_detalle', 'param_detalle.id_param_det = movimiento_enc.tipo_movimiento', 'left');
+        $this->join('vw_param_det', 'vw_param_det.id_param_det = movimiento_enc.estado', 'left');
+        $this->join('vw_param_det2', 'vw_param_det2.id_param_det = terceros.tipo_tercero', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '57');
         $this->orWhere('movimiento_enc.tipo_movimiento', '58');
         $this->orWhere('movimiento_enc.tipo_movimiento', '59');
-        $this->orderBy('id_movimientoenc', 'desc'); 
+        // $this->orderBy('id_movimientoenc', ' desc'); 
         $this->groupBy('id_movimientoenc'); 
         $data = $this->findAll();
         return $data;
