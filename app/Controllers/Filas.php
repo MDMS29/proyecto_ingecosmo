@@ -11,7 +11,7 @@ class Filas extends BaseController
 {
     protected $filas, $estanteria;
     protected $material, $fila;
-    protected $materiales;
+    protected $materiales, $cateogria;
 
     public function __construct()
     {
@@ -91,7 +91,8 @@ class Filas extends BaseController
 
     public function moverMaterial()
     {
-        $this->filas->update($this->request->getPost('id_material'), [
+        // echo $this->request->getPost('id_material');
+        $this->material->update($this->request->getPost('id_material'), [  
             'fila' => $this->request->getPost('fila')
         ]);
         return json_encode(1);

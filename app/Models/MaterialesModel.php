@@ -73,7 +73,6 @@ class MaterialesModel extends Model
         $this->select('id_material, nombre, fila');
         $this->where('materiales.categoria_material', $categoria);
         $this->where('materiales.fila', $fila);
-        $this->join('filas', 'filas.id_fila = materiales.fila');
         $datos = $this->findAll();
         return $datos;
     }
