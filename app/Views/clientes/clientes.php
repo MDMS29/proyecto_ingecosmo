@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a> 
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a>
         </div>
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
@@ -80,7 +80,7 @@
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
                                     <select disabled class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
-                                        <option value="1" selected >Cedula de Ciudadania</option>
+                                        <option value="1" selected>Cedula de Ciudadania</option>
                                         <option>-- Seleccione --</option>
                                     </select>
                                 </div>
@@ -244,7 +244,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -708,6 +708,12 @@
         const tipo = $('#tipoTele').val()
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
+        const regex = /^\d{10,10}$/;
+        
+        if (!regex.test(parseInt(numero))) {
+            return mostrarMensaje('error', '¡Telefono invalido!')
+        }
+        
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
@@ -853,6 +859,13 @@
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!regex.test(correo)) {
+            validCorreo = false
+            return mostrarMensaje('error', '¡Tipo de correo invalido!')
+        }
+
         if ([correo, prioridad].includes('')) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
