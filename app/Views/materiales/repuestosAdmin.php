@@ -16,7 +16,6 @@
                     <th scope="col" class="text-center">Proveedor</th>
                     <th scope="col" class="text-center">Existencias</th>
                     <th scope="col" class="text-center">Bodega</th>
-                    <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>
@@ -27,7 +26,8 @@
     </div>
     <div class="footer-page">
         <button class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#agregarRepuesto" onclick="seleccionarRepuesto(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
-        <a href="<?php echo base_url('repuestosAdmin/eliminados'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?php echo base_url('repuestosAdmin/pendientes'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/devolucionW.png') ?>" alt="icon-plus" width="20"> Devoluciones</a>
+        <a href="<?php echo base_url('repuestosAdmin/confirmados'); ?>" class="btn btn-success"> <img src="<?= base_url('img/confirmarW.png') ?>" alt="icon-plus" width="20"> Confirmados</a>
     </div>
 </div>
 
@@ -113,14 +113,14 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de eliminar el repuesto?</p>
+                        <p class="textoModalP">¿Estas seguro de devolver el repuesto?</p>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
                 <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnAccionF">Eliminar</a>
+                <a id="btnSi" class="btn btnAccionF">Devolver</a>
             </div>
 
         </div>
@@ -225,15 +225,11 @@
                 data: 'bodega'
             },
             {
-                
-            },
-            {
                 data: null,
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarRepuesto(' + data.id_material + ' , 2 )" data-bs-target="#agregarRepuesto" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Repuesto"></button>' +
-
-                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Proveedor"></button>'
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/devolucion.png") ?>" alt="Boton Devolver" title="Devolver Repuesto" style="width: 24px; height: 21px"></button>'
                     );
                 },
             }
@@ -296,19 +292,23 @@
 
     //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `EliminarRepuesto(${$(e.relatedTarget).data('href')})`)
+        $(this).find('#btnSi').attr('onclick', `DevolverRepuesto(${$(e.relatedTarget).data('href')})`)
     })
 
-    function EliminarRepuesto(id) {
+    function DevolverRepuesto(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
             data: {
                 id,
-                estado: 'I'
+                estado: 'P'
             }
-        }).done(function(data) {
-            mostrarMensaje('success', data)
+        }).done(function() {
+            Swal.fire(
+                'Pendiente a devolver.',
+                '¡Revisa el apartado de devoluciones para confirmar su devolución!',
+                'success'
+            )
             $('#modalConfirmarP').modal('hide')
             contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)

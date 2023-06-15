@@ -149,8 +149,8 @@
             url: "<?php echo base_url('/filas/materialesEstante/') ?>" + id,
             type: 'POST',
             dataType: 'json',
-            processData: false, // Evitar que jQuery procese los datos
-            contentType: false, // Evitar que jQuery establezca el tipo de contenido
+            processData: false, 
+            contentType: false, 
             success: function(res) {
                 if (res == 1) {
                     return mostrarMensaje('warning', '¡Este estante no tiene materiales!')

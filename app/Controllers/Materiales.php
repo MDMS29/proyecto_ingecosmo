@@ -16,7 +16,7 @@ class Materiales extends BaseController
     public function index()
     {
         // $materiales = $this->materiales->obtenerInsumos();
-        // $data = ['data' => $materiales];
+        //
         // echo view('/principal/sidebar');
         // echo view('/materiales/materiales', $data);
     }
