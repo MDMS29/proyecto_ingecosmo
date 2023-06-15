@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/vehiculo-b.png') ?>" /> Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Kilometraje</a> - <a class="toggle-vis btn" data-column="8">Combustible</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Combustible</a>
         </div>
         <table class="table table-striped" id="tableVehiculos" width="100%" cellspacing="0">
             <thead>
@@ -336,6 +336,7 @@
         nFabrica = $('#nFabrica').val()
         color = $('#color').val()
         combustible = $('#combustible').val()
+        $('#brnGuardar').attr('disabled', '')
         if ([tipoCliente, cliente, placa, marca, nFabrica, color, kms, combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
@@ -358,12 +359,12 @@
                     if (tp == 2) {
                         data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
                     } else {
-
                         data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
                     }
                     contador = 0
                     tablaVehiculos.ajax.reload(null, false)
                     $('#agregarVehiculo').modal('hide')
+                    $('#brnGuardar').removeAttr('disabled')
                 }
             })
         }

@@ -552,22 +552,33 @@ class OrdenServicio extends BaseController
                     'id_tercero' => $cliente,
                     'tipo_propietario' => $tipoCliente
                 ];
+
+                $idOrden = $this->ordenes->getInsertID();
+                //Historial
+                $dataMovimiento = [
+                    'id_tercero' => $cliente,
+                    'id_vehiculo' => $idOrden,
+                    'kms' => $kms,
+                    'fecha_movimiento' => $fechaActual,
+                    'estado' => $estado,
+                    'tipo_movimiento' => 57,
+                    'usuario_crea' => $usuarioCrea
+                ];
+
                 $res = $this->propietario->obtenerPropietario($vehiculo);
                 if (!empty($res)) {
-                    return json_encode($this->ordenes->getInsertID());
+                    if ($this->movimiento->save($dataMovimiento)) {
+                        return json_encode($this->ordenes->getInsertID()); //Movimiento
+                    }else{
+                        return json_encode(2);
+                    }
                 } else {
                     if ($this->propietario->save($dataPropie)) {
-                        $dataMovimiento = [
-                            'id_tercero' => $cliente,
-                            'id_vehiculo' => $vehiculo,
-                            'kms' => $kms,
-                            'fecha_movimiento' => $fechaActual,
-                            'estado' => $estado,
-                            'tipo_movimiento' => 57,
-                            'usuario_crea' => $usuarioCrea
-                        ];
-                        $this->movimiento->save($dataMovimiento); //Movimiento
-                        return json_encode($this->ordenes->getInsertID());
+                        if ($this->movimiento->save($dataMovimiento)) {
+                            return json_encode($this->ordenes->getInsertID()); //Movimiento
+                        }
+                    } else {
+                        return json_encode(2);
                     }
                 }
             } else {
