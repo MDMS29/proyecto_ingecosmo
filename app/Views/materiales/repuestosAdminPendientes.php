@@ -3,7 +3,7 @@
 
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos-b.png') ?>" />Administrar Devolucion De Repuesto</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/devolucionB.png') ?>" /> Repuestos Pendientes a Devolver</h2>
     <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
         <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Exixtencias</a>
     </div>
@@ -17,7 +17,6 @@
                     <th scope="col" class="text-center">Proveedor</th>
                     <th scope="col" class="text-center">Existencias</th>
                     <th scope="col" class="text-center">Bodega</th>
-                    <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
             </thead>
@@ -28,6 +27,7 @@
     </div>
     <div class="footer-page">
         <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <a href="<?php echo base_url('repuestosAdmin/confirmados'); ?>" class="btn btn-success"> <img src="<?= base_url('img/confirmarW.png') ?>" alt="icon-plus" width="20"> Confirmados</a>
     </div>
 </div>
 
@@ -109,15 +109,16 @@
 
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
-                        <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de reestablecer el Repuesto?</p>
+                        <img id="imgModal" style=" width:60px; height:40px; margin:10px; " />
+                        <p id="textoModalP" class="textoModalP"></p>
+                        <p id="nombre"> </p>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
                 <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+                <a id="btnSi" class="btn btnAccionF"></a>
             </div>
 
         </div>
@@ -148,21 +149,31 @@
     })
 
     function seleccionarRepuesto(id, tp) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
-            dataType: 'json',
-            success: function(data) {
-                $('#tp').val(2)
-                $('#tituloModal').text('Ver Repuesto')
-                $('#id').val(data['id_material'])
-                $('#nombre').val(data['nombre'])
-                $('#existencias').val(data['cantidad_actual'])
-                $('#proveedor').val(data['razon_social'])
-                $('#orden').val(data['numeroOrden'])
-                $('#bodega').val(data['bodega'])
-            }
-        })
+        if (tp == 2) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
+                dataType: 'json',
+                success: function(data) {
+                    $('#tp').val(2)
+                    $('#textoModalP').text(`¿Estas seguro de reestablecer el Repuesto - ${data.nombre}?`)
+                    $('#imgModal').attr('src', '<?php echo base_url('img/restore.png') ?>')
+                    $('#btnSi').text('Resstablecer')
+                }
+            })
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
+                dataType: 'json',
+                success: function(data) {
+                    $('#tp').val(1)
+                    $('#textoModalP').text(`Confirmar la devolucion del Repuesto - ${data.nombre}`)
+                    $('#imgModal').attr('src', '<?php echo base_url('img/comfirmarB.png') ?>')
+                    $('#btnSi').text('Confirmar')
+                }
+            })
+        }
     }
     // Tabla   
     var tableRepuestosAdmin = $("#tableRepuestosAdmin").DataTable({
@@ -170,7 +181,7 @@
             url: '<?= base_url('repuestosAdmin/obtenerRepuestos') ?>',
             method: "POST",
             data: {
-                estado: 'I'
+                estado: 'P'
             },
             dataSrc: "",
         },
@@ -197,14 +208,11 @@
                 data: 'bodega'
             },
             {
-                
-            },
-            {
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarRepuesto(' + data.id_material + ' , 2 )" data-bs-target="#verRepuesto" data-bs-toggle="modal" title="Ver Repuesto"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>' +
-                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restaurar" title="Restaurar Repuesto" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',1)"><img src="<?php echo base_url("img/confirmar.png") ?>" alt="Boton Confirmar" title="Devolver Repuesto" width="24"></button>' +
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',2)"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restaurar" title="Restaurar Repuesto" width="20"></button>'
                     );
                 },
             }
@@ -216,9 +224,14 @@
     });
 
 
-    //Cambiar estado de "Activo" a "Inactivo" 
+    // Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
+        tp = $('#tp').val()
+        if (tp==2){
+            $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
+        } else {
+            $(this).find('#btnSi').attr('onclick', `RepuestoConfirmado(${$(e.relatedTarget).data('href')})`)
+        }
     })
 
     function ReestablecerRepuesto(id) {
@@ -227,13 +240,29 @@
             url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
             data: {
                 id,
-                estado: 'A '
+                estado: 'A'
             }
-        }).done(function(data) {
-            mostrarMensaje('success', data)
+        }).done(function() {
             $('#modalConfirmarP').modal('hide')
             contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
+            return  mostrarMensaje('success', '¡Se ha reestablecido el repuesto!')
+        })
+    }
+
+    function RepuestoConfirmado(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
+            data: {
+                id,
+                estado: 'C' //Estado del repuesto: confirmado
+            }
+        }).done(function() {
+            $('#modalConfirmarP').modal('hide')
+            contador = 0
+            tableRepuestosAdmin.ajax.reload(null, false)
+            return mostrarMensaje('success', '¡Se ha confirmado la devolucion del repuesto!')
         })
     }
     $('#btnNo').click(function() {
