@@ -144,7 +144,7 @@ table {
 
 .profile-img {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
 }
 
 .profile-img img {
@@ -350,7 +350,7 @@ table {
 }
 
 #fotoPerfil{
-  width: 200px;
+  width: 165px;
   border: 3px solid var(--azulBase);
   border-radius: 10px;
   padding: 5px;

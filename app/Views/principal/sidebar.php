@@ -68,7 +68,7 @@
                         <hr class="nav-item dropdown" style="border-color: white">
                         <li><a class="nav-item dropdown" href="<?= base_url('estanteria') ?>" style="color: white;  margin-left: 10px;"><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /> Estanteria</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
-                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?> style="color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /> Orden de entrega</a></li>
+                        <li><a class="nav-item dropdown" href="<?php echo base_url('repuestos') ?> style=" color: white; margin-left: 10px;"><img title="Carrito" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /> Orden de entrega</a></li>
                         <hr class="nav-item dropdown" style="border-color: white">
                     <?php } ?>
                     <li><a class="nav-item dropdown" href="<?php echo base_url('peticiones') ?>" style="color: white;  margin-left: 10px;"><img title="Peticiones" style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon.png') ?>" /> Peticiones</a></li>
@@ -257,7 +257,7 @@
                 currency: 'COP'
             })
         };
-       
+
 
         function mostrarMensajeCarrito(icon, text) {
             Toast.fire({

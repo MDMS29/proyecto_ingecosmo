@@ -231,7 +231,7 @@
                         <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <img  id="logoModal" src="<?= base_url('img/editar.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5" id="tituloModal">Editar</h1>
                         </div>
 
