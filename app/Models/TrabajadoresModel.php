@@ -75,4 +75,10 @@ class TrabajadoresModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function trabajadoresOrdenes(){
+        $this->select("id_trabajador, concat(nombre_p,' ',nombre_s,' ',apellido_p,' ',apellido_s) as nombreTrabajador");
+        $this->where("estado", "A");
+        $data = $this->findAll();
+        return $data;
+    }
 }

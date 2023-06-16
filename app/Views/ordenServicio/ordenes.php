@@ -600,7 +600,7 @@
                                         <select class="form-select form-control" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
-                                                <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : '' ?>><?= $estado['nombre'] ?></option>
+                                                <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : ($estado['id'] == 43 ? 'hidden' : '') ?>><?= $estado['nombre'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -618,7 +618,7 @@
                                     <div class="d-flex">
                                         <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
-                                    <small id="msgFecha" class="normal">* La fecha salida debe ser mayor a la de entrada *</small>
+                                    <small id="msgFecha" class="normal"></small>
                                 </div>
                             </div>
                         </form>
@@ -1653,8 +1653,9 @@
                 cantidad: 0
             },
         ]
+        $('#btnGuardar').attr('disabled', '')
         arrayInven.forEach(elem => elem.checked == '' ? validInv = false : validInv = true)
-        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
+        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, txtObser, estado, kms, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else if (!validInv) {
             return mostrarMensaje('error', '¡Debe completar todos los campos del inventario!')
@@ -1669,7 +1670,7 @@
                     orden,
 
                     vehiculo: aggVehi == 0 ? vehiculo : nuevoVehiculo,
-                    
+
                     kms,
                     infoVehi: aggVehi == 0 ? null : {
                         placa,
@@ -1726,6 +1727,7 @@
                     $('#vehiculoT').val('')
                     $('#vehiculoT').attr('hidden', '')
                     obtenerVehiculos()
+                    $('#btnGuardar').remove('disabled')
                     tablaOrdenes.ajax.reload(null, false)
                 }
             })

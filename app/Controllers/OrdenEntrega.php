@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController; /*la plantilla del controlador general de codeigniter */
-use App\Controllers\Materiales;
+use App\Models\MoviEncModel;
 
-class ordenEntrega extends BaseController
+class OrdenEntrega extends BaseController
 {
 
     protected $ordenEntrega;
@@ -13,7 +13,7 @@ class ordenEntrega extends BaseController
   
     public function __construct()
     {
-     
+        $this->ordenEntrega = new MoviEncModel();
     }
 
     public function index()
@@ -21,6 +21,24 @@ class ordenEntrega extends BaseController
 
         echo view('/principal/sidebar');
         echo view('/ordenEntrega/ordenEntrega');
+    }
+
+    
+    public function detallesOrden($id)
+    {
+        $returnData = array();
+        $ordenEntrega_ = $this->ordenEntrega->traerDetalles($id);
+        if (!empty($ordenEntrega_)) {
+            array_push($returnData, $ordenEntrega_);
+        }
+        echo json_encode($returnData);
+    }
+
+
+    public function obtenerOrdenEntrega()
+    {
+        $res = $this->ordenEntrega->ordenesEntrega();
+        return json_encode($res);
     }
 
 }
