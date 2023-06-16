@@ -35,6 +35,14 @@ class MaterialesModel extends Model
         $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }
+    public function obtenerInsumo1()
+    {
+        $this->select('materiales.*, param_detalle.nombre as nombre_categoria');
+        $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
+        $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
+        return $datos;
+    }
+            
     public function traerDetalles($id_material)
     {
         $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');

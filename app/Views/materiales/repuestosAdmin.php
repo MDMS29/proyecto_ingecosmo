@@ -14,7 +14,7 @@
                     <th scope="col" class="text-center">Nombre</th>
                     <th scope="col" class="text-center">Orden de Servicio</th>
                     <th scope="col" class="text-center">Proveedor</th>
-                    <th scope="col" class="text-center">Existencias</th>
+                    <th scope="col" class="text-center">Cantidad</th>
                     <th scope="col" class="text-center">Bodega</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
@@ -98,6 +98,35 @@
         </div>
     </div>
 </form>
+
+<!-- Modal Confirma Devolucion -->
+<div class="modal fade" id="modalConfirmarD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content" id="modalEliminarContentP">
+            <div class="modalContenedorP">
+                <div id="contenidoHeaderEliminarP" class="modal-header">
+                    <img style=" margin-bottom: 0;" width="100" src="<?php echo base_url('/img/ingecosmo.png') ?>" />
+                    <h1 id="tituloM" class="fs-5">Observacion</h1><br>
+                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="contenidoEliminarP">
+                    <div class="">
+                    <label id="observacion" class=""></label>
+                        <textarea id="observaciont" name="textarea" rows="5" cols="60" placeholder="Ej: El repuesto llego en mal estado..." style="border: 3px solid #161666; border-radius: 5px; padding: 7px;"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div id="bloqueBtnP" class="modal-footer">
+                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cancelar</button>
+                <a id="btnSig" class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#modalConfirmarP"></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -192,6 +221,20 @@
             $('#btnGuardar').text('Agregar')
         }
     }
+
+    function titulo(id) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
+                dataType: 'json',
+                success: function(data) {
+                    $('#tituloM').text(`Observacion - ${data.nombre}`)
+                    $('#observacion').text('Motivo de devolucion:')
+                    $('#btnSig').text('Confirmar')
+                }
+            })
+        } 
+    
     // Tabla   
     var tableRepuestosAdmin = $("#tableRepuestosAdmin").DataTable({
         ajax: {
@@ -229,7 +272,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarRepuesto(' + data.id_material + ' , 2 )" data-bs-target="#agregarRepuesto" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Repuesto"></button>' +
-                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP"><img src="<?php echo base_url("img/devolucion.png") ?>" alt="Boton Devolver" title="Devolver Repuesto" style="width: 24px; height: 21px"></button>'
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarD" onclick="titulo(' + data.id_material + ')"><img src="<?php echo base_url("img/devolucion.png") ?>" alt="Boton Devolver" title="Devolver Repuesto" style="width: 24px; height: 21px"></button>'
                     );
                 },
             }
@@ -239,6 +282,7 @@
         },
 
     });
+
 
     $('#formularioRepuesto').on('submit', function(e) {
         e.preventDefault()
@@ -293,6 +337,12 @@
     //Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
         $(this).find('#btnSi').attr('onclick', `DevolverRepuesto(${$(e.relatedTarget).data('href')})`)
+    })
+
+    $('#modalConfirmarD').on('shown.bs.modal', function(e) {
+        id = $(e.relatedTarget).data('href')
+        $(this).find('#btnSig').attr('data-href', id)
+
     })
 
     function DevolverRepuesto(id) {

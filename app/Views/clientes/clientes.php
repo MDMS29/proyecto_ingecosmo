@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Más Info</a>
         </div>
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
@@ -187,7 +187,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button"  class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -285,7 +285,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye"></i> Ver Telefono</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-telephone text-info fw-2 text-dark"></i> Ver Telefono</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <input type="text" name="editTele" id="editTele" hidden>
@@ -297,6 +297,7 @@
                                 <tr class="text-center">
                                     <th>Telefono</th>
                                     <th>Prioridad</th>
+                                    <th>Tipo</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyTel1">
@@ -321,7 +322,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye"></i> Ver Correo</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-envelope text-warning fw-3 text-dark"></i> Ver Correo</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
@@ -334,7 +335,7 @@
                                     <th>Prioridad</th>
                                 </tr>
                             </thead>
-                            <tbody id="bodyCorre">
+                            <tbody id="bodyCorre1">
                                 <tr class="text-center">
                                     <td colspan="3">NO HAY CORREOS</td>
                                 </tr>
@@ -421,11 +422,11 @@
         }
         if (objCorreo.id != 0) {
             correos.push(objCorreo)
-            guardarCorreo()
+            guardarCorreo(0)
         }
         if (objTelefono.id != 0) {
             telefonos.push(objTelefono)
-            guardarTelefono()
+            guardarTelefono(0)
         }
         if (input1 == 0) {
             telefonos = []
@@ -442,7 +443,7 @@
             tipo: '',
             prioridad: ''
         }
-        guardarTelefono()
+        guardarTelefono(0)
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
@@ -509,7 +510,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarTelefono" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
+                        '<button class="btn" onclick="seleccionarCliente(' + data.id_tercero + ' , 2 )" data-bs-target="#agregarCliente" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Cliente"></button>' +
 
                         '<button class="btn" data-href=' + data.id_tercero + ' data-bs-toggle="modal" data-bs-target="#modalConfirmaP"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Cliente"></button>'
                     );
@@ -529,13 +530,7 @@
             dataType: 'json',
             success: function(data) {
                 telefonos = data[0]
-                guardarTelefono()
-                for (let i = 0; i < telefonos.length; i++) {
-                    const fila = $(`#${telefonos[i].id}`);
-                    const td = fila.find('td').eq(3).attr('id')
-                    console.log($(`#${td}td`))
-                    $(`#${td}-`).addClass('hidden')
-                }
+                guardarTelefono(1)
             }
         })
     }
@@ -547,7 +542,7 @@
             dataType: 'json',
             success: function(data) {
                 correos = data[0]
-                guardarCorreo()
+                guardarCorreo(1)
             }
         })
     }
@@ -580,7 +575,7 @@
                     dataType: 'json',
                     success: function(data) {
                         telefonos = data[0]
-                        guardarTelefono()
+                        guardarTelefono(0)
                     }
                 })
                 $.ajax({
@@ -589,7 +584,7 @@
                     dataType: 'json',
                     success: function(data) {
                         correos = data[0]
-                        guardarCorreo()
+                        guardarCorreo(0)
                     }
                 })
             })
@@ -599,8 +594,8 @@
             telefonos = []
             correos = []
             limpiarCampos(0)
-            guardarCorreo()
-            guardarTelefono()
+            guardarCorreo(0)
+            guardarTelefono(0)
             limpiarCampos(0)
             $('#tituloModal').text('Agregar')
             $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
@@ -773,11 +768,11 @@
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
         const regex = /^\d{10,10}$/;
-        
+
         if (!regex.test(parseInt(numero))) {
             return mostrarMensaje('error', '¡Telefono invalido!')
         }
-        
+
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
@@ -808,7 +803,7 @@
                 tipo: '',
                 prioridad: ''
             }
-            return guardarTelefono()
+            return guardarTelefono(0)
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
@@ -826,7 +821,7 @@
                 tipo: '',
                 prioridad: ''
             }
-            return guardarTelefono()
+            return guardarTelefono(0)
         }
 
     })
@@ -850,7 +845,7 @@
         })
     }
     // Funcion para mostrar telefono en la tabla.
-    function guardarTelefono() {
+    function guardarTelefono(tipo) {
         $('#telefono').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
@@ -864,10 +859,12 @@
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                <td id="${telefonos[i].id}td">
-                                    <button class="btn" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
-                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
-                                </td>
+                                ${tipo == 0 ? `<td>
+                                                    <button class="btn" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
+                                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
+                                                </td>` 
+                                : ''}
+                                
                             </tr>`
             }
         }
@@ -891,7 +888,7 @@
             prioridad: prioridad.attr('id')
         }
         telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
-        guardarTelefono()
+        guardarTelefono(0)
     }
     //Eliminar telefono de la tabla
     function eliminarTel(id) {
@@ -910,7 +907,7 @@
             })
         }
         telefonos = telefonos.filter(tel => tel.id != id)
-        guardarTelefono() //Actualizar tabla
+        guardarTelefono(0) //Actualizar tabla
     }
     // --------------------------------------puro email----------------------------------
     //Al escribir validar que el correo no este registrado
@@ -955,7 +952,7 @@
                 correo: '',
                 prioridad: ''
             }
-            return guardarCorreo()
+            return guardarCorreo(0)
         } else if (filtro.length > 0) {
             filtro = []
 
@@ -970,12 +967,12 @@
                 correo: '',
                 prioridad: ''
             }
-            return guardarCorreo()
+            return guardarCorreo(0)
         }
 
     })
     // Funcion para mostrar correos en la tabla.
-    function guardarCorreo() {
+    function guardarCorreo(tipo) {
         $('#email').val(correos[0]?.correo)
         var cadena
         if (correos.length == 0) {
@@ -988,14 +985,15 @@
                 cadena += ` <tr class="text-center" id=${correos[i].id}>
                                 <td>${correos[i].correo}</td>
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                <td>
+                                ${tipo == 0 ? `<td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
-                                </td>
+                                </td>` : '' }
                             </tr>`
             }
         }
         $('#bodyCorre').html(cadena)
+        $('#bodyCorre1').html(cadena)
     }
     //Editar Correo
     function editarCorreo(id) {
@@ -1011,7 +1009,7 @@
             prioridad: prioridad.attr('id')
         }
         correos = correos.filter(correo => correo.id != fila.attr('id'));
-        guardarCorreo()
+        guardarCorreo(0)
     }
     //Eliminar correo de la tabla
     function eliminarCorreo(id) {
@@ -1030,7 +1028,7 @@
             })
         }
         correos = correos.filter(correo => correo.id != id)
-        guardarCorreo() //Actualizar tabla
+        guardarCorreo(0) //Actualizar tabla
     }
 
 

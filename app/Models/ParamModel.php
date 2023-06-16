@@ -39,6 +39,20 @@ class ParamModel extends Model
         $datos = $this->findAll();
         return $datos;
     }
+    public function obtenerCategoriasOrdenes()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '10');
+        $datos = $this->findAll();
+        return $datos;
+    }
+    public function obtenerTipoMat()
+    {
+        $this->select('param_detalle.*');
+        $this->where('id_param_enc', '4');
+        $datos = $this->findAll();
+        return $datos;
+    }
     public function obtenerFilas()
     {
         $this->select('param_detalle.*');
