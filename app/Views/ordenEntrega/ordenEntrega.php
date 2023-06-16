@@ -47,54 +47,64 @@
                             <input type="text" name="idMovimientoEnc" id="idMovimientoEnc" hidden>
                             <h1 class="modal-title fs-5 text-center" id="tituloModal">Nueva Orden</h1>
                         </div>
-                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombre_p" class="col-form-label">N° Orden Servicio</label>
-                                    <input type="text" name="nombre_p" class="form-control" id="numeroOrden" disabled>
+                                    <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio</label>
+                                    <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
+                                        <option selected>--Seleccione--</option>
+                                        <?php foreach ($ordenes as $dato) { ?>
+                                            <option value="<?= $dato['id_orden'] ?>"><?= $dato['n_orden'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
+                                
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombre_s" class="col-form-label">N° Orden Entrega</label>
-                                    <input type="text" name="nombre_s" class="form-control" id="numeroOrdenEnt" disabled>
+                                    <input type="text" value="1" name="nombre_s" class="form-control" id="numeroOrdenEnt" disabled>
                                 </div>
-
                             </div>
+
                             <div class="mb-3" style="width: 100%">
                                 <label for="exampleDataList" class="col-form-label">Trabajador:</label>
                                 <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
-                                    <option selected="">--Seleccione--</option>
+                                    <option selected>--Seleccione--</option>
+                                    <?php foreach ($trabajadores as $dato) { ?>
+                                        <option value="<?= $dato['id_trabajador'] ?>"><?= $dato['nombreTrabajador'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
-                            <details id="datailInv">
-                                <div class="d-flex column-gap-3" style="width: 100%">
-                                    <div class="mb-3" style="width: 50%;">
-                                        <label for="exampleDataList" class="col-form-label">Tipo de Material:</label>
-                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
-                                            <option selected value="">--Seleccione--</option>
-                                            <option>Insumo</option>
-                                            <option>Repuestos</option>
 
-                                        </select>
-                                    </div>
-                                    <div class="mb-3" style="width: 50%;">
-                                        <label for="exampleDataList" class="col-form-label">Categorias:</label>
-                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
-                                            <option selected value="">--Seleccione--</option>
-                                            <option>Lubricantes</option>
-                                            <option>Pinturas</option>
-                                            <option>Remaches</option>
-                                            <option>Brocas</option>
-                                            <option>Baterias</option>
-                                            <option>Bombillos</option>
-                                            <option>Discos</option>
-
-                                        </select>
-                                    </div>
-                                </div>
+                            <details id="datailInv" open>
                                 <summary>Materiales a entregar</summary>
+                                <div class="d-flex column-gap-3" style="width: 100%">
+                                    <div class="mb-3" style="width: 100%;">
+                                        <label for="exampleDataList" class="col-form-label">Tipo de Material:</label>
+                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipo">
+                                            <option selected>--Seleccione--</option>
+                                            <?php foreach ($tipo as $dato) { ?>
+                                                <option value="<?= $dato['id_param_enc'] ?>"><?= $dato['nombre'] ?></option>
+                                            <?php } ?>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3" style="width: 100%;">
+                                        <label for="exampleDataList" class="col-form-label">Categorias:</label>
+                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipoCate" id="tipoCate">
+                                            <option selected>--Seleccione--</option>
+                                            <?php foreach ($tipoCate as $dato) { ?>
+                                                <option value=<?= $dato['id_param_enc'] ?>"><?= $dato['nombre'] ?></option>
+                                            <?php } ?>
+
+                                        </select>
+                                    </div>
+
+                                    <button type="button" class="btn" style="border:none;background-color:gray;color:white; width: 34px; height:38px; margin-top:35px;" title="Agregar">+</button>
+                                </div>
                                 <div class="d-flex column-gap-3" style="width: 100%">
 
 
@@ -112,112 +122,18 @@
                                         </thead>
                                         <tbody>
                                             <tr class="text-center">
-                                                <td hidden><input type="text" id="idGrua"></td>
-                                                <td>Grua</td>
-                                                <td><input type="checkbox" name="grua" id="grua"></td>
-                                                <td></td>
+                                                <td hidden><input type="text" id="materiales"></td>
+                                                <td> <?php foreach ($materiales as $dato) { ?>
+                                                      <option value=<?= $dato['id_material'] ?>"><?= $dato['nombre'] ?></option> 
+                                                    <?php } ?> 
+                                                </td>
+                                                <td><input name="precio" id="precio" disabled></td>
+                                                <td><input name="cantidad" id="cantidad" disabled></td>
                                                 <td>
                                                 </td>
 
                                             </tr>
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idLlaves"></td>
-                                                <td>Llaves</td>
-                                                <td><input type="checkbox" name="llaves" id="llaves"></td>
-                                                <td></td>
-                                                <td>
-                                                </td>
-                                            </tr>
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idDocu"></td>
-                                                <td>Documentos</td>
-                                                <td><input type="checkbox" name="documentos" id="documentos"></td>
-                                                <td></td>
-                                                <td>
-                                                </td>
-                                            </tr>
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idRetro"></td>
-                                                <td>Retrovisores</td>
-                                                <td style="display: flex;justify-content: center;">
-                                                    <select class="text-center form-select form-control" id="retrovisores" style="width: 155px;">
-                                                        <option value="" selected>-- Seleccione --</option>
-                                                        <option value="1">B</option>
-                                                        <option value="2">R</option>
-                                                        <option value="3">G</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                </td>
-                                            </tr>
 
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idRetroInter"></td>
-                                                <td>Retrovisores Internos</td>
-                                                <td style="display: flex;justify-content: center;">
-                                                    <select class="text-center form-select form-control" id="retroInter" style="width: 155px;">
-                                                        <option value="" selected>-- Seleccione --</option>
-                                                        <option value="1">B</option>
-                                                        <option value="2">R</option>
-                                                        <option value="3">G</option>
-                                                    </select>
-                                                </td>
-
-                                                <td> <select class="text-center form-select form-control" id="retroInter" style="width: 155px;">
-                                                        <option value="" selected>-- Seleccione --</option>
-                                                        <option value="1">B</option>
-                                                        <option value="2">R</option>
-                                                        <option value="3">G</option>
-                                                    </select></td>
-                                                <td>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idPanora"></td>
-                                                <td>Panorámicos</td>
-                                                <td style="display: flex;justify-content: center;">
-                                                    <select class="text-center form-select form-control" id="panoramicos" style="width: 155px;">
-                                                        <option value="" selected>-- Seleccione --</option>
-                                                        <option value="1">B</option>
-                                                        <option value="2">R</option>
-                                                        <option value="3">G</option>
-                                                    </select>
-                                                <td><input class="text-center" type="number" id="cantPano" style="width:35px; padding:1px 2px;"></td>
-                                                </td>
-                                                <td>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idRadio"></td>
-                                                <td>Radio</td>
-                                                <td style="display: flex;justify-content: center;">
-                                                    <select class="text-center form-select form-control" id="radio" style="width: 155px;">
-                                                        <option value="" selected>-- Seleccione --</option>
-                                                        <option value="1">B</option>
-                                                        <option value="2">R</option>
-                                                        <option value="3">G</option>0
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="text-center">
-                                                <td hidden><input type="text" id="idParlan"></td>
-                                                <td>Parlantes</td>
-                                                <td style="display: flex;justify-content: center;">
-                                                    <select class="text-center form-select form-control" id="parlantes" style="width: 155px;">
-                                                        <option value="" selected>-- Seleccione --</option>
-                                                        <option value="1">B</option>
-                                                        <option value="2">R</option>
-                                                        <option value="3">G</option>
-                                                    </select>
-                                                </td>
-                                                <td><input class="text-center" type="number" id="cantParlan" style="width:35px; padding:1px 2px;"></td>
-                                            </tr>
 
                                         </tbody>
                                     </table>
@@ -225,7 +141,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnAccionF" id="btnGuardar">Crear orden</button>
                     </div>
                 </div>
@@ -319,6 +235,13 @@
         },
     });
 
+    function limpiarCampos() {
+
+        $("#tipo").val('--Seleccione--');
+        $("#tipoCate").val('--Seleccione--');
+        $("#trabajadores").val('--Seleccione--');
+        $("#ordenes").val('--Seleccione--');
+    }
 
     function detallesOrden(id_movimientoenc) {
 
@@ -330,7 +253,6 @@
             success: function(rs) {
                 $("#idMovimientoEnc").val(rs[0]['id_movimientoEnc']);
                 $("#numeroOrden").val(rs[0]['orden']);
-
             }
         })
     }
