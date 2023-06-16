@@ -19,8 +19,9 @@ class Peticiones extends BaseController
     {
         $param = $this->param->obtenerTipoValidacion();
         $data = ['tipoDoc' => $param];
+
         echo view('/principal/sidebar');
-        echo view('/peticiones/peticiones',$data);
+        echo view('/peticiones/peticiones', $data);
     }
 
     public function obtenerPeticiones()
@@ -28,6 +29,10 @@ class Peticiones extends BaseController
         $res = $this->peticiones->obtenerPeticiones();
         return json_encode($res);
     }
+
+
+
+
 
     // public function insertar()
     // {
@@ -69,7 +74,7 @@ class Peticiones extends BaseController
     //             'tipo_tercero' => $tipoTercero,
     //             'tipo_doc' => $tipoDocumento,
     //             'usuario_crea' => $usuarioCrea
-                
+
     //         ];
     //         $this->proveedores->save($proveedorSave);
     //         return json_encode($this->proveedores->getInsertID());

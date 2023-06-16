@@ -359,3 +359,7 @@ table {
 #filePerfil{
   width: 200px;
 }
+
+.show-row {
+  display: table-row;
+}
