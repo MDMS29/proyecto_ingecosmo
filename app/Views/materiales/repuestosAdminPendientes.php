@@ -15,7 +15,7 @@
                     <th scope="col" class="text-center">Nombre</th>
                     <th scope="col" class="text-center">Orden de Servicio</th>
                     <th scope="col" class="text-center">Proveedor</th>
-                    <th scope="col" class="text-center">Existencias</th>
+                    <th scope="col" class="text-center">Cantidad</th>
                     <th scope="col" class="text-center">Bodega</th>
                     <th scope="col" class="text-center">Acciones </th>
                 </tr>
@@ -227,6 +227,7 @@
     // Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
         tp = $('#tp').val()
+        console.log(tp) //
         if (tp==2){
             $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
         } else {

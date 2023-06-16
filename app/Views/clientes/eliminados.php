@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes-b.png') ?>" /> Clientes Eliminados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Telefono</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="5">Direccion</a> - <a class="toggle-vis btn" data-column="6">Más Info</a>
         </div>
         <table class="table table-striped" id="tableClientes" width="100%" cellspacing="0">
             <thead>
@@ -15,7 +15,7 @@
                     <th scope="col" class="text-center">Tipo de Documento</th>
                     <th scope="col" class="text-center">No. Documento</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">Más Info</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -50,8 +50,8 @@
                     <img src="<?php echo base_url('img/logo_empresa.png') ?>" width="100" />
 
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <i class="bi bi-eye-fill fs-4" style="padding-right: 10px; color: #007bff !important;"></i>
-                        <h1 class="modal-title fs-5" id="tituloModal">Ver Cliente</h1>
+                        <i class="bi bi-eye-fill fs-4 text-dark"></i>
+                        <h1 class="modal-title mx-1 fs-5" id="tituloModal">Ver Cliente</h1>
                     </div>
 
                     <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -137,9 +137,12 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Ver Telefono</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal">
+                    <i class="bi bi-eye-fill fs-4 text-dark"></i>
+                    Ver Telefono
+                </h1>
+                <button type="button" class="btn" id="btnCerrarTel0" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <input type="text" name="editTele" id="editTele" hidden>
             <div class="modal-body">
@@ -162,7 +165,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" id="btnCerrarTel1" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>
@@ -174,8 +177,8 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Ver Correo</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4 text-dark"></i> Ver Correo</h1>
+                <button type="button" class="btn" id="btnCerrarCorreo0" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
@@ -197,7 +200,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" id="btnCerrarCorreo1" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>
@@ -287,49 +290,6 @@
     var emailTable = [];
     var telefonoTable = [];
 
-    function recargaTelCorreo() {
-        $.ajax({
-            url: '<?= base_url('clientes/obtenerClientes') ?>',
-            method: "POST",
-            data: {
-                estado: 'I'
-            },
-            dataSrc: "",
-        }).done(function(res) {
-            let data = JSON.parse(res)
-            for (let i = 0; i < data.length; i++) {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('email/EmailPrincipal/') ?>' + data[i].id_tercero + '/5',
-                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                    dataType: 'json',
-                    success: function(response) {
-                        console.log(response)
-                        return emailTable.push({
-                            idCliente: data[i].id_tercero,
-                            correo: response[0]?.correo || 'No se encontro correo'
-                        });
-                    }
-                });
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url('telefonos/TelefonoPrincipal/') ?>' + data[i].id_tercero + '/5',
-                    async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                    dataType: 'json',
-                    success: function(response) {
-                        console.log(response)
-                        return telefonoTable.push({
-                            idCliente: data[i].id_tercero,
-                            telefono: response[0]?.numero || 'No se encontro telefono'
-                        });
-                    }
-                });
-            }
-        })
-    }
-    recargaTelCorreo()
-
-
     // Tabla   
     var tableClientes = $("#tableClientes").DataTable({
         ajax: {
@@ -373,8 +333,11 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    arrayTele = telefonoTable.filter(tel => tel.idCliente == row.id_tercero)[0]?.telefono
-                    return arrayTele
+                    return (
+                        '<button class="btn" onclick="verTelefonos(' + data.id_tercero + ')" title="Ver Telefonos" data-bs-target="#verTelefono" data-bs-toggle="modal"><i class="bi bi-telephone text-info fw-2"></i></button>' +
+
+                        '<button class="btn" onclick="verCorreos(' + data.id_tercero + ')" title="Ver Correos" data-bs-target="#verCorreo" data-bs-toggle="modal"><i class="bi bi-envelope text-warning fw-2"></i></button>'
+                    );
                 }
             },
             {
@@ -390,7 +353,6 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
-
     });
 
 
@@ -427,11 +389,51 @@
                     mostrarCorreo()
                 }
             })
+            $('#btnCerrarCorreo0').removeAttr('data-bs-dismiss')
+            $('#btnCerrarCorreo1').removeAttr('data-bs-dismiss')
+            $('#btnCerrarCorreo0').attr('data-bs-target', '#verCliente')
+            $('#btnCerrarCorreo1').attr('data-bs-target', '#verCliente')
+
+            $('#btnCerrarTel0').removeAttr('data-bs-dismiss')
+            $('#btnCerrarTel1').removeAttr('data-bs-dismiss')
+            $('#btnCerrarTel0').attr('data-bs-target', '#verCliente')
+            $('#btnCerrarTel1').attr('data-bs-target', '#verCliente')
         })
     }
 
     // ---------------------------mostrar correos y telefonos-----------------------------
+    function verTelefonos(id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
+            dataType: 'json',
+            success: function(data) {
+                telefonos = data[0]
+                mostrarTelefonos()
+                $('#btnCerrarTel0').removeAttr('data-bs-target')
+                $('#btnCerrarTel1').removeAttr('data-bs-target')
+                $('#btnCerrarTel0').attr('data-bs-dismiss', 'modal')
+                $('#btnCerrarTel1').attr('data-bs-dismiss', 'modal')
+            }
+        })
+    }
 
+    function verCorreos(id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 5,
+            dataType: 'json',
+            success: function(data) {
+                correos = data[0]
+                mostrarCorreo()
+                $('#verCorreo').removeAttr('data-bs-backdrop')
+                $('#btnCerrarCorreo0').removeAttr('data-bs-target')
+                $('#btnCerrarCorreo1').removeAttr('data-bs-target')
+                $('#btnCerrarCorreo0').attr('data-bs-dismiss', 'modal')
+                $('#btnCerrarCorreo1').attr('data-bs-dismiss', 'modal')
+            }
+        })
+    }
     // Funcion para mostrar correos en la tabla.
     function mostrarCorreo() {
         $('#email').val(correos[0]?.correo)

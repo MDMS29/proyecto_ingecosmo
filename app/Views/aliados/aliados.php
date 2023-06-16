@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Telefono</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Más Info</a>
         </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
@@ -13,7 +13,7 @@
                     <th scope="col" class="text-center">Razon Social</th>
                     <th scope="col" class="text-center">NIT</th>
                     <th scope="col" class="text-center">Direccion</th>
-                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">Más Info</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -96,7 +96,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
             <div class="modal-content">
-            <div class="modal-header flex align-items-center gap-3">
+                <div class="modal-header flex align-items-center gap-3">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
@@ -225,10 +225,11 @@
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+
         <div class="modal-content" id="modalEliminarContentP">
             <div class="modalContenedorP">
                 <div id="contenidoHeaderEliminarP" class="modal-header">
-                    <img style=" margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
+                    <img style=" margin-bottom: 0; " src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100" />
                 </div>
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
@@ -241,12 +242,88 @@
             <div id="bloqueBtnP" class="modal-footer">
                 <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                 <a id="btnSi" class="btn btnAccionF">Eliminar</a>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>
 
+
+<!-- MODAL VER TELEFONO -->
+<div class="modal fade" id="verTelefono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-telephone text-info fw-2 text-dark"></i> Ver Telefono</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
+                </div>
+                <input type="text" name="editTele" id="editTele" hidden>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Prioridad</th>
+                                        <th>Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel1">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VER CORREO-->
+<div class="modal fade" id="verCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-envelope text-warning fw-3 text-dark"></i> Ver Correo</h1>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Correo</th>
+                                        <th>Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyCorre1">
+                                    <tr class="text-center">
+                                        <td colspan="3">NO HAY CORREOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -282,16 +359,15 @@
             $(this).addClass('active');
         }
     })
-    //Mostrar mensajes de SwalFire
-    function mostrarMensaje(tipo, msg) {
-        Swal.fire({
-            position: 'center',
-            icon: `${tipo}`,
-            text: `${msg}`,
-            showConfirmButton: false,
-            timer: 1500
-        })
-    }
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tableAliados.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+
     // Tabla de Aliados  
     var tableAliados = $("#tableAliados").DataTable({
         ajax: {
@@ -321,19 +397,11 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    var telefono = '';
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + row.id_tercero + '/' + 56,
-                        dataType: 'json',
-                        async: false, // Establece el modo de solicitud sincrónica para obtener el resultado antes de continuar
-                        success: function(response) {
-                            if (response.length > 0) {
-                                telefono = response[0][0].numero;
-                            }
-                        }
-                    });
-                    return telefono;
+                    return (
+                        '<button class="btn" onclick="mostrarTelefonos(' + data.id_tercero + ')" title="Ver Telefonos" data-bs-target="#verTelefono" data-bs-toggle="modal"><i class="bi bi-telephone text-info fw-2"></i></button>' +
+
+                        '<button class="btn" onclick="mostrarCorreos(' + data.id_tercero + ')" title="Ver Correos" data-bs-target="#verCorreo" data-bs-toggle="modal"><i class="bi bi-envelope text-warning fw-2"></i></button>'
+                    );
                 }
             },
             {
@@ -351,15 +419,30 @@
         },
 
     });
-    //Mostrar Ocultar Columnas
-    $('a.toggle-vis').on('click', function(e) {
-        e.preventDefault();
-        // Get the column API object
-        var column = tableAliados.column($(this).attr('data-column'));
-        // Toggle the visibility
-        column.visible(!column.visible());
-    });
 
+    function mostrarTelefonos(id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 56,
+            dataType: 'json',
+            success: function(data) {
+                telefonos = data[0]
+                guardarTelefono(1)
+            }
+        })
+    }
+
+    function mostrarCorreos(id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 56,
+            dataType: 'json',
+            success: function(data) {
+                correos = data[0]
+                guardarCorreo(1)
+            }
+        })
+    }
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (accion == 3) {
@@ -392,11 +475,11 @@
         }
         if (objCorreo.id != 0) {
             correos.push(objCorreo)
-            guardarCorreo()
+            guardarCorreo(0)
         }
         if (objTelefono.id != 0) {
             telefonos.push(objTelefono)
-            guardarTelefono()
+            guardarTelefono(0)
         }
         if (input1 == 0) {
             telefonos = []
@@ -444,7 +527,7 @@
                         dataType: 'json',
                         success: function(data) {
                             telefonos = data[0]
-                            guardarTelefono()
+                            guardarTelefono(0)
                         }
                     })
                     $.ajax({
@@ -453,7 +536,7 @@
                         dataType: 'json',
                         success: function(data) {
                             correos = data[0]
-                            guardarCorreo()
+                            guardarCorreo(0)
                         }
                     })
                 }
@@ -463,8 +546,8 @@
             telefonos = []
             correos = []
             limpiarCampos(0)
-            guardarCorreo()
-            guardarTelefono()
+            guardarCorreo(0)
+            guardarTelefono(0)
             $('#tituloModal').text(`Agregar`)
             $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
@@ -695,7 +778,7 @@
                 tipo: '',
                 prioridad: ''
             }
-            return guardarTelefono()
+            return guardarTelefono(0)
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
@@ -713,7 +796,7 @@
                 tipo: '',
                 prioridad: ''
             }
-            return guardarTelefono()
+            return guardarTelefono(0)
         }
 
     })
@@ -743,7 +826,7 @@
         buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
     })
     // Funcion para mostrar telefonos en la tabla.
-    function guardarTelefono() {
+    function guardarTelefono(tipo) {
         principal = telefonos.filter(tel => tel.prioridad == 'P')
         $('#telefono').val(principal[0]?.numero)
         var cadena
@@ -758,14 +841,15 @@
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>  
-                                <td>
+                                ${tipo == 0 ? `<td>
                                     <button class="btn btnEditarTel" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
-                                </td>
+                                </td>` : '' }
                             </tr>`
             }
         }
         $('#bodyTel').html(cadena)
+        $('#bodyTel1').html(cadena)
     }
 
     //Editar Telefono
@@ -805,7 +889,7 @@
             })
         }
         telefonos = telefonos.filter(tel => tel.id != id)
-        guardarTelefono() //Actualizar tabla
+        guardarTelefono(0) //Actualizar tabla
     }
     //Agregar Correo a la tabla
     $('#btnAddCorre').on('click', function(e) {
@@ -839,7 +923,7 @@
                 correo: '',
                 prioridad: ''
             }
-            return guardarCorreo()
+            return guardarCorreo(0)
         } else if (filtro.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
@@ -853,7 +937,7 @@
                 correo: '',
                 prioridad: ''
             }
-            return guardarCorreo()
+            return guardarCorreo(0)
         }
 
     })
@@ -863,7 +947,7 @@
         buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
     })
 
-    function guardarCorreo() {
+    function guardarCorreo(tipo) {
         principal = correos.filter(correo => correo.prioridad == 'P')
         $('#email').val(principal[0]?.correo)
         var cadena
@@ -877,14 +961,16 @@
                 cadena += ` <tr class="text-center" id='${correos[i].id}'>
                                 <td>${correos[i].correo}</td>
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                <td>
+                                ${tipo == 0 ? `<td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
-                                </td>
+                                </td> ` 
+                                : ''}
                             </tr>`
             }
         }
         $('#bodyCorre').html(cadena)
+        $('#bodyCorre1').html(cadena)
     }
     //Editar Correo
     function editarCorreo(id) {
@@ -901,7 +987,7 @@
             prioridad: prioridad.attr('id')
         }
         correos = correos.filter(correo => correo.id != fila.attr('id'));
-        guardarCorreo()
+        guardarCorreo(0)
     }
     //Eliminar correo de la tabla
     function eliminarCorreo(id) {
@@ -920,7 +1006,7 @@
             })
         }
         correos = correos.filter(correo => correo.id != id)
-        guardarCorreo() //Actualizar tabla
+        guardarCorreo(0) //Actualizar tabla
     }
 
 

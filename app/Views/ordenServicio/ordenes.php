@@ -1655,7 +1655,7 @@
         ]
         $('#btnGuardar').attr('disabled', '')
         arrayInven.forEach(elem => elem.checked == '' ? validInv = false : validInv = true)
-        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, txtObser, estado, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
+        if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, txtObser, estado, kms, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else if (!validInv) {
             return mostrarMensaje('error', '¡Debe completar todos los campos del inventario!')
