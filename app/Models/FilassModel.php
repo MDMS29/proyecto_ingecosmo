@@ -44,6 +44,14 @@ class FilassModel extends Model
       return $datos;
    }
 
+   public function traerFilasEstante($id)
+   {
+      $this->select('filas.id_fila as numeroFila');
+      $this->where('id_estante', $id);
+      $datos = $this->findAll();
+      return $datos;
+   }
+
    public function traerFila()
    {
       $this->select('filas.*, filas.id_fila as numeroFila');
@@ -58,6 +66,14 @@ class FilassModel extends Model
       $datos = $this->findAll();
       return $datos;
    }
+
+   // public function traerMaterialEstante($material, $estantes){
+   //    $this->select('materiales.*, materiales.id_material as material, materiales.estante as estanteMaterial');
+   //    $this->where('materiales.id_material', $material);
+   //    $this->where('materiales.estante', $estantes);
+   // $datos = $this->findAll();
+   //    return $datos;
+   // }
 
    public function contadorArticulos($id)
    {

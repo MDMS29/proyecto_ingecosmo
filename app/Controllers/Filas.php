@@ -63,6 +63,15 @@ class Filas extends BaseController
         }
         echo json_encode($returnData);
     }
+    public function filasEstante($id)
+    {
+        $returnData = [];
+        $filas_ = $this->filas->traerFilasEstante($id);
+        if (!empty($filas_)) {
+            return json_encode($filas_);
+        }
+        echo json_encode($returnData);
+    }
 
     public function obtenerMaterialesCate($categoria, $fila)
     {
