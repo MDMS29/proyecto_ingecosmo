@@ -63,79 +63,89 @@
 </div>
 
 <!-- modal responderPeticion -->
-<div class="modal fade" id="responderPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <input type="text" name="id" id="id" hidden>
-    <div class="modal-dialog modal-xl">
-        <div class="body">
-            <div class="modal-content">
-                <div class="modal-header flex align-items-center">
-                    <div class="logo">
+<form autocomplete="off" id="formularioPeticiones">
+    <div class="modal fade" id="responderPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input type="text" name="id" id="id" hidden>
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="body-R">
+                <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center justify-content-between">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
-                    <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4 text-primary"></i><span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="d-flex column-gap-3" style="width: 100%">
-                            <div class="mb-3" style="width: 100%">
-                                <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
-                                <input type="text" name="asunto" class="form-control" id="asunto" disabled>
-                            </div>
-                        </div>
-                        <div class="d-flex column-gap-3" style="width: 100%">
-                            <div class="mb-3" style="width: 100%">
-                                <label for="emisor" class="col-form-label">Emisor:</label>
-                                <input type="text" name="emisor" class="form-control" id="emisor" disabled>
-                            </div>
-                            <div class="mb-3" style="width: 100%">
-                                <label for="apellido_s" class="col-form-label">Fecha de la Peticion:</label>
-                                <input type="text" name="apellido_s" class="form-control" id="apellidoS" disabled>
-                            </div>
-                            <div class="mb-3" style="width: 100%">
-                                <div class="">
-                                    <label for="nIdenti" class="col-form-label">Hora de la Peticion:</label>
-                                    <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11" disabled>
-                                    <small id="msgDoc" class="invalido"></small>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                    <input type="text" name="asunto" class="form-control" id="asunto" disabled>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex column-gap-3" style="width: 100%">
-                            <div class="mb-3" style="width: 100%">
-                                <label for="telefono" class="col-form-label">Telefono:</label>
-                                <div class="d-flex">
-                                    <input type="number" name="telefono" class="form-control" id="telefono" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="emisor" class="col-form-label">Emisor:</label>
+                                    <input type="text" name="emisor" class="form-control" id="emisor" disabled>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                    <input type="text" name="fechaP" class="form-control" id="fechaP" disabled>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="horaP" class="col-form-label">Hora de la Peticion:</label>
+                                    <input type="number" name="horaP" class="form-control" id="horaP" disabled>
                                 </div>
                             </div>
-                            <div class="mb-3" style="width: 100%">
-                                <label for="email" class="col-form-label">Email:</label>
-                                <div class="d-flex">
-                                    <input type="email" name="email" class="form-control" id="email" disabled>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#verCorreos" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <details open>
+                                        <summary>Descripcion del Envio</summary>
+                                        <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
+                                    </details>
                                 </div>
                             </div>
-                            <div class="mb-3" style="width: 100%">
-                                <div class="mb-3">
-                                    <label for="rol" class="col-form-label">Tipo de Rol:</label>
-                                    <select class="form-select form-select" name="rol" id="rol" disabled>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="receptor" class="col-form-label">Receptor:</label>
+                                    <input type="text" name="receptor" class="form-control" id="receptor" disabled>
+                                </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="tipoValidacion" class="col-form-label">Tipo de Validacion:</label>
+                                    <select class="form-select form-control" name="tipoValidacion" id="tipoValidacion">
                                         <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($roles as $r) { ?>
-                                            <option value="<?= $r['id_rol'] ?>"><?= $r['nombre'] ?></option>
-                                        <?php } ?>
+                                        <!-- ira el forEach -->
+                                        <option value=""></option>
                                     </select>
                                 </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="fechaRespuesta" class="col-form-label">Fecha de Respuesta:</label>
+                                    <div class="d-flex">
+                                        <input type="date" name="fechaRespuesta" id="fechaRespuesta" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="respuesta" class="col-form-label">Respuesta:</label>
+                                    <textarea name="respuesta" id="respuesta" class="form-control w-100 p-1" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 
 <script>
