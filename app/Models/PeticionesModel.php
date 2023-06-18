@@ -14,7 +14,7 @@ class PeticionesModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_peticion', 'emisor', 'receptor', 'asunto', 'msg_emisor', 'msg_receptor', 'tipo_validacion', 'fecha_envio_pet', 'fecha_rezs_pet', 'hora_envio_pet', 'hora_res_pet', 'usuario_crea', 'fecha_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_peticion', 'emisor', 'receptor', 'asunto', 'msg_emisor', 'msg_receptor', 'tipo_validacion', 'fecha_envio_pet', 'fecha_res_pet', 'hora_envio_pet', 'hora_res_pet', 'usuario_crea', 'fecha_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = ''; /*fecha automatica para la creacion */
@@ -29,7 +29,20 @@ class PeticionesModel extends Model
     public function obtenerPeticiones()
     {
         $this->select('peticiones.*');
+        // $this->join('usuarios', 'usuarios.id_usuario = peticiones.emisor', 'left');
+        // $this->join('usuarios', 'usuarios.id_usuario = peticiones.receptor', 'left');
+        // $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
+        // $this->where('param_detalle_', '8');
         $data = $this->findAll();
+        return $data;
+    }
+
+    public function buscarPeticion($id)
+    {
+        $this->select('peticiones.*');
+        $this->where('id_peticion', $id);
+        $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
+        $data = $this->first();
         return $data;
     }
 }

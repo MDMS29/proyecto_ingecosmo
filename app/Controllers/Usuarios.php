@@ -143,18 +143,24 @@ class Usuarios extends BaseController
         $nombreP = $this->request->getPost('nombreP');
         $foto = $this->request->getFile('foto');
         $res = $this->usuarios->buscarUsuario($idUser, 0);
+
         $foto->isValid() && !$foto->hasMoved();
+
         $rutaImagen = $res['foto'];
         $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
+
             $uploadPath = 'fotoUser';
+
             if (!is_dir($uploadPath)) { // Verificar si el directorio existe, si no, crearlo
                 mkdir($uploadPath, 0777, true);
             }
             $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+            
             $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
             $usuarioUpdate = [
                 'foto' => $rutaImagen
             ];
+            
             $this->usuarios->update($idUser, $usuarioUpdate);
             return $idUser;
     }
@@ -260,6 +266,7 @@ class Usuarios extends BaseController
             $data = $this->usuarios->buscarUsuario(0, $nIdenti);
             array_push($array, $data);
             return json_encode($array);
+            
         } else if ($id != 0 && $nIdenti != 0) {
             $data = $this->usuarios->buscarUsuario($id, $nIdenti);
             array_push($array, $data);

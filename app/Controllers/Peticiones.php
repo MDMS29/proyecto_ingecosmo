@@ -30,6 +30,14 @@ class Peticiones extends BaseController
         return json_encode($res);
     }
 
+    public function buscarPeticion($id)
+    {
+        $array = array();
+        $data = $this->peticiones->buscarPeticion($id);
+        array_push($array, $data);
+        return json_encode($array);
+    }
+
 
 
 

@@ -304,7 +304,6 @@
             dataType: 'json'
         }).done(function(res) {
             $('#tituloModal').text('Ver Usuario')
-            $('#tp').val(2)
             $('#id').val(res[0]['id_usuario'])
             $('#nombreP').val(res[0]['nombre_p'])
             $('#nombreS').val(res[0]['nombre_s'])
