@@ -18,10 +18,21 @@ class Peticiones extends BaseController
     public function index()
     {
         $param = $this->param->obtenerTipoValidacion();
-        $data = ['tipoDoc' => $param];
+        $data = ['tipoVal' => $param];
 
         echo view('/principal/sidebar');
-        echo view('/peticiones/peticiones', $data);
+        echo view('/peticiones/peticionesAdmin/recibidosAdmin', $data);
+        // echo view('/peticiones/peticiones', $data);
+    }
+
+    public function indexAlmacenista()
+    {
+        $param = $this->param->obtenerTipoValidacion();
+        $data = ['tipoVal' => $param];
+
+        echo view('/principal/sidebar');
+        echo view('/peticiones/peticionesAlmacenista/enviadosAlmacenista', $data);
+        // echo view('/peticiones/peticiones', $data);
     }
 
     public function obtenerPeticiones()
@@ -38,54 +49,44 @@ class Peticiones extends BaseController
         return json_encode($array);
     }
 
+    public function enviadosAdmin()
+    {
+        $param = $this->param->obtenerTipoValidacion();
+        $data = ['tipoVal' => $param];
+        echo view('principal/sidebar');
+        echo view('peticiones/peticionesAdmin/enviadosAdmin', $data);
+    }
 
+    public function recibidosAlmacenista()
+    {
+        $param = $this->param->obtenerTipoValidacion();
+        $data = ['tipoVal' => $param];
+        echo view('principal/sidebar');
+        echo view('peticiones/peticionesAlmacenista/recibidosAlmacenista', $data);
+    }
 
+    public function insertar()
+    {
+        $idPeticion = $this->request->getPost('id');
+        $asunto = $this->request->getPost('asunto');
+        $emisor = $this->request->getPost('emisor');
+        $fechaP = $this->request->getPost('fechaP');
+        $horaP = $this->request->getPost('horaP');
+        $txtDescripcion = $this->request->getPost('txtDescripcion');
 
+        $usuarioCrea = session('id');
 
-    // public function insertar()
-    // {
-    //     $tp = $this->request->getPost('tp');
-    //     $idProveedor = $this->request->getPost('id');
-    //     $nit = $this->request->getPost('nit');
-    //     $razonSocial= $this->request->getPost('RazonSocial');
-    //     $direccion = $this->request->getPost('direccion');
-    //     $telefono = $this->request->getPost('telefono');
-    //     $email = $this->request->getPost('email');
-    //     $tipoTercero = 8;
-    //     $tipoDocumento = 2;
-    //     $usuarioCrea = session('id');
+            $peticionSave = [
+                'asunto' => $asunto,
+                'emisor' => $emisor,
+                'fecha_envio_peticion' => $fechaP,
+                'hora_envio_peticion' => $horaP,
+                'msg_emisor' => $txtDescripcion,
+                'usuario_crea' => $usuarioCrea
 
-
-    //     if ($tp == 2) {
-    //         //Actualizar datos
-    //         $proveedorUpdate = [
-    //             'n_identificacion' => $nit,
-    //             'razon_social' => $razonSocial,
-    //             'direccion' => $direccion,
-    //             'telefono' => $telefono,
-    //             'email' => $email,
-    //             'tipo_tercero' => $tipoTercero,
-    //             'tipo_doc' => $tipoDocumento,
-    //             'usuario_crea' => $usuarioCrea
-    //         ];
-    //         $this->proveedores->update($idProveedor, $proveedorUpdate);
-    //         return $idProveedor;
-    //     } else {
-    //         //Insertar datos
-    //         //Si la respuesta esta vacia - guardar
-    //         $proveedorSave = [
-    //             'n_identificacion' => $nit,
-    //             'razon_social' => $razonSocial,
-    //             'direccion' => $direccion,
-    //             'telefono' => $telefono,
-    //             'email' => $email,
-    //             'tipo_tercero' => $tipoTercero,
-    //             'tipo_doc' => $tipoDocumento,
-    //             'usuario_crea' => $usuarioCrea
-
-    //         ];
-    //         $this->proveedores->save($proveedorSave);
-    //         return json_encode($this->proveedores->getInsertID());
-    //     }
-    // }
+            ];
+            $this->peticiones->save($peticionSave);
+            return json_encode($this->peticiones->getInsertID());
+        
+    }
 }

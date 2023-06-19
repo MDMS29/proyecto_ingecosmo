@@ -151,6 +151,11 @@
                             <p id="pa">Historial Ordenes</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
+                            <p id="pa">Peticiones</p>
+                        </a>
+                    </li>
                 <?php } else if (session('idRol') == 3) { ?>
                     <li>
                         <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
@@ -173,12 +178,12 @@
                             <p id="pa">Orden de entrega</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('peticiones/indexAlmacenista') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
+                            <p id="pa">Peticiones</p>
+                        </a>
+                    </li>
                 <?php } ?>
-                <li>
-                    <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
-                        <p id="pa">Peticiones</p>
-                    </a>
-                </li>
                 <li>
                     <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                         <p id="pa">Historial</p>
