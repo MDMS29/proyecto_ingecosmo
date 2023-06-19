@@ -124,7 +124,7 @@
                 data: 'asunto'
             },
             {
-                data: 'emisor'
+                data: 'nomEmisor'
             },
             {
                 data: 'fecha_envio_pet'
@@ -133,7 +133,7 @@
                 data: 'hora_envio_pet'
             },
             {
-                data: 'tipo_validacion'
+                data: 'estado'
             },
             {
                 data: null,
