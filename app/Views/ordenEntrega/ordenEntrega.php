@@ -61,7 +61,7 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                
+
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombre_s" class="col-form-label">N° Orden Entrega</label>
                                     <input type="text" value="1" name="nombre_s" class="form-control" id="numeroOrdenEnt" disabled>
@@ -94,12 +94,8 @@
 
                                     <div class="mb-3" style="width: 100%;">
                                         <label for="exampleDataList" class="col-form-label">Categorias:</label>
-                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipoCate" id="tipoCate">
-                                            <option selected>--Seleccione--</option>
-                                            <?php foreach ($tipoCate as $dato) { ?>
-                                                <option value=<?= $dato['id_param_enc'] ?>"><?= $dato['nombre'] ?></option>
-                                            <?php } ?>
-
+                                        <select class="form-select form-control" name="tipoCate" id="tipoCate">
+                                        <option id="dpto">--Seleccione--</option>
                                         </select>
                                     </div>
 
@@ -124,8 +120,8 @@
                                             <tr class="text-center">
                                                 <td hidden><input type="text" id="materiales"></td>
                                                 <td> <?php foreach ($materiales as $dato) { ?>
-                                                      <option value=<?= $dato['id_material'] ?>"><?= $dato['nombre'] ?></option> 
-                                                    <?php } ?> 
+                                                        <option value=<?= $dato['id_material'] ?>"><?= $dato['nombre'] ?></option>
+                                                    <?php } ?>
                                                 </td>
                                                 <td><input name="precio" id="precio" disabled></td>
                                                 <td><input name="cantidad" id="cantidad" disabled></td>
@@ -256,4 +252,32 @@
             }
         })
     }
+
+
+    function verTipoCate(id, idTipoCate) {
+        $.ajax({
+            url: '<?= base_url('ordenEntrega/buscarCate'); ?>',
+            data: {
+                idTipoCate: id
+            },
+            type: 'POST',
+            success: function(res) {
+                res = JSON.parse(res)
+                var cadena
+                console.log(cadena)
+                cadena = `<option selected value=""> -- Seleccione -- </option>`
+                for (let i = 0; i < res.length; i++) {
+                    nombre = `${res[i].nombre}`;
+                    cadena += `<option value=${res[i].id_param_det}>${res[i].nombre}</option>`
+
+                }
+                $('#tipoCate').html(cadena)
+                $('#tipoCate').val(idTipoCate)
+            }
+        })
+    }
+    $('#tipoCate').on('change', function(e) {
+        id = $('#tipoCate').val()
+        verTipoCate(id, '')
+    })
 </script>

@@ -297,7 +297,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/carrito.png') ?>" alt="icon-plus" width="20">Agregar al carrito </button>
+          <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/orden-entrega.png') ?>" alt="icon-plus" width="20">Agregar a orden</button>
 
 
         </div>

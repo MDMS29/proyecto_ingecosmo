@@ -80,4 +80,11 @@ class OrdenEntrega extends BaseController
         return json_encode($res);
     }
 
+    public function buscarCate()
+    {
+        $tipo = $this->request->getPost('idTipoCate');
+        $res = $this->tipoCate->obtenerCategoriasOrdenes();
+        return json_encode($res);
+    }
+
 }
