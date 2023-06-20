@@ -69,4 +69,13 @@ class EstanteriaModel extends Model
         return $datos;
     }
 
+    public function traerBodega()
+    {
+        $this->select('id, nombre');
+        $this->where('tipo_estante', '61');
+        $this->where('estado', 'A');
+        $datos = $this->findAll();
+        return $datos;
+    }
+
 }

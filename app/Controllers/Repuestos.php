@@ -6,12 +6,18 @@ use App\Controllers\BaseController;
 use App\Models\ParamModel;
 use App\Models\MaterialesModel;
 use App\Models\EstanteriaModel;
+use App\Models\MoviEncModel;
+use App\Models\MoviDetModel;
+use App\Models\OrdenesModel;
 
 class Repuestos extends BaseController
 {
     protected $materiales;
     protected $categorias;
     protected $estanteria;
+    protected $movEnc;
+    protected $movDet;
+    protected $ordenes;
 
 
     public function __construct()
@@ -19,6 +25,11 @@ class Repuestos extends BaseController
         $this->categorias = new ParamModel();
         $this->estanteria = new EstanteriaModel();
         $this->materiales= new MaterialesModel();
+        $this->movEnc = new MoviEncModel();
+        $this->movDet = new MoviDetModel();
+        $this->ordenes = new OrdenesModel();
+
+
     }
     public function index()
     {
@@ -32,7 +43,11 @@ class Repuestos extends BaseController
     public  function mostrarBodega($id, $nombre, $icon)
     {
         $repuestos = $this->materiales->obtenerRepuestoBodega($id);
-        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon];
+        $ordenes = $this->ordenes->obtenerOrdenes();
+        $estanteria = $this->estanteria->traerBodega();
+
+        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria];
+
         echo view('/principal/sidebar');
         
         echo view('/materiales/repuestos', $data);
@@ -53,11 +68,46 @@ class Repuestos extends BaseController
     public function insertar()
     {
         $nombre =  $this->request->getPost('nombre');
+        $proveedor = $this->request->getPost('proveedor');
+        $cantidad = $this->request->getPost('cantidad');
+        $ordenTrabajo = $this->request->getPost('ordenTrabajo');
+        $placa = $this->request->getPost('placa');
+        $bodega = $this->request->getPost('bodega');
+        $usuarioCrea = session('id');
+        $fechaActual = date('Y-m-d');
+
         $data = [
             'nombre' => $nombre,
+            'proveedor' => $proveedor,
+            'cantidad' => $cantidad,
+            'ordenTrabajo' => $ordenTrabajo,
+            'placa' => $placa,
+            'bodega' => $bodega,
         ];
 
         $this->materiales->save($data);
+        $idMaterial = $this->materiales->getInsertID();
+        $dataEnc = [
+            'tipo_movimiento' => 11,
+            'estado' => 'A',
+            'fecha_movimiento' => $fechaActual,
+            'usuario_crea' => $usuarioCrea
+        ];
+        if ($this->movEnc->save($dataEnc)) {
+            $idMovEnc = $this->movEnc->getInsertID();
+            $dataDet = [
+                'id_movimientoenc' => $idMovEnc,
+                'id_material' => $idMaterial,
+                'item' => 0,
+                'usuario_crea' => $usuarioCrea
+
+            ];
+            if ($this->movDet->save($dataDet)) {
+                return json_encode(1);
+            } else {
+                return json_encode(2);
+            }
+        }
 
         // return redirect()->to(base_url('/materiales'));
     }
