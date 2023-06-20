@@ -19,6 +19,7 @@ class Proveedores extends BaseController
     {
         $tipoTel = $this->param->obtenerTipoTel(); 
         $param = $this->param->obtenerTipoDoc();
+        
         $data = ['tipoDoc' => $param, 'tipoTele' => $tipoTel];
         echo view('/principal/sidebar');
         echo view('/proveedores/proveedores',$data);

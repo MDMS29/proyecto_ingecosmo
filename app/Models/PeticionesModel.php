@@ -29,13 +29,12 @@ class PeticionesModel extends Model
     public function obtenerPeticiones()
     {
         $this->select("peticiones.*, concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ', usuarios.apellido_p, ' ', usuarios.apellido_s) as nomEmisor,concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ', usuarios.apellido_p, ' ', usuarios.apellido_s) as nomRecpetor, param_detalle.nombre as estado");
-        $this->join('usuarios','peticiones.receptor=usuarios.id_usuario ', 'left' );
+        $this->join('usuarios','peticiones.emisor=usuarios.id_usuario ', 'left' );
+        $this->join('vw_usuarios', 'vw_usuarios.id_usuario=peticiones.receptor', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
-        // $this->join('usuarios', 'usuarios.id_usuario = peticiones.receptor', 'left');
         // $this->where('peticiones.tipo_validacion', '64');
         // $this->where('peticiones.tipo_validacion', '65');
         // $this->where('peticiones.tipo_validacion', '66');
-        // $this->where('peticiones.tipo_validacion', $estado);
         $data = $this->findAll();
         return $data;
     }

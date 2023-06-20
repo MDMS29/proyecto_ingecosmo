@@ -18,8 +18,7 @@ class Peticiones extends BaseController
     public function index()
     {
         $param = $this->param->obtenerTipoValidacion();
-        $data = ['tipoVal' => $param];
-
+        $data = ['estados' => $param];
         echo view('/principal/sidebar');
         echo view('/peticiones/peticionesAdmin/recibidosAdmin', $data);
         // echo view('/peticiones/peticiones', $data);
@@ -29,7 +28,6 @@ class Peticiones extends BaseController
     {
         $param = $this->param->obtenerTipoValidacion();
         $data = ['tipoVal' => $param];
-
         echo view('/principal/sidebar');
         echo view('/peticiones/peticionesAlmacenista/enviadosAlmacenista', $data);
         // echo view('/peticiones/peticiones', $data);
@@ -76,17 +74,16 @@ class Peticiones extends BaseController
 
         $usuarioCrea = session('id');
 
-            $peticionSave = [
-                'asunto' => $asunto,
-                'emisor' => $emisor,
-                'fecha_envio_peticion' => $fechaP,
-                'hora_envio_peticion' => $horaP,
-                'msg_emisor' => $txtDescripcion,
-                'usuario_crea' => $usuarioCrea
+        $peticionSave = [
+            'asunto' => $asunto,
+            'emisor' => $emisor,
+            'fecha_envio_peticion' => $fechaP,
+            'hora_envio_peticion' => $horaP,
+            'msg_emisor' => $txtDescripcion,
+            'usuario_crea' => $usuarioCrea
 
-            ];
-            $this->peticiones->save($peticionSave);
-            return json_encode($this->peticiones->getInsertID());
-        
+        ];
+        $this->peticiones->save($peticionSave);
+        return json_encode($this->peticiones->getInsertID());
     }
 }

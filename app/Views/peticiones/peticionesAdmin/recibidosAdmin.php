@@ -82,10 +82,11 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="estado" class="col-form-label">Estado:</label>
-                                    <select class="form-select form-control" name="estado" id="estado">
+                                    <select class="form-select form-select" name="cargo" id="cargo">
                                         <option selected value="">-- Seleccione --</option>
-                                        <!-- ira el forEach -->
-                                        <option value=""></option>
+                                        <?php foreach ($estados as $e) { ?>
+                                            <option value="<?= $e['id_param_enc'] ?>"><?= $e['nombre'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="mb-3" style="width: 100%">

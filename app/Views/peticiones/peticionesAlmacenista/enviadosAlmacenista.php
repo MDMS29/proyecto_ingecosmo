@@ -97,6 +97,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     var ContadorPRC = 0; //Contador DataTable
+    // para asignarle la fecha actual al input date
+    var fechaActual = new Date();
+    var formattedDate = fechaActual.toISOString().substring(0, 10);
+    // para asignarle la hora actual al input time
+    var horaActual = new Date();
+    var formattedTime = ('0' + fechaActual.getHours()).slice(-2) + ':' + ('0' + fechaActual.getMinutes()).slice(-2);
+
+    var emisorSesion = <?php echo session('id')  ?>
 
     function limpiarCampos() {
         $('#asunto').text('');
@@ -152,27 +160,6 @@
 
 
     function seleccionarPeticion(id, tp) {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo base_url('peticiones/buscarPeticion/') ?>" + id,
-            dataType: 'json'
-        }).done(function(res) {
-            limpiarCampos(0)
-            $('#tituloModal').text('Agregar')
-            $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
-            $('#imgModal').attr('src', '<?= base_url('img/plus.png') ?>')
-            $('#tituloModal2').text('Peticion - ' + id)
-            $('#fechaRespuesta').attr('disabled', '')
-            $('#id').val(res[0]['id_peticion'])
-            $('#asunto').val(res[0]['asunto'])
-            $('#emisor').val(res[0]['emisor'])
-            $('#fechaP').val(res[0]['fecha_envio_pet'])
-            $('#horaP').val(res[0]['hora_envio_pet'])
-            $('#txtDescripcion').val(res[0]['msg_emisor'])
-        })
-    }
-
-    function seleccionarPeticion(id, tp) {
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
@@ -186,7 +173,7 @@
                 $('#id').val(res[0]['id_peticion'])
                 $('#asunto').val(res[0]['asunto'])
                 $('#asunto').attr('disabled', '')
-                $('#emisor').val(res[0]['emisor'])
+                $('#emisor').val(res[0]['nomEmisor'])
                 $('#emisor').attr('disabled', '')
                 $('#fechaP').val(res[0]['fecha_envio_pet'])
                 $('#fechaP').attr('disabled', '')
@@ -198,20 +185,19 @@
             })
         } else {
             //Insertar datos
-            limpiarCampos(0)
             $('#tituloModal').text(`Agregar`)
-            $('#ojoPeticion').attr('hidden','')
+            $('#ojoPeticion').attr('hidden', '')
             $('#imgModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
             $('#asunto').val('')
             $('#asunto').removeAttr('disabled')
-            $('#emisor').val('')
-            $('#fechaP').val('')
-            $('#horaP').val('')
+            $('#emisor').val(emisorSesion)
+            $('#fechaP').val(formattedDate)
+            $('#horaP').val(formattedTime)
             $('#txtDescripcion').val('')
             $('#txtDescripcion').removeAttr('disabled')
-            $('#btnGuardar').removeAttr('hidden','')
+            $('#btnGuardar').removeAttr('hidden', '')
 
         }
 
