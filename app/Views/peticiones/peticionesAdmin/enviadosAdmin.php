@@ -126,7 +126,7 @@
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
             data: {
-                tp: 1
+                tp: 2
             },
             dataSrc: "",
         },

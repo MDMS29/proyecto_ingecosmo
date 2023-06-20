@@ -4,7 +4,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones Enviadas</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones rECIBIDAS</h2>
 
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tablePeticiones" width="100%" cellspacing="0">
@@ -66,7 +66,7 @@
                                     <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
                                     <input disabled type="text" name="fechaP" class="form-control" id="fechaP">
                                 </div>
-                                
+
                             </div>
                             <br>
 
@@ -98,8 +98,6 @@
     var fechaActual = new Date();
     var formattedDate = fechaActual.toISOString().substring(0, 10);
     // para asignarle la hora actual al input time
-    
-    var emisorSesion = "<?php echo session('nomCompleto') ?>"
 
     function limpiarCampos() {
         $('#asunto').text('');
@@ -112,7 +110,9 @@
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
-            data: {tp:1},
+            data: {
+                tp: 4
+            },
             dataSrc: "",
         },
         columns: [{
@@ -184,7 +184,7 @@
             $('#id').val(0)
             $('#asunto').val('')
             $('#asunto').removeAttr('disabled')
-            $('#emisor').val(emisorSesion)
+            $('#emisor').val("<?php echo session('nomCompleto') ?>")
             $('#fechaP').val(formattedDate)
             $('#txtDescripcion').val('')
             $('#txtDescripcion').removeAttr('disabled')
@@ -199,7 +199,7 @@
         e.preventDefault()
         id = $('#id').val()
         asunto = $('#asunto').val()
-        emisor = $('#emisor').val()
+        emisor = "<?php echo session('id') ?>"
         fechaP = $('#fechaP').val()
         horaP = $('#horaP').val()
         txtDescripcion = $('#txtDescripcion').val()

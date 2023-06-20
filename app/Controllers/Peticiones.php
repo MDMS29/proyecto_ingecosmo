@@ -69,8 +69,8 @@ class Peticiones extends BaseController
         $idPeticion = $this->request->getPost('id');
         $asunto = $this->request->getPost('asunto');
         $emisor = $this->request->getPost('emisor');
-        $fechaP = $this->request->getPost('fechaP');
-        $horaP = $this->request->getPost('horaP');
+        $fechaP = date('Y-m-d');
+        $horaP = date('h:m:s');
         $txtDescripcion = $this->request->getPost('txtDescripcion');
 
         $usuarioCrea = session('id');
@@ -78,8 +78,8 @@ class Peticiones extends BaseController
         $peticionSave = [
             'asunto' => $asunto,
             'emisor' => $emisor,
-            'fecha_envio_peticion' => $fechaP,
-            'hora_envio_peticion' => $horaP,
+            'fecha_envio_pet' => $fechaP,
+            'hora_envio_pet' => $horaP,
             'msg_emisor' => $txtDescripcion,
             'usuario_crea' => $usuarioCrea
 

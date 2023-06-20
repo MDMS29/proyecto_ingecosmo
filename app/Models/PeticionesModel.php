@@ -34,12 +34,21 @@ class PeticionesModel extends Model
         $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
 
         if ($tp==1) {
-            $this->where('peticiones.receptor', session('id'));
             $this->where('peticiones.tipo_validacion', '64');
-        }else{
+        }
+        if($tp==2){
+            $this->where('peticiones.receptor', session('id'));
+            $this->where('peticiones.tipo_validacion', '65');
+            $this->orWhere('peticiones.tipo_validacion', '66');
+        }
+        if($tp==3){
+            $this->where('peticiones.emisor', session('id'));
+            $this->where('peticiones.tipo_validacion', '64');
+        }
+        if($tp==4){
             $this->where('peticiones.emisor', session('id'));
             $this->where('peticiones.tipo_validacion', '65');
-            $this->where('peticiones.tipo_validacion', '66');
+            $this->orWhere('peticiones.tipo_validacion', '66');
         }
         // $this->where('peticiones.tipo_validacion', $estado);
         $data = $this->findAll();
