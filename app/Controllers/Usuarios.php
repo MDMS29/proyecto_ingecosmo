@@ -26,25 +26,6 @@ class Usuarios extends BaseController
         helper('sistema');
     }
 
-    // public function guardarFoto(){ pruebitas jijijiji
-    //     $uploads='upload';
-    //     $config['upload_path']="uploads/";
-    //     $config['file_name']="nombre_archivo";
-    //     $config['allowed_types']="jpg|png|jpeg|gif";
-    //     $config['max_size']="5000";
-    //     $config['max_width']="2000";
-    //     $config['max_height']="2000";
-
-    //     $this->load->library('uploads', $config);
-
-    //     if (!$this->upload->do_upload($uploads)) {
-    //         // $data['uploadError']=$this->upload->display_errors();
-    //         echo $this->upload->display_errors();
-    //         return;
-    //     }
-    //     var_dump($this->upload->data());
-    // }
-
     public function login()
     {
         $usuario = $this->request->getPost('usuario');
@@ -59,7 +40,8 @@ class Usuarios extends BaseController
                     "nombre" => $datos['nombre_p'],
                     "apellido" => $datos['apellido_p'],
                     "idRol" => $datos['idRol'],
-                    "rol" => $datos['nombre_rol']
+                    "rol" => $datos['nombre_rol'],
+                    "nomCompleto" => $datos['nomCompleto']
                 ];
                 $session = session();
                 $session->set($data);
@@ -77,7 +59,8 @@ class Usuarios extends BaseController
                     "nombre" => $datos['nombre_p'],
                     "apellido" => $datos['apellido_p'],
                     "idRol" => $datos['idRol'],
-                    "rol" => $datos['nombre_rol']
+                    "rol" => $datos['nombre_rol'],
+                    "nomCompleto" => $datos['nomCompleto']
                 ];
                 $session = session();
                 $session->set($data);

@@ -81,11 +81,10 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="estado" class="col-form-label">Estado:</label>
-                                    <select class="form-select form-select" name="cargo" id="cargo">
-                                        <option selected value="">-- Seleccione --</option>
+                                    <label for="estado" class="col-form-label">Tipo Validacion:</label>
+                                    <select  class="form-select form-select" name="estado" id="estado">
                                         <?php foreach ($estados as $e) { ?>
-                                            <option value="<?= $e['id_param_enc'] ?>"><?= $e['nombre'] ?></option>
+                                            <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -124,7 +123,9 @@
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
-            data: {},
+            data: {
+                tp: 1
+            },
             dataSrc: "",
         },
         columns: [{
@@ -175,11 +176,11 @@
             $('#fechaRespuesta').attr('disabled', '')
             $('#id').val(res[0]['id_peticion'])
             $('#asunto').val(res[0]['asunto'])
-            $('#emisor').val(res[0]['emisor'])
+            $('#emisor').val(res[0]['nomEmisor'])
             $('#fechaP').val(res[0]['fecha_envio_pet'])
             $('#horaP').val(res[0]['hora_envio_pet'])
             $('#txtDescripcion').val(res[0]['msg_emisor'])
-            $('#receptor').val(res[0]['receptor'])
+            $('#receptor').val(res[0]['nomRecpetor'])
             $('#estado').val(res[0]['tipo_validacion'])
             $('#fechaRespuesta').val(res[0]['fecha_res_pet'])
             $('#respuesta').val(res[0]['msg_receptor'])

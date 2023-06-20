@@ -84,7 +84,7 @@
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="estado" class="col-form-label">Estado:</label>
+                                <label for="estado" class="col-form-label">Tipo Validacion:</label>
                                 <select class="form-select form-control" name="estado2" id="estado2">
                                     <option selected value="">-- Seleccione --</option>
                                     <!-- ira el forEach -->
@@ -125,7 +125,7 @@
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
-            data: {},
+            data: {tp:2},
             dataSrc: "",
         },
         columns: [{
@@ -184,11 +184,11 @@
             $('#fechaRespuesta').attr('disabled', '')
             $('#id').val(res[0]['id_peticion'])
             $('#asunto2').val(res[0]['asunto'])
-            $('#emisor2').val(res[0]['emisor'])
+            $('#emisor2').val(res[0]['nomEmisor'])
             $('#fechaP2').val(res[0]['fecha_envio_pet'])
             $('#horaP2').val(res[0]['hora_envio_pet'])
             $('#txtDescripcion2').val(res[0]['msg_emisor'])
-            $('#receptor2').val(res[0]['receptor'])
+            $('#receptor2').val(res[0]['nomRecpetor'])
             $('#estado2').val(res[0]['tipo_validacion'])
             $('#fechaRespuesta2').val(res[0]['fecha_res_pet'])
             $('#respuesta2').val(res[0]['msg_receptor'])

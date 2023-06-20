@@ -35,7 +35,8 @@ class Peticiones extends BaseController
 
     public function obtenerPeticiones()
     {
-        $res = $this->peticiones->obtenerPeticiones();
+        $tp = $this->request->getPost('tp');
+        $res = $this->peticiones->obtenerPeticiones($tp);
         return json_encode($res);
     }
 
@@ -50,7 +51,7 @@ class Peticiones extends BaseController
     public function enviadosAdmin()
     {
         $param = $this->param->obtenerTipoValidacion();
-        $data = ['tipoVal' => $param];
+        $data = ['estados' => $param];
         echo view('principal/sidebar');
         echo view('peticiones/peticionesAdmin/enviadosAdmin', $data);
     }

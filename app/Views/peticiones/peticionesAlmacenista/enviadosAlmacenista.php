@@ -66,10 +66,7 @@
                                     <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
                                     <input disabled type="text" name="fechaP" class="form-control" id="fechaP">
                                 </div>
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="horaP" class="col-form-label">Hora de la Peticion:</label>
-                                    <input type="time" name="horaP" class="form-control" id="horaP" disabled>
-                                </div>
+                                
                             </div>
                             <br>
 
@@ -101,16 +98,13 @@
     var fechaActual = new Date();
     var formattedDate = fechaActual.toISOString().substring(0, 10);
     // para asignarle la hora actual al input time
-    var horaActual = new Date();
-    var formattedTime = ('0' + fechaActual.getHours()).slice(-2) + ':' + ('0' + fechaActual.getMinutes()).slice(-2);
-
-    var emisorSesion = <?php echo session('id')  ?>
+    
+    var emisorSesion = "<?php echo session('nomCompleto') ?>"
 
     function limpiarCampos() {
         $('#asunto').text('');
         $('#emisor').text('');
         $('#fechaP').text('');
-        $('#horaP').text('');
         $('#txtDescripcion').text('');
     }
 
@@ -118,7 +112,7 @@
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
-            data: {},
+            data: {tp:1},
             dataSrc: "",
         },
         columns: [{
@@ -177,8 +171,6 @@
                 $('#emisor').attr('disabled', '')
                 $('#fechaP').val(res[0]['fecha_envio_pet'])
                 $('#fechaP').attr('disabled', '')
-                $('#horaP').val(res[0]['hora_envio_pet'])
-                $('#horaP').attr('disabled', '')
                 $('#txtDescripcion').val(res[0]['msg_emisor'])
                 $('#txtDescripcion').attr('disabled', '')
                 $('#btnGuardar').attr('hidden', '')
@@ -194,7 +186,6 @@
             $('#asunto').removeAttr('disabled')
             $('#emisor').val(emisorSesion)
             $('#fechaP').val(formattedDate)
-            $('#horaP').val(formattedTime)
             $('#txtDescripcion').val('')
             $('#txtDescripcion').removeAttr('disabled')
             $('#btnGuardar').removeAttr('hidden', '')

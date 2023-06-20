@@ -45,7 +45,7 @@ class UsuariosModel extends Model
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
             $this->join('param_detalle', 'param_detalle.id_param_det = usuarios.tipo_doc');
         } elseif ($nIdenti != 0) {
-            $this->select('usuarios.*, roles.nombre as nombre_rol, roles.id_rol as idRol');
+            $this->select("usuarios.*, concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ',usuarios.apellido_p, ' ', usuarios.apellido_s) as nomCompleto, roles.nombre as nombre_rol, roles.id_rol as idRol");
             $this->where('n_identificacion', $nIdenti);
             $this->where('usuarios.estado', 'A');
             $this->join('roles', 'roles.id_rol = usuarios.id_rol');
