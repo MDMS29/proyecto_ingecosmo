@@ -10,7 +10,6 @@
       <p>No se encuentra repuestos - Bodega <?= $nombreBodega ?></p>
     <?php } else { ?>
       <?php foreach ($data as $dato) { ?>
-
         <div class="card">
 
           <div class="contenido1">
@@ -72,7 +71,12 @@
 
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Proveedor:</label>
-              <input class="form-control" type="number" id="Proveedor" name="Proveedor" placeholder="">
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="proveedor" id="proveedor">
+                <option selected value="">--Seleccione--</option>
+                <?php foreach ($proveedores as $data) { ?>
+                  <option value="<?= $data['id_tercero'] ?>"><?= $data['razon_social'] ?></option>
+                <?php } ?>
+              </select>
             </div>
           </div>
 
@@ -96,17 +100,19 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Placa:</label>
-              <input class="form-control" type="number" id="placa" name="placa" placeholder="">
+              <input class="form-control" type="text" id="placa" name="placa" placeholder="" disabled>
             </div>
 
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Bodega:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="Bodega" id="Bodega">
+              <input class="form-control" name="bodega" id="bodega" disabled value="<?= $nomEstante ?>">
+
+              <!-- <select style="background-color:#ECEAEA;" class="form-select form-select" name="bodega" id="bodega">
                 <option selected value="">--Seleccione--</option>
-                <?php foreach ($estanteria as $data) { ?>
-                  <option value="<?= $data['id'] ?>"><?= $data['nombre'] ?></option>
-                <?php } ?>
-              </select>
+                < ?php foreach ($estanteria as $data) { ?>
+                  <option value="< ?= $data['id'] ?>">< ?= $data['nombre'] ?></option>
+                < ?php } ?>
+              </select> -->
             </div>
           </div>
 
@@ -137,18 +143,18 @@
       </div>
 
       <div class="modal-body w-100" id="modalBodyD">
-        
+
         <div class="d-flex column-gap-3" style="width: 100%">
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Nombre:</label>
             <input type="text" class="form-control" id="nombre1" name="nombre1" onInput="validarInput()" placeholder="" disabled>
             <small id="msgEditar" class="invalido3"></small>
           </div>
-          
+
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Proveedor:</label>
             <div class="input-group mb-3">
-              
+
               <input class="form-control" type="number" id="Proveedor" name="Proveedor" disabled>
             </div>
           </div>
@@ -161,13 +167,13 @@
               <input class="form-control" type="number" id="Cantidad" name="Cantidad" disabled>
             </div>
           </div>
-          
+
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Orden de trabajo:</label>
-            <input type="text" class="form-control" id="ordenTrabajo" name="ordenTrabajo"  placeholder="" disabled>
+            <input type="text" class="form-control" id="ordenTrabajo" name="ordenTrabajo" placeholder="" disabled>
           </div>
         </div>
-        
+
 
         <div class="d-flex column-gap-3" style="width: 100%">
 
@@ -270,7 +276,7 @@
 
           <div class="d-flex column-gap-3" style="width: 50%">
 
-          <div class="mb-3" style="width: 97%">
+            <div class="mb-3" style="width: 97%">
               <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
               <div>
                 <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
@@ -299,23 +305,38 @@
     $("#nombre").val('');
   }
 
-  function agregar(id, tp) {
-    $('#tp').val(tp)
-  }
 
 
-    // formulario agregar 
-    $("#formularioAgregar").on("submit", function(e) {
+  $('#ordenTrabajo').on('change', function(e) {
+    id = $('#ordenTrabajo').val()
+    $.ajax({
+      url: "<?= base_url('ordenServicio/buscarOrden') ?>",
+      type: 'POST',
+      data: {
+        id
+      },
+      success: function(data) {
+        data = JSON.parse(data)
+        $('#placa').val(data['placa'])
+
+      }
+    })
+  })
+
+
+  // formulario agregar 
+  $("#bodega").val(rs[0]['nombre']);
+  $("#formularioAgregar").on("submit", function(e) {
     e.preventDefault()
-    idMaterial = $("#idMaterial").val()
+    // idMaterial = $("#idMaterial").val()
     nombre = $("#nombre").val()
     proveedor = $("#proveedor").val()
     cantidad = $("#cantidad").val()
     ordenTrabajo = $("#ordenTrabajo").val()
     placa = $("#placa").val()
-    bodega = $("#bodega").val()
+  
     idCategoria = $("#idCategoria").val()
-    if ([nombre, proveedor, cantidadActual, ordenTrabajo, placa, bodega].includes("")) {
+    if ([nombre, proveedor, cantidad, ordenTrabajo, placa, bodega].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -325,9 +346,9 @@
       })
     }
     $.post({
-      url: '<?php echo base_url('insumos/insertar') ?>',
+      url: '<?php echo base_url('repuestos/insertar') ?>',
       data: {
-        idMaterial: id_material,
+        // idMaterial: id_material,
         nombre: nombre,
         proveedor: proveedor,
         cantidad: cantidad,
@@ -352,4 +373,8 @@
     })
 
   })
+
+  function agregar(id, tp) {
+    $('#tp').val(tp)
+  }
 </script>

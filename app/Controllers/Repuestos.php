@@ -9,6 +9,7 @@ use App\Models\EstanteriaModel;
 use App\Models\MoviEncModel;
 use App\Models\MoviDetModel;
 use App\Models\OrdenesModel;
+use App\Models\TercerosModel;
 
 class Repuestos extends BaseController
 {
@@ -18,6 +19,7 @@ class Repuestos extends BaseController
     protected $movEnc;
     protected $movDet;
     protected $ordenes;
+    protected $proveedores;
 
 
     public function __construct()
@@ -28,6 +30,7 @@ class Repuestos extends BaseController
         $this->movEnc = new MoviEncModel();
         $this->movDet = new MoviDetModel();
         $this->ordenes = new OrdenesModel();
+        $this->proveedores = new TercerosModel();
 
 
     }
@@ -45,8 +48,8 @@ class Repuestos extends BaseController
         $repuestos = $this->materiales->obtenerRepuestoBodega($id);
         $ordenes = $this->ordenes->obtenerOrdenes();
         $estanteria = $this->estanteria->traerBodega();
-
-        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria];
+        $proveedores = $this->proveedores->obtenerProveedoresRep();
+        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria, "proveedores" => $proveedores, "nomEstante" => $nombre];
 
         echo view('/principal/sidebar');
         
@@ -73,16 +76,18 @@ class Repuestos extends BaseController
         $ordenTrabajo = $this->request->getPost('ordenTrabajo');
         $placa = $this->request->getPost('placa');
         $bodega = $this->request->getPost('bodega');
+        $tipoMaterial = $this->request->getPost('tipoMaterial');
         $usuarioCrea = session('id');
         $fechaActual = date('Y-m-d');
 
         $data = [
             'nombre' => $nombre,
-            'proveedor' => $proveedor,
+            'id_proveedor' => $proveedor,
             'cantidad' => $cantidad,
-            'ordenTrabajo' => $ordenTrabajo,
+            'id_orden' => $ordenTrabajo,
             'placa' => $placa,
-            'bodega' => $bodega,
+            'estante' => $bodega,
+            'tipo_material' => $tipoMaterial
         ];
 
         $this->materiales->save($data);

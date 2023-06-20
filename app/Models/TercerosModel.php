@@ -46,6 +46,13 @@ class TercerosModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function obtenerProveedoresRep()
+    {
+        $this->select('terceros.*');
+        $this->where('tipo_tercero', '8');
+        $data = $this->findAll();
+        return $data;
+    }
 
     public function buscarProveedor($id, $nit, $razonSocial)
     {
