@@ -80,22 +80,24 @@
 
                             <details id="datailInv" open>
                                 <summary>Materiales a entregar</summary>
+
                                 <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%;">
                                         <label for="exampleDataList" class="col-form-label">Tipo de Material:</label>
-                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipo">
+                                        <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipoMat">
                                             <option selected>--Seleccione--</option>
                                             <?php foreach ($tipo as $dato) { ?>
-                                                <option value="<?= $dato['id_param_enc'] ?>"><?= $dato['nombre'] ?></option>
+                                                <option value="<?= $dato['id_param_det'] ?>"><?= $dato['nombre'] ?></option>
                                             <?php } ?>
 
                                         </select>
                                     </div>
 
                                     <div class="mb-3" style="width: 100%;">
-                                        <label for="exampleDataList" class="col-form-label">Categorias:</label>
+                                        <label for="exampleDataList" class="col-form-label">Categorias o Bodega:</label>
                                         <select class="form-select form-control" name="tipoCate" id="tipoCate">
-                                        <option id="dpto">--Seleccione--</option>
+                                            <!-- SELECT DINAMICO -->
+                                            <option value="1"> --Seleccione--</option>
                                         </select>
                                     </div>
 
@@ -110,21 +112,26 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th hidden></th>
-                                                <th>Lista Materiales</th>
+                                                <th>Item</th>
+                                                <th>Material</th>
+                                                <th>Tipo</th>
+                                                <th>Cantidad</th>
                                                 <th>Precio</th>
-                                                <th colspan="1" style="width:20px;">Cantidad</th>
+                                                <th>Subtotal</th>
+                                  
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="text-center">
                                                 <td hidden><input type="text" id="materiales"></td>
-                                                <td> <?php foreach ($materiales as $dato) { ?>
-                                                        <option value=<?= $dato['id_material'] ?>"><?= $dato['nombre'] ?></option>
-                                                    <?php } ?>
-                                                </td>
-                                                <td><input name="precio" id="precio" disabled></td>
-                                                <td><input name="cantidad" id="cantidad" disabled></td>
+
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>
                                                 </td>
 
@@ -264,20 +271,34 @@
             success: function(res) {
                 res = JSON.parse(res)
                 var cadena
-                console.log(cadena)
-                cadena = `<option selected value=""> -- Seleccione -- </option>`
-                for (let i = 0; i < res.length; i++) {
-                    nombre = `${res[i].nombre}`;
-                    cadena += `<option value=${res[i].id_param_det}>${res[i].nombre}</option>`
+                if (id == 10) {
+                    cadena = `<option selected value=""> -- Seleccione -- </option>`
+                    for (let i = 0; i < res.length; i++) {
+                        nombre = `${res[i].nombre}`;
+                        cadena += `<option value=${res[i].id_param_det}>${res[i].nombre}</option>`
+                        
+                    }
+                    $('#tipoCate').html(cadena)
+                    $('#tipoCate').val(idTipoCate)
+                
+                   
+                } else  {
+                    console.log(id)
+                    cadena = `<option selected value=""> -- Seleccione -- </option>`
+                    for (let i = 0; i < res.length; i++) {
+                        nombre = `${res[i].nombre}`;
+                        cadena += `<option value=${res[i].id}>${res[i].nombre}</option>`
 
+                    }
+                    $('#tipoCate').html(cadena)
+                    $('#tipoCate').val(idTipoCate)
+                   
                 }
-                $('#tipoCate').html(cadena)
-                $('#tipoCate').val(idTipoCate)
             }
         })
     }
-    $('#tipoCate').on('change', function(e) {
-        id = $('#tipoCate').val()
+    $('#tipoMat').on('change', function(e) {
+        id = $('#tipoMat').val()
         verTipoCate(id, '')
     })
 </script>

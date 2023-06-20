@@ -405,9 +405,9 @@
 
 
       }
+
     })
   }
-
 
   function validarInput() {
     document.getElementById("btnValidar").disabled = !document.getElementById("cantidadUsar").value.length;

@@ -49,7 +49,8 @@ class ParamModel extends Model
     public function obtenerTipoMat()
     {
         $this->select('param_detalle.*');
-        $this->where('id_param_enc', '4');
+        $this->where('id_param_det', '9');
+        $this->orWhere('id_param_det', '10');
         $datos = $this->findAll();
         return $datos;
     }

@@ -18,7 +18,7 @@
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Subtotal</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
-                    <th scope="col" class="text-center">Acciones</th>
+                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody class="text-center">

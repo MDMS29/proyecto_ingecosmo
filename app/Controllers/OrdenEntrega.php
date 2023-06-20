@@ -9,6 +9,7 @@ use App\Models\ParamModel;
 use App\Models\VehiculosModel;
 use App\Models\TrabajadoresModel;
 use App\Models\OrdenesModel;
+use App\Models\EstanteriaModel;
 
 
 class OrdenEntrega extends BaseController
@@ -21,16 +22,18 @@ class OrdenEntrega extends BaseController
     protected $ordenes;
     protected $tipo;
     protected $tipoCate;
-  
+    protected $estanteria;
+
     public function __construct()
     {
         $this->ordenEntrega = new MoviEncModel();
         $this->trabajadores = new TrabajadoresModel();
         $this->materiales = new MaterialesModel();
-        $this->vehiculos= new VehiculosModel();
-        $this->ordenes= new OrdenesModel();
-        $this->tipo= new ParamModel();
-        $this->tipoCate= new ParamModel();
+        $this->vehiculos = new VehiculosModel();
+        $this->ordenes = new OrdenesModel();
+        $this->tipo = new ParamModel();
+        $this->tipoCate = new ParamModel();
+        $this->estanteria = new EstanteriaModel();
     }
 
     public function index()
@@ -38,31 +41,34 @@ class OrdenEntrega extends BaseController
         $trabajadores = $this->trabajadores->trabajadoresOrdenes();
         $materiales = $this->materiales->obtenerInsumo1();
         $tipo = $this->tipo->obtenerTipoMat();
-        $ordenes= $this->ordenes->obtenerOrdenes();
+        $ordenes = $this->ordenes->obtenerOrdenes();
         $tipoCate = $this->tipo->obtenerCategoriasOrdenes();
-        $data = ['trabajadores' => $trabajadores, 'tipo' => $tipo, 'tipoCate' => $tipoCate, 'ordenes' => $ordenes,'materiales' => $materiales,];
+        $estanteria = $this->estanteria->obtenerBodega();
+
+        $data = ['trabajadores' => $trabajadores, 'tipo' => $tipo, 'tipoCate' => $tipoCate, 'ordenes' => $ordenes, 'materiales' => $materiales, 'estanteria' => $estanteria,];
         echo view('/principal/sidebar');
         echo view('/ordenEntrega/ordenEntrega', $data);
     }
 
     public  function mostrarOrdenesEntrega($id, $nombre, $idCate)
     {
-        $ordenEntrega= $this->ordenEntrega->ordenesEntrega();
+        $ordenEntrega = $this->ordenEntrega->ordenesEntrega();
         $materiales = $this->materiales->obtenerMateriales($id);
         $trabajadores = $this->trabajadores->trabajadoresOrdenes();
         $vehiculos = $this->vehiculos->vehiculosOrdenes();
+        $estanteria = $this->estanteria->obtenerBodega();
         if (empty($materiales)) {
             $materiales = '';
         }
 
-        $data = ['data' => $ordenEntrega, 'nombreCategoria' => $nombre, 'idCate' => $idCate, "vehiculos" => $vehiculos, "trabajadores" => $trabajadores];
+        $data = ['data' => $ordenEntrega, 'nombreCategoria' => $nombre, 'idCate' => $idCate, "vehiculos" => $vehiculos, "trabajadores" => $trabajadores, "estanteria" => $estanteria,];
         echo view('/principal/sidebar');
 
         echo view('/ordenEntrega/ordenEntrega', $data);
     }
 
 
-    
+
     public function detallesOrden($id)
     {
         $returnData = array();
@@ -82,9 +88,15 @@ class OrdenEntrega extends BaseController
 
     public function buscarCate()
     {
-        $tipo = $this->request->getPost('idTipoCate');
-        $res = $this->tipoCate->obtenerCategoriasOrdenes();
-        return json_encode($res);
-    }
+        $tipoCate = $this->request->getPost('idTipoCate');
 
+        if ($tipoCate == 9) {
+            $res = $this->tipoCate->obtenerCategorias();
+
+            return json_encode($res);
+        } else {
+            $res = $this->estanteria->traerBodega();
+            return json_encode($res);
+        }
+    }
 }
