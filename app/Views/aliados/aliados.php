@@ -32,8 +32,8 @@
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-lg">
-            <div class="body-R" style="position: relative; top: 100px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="body-R">
                 <div class="modal-content">
                     <div class="modal-header flex align-items-center gap-3 ">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">

@@ -74,7 +74,7 @@
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Fila</label>
-                            <select class="form-select" id="fila" name="fila" style="background: #ECEAEA;">
+                            <select class="form-select" id="fila" name="fila">
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
                                     <option id="<?php echo $fila['id_fila']; ?>F" value=<?php echo $fila['id_fila']; ?>>
