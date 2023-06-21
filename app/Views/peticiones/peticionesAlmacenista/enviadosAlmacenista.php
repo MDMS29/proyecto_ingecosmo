@@ -4,7 +4,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones rECIBIDAS</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones Enviadas</h2>
 
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tablePeticiones" width="100%" cellspacing="0">
@@ -27,9 +27,10 @@
     <div class="footer-page mt-4">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarPeticion" onclick="seleccionarPeticion(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">Agregar</button>
 
-        <a href="<?= base_url('peticiones/recibidosAlmacenista') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
+
 
 
 <!-- modal Agregar o Ver Peticion -->
@@ -92,6 +93,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     var ContadorPRC = 0; //Contador DataTable
     // para asignarle la fecha actual al input date
@@ -106,15 +108,20 @@
         $('#txtDescripcion').text('');
     }
 
+
+    // Tabla   
     var tablaAdminRecibidos = $("#tablePeticiones").DataTable({
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
             data: {
-                tp: 4
+                tp: 3
             },
             dataSrc: "",
         },
+        order: [
+            [3, 'desc']
+        ],
         columns: [{
                 data: null,
                 render: function(data, type, row) {

@@ -180,7 +180,8 @@
             $('#fechaP').val(res[0]['fecha_envio_pet'])
             $('#horaP').val(res[0]['hora_envio_pet'])
             $('#txtDescripcion').val(res[0]['msg_emisor'])
-            $('#receptor').val(res[0]['nomRecpetor'])
+            // igual esa parte de echo receptor nombre completo de la session es para mostrar, pero al guardar sera otra funcion tipo enviar
+            $('#receptor').val("<?php echo session('nomCompleto') ?>")
             $('#estado').val(res[0]['tipo_validacion'])
             $('#fechaRespuesta').val(res[0]['fecha_res_pet'])
             $('#respuesta').val(res[0]['msg_receptor'])

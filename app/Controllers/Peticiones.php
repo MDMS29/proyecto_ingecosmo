@@ -27,9 +27,9 @@ class Peticiones extends BaseController
     public function indexAlmacenista()
     {
         $param = $this->param->obtenerTipoValidacion();
-        $data = ['tipoVal' => $param];
+        $data = ['estados' => $param];
         echo view('/principal/sidebar');
-        echo view('/peticiones/peticionesAlmacenista/enviadosAlmacenista', $data);
+        echo view('/peticiones/peticionesAlmacenista/recibidosAlmacenista', $data);
         // echo view('/peticiones/peticiones', $data);
     }
 
@@ -56,12 +56,12 @@ class Peticiones extends BaseController
         echo view('peticiones/peticionesAdmin/enviadosAdmin', $data);
     }
 
-    public function recibidosAlmacenista()
+    public function enviadosAlmacenista()
     {
         $param = $this->param->obtenerTipoValidacion();
         $data = ['tipoVal' => $param];
         echo view('principal/sidebar');
-        echo view('peticiones/peticionesAlmacenista/recibidosAlmacenista', $data);
+        echo view('peticiones/peticionesAlmacenista/enviadosAlmacenista', $data);
     }
 
     public function insertar()

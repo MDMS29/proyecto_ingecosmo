@@ -4,7 +4,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones eNvidadas</h2>
+    <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones Recibidas</h2>
 
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tablePeticiones" width="100%" cellspacing="0">
@@ -27,9 +27,9 @@
             </tbody>
         </table>
     </div>
-    <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
-    </div>
+
+    <a href="<?= base_url('peticiones/enviadosAlmacenista') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
+</div>
 </div>
 
 
@@ -85,10 +85,10 @@
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <label for="estado" class="col-form-label">Tipo Validacion:</label>
-                                <select class="form-select form-control" name="estado2" id="estado2">
-                                    <option selected value="">-- Seleccione --</option>
-                                    <!-- ira el forEach -->
-                                    <option value=""></option>
+                                <select disabled class="form-select form-select" name="estado2" id="estado2">
+                                    <?php foreach ($estados as $e) { ?>
+                                        <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="mb-3" style="width: 100%">
@@ -116,9 +116,10 @@
 </div>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     var ContadorPRC = 0; //Contador DataTable
+
 
     // Tabla   
     var tablaAdminEnviados = $("#tablePeticiones").DataTable({
@@ -126,7 +127,7 @@
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
             data: {
-                tp: 3
+                tp: 4
             },
             dataSrc: "",
         },
