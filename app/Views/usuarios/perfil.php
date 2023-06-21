@@ -204,7 +204,7 @@
                                                         <small id="msgConfirRes" class="normal"></small>
                                                     </div>
                                                     <div id="bloqueContra2">
-                                                        <input type="button" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                                                        <input type="button" class="btn btnRedireccion" value="Actualizar" id="btnActuContra"></input>
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,8 +292,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Actualizar</button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Actualizar</button>
                     </div>
                 </div>
             </div>

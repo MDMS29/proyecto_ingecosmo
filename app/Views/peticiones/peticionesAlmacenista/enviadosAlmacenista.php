@@ -82,8 +82,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,6 @@
     // para asignarle la fecha actual al input date
     var fechaActual = new Date();
     var formattedDate = fechaActual.toISOString().substring(0, 10);
-    // para asignarle la hora actual al input time
 
     function limpiarCampos() {
         $('#asunto').text('');
@@ -207,8 +206,8 @@
         id = $('#id').val()
         asunto = $('#asunto').val()
         emisor = "<?php echo session('id') ?>"
-        fechaP = $('#fechaP').val()
-        horaP = $('#horaP').val()
+        // fechaP = $('#fechaP').val()
+        // horaP = $('#horaP').val()
         txtDescripcion = $('#txtDescripcion').val()
         //Control de campos vacios
         if ([asunto, txtDescripcion].includes('')) {
@@ -229,10 +228,9 @@
                     mostrarMensaje('success', '¡Se ha enviado la Peticion!')
                 }
             }).done(function(data) {
+                limpiarCampos()
                 $('#agregarPeticion').modal('hide')
-                setTimeout(() => {
-                    tablePeticiones.ajax.reload(null, false); //Recargar tabla
-                }, 3000)
+                tablePeticiones.ajax.reload(null, true); //Recargar tabla
                 ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled') //jumm
             });
