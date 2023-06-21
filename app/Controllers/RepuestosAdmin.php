@@ -9,6 +9,7 @@ use App\Models\TercerosModel;
 use App\Models\EstanteriaModel;
 use App\Models\ParamModel;
 use App\Models\OrdenesModel;
+use App\Models\MoviEncModel;
 
 class RepuestosAdmin extends BaseController
 {
@@ -16,6 +17,7 @@ class RepuestosAdmin extends BaseController
     protected $vehiculo;
     protected $proveedor;
     protected $bodegas;
+    protected $movimiento;
     protected $param;
     protected $ordenes;
 
@@ -27,6 +29,7 @@ class RepuestosAdmin extends BaseController
         $this->bodegas = new EstanteriaModel();
         $this->param = new ParamModel();
         $this->ordenes = new OrdenesModel();
+        $this->movimiento = new MoviEncModel();
     }
     public function index()
     {
@@ -50,6 +53,17 @@ class RepuestosAdmin extends BaseController
         //$id = $this->request->getPost('id');
         $res = $this->respuestosAdmin->buscarRepuesto($id);
         return json_encode($res);
+    }
+
+    public function insertarO()
+    {
+        $id = $this->request->getPost('id');
+        $observacion = $this->request->getPost('observacion');
+        if ($this->respuestosAdmin->update($id, ['observacion' => $observacion])) {
+            return json_encode(1);
+        } else {
+            return json_encode(1);
+        }
     }
 
     public function insertar()
@@ -90,11 +104,28 @@ class RepuestosAdmin extends BaseController
     {
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('estado');
+        $idTra = $this->request->getPost('idTrab');
+        $proveedor = $this->request->getPost('proveedor');
+        $orden = $this->request->getPost('orden');
+        $dataMovimiento = [
+            'id_tercero' => $proveedor,
+            'id_material' => $id,
+            'id_vehiculo' => $orden,
+            'id_trabajador' => $idTra,
+            'fecha_movimiento' => date('Y-m-d'),
+            'estado' => $estado,
+            'tipo_movimiento' => 67,
+            'usuario_crea' => 23
+        ];
         if ($this->respuestosAdmin->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
                 return '¡Se ha reestablecido el Repuesto!';
+            } 
+            if ($estado == 'C') {
+                $this->movimiento->save($dataMovimiento);
+                return json_encode(1);
             } else {
-                return '¡Se ha eliminado el Repuesto!';
+                return json_encode(2);
             }
         }
     }

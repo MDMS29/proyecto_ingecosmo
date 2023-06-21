@@ -15,7 +15,7 @@ class MoviEncModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_tercero', 'id_vehiculo', 'id_trabajador', 'fecha_movimiento', 'tipo_movimiento', 'estado', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_tercero', 'id_vehiculo', 'id_trabajador', 'fecha_movimiento', 'tipo_movimiento', 'estado', 'fecha_crea', 'usuario_crea', 'id_material']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -45,27 +45,26 @@ class MoviEncModel extends Model
         return $data;
     }
 
-    public function traerDetalles()
-    {
-        $this->select('movimiento_enc.* ,ordenes_servicio.n_orden as orden');
-        $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo');
-        
-
-        $datos = $this->first();
-        return $datos;
-    }
+    // public function traerDetalles()
+    // {
+    //     $this->select('movimiento_enc.* ,ordenes_servicio.n_orden as orden');
+    //     $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo');
+    //     $datos = $this->first();
+    //     return $datos;
+    // }
 
     public function historialMateriales()
     {
         $this->select("movimiento_enc.id_movimientoenc, concat(trabajadores.nombre_p , ' ' , trabajadores.nombre_s , ' ' , trabajadores.apellido_p , ' ' , trabajadores.apellido_s) as nombreTrabajador, materiales.nombre as nombreMate , materiales.precio_compra as subtotal, movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento,ordenes_servicio.n_orden as nombreOrden");
         $this->join('param_detalle', 'param_detalle.id_param_det = movimiento_enc.tipo_movimiento');
-        $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc');
-        $this->join('materiales', 'materiales.id_material = movimiento_det.id_material');
+        $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc', 'left');
+        $this->join('materiales', 'materiales.id_material = movimiento_det.id_material', 'left');
         $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo', 'left');
         $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '11');
-        $this->orWhere('movimiento_enc.tipo_movimiento', '12');
-        $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
+        $this->orWhere('movimiento_enc.tipo_movimiento', '11');
+        $this->orWhere('movimiento_enc.tipo_movimiento', '67');
+        // $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
         $data = $this->findAll();
         return $data;
     }

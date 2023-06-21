@@ -107,19 +107,19 @@
                 <div id="contenidoHeaderEliminarP" class="modal-header">
                     <img style=" margin-bottom: 0;" width="100" src="<?php echo base_url('/img/ingecosmo.png') ?>" />
                     <h1 id="tituloM" class="fs-5">Observacion</h1><br>
-                    <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" style="margin:0;" class="btn-close" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="contenidoEliminarP">
                     <div class="">
-                    <label id="observacion" class=""></label>
+                        <label id="observacion" class=""></label>
                         <textarea id="observaciont" name="textarea" rows="5" cols="60" placeholder="Ej: El repuesto llego en mal estado..." style="border: 3px solid #161666; border-radius: 5px; padding: 7px;"></textarea>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cancelar</button>
+                <button id="btnNo" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cancelar</button>
                 <a id="btnSig" class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#modalConfirmarP"></a>
             </div>
 
@@ -183,6 +183,7 @@
         validNom = true
         $('#msgAgregar').text('')
         $('#cantRestock').text('')
+        $('#observaciont').val('')
     }
 
     function seleccionarRepuesto(id, tp) {
@@ -223,18 +224,18 @@
     }
 
     function titulo(id) {
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
-                dataType: 'json',
-                success: function(data) {
-                    $('#tituloM').text(`Observacion - ${data.nombre}`)
-                    $('#observacion').text('Motivo de devolucion:')
-                    $('#btnSig').text('Confirmar')
-                }
-            })
-        } 
-    
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
+            dataType: 'json',
+            success: function(data) {
+                $('#tituloM').text(`Observacion - ${data.nombre}`)
+                $('#observacion').text('Motivo de devolucion:')
+                $('#btnSig').text('Confirmar')
+            }
+        })
+    }
+
     // Tabla   
     var tableRepuestosAdmin = $("#tableRepuestosAdmin").DataTable({
         ajax: {
@@ -283,6 +284,27 @@
 
     });
 
+    $('#btnSig').on('click', function(e) {
+        e.preventDefault()
+        id = $('#id').val()
+        observacion = $('#observaciont').val()
+        if ([observacion].includes('')) {
+            mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: "<?= base_url('repuestosAdmin/insertarO') ?>",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id,
+                    observacion
+                },
+                success: function(res) {
+                    contador = 0       
+                }
+            })
+        }
+    })
 
     $('#formularioRepuesto').on('submit', function(e) {
         e.preventDefault()
