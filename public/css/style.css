@@ -1,13 +1,16 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Nunito', sans-serif;
 }
 
 :root {
-  --azulBoton: #161666; /* tambien para bordes */
+  --azulBoton: #161666;
+  /* tambien para bordes */
   --rojoBoton: #E25050;
-  --grisInput: #ECEAEA; /* gris mas oscuro */
-  --label:  #1b335b;
+  --grisInput: #ECEAEA;
+  /* gris mas oscuro */
+  --label: #1b335b;
 
 
 
@@ -41,24 +44,31 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-/* input[class="form-control"]{
-  background-color: var(--grisInput) ;
-} */
+input[class="form-control"],
+select {
+  background-color: var(--grisInput) !important;
+}
+input[class="form-control"]:disabled,
+input[class="form-select"]:disabled {
+  background-color: #e9ecef !important;
+}
 
 /* -- DATA TABLE -- */
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   margin: 0px 0px !important;
 }
+
 div.dataTables_wrapper div.dataTables_length select {
   width: 65px;
   background-color: white;
 }
+
 div.dataTables_wrapper div.dataTables_filter input {
   background-color: white;
 }
 
 #numeroDinamico {
-  display: flex; 
+  display: flex;
   -webkit-box-align: center;
   align-items: center;
   justify-content: center;
@@ -90,11 +100,12 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar {
   width: 5px;
 }
+
 *::-webkit-scrollbar:hover,
 body::-webkit-scrollbar:hover {
   width: 10px;
 }
-    
+
 *::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   background-color: #797979;
@@ -102,7 +113,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 *::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb:hover{
+body::-webkit-scrollbar-thumb:hover {
   background-color: #797979;
   border-radius: 20px;
 }
@@ -124,12 +135,12 @@ input[type=number] {
   box-sizing: border-box;
 }
 
- #aa :hover img {
-  transform:scale(1.1);
-  transition: all 0.3s ease-in; 
+#aa :hover img {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in;
 
- }
- 
+}
+
 
 #aa {
   align-items: center;
@@ -167,7 +178,7 @@ html {
 
 /* Estilos para pantallas grandes */
 @media (min-width: 768px) {
-   #sidebar {
+  #sidebar {
     display: block;
   }
 
@@ -179,7 +190,7 @@ html {
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 767px) {
-   #sidebar {
+  #sidebar {
     display: none;
     pointer-events: none;
   }
@@ -190,7 +201,7 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-  } 
+  }
 
   #content {
     margin-top: 8vh;
@@ -11796,7 +11807,7 @@ a.text-dark:focus {
   }
 
   abbr[title]::after {
-    content: " ("attr(title) ")";
+    content: " (" attr(title) ")";
   }
 
   pre {
@@ -12169,5 +12180,3 @@ a[data-toggle="collapse"] {
   background: #0056b3 !important;
   border-color: #3e64ff !important;
 } */
-
-
