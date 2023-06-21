@@ -67,7 +67,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary>Descripcion del Envio</summary>
+                                        <summary class="col-form-label">Descripcion del Envio:</summary>
                                         <textarea disabled name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
                                     </details>
                                 </div>
@@ -82,16 +82,16 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="estado" class="col-form-label">Tipo Validacion:</label>
-                                    <select  class="form-select form-select" name="estado" id="estado">
+                                    <select class="form-select form-select" name="estado" id="estado">
                                         <?php foreach ($estados as $e) { ?>
                                             <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaRespuesta" class="col-form-label">Fecha de Respuesta:</label>
+                                    <label for="fechaRes" class="col-form-label">Fecha de Respuesta:</label>
                                     <div class="d-flex">
-                                        <input disabled type="date" name="fechaRespuesta" id="fechaRespuesta" class="form-control">
+                                        <input disabled type="date" name="fechaRes" id="fechaRes" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -105,8 +105,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Enviar</button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -117,6 +117,10 @@
 
 <script>
     var ContadorPRC = 0; //Contador DataTable
+    
+    // para asignarle la fecha actual al input date
+    var fechaActual = new Date();
+    var formattedDate = fechaActual.toISOString().substring(0, 10);
 
 
     var tablaAdminRecibidos = $("#tablePeticiones").DataTable({
@@ -128,6 +132,9 @@
             },
             dataSrc: "",
         },
+        order: [
+            [3, 'desc']
+        ],
         columns: [{
                 data: null,
                 render: function(data, type, row) {
@@ -173,7 +180,7 @@
             dataType: 'json'
         }).done(function(res) {
             $('#tituloModal').text('Responder Peticion - ' + id)
-            $('#fechaRespuesta').attr('disabled', '')
+            $('#fechaRes').attr('disabled', '')
             $('#id').val(res[0]['id_peticion'])
             $('#asunto').val(res[0]['asunto'])
             $('#emisor').val(res[0]['nomEmisor'])
@@ -183,8 +190,54 @@
             // igual esa parte de echo receptor nombre completo de la session es para mostrar, pero al guardar sera otra funcion tipo enviar
             $('#receptor').val("<?php echo session('nomCompleto') ?>")
             $('#estado').val(res[0]['tipo_validacion'])
-            $('#fechaRespuesta').val(res[0]['fecha_res_pet'])
+            $('#fechaRes').val(formattedDate)
             $('#respuesta').val(res[0]['msg_receptor'])
         })
     }
+
+    
+    //Envio de formulario
+    $('#formularioPeticiones').on('submit', function(e) {
+        e.preventDefault()
+        id = $('#id').val()
+        asunto = $('#asunto').val()
+        emisor = "<?php echo session('id') ?>"
+        fechaP = $('#fechaP').val()
+        horaP = $('#horaP').val()
+        txtDescripcion = $('#txtDescripcion').val()
+        receptor = "<?php echo session('id') ?>"
+        estado = $('#estado').val()
+        fechaRes = $('#fechaRes').val()
+        respuesta = $('#respuesta').val()
+        //Control de campos vacios
+        if ([respuesta].includes('')) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('peticiones/responder') ?>',
+                type: 'POST',
+                data: {
+                    id,
+                    asunto,
+                    emisor,
+                    fechaP,
+                    horaP,
+                    txtDescripcion,
+                    receptor,
+                    estado,
+                    fechaRes,
+                    respuesta
+                },
+                success: function(idPet) {
+                    mostrarMensaje('success', '¡Se ha enviado la Peticion!')
+                }
+            }).done(function(data) {
+                limpiarCampos()
+                $('#responderPeticion').modal('hide')
+                tablePeticiones.ajax.reload(null, true); //Recargar tabla
+                ContadorPRC = 0
+                $('#btnGuardar').removeAttr('disabled') //jumm
+            });
+        };
+    })
 </script>

@@ -61,7 +61,7 @@
                                     <input type="text" id="aggVehi" value="0" placeholder="Ej: QWE123" hidden>
                                     <div class="d-flex">
                                         <input type="text" maxlength="6" class="form-control" id="vehiculoT" hidden>
-                                        <select class="form-select form-control" name="vehiculo" id="vehiculo">
+                                        <select class="form-select" name="vehiculo" id="vehiculo">
                                             <option selected value="">-- Seleccione --</option>
                                             <!-- SELECT DINAMICO -->
                                         </select>
@@ -76,7 +76,7 @@
                                 <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
                                         <label for="tipoCliente" class="col-form-label">Tipo Responsable:</label>
-                                        <select class="form-select form-control" name="tipoCliente" id="tipoCliente">
+                                        <select class="form-select" name="tipoCliente" id="tipoCliente">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($tipoClientes as $cliente) { ?>
                                                 <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="mb-3" style="width: 100%">
                                         <label for="cliente" class="col-form-label">Responsable:</label>
-                                        <select class="form-select form-control" name="cliente" id="cliente">
+                                        <select class="form-select " name="cliente" id="cliente">
                                             <option value="" selected="selected">-- Seleccione --</option>
                                             <!-- SELECT DINAMICO -->
 
@@ -97,7 +97,7 @@
                                     <div class="d-flex gap-3" style="width: 100%">
                                         <div class="mb-3" style="width: 100%">
                                             <label for="tipoDocRes" class="col-form-label">Tipo Identificación:</label>
-                                            <select class="form-select form-select" name="tipoDocRes" id="tipoDocRes" disabled>
+                                            <select class="form-select" name="tipoDocRes" id="tipoDocRes" disabled>
                                                 <option value="1" selected>Cedula de Ciudadania</option>
                                                 <option>-- Seleccione --</option>
                                             </select>
@@ -125,7 +125,7 @@
                                 <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
                                         <label for="marca" class="col-form-label">Marca:</label>
-                                        <select class="form-select form-control" name="marca" id="marca">
+                                        <select class="form-select" name="marca" id="marca">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($marcas as $marca) { ?>
                                                 <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="mb-3" style="width: 100%">
                                         <label for="nFabrica" class="col-form-label">No. Fabrica:</label>
-                                        <select class="form-select form-control" name="nFabrica" id="nFabrica">
+                                        <select class="form-select" name="nFabrica" id="nFabrica">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php $years = range(2035, 1990); ?>
                                             <?php foreach ($years as $year) : ?>
@@ -160,7 +160,7 @@
                                 <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
                                         <label for="combustible" class="col-form-label">Combustible:</label>
-                                        <select class="form-select form-control" name="combustible" id="combustible">
+                                        <select class="form-select" name="combustible" id="combustible">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($combustible as $com) { ?>
                                                 <option value="<?= $com['id'] ?>"><?= $com['nombre'] ?></option>
@@ -205,7 +205,7 @@
                                             <td hidden><input type="text" id="idRetro"></td>
                                             <td>Retrovisores</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="retrovisores" style="width: 155px;">
+                                                <select class="text-center form-select" id="retrovisores" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -219,7 +219,7 @@
                                             <td hidden><input type="text" id="idRetroInter"></td>
                                             <td>Retrovisores Internos</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="retroInter" style="width: 155px;">
+                                                <select class="text-center form-select" id="retroInter" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -233,7 +233,7 @@
                                             <td hidden><input type="text" id="idPanora"></td>
                                             <td>Panorámicos</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="panoramicos" style="width: 155px;">
+                                                <select class="text-center form-select" id="panoramicos" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -247,7 +247,7 @@
                                             <td hidden><input type="text" id="idRadio"></td>
                                             <td>Radio</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="radio" style="width: 155px;">
+                                                <select class="text-center form-select" id="radio" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -261,7 +261,7 @@
                                             <td hidden><input type="text" id="idParlan"></td>
                                             <td>Parlantes</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="parlantes" style="width: 155px;">
+                                                <select class="text-center form-select" id="parlantes" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -275,7 +275,7 @@
                                             <td hidden><input type="text" id="idRejillas"></td>
                                             <td>Rejillas A/A</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="rejillas" style="width: 155px;">
+                                                <select class="text-center form-select" id="rejillas" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -289,7 +289,7 @@
                                             <td hidden><input type="text" id="idEncen"></td>
                                             <td>Encendedor</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="encendedor" style="width: 155px;">
+                                                <select class="text-center form-select" id="encendedor" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -303,7 +303,7 @@
                                             <td hidden><input type="text" id="idPito"></td>
                                             <td>Pito</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="pito" style="width: 155px;">
+                                                <select class="text-center form-select" id="pito" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -316,7 +316,7 @@
                                             <td hidden><input type="text" id="idPlumi"></td>
                                             <td>Plumillas</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="plumillas" style="width: 155px;">
+                                                <select class="text-center form-select" id="plumillas" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -330,7 +330,7 @@
                                             <td hidden><input type="text" id="idCintu"></td>
                                             <td>Cinturones</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="cinturones" style="width: 155px;">
+                                                <select class="text-center form-select" id="cinturones" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -344,7 +344,7 @@
                                             <td hidden><input type="text" id="idMani"></td>
                                             <td>Manijas</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="manijas" style="width: 155px;">
+                                                <select class="text-center form-select" id="manijas" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -358,7 +358,7 @@
                                             <td hidden><input type="text" id="idComando"></td>
                                             <td>Comando ptas</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="comando" style="width: 155px;">
+                                                <select class="text-center form-select" id="comando" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -372,7 +372,7 @@
                                             <td hidden><input type="text" id="idTaSol"></td>
                                             <td>Tapa Soles</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="tapaSoles" style="width: 155px;">
+                                                <select class="text-center form-select" id="tapaSoles" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -388,7 +388,7 @@
                                             <td hidden><input type="text" id="idTape"></td>
                                             <td>Tapetes</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="tapetes" style="width: 155px;">
+                                                <select class="text-center form-select" id="tapetes" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -404,7 +404,7 @@
                                             <td hidden><input type="text" id="idTapi"></td>
                                             <td>Tapizado</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="tapizado" style="width: 155px;">
+                                                <select class="text-center form-select" id="tapizado" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -418,7 +418,7 @@
                                             <td hidden><input type="text" id="idLuz"></td>
                                             <td>Luz Techo</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="luzTecho" style="width: 155px;">
+                                                <select class="text-center form-select" id="luzTecho" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -432,7 +432,7 @@
                                             <td hidden><input type="text" id="idTapa"></td>
                                             <td>Tapa Gasolina</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="tapaGaso" style="width: 155px;">
+                                                <select class="text-center form-select" id="tapaGaso" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -446,7 +446,7 @@
                                             <td hidden><input type="text" id="idLlavePer"></td>
                                             <td>Llave Pernos</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="llavePer" style="width: 155px;">
+                                                <select class="text-center form-select" id="llavePer" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -460,7 +460,7 @@
                                             <td hidden><input type="text" id="idHerra"></td>
                                             <td>Herramientas</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="herramientas" style="width: 155px;">
+                                                <select class="text-center form-select" id="herramientas" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -474,7 +474,7 @@
                                             <td hidden><input type="text" id="idKit"></td>
                                             <td>Kit de Carretera</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="kitCarrete" style="width: 155px;">
+                                                <select class="text-center form-select" id="kitCarrete" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -489,7 +489,7 @@
                                             <td hidden><input type="text" id="idGato"></td>
                                             <td>Gato</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="gato" style="width: 155px;">
+                                                <select class="text-center form-select" id="gato" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -502,7 +502,7 @@
                                             <td hidden><input type="text" id="idExtintor"></td>
                                             <td>Extintor</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="extintor" style="width: 155px;">
+                                                <select class="text-center form-select" id="extintor" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -517,7 +517,7 @@
                                             <td hidden><input type="text" id="idSensores"></td>
                                             <td>Sensores</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="sensores" style="width: 155px;">
+                                                <select class="text-center form-select" id="sensores" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -530,7 +530,7 @@
                                             <td hidden><input type="text" id="idCamara"></td>
                                             <td>Camara de Rever</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="camaraRe" style="width: 155px;">
+                                                <select class="text-center form-select" id="camaraRe" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -543,7 +543,7 @@
                                             <td hidden><input type="text" id="idControl"></td>
                                             <td>Control de Alarma</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="controlAlarma" style="width: 155px;">
+                                                <select class="text-center form-select" id="controlAlarma" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -556,7 +556,7 @@
                                             <td hidden><input type="text" id="idBateria"></td>
                                             <td>Bateria</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="bateria" style="width: 155px;">
+                                                <select class="text-center form-select" id="bateria" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">B</option>
                                                     <option value="2">R</option>
@@ -570,7 +570,7 @@
                                             <td hidden><input type="text" id="idCombustible"></td>
                                             <td>Combustible</td>
                                             <td style="display: flex;justify-content: center;">
-                                                <select class="text-center form-select form-control" id="tipocombustible" style="width: 155px;">
+                                                <select class="text-center form-select" id="tipocombustible" style="width: 155px;">
                                                     <option value="" selected>-- Seleccione --</option>
                                                     <option value="1">ID</option>
                                                     <option value="2">IT</option>
@@ -597,7 +597,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="estado" class="col-form-label">Estado:</label>
-                                        <select class="form-select form-control" name="estado" id="estado">
+                                        <select class="form-select" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
                                                 <option value="<?= $estado['id'] ?>" <?php echo $estado['id'] == 38 ? 'hidden' : ($estado['id'] == 43 ? 'hidden' : '') ?>><?= $estado['nombre'] ?></option>
@@ -624,8 +624,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -647,7 +647,7 @@
                 <div class="modal-body">
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <label for="prioridad" class="col-form-label">Cambiar Estado:</label>
-                        <select class="form-select form-control" name="estadoVehiculo" id="estadoVehiculo">
+                        <select class="form-select" name="estadoVehiculo" id="estadoVehiculo">
                             <option selected value="">-- Seleccione --</option>
                             <?php foreach ($estadosVehi as $estado) { ?>
                                 <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
@@ -656,8 +656,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('#estadoVehiculo')">Cerrar</button>
-                    <button type="button" class="btn btnAccionF" id="btnCambiarEstado">Agregar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos('#estadoVehiculo')">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" id="btnCambiarEstado">Agregar</button>
                 </div>
             </div>
         </div>

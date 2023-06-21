@@ -146,8 +146,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>
@@ -200,8 +200,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
-                        <input type="submit" class="btn btnAccionF" value="Actualizar" id="btnActuContra"></input>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
+                        <input type="submit" class="btn btnRedireccion" value="Actualizar" id="btnActuContra"></input>
                     </div>
                 </div>
             </div>

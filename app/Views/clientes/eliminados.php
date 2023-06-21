@@ -34,7 +34,7 @@
     </div>
 
     <div class="footer-page">
-        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 
@@ -125,7 +125,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" id="btnCerrarTel1" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" class="btn btnAccionF" id="btnCerrarTel1" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>
@@ -200,7 +200,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnCerrarCorreo1" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" id="btnCerrarCorreo1" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>
@@ -226,8 +226,8 @@
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+                <button id="btnNo" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnRedireccion">Reestablecer</a>
             </div>
 
         </div>

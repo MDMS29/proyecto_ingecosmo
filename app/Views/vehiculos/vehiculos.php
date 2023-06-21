@@ -48,7 +48,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="tipoCliente" class="col-form-label">Tipo Responsable:</label>
-                                    <select class="form-select form-control" name="tipoCliente" id="tipoCliente">
+                                    <select class="form-select" name="tipoCliente" id="tipoCliente">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($tipoClientes as $cliente) { ?>
                                             <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="cliente" class="col-form-label">Responsable:</label>
-                                    <select class="form-select form-control" name="cliente" id="cliente">
+                                    <select class="form-select " name="cliente" id="cliente">
                                         <!-- SELECT DINAMICO -->
                                     </select>
                                 </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="marca" class="col-form-label">Marca:</label>
-                                    <select class="form-select form-control" name="marca" id="marca">
+                                    <select class="form-select " name="marca" id="marca">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($marcas as $marca) { ?>
                                             <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
@@ -100,7 +100,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="combustible" class="col-form-label">Combustible:</label>
-                                    <select class="form-select form-control" name="combustible" id="combustible">
+                                        <select class="form-select" name="combustible" id="combustible">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($combustible as $com) { ?>
                                             <option value="<?= $com['id'] ?>"><?= $com['nombre'] ?></option>
@@ -114,8 +114,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
                 </div>
             </div>

@@ -32,8 +32,8 @@
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-lg">
-            <div class="body-R" style="position: relative; top: 100px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="body-R">
                 <div class="modal-content">
                     <div class="modal-header flex align-items-center gap-3 ">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
@@ -83,8 +83,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar"></button>
                     </div>
                 </div>
             </div>
@@ -153,8 +153,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
-                    <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                    <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
             </div>
         </div>
@@ -214,8 +214,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
-                    <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                    <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
                 </div>
             </div>
         </div>

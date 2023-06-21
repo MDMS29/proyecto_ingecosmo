@@ -28,7 +28,7 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 
@@ -41,7 +41,7 @@
             <div class="modal-content" style="height: 100%;">
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
-                    <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i><span id="tituloModal2"><!--texto--></span> </h1>
+                    <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i><span id="tituloModal"><!--texto--></span> </h1>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
@@ -85,7 +85,7 @@
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <label for="estado" class="col-form-label">Tipo Validacion:</label>
-                                <select disabled class="form-select form-select" name="estado2" id="estado2">
+                                <select disabled class="form-select" name="estado2" id="estado2">
                                     <?php foreach ($estados as $e) { ?>
                                         <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
                                     <?php } ?>
@@ -108,7 +108,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -130,6 +130,9 @@
             },
             dataSrc: "",
         },
+        order: [
+            [3, 'desc']
+        ],
         columns: [{
                 data: null,
                 render: function(data, type, row) {
@@ -182,7 +185,7 @@
             url: "<?php echo base_url('peticiones/buscarPeticion/') ?>" + id,
             dataType: 'json'
         }).done(function(res) {
-            $('#tituloModal2').text('Ver Peticion - ' + id)
+            $('#tituloModal').text('Ver Peticion - ' + id)
             $('#fechaRespuesta').attr('disabled', '')
             $('#id').val(res[0]['id_peticion'])
             $('#asunto2').val(res[0]['asunto'])
