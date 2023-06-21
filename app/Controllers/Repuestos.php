@@ -49,7 +49,7 @@ class Repuestos extends BaseController
         $ordenes = $this->ordenes->obtenerOrdenes();
         $estanteria = $this->estanteria->traerBodega();
         $proveedores = $this->proveedores->obtenerProveedoresRep();
-        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria, "proveedores" => $proveedores, "nomEstante" => $nombre];
+        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria, "proveedores" => $proveedores, "nomEstante" => $nombre, "idBodega" => $id];
 
         echo view('/principal/sidebar');
         
@@ -83,7 +83,7 @@ class Repuestos extends BaseController
         $data = [
             'nombre' => $nombre,
             'id_proveedor' => $proveedor,
-            'cantidad' => $cantidad,
+            'cantidad_actual' => $cantidad,
             'id_orden' => $ordenTrabajo,
             'placa' => $placa,
             'estante' => $bodega,

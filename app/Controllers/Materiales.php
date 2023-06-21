@@ -21,6 +21,14 @@ class Materiales extends BaseController
         // echo view('/materiales/materiales', $data);
     }
 
+    public function detallesRepuesto($id_material)
+    {
+        $returnData = array();
+        $materiales_ = $this->materiales->traerDetallesRep($id_material);
+        array_push($returnData, $materiales_);
+        echo json_encode($returnData);
+    }
+
     public function detallesMaterial($id)
     {
         $returnData = array();
@@ -41,7 +49,7 @@ class Materiales extends BaseController
         echo json_encode($returnData);
     }
 
-    
+
     public function usarMaterial($id)
     {
         $returnData = array();
@@ -52,7 +60,7 @@ class Materiales extends BaseController
         echo json_encode($returnData);
     }
 
-    
+
 
 
     // public function agregarMaterial($id_material)

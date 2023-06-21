@@ -373,7 +373,6 @@
 
   // funcion traer detalles del material
 
-
   function detallesMaterial(id_material) {
 
     $('#btnUsar1').attr('onclick', `usarMaterial(${id_material},2)`)
@@ -384,6 +383,7 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
+        console.log(rs)
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);
