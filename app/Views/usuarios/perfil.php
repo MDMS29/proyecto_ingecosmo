@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?php echo base_url('css/usuarios/usuarios.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>">
+<!-- <link rel="stylesheet" href="< ?php echo base_url("css/proveedores_clientes/proveedores_cliente.css") ?>"> -->
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -225,14 +225,14 @@
 <form method="POST" id="formularioPerfil" autocomplete="off">
     <div class="modal fade" id="editarPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="bodyP">
+            <div class="body-R" style="width: 100%;">
                 <div class="modal-content">
-                    <div class="modal-header" id="modalHeader">
-                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
+                <div class="modal-header flex align-items-center gap-3">
+                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                             <img  id="logoModal" src="<?= base_url('img/editar.png') ?>" alt="icon-plus" width="20">
-                            <h1 class="modal-title fs-5" id="tituloModal">Editar</h1>
+                            <h1 class="modal-title fs-5" id="tituloModal"> Editar</h1>
                         </div>
 
                         <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

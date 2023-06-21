@@ -85,7 +85,7 @@
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <label for="estado" class="col-form-label">Tipo Validacion:</label>
-                                <select disabled class="form-select form-select" name="estado2" id="estado2">
+                                <select disabled class="form-select" name="estado2" id="estado2">
                                     <?php foreach ($estados as $e) { ?>
                                         <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
                                     <?php } ?>

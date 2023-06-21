@@ -35,7 +35,7 @@
             <div class="modal-content">
 
                 <div class="modal-header" id="modalHeader">
-                    <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.jpg') ?>" />
+                    <img  src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
 
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus">

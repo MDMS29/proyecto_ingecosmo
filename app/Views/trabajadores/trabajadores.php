@@ -826,6 +826,12 @@
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
 
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(correo)) {
+            validCorreo = false
+            return mostrarMensaje('error', '¡Tipo de correo invalido!')
+        }
+
         if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
