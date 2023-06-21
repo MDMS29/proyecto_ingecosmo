@@ -34,10 +34,12 @@
 
   <div class="footer-page">
     <a href="<?php echo base_url('/repuestos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
-    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
+      Agregar</button>
   </div>
 </div>
 
+<!-- MODAL AGREGAR -->
 <form id="formularioAgregar" autocomplete="off">
   <input class="form-control" id="id" name="id" type="text" value="0" hidden>
   <!-- <input type="text" value="< ?= $idCate ?>" id="idCategoria" hidden> -->
@@ -54,7 +56,8 @@
           <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
           <div class="d-flex align-items-center justify-content-center" style="width:auto;">
             <img src="<?= base_url('img/botonAgregar.png') ?>" width="30" height="30" style="margin-right: 5px;" />
-            <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar</h1>
+            <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar
+            </h1>
           </div>
           <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
 
@@ -83,7 +86,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Cantidad:</label>
-              <input class="form-control" type="number" id="Cantidad" name="Cantidad" placeholder="">
+              <input class="form-control" type="number" id="cantidad" name="cantidad" placeholder="">
             </div>
 
             <div class="mb-3" style="width: 90%;">
@@ -126,6 +129,7 @@
   </div>
 </form>
 
+<!-- MODAL DETALLES -->
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <input type="text" name="id" id="id" hidden>
@@ -155,7 +159,7 @@
             <label for="exampleDataList" class="col-form-label">Proveedor:</label>
             <div class="input-group mb-3">
 
-              <input class="form-control" type="number" id="Proveedor" name="Proveedor" disabled>
+              <input class="form-control" type="text" id="proveedor1" name="proveedor1" disabled>
             </div>
           </div>
         </div>
@@ -164,13 +168,13 @@
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Cantidad:</label>
             <div class="input-group mb-3">
-              <input class="form-control" type="number" id="Cantidad" name="Cantidad" disabled>
+              <input class="form-control" type="number" id="cantidad1" name="Cantidad" disabled>
             </div>
           </div>
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Orden de trabajo:</label>
-            <input type="text" class="form-control" id="ordenTrabajo" name="ordenTrabajo" placeholder="" disabled>
+            <input type="text" class="form-control" id="ordenTrabajo1" name="ordenTrabajo" placeholder="" disabled>
           </div>
         </div>
 
@@ -179,12 +183,12 @@
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Placa:</label>
-            <input type="text" class="form-control" id="placa" name="placa" placeholder="" disabled>
+            <input type="text" class="form-control" id="placa1" name="placa" placeholder="" disabled>
           </div>
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Bodega:</label>
-            <input type="text" class="form-control" id="bodega" name="bodega" placeholder="" disabled>
+            <input type="text" class="form-control" id="bodega1" name="bodega" placeholder="" disabled>
           </div>
         </div>
 
@@ -208,7 +212,7 @@
       <div class="modal-content" id="modalContentUsar">
 
         <div class="modal-header flex justify-content-between align-items-center w-100">
-          <input type="text" name="idMaterial" id="idMaterial" hidden>
+          <input type="text" name="idMaterial" id="idMaterial">
           <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
           <div class="d-flex align-items-center justify-content-center" style="width:auto;">
             <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
@@ -289,7 +293,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/orden-entrega.png') ?>" alt="icon-plus" width="20">Agregar a orden</button>
+          <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/orden-entrega.png') ?>" alt="icon-plus" width="20">Agregar a
+            orden</button>
 
 
         </div>
@@ -325,16 +330,14 @@
 
 
   // formulario agregar 
-  $("#bodega").val(rs[0]['nombre']);
   $("#formularioAgregar").on("submit", function(e) {
     e.preventDefault()
-    // idMaterial = $("#idMaterial").val()
+    idMaterial = $("#idMaterial").val()
     nombre = $("#nombre").val()
     proveedor = $("#proveedor").val()
     cantidad = $("#cantidad").val()
     ordenTrabajo = $("#ordenTrabajo").val()
     placa = $("#placa").val()
-  
     idCategoria = $("#idCategoria").val()
     if ([nombre, proveedor, cantidad, ordenTrabajo, placa, bodega].includes("")) {
       return Swal.fire({
@@ -348,7 +351,7 @@
     $.post({
       url: '<?php echo base_url('repuestos/insertar') ?>',
       data: {
-        // idMaterial: id_material,
+        idMaterial,
         nombre: nombre,
         proveedor: proveedor,
         cantidad: cantidad,
@@ -356,7 +359,7 @@
         tipoMaterial: 10,
         idCategoria: idCategoria,
         placa: placa,
-        bodega: bodega
+        bodega: "<?= $idBodega ?>"
       },
       success: function(res) {
         if (res == 1) {
@@ -376,5 +379,109 @@
 
   function agregar(id, tp) {
     $('#tp').val(tp)
+
   }
+
+  function detallesMaterial(id_material) {
+    $('#btnUsar1').attr('onclick', `usarMaterial(${id_material},2)`)
+
+    dataURL = "<?php echo base_url('/materiales/detallesRepuesto'); ?>" + "/" + id_material;
+    $.ajax({
+      type: "POST",
+      url: dataURL,
+      dataType: "json",
+      success: function(rs) {
+        console.log(rs)
+        $('#detallesModal').modal('show')
+        $("#titulo").text('Detalles');
+        $("#idMaterial").val(rs[0]['id_material']);
+        $("#nombre1").val(rs[0]['nombre']);
+        $("#proveedor1").val(rs[0]['nomProveedor']);
+        $("#cantidad1").val(Number(rs[0]['cantidad_actual']));
+        $("#ordenTrabajo1").val(rs[0]['numOrden']);
+        $("#placa1").val(rs[0]['placaVeh']);
+        $("#bodega1").val(rs[0]['bodega']);
+      }
+    })
+  }
+
+  function usarMaterial(id_material) {
+    dataURL = "<?php echo base_url('/materiales/usarMaterial'); ?>" + "/" + id_material;
+    $.ajax({
+      type: "POST",
+      url: dataURL,
+      dataType: "json",
+      success: function(rs) {
+        $("#idMaterial").val(rs[0]['id_material']);
+        $("#nombreInsumo").val(rs[0]['nombre']);
+        $("#cantidadExistente").val(rs[0]['cantidad_actual']);
+        $("#PrecioDeVenta").val(rs[0]['precio_venta']);
+        $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
+
+      }
+    })
+  }
+
+  // operaciones con el input usar
+
+  $('#cantidadUsar').on('input', function(e) {
+    idMaterial = $("#idMaterial").val()
+
+    cantidad = $('#cantidadUsar').val()
+    valorVenta = $("#PrecioDeVenta").val()
+    cantidadExistente = $('#cantidadExistente').val()
+    if (parseInt(cantidad) > parseInt(cantidadExistente)) {
+      $('#msgUsar').text(' *Valor invalido*')
+      $("#btnValidar").attr('disabled', '');
+      validUsar = false
+      $('#subtotal').val(0)
+    } else {
+      $('#msgUsar').text('')
+      validUsar = true
+      $('#subtotal').val(cantidad * valorVenta)
+    }
+  })
+
+
+
+  // formulario usar
+
+  $("#formularioUsar").on("submit", function(e) {
+    e.preventDefault()
+
+    idMaterial = $("#idMaterial").val()
+    nombre = $("#nombre").val()
+    proveedor = $("#proveedor").val()
+    cantidad = $("#cantidad").val()
+    ordenTrabajo = $("#ordenTrabajo").val()
+    placa = $("#placa").val()
+    idCategoria = $("#idCategoria").val()
+    console.log(idMaterial)
+    if ([nombre, proovedor, cantidad, precioVenta, ordenTrabajo, placa, bodega].includes("")) {
+      return mostrarMensaje('error', '¡Campos Vacios!')
+    }
+    $.post({
+      url: '<?php echo base_url('/usar') ?>',
+      data: {
+        idMaterial,
+        trabajador,
+        ordenes,
+        precioVenta,
+        cantidadExistente,
+        cantidadUsar,
+        subtotal
+      },
+      success: function(data) {
+        if (data == 1) {
+          mostrarMensaje('success', '¡Insumo usado con exito!')
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000)
+        } else {
+          return mostrarMensaje('error', '¡Ha ocurrido un error!')
+        }
+      }
+    })
+
+  })
 </script>

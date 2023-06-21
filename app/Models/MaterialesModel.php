@@ -48,11 +48,22 @@ class MaterialesModel extends Model
         $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
         $this->join('estanteria', 'estanteria.id = materiales.estante');
         $this->join('filas', 'filas.id_fila = materiales.fila');
-
         $this->where('id_material', $id_material);
         $datos = $this->first();
         return $datos;
     }
+
+    public function traerDetallesRep($id_material){
+        $this->select('materiales.*, terceros.razon_social as nomProveedor, ordenes_servicio.n_orden as numOrden, estanteria.nombre as bodega, vehiculos.placa as placaVeh');
+        $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor');
+        $this->join('estanteria', 'estanteria.id = materiales.estante');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = materiales.id_orden');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo');
+        $this->where('id_material', $id_material);
+        $datos = $this->first();
+        return $datos;
+    }
+
     public function traerEditar($id_material)
     {
         $this->select('materiales.*');
