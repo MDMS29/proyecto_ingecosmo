@@ -25,9 +25,9 @@
         </table>
     </div>
     <div class="footer-page">
-        <button class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="seleccionarCliente(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
+        <button class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarCliente" onclick="seleccionarCliente(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
 
-        <a href="<?php echo base_url('/clientes/eliminados'); ?>" class="btn btnRedireccion"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
+        <a href="<?php echo base_url('/clientes/eliminados'); ?>" class="btn btnAccionF"> <img src="<?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a>
     </div>
 </div>
 
@@ -310,7 +310,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>
@@ -345,7 +345,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>

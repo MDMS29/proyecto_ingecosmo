@@ -123,7 +123,7 @@
     var formattedDate = fechaActual.toISOString().substring(0, 10);
 
 
-    var tablaAdminRecibidos = $("#tablePeticiones").DataTable({
+    var tablePeticiones = $("#tablePeticiones").DataTable({
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
@@ -229,12 +229,11 @@
                     respuesta
                 },
                 success: function(idPet) {
-                    mostrarMensaje('success', '¡Se ha enviado la Peticion!')
+                    mostrarMensaje('success', '¡Se ha respondido la Peticion!')
                 }
             }).done(function(data) {
-                limpiarCampos()
                 $('#responderPeticion').modal('hide')
-                tablePeticiones.ajax.reload(null, true); //Recargar tabla
+                tablePeticiones.ajax.reload(null, false); //Recargar tabla
                 ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled') //jumm
             });

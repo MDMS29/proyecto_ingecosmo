@@ -20,12 +20,12 @@ input[class="form-control"] {
 }
 
 .btnRedireccion {
-    background-color: var(--rojoAcciones) !important;
+    background-color: var(--azulBase) !important;
     color: white !important;
 }
 
 .btnAccionF {
-    background-color: var(--azulBase) !important;
+    background-color: var(--rojoAcciones) !important;
     color: white !important;
 }
 

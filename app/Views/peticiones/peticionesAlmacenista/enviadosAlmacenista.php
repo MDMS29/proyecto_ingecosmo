@@ -25,9 +25,9 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarPeticion" onclick="seleccionarPeticion(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">Agregar</button>
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#agregarPeticion" onclick="seleccionarPeticion(<?= 0 . ',' . 1 ?>)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">Agregar</button>
 
-        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 
@@ -82,8 +82,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
 
 
     // Tabla   
-    var tablaAdminRecibidos = $("#tablePeticiones").DataTable({
+    var tablePeticiones = $("#tablePeticiones").DataTable({
         ajax: {
             url: '<?= base_url('peticiones/obtenerPeticiones') ?>',
             method: "POST",
@@ -206,8 +206,8 @@
         id = $('#id').val()
         asunto = $('#asunto').val()
         emisor = "<?php echo session('id') ?>"
-        // fechaP = $('#fechaP').val()
-        // horaP = $('#horaP').val()
+        fechaP = $('#fechaP').val()
+        horaP = $('#horaP').val()
         txtDescripcion = $('#txtDescripcion').val()
         //Control de campos vacios
         if ([asunto, txtDescripcion].includes('')) {
