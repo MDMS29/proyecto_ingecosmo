@@ -10,6 +10,7 @@ use App\Models\EstanteriaModel;
 use App\Models\ParamModel;
 use App\Models\OrdenesModel;
 use App\Models\MoviEncModel;
+use App\Models\MoviDetModel;
 
 class RepuestosAdmin extends BaseController
 {
@@ -17,7 +18,8 @@ class RepuestosAdmin extends BaseController
     protected $vehiculo;
     protected $proveedor;
     protected $bodegas;
-    protected $movimiento;
+    protected $movimientoEnc;
+    protected $movimientoDet;
     protected $param;
     protected $ordenes;
 
@@ -29,7 +31,8 @@ class RepuestosAdmin extends BaseController
         $this->bodegas = new EstanteriaModel();
         $this->param = new ParamModel();
         $this->ordenes = new OrdenesModel();
-        $this->movimiento = new MoviEncModel();
+        $this->movimientoEnc = new MoviEncModel();
+        $this->movimientoDet = new MoviDetModel();
     }
     public function index()
     {
@@ -107,7 +110,7 @@ class RepuestosAdmin extends BaseController
         $idTra = $this->request->getPost('idTrab');
         $proveedor = $this->request->getPost('proveedor');
         $orden = $this->request->getPost('orden');
-        $dataMovimiento = [
+        $dataMovimientoenc = [
             'id_tercero' => $proveedor,
             'id_material' => $id,
             'id_vehiculo' => $orden,
@@ -115,14 +118,26 @@ class RepuestosAdmin extends BaseController
             'fecha_movimiento' => date('Y-m-d'),
             'estado' => $estado,
             'tipo_movimiento' => 67,
-            'usuario_crea' => 23
+            'usuario_crea' => session('id'),
         ];
         if ($this->respuestosAdmin->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
                 return '¡Se ha reestablecido el Repuesto!';
             } 
             if ($estado == 'C') {
-                $this->movimiento->save($dataMovimiento);
+                if($this->movimientoEnc->save($dataMovimientoenc)){
+                    $res = $this->respuestosAdmin->buscarRepuesto($id);
+                    $idEnc= $this->movimientoEnc->getInsertID();
+                    $dataMovimientodet = [
+                        'id_movimientoenc' => $idEnc,
+                        'id_material' => $id,
+                        'cantidad' => $res['cantidad_actual'],
+                        'costo' => 0,
+                        'usuario_crea' => session('id'),
+                    ];
+                   $this->movimientoDet->save($dataMovimientodet);
+                }
+                
                 return json_encode(1);
             } else {
                 return json_encode(2);

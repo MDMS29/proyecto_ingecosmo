@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="modal-footer" id="modalFooter">
-                <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btnAccionF" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -279,7 +279,7 @@
                     $('#modalConfirmarP').modal('hide')
                     contador = 0
                     tableRepuestosAdmin.ajax.reload(null, false)
-                    // return mostrarMensaje('success', '¡Se ha confirmado la devolucion del repuesto!')
+                    return mostrarMensaje('success', '¡Se ha confirmado la devolucion del repuesto!')
                 })
             }
         })

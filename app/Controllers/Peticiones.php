@@ -87,4 +87,39 @@ class Peticiones extends BaseController
         $this->peticiones->save($peticionSave);
         return json_encode($this->peticiones->getInsertID());
     }
+
+    public function responder()
+    {
+        $idPeticion = $this->request->getPost('id');
+        $asunto = $this->request->getPost('asunto');
+        $emisor = $this->request->getPost('emisor');
+        $fechaP = date('Y-m-d');
+        $horaP = date('h:m:s');
+        $txtDescripcion = $this->request->getPost('txtDescripcion');
+        $receptor = $this->request->getPost('receptor');
+        $respuesta = $this->request->getPost('respuesta');
+        $estado = $this->request->getPost('estado');
+        $fechaRes = date('Y-m-d');
+        $horaRes = date('h:m:s');
+
+        $usuarioCrea = session('id');
+
+        $peticionUpdate = [
+            'asunto' => $asunto,
+            'emisor' => $emisor,
+            'fecha_envio_pet' => $fechaP,
+            'hora_envio_pet' => $horaP,
+            'msg_emisor' => $txtDescripcion,
+            'receptor' => $receptor,
+            'tipo_validacion' => $estado,
+            'fecha_res_pet' => $fechaRes,
+            'hora_res_pet' => $horaRes,
+            'msg_receptor' => $respuesta,
+            'usuario_crea' => $usuarioCrea
+
+        ];
+        $this->peticiones->update($idPeticion, $peticionUpdate);
+        return $idPeticion;
+        return json_encode($this->peticiones->getInsertID());
+    }
 }

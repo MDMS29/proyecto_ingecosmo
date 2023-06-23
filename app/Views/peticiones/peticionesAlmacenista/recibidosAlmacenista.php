@@ -27,9 +27,9 @@
             </tbody>
         </table>
     </div>
-
-    <a href="<?= base_url('peticiones/enviadosAlmacenista') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
-</div>
+    <div class="footer-page mt-4">
+        <a href="<?= base_url('peticiones/enviadosAlmacenista') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
+    </div>
 </div>
 
 
