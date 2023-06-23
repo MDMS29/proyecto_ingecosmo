@@ -14,7 +14,7 @@ class MaterialesModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'observacion', 'usuario_crea', 'fecha_crea'];
 
     protected $useTimestamps = true;
 

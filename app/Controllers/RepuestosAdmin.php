@@ -9,6 +9,8 @@ use App\Models\TercerosModel;
 use App\Models\EstanteriaModel;
 use App\Models\ParamModel;
 use App\Models\OrdenesModel;
+use App\Models\MoviEncModel;
+use App\Models\MoviDetModel;
 
 class RepuestosAdmin extends BaseController
 {
@@ -16,6 +18,8 @@ class RepuestosAdmin extends BaseController
     protected $vehiculo;
     protected $proveedor;
     protected $bodegas;
+    protected $movimientoEnc;
+    protected $movimientoDet;
     protected $param;
     protected $ordenes;
 
@@ -27,6 +31,8 @@ class RepuestosAdmin extends BaseController
         $this->bodegas = new EstanteriaModel();
         $this->param = new ParamModel();
         $this->ordenes = new OrdenesModel();
+        $this->movimientoEnc = new MoviEncModel();
+        $this->movimientoDet = new MoviDetModel();
     }
     public function index()
     {
@@ -50,6 +56,17 @@ class RepuestosAdmin extends BaseController
         //$id = $this->request->getPost('id');
         $res = $this->respuestosAdmin->buscarRepuesto($id);
         return json_encode($res);
+    }
+
+    public function insertarO()
+    {
+        $id = $this->request->getPost('id');
+        $observacion = $this->request->getPost('observacion');
+        if ($this->respuestosAdmin->update($id, ['observacion' => $observacion])) {
+            return json_encode(1);
+        } else {
+            return json_encode(1);
+        }
     }
 
     public function insertar()
@@ -90,11 +107,40 @@ class RepuestosAdmin extends BaseController
     {
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('estado');
+        $idTra = $this->request->getPost('idTrab');
+        $proveedor = $this->request->getPost('proveedor');
+        $orden = $this->request->getPost('orden');
+        $dataMovimientoenc = [
+            'id_tercero' => $proveedor,
+            'id_material' => $id,
+            'id_vehiculo' => $orden,
+            'id_trabajador' => $idTra,
+            'fecha_movimiento' => date('Y-m-d'),
+            'estado' => $estado,
+            'tipo_movimiento' => 67,
+            'usuario_crea' => session('id'),
+        ];
         if ($this->respuestosAdmin->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
                 return '¡Se ha reestablecido el Repuesto!';
+            } 
+            if ($estado == 'C') {
+                if($this->movimientoEnc->save($dataMovimientoenc)){
+                    $res = $this->respuestosAdmin->buscarRepuesto($id);
+                    $idEnc= $this->movimientoEnc->getInsertID();
+                    $dataMovimientodet = [
+                        'id_movimientoenc' => $idEnc,
+                        'id_material' => $id,
+                        'cantidad' => $res['cantidad_actual'],
+                        'costo' => 0,
+                        'usuario_crea' => session('id'),
+                    ];
+                   $this->movimientoDet->save($dataMovimientodet);
+                }
+                
+                return json_encode(1);
             } else {
-                return '¡Se ha eliminado el Repuesto!';
+                return json_encode(2);
             }
         }
     }
