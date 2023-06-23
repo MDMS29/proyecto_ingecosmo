@@ -63,15 +63,30 @@ class MoviEncModel extends Model
 
     public function ordenesEntrega()
     {
-        $this->select("movimiento_enc.id_movimientoenc, concat(trabajadores.nombre_p , ' ' , trabajadores.nombre_s , ' ' , trabajadores.apellido_p , ' ' , trabajadores.apellido_s) as nombreTrabajador, materiales.nombre as nombreMate , materiales.precio_compra as subtotal, movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento,ordenes_servicio.n_orden as nombreOrden");
+        $this->select("movimiento_enc.id_movimientoenc, concat(trabajadores.nombre_p , ' ' , trabajadores.nombre_s , ' ' , trabajadores.apellido_p , ' ' , trabajadores.apellido_s) as nombreTrabajador, materiales.nombre as nombreMate , materiales.precio_compra as subtotal, movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento,ordenes_servicio.n_orden as nombreOrden, vehiculos.placa");
         $this->join('param_detalle', 'param_detalle.id_param_det = movimiento_enc.tipo_movimiento');
         $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc');
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material');
-        $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo', 'left');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = movimiento_enc.id_vehiculo', 'left');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo', 'left');
         $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '68');
         $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
+        $this->groupBy('movimiento_enc.id_vehiculo');
+        // $this->where('movimiento_enc.id_movimientoenc', $id);
         $data = $this->findAll();
+        return $data;
+    }
+
+    public function buscarOrden($id)
+    {
+        $this->select("trabajadores.id_trabajador, ordenes_servicio.id_orden");
+
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = movimiento_enc.id_vehiculo', 'left');
+        $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
+;
+        $this->where('movimiento_enc.id_movimientoenc', $id);
+        $data = $this->first();
         return $data;
     }
 
