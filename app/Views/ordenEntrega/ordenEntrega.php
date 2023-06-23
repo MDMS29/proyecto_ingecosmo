@@ -295,7 +295,7 @@
                         success: function(data) {
                             $.ajax({
                                 type: "POST",
-                                url: "<?= base_url('insumos/buscarMateriales/') ?>" + id,
+                                url: "<?= base_url('insumo/buscarMateriales/') ?>" + id,
                                 dataType: "json",
                                 success: function(data) {
                                     console.log(data)

@@ -223,4 +223,11 @@ class MaterialesModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    
+    public function buscarDetallesMaterial($id){
+        $this->select("*");
+        $this->where('id_material',$id);
+        $data = $this->findAll();
+        return $data;
+     }
 }

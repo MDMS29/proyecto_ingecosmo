@@ -32,5 +32,6 @@ class MoviDetModel extends Model
         $data = $this->findAll();
         return $data;
      }
+     
 
 }
