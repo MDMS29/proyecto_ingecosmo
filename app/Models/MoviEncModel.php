@@ -40,20 +40,11 @@ class MoviEncModel extends Model
         $this->orWhere('movimiento_enc.tipo_movimiento', '58');
         $this->orWhere('movimiento_enc.tipo_movimiento', '59');
         // $this->orderBy('id_movimientoenc', ' desc'); 
-        $this->groupBy('id_movimientoenc'); 
+        $this->groupBy('id_movimientoenc');
         $data = $this->findAll();
         return $data;
     }
 
-    public function traerDetalles()
-    {
-        $this->select('movimiento_enc.* ,ordenes_servicio.n_orden as orden');
-        $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo');
-        
-
-        $datos = $this->first();
-        return $datos;
-    }
 
     public function historialMateriales()
     {
@@ -78,8 +69,7 @@ class MoviEncModel extends Model
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material');
         $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo', 'left');
         $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
-        $this->where('movimiento_enc.tipo_movimiento', '11');
-        $this->orWhere('movimiento_enc.tipo_movimiento', '12');
+        $this->where('movimiento_enc.tipo_movimiento', '68');
         $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
         $data = $this->findAll();
         return $data;
@@ -90,9 +80,18 @@ class MoviEncModel extends Model
         $this->select('materiales.nombre, movimiento_det.cantidad, movimiento_det.costo, movimiento_enc.fecha_movimiento');
         $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc', 'left');
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material', 'left');
-        $this->where('movimiento_enc.id_vehiculo','4');
+        $this->where('movimiento_enc.id_vehiculo', '4');
         // $this->orderBy('movimiento_det.item', 'asc');
         $data = $this->findAll();
         return $data;
+    }
+
+
+    public function traerDetalles()
+    {
+        $this->select('movimiento_enc.* ,ordenes_servicio.n_orden as orden');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_vehiculo = movimiento_enc.id_vehiculo');
+        $datos = $this->first();
+        return $datos;
     }
 }

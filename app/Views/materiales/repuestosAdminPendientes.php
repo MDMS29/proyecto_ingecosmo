@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="modal-footer" id="modalFooter">
-                <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btnAccionF" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

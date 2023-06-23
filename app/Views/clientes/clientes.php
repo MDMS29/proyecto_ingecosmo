@@ -118,8 +118,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnAccionF" id="btnGuardar">Agregar</button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -187,8 +187,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
-                    <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
+                    <button type="button"  class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
             </div>
         </div>
@@ -244,8 +244,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
-                <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
+                <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
             </div>
         </div>
     </div>
@@ -310,7 +310,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>
@@ -345,7 +345,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
             </div>
         </div>
     </div>

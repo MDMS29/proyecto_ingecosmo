@@ -24,7 +24,7 @@
         </table>
     </div>
     <div class="footer-page">
-        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
     </div>
 </div>
 
@@ -38,8 +38,7 @@
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"><!-- TEXTO DINAMICO--></h1>
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal"><!-- TEXTO DINAMICO--></span></h1>
                     </div>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
@@ -119,7 +118,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -134,8 +133,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Telefonos</h1>
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal">Ver Telefonos</span></h1>
                     </div>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
                 </div>
@@ -159,7 +157,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -174,8 +172,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <i style="color:#007BFF" class="bi bi-eye-fill fs-4"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Correos</h1>
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal">Ver Correos</span></h1>
                     </div>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
                 </div>
@@ -199,7 +196,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verTrabajador">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -226,8 +223,8 @@
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
-                <button id="btnNo" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
+                <button id="btnNo" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnSi" class="btn btnRedireccion">Reestablecer</a>
             </div>
 
         </div>

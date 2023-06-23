@@ -229,7 +229,7 @@ class Insumos extends BaseController
         }
     }
 
-    public function buscarInsumo($id_material, $nombre)
+    public function buscarInsumo($id_material, $nombre='')
     {
         $array = array();
         if ($id_material != 0) {

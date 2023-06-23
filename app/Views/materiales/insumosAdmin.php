@@ -97,7 +97,6 @@
                 <span class="input-group-text" id="basic-addon1">$</span>
                 <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
               </div>
-
             </div>
           </div>
 
@@ -122,8 +121,8 @@
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btnAccionF" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnRedireccion " id="btnAgregar">Agregar</button>
+          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
       </div>
     </div>
@@ -156,8 +155,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos()">Cerrar</button>
-        <button type="button" class="btn btnRedireccion " id="btnRestock">Guardar</button>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos()">Cerrar</button>
+        <button type="button" class="btn btnAccionF" id="btnRestock">Guardar</button>
       </div>
     </div>
   </div>
