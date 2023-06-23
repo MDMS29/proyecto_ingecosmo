@@ -100,7 +100,7 @@
                     </a>
                 </li>
 
-                <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
+                <?php if (session('idRol') == 1 ) { ?>
                     <li>
                         <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
                             <p id="pa">Trabajadores</p>
@@ -156,7 +156,7 @@
                             <p id="pa">Peticiones</p>
                         </a>
                     </li>
-                <?php } else if (session('idRol') == 3) { ?>
+                <?php } else if (session('idRol') == 3 || session('idRol') == 4 ) { ?>
                     <li>
                         <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                             <p id="pa">Repuestos</p>

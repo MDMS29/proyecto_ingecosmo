@@ -34,9 +34,10 @@
     </div>
 </div>
 
+<!--Editar-Agregar -->
 <form autocomplete="off" id="formularioOrdenes">
     <div class="modal fade" id="ordenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <input type="text" name="id" id="id" value="0" hidden>
+        <input type="text" name="id" id="id" hidden>
         <input type="text" name="tp" id="tp" hidden>
         <div class="modal-dialog  modal-dialog-scrollable modal-lg">
             <div class="body-R">
@@ -56,7 +57,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio</label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
-                                        <option selected>--Seleccione--</option>
+                                        <option selected value="">--Seleccione--</option>
                                         <?php foreach ($ordenes as $dato) { ?>
                                             <option value="<?= $dato['id_orden'] ?>"><?= $dato['n_orden'] ?></option>
                                         <?php } ?>
@@ -64,25 +65,21 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="ordenesEnt" class="col-form-label">N° Orden Entrega</label>
-                                    <input type="text" value="1" name="ordenesEnt" class="form-control" id="ordenesEnt" disabled>
+                                    <label for="exampleDataList" class="col-form-label">Trabajador:</label>
+                                    <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
+                                        <option selected value="">--Seleccione--</option>
+                                        <?php foreach ($trabajadores as $dato) { ?>
+                                            <option value="<?= $dato['id_trabajador'] ?>"><?= $dato['nombreTrabajador'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
-                            </div>
 
-                            <div class="mb-3" style="width: 100%">
-                                <label for="exampleDataList" class="col-form-label">Trabajador:</label>
-                                <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
-                                    <option selected>--Seleccione--</option>
-                                    <?php foreach ($trabajadores as $dato) { ?>
-                                        <option value="<?= $dato['id_trabajador'] ?>"><?= $dato['nombreTrabajador'] ?></option>
-                                    <?php } ?>
-                                </select>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label for="tipoMat" class="col-form-label">Tipo de Material:</label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipoMat">
-                                        <option selected>--Seleccione--</option>
+                                        <option selected value="">--Seleccione--</option>
                                         <?php foreach ($tipo as $dato) { ?>
                                             <option value="<?= $dato['id_param_det'] ?>"><?= $dato['nombre'] ?></option>
                                         <?php } ?>
@@ -158,7 +155,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnAccionF" id="btnGuardar">Crear orden</button>
                     </div>
                 </div>
@@ -252,7 +249,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-bs-target="#editarOrden" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar orden"></button>' +
+                        '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ' , 2 )" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
                         '<button class="btn" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
 
 
@@ -267,35 +264,65 @@
         },
     });
 
-    function limpiarCampos() {
+    // function limpiarCampos() {
 
-        $("#tipo").val('--Seleccione--');
-        $("#tipoCate").val('--Seleccione--');
-        $("#trabajadores").val('--Seleccione--');
-        $("#ordenes").val('--Seleccione--');
-    }
+    //     $("#tipo").val('');
+    //     $("#tipoCate").val('');
+    //     $("#trabajadores").val('');
+    //     $("#ordenes").val('');
+
+
+    // }
 
     function seleccionarOrden(id, tp) {
         if (tp == 2) {
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url('ordenEntrega/buscarOrden/') ?>" + id + '/',
+                dataType: "json",
+                success: function(rs) {
+                    console.log(rs)
+                    $('#id').val(id)
+                    $('#tp').val(2)
 
+                    $('#ordenes').val(rs['id_orden'])
+                    $('#trabajadores').val(rs['id_trabajador'])
+
+                    $.ajax({
+                        type: "POST",
+                        url: "<?= base_url('ordenEntrega/buscarDetallesOrden/') ?>" + id,
+                        dataType: "json",
+                        success: function(data) {
+                            $.ajax({
+                                type: "POST",
+                                url: "<?= base_url('insumos/buscarMateriales/') ?>" + id,
+                                dataType: "json",
+                                success: function(data) {
+                                    console.log(data)
+                                }
+                            })
+                            console.log(data)
+                        }
+
+                    })
+
+                    $('#tituloModal').text('Editar')
+                    $('#logoModal').attr('src', '<?= base_url('img/editar1.png') ?>')
+                    $('#logoModal').attr('width', '25')
+                    $('#btnGuardar').text('Actualizar')
+                }
+            })
         } else {
+            $('#tituloModal').text('Nueva Orden')
+            $('#logoModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
+            $('#logoModal').attr('width', '25')
             $("#tp").val(1)
             $("#id").val(0)
-            // $("#ordenes").val('')
-            // $("#ordenesEnt").val('')
-            // $("#trabajadores").val('')
+            $('#btnGuardar').text('Crear Nueva Orden')
         }
-        // dataURL = "<?php echo base_url('/ordenEntrega/detallesOrden'); ?>" + "/" + id;
-        // $.ajax({
-        //     type: "POST",
-        //     url: dataURL,
-        //     dataType: "json",
-        //     success: function(rs) {
-        //         $("#idMovimientoEnc").val(rs[0]['id_movimientoEnc']);
-        //         $("#numeroOrden").val(rs[0]['orden']);
-        //     }
-        // })
+
     }
+
     $('#tipoMat').on('change', function(e) {
         id = $('#tipoMat').val()
         verTipoCate(id, '')
@@ -419,6 +446,12 @@
             cantidad: 0,
             precio: 0
         }
+
+        $("#tipoMat").val('');
+        $("#tipoCate").val('');
+        $("#material").val('');
+        $("#cantidadActual").val('');
+        $("#cantidadUsar").val('');
     })
 
     function mostrarMateriales() {
@@ -442,6 +475,7 @@
             }
         }
         $('#bodyTable').html(cadena)
+
         // $('#tableOrdenes')
     }
 
@@ -469,41 +503,41 @@
                 ordenesEnt,
                 trabajador
             },
-            dataType: 'json',
-            success: function(data) {
-                if (data == 2) {
-                    return mostrarMensaje('error', '¡Ha ocurrido un error!')
-                } else {
-                    materialesOrden.forEach(item => {
-                        $.ajax({
-                            type: 'POST',
-                            url: '<?= base_url('ordenEntrega/insertarDet') ?>',
-                            data: {
-                                tp,
-                                idMovEnc: data,
-                                idMaterial: item.idMaterial,
-                                item: item.item,
-                                cantidad: item.cantidad,
-                                subtotal: item.subtotal
-                            },
-                            dataType: 'json',
-                            success: function(data) {
-                                if (data == 2) {
-                                    return mostrarMensaje('error', '¡Ha ocurrido un error!')
-                                }
+            dataType: 'json'
+        }).done(function(data) {
+            if (data == 2) {
+                return mostrarMensaje('error', '¡Ha ocurrido un error!')
+            } else {
+                materialesOrden.forEach(item => {
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= base_url('ordenEntrega/insertarDet') ?>',
+                        data: {
+                            tp,
+                            idMovEnc: data,
+                            idMaterial: item.idMaterial,
+                            item: item.item,
+                            cantidad: item.cantidad,
+                            subtotal: item.subtotal
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data == 2) {
+                                return mostrarMensaje('error', '¡Ha ocurrido un error!')
                             }
-                        })
+                        }
                     })
-                }
-                if (tp == 1) {
-                    mostrarMensaje('success', '¡Se ha Guardado la Orden de Entrega!')
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 1000);
-                } else {
-                    mostrarMensaje('success', '¡Se ha Actualizado la Orden de Entrega!')
-                }
+                })
             }
+            if (tp == 1) {
+                mostrarMensaje('success', '¡Se ha Guardado la Orden de Entrega!')
+                $('#ordenModal').modal('hide')
+            } else {
+                mostrarMensaje('success', '¡Se ha Actualizado la Orden de Entrega!')
+                $('#ordenModal').modal('hide')
+            }
+            contador = 0
+            tablaHistorial.ajax.reload(null, false)
         })
     })
 </script>

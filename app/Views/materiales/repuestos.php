@@ -33,9 +33,10 @@
   </div>
 
   <div class="footer-page">
-    <a href="<?php echo base_url('/repuestos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
     <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
       Agregar</button>
+
+    <a href="<?php echo base_url('/repuestos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
   </div>
 </div>
 
@@ -151,7 +152,7 @@
         <div class="d-flex column-gap-3" style="width: 100%">
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Nombre:</label>
-            <input type="text" class="form-control" id="nombre1" name="nombre1" onInput="validarInput()" placeholder="" disabled>
+            <input type="text" class="form-control" id="nombre1" name="nombre1" placeholder="" disabled>
             <small id="msgEditar" class="invalido3"></small>
           </div>
 
@@ -203,7 +204,7 @@
   </div>
 </div>
 
-<!-- Modal usar-->
+<!-- MODAL USAR-->
 <div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <form id="formularioUsar" autocomplete="off">
 
@@ -212,7 +213,7 @@
       <div class="modal-content" id="modalContentUsar">
 
         <div class="modal-header flex justify-content-between align-items-center w-100">
-          <input type="text" name="idMaterial" id="idMaterial">
+          <input type="text" name="idMaterial" id="idMaterial" hidden>
           <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
           <div class="d-flex align-items-center justify-content-center" style="width:auto;">
             <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
@@ -251,39 +252,46 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 50%">
               <label for="exampleDataList" class="col-form-label">Nombre del repuesto:</label>
-              <input class="form-control" id="nombreRepuesto" name="nombreRepuesto" placeholder="" disabled>
+              <input class="form-control" id="nombreRepuesto" name="nomRepuesto" placeholder="" disabled>
             </div>
 
             <div class="mb-3" style="width: 50%">
               <label for="exampleDataList" class="col-form-label">Proveedor:</label>
-              <input class="form-control" id="Proveedor" name="Proveedor" placeholder="" disabled>
+              <input class="form-control" id="proveedor2" name="proveedor" placeholder="" disabled>
             </div>
           </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
 
             <div class="mb-3" style="width: 50%;">
-              <label for="exampleDataList" class="col-form-label">Placa:</label>
+              <label for="exampleDataList" class="col-form-label">Orden de trabajo:</label>
               <div class="input-group mb-3">
-                <input class="form-control" type="number" id="Placa" name="Placa" disabled>
+                <input class="form-control" type="text" id="ordenTrabajo2" name="ordenTrabajo" disabled>
               </div>
             </div>
+
+            <div class="mb-3" style="width: 50%;">
+              <label for="exampleDataList" class="col-form-label">Placa:</label>
+              <div class="input-group mb-3">
+                <input class="form-control" type="text" id="placa2" name="placa" disabled>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="d-flex column-gap-3" style="width: 100%">
 
             <div class="mb-3" style="width: 50%">
               <label for="exampleDataList" class="col-form-label">Cantidad existente:</label>
               <div>
-                <input type="number" class="form-control" id="cantidadExistente" name="cantidadExistente" onInput="validarInput()" placeholder="">
-                <small id="msgUsar" class="invalido"></small>
+                <input type="number" class="form-control" id="cantidadExistente" name="cantidadExistente" onInput="validarInput()" placeholder="" disabled>
               </div>
             </div>
-          </div>
 
-          <div class="d-flex column-gap-3" style="width: 50%">
-
-            <div class="mb-3" style="width: 97%">
+            <div class="mb-3" style="width: 50%">
               <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
               <div>
-                <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
+                <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" placeholder="">
                 <small id="msgUsar" class="invalido"></small>
               </div>
             </div>
@@ -308,6 +316,16 @@
 
     $("#nombre1").val('');
     $("#nombre").val('');
+    $("#proveedor").val('');
+    $("#cantidad").val('');
+    $("#ordenTrabajo").val('');
+    $("#placa").val('');
+
+
+    $("#cantidadUsar").val('');
+    $('#msgUsar').text('')
+    $('#msgAgregar').text('')
+    $("#imagenDetalle").attr('src', '<?php echo base_url('/img/masDetalles.png') ?>');
   }
 
 
@@ -406,39 +424,37 @@
   }
 
   function usarMaterial(id_material) {
-    dataURL = "<?php echo base_url('/materiales/usarMaterial'); ?>" + "/" + id_material;
+    dataURL = "<?php echo base_url('/materiales/usarRepuesto'); ?>" + "/" + id_material;
     $.ajax({
       type: "POST",
       url: dataURL,
       dataType: "json",
       success: function(rs) {
         $("#idMaterial").val(rs[0]['id_material']);
-        $("#nombreInsumo").val(rs[0]['nombre']);
+        $("#nombreRepuesto").val(rs[0]['nombre']);
+        $("#proveedor2").val(rs[0]['nomProveedor']);
+        $("#ordenTrabajo2").val(rs[0]['numOrden']);
+        $("#placa2").val(rs[0]['placaVeh']);
         $("#cantidadExistente").val(rs[0]['cantidad_actual']);
-        $("#PrecioDeVenta").val(rs[0]['precio_venta']);
-        $("#cantidadVendida").val(rs[0]['cantidad_vendida']);
-
       }
     })
   }
 
-  // operaciones con el input usar
 
+  // operaciones con el input usar
   $('#cantidadUsar').on('input', function(e) {
     idMaterial = $("#idMaterial").val()
-
     cantidad = $('#cantidadUsar').val()
-    valorVenta = $("#PrecioDeVenta").val()
     cantidadExistente = $('#cantidadExistente').val()
     if (parseInt(cantidad) > parseInt(cantidadExistente)) {
       $('#msgUsar').text(' *Valor invalido*')
       $("#btnValidar").attr('disabled', '');
       validUsar = false
-      $('#subtotal').val(0)
+      // $('#subtotal').val(0)
     } else {
       $('#msgUsar').text('')
       validUsar = true
-      $('#subtotal').val(cantidad * valorVenta)
+      // $('#subtotal').val(cantidad * valorVenta)
     }
   })
 
@@ -450,27 +466,37 @@
     e.preventDefault()
 
     idMaterial = $("#idMaterial").val()
-    nombre = $("#nombre").val()
-    proveedor = $("#proveedor").val()
-    cantidad = $("#cantidad").val()
+    cantidadExistente = $("#cantidadExistente").val()
+    cantidad = $("#cantidadUsar").val()
     ordenTrabajo = $("#ordenTrabajo").val()
     placa = $("#placa").val()
     idCategoria = $("#idCategoria").val()
-    console.log(idMaterial)
-    if ([nombre, proovedor, cantidad, precioVenta, ordenTrabajo, placa, bodega].includes("")) {
+
+    if ([cantidad].includes("")) {
       return mostrarMensaje('error', '¡Campos Vacios!')
     }
-    $.post({
-      url: '<?php echo base_url('/usar') ?>',
+
+    console.log(idMaterial)
+    obj = {
+      idMaterial,
+      cantidadExistente,
+      cantidad,
+      placa,
+      ordenTrabajo
+    }
+    console.table(obj);
+
+    $.ajax({
+      type: 'POST',
+      url: "<?php echo base_url('repuestos/usar') ?>",
       data: {
         idMaterial,
-        trabajador,
-        ordenes,
-        precioVenta,
         cantidadExistente,
-        cantidadUsar,
-        subtotal
+        cantidad,
+        placa,
+        ordenTrabajo
       },
+      dataType: "json",
       success: function(data) {
         if (data == 1) {
           mostrarMensaje('success', '¡Insumo usado con exito!')
@@ -481,7 +507,8 @@
           return mostrarMensaje('error', '¡Ha ocurrido un error!')
         }
       }
-    })
+    });
+
 
   })
 </script>

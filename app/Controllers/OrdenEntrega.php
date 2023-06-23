@@ -40,9 +40,26 @@ class OrdenEntrega extends BaseController
 
     public function obtenerOrdenEntrega()
     {
+
         $res = $this->ordenEntrega->ordenesEntrega();
         return json_encode($res);
     }
+
+    public function buscarOrden($id)
+    {
+        $array = array();
+        $res = $this->ordenEntrega->buscarOrden($id);
+        array_push($array, $res);
+        return json_encode($res);
+    }
+    public function buscarDetallesOrden($id)
+    {
+        $array = array();
+        $res = $this->movDet->buscarDetallesOrden($id);
+        array_push($array, $res);
+        return json_encode($res);
+    }
+    
     public function index()
     {
         $trabajadores = $this->trabajadores->trabajadoresOrdenes();

@@ -14,7 +14,7 @@ class MaterialesModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'observacion', 'usuario_crea', 'fecha_crea'];
 
     protected $useTimestamps = true;
 
@@ -74,6 +74,17 @@ class MaterialesModel extends Model
     public function usarInsumo($id_material)
     {
         $this->select('materiales.*');
+        $this->where('id_material', $id_material);
+        $datos = $this->first(); 
+        return $datos;
+    }
+
+    public function usarRepuesto($id_material)
+    {
+        $this->select('materiales.*, terceros.razon_social as nomProveedor, ordenes_servicio.n_orden as numOrden, vehiculos.placa as placaVeh');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = materiales.id_orden');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo');
+        $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor');
         $this->where('id_material', $id_material);
         $datos = $this->first(); 
         return $datos;

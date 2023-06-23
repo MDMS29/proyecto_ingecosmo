@@ -60,6 +60,16 @@ class Materiales extends BaseController
         echo json_encode($returnData);
     }
 
+    public function usarRepuesto($id_material)
+    {
+        $returnData = array();
+        $materiales_ = $this->materiales->usarRepuesto($id_material);
+        if (!empty($materiales_)) {
+            array_push($returnData, $materiales_);
+        }
+        echo json_encode($returnData);
+    }
+
 
 
 

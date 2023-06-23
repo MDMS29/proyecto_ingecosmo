@@ -26,6 +26,11 @@ class MoviDetModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
- 
+     public function buscarDetallesOrden($id){
+        $this->select("*");
+        $this->where('id_movimientoenc',$id);
+        $data = $this->findAll();
+        return $data;
+     }
 
 }

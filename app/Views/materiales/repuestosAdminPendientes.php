@@ -149,6 +149,7 @@
     })
 
     function seleccionarRepuesto(id, tp) {
+        console.log(id)
         if (tp == 2) {
             $.ajax({
                 type: 'POST',
@@ -228,7 +229,7 @@
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
         tp = $('#tp').val()
         console.log(tp) //
-        if (tp==2){
+        if (tp == 2) {
             $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
         } else {
             $(this).find('#btnSi').attr('onclick', `RepuestoConfirmado(${$(e.relatedTarget).data('href')})`)
@@ -247,23 +248,40 @@
             $('#modalConfirmarP').modal('hide')
             contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
-            return  mostrarMensaje('success', '¡Se ha reestablecido el repuesto!')
+            return mostrarMensaje('success', '¡Se ha reestablecido el repuesto!')
         })
     }
 
     function RepuestoConfirmado(id) {
+        console.log(id)
+        id,
+        proveedor,
+        orden,
+        idTrab = '<?php echo session('id') ?>'
         $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
-            data: {
-                id,
-                estado: 'C' //Estado del repuesto: confirmado
+            type: 'POST',
+            url: "<?php echo base_url('/repuestosAdmin/buscarRepuesto/') ?>" + id,
+            dataType: 'json',
+            success: function(data) {
+                proveedor = data['razon_social']
+                orden = data['numeroOrden'] 
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
+                    data: {
+                        id,
+                        orden,
+                        idTrab,
+                        proveedor,
+                        estado: 'C' //Estado del repuesto: confirmado
+                    }
+                }).done(function() {
+                    $('#modalConfirmarP').modal('hide')
+                    contador = 0
+                    tableRepuestosAdmin.ajax.reload(null, false)
+                    return mostrarMensaje('success', '¡Se ha confirmado la devolucion del repuesto!')
+                })
             }
-        }).done(function() {
-            $('#modalConfirmarP').modal('hide')
-            contador = 0
-            tableRepuestosAdmin.ajax.reload(null, false)
-            return mostrarMensaje('success', '¡Se ha confirmado la devolucion del repuesto!')
         })
     }
     $('#btnNo').click(function() {
