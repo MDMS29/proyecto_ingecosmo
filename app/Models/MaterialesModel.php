@@ -79,6 +79,17 @@ class MaterialesModel extends Model
         return $datos;
     }
 
+    public function usarRepuesto($id_material)
+    {
+        $this->select('materiales.*, terceros.razon_social as nomProveedor, ordenes_servicio.n_orden as numOrden, vehiculos.placa as placaVeh');
+        $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = materiales.id_orden');
+        $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo');
+        $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor');
+        $this->where('id_material', $id_material);
+        $datos = $this->first(); 
+        return $datos;
+    }
+
     public function traerMateriales($id_material)
     {
         $this->select('materiales.*');
