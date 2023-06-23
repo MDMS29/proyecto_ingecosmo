@@ -28,37 +28,34 @@ class PeticionesModel extends Model
 
     public function obtenerPeticiones($tp)
     {
-        $this->select("peticiones.*, concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ', usuarios.apellido_p, ' ', usuarios.apellido_s) as nomEmisor,concat(vw_usuarios.nombre_p,' ', vw_usuarios.nombre_s, ' ', vw_usuarios.apellido_p, ' ', vw_usuarios.apellido_s) as nomRecpetor, param_detalle.nombre as estado");
-        $this->join('usuarios','peticiones.emisor=usuarios.id_usuario ', 'left' );
+        $this->select("peticiones.*, concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ', usuarios.apellido_p, ' ', usuarios.apellido_s) as nomEmisor,concat(vw_usuarios.nombre_p,' ', vw_usuarios.nombre_s, ' ', vw_usuarios.apellido_p, ' ', vw_usuarios.apellido_s) as nomReceptor, param_detalle.nombre as estado");
+        $this->join('usuarios', 'peticiones.emisor=usuarios.id_usuario ', 'left');
         $this->join('vw_usuarios', 'vw_usuarios.id_usuario=peticiones.receptor', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
-
-        if ($tp==1) {
-            $this->where('peticiones.tipo_validacion', '64');
+        switch ($tp) {
+            case 2:
+                $this->where('peticiones.receptor', session('id'));
+                break;
+            case 3:
+                $this->where('peticiones.emisor', session('id'));
+                $this->where('peticiones.tipo_validacion', '64');
+                break;
+            case 4:
+                $this->where('peticiones.emisor', session('id'));
+                $this->where('peticiones.tipo_validacion !=' , '64');
+                break;
+            default:
+                $this->where('peticiones.tipo_validacion', '64');
+                break;
         }
-        if($tp==2){
-            $this->where('peticiones.receptor', session('id'));
-            $this->where('peticiones.tipo_validacion', '65');
-            $this->orWhere('peticiones.tipo_validacion', '66');
-        }
-        if($tp==3){
-            $this->where('peticiones.emisor', session('id'));
-            $this->where('peticiones.tipo_validacion', '64');
-        }
-        if($tp==4){
-            $this->where('peticiones.emisor', session('id'));
-            $this->where('peticiones.tipo_validacion', '65');
-            $this->orWhere('peticiones.tipo_validacion', '66');
-        }
-        // $this->where('peticiones.tipo_validacion', $estado);
         $data = $this->findAll();
         return $data;
     }
 
     public function buscarPeticion($id)
     {
-        $this->select("peticiones.*, concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ', usuarios.apellido_p, ' ', usuarios.apellido_s) as nomEmisor,concat(vw_usuarios.nombre_p,' ', vw_usuarios.nombre_s, ' ', vw_usuarios.apellido_p, ' ', vw_usuarios.apellido_s) as nomRecpetor, param_detalle.nombre as estado");
-        $this->join('usuarios','peticiones.emisor=usuarios.id_usuario ', 'left' );
+        $this->select("peticiones.*, concat(usuarios.nombre_p,' ', usuarios.nombre_s, ' ', usuarios.apellido_p, ' ', usuarios.apellido_s) as nomEmisor,concat(vw_usuarios.nombre_p,' ', vw_usuarios.nombre_s, ' ', vw_usuarios.apellido_p, ' ', vw_usuarios.apellido_s) as nomReceptor, param_detalle.nombre as estado");
+        $this->join('usuarios', 'peticiones.emisor=usuarios.id_usuario ', 'left');
         $this->join('vw_usuarios', 'vw_usuarios.id_usuario=peticiones.receptor', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
         $this->where('peticiones.id_peticion', $id);

@@ -66,11 +66,12 @@ class Peticiones extends BaseController
 
     public function insertar()
     {
+        date_default_timezone_set('America/Bogota');
         $idPeticion = $this->request->getPost('id');
         $asunto = $this->request->getPost('asunto');
         $emisor = $this->request->getPost('emisor');
         $fechaP = date('Y-m-d');
-        $horaP = date('h:m:s');
+        $horaP = date("H:i:s");
         $txtDescripcion = $this->request->getPost('txtDescripcion');
 
         $usuarioCrea = session('id');
@@ -90,23 +91,23 @@ class Peticiones extends BaseController
 
     public function responder()
     {
+        date_default_timezone_set('America/Bogota');
         $idPeticion = $this->request->getPost('id');
         $asunto = $this->request->getPost('asunto');
-        $emisor = $this->request->getPost('emisor');
         $fechaP = date('Y-m-d');
-        $horaP = date('h:m:s');
+        $horaP = date("H:i:s");
+
         $txtDescripcion = $this->request->getPost('txtDescripcion');
         $receptor = $this->request->getPost('receptor');
         $respuesta = $this->request->getPost('respuesta');
         $estado = $this->request->getPost('estado');
         $fechaRes = date('Y-m-d');
-        $horaRes = date('h:m:s');
+        $horaRes = date("H:i:s");
 
         $usuarioCrea = session('id');
 
         $peticionUpdate = [
             'asunto' => $asunto,
-            'emisor' => $emisor,
             'fecha_envio_pet' => $fechaP,
             'hora_envio_pet' => $horaP,
             'msg_emisor' => $txtDescripcion,

@@ -28,14 +28,73 @@
         </table>
     </div>
     <div class="footer-page mt-4">
+
+        <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#agregarPeticion" onclick="agregarPeticion()"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">Agregar</button>
+
         <a href="<?= base_url('peticiones/enviadosAlmacenista') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
     </div>
 </div>
 
 
+<form autocomplete="off" id="formularioAlmacenista" enctype="multipart/form-data">
+    <div class="modal fade" id="agregarPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input hidden id="tp" name="tp">
+        <input hidden id="id" name="id">
+        <div class="modal-dialog modal-lg">
+            <div class="body">
+                <div class="modal-content">
+                    <div class="modal-header flex align-items-center gap-3">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2">
+                            <img id="imgModal" src="<?= base_url('img/plus-b.png') ?>" width="25">
+                            <span id="tituloModal">Agregar</span>
+                        </h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos()">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                    <input type="text" name="asunto" class="form-control" id="asunto">
+                                </div>
+                            </div>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="emisor" class="col-form-label">Emisor:</label>
+                                    <input type="text" name="emisor" class="form-control" id="emisor" disabled>
+                                </div>
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                    <input disabled type="text" name="fechaP" class="form-control" id="fechaP">
+                                </div>
+
+                            </div>
+                            <br>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%">
+                                    <details open>
+                                        <summary class="col-form-label">Descripcion del Envio</summary>
+                                        <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
+                                    </details>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <!-- modal Ver Peticion -->
 <div class="modal fade" id="verPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <input type="text" name="id" id="id" hidden>
+    <input type="text" name="id" id="id2" hidden>
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="body-R">
             <div class="modal-content" style="height: 100%;">
@@ -119,7 +178,16 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     var ContadorPRC = 0; //Contador DataTable
+    // para asignarle la fecha actual al input date
+    var fechaActual = new Date();
+    var formattedDate = fechaActual.toISOString().substring(0, 10);
 
+    function limpiarCampos() {
+        $('#asunto').text('');
+        $('#emisor').text('');
+        $('#fechaP').text('');
+        $('#txtDescripcion').text('');
+    }
 
     // Tabla   
     var tablaAdminEnviados = $("#tablePeticiones").DataTable({
@@ -132,7 +200,7 @@
             dataSrc: "",
         },
         order: [
-            [3, 'desc']
+            [0, 'desc']
         ],
         columns: [{
                 data: null,
@@ -154,7 +222,7 @@
                 data: 'hora_envio_pet'
             },
             {
-                data: 'nomRecpetor'
+                data: 'nomReceptor'
             },
             {
                 data: 'fecha_res_pet'
@@ -188,16 +256,69 @@
         }).done(function(res) {
             $('#tituloModal2').text('Ver Peticion - ' + id)
             $('#fechaRespuesta').attr('disabled', '')
-            $('#id').val(res[0]['id_peticion'])
+            $('#id2').val(res[0]['id_peticion'])
             $('#asunto2').val(res[0]['asunto'])
             $('#emisor2').val(res[0]['nomEmisor'])
             $('#fechaP2').val(res[0]['fecha_envio_pet'])
             $('#horaP2').val(res[0]['hora_envio_pet'])
             $('#txtDescripcion2').val(res[0]['msg_emisor'])
-            $('#receptor2').val(res[0]['nomRecpetor'])
+            $('#receptor2').val(res[0]['nomReceptor'])
             $('#estado2').val(res[0]['tipo_validacion'])
             $('#fechaRespuesta2').val(res[0]['fecha_res_pet'])
             $('#respuesta2').val(res[0]['msg_receptor'])
         })
     }
+
+    function agregarPeticion() {
+        // datos vacios pero del agregar
+        $('#tituloModal').text(`Agregar`)
+        $('#ojoPeticion').attr('hidden', '')
+        $('#imgModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
+        $('#tp').val(1)
+        $('#id').val(0)
+        $('#asunto').val('')
+        $('#asunto').removeAttr('disabled')
+        $('#emisor').val("<?php echo session('nomCompleto') ?>")
+        $('#fechaP').val(formattedDate)
+        $('#txtDescripcion').val('')
+        $('#txtDescripcion').removeAttr('disabled')
+        $('#btnGuardar').removeAttr('hidden', '')
+    }
+
+       //Envio de formulario
+       $('#formularioAlmacenista').on('submit', function(e) {
+        e.preventDefault()
+        id = $('#id').val()
+        asunto = $('#asunto').val()
+        emisor = "<?php echo session('id') ?>"
+        fechaP = $('#fechaP').val()
+        horaP = $('#horaP').val()
+        txtDescripcion = $('#txtDescripcion').val()
+        //Control de campos vacios
+        if ([asunto, txtDescripcion].includes('')) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('peticiones/insertar') ?>',
+                type: 'POST',
+                data: {
+                    id,
+                    asunto,
+                    emisor,
+                    fechaP,
+                    horaP,
+                    txtDescripcion
+                },
+                success: function(idPet) {
+                    mostrarMensaje('success', '¡Se ha enviado la Peticion!')
+                }
+            }).done(function(data) {
+                limpiarCampos()
+                $('#agregarPeticion').modal('hide')
+                tablePeticiones.ajax.reload(null, true); //Recargar tabla
+                ContadorPRC = 0
+                $('#btnGuardar').removeAttr('disabled') //jumm
+            });
+        };
+    })
 </script>

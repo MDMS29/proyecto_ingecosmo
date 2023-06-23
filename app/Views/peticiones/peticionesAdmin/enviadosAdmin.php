@@ -131,7 +131,7 @@
             dataSrc: "",
         },
         order: [
-            [3, 'desc']
+            [0, 'desc']
         ],
         columns: [{
                 data: null,
@@ -153,7 +153,7 @@
                 data: 'hora_envio_pet'
             },
             {
-                data: 'nomRecpetor'
+                data: 'nomReceptor'
             },
             {
                 data: 'fecha_res_pet'
@@ -168,7 +168,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#verPeticion" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i></button>'
+                        '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#verPeticion" data-bs-toggle="modal" width="20"title="Ver Peticion"><i class="bi bi-eye-fill fs-4"></i></button>'
                     );
                 },
             }
@@ -193,7 +193,7 @@
             $('#fechaP2').val(res[0]['fecha_envio_pet'])
             $('#horaP2').val(res[0]['hora_envio_pet'])
             $('#txtDescripcion2').val(res[0]['msg_emisor'])
-            $('#receptor2').val(res[0]['nomRecpetor'])
+            $('#receptor2').val(res[0]['nomReceptor'])
             $('#estado2').val(res[0]['tipo_validacion'])
             $('#fechaRespuesta2').val(res[0]['fecha_res_pet'])
             $('#respuesta2').val(res[0]['msg_receptor'])

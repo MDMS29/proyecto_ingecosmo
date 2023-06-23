@@ -133,7 +133,7 @@
             dataSrc: "",
         },
         order: [
-            [3, 'desc']
+            [0, 'desc']
         ],
         columns: [{
                 data: null,
@@ -201,7 +201,6 @@
         e.preventDefault()
         id = $('#id').val()
         asunto = $('#asunto').val()
-        emisor = "<?php echo session('id') ?>"
         fechaP = $('#fechaP').val()
         horaP = $('#horaP').val()
         txtDescripcion = $('#txtDescripcion').val()
@@ -219,7 +218,6 @@
                 data: {
                     id,
                     asunto,
-                    emisor,
                     fechaP,
                     horaP,
                     txtDescripcion,

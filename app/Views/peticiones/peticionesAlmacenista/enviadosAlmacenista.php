@@ -119,7 +119,7 @@
             dataSrc: "",
         },
         order: [
-            [3, 'desc']
+            [0, 'desc']
         ],
         columns: [{
                 data: null,
@@ -182,7 +182,7 @@
                 $('#btnGuardar').attr('hidden', '')
             })
         } else {
-            //Insertar datos
+            // datos vacios pero del agregar
             $('#tituloModal').text(`Agregar`)
             $('#ojoPeticion').attr('hidden', '')
             $('#imgModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
