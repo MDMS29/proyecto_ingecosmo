@@ -26,13 +26,11 @@ class Repuestos extends BaseController
     {
         $this->categorias = new ParamModel();
         $this->estanteria = new EstanteriaModel();
-        $this->materiales= new MaterialesModel();
+        $this->materiales = new MaterialesModel();
         $this->movEnc = new MoviEncModel();
         $this->movDet = new MoviDetModel();
         $this->ordenes = new OrdenesModel();
         $this->proveedores = new TercerosModel();
-
-
     }
     public function index()
     {
@@ -40,7 +38,6 @@ class Repuestos extends BaseController
         $data = ['data' => $bodega];
         echo view('/principal/sidebar');
         echo view('/categorias/categoriaRepuesto', $data);
-        
     }
 
     public  function mostrarBodega($id, $nombre, $icon)
@@ -52,16 +49,16 @@ class Repuestos extends BaseController
         $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria, "proveedores" => $proveedores, "nomEstante" => $nombre, "idBodega" => $id];
 
         echo view('/principal/sidebar');
-        
+
         echo view('/materiales/repuestos', $data);
     }
 
     public  function materialesCategoriaRepuestos($id)
     {
         $material = $this->materiales->obtenerRepuestosCate($id);
-        if(empty($material)){
+        if (empty($material)) {
             return json_encode(1);
-        }else{
+        } else {
             return json_encode($material);
         }
         // echo view('/materiales/materiales', $data);
@@ -115,6 +112,55 @@ class Repuestos extends BaseController
         }
 
         // return redirect()->to(base_url('/materiales'));
+    }
+
+    public function usar()
+    {
+        $id =  $this->request->getPost('idMaterial');
+
+        // $res = $this->materiales->traerDetalles($id);
+        $cantidadExistente = $this->request->getPost('cantidadExistente');
+        $ordenTrabajo = $this->request->getPost('ordenTrabajo');
+        $placa = $this->request->getPost('placa');
+        $cantidadUsar = $this->request->getPost('cantidad');
+        $usuarioCrea = session('id');
+        $fechaActual = date('Y-m-d');
+        $cantidadNueva =  $cantidadExistente - $cantidadUsar; //Nueva cantidad existente del material
+        // $cantidadVendidaActual = $res['cantidad_vendida'] + $cantidadUsar; //Nueva cantidad vendida del material
+        $data = [
+            'cantidad_actual' => $cantidadNueva,
+            // 'cantidad_vendida' => $cantidadVendidaActual
+        ];
+
+
+        if ($this->materiales->update($id, $data)) {
+            $dataEnc = [
+                'tipo_movimiento' => 12,
+                'estado' => 'A',
+                'id_vehiculo' => $ordenTrabajo,
+                // 'id_vehiculo' => $placa
+                'fecha_movimiento' => $fechaActual,
+                'usuario_crea' => $usuarioCrea
+            ];
+            if ($this->movEnc->save($dataEnc)) {
+                $idMovEnc = $this->movEnc->getInsertID();
+                $dataDet = [
+                    'id_movimientoenc' => $idMovEnc,
+                    'id_material' => $id,
+                    'item' => 1,
+                    'cantidad' => $cantidadUsar,
+                    // 'costo' => $cantidadVendidaActual,
+                    'usuario_crea' => $usuarioCrea
+                ];
+                if ($this->movDet->save($dataDet)) {
+                    return json_encode(1);
+                } else {
+                    return json_encode(2);
+                }
+            }
+        } else {
+            return json_encode(2);
+        }
     }
 
     public function obtenerFilasRepuestos($estante)

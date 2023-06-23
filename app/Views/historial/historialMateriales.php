@@ -18,7 +18,7 @@
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Subtotal</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
-                     <th scope="col" class="text-center">Acciones</th>
+                    <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -57,12 +57,13 @@
     var tablaHistorial = $('#tableHistorial').DataTable({
         ajax: {
             url: '<?= base_url('historial/obtenerMovimientoEnc') ?>',
+            data: {},
             method: "POST",
             dataSrc: "",
         },
         columns: [{
-                data : null, 
-                render : function(data, type, row) {
+                data: null,
+                render: function(data, type, row) {
                     contador = contador + 1;
                     return "<b>" + contador + "</b>";
                 }
@@ -71,43 +72,43 @@
             //     data: "nombreMate"
             // },
             {
-                data : null,
-                render : function(data, type, row) {
+                data: null,
+                render: function(data, type, row) {
                     return row.nombreOrden == null ? "No se encontro orden de servicio" : row.nombreOrden; //
-                } 
+                }
             },
-  
+
             {
-                data : null,
-                render : function(data, type, row) {
+                data: null,
+                render: function(data, type, row) {
                     return row.nombreTrabajador == null ? "No se encontro trabajador " : row.nombreTrabajador
-                } 
+                }
             },
             {
-                data : 'cantidad'
+                data: 'cantidad'
             },
             {
                 data: "fecha_movimiento"
             },
             {
-                data : null,
-                render : function(data, type, row) {
-                   return formatearCantidad(row.subtotal)
-                } 
+                data: null,
+                render: function(data, type, row) {
+                    return formatearCantidad(row.subtotal)
+                }
             },
             {
                 data: "tipo_movimiento"
             },
             {
-        data: null,
-        render: function(data, type, row) {
-          return (
-            '<button class="btn" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
-          );
-        },
-      }
-            
-            
+                data: null,
+                render: function(data, type, row) {
+                    return (
+                        '<button class="btn" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
+                    );
+                },
+            }
+
+
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"

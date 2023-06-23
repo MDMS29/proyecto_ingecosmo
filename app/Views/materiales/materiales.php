@@ -221,7 +221,7 @@
             <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
             <h1 class="modal-title fs-5 text-center" id="tituloModal">Usar Insumo</h1>
           </div>
-          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos()">X</button>
         </div>
 
 
@@ -373,6 +373,7 @@
 
   // funcion traer detalles del material
 
+
   function detallesMaterial(id_material) {
 
     $('#btnUsar1').attr('onclick', `usarMaterial(${id_material},2)`)
@@ -383,7 +384,6 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
-        console.log(rs)
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);
