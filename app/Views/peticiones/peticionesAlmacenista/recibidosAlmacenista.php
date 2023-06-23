@@ -31,7 +31,7 @@
 
         <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#agregarPeticion" onclick="agregarPeticion()"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">Agregar</button>
 
-        <a href="<?= base_url('peticiones/enviadosAlmacenista') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
+        <a href="<?= base_url('peticiones/enviadosAlmacenista') ?>" class="btn btn-success"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
     </div>
 </div>
 
@@ -237,7 +237,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#verPeticion" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i></button>'
+                        '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#verPeticion" data-bs-toggle="modal" width="20" title="Ver Peticion"><i class="bi bi-eye-fill fs-4"></i></button>'
                     );
                 },
             }

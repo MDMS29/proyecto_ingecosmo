@@ -25,7 +25,7 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        <a href="<?= base_url('peticiones/enviadosAdmin') ?>" class="btn btnRedireccion"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
+        <a href="<?= base_url('peticiones/enviadosAdmin') ?>" class="btn btn-success"> <img src="<?php echo base_url('/img/buzon.png')  ?>" alt="Enviados" width="20"> Peticiones Enviadas</a>
     </div>
 </div>
 
@@ -83,8 +83,10 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="estado" class="col-form-label">Tipo Validacion:</label>
                                     <select class="form-select form-select" name="estado" id="estado">
+                                        <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($estados as $e) { ?>
-                                            <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
+                                            <option value="<?= $e['id_param_det'] ?>" <?php echo $e['id_param_det'] == 64 ? 'hidden' : ''?>><?= $e['nombre'] ?></option>
+
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -161,7 +163,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#responderPeticion" data-bs-toggle="modal" width="20"><i class="bi bi-reply-all fs-4" title="Responder Peticion"></i></button>'
+                        '<button class="btn" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#responderPeticion" data-bs-toggle="modal" width="20" title="Responder Peticion"><i class="bi bi-reply-all fs-4"></i></button>'
                     );
                 },
             }
@@ -189,7 +191,6 @@
             $('#txtDescripcion').val(res[0]['msg_emisor'])
             // igual esa parte de echo receptor nombre completo de la session es para mostrar, pero al guardar sera otra funcion tipo enviar
             $('#receptor').val("<?php echo session('nomCompleto') ?>")
-            $('#estado').val(res[0]['tipo_validacion'])
             $('#fechaRes').val(formattedDate)
             $('#respuesta').val(res[0]['msg_receptor'])
         })

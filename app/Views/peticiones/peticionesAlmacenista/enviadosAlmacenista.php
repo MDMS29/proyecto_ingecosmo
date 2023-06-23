@@ -147,7 +147,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ' , 2)" data-bs-target="#agregarPeticion" data-bs-toggle="modal" width="20"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i></button>'
+                        '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ' , 2)" data-bs-target="#agregarPeticion" data-bs-toggle="modal" width="20" title="Ver Peticion"><i class="bi bi-eye-fill fs-4"></i></button>'
                     );
                 },
             }
