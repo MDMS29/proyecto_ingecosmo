@@ -30,7 +30,7 @@
     </table>
   </div>
   <div class="footer-page">
-  <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+  <button type="button" class="btn btnRedireccion d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
       <div class="modal-content" id="modalContent">
         <div class="modal-header d-flex align-items-center justify-content-between">
           <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
-          <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4 text-primary"></i><span id="tituloModal">Ver Material</span> </h1>
+          <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal">Ver Material</span> </h1>
           <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
 
@@ -118,7 +118,7 @@
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btnAccionF" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -144,8 +144,8 @@
         </div>
       </div>
       <div id="bloqueBtnP" class="modal-footer">
-        <button id="btnNo" class="btn btnAccionF" data-dismiss="modal">Cerrar</button>
-        <a id="btnSi" class="btn btnRedireccion">Reestablecer</a>
+        <button id="btnNo" class="btn btnRedireccion" data-dismiss="modal">Cerrar</button>
+        <a id="btnSi" class="btn btnAccionF">Reestablecer</a>
       </div>
 
     </div>

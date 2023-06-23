@@ -281,7 +281,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -318,7 +318,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#verCliente">Cerrar</button>
                 </div>
             </div>
         </div>
