@@ -26,9 +26,9 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-        'hostname' => '10.230.16.76',//10.230.16.213
-        'username' => 'ingecosmos',//ingecosmos
-        'password' => '123456789',//123456789
+        'hostname' => 'localhost',//10.230.16.213
+        'username' => 'root',//ingecosmos
+        'password' => '',//123456789
         'database' => 'db_ingecosmo',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
@@ -41,7 +41,7 @@ class Database extends Config
         'compress' => false,
         'strictOn' => false,
         'failover' => [],
-        'port'     => 3306, 
+        'port'     => 3307, 
     ];
 
     /**

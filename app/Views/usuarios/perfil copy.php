@@ -6,96 +6,218 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h1>Perfil</h1>
-    <div class="container-info">
-        <div class="info-user">
-            <div class="d-flex align-items-center">
-                <img style="border-radius: 50%;" alt="Foto Usuario" id="fotoPerfil" />
-            </div>
-            <div class="w-100 p-2">
-                <h5><?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?></h5>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
 
-                <div class="d-flex gap-3 p-2">
-                    <label>Rol:</label>
-                    <p><?= $usuario['nombre_rol'] ?></p>
-                </div>
-
-                <div class="d-flex">
-                    <div class="px-2 d-flex gap-3 flex-grow-1">
-                        <label>Tipo Documento:</label>
-                        <p><?= $usuario['tipo_Documento'] ?></p>
-                    </div>
-                    <div class="px-2 d-flex gap-3 flex-grow-1">
-                        <label>N° Documento:</label>
-                        <p><?= $usuario['n_identificacion'] ?></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="info-user flex-column">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#telefonos" role="tab" aria-controls="profile" aria-selected="false">Telefonos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
-                </li>
-            </ul>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="telefonos" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="table-responsive p-4">
-                            <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
-                                <thead>
-                                    <tr class="table-secondary">
-                                        <th scope="col" class="text-center">Numero</th>
-                                        <th scope="col" class="text-center">Prioridad</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($telefonos as $tel) { ?>
-                                        <tr>
-                                            <td class="text-center">
-                                                <?= $tel['numero'] ?>
-                                            </td>
-                                            <td class="text-center">
-                                                <?= $tel['prioridad'] == 'P' ? 'Principal' : 'Secundario' ?>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                <form id="formularioPerfil" autocomplete="off" enctype="multipart/form-data">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img style="border-radius: 5px;" alt="Foto Usuario" id="fotoPerfil" />
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="correos" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="table-responsive p-4">
-                            <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
-                                <thead>
-                                    <tr class="table-secondary">
-                                        <th scope="col" class="text-center">Correo</th>
-                                        <th scope="col" class="text-center">Prioridad</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($correos as $correo) { ?>
-                                        <tr>
-                                            <td class="text-center">
-                                                <?= $correo['correo'] ?>
-                                            </td>
-                                            <td class="text-center">
-                                                <?= $correo['prioridad'] == 'P' ? 'Principal' : 'Secundario' ?>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                </form>
+
+                <div class="col-md-7" id="encP">
+                    <div class="profile-head">
+                        <h5 style="font-weight: bold;">
+                            <?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?>
+                        </h5>
+
+                        <h6>
+                            <?= $usuario['nombre_rol'] ?>
+                        </h6>
+
+                        <p class="profile-ranting" style="opacity: 0;">3</p>
+                        <ul class="nav nav-tabs" style="margin-bottom: 0;" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Info Personal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#telefonos" role="tab" aria-controls="profile" aria-selected="false">Telefonos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#contraseñas" role="tab" aria-controls="profile" aria-selected="false">Cambiar Contraseña</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <?php if (session('idRol') == 1 || session('idRol') == 2) { ?>
+                            <div class="profile-work">
+                                <p>Permisos</p>
+                                <p>Podrás ver los Trabajadores, Clientes, Materiales, Vehículos y Proveedores.</p>
+                                <p>Tendrás el poder de agregar, editar y eliminar cualquiera de sus datos almacenados.</p>
+
+                            </div>
+                        <?php } ?>
+
+                        <?php if (session('idRol') == 3) { ?>
+                            <div class="profile-work">
+                                <p>Permisos</p>
+                                <p>Podrás ver los Insumos y Repuestos, Historial, Organizacion y Estanteria, Carrito para el uso de materiales.</p>
+                                <p>Tendrá el poder de
+                                    agregar y usar Materiales y verlos reflejados en el carrito, cambiar materiales de fila, ver la ubicacion de los productos en los estantes.</p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="bloquePerfil">
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Id Usuario</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?= $usuario['id_usuario'] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Nombres</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?= $usuario['nombre_p'] . ' ' . $usuario['nombre_s'] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Apellidos</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?= $usuario['apellido_p'] . ' ' . $usuario['apellido_s'] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Tipo Documento</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?= $usuario['tipo_Documento'] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>N° Documento</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?= $usuario['n_identificacion'] ?></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="bloquePerfil2">
+                                    <div class="rowBtn">
+                                        <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion" onclick="editarCampos(<?= $usuario['id_usuario'] . ',' . 2 ?>)">Editar perfil</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="telefonos" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="table-responsive p-4" style="background-color: #f8f9fa;">
+                                    <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
+                                        <thead>
+                                            <tr class="table-secondary">
+                                                <th scope="col" class="text-center">Numero</th>
+                                                <th scope="col" class="text-center">Prioridad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($telefonos as $tel) { ?>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <?= $tel['numero'] ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?= $tel['prioridad'] == 'P' ? 'Principal' : 'Secundario' ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="correos" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="table-responsive p-4" style="background-color: #f8f9fa;">
+                                    <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
+                                        <thead>
+                                            <tr class="table-secondary">
+                                                <th scope="col" class="text-center">Correo</th>
+                                                <th scope="col" class="text-center">Prioridad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($correos as $correo) { ?>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <?= $correo['correo'] ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?= $correo['prioridad'] == 'P' ? 'Principal' : 'Secundario' ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="contraseñas" role="tabpanel" aria-labelledby="profile-tab">
+                                <form autocomplete="off" id="formularioContraseñas">
+                                    <div class="container" style="background-color: #dfe6f2;border-radius:10px;">
+                                        <div class="d-flex column-gap-3" style="width: 100%" id="contenedorPerfil">
+                                            <div class="mb-3" style="width: 100%; margin: 0;" id="contenidoPerfil">
+                                                <div class="mb-3" style="width: 100%; margin: 0;" id="bloqueContra">
+                                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
+                                                    </label>
+                                                    <input type="hidden" name="idUsuario" id="idUsuario" value="<?= $usuario['id_usuario'] ?>">
+
+                                                    <div class="flex">
+                                                        <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
+                                                        <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
+                                                    </div>
+                                                    <div class="form-check" style="margin-top: 10px;">
+                                                        <input class="form-check-input" type="checkbox" value="" id="ver" onchange="verContrasena()">
+                                                        <label class="form-check-label" for="ver">
+                                                            Ver Contraseña
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div id="contenidoPerfil2" class="mb-3" style="width: 100%; margin: 0px;">
+                                                    <div class="mb-3" style="width: 100%; margin: 0px;" id="bloqueContra">
+                                                        <div>
+                                                            <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                                            <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                                        </div>
+                                                        <small id="msgConfirRes" class="normal"></small>
+                                                    </div>
+                                                    <div id="bloqueContra2">
+                                                        <input type="button" class="btn btnRedireccion" value="Actualizar" id="btnActuContra"></input>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-        </div>
-        <div></div>
-        <div></div>
+        </form>
     </div>
 </div>
 
@@ -105,11 +227,11 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="body-R" style="width: 100%;">
                 <div class="modal-content">
-                    <div class="modal-header flex align-items-center gap-3">
-                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100" />
+                <div class="modal-header flex align-items-center gap-3">
+                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                            <img id="logoModal" src="<?= base_url('img/editar.png') ?>" alt="icon-plus" width="20">
+                            <img  id="logoModal" src="<?= base_url('img/editar.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5" id="tituloModal"> Editar</h1>
                         </div>
 
