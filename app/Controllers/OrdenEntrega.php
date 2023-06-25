@@ -59,6 +59,13 @@ class OrdenEntrega extends BaseController
         array_push($array, $res);
         return json_encode($res);
     }
+    public function buscarDetallesMaterial($id)
+    {
+        $array = array();
+        $res = $this->materiales->buscarDetallesMaterial($id);
+        array_push($array, $res);
+        return json_encode($res);
+    }
     
     public function index()
     {
@@ -128,7 +135,17 @@ class OrdenEntrega extends BaseController
         ];
 
         if ($tp == 2) {
-            // editar
+            if ($this->ordenes->update($idOrden)) {
+                $res = $this->ordenes->obtenerOrdenEntrega($ordenesEnt);
+                    $dataEncOrden = [
+                        'id_vehiculo' => $ordenServicio,
+                        'id_trabajador' => $trabajador,
+                        'fecha_movimiento' => $fechaMov,
+                        'tipo_movimiento' => $tipoMov,
+                        'usuario_crea' => session('id')
+                    ];
+            }
+
         } else {
             if ($this->ordenEntrega->save($dataEncOrden)) {
                 return json_encode($this->ordenEntrega->getInsertID());

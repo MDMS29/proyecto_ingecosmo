@@ -22,6 +22,7 @@ table {
   border-radius: 10px;
 }
 
+
 /* -- BOTONES GENERALES -- */
 .btnRedireccion {
   background-color: var(--azulBase) !important;
@@ -83,3 +84,5 @@ div.dataTables_wrapper div.dataTables_filter input {
 #divResponsable {
   display: flex;
 }
+
+/* ordenes */

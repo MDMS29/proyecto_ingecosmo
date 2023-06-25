@@ -115,7 +115,7 @@
 
                                         <div class="mb-3" style="width: 100%">
                                             <label for="cantidadUsar" class="col-form-label">Cantidad a usar</label>
-                                            <input type="text" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
+                                            <input type="number" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
                                             <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                         </div>
 
@@ -155,7 +155,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btnAccionF"  data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar">Crear orden</button>
                     </div>
                 </div>
@@ -295,7 +295,7 @@
                         success: function(data) {
                             $.ajax({
                                 type: "POST",
-                                url: "<?= base_url('insumo/buscarMateriales/') ?>" + id,
+                                url: "<?= base_url('ordenEntrega/buscarMateriales/') ?>" + id,
                                 dataType: "json",
                                 success: function(data) {
                                     console.log(data)
@@ -316,9 +316,19 @@
             $('#tituloModal').text('Nueva Orden')
             $('#logoModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
             $('#logoModal').attr('width', '25')
+
             $("#tp").val(1)
             $("#id").val(0)
             $('#btnGuardar').text('Crear Nueva Orden')
+            $('#ordenes').val('')
+            $('#trabajadores').val('')
+            $("#tipoMat").val('');
+            $("#tipoCate").val('');
+            $("#material").val('');
+
+            $("#cantidadActual").val('');
+            $("#cantidadUsar").val('');
+            
         }
 
     }
@@ -436,7 +446,7 @@
 
     $('#agregarMaterial').on('click', function(e) {
         if (objMaterial.cantidad == 0 || validUsar == false) {
-            return mostrarMensaje('error', '¡Ingrese una cantidad valida!')
+            return mostrarMensaje('error', '¡Datos vacios o invalidos !')
         }
         materialesOrden.push(objMaterial)
         mostrarMateriales()
@@ -447,24 +457,26 @@
             precio: 0
         }
 
+
         $("#tipoMat").val('');
         $("#tipoCate").val('');
         $("#material").val('');
         $("#cantidadActual").val('');
         $("#cantidadUsar").val('');
+   
     })
 
     function mostrarMateriales() {
         console.log(materialesOrden)
         let cadena = ''
         if (materialesOrden.length == 0) {
-            cadena = `  <tr>
-                            <td colspan="6" class="text-center">NO HAY MATERIALES</td>            
+            cadena = `  <tr class="pp2">
+                            <td colspan="6" id="td" class="text-center">NO HAY MATERIALES</td>            
                         </tr> `
         } else {
 
             for (let i = 0; i < materialesOrden.length; i++) {
-                cadena += `  <tr>
+                cadena += `  <tr id="pp">
                                 <td class="text-center">${materialesOrden[i].item}</td>            
                                 <td class="text-center">${materialesOrden[i].nombre}</td>            
                                 <td class="text-center">${materialesOrden[i].tipo== 10 ?'Repuesto': 'Insumo'}</td>            

@@ -176,7 +176,20 @@
             contentType: false, // Evitar que jQuery establezca el tipo de contenido
             success: function(res) {
                 if (res == 1) {
-                    return mostrarMensaje('warning', '¡Esta categoria no tiene materiales!')
+                    Swal.fire({
+                    title: 'Esta categoria no tiene materiales',
+                    text: "¿Desea ir a esta categoria?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cerrar',
+                    confirmButtonColor: '#161666',
+                    cancelButtonColor: '#E25050',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url
+                    }
+                })
                 } else {
                     window.location.href = url
                 }
