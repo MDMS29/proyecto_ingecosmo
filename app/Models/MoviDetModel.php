@@ -32,6 +32,13 @@ class MoviDetModel extends Model
         $data = $this->findAll();
         return $data;
      }
+     public function buscarDetalles($id){
+        $this->select("*");
+        $this->where('id_movimientodet',$id);
+        $data = $this->first();
+        return $data;
+     }
+
      
 
 }

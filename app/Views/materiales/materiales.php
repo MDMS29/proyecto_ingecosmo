@@ -653,7 +653,7 @@
 
           Toast.fire({
             icon: 'success',
-            title: 'Insumo agregado al carrito'
+            title: 'Insumo agregado a la orden'
           })
           setTimeout(() => {
             window.location.reload();

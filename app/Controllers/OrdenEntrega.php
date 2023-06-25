@@ -27,6 +27,7 @@ class OrdenEntrega extends BaseController
 
     public function __construct()
     {
+
         $this->ordenEntrega = new MoviEncModel();
         $this->movDet = new MoviDetModel();
         $this->trabajadores = new TrabajadoresModel();
@@ -135,28 +136,25 @@ class OrdenEntrega extends BaseController
         ];
 
         if ($tp == 2) {
-            if ($this->ordenes->update($idOrden)) {
-                $res = $this->ordenes->obtenerOrdenEntrega($ordenesEnt);
-                    $dataEncOrden = [
-                        'id_vehiculo' => $ordenServicio,
-                        'id_trabajador' => $trabajador,
-                        'fecha_movimiento' => $fechaMov,
-                        'tipo_movimiento' => $tipoMov,
-                        'usuario_crea' => session('id')
-                    ];
+            if ($this->ordenEntrega->update($idOrden, $dataEncOrden)) {
+                return json_encode($idOrden);
+            }else{
+                return json_encode(0);
             }
 
         } else {
             if ($this->ordenEntrega->save($dataEncOrden)) {
                 return json_encode($this->ordenEntrega->getInsertID());
             } else {
-                return json_encode(2);
+                return json_encode(0);
             }
         }
     }
     public function insertarDet()
     {
+
         $tp = $this->request->getPost('tp');
+        $idMovDet = $this->request->getPost('idMovDet');
         $idMovEnc = $this->request->getPost('idMovEnc');
         $idMat = $this->request->getPost('idMaterial');
         $item = $this->request->getPost('item');
@@ -173,7 +171,21 @@ class OrdenEntrega extends BaseController
         ];
 
         if ($tp == 2) {
-            // editar
+            $res= $this->movDet->buscarDetalles($idMovDet); 
+            var_dump($res);
+            if ($res==null){
+                if ($this->movDet->save($dataDetMov)) {
+                    return json_encode(1);
+                } else {
+                    return json_encode(2);
+                }
+            } else{
+                if ($this->movDet->update($idMovDet, $dataDetMov)) {
+                    return json_encode(1);
+                } else {
+                    return json_encode(2);
+                }
+            }
         } else {
             if ($this->movDet->save($dataDetMov)) {
                 return json_encode(1);

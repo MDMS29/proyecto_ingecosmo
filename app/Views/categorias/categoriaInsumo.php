@@ -178,7 +178,7 @@
                 if (res == 1) {
                     Swal.fire({
                     title: 'Esta categoria no tiene materiales',
-                    text: "¿Desea ir a esta categoria?",
+                    text: "¿Desea ir a esta categoria   ?",
                     icon: 'warning',
                     showCancelButton: true,
                     cancelButtonText: 'Cerrar',

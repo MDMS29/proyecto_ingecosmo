@@ -230,4 +230,13 @@ class MaterialesModel extends Model
         $data = $this->findAll();
         return $data;
      }
+
+     public function obtenerMaterialesEnt($id, $tipoMaterial)
+     {
+         $this->select('id_material as id, fecha_ultimo_salid, tipo_material as tipoMaterial');
+         $this->where('id_material', $id);
+         $this->where('tipo_material', $tipoMaterial);
+         $data = $this->findAll();
+         return $data;
+     }
 }

@@ -247,4 +247,12 @@ class Insumos extends BaseController
             return json_encode($array);
         }
     }
+
+    public function obtenerMaterialesEnt($id, $tipoMaterial)
+    {
+        $array = array();
+        $data = $this->materiales->obtenerMaterialesEnt($id, $tipoMaterial);
+        array_push($array, $data);
+        return json_encode($array);
+    }
 }
