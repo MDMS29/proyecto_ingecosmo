@@ -142,5 +142,11 @@ class Trabajadores extends BaseController
         echo view('/principal/sidebar');
         echo view('/trabajadores/eliminados', $data);
     }
+
+    public function contadorTrabajadores(){
+        $id = $this->request->getPost('id');
+        $res = $this->trabajadores->contadorTrabajadores($id);
+        return json_encode($res);
+    }
     
 }

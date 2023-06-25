@@ -1,18 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Alike&family=Noto+Serif&family=Nunito:wght@300&display=swap");
 p {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 :root {
   --azulBase: #161666;
   --rojoAcciones: #ef434d;
   --azulClaro: #dfe6f2;
-  --grisInput: #ECEAEA; /* gris mas oscuro */
+  --grisInput: #eceaea; /* gris mas oscuro */
 }
 
 /* -- DIV OCULTAR COLUMNAS -- */
-.ocultar>a:is(.toggle-vis).active,
-.ocultar>a:is(.toggle-vis):hover {
+.ocultar > a:is(.toggle-vis).active,
+.ocultar > a:is(.toggle-vis):hover {
   border-radius: none !important;
   color: var(--azulBase);
   font-weight: 700;
@@ -97,58 +97,6 @@ table {
   color: #8e8e8e;
 }
 
-/* PERFIL */
-.container-info{
-  /* background-color: white; */
-  padding: 25px 30px;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-}
-
-.container-info div{
-  /* border: 1px solid black; */
-}
-
-.info-user{
-  background-color: white;
-  display: flex;
-  border-radius: 20px;
-  padding: 5px;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%);
-}
-
-
-.profile-head .nav-tabs {
-  margin-bottom: 5%;
-}
-
-.profile-head .nav-tabs .nav-link {
-  font-weight: 600;
-  border: none;
-}
-
-.profile-head .nav-tabs .nav-link.active {
-  border: none;
-  border-bottom: 2px solid #0062cc;
-}
-
-.profile-work p:first-child {
-  font-size: 20px;
-  color: #0062cc;
-  font-weight: 600;
-  margin-top: 10%;
-}
-
-.profile-work ul {
-  list-style: none;
-}
-
-
-
-
-
 
 
 /* modal confirmar eliminar */
@@ -172,7 +120,6 @@ table {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-
 }
 
 .textoModalP {
@@ -206,15 +153,13 @@ table {
   margin-right: 30px;
 }
 
-
-
-#bloqueFoto{
+#bloqueFoto {
   display: flex;
-  justify-content: center ;
+  justify-content: center;
   align-items: center;
 }
 
-#iconoFoto{
+#iconoFoto {
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -222,14 +167,14 @@ table {
   border-radius: 5px;
 }
 
-.tituloFoto{
+.tituloFoto {
   width: 500px;
   font-size: 20px;
   text-align: center;
   border: none !important;
 }
 
-#fotoPerfil{
+#fotoPerfil {
   margin: 5px 25px;
   width: 150px;
   border: 3px solid var(--azulBase);
@@ -237,7 +182,7 @@ table {
   overflow: hidden;
 }
 
-#filePerfil{
+#filePerfil {
   width: 200px;
 }
 

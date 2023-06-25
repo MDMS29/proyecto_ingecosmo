@@ -1,0 +1,94 @@
+/* PERFIL */
+.container-info {
+  /* background-color: white; */
+  padding: 25px 30px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.info-user {
+  background-color: white;
+  display: flex;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%);
+}
+
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
+}
+
+.profile-work p:first-child {
+  font-size: 20px;
+  color: #0062cc;
+  font-weight: 600;
+  margin-top: 10%;
+}
+
+.profile-work ul {
+  list-style: none;
+}
+
+/*TELEFONOS Y CORREOS*/
+.tel-correo {
+  overflow: hidden;
+  min-height: 200px;
+  max-height: 300px;
+}
+.table-perfil {
+  height:  200px;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+/* INFORMACION DEL SISTEMA */
+.info-sistema {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+.header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px;
+}
+.header-card > h5 {
+  color: #1d1d6b;
+}
+#cargo,
+#tituloOrden,
+#tituloUsuarios,
+#tituloVehiculos {
+  color: #282879a6;
+}
+.img-card {
+  background-color: rgba(128, 128, 128, 0.301);
+  border-radius: 50%;
+  padding: 3px;
+}
+.info-permiso {
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%);
+}
+.info-permiso > ul{
+  display: grid;
+  max-height: 300px;
+
+  grid-template-columns: repeat(3,1fr);
+}

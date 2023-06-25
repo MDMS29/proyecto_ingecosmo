@@ -475,7 +475,7 @@ class OrdenServicio extends BaseController
         $fechaEntrada = $this->request->getPost('fechaEntrada');
         $fechaSalida = $this->request->getPost('fechaSalida');
         $usuarioCrea = session('id');
-        $fechaActual = date('Y-m-d'); 
+        $fechaActual = date('Y-m-d');
         //Asi podrias tomar la fecha actual y ya, para que no salga como un input, entendido entonces que no salga en la vista, pero ahora te muestro que quedaria un hueco a ve
         $tipoMov = 0;
 
@@ -570,7 +570,7 @@ class OrdenServicio extends BaseController
                 if (!empty($res)) {
                     if ($this->movimiento->save($dataMovimiento)) {
                         return json_encode($this->ordenes->getInsertID()); //Movimiento
-                    }else{
+                    } else {
                         return json_encode(2);
                     }
                 } else {
@@ -619,5 +619,11 @@ class OrdenServicio extends BaseController
         } else {
             return json_encode(2);
         }
+    }
+    public function contadorOrdenes()
+    {
+        $id = $this->request->getPost('id');
+        $res = $this->ordenes->contadorOrdenes($id);
+        return json_encode($res);
     }
 }

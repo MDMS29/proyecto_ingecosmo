@@ -76,4 +76,15 @@ class VehiculosModel extends Model
         $data = $this->findAll();
         return $data;
     }
+
+    public function contadorVehiculos($id)
+    {
+        $this->select('COUNT(id_vehiculo) AS n_vehi');
+        $this->where('estado', 'A');
+        if($id != 0) {
+            $this->where('vehiculos.id_marca', $id);
+        }
+        $data = $this->first();
+        return $data;
+    }
 }
