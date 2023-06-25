@@ -31,6 +31,10 @@
                         <p><?= $usuario['n_identificacion'] ?></p>
                     </div>
                 </div>
+                <div class="w-100 d-flex gap-3">
+                    <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion flex-grow-1" onclick="editarCampos(<?= $usuario['id_usuario'] . ',' . 2 ?>)">Editar Perfil</button>
+                    <button class="btn btnAccionF flex-grow-1">Cambiar Contraseña</button>
+                </div>
             </div>
         </div>
         <div class="d-flex">
