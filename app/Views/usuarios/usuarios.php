@@ -155,9 +155,6 @@
     </div>
 </form>
 
-
-
-
 <!-- MODAL EDITAR CONTRASEÑA -->
 <form autocomplete="off" id="formularioContraseñas">
     <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

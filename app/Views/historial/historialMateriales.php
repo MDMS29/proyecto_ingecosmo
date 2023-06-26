@@ -32,6 +32,42 @@
     </div>
 </div>
 
+<div class="modal fade" id="verDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"> <img src="<?= base_url('img/historial-b.png') ?>" alt="logo-empresa" width="40" height="40"> Ver Detalles</h1>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
+            </div>
+            <input type="text" name="editOrden" id="editOrden" hidden>
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Materiales De La orden</th>
+                                    <th>Fecha de entrega</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyTel1">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY TELEFONOS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnAccionF" data-bs-toggle="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>

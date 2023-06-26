@@ -58,4 +58,14 @@ class UsuariosModel extends Model
         $data = $this->first();
         return $data;
     }
+    public function contadorUsuarios($id)
+    {
+        $this->select('count(id_usuario) as n_usuario');
+        $this->where('estado', 'A');
+        if ($id != 0) {
+            $this->where('usuarios.id_rol', $id);
+        }
+        $data = $this->first();
+        return $data;
+    }
 }

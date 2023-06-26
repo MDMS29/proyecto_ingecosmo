@@ -115,7 +115,7 @@
 
                                         <div class="mb-3" style="width: 100%">
                                             <label for="cantidadUsar" class="col-form-label">Cantidad a usar</label>
-                                            <input type="text" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
+                                            <input type="number" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
                                             <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                         </div>
 
@@ -163,11 +163,46 @@
         </div>
     </div>
 </form>
+<div class="modal fade" id="verDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"> <img src="<?= base_url('img/orden-entrega-b.png') ?>" alt="logo-empresa" width="40" height="40"> Ver Detalles</h1>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
+            </div>
+            <input type="text" name="editOrden" id="editOrden" hidden>
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Materiales De La orden</th>
+                                    <th>Fecha de entrega</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyEnt">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY MATERIALES</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnAccionF" data-bs-toggle="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     let materialesOrden = []
+
     let objMaterial = {
         idInv: 0,
         idMaterial: 0,
@@ -250,8 +285,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ' , 2 )" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
-                        '<button class="btn" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
-
+                        '<button class="btn" onclick="mostrarMaterialesEnt(' + data.id_material + ')" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
 
                     );
                 },
@@ -278,13 +312,13 @@
         if (tp == 2) {
             $.ajax({
                 type: "POST",
-                url: "<?= base_url('ordenEntrega/buscarOrden/') ?>" + id + '/',
+                url: "<?= base_url('ordenEntrega/buscarOrden/') ?>" + id,
                 dataType: "json",
                 success: function(rs) {
-                    console.log(rs)
                     $('#id').val(id)
                     $('#tp').val(2)
-
+                    materialesOrden = []
+                    mostrarMateriales()
                     $('#ordenes').val(rs['id_orden'])
                     $('#trabajadores').val(rs['id_trabajador'])
 
@@ -293,17 +327,28 @@
                         url: "<?= base_url('ordenEntrega/buscarDetallesOrden/') ?>" + id,
                         dataType: "json",
                         success: function(data) {
-                            $.ajax({
-                                type: "POST",
-                                url: "<?= base_url('insumo/buscarMateriales/') ?>" + id,
-                                dataType: "json",
-                                success: function(data) {
-                                    console.log(data)
-                                }
-                            })
-                            console.log(data)
+                            for (let i = 0; i < data.length; i++) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "<?= base_url('insumos/buscarInsumo/') ?>" + data[i].id_material,
+                                    dataType: "json",
+                                    success: function(res) {
+                                        objMaterial = {
+                                            idInv: data[i].id_movimientodet,
+                                            idMaterial: res[0].id_material,
+                                            item: materialesOrden.length + 1,
+                                            nombre: res[0].nombre,
+                                            tipo: res[0].tipo_material,
+                                            cantidad: data[i].cantidad,
+                                            precio: Number(res[0].precio_venta),
+                                            subtotal: data[i].cantidad * Number(res[0].precio_venta)
+                                        }
+                                        materialesOrden.push(objMaterial);
+                                        mostrarMateriales()
+                                    }
+                                })
+                            }
                         }
-
                     })
 
                     $('#tituloModal').text('Editar')
@@ -316,9 +361,24 @@
             $('#tituloModal').text('Nueva Orden')
             $('#logoModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
             $('#logoModal').attr('width', '25')
+
             $("#tp").val(1)
             $("#id").val(0)
             $('#btnGuardar').text('Crear Nueva Orden')
+            $('#ordenes').val('')
+            $('#trabajadores').val('')
+            $("#tipoMat").val('');
+            $("#tipoCate").val('');
+            $("#material").val('');
+
+            materialesOrden = []
+            mostrarMateriales()
+
+
+
+            $("#cantidadActual").val('');
+            $("#cantidadUsar").val('');
+
         }
 
     }
@@ -349,7 +409,6 @@
 
 
                 } else {
-                    console.log(id)
                     cadena = `<option selected value=""> -- Seleccione -- </option>`
                     for (let i = 0; i < res.length; i++) {
                         cadena += `<option value=${res[i].id_param_det}>${res[i].nombre}</option>`
@@ -368,7 +427,6 @@
     })
 
     function verMateriales(id) {
-        console.log(id)
         tipo = $('#tipoMat').val()
         $.ajax({
             url: '<?= base_url('ordenEntrega/buscarMateriales') ?>',
@@ -402,7 +460,6 @@
             type: 'POST',
             success: function(res) {
                 res = JSON.parse(res)
-                console.log(res)
                 $('#cantidadActual').val(res[0]['cantidad_actual'])
 
                 $('#cantidadUsar').on('input', function(e) {
@@ -436,9 +493,26 @@
 
     $('#agregarMaterial').on('click', function(e) {
         if (objMaterial.cantidad == 0 || validUsar == false) {
-            return mostrarMensaje('error', '¡Ingrese una cantidad valida!')
+            return mostrarMensaje('error', '¡Datos vacios o invalidos !')
         }
-        materialesOrden.push(objMaterial)
+
+        let objDestMat = materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0]
+
+        if (objDestMat != undefined) {
+            const {
+                cantidad,
+                precio
+            } = objDestMat
+
+            let nuevaCant = Number(cantidad) + Number(objMaterial.cantidad)
+
+            let nuevoSub = precio * nuevaCant
+            materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0].cantidad = nuevaCant
+            materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0].subtotal = nuevoSub
+        } else {
+            materialesOrden.push(objMaterial)
+        }
+        console.log(materialesOrden)
         mostrarMateriales()
         objMaterial = {
             nombre: '',
@@ -447,24 +521,37 @@
             precio: 0
         }
 
+
         $("#tipoMat").val('');
         $("#tipoCate").val('');
         $("#material").val('');
         $("#cantidadActual").val('');
         $("#cantidadUsar").val('');
+
     })
 
+    function mostrarMaterialesEnt(id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('insumos/obtenerMaterialesEnt/') ?>' + id + '/' + 9,
+            dataType: 'json',
+            success: function(data) {
+                materiales = data[0];
+                mostrarMateriales(1)
+            }
+        })
+    }
+
     function mostrarMateriales() {
-        console.log(materialesOrden)
         let cadena = ''
         if (materialesOrden.length == 0) {
-            cadena = `  <tr>
-                            <td colspan="6" class="text-center">NO HAY MATERIALES</td>            
+            cadena = `  <tr class="pp2">
+                            <td colspan="6" id="td" class="text-center">NO HAY MATERIALES</td>            
                         </tr> `
         } else {
 
             for (let i = 0; i < materialesOrden.length; i++) {
-                cadena += `  <tr>
+                cadena += `  <tr id="pp">
                                 <td class="text-center">${materialesOrden[i].item}</td>            
                                 <td class="text-center">${materialesOrden[i].nombre}</td>            
                                 <td class="text-center">${materialesOrden[i].tipo== 10 ?'Repuesto': 'Insumo'}</td>            
@@ -498,6 +585,7 @@
             type: "POST",
             url: '<?= base_url('ordenEntrega/insertar') ?>',
             data: {
+                id,
                 tp,
                 ordenServicio,
                 ordenesEnt,
@@ -505,7 +593,7 @@
             },
             dataType: 'json'
         }).done(function(data) {
-            if (data == 2) {
+            if (data == 0) {
                 return mostrarMensaje('error', '¡Ha ocurrido un error!')
             } else {
                 materialesOrden.forEach(item => {
@@ -513,8 +601,10 @@
                         type: 'POST',
                         url: '<?= base_url('ordenEntrega/insertarDet') ?>',
                         data: {
+
                             tp,
                             idMovEnc: data,
+                            idMovDet: item.idInv,
                             idMaterial: item.idMaterial,
                             item: item.item,
                             cantidad: item.cantidad,
@@ -522,7 +612,7 @@
                         },
                         dataType: 'json',
                         success: function(data) {
-                            if (data == 2) {
+                            if (data == 0) {
                                 return mostrarMensaje('error', '¡Ha ocurrido un error!')
                             }
                         }

@@ -4,25 +4,41 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsuariosModel;
+use App\Models\TrabajadoresModel;
+use App\Models\VehiculosModel;
+use App\Models\CargosModel;
+use App\Models\MarcasVehiculoModel;
 use App\Models\ParamModel;
 use App\Models\RolesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
+use App\Models\MaterialesModel;
+use App\Models\OrdenesModel;
+use App\Models\PermisosModel;
+use App\Models\EstanteriaModel;
 
 class Usuarios extends BaseController
 {
-    protected $usuarios;
+    protected $usuarios, $trabajadores, $vehiculos, $ordenes;
     protected $param;
-    protected $roles;
-    protected $telefonos;
-    protected $correos;
+    protected $roles, $permisos;
+    protected $telefonos, $materiales;
+    protected $correos, $cargos, $marcas, $estantes;
     public function __construct()
     {
         $this->usuarios = new UsuariosModel();
+        $this->trabajadores = new TrabajadoresModel();
+        $this->vehiculos = new VehiculosModel();
+        $this->ordenes = new OrdenesModel();
+        $this->cargos = new CargosModel();
+        $this->marcas = new MarcasVehiculoModel();
         $this->param = new ParamModel();
         $this->roles = new RolesModel();
+        $this->materiales = new MaterialesModel();
         $this->telefonos = new TelefonosModel();
         $this->correos = new EmailModel();
+        $this->permisos = new PermisosModel();
+        $this->estantes = new EstanteriaModel();
         helper('sistema');
     }
 
@@ -70,7 +86,6 @@ class Usuarios extends BaseController
             }
         }
     }
-
     public function salir()
     {
         $session = session();
@@ -95,10 +110,23 @@ class Usuarios extends BaseController
 
     public function perfil($id)
     {
+        $trabajadores = $this->trabajadores->contadorTrabajadores(0);
+        $vehiculos = $this->vehiculos->contadorVehiculos(0);
+        $ordenes = $this->ordenes->obtenerUltimaOrden();
+        $countUsu = $this->usuarios->contadorUsuarios(0);
+        $cargos = $this->cargos->obtenerCargos();
+        $estVehi = $this->param->obtenerEstadosVehi('A');
+        $categorias = $this->param->obtenerCategorias();
+        $roles = $this->roles->obtenerRoles();
+        $insumos = $this->materiales->contadorInsumos(0);
+        $respuestos = $this->materiales->contadorRepuestos(0);
+        $estantes = $this->estantes->traerBodega();
+        $marcas = $this->marcas->obtenerMarcas();
         $usuarios = $this->usuarios->buscarUsuario($id, 0);
         $telefonos = $this->telefonos->obtenerTelefonoUser($id, 7);
         $correos = $this->correos->obtenerEmailUser($id, 7);
-        $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos];
+        $permisos = $this->permisos->obtenerPermisos(session('idRol'));
+        $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos, 'countTraba' => $trabajadores, 'countVehi' => $vehiculos, 'countOrden' => $ordenes, 'countUsuario' => $countUsu, 'cargos' => $cargos, 'estadoVehi' => $estVehi, 'roles' => $roles, 'marcas' => $marcas, 'permisos' => $permisos, 'categorias' => $categorias, 'countInsumo' => $insumos, 'countRepuestos' => $respuestos, 'estantes' => $estantes];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
     }
@@ -121,7 +149,8 @@ class Usuarios extends BaseController
     }
 
 
-    public function insertarFotoPerfil(){
+    public function insertarFotoPerfil()
+    {
         $idUser = $this->request->getPost('id');
         $nombreP = $this->request->getPost('nombreP');
         $foto = $this->request->getFile('foto');
@@ -132,23 +161,21 @@ class Usuarios extends BaseController
         $rutaImagen = $res['foto'];
         $newName = $idUser . $nombreP . '.png'; //Nombre de imagen
 
-            $uploadPath = 'fotoUser';
+        $uploadPath = 'fotoUser';
 
-            if (!is_dir($uploadPath)) { // Verificar si el directorio existe, si no, crearlo
-                mkdir($uploadPath, 0777, true);
-            }
-            $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
-            
-            $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
-            $usuarioUpdate = [
-                'foto' => $rutaImagen
-            ];
-            
-            $this->usuarios->update($idUser, $usuarioUpdate);
-            return $idUser;
+        if (!is_dir($uploadPath)) { // Verificar si el directorio existe, si no, crearlo
+            mkdir($uploadPath, 0777, true);
+        }
+        $foto->store($uploadPath, $newName); // Guardar el archivo en el directorio
+
+        $rutaImagen = 'fotoUser/' . $foto->getName(); // Obtener la ruta de la imagen guardada
+        $usuarioUpdate = [
+            'foto' => $rutaImagen
+        ];
+
+        $this->usuarios->update($idUser, $usuarioUpdate);
+        return $idUser;
     }
-
-
     public function insertar()
     {
         $tp = $this->request->getPost('tp');
@@ -164,7 +191,7 @@ class Usuarios extends BaseController
 
         $foto = $this->request->getFile('foto');
         $res = $this->usuarios->buscarUsuario($idUser, 0);
-        
+
         if ($foto == null && $tp == 1) {
             $rutaImagen = 'fotoUser/default.png';
         } else if ($foto == null && $tp == 2) {
@@ -249,7 +276,6 @@ class Usuarios extends BaseController
             $data = $this->usuarios->buscarUsuario(0, $nIdenti);
             array_push($array, $data);
             return json_encode($array);
-            
         } else if ($id != 0 && $nIdenti != 0) {
             $data = $this->usuarios->buscarUsuario($id, $nIdenti);
             array_push($array, $data);
@@ -275,5 +301,11 @@ class Usuarios extends BaseController
         $data = ['tipoDoc' => $param, 'roles' => $roles];
         echo view('principal/sidebar');
         echo view('usuarios/eliminados', $data);
+    }
+    public function contadorUsuarios()
+    {
+        $id = $this->request->getPost('id');
+        $res = $this->usuarios->contadorUsuarios($id);
+        return json_encode($res);
     }
 }

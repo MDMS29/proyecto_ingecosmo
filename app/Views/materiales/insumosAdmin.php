@@ -230,9 +230,15 @@
         type: 'POST',
         dataType: 'json',
         success: function(res) {
-          cadena = `<option value="" selected>-- Seleccione  --</option>`
-          for (let i = 0; i < res.length; i++) {
-            cadena += `<option value=${res[i].fila}>${res[i].fila}</option>`
+          console.log(res)
+          if(res.length == 0){
+            cadena =  `<option value="" selected>-- No Hay Filas  --</option>`
+          }else{
+            cadena = `<option value="" selected>-- Seleccione  --</option>`
+            for (let i = 0; i < res.length; i++) {
+              cadena += `<option value=${res[i].id_fila}>${res[i].fila}</option>`
+            }
+
           }
           $('#fila').html(cadena)
           $('#fila').val(fila)

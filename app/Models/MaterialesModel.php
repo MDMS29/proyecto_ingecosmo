@@ -42,7 +42,7 @@ class MaterialesModel extends Model
         $datos = $this->findAll(); // nos trae el registro que cumpla con una condicion dada 
         return $datos;
     }
-            
+
     public function traerDetalles($id_material)
     {
         $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
@@ -53,7 +53,8 @@ class MaterialesModel extends Model
         return $datos;
     }
 
-    public function traerDetallesRep($id_material){
+    public function traerDetallesRep($id_material)
+    {
         $this->select('materiales.*, terceros.razon_social as nomProveedor, ordenes_servicio.n_orden as numOrden, estanteria.nombre as bodega, vehiculos.placa as placaVeh');
         $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor');
         $this->join('estanteria', 'estanteria.id = materiales.estante');
@@ -68,14 +69,14 @@ class MaterialesModel extends Model
     {
         $this->select('materiales.*');
         $this->where('id_material', $id_material);
-        $datos = $this->first(); 
+        $datos = $this->first();
         return $datos;
     }
     public function usarInsumo($id_material)
     {
         $this->select('materiales.*');
         $this->where('id_material', $id_material);
-        $datos = $this->first(); 
+        $datos = $this->first();
         return $datos;
     }
 
@@ -86,7 +87,7 @@ class MaterialesModel extends Model
         $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo');
         $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor');
         $this->where('id_material', $id_material);
-        $datos = $this->first(); 
+        $datos = $this->first();
         return $datos;
     }
 
@@ -117,7 +118,8 @@ class MaterialesModel extends Model
 
     public function obtenerFilasInsumos($estante)
     {
-        $this->select('fila, id_material');
+        $this->select('filas.nombre as fila, filas.id_fila, materiales.id_material');
+        $this->join('filas', 'filas.id_fila = materiales.fila');
         $this->where('materiales.estante', $estante);
         $this->groupBy('materiales.fila');
         $datos = $this->findAll();
@@ -126,7 +128,7 @@ class MaterialesModel extends Model
 
     public function obtenerFilasRepuestos($estante)
     {
-        $this->select('fila, id_material');
+        $this->select('filas.nombre as fila, filas.id_fila, materiales.id_material');
         $this->where('materiales.estante', $estante);
         $this->groupBy('materiales.fila');
         $datos = $this->findAll();
@@ -214,20 +216,52 @@ class MaterialesModel extends Model
     public function obtenerInsumoAdmin($estado)
     {
         $this->select('materiales.id_material, materiales.nombre, materiales.cantidad_actual, materiales.fila, materiales.precio_venta, materiales.precio_compra, materiales.cantidad_vendida, param_detalle.nombre as categoria, vw_param_det.nombre as tipo, estanteria.nombre as nomEstante, filas.nombre as fila');
-        $this->join('filas', 'filas.id_fila = materiales.fila', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = materiales.tipo_material', 'left');
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+        $this->join('filas', 'filas.id_fila = materiales.fila', 'left');
         $this->where('tipo_material', '9');
         $this->where('materiales.estado', $estado);
         $data = $this->findAll();
         return $data;
     }
-    
-    public function buscarDetallesMaterial($id){
+
+    public function buscarDetallesMaterial($id)
+    {
         $this->select("*");
-        $this->where('id_material',$id);
+        $this->where('id_material', $id);
         $data = $this->findAll();
         return $data;
-     }
+    }
+
+    public function obtenerMaterialesEnt($id, $tipoMaterial)
+    {
+        $this->select('id_material as id, fecha_ultimo_salid, tipo_material as tipoMaterial');
+        $this->where('id_material', $id);
+        $this->where('tipo_material', $tipoMaterial);
+        $data = $this->findAll();
+        return $data;
+    }
+    public function contadorInsumos($id)
+    {
+        $this->select('COUNT(id_material) AS n_material');
+        $this->where('tipo_material', '9');
+        $this->where('estado', 'A');
+        if($id != 0) {
+            $this->where('materiales.categoria_material', $id);
+        }
+        $data = $this->first();
+        return $data;
+    }
+    public function contadorRepuestos($id)
+    {
+        $this->select('COUNT(id_material) AS n_material');
+        $this->where('tipo_material', '10');
+        $this->where('estado', 'A');
+        if($id != 0) {
+            $this->where('materiales.estante', $id);
+        }
+        $data = $this->first();
+        return $data;
+    }
 }

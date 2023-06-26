@@ -74,7 +74,7 @@ class MoviEncModel extends Model
         $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '68');
         $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
-        $this->groupBy('movimiento_enc.id_vehiculo');
+        $this->groupBy('movimiento_enc.id_movimientoenc');
         // $this->where('movimiento_enc.id_movimientoenc', $id);
         $data = $this->findAll();
         return $data;

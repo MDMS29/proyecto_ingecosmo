@@ -135,4 +135,10 @@ class Vehiculos extends BaseController
         $res = $this->clientes->obtenerTipoTercero($tipo, 0);
         return json_encode($res);
     }
+    public function contadorVehiculos()
+    {
+        $id = $this->request->getPost('id');
+        $res = $this->vehiculos->contadorVehiculos($id);
+        return json_encode($res);
+    }
 }
