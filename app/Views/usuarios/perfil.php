@@ -32,139 +32,202 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex gap-3">
-                    <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion flex-grow-1" onclick="editarCampos(<?= $usuario['id_usuario'] . ',' . 2 ?>)">Editar Perfil</button>
-                    <button class="btn btnAccionF flex-grow-1">Cambiar Contraseña</button>
+                    <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion flex-grow-1" onclick="editarCampos(<?= $usuario['id_usuario'] . ',' . 2 ?>)" title="Editar Perfil">Editar Perfil</button>
+                    <button class="btn btnAccionF flex-grow-1" data-bs-toggle="modal" data-bs-target="#cambiarContra" type="button" title="Cambiar Contraseña">Cambiar Contraseña</button>
                 </div>
             </div>
         </div>
         <div class="d-flex">
             <div class="info-sistema d-flex justify-content-evenly">
-                <div class="d-flex flex-column gap-2">
-                    <!-- TRABAJADORES -->
-                    <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
-                        <div class="header-card">
-                            <h5 class="fs-6">Trabajadores | <span id="cargo"> Todos </span></h5>
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filtrar</h6>
-                                    </li>
-                                    <li><a class="dropdown-item" onclick="filtrarCargo(0, 'Todos')">Todos</a></li>
-                                    <?php foreach ($cargos as $cargo) { ?>
-                                        <li><a class="dropdown-item" onclick="filtrarCargo(<?= $cargo['id_cargo'] ?> , '<?= $cargo['nombre'] ?>')"><?= $cargo['nombre'] ?></a></li>
-                                    <?php } ?>
-                                </ul>
+                <?php if (session('idRol') == 1) { ?>
+                    <div class="d-flex flex-column gap-2">
+                        <!-- TRABAJADORES -->
+                        <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
+                            <div class="header-card">
+                                <h5 class="fs-6">Trabajadores | <span id="cargo"> Todos </span></h5>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filtrar</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="filtrarCargo(0, 'Todos')">Todos</a></li>
+                                        <?php foreach ($cargos as $cargo) { ?>
+                                            <li><a class="dropdown-item" onclick="filtrarCargo(<?= $cargo['id_cargo'] ?> , '<?= $cargo['nombre'] ?>')"><?= $cargo['nombre'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body px-6 p-0">
+                            <div class="card-body px-6 p-0">
 
-                            <div class="d-flex align-items-center justify-content-center gap-3">
-                                <div>
-                                    <img src="<?= base_url('img/trabajadores-n.png') ?>" alt="logo trabajadores" width="40" class="img-card">
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div>
+                                        <img src="<?= base_url('img/trabajadores-n.png') ?>" alt="logo trabajadores" width="40" class="img-card">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h4 id="n-trabajadores" style="margin: 0;"><?= $countTraba['n_trabajador'] ?></h4>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <h4 id="n-trabajadores" style="margin: 0;"><?= $countTraba['n_trabajador'] ?></h4>
-                                </div>
+                                <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('trabajadores') ?>" title="Ver Más">Ver más</a></small>
                             </div>
-                            <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('trabajadores') ?>">Ver más</a></small>
+
                         </div>
 
-                    </div>
+                        <!-- ORDENES DE SERVICIO -->
+                        <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
+                            <div class="header-card">
+                                <h5 class="fs-6">Orden de Servicio | <span id="tituloOrden"> Ultima Orden </span></h5>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filtrar</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="filtrarEstado(0, 'Ultima Orden')">Ultima Orden</a></li>
+                                        <?php foreach ($estadoVehi as $estado) { ?>
+                                            <li><a class="dropdown-item" onclick="filtrarEstado(<?= $estado['id'] ?>, '<?= $estado['nombre'] ?>')"><?= $estado['nombre'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body px-6 p-0">
 
-                    <!-- ORDENES DE SERVICIO -->
-                    <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
-                        <div class="header-card">
-                            <h5 class="fs-6">Orden de Servicio | <span id="tituloOrden"> Ultima Orden </span></h5>
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filtrar</h6>
-                                    </li>
-                                    <li><a class="dropdown-item" onclick="filtrarEstado(0, 'Ultima Orden')">Ultima Orden</a></li>
-                                    <?php foreach ($estadoVehi as $estado) { ?>
-                                        <li><a class="dropdown-item" onclick="filtrarEstado(<?= $estado['id'] ?>, '<?= $estado['nombre'] ?>')"><?= $estado['nombre'] ?></a></li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body px-6 p-0">
-
-                            <div class="d-flex align-items-center justify-content-center gap-3">
-                                <div>
-                                    <img src="<?= base_url('img/orden-servicio-b.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div>
+                                        <img src="<?= base_url('img/orden-servicio-b.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h4 id="n-orden" style="margin: 0;"><?= $countOrden['n_orden'] ?></h4>
+                                        &nbsp;
+                                        <small id="placa" class="text-black-50" style="margin: 0;"><?= $countOrden['placa'] ?></small>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <h4 id="n-orden" style="margin: 0;"><?= $countOrden['n_orden'] ?></h4>
-                                    &nbsp;
-                                    <small id="placa" class="text-black-50" style="margin: 0;"><?= $countOrden['placa'] ?></small>
-                                </div>
+                                <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('ordenServicio') ?>" title="Ver Más">Ver más</a></small>
                             </div>
-                            <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('ordenServicio') ?>">Ver más</a></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex flex-column gap-2">
-                    <!-- USUARIOS DEL SISTEMA -->
-                    <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
-                        <div class="header-card">
-                            <h5 class="fs-6">Usuarios | <span id="tituloUsuarios"> Todos </span></h5>
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filtrar</h6>
-                                    </li>
-                                    <li><a class="dropdown-item" onclick="filtrarRol(0, 'Todos')">Todos</a></li>
-                                    <?php foreach ($roles as $rol) { ?>
-                                        <li><a class="dropdown-item" onclick="filtrarRol(<?= $rol['id_rol'] ?>, '<?= $rol['nombre'] ?>')"><?= $rol['nombre'] ?></a></li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body px-6 p-0">
-                            <div class="d-flex align-items-center justify-content-center gap-3">
-                                <div>
-                                    <img src="<?= base_url('img/usuarioS-n.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <h4 id="n-usuario" style="margin: 0;"><?= $countUsuario['n_usuario'] ?></h4>
-                                </div>
-                            </div>
-                            <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('usuarios') ?>">Ver más</a></small>
                         </div>
                     </div>
-                    <!-- VEHICULOS -->
-                    <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
-                        <div class="header-card">
-                            <h5 class="fs-6">Vehiculos | <span id="tituloVehiculos"> Todos </span></h5>
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filtrar</h6>
-                                    </li>
-                                    <li><a class="dropdown-item" onclick="filtrarMarca(0, 'Todos')">Todos</a></li>
-                                    <?php foreach ($marcas as $marca) { ?>
-                                        <li><a class="dropdown-item" onclick="filtrarMarca(<?= $marca['id_marca'] ?>, '<?= $marca['nombre'] ?>')"><?= $marca['nombre'] ?></a></li>
-                                    <?php } ?>
-                                </ul>
+                    <div class="d-flex flex-column gap-2">
+                        <!-- USUARIOS DEL SISTEMA -->
+                        <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
+                            <div class="header-card">
+                                <h5 class="fs-6">Usuarios | <span id="tituloUsuarios"> Todos </span></h5>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filtrar</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="filtrarRol(0, 'Todos')">Todos</a></li>
+                                        <?php foreach ($roles as $rol) { ?>
+                                            <li><a class="dropdown-item" onclick="filtrarRol(<?= $rol['id_rol'] ?>, '<?= $rol['nombre'] ?>')"><?= $rol['nombre'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body px-6 p-0">
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div>
+                                        <img src="<?= base_url('img/usuarioS-n.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h4 id="n-usuario" style="margin: 0;"><?= $countUsuario['n_usuario'] ?></h4>
+                                    </div>
+                                </div>
+                                <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('usuarios') ?>" title="Ver Más">Ver más</a></small>
                             </div>
                         </div>
-                        <div class="card-body px-6 p-0">
-                            <div class="d-flex align-items-center justify-content-center gap-3">
-                                <div>
-                                    <img src="<?= base_url('img/vehiculo-b.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <h4 id="n-vehi" style="margin: 0;"><?= $countVehi['n_vehi'] ?></h4>
+                        <!-- VEHICULOS -->
+                        <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
+                            <div class="header-card">
+                                <h5 class="fs-6">Vehiculos | <span id="tituloVehiculos"> Todos </span></h5>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filtrar</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="filtrarMarca(0, 'Todos')">Todos</a></li>
+                                        <?php foreach ($marcas as $marca) { ?>
+                                            <li><a class="dropdown-item" onclick="filtrarMarca(<?= $marca['id_marca'] ?>, '<?= $marca['nombre'] ?>')"><?= $marca['nombre'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
                                 </div>
                             </div>
-                            <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('vehiculos') ?>">Ver más</a></small>
+                            <div class="card-body px-6 p-0">
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div>
+                                        <img src="<?= base_url('img/vehiculo-b.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h4 id="n-vehi" style="margin: 0;"><?= $countVehi['n_vehi'] ?></h4>
+                                    </div>
+                                </div>
+                                <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('vehiculos') ?>" title="Ver Más">Ver más</a></small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php } else { ?>
+                    <div class="d-flex card-info gap-2">
+                        <!-- INSUMOS -->
+                        <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
+                            <div class="header-card">
+                                <h5 class="fs-6">Insumos | <span id="tituloInsumos"> Todos </span></h5>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filtrar</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="filtrarInsumos(0, 'Todos')">Todos</a></li>
+                                        <?php foreach ($categorias as $categoria) { ?>
+                                            <li><a class="dropdown-item" onclick="filtrarInsumos(<?= $categoria['id_param_det'] ?>, '<?= $categoria['nombre'] ?>')"><?= $categoria['nombre'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body px-6 p-0">
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div>
+                                        <img src="<?= base_url('img/insumos.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h4 id="n-insumos" style="margin: 0;"><?= $countInsumo['n_material'] ?></h4>
+                                    </div>
+                                </div>
+                                <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('vehiculos') ?>" title="Ver Más">Ver más</a></small>
+                            </div>
+                        </div>
+                        <!-- REPUESTOS -->
+                        <div class="card py-2" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 10%); border-radius:20px; width: 300px;">
+                            <div class="header-card">
+                                <h5 class="fs-6">Repuestos | <span id="tituloRepuestos"> Todos </span></h5>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="true" title="Filtrar Trabajadores"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow " data-popper-placement="bottom-end">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filtrar</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="filtrarRepuestos(0, 'Todos')">Todos</a></li>
+                                        <?php foreach ($estantes as $estante) { ?>
+                                            <li><a class="dropdown-item" onclick="filtrarRepuestos(<?= $estante['id'] ?>, '<?= $estante['nombre'] ?>')"><?= $estante['nombre'] ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body px-6 p-0">
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div>
+                                        <img src="<?= base_url('img/repuestos-b.png') ?>" alt="logo ordenes de servicio" width="40" class="img-card">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h4 id="n-repuestos" style="margin: 0;"><?= $countRepuestos['n_material'] ?></h4>
+                                    </div>
+                                </div>
+                                <small class=" d-flex text-end"><a style="width: 90%;" href="<?= base_url('vehiculos') ?>" title="Ver Más">Ver más</a></small>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <div class="info-user tel-correo flex-column p-2">
@@ -244,6 +307,57 @@
     </div>
 </div>
 </div>
+
+<!-- CAMBIAR CONTRASEÑA -->
+<form autocomplete="off" id="formularioContraseñas">
+    <div class="modal fade" id="cambiarContra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="body-R">
+                <div class="modal-content">
+                    <div class="modal-header flex justify-content-between align-items-center">
+                        <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                        <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/restorePass.png') ?>" alt="" width="30" height="30"> Restablecer
+                            Contraseña</h1>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes', 'idUsuario')">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="idUsuario" id="idUsuario">
+                        <div class="container p-4" style="background-color: #dfe6f2;border-radius:10px;">
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="divContras">
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
+                                    </label>
+                                    <div class="flex">
+                                        <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
+                                        <small class="normal">¡La contraseña debe contar con un minimo de 6
+                                            caracteres!</small>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 10px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="verModal" onchange="verContrasena()">
+                                        <label class="form-check-label" for="verModal">
+                                            Ver Contraseña
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3" style="width: 100%" id="divContras2">
+                                    <div>
+                                        <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                        <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
+                                    </div>
+                                    <small id="msgConfirRes" class="normal"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
+                        <input type="submit" class="btn btnRedireccion" value="Actualizar" id="btnActuContra"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <!-- -------------------modal------------------------- -->
 <form method="POST" id="formularioPerfil" autocomplete="off">
@@ -462,7 +576,7 @@
         var check, password;
         password = document.getElementById("contraRes");
         password2 = document.getElementById("confirContraRes");
-        check = document.getElementById("ver");
+        check = document.getElementById("verModal");
         if (check.checked == true) // Si la checkbox de mostrar contraseña está activada
         {
             password.type = "text";
@@ -521,7 +635,7 @@
     //Funcion para cambiar contraseña
     $('#btnActuContra').on('click', function(e) {
         e.preventDefault()
-        idUsuario = $("#idUsuario").val()
+        idUsuario = "<?= session('id') ?>"
         contra = $("#contraRes").val()
         contraConfir = $("#confirContraRes").val()
 
@@ -543,22 +657,22 @@
                 if (data == 2) {
                     return mostrarMensaje('error', '¡Ha ocurrido un error!')
                 } else {
-                    mostrarMensaje('success', '¡Se ha actualizado su contraseña!')
-                    const informacion = {
-                        usuario: '',
-                        contrasena: ''
-                    };
-                    localStorage.setItem("usuario", JSON.stringify(informacion));
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= base_url('usuarios/salir') ?>',
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data == 1) {
-                                window.location.href = '<?= base_url('') ?>'
-                            }
-                        }
-                    })
+                    return mostrarMensaje('success', '¡Se ha actualizado su contraseña!')
+                    // const informacion = {
+                    //     usuario: '',
+                    //     contrasena: ''
+                    // };
+                    // localStorage.setItem("usuario", JSON.stringify(informacion));
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url: '< ?= base_url('usuarios/salir') ?>',
+                    //     dataType: 'json',
+                    //     success: function(data) {
+                    //         if (data == 1) {
+                    //             window.location.href = '< ?= base_url('') ?>'
+                    //         }
+                    //     }
+                    // })
                 }
             })
         }
@@ -646,6 +760,34 @@
             success: function(res) {
                 $('#tituloVehiculos').text(nombre)
                 $('#n-vehi').text(res.n_vehi)
+            }
+        })
+    }
+    function filtrarInsumos(id, nombre) {
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('insumos/contadorInsumos') ?>',
+            data: {
+                id
+            },
+            dataType: 'json',
+            success: function(res) {
+                $('#tituloInsumos').text(nombre)
+                $('#n-insumos').text(res.n_material)
+            }
+        })
+    }
+    function filtrarRepuestos(id, nombre) {
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('insumos/contadorRepuestos') ?>',
+            data: {
+                id
+            },
+            dataType: 'json',
+            success: function(res) {
+                $('#tituloRepuestos').text(nombre)
+                $('#n-repuestos').text(res.n_material)
             }
         })
     }

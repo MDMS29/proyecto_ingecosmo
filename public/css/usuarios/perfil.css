@@ -72,6 +72,8 @@
 #cargo,
 #tituloOrden,
 #tituloUsuarios,
+#tituloRepuestos,
+#tituloInsumos,
 #tituloVehiculos {
   color: #282879a6;
 }
@@ -95,4 +97,9 @@
 
 #btnEditPerfil{
   position: relative;
+}
+
+.card-info{
+  align-items: center;
+  max-height: 120px;
 }

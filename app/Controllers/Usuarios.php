@@ -12,16 +12,18 @@ use App\Models\ParamModel;
 use App\Models\RolesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
+use App\Models\MaterialesModel;
 use App\Models\OrdenesModel;
 use App\Models\PermisosModel;
+use App\Models\EstanteriaModel;
 
 class Usuarios extends BaseController
 {
     protected $usuarios, $trabajadores, $vehiculos, $ordenes;
     protected $param;
     protected $roles, $permisos;
-    protected $telefonos;
-    protected $correos, $cargos, $marcas;
+    protected $telefonos, $materiales;
+    protected $correos, $cargos, $marcas, $estantes;
     public function __construct()
     {
         $this->usuarios = new UsuariosModel();
@@ -32,9 +34,11 @@ class Usuarios extends BaseController
         $this->marcas = new MarcasVehiculoModel();
         $this->param = new ParamModel();
         $this->roles = new RolesModel();
+        $this->materiales = new MaterialesModel();
         $this->telefonos = new TelefonosModel();
         $this->correos = new EmailModel();
         $this->permisos = new PermisosModel();
+        $this->estantes = new EstanteriaModel();
         helper('sistema');
     }
 
@@ -82,7 +86,6 @@ class Usuarios extends BaseController
             }
         }
     }
-
     public function salir()
     {
         $session = session();
@@ -113,13 +116,17 @@ class Usuarios extends BaseController
         $countUsu = $this->usuarios->contadorUsuarios(0);
         $cargos = $this->cargos->obtenerCargos();
         $estVehi = $this->param->obtenerEstadosVehi('A');
+        $categorias = $this->param->obtenerCategorias();
         $roles = $this->roles->obtenerRoles();
+        $insumos = $this->materiales->contadorInsumos(0);
+        $respuestos = $this->materiales->contadorRepuestos(0);
+        $estantes = $this->estantes->traerBodega();
         $marcas = $this->marcas->obtenerMarcas();
         $usuarios = $this->usuarios->buscarUsuario($id, 0);
         $telefonos = $this->telefonos->obtenerTelefonoUser($id, 7);
         $correos = $this->correos->obtenerEmailUser($id, 7);
         $permisos = $this->permisos->obtenerPermisos(session('idRol'));
-        $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos, 'countTraba' => $trabajadores, 'countVehi' => $vehiculos, 'countOrden' => $ordenes, 'countUsuario' => $countUsu, 'cargos' => $cargos, 'estadoVehi' => $estVehi, 'roles' => $roles, 'marcas' => $marcas, 'permisos' => $permisos];
+        $data = ['usuario' => $usuarios, 'telefonos' => $telefonos, 'correos' => $correos, 'countTraba' => $trabajadores, 'countVehi' => $vehiculos, 'countOrden' => $ordenes, 'countUsuario' => $countUsu, 'cargos' => $cargos, 'estadoVehi' => $estVehi, 'roles' => $roles, 'marcas' => $marcas, 'permisos' => $permisos, 'categorias' => $categorias, 'countInsumo' => $insumos, 'countRepuestos' => $respuestos, 'estantes' => $estantes];
         echo view('principal/sidebar');
         echo view('usuarios/perfil', $data);
     }

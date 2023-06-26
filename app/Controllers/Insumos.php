@@ -64,7 +64,7 @@ class Insumos extends BaseController
         echo view('/materiales/materiales', $data);
     }
 
-    
+
     public  function materialesCategoria($id)
     {
         $material = $this->materiales->obtenerInsumo($id);
@@ -77,12 +77,10 @@ class Insumos extends BaseController
     }
 
 
-    public function obtenerFilasInsumos( $estante)
+    public function obtenerFilasInsumos($estante)
     {
         $materiales = $this->materiales->obtenerFilasInsumos($estante);
-        if (!empty($materiales)) {
-            return json_encode($materiales);
-        }
+        return json_encode($materiales);
     }
     public function obtenerMaterialesFila($fila)
     {
@@ -224,12 +222,12 @@ class Insumos extends BaseController
                     return json_encode(2);
                 }
             }
-        }else{
+        } else {
             return json_encode(2);
         }
     }
 
-    public function buscarInsumo($id_material, $nombre='')
+    public function buscarInsumo($id_material, $nombre = '')
     {
         $array = array();
         if ($id_material != 0) {
@@ -254,5 +252,17 @@ class Insumos extends BaseController
         $data = $this->materiales->obtenerMaterialesEnt($id, $tipoMaterial);
         array_push($array, $data);
         return json_encode($array);
+    }
+    public function contadorInsumos()
+    {
+        $id = $this->request->getPost('id');
+        $res = $this->materiales->contadorInsumos($id);
+        return json_encode($res);
+    }
+    public function contadorRepuestos()
+    {
+        $id = $this->request->getPost('id');
+        $res = $this->materiales->contadorRepuestos($id);
+        return json_encode($res);
     }
 }
