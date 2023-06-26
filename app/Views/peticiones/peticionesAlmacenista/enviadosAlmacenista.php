@@ -95,6 +95,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    recargarAlmacenista()
     var ContadorPRC = 0; //Contador DataTable
     // para asignarle la fecha actual al input date
     var fechaActual = new Date();
@@ -228,6 +229,7 @@
                     mostrarMensaje('success', '¡Se ha enviado la Peticion!')
                 }
             }).done(function(data) {
+                recargarAdmin()
                 limpiarCampos()
                 $('#agregarPeticion').modal('hide')
                 tablePeticiones.ajax.reload(null, true); //Recargar tabla

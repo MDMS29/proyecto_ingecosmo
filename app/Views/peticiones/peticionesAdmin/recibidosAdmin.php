@@ -85,7 +85,7 @@
                                     <select class="form-select form-select" name="estado" id="estado">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($estados as $e) { ?>
-                                            <option value="<?= $e['id_param_det'] ?>" <?php echo $e['id_param_det'] == 64 ? 'hidden' : ''?>><?= $e['nombre'] ?></option>
+                                            <option value="<?= $e['id_param_det'] ?>" <?php echo $e['id_param_det'] == 64 ? 'hidden' : '' ?>><?= $e['nombre'] ?></option>
 
                                         <?php } ?>
                                     </select>
@@ -118,8 +118,9 @@
 
 
 <script>
+    recargarAdmin()
     var ContadorPRC = 0; //Contador DataTable
-    
+
     // para asignarle la fecha actual al input date
     var fechaActual = new Date();
     var formattedDate = fechaActual.toISOString().substring(0, 10);
@@ -196,7 +197,7 @@
         })
     }
 
-    
+
     //Envio de formulario
     $('#formularioPeticiones').on('submit', function(e) {
         e.preventDefault()
@@ -209,6 +210,7 @@
         estado = $('#estado').val()
         fechaRes = $('#fechaRes').val()
         respuesta = $('#respuesta').val()
+        visto = "N"
         //Control de campos vacios
         if ([respuesta].includes('')) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -225,12 +227,14 @@
                     receptor,
                     estado,
                     fechaRes,
-                    respuesta
+                    respuesta,
+                    visto
                 },
                 success: function(idPet) {
                     mostrarMensaje('success', '¡Se ha respondido la Peticion!')
                 }
             }).done(function(data) {
+                recargarAlmacenista()
                 $('#responderPeticion').modal('hide')
                 tablePeticiones.ajax.reload(null, false); //Recargar tabla
                 ContadorPRC = 0
@@ -238,4 +242,5 @@
             });
         };
     })
+
 </script>

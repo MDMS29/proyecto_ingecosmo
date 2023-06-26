@@ -100,7 +100,7 @@
                     </a>
                 </li>
 
-                <?php if (session('idRol') == 1 ) { ?>
+                <?php if (session('idRol') == 1) { ?>
                     <li>
                         <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
                             <p id="pa">Trabajadores</p>
@@ -151,12 +151,15 @@
                             <p id="pa">Historial Ordenes</p>
                         </a>
                     </li>
+                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">
+                        <span id="numeroDinamicoAdmin"></span>
+                    </div>
                     <li>
                         <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                             <p id="pa">Peticiones</p>
                         </a>
                     </li>
-                <?php } else if (session('idRol') == 3 || session('idRol') == 4 ) { ?>
+                <?php } else if (session('idRol') == 3 || session('idRol') == 4) { ?>
                     <li>
                         <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                             <p id="pa">Repuestos</p>
@@ -172,12 +175,15 @@
                             <p id="pa">Estanteria</p>
                         </a>
                     </li>
-                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div>
+                    <!-- <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div> -->
                     <li>
                         <a href="<?php echo base_url('ordenEntrega') ?>" id="aa"><span><img title="Ordenes de entrega" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /></span>
                             <p id="pa">Orden de entrega</p>
                         </a>
                     </li>
+                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">
+                        <span id="numeroDinamicoAlmacenista"></span>
+                    </div>
                     <li>
                         <a href="<?php echo base_url('peticiones/indexAlmacenista') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                             <p id="pa">Peticiones</p>
@@ -211,6 +217,34 @@
     </div>
 
     <script>
+        function recargarAdmin() {
+            $.ajax({
+                url: '<?php echo base_url('peticiones/contadorPeticiones') ?>',
+                type: 'POST',
+                data: {},
+                dataType: 'json',
+                success: function(data) {
+                    $("#numeroDinamicoAdmin").text(data.contadorPet)
+                    console.log(data.contadorPet)
+                }
+            })
+        }
+        recargarAdmin()
+
+        function recargarAlmacenista() {
+            $.ajax({
+                url: '<?php echo base_url('peticiones/contadorPeticionesAlmacenista/') ?>' + '<?php echo session("id") ?>',
+                type: 'POST',
+                data: {},
+                dataType: 'json',
+                success: function(data) {
+                    $("#numeroDinamicoAlmacenista").text(data.contadorVisto)
+                    console.log(data.contadorVisto)
+                }
+            })
+        }
+        recargarAlmacenista()
+
         const informacion = JSON.parse(localStorage.getItem('usuario'));
         if (informacion == null || informacion?.usuario == '') {
             window.location.href = '<?= base_url('') ?>'
