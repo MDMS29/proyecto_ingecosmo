@@ -10,7 +10,7 @@
     <h1>Perfil</h1>
     <div class="container-info">
         <div class="info-user">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-center">
                 <img style="border-radius: 50%;" alt="Foto Usuario" id="fotoPerfil" />
             </div>
             <div class="w-100 p-2 d-flex flex-column justify-content-center">
@@ -21,7 +21,7 @@
                     <p><?= $usuario['nombre_rol'] ?></p>
                 </div>
 
-                <div class="d-flex">
+                <div class="d-flex documento">
                     <div class="px-2 d-flex gap-3 flex-grow-1">
                         <label>Tipo Documento:</label>
                         <p><?= $usuario['tipo_Documento'] ?></p>
@@ -32,8 +32,8 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex gap-3">
-                    <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion flex-grow-1" onclick="editarCampos(<?= $usuario['id_usuario'] . ',' . 2 ?>)" title="Editar Perfil">Editar Perfil</button>
-                    <button class="btn btnAccionF flex-grow-1" data-bs-toggle="modal" data-bs-target="#cambiarContra" type="button" title="Cambiar Contraseña">Cambiar Contraseña</button>
+                    <button data-bs-toggle="modal" data-bs-target="#editarPerfil" type="button" class="btn btnRedireccion flex-grow-1" onclick="editarCampos(<?= $usuario['id_usuario'] . ',' . 2 ?>)" title="Editar Perfil"><img id="btnEditar" width="20"><span id="textEdit">Editar Perfil</span></button>
+                    <button class="btn btnAccionF flex-grow-1" data-bs-toggle="modal" data-bs-target="#cambiarContra" type="button" title="Cambiar Contraseña"><img id="btnCambiarPass" width="20"><span id="textCamb">Cambiar Contraseña</span></button>
                 </div>
             </div>
         </div>
@@ -297,7 +297,7 @@
             </div>
         </div>
         <div class="info-permiso px-2 py-3">
-            <h3>Permisos del Sistema - <span id="cargo"><?= $usuario['nombre_rol'] ?></span></h3>
+            <h3 class="text-center">Permisos del Sistema <span id="cargo"><?= $usuario['nombre_rol'] ?></span></h3>
             <ul>
                 <?php foreach ($permisos as $permiso) { ?>
                     <li><?= $permiso['nombre'] ?></li>
@@ -790,5 +790,18 @@
                 $('#n-repuestos').text(res.n_material)
             }
         })
+    }
+
+    if (screen.width < 715) {
+        $('#btnEditar').attr('src', '<?= base_url('img/edit-w.png')?>')
+        $('#btnCambiarPass').attr('src', '<?= base_url('img/restorePass-w.png')?>')
+        $('#textEdit').text('')
+        $('#textCamb').text('')
+    }else{
+        $('#btnEditar').attr('src', '')
+        $('#btnCambiarPass').attr('src', '')
+        $('#textEdit').text('Editar Perfil')
+        $('#textCamb').text('Cambiar Contraseña')
+
     }
 </script>
