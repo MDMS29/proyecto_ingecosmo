@@ -187,7 +187,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -859,12 +859,10 @@
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                ${tipo == 0 ? `<td>
-                                                    <button class="btn" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
-                                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
-                                                </td>` 
-                                : ''}
-                                
+                                <td>
+                                    <button class="btn" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
+                                </td>                 
                             </tr>`
             }
         }

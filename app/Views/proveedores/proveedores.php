@@ -863,7 +863,7 @@
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
                                 ${tipo == 0 ? `<td>
                                     <button class="btn" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
-                                    <button class="btn" onclick="eliminarTel(${telefonos[i].id})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
+                                    <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
                                 </td>` : '' }
                             </tr>`
             }
