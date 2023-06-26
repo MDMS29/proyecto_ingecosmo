@@ -424,8 +424,6 @@
         $(`#${input3}`).val('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
-        $('#msgNit').text('')
-        $('#msgRaSo').text('')
     }
 
     // ------------------------------ estructura Tabla ------------------------------------- 

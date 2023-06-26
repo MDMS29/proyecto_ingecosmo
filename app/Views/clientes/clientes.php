@@ -447,7 +447,6 @@
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
-        $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
     }

@@ -151,7 +151,6 @@ class MaterialesModel extends Model
             $this->select('materiales.*,param_detalle.nombre as nombre_categoria');
             $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
             $this->where('materiales.nombre', $nombre);
-            $this->where('materiales.estado', 'A');
         } else if ($id_material != 0 && $nombre != '') {
 
             $this->select('materiales.*');
