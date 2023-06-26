@@ -608,6 +608,7 @@
             $('#cargo').val('')
             $('#btnGuardar').text('Agregar')
             $('#msgDoc').text('')
+            $('#msgDoc').val('')
             $.ajax({
                 type: 'POST',
                 url: "<?php echo base_url('srchTra/') ?>" + id + "/" + inputIden,
@@ -615,6 +616,7 @@
                 success: function(res) {
                     if (res[0]['n_identificacion'] == inputIden) {
                         $('#msgDoc').text('')
+                        $('#msgDoc').val('')
                         validIdent = true
                         
                     } else {
