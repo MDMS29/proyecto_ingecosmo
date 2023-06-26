@@ -397,6 +397,68 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
+    //limpiar campos
+    function limpiarCampos1(input1, input2, input3, accion) {
+        if (accion == 3) {
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarTrabajador').modal('show')
+                }
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarTrabajador').modal('show')
+            }
+        }
+        if (accion == 4) {
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarTrabajador').modal('show')
+                }
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarTrabajador').modal('show')
+            }
+        }
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo()
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono()
+        }
+        if (input1 == 0) {
+            telefonos = []
+            correos = []
+        }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
+        $(`#${input1}`).val('')
+        $(`#${input2}`).val('')
+        $(`#${input3}`).val('')
+        $('#msgConfirRes').text('')
+        $('#msgConfir').text('')
+        $('#msgDoc').text('')
+        $('#msgTel').text('')
+        $('#msgCorreo').text('')
+    }
     //Limpiar campos de telefonos y correos
     function limpiarCampos(input1, input2, input3, accion) {
         if (accion == 3) {
@@ -458,6 +520,27 @@
         $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+
+        inputIden = $('#nIdenti').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarTrabajadorIdent(0, inputIden)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchTra/') ?>" + id + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['n_identificacion'] == inputIden) {
+                        $('#msgDoc').text('')
+                        validIdent = true
+                    } else {
+                        buscarTrabajadorIdent(0, inputIden)
+                    }
+                }
+            })
+        }
     }
     //Insertar y editar Trabajador
     function seleccionarTrabajador(id, tp) {
@@ -482,6 +565,7 @@
                 $('#direccion').val(res[0]['direccion'])
                 $('#cargo').val(res[0]['id_cargo'])
                 $('#btnGuardar').text('Actualizar')
+                $('#msgDoc').text('')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,
@@ -523,6 +607,23 @@
             $('#direccion').val('')
             $('#cargo').val('')
             $('#btnGuardar').text('Agregar')
+            $('#msgDoc').text('')
+            $('#msgDoc').val('')
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchTra/') ?>" + id + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0]['n_identificacion'] == inputIden) {
+                        $('#msgDoc').text('')
+                        $('#msgDoc').val('')
+                        validIdent = true
+                        
+                    } else {
+                        buscarTrabajadorIdent(0, inputIden)
+                    }
+                }
+            })
         }
     }
     //Funcion para buscar trabajador segun su identificacion

@@ -175,7 +175,7 @@
                             <p id="pa">Estanteria</p>
                         </a>
                     </li>
-                    <!-- <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div> -->
+                    <!--  -->
                     <li>
                         <a href="<?php echo base_url('ordenEntrega') ?>" id="aa"><span><img title="Ordenes de entrega" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /></span>
                             <p id="pa">Orden de entrega</p>
