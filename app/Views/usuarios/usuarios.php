@@ -54,11 +54,11 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombre_p" class="col-form-label">Primer Nombre:</label>
-                                    <input type="text" name="nombre_p" class="form-control" id="nombreP">
+                                    <input type="text" name="nombre_p" class="form-control" id="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombre_s" class="col-form-label">Segundo Nombre:</label>
-                                    <input type="text" name="nombre_s" class="form-control" id="nombreS">
+                                    <input type="text" name="nombre_s" class="form-control" id="nombreS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
@@ -73,16 +73,16 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="apellido_p" class="col-form-label">Primer Apellido:</label>
-                                    <input type="text" name="apellido_p" class="form-control" id="apellidoP">
+                                    <input type="text" name="apellido_p" class="form-control" id="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
-                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS">
+                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
                                         <label for="nIdenti" class="col-form-label">N° Identificación:</label>
-                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="11">
+                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         <small id="msgDoc" class="invalido"></small>
                                     </div>
                                 </div>

@@ -153,7 +153,7 @@
                                     <div class="mb-3" style="width: 100%">
                                         <label for="kms" class="col-form-label">Kilometraje:</label>
                                         <div class="d-flex">
-                                            <input type="number" name="kms" class="form-control" id="kms">
+                                            <input type="number" name="kms" class="form-control" id="kms" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         </div>
                                     </div>
                                 </div>
@@ -589,7 +589,7 @@
                                     <div class="mb-3">
                                         <input type="text" id="idObser" hidden>
                                         <label for="observaciones" class="col-form-label d-block">Observaciones:</label>
-                                        <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3"></textarea>
+                                        <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></textarea>
                                     </div>
                                 </div>
                             </div>

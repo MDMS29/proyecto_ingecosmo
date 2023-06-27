@@ -49,7 +49,7 @@
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
                             <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                             <small id="msgRaSo" class="invalido"></small>
 
                             <input hidden id="tp" name="tp">
@@ -58,14 +58,14 @@
 
                         <div class="mb-3" style="width: 100%; ">
                             <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                            <input type="text" class="form-control" id="nit" name="nit"></input>
+                            <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
                     </div>
 
                     <div class="mb-3" style="width: 100%; padding-inline:20px;">
                         <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                        <input class="form-control" id="direccion" name="direccion"></input>
+                        <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
                     </div>
 
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
