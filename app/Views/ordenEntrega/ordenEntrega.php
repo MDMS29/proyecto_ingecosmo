@@ -284,8 +284,8 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ' , 2 )" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
-                        '<button class="btn" onclick="mostrarMaterialesEnt(' + data.id_material + ')" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
+                        '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ' , 2 )" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' 
+                        // '<button class="btn" onclick="mostrarMaterialesEnt(' + data.id_material + ')" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
 
                     );
                 },

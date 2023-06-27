@@ -337,7 +337,7 @@
     let correos = [] //Correos del Aliado.
     var validCorreo = true
     var validTel = true
-    var validRazonSocial;
+    var validRazonSocial = true;
     var validNit = true;
     var objCorreo = {
         id: 0,
@@ -374,7 +374,7 @@
             url: '<?= base_url('aliados/obtenerAliados') ?>',
             method: "POST",
             data: {
-                estado: 'I'
+                estado: 'A'
             },
             dataSrc: "",
         },
@@ -503,6 +503,7 @@
         $('#msgConfir').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+
     }
 
     function seleccionarAliado(id, tp) {
@@ -521,6 +522,7 @@
                     $('#nit').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
                     $('#btnGuardar').text('Actualizar')
+                    $('#msgDoc').text('')
                     $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 56,
@@ -546,19 +548,21 @@
             telefonos = []
             correos = []
             limpiarCampos(0)
-            guardarCorreo(0)
-            guardarTelefono(0)
+            guardarCorreo()
+            guardarTelefono()
             $('#tituloModal').text(`Agregar`)
             $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
+            $('#RazonSocial').text('')
             $('#RazonSocial').val('')
+            $('#nit').text('')
             $('#nit').val('')
+            $('#direccion').text('')
             $('#direccion').val('')
             $('#msgNit').text('')
             $('#msgRaSo').text('')
             $('#btnGuardar').text('Agregar')
-
         }
 
     }
@@ -579,9 +583,10 @@
             }
         })
     }
-    //Valor para el nit si es valido o invalido
+    //Valor para el razon si es valido o invalido
     $('#RazonSocial').on('input', function(e) {
         inputRazonSocial = $('#RazonSocial').val()
+        console.log(inputRazonSocial)
         tp = $('#tp').val()
         id = $('#id').val()
         if (tp == 1 && id == 0) {
@@ -625,6 +630,7 @@
         console.log(inputNit)
         tp = $('#tp').val()
         id = $('#id').val()
+        console.log(id)
         if (tp == 1 && id == 0) {
             buscarNit(0, inputNit)
         } else if (tp == 2 && id != 0) {

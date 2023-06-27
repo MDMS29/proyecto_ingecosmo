@@ -118,6 +118,7 @@
 
 
 <script>
+    recargarAdmin()
     var ContadorPRC = 0; //Contador DataTable
 
     // Tabla   

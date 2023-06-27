@@ -552,7 +552,6 @@
         $(`#${input3}`).val('')
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
-        $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
         $('#FotoUsuario').text('')
@@ -684,6 +683,7 @@
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
             $('#FotoUsuario').text('Foto de Usuario:')
+            $('#msgDoc').text('')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
         }
     }

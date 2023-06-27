@@ -51,7 +51,6 @@
                         <div class="mb-3" style="width: 100%;">
                             <label for="exampleDataList" class="col-form-label">Nombre:</label>
                             <input class="form-control" id="nombre" name="nombre" placeholder="">
-                            <small id="msgAgregar" class="invalidoInsumo"></small>
                         </div>
                         <div class="mb-3" style="width: 100%;">
                             <label for="existencias" class="col-form-label">Existencias:</label>
@@ -222,7 +221,6 @@
             $('#btnGuardar').text('Agregar')
         }
     }
-
     function titulo(id) {
         $.ajax({
             type: 'POST',
