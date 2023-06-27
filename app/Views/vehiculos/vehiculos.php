@@ -65,7 +65,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="placa" class="col-form-label">Placa:</label>
-                                    <input type="text" minlength="6" maxlength="8" class="form-control text-uppercase" name="placa" id="placa">
+                                    <input type="text" minlength="6" maxlength="8" class="form-control text-uppercase" name="placa" id="placa" oninput="this.value = this.value.replace(/[^a-zA-Z0-9ñ]/,'')">
                                     <input type="hidden" id="placaHidden">
                                     <small id="msgPlaca" class="invalido"></small>
                                 </div>
@@ -93,7 +93,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
                                         <label for="color" class="col-form-label">Color:</label>
-                                        <input type="text" name="color" class="form-control" id="color" minlength="4">
+                                        <input type="text" name="color" class="form-control" id="color" minlength="4" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                     </div>
                                 </div>
                             </div>

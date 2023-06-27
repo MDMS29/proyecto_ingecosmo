@@ -56,7 +56,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Nombre:</label>
-              <input class="form-control" id="nombre" name="nombre" placeholder="">
+              <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
               <input class="form-control" id="nombreHidden" name="nombreHidden" hidden>
               <small id="msgAgregar" class="invalidoInsumo"></small>
             </div>
@@ -73,12 +73,12 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
-              <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')" >
             </div>
 
             <div class="mb-3" style="width: 100%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
-              <input class="form-control" type="number" id="cantidadV" name="cantidadV" placeholder="">
+              <input class="form-control" type="text" id="cantidadV" name="cantidadV" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
@@ -87,7 +87,7 @@
               <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">$</span>
-                <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
+                <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
               </div>
             </div>
 
@@ -95,7 +95,7 @@
               <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">$</span>
-                <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+                <input class="form-control" type="text  " id="precioC" name="precioC" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
               </div>
             </div>
           </div>
