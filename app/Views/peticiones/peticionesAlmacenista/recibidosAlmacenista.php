@@ -206,6 +206,7 @@
                 data: null,
                 render: function(data, type, row) {
                     ContadorPRC = ContadorPRC + 1;
+                    
                     return "<b>" + ContadorPRC + "</b>";
                 },
             },

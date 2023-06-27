@@ -151,6 +151,7 @@
                             <p id="pa">Historial Ordenes</p>
                         </a>
                     </li>
+                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div>
                     <li>
                         <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                             <p id="pa">Peticiones</p>
@@ -178,6 +179,7 @@
                             <p id="pa">Orden de entrega</p>
                         </a>
                     </li>
+                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">4</div>
                     <li>
                         <a href="<?php echo base_url('peticiones/indexAlmacenista') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                             <p id="pa">Peticiones</p>
