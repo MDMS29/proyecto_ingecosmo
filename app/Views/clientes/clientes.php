@@ -690,12 +690,10 @@
                     }
                 }
             }).done(function(data) {
+                ContadorPRC = 0
+                tableClientes.ajax.reload(null, false); //Recargar tabla
                 $('#agregarCliente').modal('hide')
                 recargaTelCorreo()
-                setTimeout(() => {
-                    tableClientes.ajax.reload(null, false); //Recargar tabla
-                }, 3000)
-                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
                 objCorreo = {
@@ -709,7 +707,6 @@
                     tipo: '',
                     prioridad: ''
                 }
-                ContadorPRC = 0
             });
         };
     })
@@ -858,10 +855,10 @@
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                <td>
+                                ${tipo == 0 ? `<td>
                                     <button class="btn" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
-                                </td>                 
+                                </td> ` : ''}              
                             </tr>`
             }
         }
