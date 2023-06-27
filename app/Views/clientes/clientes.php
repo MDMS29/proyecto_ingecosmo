@@ -95,7 +95,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Direccion:</label>
-                                    <input class="form-control" id="direccion" name="direccion"  oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
+                                    <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
@@ -764,13 +764,12 @@
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
         const regex = /^\d{10,10}$/;
-
-        if (!regex.test(parseInt(numero))) {
-            return mostrarMensaje('error', '¡Telefono invalido!')
-        }
-
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            if (!regex.test(parseInt(numero))) {
+                return mostrarMensaje('error', '¡Telefono invalido!')
+            }
         }
         contador += 1
         let info = {
