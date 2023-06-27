@@ -617,7 +617,7 @@
         e.preventDefault()
         tp = $('#tp').val()
         id = $('#id').val()
-        $('#btnGuardar').attr('disabled', '')
+        // $('#btnGuardar').attr('disabled', '')
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
@@ -691,12 +691,10 @@
                     }
                 }
             }).done(function(data) {
+                ContadorPRC = 0
+                tableClientes.ajax.reload(null, false); //Recargar tabla
                 $('#agregarCliente').modal('hide')
                 recargaTelCorreo()
-                setTimeout(() => {
-                    tableClientes.ajax.reload(null, false); //Recargar tabla
-                }, 3000)
-                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
                 objCorreo = {
@@ -926,7 +924,7 @@
             return mostrarMensaje('error', '¡Tipo de correo invalido!')
         }
 
-        if ([correo, prioridad].includes('')) {
+        if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
         }
         let info = {
