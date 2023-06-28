@@ -183,6 +183,7 @@
         $('#msgAgregar').text('')
         $('#cantRestock').text('')
         $('#observaciont').val('')
+        $('#observaciont').text('')
     }
 
     function seleccionarRepuesto(id, tp) {
@@ -229,6 +230,7 @@
             success: function(data) {
                 $('#tituloM').text(`Observacion - ${data.nombre}`)
                 $('#observacion').text('Motivo de devolucion:')
+                $('#observaciont').val('')
                 $('#btnSig').text('Confirmar')
             }
         })
