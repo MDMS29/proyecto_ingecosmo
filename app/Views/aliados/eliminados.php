@@ -4,15 +4,15 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados Eliminados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Más Info</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Dirección</a> - <a class="toggle-vis btn" data-column="4">Más Info</a>
         </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">Razon Social</th>
+                    <th scope="col" class="text-center">Razón Social</th>
                     <th scope="col" class="text-center">NIT</th>
-                    <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Dirección</th>
                     <th scope="col" class="text-center">Más Info</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -46,7 +46,7 @@
                     <form>
                         <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                             <div class="mb-3" style="width: 100%;">
-                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                                <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social:</label>
                                 <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" disabled>
                                 <small id="msgRaSo" class="invalido"></small>
 
@@ -62,13 +62,13 @@
                         </div>
 
                         <div class="mb-3" style="width: 100%; padding-inline:20px;">
-                            <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
+                            <label style="margin:0;" class="col-form-label" for="message-text">Dirección:</label>
                             <input class="form-control" id="direccion" name="direccion" disabled></input>
                         </div>
 
                         <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                             <div class="mb-3" style="width: 100%">
-                                <label for="telefono" class="col-form-label">Telefono:</label>
+                                <label for="telefono" class="col-form-label">Teléfono:</label>
                                 <div class="d-flex">
                                     <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefonos" class="btn" style="border:none;background-color:gray;color:white;" title="Ver Telefonos">+</button>
@@ -102,7 +102,7 @@
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <i class="bi bi-eye-fill fs-4 text-dark"></i>
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Telefono</h1>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal"> Ver Teléfono</h1>
                     </div>
                     <button type="button" id="btnCerrarTel0" class="btn" data-bs-toggle="modal" data-bs-target="#verAliado" aria-label="Close">X</button>
                 </div>
@@ -112,13 +112,13 @@
                             <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
                                         <th>Prioridad</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bodyTel">
                                     <tr class="text-center">
-                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                        <td colspan="3">NO HAY TELÉFONOS</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -173,7 +173,7 @@
     </div>
 </div>
 
-<!-- Modal Confirma Reestablecer -->
+<!-- Modal Confirma Restablecer -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
@@ -186,14 +186,14 @@
                 <div class="contenidoEliminarP">
                     <div class="bloqueModalP">
                         <img style=" width:80px; height:60px; margin:10px; " src="<?php echo base_url('/img/icon-alerta.png') ?>" />
-                        <p class="textoModalP">¿Estas seguro de reestablecer este Aliado?</p>
+                        <p class="textoModalP">¿Estas seguro de restablecer este Aliado?</p>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
                 <button id="btnNo" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnRedireccion">Reestablecer</a>
+                <a id="btnSi" class="btn btnRedireccion">Restablecer</a>
             </div>
 
         </div>
@@ -392,10 +392,10 @@
 
     //Cambiar estado de "Inactivo" a "Activo"
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `ReestablecerAliado(${$(e.relatedTarget).data('href')})`)
+        $(this).find('#btnSi').attr('onclick', `RestablecerAliado(${$(e.relatedTarget).data('href')})`)
     })
 
-    function ReestablecerAliado(id) {
+    function RestablecerAliado(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('aliados/cambiarEstado') ?>",
