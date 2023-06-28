@@ -685,7 +685,6 @@
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
-            
             if (!regex.test(parseInt(numero))) {
                 return mostrarMensaje('error', '¡Telefono invalido!')
             }
