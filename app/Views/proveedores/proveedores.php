@@ -112,7 +112,7 @@
                             <div class=" flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10"  oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="correoAdd" class="col-form-label">Correo:</label>
                             <div>
-                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
