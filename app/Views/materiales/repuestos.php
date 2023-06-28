@@ -69,7 +69,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Nombre:</label>
-              <input class="form-control" id="nombre" name="nombre" placeholder="">
+              <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
               <small id="msgAgregar" class="invalido2"></small>
             </div>
 
@@ -87,7 +87,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Cantidad:</label>
-              <input class="form-control" type="number" id="cantidad" name="cantidad" placeholder="">
+              <input class="form-control" type="text" id="cantidad" name="cantidad" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 90%;">
@@ -291,7 +291,7 @@
             <div class="mb-3" style="width: 50%">
               <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
               <div>
-                <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" placeholder="">
+                <input type="text" class="form-control" id="cantidadUsar" name="cantidadUsar" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')" >
                 <small id="msgUsar" class="invalido"></small>
               </div>
             </div>

@@ -75,7 +75,7 @@
                                 </div>
 
                             </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
+                            <div class="d-flex column-gap-3" style="width: 100%" id="tipoMatCat">
                                 <div class="mb-3" style="width: 100%;">
                                     <label for="tipoMat" class="col-form-label">Tipo de Material:</label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipoMat">
@@ -98,7 +98,7 @@
 
                             <details id="datailInv" open>
                                 <summary>Materiales a entregar</summary>
-                                <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="d-flex column-gap-3" style="width: 100%" id="MatCant">
                                     <div class="mb-3" style="width: 53%;">
                                         <label for="material" class="col-form-label">Materiales:</label>
                                         <select class="form-select" name="material" id="material">
@@ -284,8 +284,8 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ' , 2 )" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' 
-                        // '<button class="btn" onclick="mostrarMaterialesEnt(' + data.id_material + ')" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
+                        '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ' , 2 )" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
+                        '<button class="btn" id="btnVer" onclick="seleccionarOrden(' + data.id_movimientoenc + ',3)" data-bs-target="#ordenModal" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
 
                     );
                 },
@@ -355,7 +355,77 @@
                     $('#logoModal').attr('src', '<?= base_url('img/editar1.png') ?>')
                     $('#logoModal').attr('width', '25')
                     $('#btnGuardar').text('Actualizar')
+
+                    $('#ordenes').removeAttr('disabled', '')
+                    $('#trabajadores').removeAttr('disabled', '')
+                    $('#btnGuardar').removeAtrr('hidden', '')
+                    $('#tipoMatCat').addClass('d-flex')
+                    $('#tipoMatCat').removeAttr('hidden', '')
+                    $('#tipoMatCat').css('display', 'flex')
+                    $('#MatCant').addClass('d-flex')
+                    $('#MatCant').css('display', 'flex')
+                    $('#MatCat').removeAttr('hidden', '')
                 }
+
+            })
+        }
+        if (tp == 3) {
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url('ordenEntrega/buscarOrden/') ?>" + id,
+                dataType: "json",
+                success: function(rs) {
+                    $('#id').val(id)
+                    $('#tp').val(2)
+                    materialesOrden = []
+                    mostrarMateriales()
+                    $('#ordenes').val(rs['id_orden'])
+                    $('#trabajadores').val(rs['id_trabajador'])
+
+                    $.ajax({
+                        type: "POST",
+                        url: "<?= base_url('ordenEntrega/buscarDetallesOrden/') ?>" + id,
+                        dataType: "json",
+                        success: function(data) {
+                            for (let i = 0; i < data.length; i++) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "<?= base_url('insumos/buscarInsumo/') ?>" + data[i].id_material,
+                                    dataType: "json",
+                                    success: function(res) {
+                                        objMaterial = {
+                                            idInv: data[i].id_movimientodet,
+                                            idMaterial: res[0].id_material,
+                                            item: materialesOrden.length + 1,
+                                            nombre: res[0].nombre,
+                                            tipo: res[0].tipo_material,
+                                            cantidad: data[i].cantidad,
+                                            precio: Number(res[0].precio_venta),
+                                            subtotal: data[i].cantidad * Number(res[0].precio_venta)
+                                        }
+                                        materialesOrden.push(objMaterial);
+                                        mostrarMateriales()
+                                    }
+                                })
+                            }
+                        }
+                    })
+
+                    $('#tituloModal').text('Ver Detalles ')
+                    $('#logoModal').attr('src', '<?= base_url('img/orden-entrega-b.png') ?>')
+                    $('#logoModal').attr('width', '25')
+
+
+                    $('#btnGuardar').attr('hidden', '')
+                    $('#ordenes').attr('disabled', '')
+                    $('#trabajadores').attr('disabled', '')
+                    $('#tipoMatCat').removeClass('d-flex')
+                    $('#tipoMatCat').css('display', 'none')
+                    $('#MatCant').removeClass('d-flex')
+                    $('#MatCant').css('display', 'none')
+                    $('#MatCant').attr('hidden', '')
+                }
+
             })
         } else {
             $('#tituloModal').text('Nueva Orden')
@@ -367,9 +437,17 @@
             $('#btnGuardar').text('Crear Nueva Orden')
             $('#ordenes').val('')
             $('#trabajadores').val('')
-            $("#tipoMat").val('');
-            $("#tipoCate").val('');
-            $("#material").val('');
+            $('#MatCant').val('')
+
+            $('#ordenes').removeAttr('disabled', '')
+            $('#trabajadores').removeAttr('disabled', '')
+            $('#btnGuardar').removeAtrr('hidden', '')
+            $('#tipoMatCat').addClass('d-flex')
+            $('#tipoMatCat').css('display', 'flex')
+            $('#tipoMatCat').removeAtrr('hidden', '')
+
+            $('#MatCant').addClass('d-flex')
+            $('#MatCant').css('display', 'flex')
 
             materialesOrden = []
             mostrarMateriales()

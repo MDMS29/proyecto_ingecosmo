@@ -681,8 +681,14 @@
         const tipo = $('#tipoTele').val()
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
-        if ([numero, prioridad].includes('') || validTel == false) {
+        const regex = /^\d{10,10}$/;
+        if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            
+            if (!regex.test(parseInt(numero))) {
+                return mostrarMensaje('error', '¡Telefono invalido!')
+            }
         }
         contador += 1
         let info = {
