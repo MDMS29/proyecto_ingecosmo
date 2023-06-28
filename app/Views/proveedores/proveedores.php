@@ -49,7 +49,7 @@
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
                             <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                             <small id="msgRaSo" class="invalido"></small>
 
                             <input hidden id="tp" name="tp">
@@ -65,7 +65,7 @@
 
                     <div class="mb-3" style="width: 100%; padding-inline:20px;">
                         <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                        <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
+                        <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
                     </div>
 
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">

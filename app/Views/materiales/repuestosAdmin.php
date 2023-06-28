@@ -50,7 +50,7 @@
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
                             <label for="exampleDataList" class="col-form-label">Nombre:</label>
-                            <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                            <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                         </div>
                         <div class="mb-3" style="width: 100%;">
                             <label for="existencias" class="col-form-label">Cantidad:</label>
