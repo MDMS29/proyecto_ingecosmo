@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="6">Direccion</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="6">Dirección</a>
         </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
@@ -15,7 +15,7 @@
                     <th scope="col" class="text-center">Tipo Documento</th>
                     <th scope="col" class="text-center">Identificación</th>
                     <th scope="col" class="text-center">Cargo</th>
-                    <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Dirección</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -72,7 +72,7 @@
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
                                         <select class="form-select form-select" name="tipoDoc" id="tipoDoc" disabled>
-                                            <option value="1" selected>Cedula de Ciudadania</option>
+                                            <option value="1" selected>Cedula de Ciudadanía</option>
                                             <option>-- Seleccione --</option>
                                         </select>
                                     </div>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="direccion" class="col-form-label">Direccion:</label>
+                                    <label for="direccion" class="col-form-label">Dirección:</label>
                                     <input type="text" name="direccion" class="form-control" id="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -104,7 +104,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="telefono" class="col-form-label">Telefono:</label>
+                                    <label for="telefono" class="col-form-label">Teléfono:</label>
                                     <div class="d-flex">
                                         <input type="number" name="telefono" class="form-control" id="telefono" disabled>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" class="btn" style="border:none;background-color:gray;color:white;">+</button>
@@ -139,7 +139,7 @@
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Telefono</h1>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Teléfono</h1>
                     </div>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
@@ -148,14 +148,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Teléfono:</label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Teléfono:</label>
                                 <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -176,7 +176,7 @@
                             <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
                                         <th>Tipo</th>
                                         <th>Prioridad</th>
                                         <th>Acciones</th>
@@ -184,7 +184,7 @@
                                 </thead>
                                 <tbody id="bodyTel">
                                     <tr class="text-center">
-                                        <td colspan="4">NO HAY TELEFONOS</td>
+                                        <td colspan="4">NO HAY TELÉFONOS</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -685,7 +685,6 @@
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
-            
             if (!regex.test(parseInt(numero))) {
                 return mostrarMensaje('error', '¡Telefono invalido!')
             }
