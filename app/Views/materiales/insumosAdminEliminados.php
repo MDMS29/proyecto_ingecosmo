@@ -189,7 +189,7 @@
         success: function(res) {
           cadena = `<option value="" selected>-- Seleccione  --</option>`
           for (let i = 0; i < res.length; i++) {
-            cadena += `<option value=${res[i].fila}>${res[i].fila}</option>`
+            cadena += `<option value=${res[i].id_fila}>${res[i].fila}</option>`
           }
           $('#fila').html(cadena)
           $('#fila').val(fila)

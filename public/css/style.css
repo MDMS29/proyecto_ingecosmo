@@ -2586,6 +2586,7 @@ select.form-control[multiple] {
 
 textarea.form-control {
   height: auto;
+  background-color: var(--grisInput);
 }
 
 .form-group {

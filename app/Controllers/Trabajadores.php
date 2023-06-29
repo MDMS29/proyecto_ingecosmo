@@ -129,7 +129,7 @@ class Trabajadores extends BaseController
         $estado = $this->request->getPost('estado');
         if ($this->trabajadores->update($id, ['estado' => $estado])) {
             if($estado == 'A'){
-                return '¡Se ha reestablecido el trabajador!';
+                return '¡Se ha restablecido el trabajador!';
             }else{
                 return '¡Se ha eliminado el trabajador!';
             }

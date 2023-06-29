@@ -5,7 +5,7 @@
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/devolucionB.png') ?>" /> Repuestos Pendientes a Devolver</h2>
     <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-        <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Exixtencias</a>
+        <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Proveedor</a> - <a class="toggle-vis btn" data-column="4">Cantidad</a>
     </div>
     <div class="table-responsive p-2">
         <table class="table table-striped" id="tableRepuestosAdmin" width="100%" cellspacing="0">
@@ -157,7 +157,7 @@
                 dataType: 'json',
                 success: function(data) {
                     $('#tp').val(2)
-                    $('#textoModalP').text(`¿Estas seguro de reestablecer el Repuesto - ${data.nombre}?`)
+                    $('#textoModalP').text(`¿Estas seguro de restablecer el Repuesto - ${data.nombre}?`)
                     $('#imgModal').attr('src', '<?php echo base_url('img/restore.png') ?>')
                     $('#btnSi').text('Resstablecer')
                 }
@@ -169,7 +169,7 @@
                 dataType: 'json',
                 success: function(data) {
                     $('#tp').val(1)
-                    $('#textoModalP').text(`Confirmar la devolucion del Repuesto - ${data.nombre}`)
+                    $('#textoModalP').text(`Confirmar la devolución del Repuesto - ${data.nombre}`)
                     $('#imgModal').attr('src', '<?php echo base_url('img/comfirmarB.png') ?>')
                     $('#btnSi').text('Confirmar')
                 }
@@ -238,7 +238,7 @@
         }, 500);
     })
 
-    function ReestablecerRepuesto(id) {
+    function RestablecerRepuesto(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
@@ -250,7 +250,7 @@
             $('#modalConfirmarP').modal('hide')
             contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
-            return mostrarMensaje('success', '¡Se ha reestablecido el repuesto!')
+            return mostrarMensaje('success', '¡Se ha restablecido el repuesto!')
         })
     }
 

@@ -36,9 +36,9 @@
 <!-- modal Ver Peticion -->
 <div class="modal fade" id="verPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <input type="text" name="id" id="id" hidden>
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
-            <div class="modal-content" style="height: 100%;">
+            <div class="modal-content" >
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i><span id="tituloModal"><!--texto--></span> </h1>
@@ -66,13 +66,11 @@
                                 <input type="time" name="horaP2" class="form-control" id="horaP2" disabled>
                             </div>
                         </div>
-                        <br>
-
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <details open>
-                                    <summary>Descripcion del Envio</summary>
-                                    <textarea name="txtDescripcion2" id="txtDescripcion2" class="form-control w-100 p-1" rows="3" disabled></textarea>
+                                    <summary style="color: #1b335b; font-weight: 600;">Descripcion del Envio</summary>
+                                    <textarea  name="txtDescripcion2" id="txtDescripcion2" class="form-control w-100 p-1" rows="3" disabled></textarea>
                                 </details>
                             </div>
                         </div>
@@ -119,7 +117,6 @@
 
 <script>
     recargarAdmin()
-    var ContadorPRC = 0; //Contador DataTable
 
     // Tabla   
     var tablaAdminEnviados = $("#tablePeticiones").DataTable({
@@ -135,11 +132,7 @@
             [0, 'desc']
         ],
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
-                },
+                data: 'id_peticion'
             },
             {
                 data: 'asunto'
@@ -163,7 +156,16 @@
                 data: 'hora_res_pet'
             },
             {
-                data: 'estado'
+                data: null,
+                render: function(data, type, row) {
+                    let vistoClass
+                    if (row.estado == 'Aceptado') {
+                        vistoClass="text-success fw-bold"
+                    } else if(row.estado == 'Denegado') {
+                        vistoClass="text-danger fw-bold"
+                    }
+                    return '<span class="' + vistoClass + '"> ' + row.estado + ' </span>';
+                }
             },
             {
                 data: null,
