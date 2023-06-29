@@ -19,6 +19,7 @@
                     <th scope="col" class="text-center">Fecha de Respuesta</th>
                     <th scope="col" class="text-center">Hora de Respuesta</th>
                     <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Visto</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -235,12 +236,30 @@
                 data: 'estado'
             },
             {
+                data: 'visto',
+                render: function(data, type, row) {
+                    let vistoClass
+                    let vistoInfo
+                    if (row.visto == 'S') {
+                        vistoClass="valido"
+                        vistoInfo="Leido"
+                    } else {
+                        vistoClass="invalido"
+                        vistoInfo="No leido"
+                    }
+                    return '<span id="msgNit" class="' + vistoClass + '"> ' + vistoInfo + ' </span>';
+                    
+                   
+
+                }
+            },
+            {
                 data: null,
                 render: function(data, type, row) {
                     return (
                         '<button class="btn text-primary" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#verPeticion" data-bs-toggle="modal" width="20" title="Ver Peticion"><i class="bi bi-eye-fill fs-4"></i></button>'
                     );
-                },
+                }
             }
         ],
         "language": {
@@ -276,8 +295,8 @@
                     visto
                 },
                 dataType: 'json',
-                success: function(data){
-                    if(data==1){
+                success: function(data) {
+                    if (data == 1) {
                         recargarAlmacenista()
                     }
                 }

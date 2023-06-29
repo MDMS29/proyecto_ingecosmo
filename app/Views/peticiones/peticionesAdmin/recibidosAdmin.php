@@ -234,6 +234,7 @@
                     mostrarMensaje('success', '¡Se ha respondido la Peticion!')
                 }
             }).done(function(data) {
+                recargarAdmin()
                 recargarAlmacenista()
                 $('#responderPeticion').modal('hide')
                 tablePeticiones.ajax.reload(null, false); //Recargar tabla
@@ -242,5 +243,4 @@
             });
         };
     })
-
 </script>

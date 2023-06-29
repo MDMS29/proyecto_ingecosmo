@@ -78,7 +78,10 @@ table {
 /* -- CONTRASEÑA -- */
 
 #msgConfir.valido,
-#msgConfirRes.valido {
+#msgConfirRes.valido{
+  color: green !important;
+}
+#msgNit.valido {
   color: green !important;
 }
 

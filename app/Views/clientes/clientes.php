@@ -916,14 +916,15 @@
         const editCorreo = $('#editCorreo').val();
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!regex.test(correo)) {
-            validCorreo = false
-            return mostrarMensaje('error', '¡Tipo de correo invalido!')
-        }
-
         if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {            
+            if (!regex.test(correo)) {
+                validCorreo = false
+                return mostrarMensaje('error', '¡Tipo de correo invalido!')
+            }
         }
+
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,
