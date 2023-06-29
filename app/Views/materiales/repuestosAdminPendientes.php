@@ -212,8 +212,8 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',1)"><img src="<?php echo base_url("img/confirmar.png") ?>" alt="Boton Confirmar" title="Devolver Repuesto" width="24"></button>' +
-                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',2)"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restaurar" title="Restaurar Repuesto" width="20"></button>'
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" value="1" onclick="seleccionarRepuesto(' + data.id_material + ',1)"><img src="<?php echo base_url("img/confirmar.png") ?>" alt="Boton Confirmar" title="Devolver Repuesto" width="24"></button>' +
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" value="2" onclick="seleccionarRepuesto(' + data.id_material + ',2)"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restaurar" title="Restaurar Repuesto" width="20"></button>'
                     );
                 },
             }
@@ -227,13 +227,15 @@
 
     // Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
-        tp = $('#tp').val()
-        console.log(tp) //
-        if (tp == 2) {
-            $(this).find('#btnSi').attr('onclick', `RestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
-        } else {
-            $(this).find('#btnSi').attr('onclick', `RepuestoConfirmado(${$(e.relatedTarget).data('href')})`)
-        }
+        setTimeout(() => {
+            tp = $('#tp').val()
+            console.log(tp) //
+            if (tp == 2) {
+                $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
+            } else {
+                $(this).find('#btnSi').attr('onclick', `RepuestoConfirmado(${$(e.relatedTarget).data('href')})`)
+            }
+        }, 500);
     })
 
     function RestablecerRepuesto(id) {
@@ -264,7 +266,7 @@
             dataType: 'json',
             success: function(data) {
                 proveedor = data['razon_social']
-                orden = data['numeroOrden'] 
+                orden = data['numeroOrden']
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
