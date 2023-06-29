@@ -55,26 +55,26 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
-                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
+                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                     <input hidden id="tp" name="tp">
                                     <input hidden id="id" name="id">
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Segundo Nombre:</label>
-                                    <input class="form-control" id="nombreS" name="nombreS"></input>
+                                    <input class="form-control" id="nombreS" name="nombreS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido:</label>
-                                    <input class="form-control" id="apellidoP" name="apellidoP"></input>
+                                    <input class="form-control" id="apellidoP" name="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></input>
                                 </div>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido:</label>
-                                    <input class="form-control" id="apellidoS" name="apellidoS"></input>
+                                    <input class="form-control" id="apellidoS" name="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
@@ -87,7 +87,7 @@
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
-                                    <input class="form-control" id="nIdenti" name="nIdenti" type="number"></input>
+                                    <input class="form-control" id="nIdenti" name="nIdenti" type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                                     <small id="msgDoc" class="invalido"></small>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Direccion:</label>
-                                    <input class="form-control" id="direccion" name="direccion"></input>
+                                    <input class="form-control" id="direccion" name="direccion"  oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
@@ -145,7 +145,7 @@
                             <div class="flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono:</label>
                                 <div>
-                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="correoAdd" class="col-form-label">Correo:</label>
                             <div>
-                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
@@ -447,7 +447,6 @@
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
-        $('#msgDoc').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
     }
@@ -691,12 +690,10 @@
                     }
                 }
             }).done(function(data) {
+                ContadorPRC = 0
+                tableClientes.ajax.reload(null, false); //Recargar tabla
                 $('#agregarCliente').modal('hide')
                 recargaTelCorreo()
-                setTimeout(() => {
-                    tableClientes.ajax.reload(null, false); //Recargar tabla
-                }, 3000)
-                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
                 objCorreo = {
@@ -710,7 +707,6 @@
                     tipo: '',
                     prioridad: ''
                 }
-                ContadorPRC = 0
             });
         };
     })
@@ -859,10 +855,10 @@
                                 <td>${telefonos[i].numero}</td>
                                 <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
                                 <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                <td>
+                                ${tipo == 0 ? `<td>
                                     <button class="btn" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
                                     <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
-                                </td>                 
+                                </td> ` : ''}              
                             </tr>`
             }
         }

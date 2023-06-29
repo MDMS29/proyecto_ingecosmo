@@ -66,13 +66,11 @@ class TercerosModel extends Model
 
             $this->select('terceros.*, ');
             $this->where('n_identificacion', $nit);
-            $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '8');
         } elseif ($razonSocial != 0) {
 
             $this->select('terceros.*, ');
             $this->where('razon_social', $razonSocial);
-            $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '8');
         } elseif ($id != 0 && $nit != 0) {
 
@@ -121,13 +119,11 @@ class TercerosModel extends Model
 
             $this->select('terceros.*, ');
             $this->where('n_identificacion', $nit);
-            $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '56');
         } elseif ($razonSocial != 0) {
 
             $this->select('terceros.*, ');
             $this->where('razon_social', $razonSocial);
-            $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '56');
         } elseif ($id != 0 && $nit != 0) {
 
@@ -176,7 +172,6 @@ class TercerosModel extends Model
         } elseif ($nIdenti != 0) {
             $this->select('terceros.*, ');
             $this->where('n_identificacion', $nIdenti);
-            $this->where('terceros.estado', 'A');
             $this->where('tipo_tercero', '5');
         } elseif ($id != 0 && $nIdenti != 0) {
             $this->select('terceros.*');

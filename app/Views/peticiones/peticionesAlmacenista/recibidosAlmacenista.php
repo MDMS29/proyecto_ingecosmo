@@ -177,6 +177,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    recargarAlmacenista()
     var ContadorPRC = 0; //Contador DataTable
     // para asignarle la fecha actual al input date
     var fechaActual = new Date();
@@ -267,6 +268,21 @@
             $('#estado2').val(res[0]['tipo_validacion'])
             $('#fechaRespuesta2').val(res[0]['fecha_res_pet'])
             $('#respuesta2').val(res[0]['msg_receptor'])
+            let visto = "S"
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('peticiones/vistoPeticiones/') ?>' + id,
+                data: {
+                    visto
+                },
+                dataType: 'json',
+                success: function(data){
+                    if(data==1){
+                        recargarAlmacenista()
+                    }
+                }
+            })
         })
     }
 
@@ -286,8 +302,8 @@
         $('#btnGuardar').removeAttr('hidden', '')
     }
 
-       //Envio de formulario
-       $('#formularioAlmacenista').on('submit', function(e) {
+    //Envio de formulario
+    $('#formularioAlmacenista').on('submit', function(e) {
         e.preventDefault()
         id = $('#id').val()
         asunto = $('#asunto').val()

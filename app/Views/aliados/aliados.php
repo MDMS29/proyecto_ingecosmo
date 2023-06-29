@@ -48,19 +48,19 @@
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                                 <div class="mb-3" style="width: 100%;">
                                     <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial">
+                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                     <small id="msgRaSo" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%; ">
                                     <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
-                                    <input type="text" class="form-control" id="nit" name="nit"></input>
+                                    <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                                     <small id="msgNit" class="invalido"></small>
                                 </div>
                             </div>
 
                             <div class="mb-3" style="width: 100%; padding-inline:20px;">
                                 <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                                <input class="form-control" id="direccion" name="direccion"></input>
+                                <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
@@ -337,7 +337,7 @@
     let correos = [] //Correos del Aliado.
     var validCorreo = true
     var validTel = true
-    var validRazonSocial;
+    var validRazonSocial = true;
     var validNit = true;
     var objCorreo = {
         id: 0,
@@ -374,7 +374,7 @@
             url: '<?= base_url('aliados/obtenerAliados') ?>',
             method: "POST",
             data: {
-                estado: 'I'
+                estado: 'A'
             },
             dataSrc: "",
         },
@@ -503,6 +503,7 @@
         $('#msgConfir').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+
     }
 
     function seleccionarAliado(id, tp) {
@@ -521,6 +522,7 @@
                     $('#nit').val(res[0]['n_identificacion'])
                     $('#direccion').val(res[0]['direccion'])
                     $('#btnGuardar').text('Actualizar')
+                    $('#msgDoc').text('')
                     $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 56,
@@ -546,19 +548,21 @@
             telefonos = []
             correos = []
             limpiarCampos(0)
-            guardarCorreo(0)
-            guardarTelefono(0)
+            guardarCorreo()
+            guardarTelefono()
             $('#tituloModal').text(`Agregar`)
             $('#logoModal').attr('src', '<?php echo base_url('img/plus-b.png') ?>')
             $('#tp').val(1)
             $('#id').val(0)
+            $('#RazonSocial').text('')
             $('#RazonSocial').val('')
+            $('#nit').text('')
             $('#nit').val('')
+            $('#direccion').text('')
             $('#direccion').val('')
             $('#msgNit').text('')
             $('#msgRaSo').text('')
             $('#btnGuardar').text('Agregar')
-
         }
 
     }
@@ -579,9 +583,10 @@
             }
         })
     }
-    //Valor para el nit si es valido o invalido
+    //Valor para el razon si es valido o invalido
     $('#RazonSocial').on('input', function(e) {
         inputRazonSocial = $('#RazonSocial').val()
+        console.log(inputRazonSocial)
         tp = $('#tp').val()
         id = $('#id').val()
         if (tp == 1 && id == 0) {
@@ -625,6 +630,7 @@
         console.log(inputNit)
         tp = $('#tp').val()
         id = $('#id').val()
+        console.log(id)
         if (tp == 1 && id == 0) {
             buscarNit(0, inputNit)
         } else if (tp == 2 && id != 0) {

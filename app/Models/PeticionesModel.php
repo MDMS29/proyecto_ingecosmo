@@ -14,7 +14,7 @@ class PeticionesModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['id_peticion', 'emisor', 'receptor', 'asunto', 'msg_emisor', 'msg_receptor', 'tipo_validacion', 'fecha_envio_pet', 'fecha_res_pet', 'hora_envio_pet', 'hora_res_pet', 'usuario_crea', 'fecha_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['id_peticion', 'emisor', 'receptor', 'asunto', 'msg_emisor', 'msg_receptor', 'tipo_validacion','visto', 'fecha_envio_pet', 'fecha_res_pet', 'hora_envio_pet', 'hora_res_pet', 'usuario_crea', 'fecha_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = ''; /*fecha automatica para la creacion */
@@ -59,6 +59,21 @@ class PeticionesModel extends Model
         $this->join('vw_usuarios', 'vw_usuarios.id_usuario=peticiones.receptor', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = peticiones.tipo_validacion');
         $this->where('peticiones.id_peticion', $id);
+        $data = $this->first();
+        return $data;
+    }
+
+    public function contadorPeticiones(){
+        $this->select("count(id_peticion) as contadorPet");
+        $this->where('peticiones.tipo_validacion', '64');
+        $data = $this->first();
+        return $data;
+    }
+
+    public function contadorPeticionesAlmacenista($id){
+        $this->select("count(visto) as contadorVisto");
+        $this->where('peticiones.visto', 'N');
+        $this->where('peticiones.emisor', $id);
         $data = $this->first();
         return $data;
     }

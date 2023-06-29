@@ -42,6 +42,7 @@ class Peticiones extends BaseController
 
     public function buscarPeticion($id)
     {
+
         $array = array();
         $data = $this->peticiones->buscarPeticion($id);
         array_push($array, $data);
@@ -94,6 +95,7 @@ class Peticiones extends BaseController
         date_default_timezone_set('America/Bogota');
         $idPeticion = $this->request->getPost('id');
         $asunto = $this->request->getPost('asunto');
+        $visto = $this->request->getPost('visto');
         $fechaP = date('Y-m-d');
         $horaP = date("H:i:s");
 
@@ -116,11 +118,35 @@ class Peticiones extends BaseController
             'fecha_res_pet' => $fechaRes,
             'hora_res_pet' => $horaRes,
             'msg_receptor' => $respuesta,
+            'visto' => $visto,
             'usuario_crea' => $usuarioCrea
 
         ];
         $this->peticiones->update($idPeticion, $peticionUpdate);
         return $idPeticion;
         return json_encode($this->peticiones->getInsertID());
+    }
+
+    public function contadorPeticiones()
+    {
+        $contador = $this->peticiones->contadorPeticiones();
+        return json_encode($contador);
+    }
+
+    public function contadorPeticionesAlmacenista($id)
+    {
+        $contador = $this->peticiones->contadorPeticionesAlmacenista($id);
+        return json_encode($contador);
+    }
+
+    public function vistoPeticiones($id)
+    {
+        $visto = $this->request->getPost('visto');
+        // var_dump($visto);
+        if ($this->peticiones->update($id, ['visto' => $visto])) {
+            return json_encode(1);
+        } else {
+            return json_encode(2);
+        }
     }
 }
