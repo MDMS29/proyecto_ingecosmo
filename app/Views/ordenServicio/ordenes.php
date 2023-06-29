@@ -1727,7 +1727,7 @@
                     $('#vehiculoT').val('')
                     $('#vehiculoT').attr('hidden', '')
                     obtenerVehiculos()
-                    $('#btnGuardar').remove('disabled')
+                    $('#btnGuardar').removeAttr('disabled')
                     tablaOrdenes.ajax.reload(null, false)
                 }
             })
