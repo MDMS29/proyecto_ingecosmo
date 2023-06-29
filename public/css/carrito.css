@@ -14,9 +14,8 @@
 
 
 
-/* -- BOTONES GENERALES -- */
-input[class="form-control"] {
-    background-color: var(--grisInput);
+/* -- BOTONES GENERALES --
+-grisInput);
 }
 
 .btnRedireccion {
@@ -27,6 +26,7 @@ input[class="form-control"] {
 .btnAccionF {
     background-color: var(--azulBase) !important;
     color: white !important;
+    color: rgb(235, 154, 4);
 }
 
 .btnEditar {

@@ -55,26 +55,26 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
-                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                     <input hidden id="tp" name="tp">
                                     <input hidden id="id" name="id">
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Segundo Nombre:</label>
-                                    <input class="form-control" id="nombreS" name="nombreS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></input>
+                                    <input class="form-control" id="nombreS" name="nombreS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido:</label>
-                                    <input class="form-control" id="apellidoP" name="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></input>
+                                    <input class="form-control" id="apellidoP" name="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido:</label>
-                                    <input class="form-control" id="apellidoS" name="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></input>
+                                    <input class="form-control" id="apellidoS" name="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
@@ -95,7 +95,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Direccion:</label>
-                                    <input class="form-control" id="direccion" name="direccion"  oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
+                                    <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
@@ -616,7 +616,7 @@
         e.preventDefault()
         tp = $('#tp').val()
         id = $('#id').val()
-        $('#btnGuardar').attr('disabled', '')
+        // $('#btnGuardar').attr('disabled', '')
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()
         apellidoP = $('#apellidoP').val()
@@ -764,13 +764,12 @@
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
         const regex = /^\d{10,10}$/;
-
-        if (!regex.test(parseInt(numero))) {
-            return mostrarMensaje('error', '¡Telefono invalido!')
-        }
-
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            if (!regex.test(parseInt(numero))) {
+                return mostrarMensaje('error', '¡Telefono invalido!')
+            }
         }
         contador += 1
         let info = {
@@ -917,14 +916,15 @@
         const editCorreo = $('#editCorreo').val();
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!regex.test(correo)) {
-            validCorreo = false
-            return mostrarMensaje('error', '¡Tipo de correo invalido!')
+        if ([correo, prioridad].includes('') || validCorreo == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {            
+            if (!regex.test(correo)) {
+                validCorreo = false
+                return mostrarMensaje('error', '¡Tipo de correo invalido!')
+            }
         }
 
-        if ([correo, prioridad].includes('')) {
-            return mostrarMensaje('error', '¡Hay campos vacios!')
-        }
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,

@@ -337,7 +337,7 @@
         color = $('#color').val()
         combustible = $('#combustible').val()
         $('#brnGuardar').attr('disabled', '')
-        if ([tipoCliente, cliente, placa, marca, nFabrica, color, kms, combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
+        if ([tipoCliente, cliente, placa, marca, nFabrica, color,  combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({

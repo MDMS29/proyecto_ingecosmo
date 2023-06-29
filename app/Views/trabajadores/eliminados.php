@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:50px; height:50px; " src="<?php echo base_url('/img/trabajadores-n.png') ?>" /> Trabajadores Eliminados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="6">Direccion</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="3">Tipo Documento</a> - <a class="toggle-vis btn" data-column="4">Identificación</a> - <a class="toggle-vis btn" data-column="6">Dirección</a>
         </div>
         <table class="table table-striped" id="tableTrabajadores" width="100%" cellspacing="0">
             <thead>
@@ -15,7 +15,7 @@
                     <th scope="col" class="text-center">Tipo Documento</th>
                     <th scope="col" class="text-center">Identificación</th>
                     <th scope="col" class="text-center">Cargo</th>
-                    <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Dirección</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="direccion" class="col-form-label">Direccion:</label>
+                                <label for="direccion" class="col-form-label">Dirección:</label>
                                 <input type="text" name="direccion" class="form-control" id="direccion" disabled>
                             </div>
                             <div class="mb-3" style="width: 100%">
@@ -101,7 +101,7 @@
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="telefono" class="col-form-label">Telefono:</label>
+                                <label for="telefono" class="col-form-label">Teléfono:</label>
                                 <div class="d-flex">
                                     <input type="number" name="telefono" class="form-control" id="telefono" disabled>
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#verTelefonos" class="btn" style="border:none;background-color:gray;color:white;" title="Ver Telefonos">+</button>
@@ -133,7 +133,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal">Ver Telefonos</span></h1>
+                        <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4"></i><span id="tituloModal">Ver Teléfonos</span></h1>
                     </div>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verTrabajador" aria-label="Close">X</button>
                 </div>
@@ -143,13 +143,13 @@
                             <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
                                         <th>Prioridad</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bodyTel">
                                     <tr class="text-center">
-                                        <td colspan="3">NO HAY TELEFONOS</td>
+                                        <td colspan="3">NO HAY TELÉFONOS</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -204,7 +204,7 @@
 </div>
 
 
-<!-- Modal Confirma Reestablecer -->
+<!-- Modal Confirma Restablecer -->
 <div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
 
@@ -224,7 +224,7 @@
             </div>
             <div id="bloqueBtnP" class="modal-footer">
                 <button id="btnNo" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
-                <a id="btnSi" class="btn btnRedireccion">Reestablecer</a>
+                <a id="btnSi" class="btn btnRedireccion">Restablecer</a>
             </div>
 
         </div>
@@ -392,10 +392,10 @@
     }
     //Cambiar estado de "Eliminado" a "Activo"
     $('#modalConfirmar').on('shown.bs.modal', function(e) {
-        $(this).find('#btnSi').attr('onclick', `ReestaurarTrabajadores(${$(e.relatedTarget).data('href')})`)
+        $(this).find('#btnSi').attr('onclick', `RestaurarTrabajadores(${$(e.relatedTarget).data('href')})`)
     })
 
-    function ReestaurarTrabajadores(id) {
+    function RestaurarTrabajadores(id) {
         $.ajax({
             url: "<?php echo base_url('trabajadores/cambiarEstado') ?>",
             type: "POST",

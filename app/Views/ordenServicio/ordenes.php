@@ -589,7 +589,7 @@
                                     <div class="mb-3">
                                         <input type="text" id="idObser" hidden>
                                         <label for="observaciones" class="col-form-label d-block">Observaciones:</label>
-                                        <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')"></textarea>
+                                        <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1727,7 +1727,7 @@
                     $('#vehiculoT').val('')
                     $('#vehiculoT').attr('hidden', '')
                     obtenerVehiculos()
-                    $('#btnGuardar').remove('disabled')
+                    $('#btnGuardar').removeAttr('disabled')
                     tablaOrdenes.ajax.reload(null, false)
                 }
             })

@@ -105,7 +105,7 @@ class Aliados extends BaseController
         $estado = $this->request->getPost('estado');
         if ($this->aliados->update($id, ['estado' => $estado])) {
             if($estado == 'A'){
-                return '¡Se ha reestablecido el aliado!';
+                return '¡Se ha restablecido el aliado!';
             }else{
                 return '¡Se ha eliminado el aliado!';
             }

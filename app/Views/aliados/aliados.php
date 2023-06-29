@@ -4,15 +4,15 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/Aliados.png') ?>" /> Aliados</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Direccion</a> - <a class="toggle-vis btn" data-column="4">Más Info</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">NIT</a> - <a class="toggle-vis btn" data-column="3">Dirección</a> - <a class="toggle-vis btn" data-column="4">Más Info</a>
         </div>
         <table class="table table-striped" id="tableAliados" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">Razon Social</th>
+                    <th scope="col" class="text-center">Razón Social</th>
                     <th scope="col" class="text-center">NIT</th>
-                    <th scope="col" class="text-center">Direccion</th>
+                    <th scope="col" class="text-center">Dirección</th>
                     <th scope="col" class="text-center">Más Info</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -47,8 +47,8 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social:</label>
+                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                     <small id="msgRaSo" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%; ">
@@ -59,15 +59,15 @@
                             </div>
 
                             <div class="mb-3" style="width: 100%; padding-inline:20px;">
-                                <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                                <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
+                                <label style="margin:0;" class="col-form-label" for="message-text">Dirección:</label>
+                                <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="telefono" class="col-form-label">Telefono:</label>
+                                    <label for="telefono" class="col-form-label">Teléfono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <input type="text" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;" >
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Telefono</h1>
+                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Agregar Teléfono</h1>
                     </div>
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
@@ -109,14 +109,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Teléfono:</label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Teléfono:</label>
                                 <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -137,7 +137,7 @@
                             <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
                                         <th>Tipo</th>
                                         <th>Prioridad</th>
                                         <th>Acciones</th>
@@ -145,7 +145,7 @@
                                 </thead>
                                 <tbody id="bodyTel">
                                     <tr class="text-center">
-                                        <td colspan="4">NO HAY TELEFONOS</td>
+                                        <td colspan="4">NO HAY TELÉFONOS</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -182,7 +182,7 @@
                             <div class="d-flex gap-2" style="width: 100%;">
                                 <label for="correoAdd" class="col-form-label">Correo:</label>
                                 <div>
-                                    <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                    <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                     <small id="msgCorreo" class="invalido"></small>
                                 </div>
                             </div>

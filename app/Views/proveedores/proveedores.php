@@ -35,7 +35,7 @@
             <div class="modal-content">
 
                 <div class="modal-header" id="modalHeader">
-                    <img  src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
+                    <img src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100" />
 
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus">
@@ -49,7 +49,7 @@
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
                             <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,' ')">
                             <small id="msgRaSo" class="invalido"></small>
 
                             <input hidden id="tp" name="tp">
@@ -179,7 +179,7 @@
                         <div class="d-flex gap-2" style="width: 100%;">
                             <label for="correoAdd" class="col-form-label">Correo:</label>
                             <div>
-                                <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
@@ -643,11 +643,8 @@
                     }
                 }
             }).done(function(data) {
+                tableProveedores.ajax.reload(null, false); //Recargar tabla
                 $('#agregarProveedor').modal('hide')
-                recargaTelCorreo()
-                setTimeout(() => {
-                    tableProveedores.ajax.reload(null, false); //Recargar tabla
-                }, 3000)
                 ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled') //jumm
                 $('#editTele').val('');
@@ -767,12 +764,12 @@
         const editTel = $('#editTele').val();
         const regex = /^\d{10,10}$/;
 
-        if (!regex.test(parseInt(numero))) {
-            return mostrarMensaje('error', '¡Telefono invalido!')
-        }
-
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            if (!regex.test(parseInt(numero))) {
+                return mostrarMensaje('error', '¡Telefono invalido!')
+            }
         }
         contador += 1
         let info = {
@@ -923,14 +920,15 @@
         const editCorreo = $('#editCorreo').val();
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!regex.test(correo)) {
-            validCorreo = false
-            return mostrarMensaje('error', '¡Tipo de correo invalido!')
+        if ([correo, prioridad].includes('') || validCorreo == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {
+            if (!regex.test(correo)) {
+                validCorreo = false
+                return mostrarMensaje('error', '¡Tipo de correo invalido!')
+            }
         }
 
-        if ([correo, prioridad].includes('')) {
-            return mostrarMensaje('error', '¡Hay campos vacios!')
-        }
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,

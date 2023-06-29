@@ -74,25 +74,25 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Nombre:</label>
-              <input class="form-control" id="nombre" name="nombre" placeholder="">
+              <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
               <small id="msgAgregar" class="invalido2"></small>
             </div>
 
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
-              <input class="form-control" type="number" id="precioC" name="precioC" placeholder="">
+              <input class="form-control" type="text" id="precioC" name="precioC" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
-              <input class="form-control" type="number" id="precioV" name="precioV" placeholder="">
+              <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Ingresada:</label>
-              <input class="form-control" type="number" id="cantidadA" name="cantidadA" placeholder="">
+              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
