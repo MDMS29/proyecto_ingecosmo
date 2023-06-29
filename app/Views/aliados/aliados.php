@@ -48,7 +48,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                                 <div class="mb-3" style="width: 100%;">
                                     <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social:</label>
-                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                     <small id="msgRaSo" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%; ">
@@ -60,14 +60,14 @@
 
                             <div class="mb-3" style="width: 100%; padding-inline:20px;">
                                 <label style="margin:0;" class="col-form-label" for="message-text">Dirección:</label>
-                                <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
+                                <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Teléfono:</label>
                                     <div class="d-flex">
-                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <input type="text" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;" >
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                             <div class=" flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Teléfono:</label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10">
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                             <div class="d-flex gap-2" style="width: 100%;">
                                 <label for="correoAdd" class="col-form-label">Correo:</label>
                                 <div>
-                                    <input type="email" name="correoAdd" class="form-control" id="correoAdd">
+                                    <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                     <small id="msgCorreo" class="invalido"></small>
                                 </div>
                             </div>
