@@ -123,11 +123,7 @@
             [0, 'desc']
         ],
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
-                },
+                data: 'id_peticon'
             },
             {
                 data: 'asunto'
