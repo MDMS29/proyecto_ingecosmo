@@ -53,7 +53,7 @@
                             </thead>
                             <tbody id="bodyTel1">
                                 <tr class="text-center">
-                                    <td colspan="3">NO HAY TELEFONOS</td>
+                                    <td colspan="3">NO HAY MATERIALES</td>
                                 </tr>
                             </tbody>
                         </table>
