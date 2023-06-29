@@ -192,7 +192,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnAccionF" data-bs-toggle="modal">Cerrar</button>
+
             </div>
         </div>
     </div>
@@ -355,16 +355,13 @@
                     $('#logoModal').attr('src', '<?= base_url('img/editar1.png') ?>')
                     $('#logoModal').attr('width', '25')
                     $('#btnGuardar').text('Actualizar')
+                    $('#btnGuardar').removeAttr('hidden', '')
 
                     $('#ordenes').removeAttr('disabled', '')
                     $('#trabajadores').removeAttr('disabled', '')
-                    $('#btnGuardar').removeAtrr('hidden', '')
-                    $('#tipoMatCat').addClass('d-flex')
                     $('#tipoMatCat').removeAttr('hidden', '')
-                    $('#tipoMatCat').css('display', 'flex')
                     $('#MatCant').addClass('d-flex')
-                    $('#MatCant').css('display', 'flex')
-                    $('#MatCat').removeAttr('hidden', '')
+                    $('#MatCant').removeAttr('hidden', '')
                 }
 
             })
@@ -439,15 +436,12 @@
             $('#trabajadores').val('')
             $('#MatCant').val('')
 
+            $('#btnGuardar').removeAttr('hidden', '')
             $('#ordenes').removeAttr('disabled', '')
             $('#trabajadores').removeAttr('disabled', '')
-            $('#btnGuardar').removeAtrr('hidden', '')
-            $('#tipoMatCat').addClass('d-flex')
-            $('#tipoMatCat').css('display', 'flex')
-            $('#tipoMatCat').removeAtrr('hidden', '')
-
+            $('#tipoMatCat').removeAttr('hidden', '')
             $('#MatCant').addClass('d-flex')
-            $('#MatCant').css('display', 'flex')
+            $('#MatCant').removeAttr('hidden', '')
 
             materialesOrden = []
             mostrarMateriales()
