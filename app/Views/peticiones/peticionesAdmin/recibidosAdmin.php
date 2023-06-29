@@ -158,7 +158,10 @@
                 data: 'hora_envio_pet'
             },
             {
-                data: 'estado'
+                data: null,
+                render: function(data, type, row) {
+                    return '<span class="fw-bold" style="color: rgb(235, 154, 4);">' + row.estado + '</span>'
+                }
             },
             {
                 data: null,
@@ -166,7 +169,7 @@
                     return (
                         '<button class="btn" onclick="seleccionarPeticion(' + data.id_peticion + ')" data-bs-target="#responderPeticion" data-bs-toggle="modal" width="20" title="Responder Peticion"><i class="bi bi-reply-all fs-4"></i></button>'
                     );
-                },
+                }
             }
         ],
         "language": {

@@ -233,7 +233,16 @@
                 data: 'hora_res_pet'
             },
             {
-                data: 'estado'
+                data: null,
+                render: function(data, type, row) {
+                    let vistoClass
+                    if (row.estado == 'Aceptado') {
+                        vistoClass="text-success fw-bold"
+                    } else if(row.estado == 'Denegado') {
+                        vistoClass="text-danger fw-bold"
+                    }
+                    return '<span class="' + vistoClass + '"> ' + row.estado + ' </span>';
+                }
             },
             {
                 data: 'visto',
@@ -241,16 +250,13 @@
                     let vistoClass
                     let vistoInfo
                     if (row.visto == 'S') {
-                        vistoClass="valido"
+                        vistoClass="text-success fw-bold"
                         vistoInfo="Leido"
                     } else {
-                        vistoClass="invalido"
+                        vistoClass="text-danger fw-bold"
                         vistoInfo="No leido"
                     }
-                    return '<span id="msgNit" class="' + vistoClass + '"> ' + vistoInfo + ' </span>';
-                    
-                   
-
+                    return '<span class="' + vistoClass + '"> ' + vistoInfo + ' </span>';
                 }
             },
             {

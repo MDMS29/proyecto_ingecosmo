@@ -55,7 +55,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
-                                    <input type="text" name="asunto" class="form-control" id="asunto"  oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
+                                    <input type="text" name="asunto" class="form-control" id="asunto" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
@@ -142,7 +142,10 @@
                 data: 'hora_envio_pet'
             },
             {
-                data: 'estado'
+                data: null,
+                render: function(data, type, row) {
+                    return '<span class="fw-bold" style="color: rgb(235, 154, 4);">' + row.estado + '</span>'
+                }
             },
             {
                 data: null,
