@@ -652,6 +652,9 @@
             if (tp == 1) {
                 mostrarMensaje('success', '¡Se ha Guardado la Orden de Entrega!')
                 $('#ordenModal').modal('hide')
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000);
             } else {
                 mostrarMensaje('success', '¡Se ha Actualizado la Orden de Entrega!')
                 $('#ordenModal').modal('hide')

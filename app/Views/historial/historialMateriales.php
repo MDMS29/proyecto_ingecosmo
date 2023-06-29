@@ -18,7 +18,6 @@
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Subtotal</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
-                    <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -135,14 +134,7 @@
             {
                 data: "tipo_movimiento"
             },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return (
-                        '<button class="btn" data-bs-target="#verDetalles" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
-                    );
-                },
-            }
+     
 
 
         ],
