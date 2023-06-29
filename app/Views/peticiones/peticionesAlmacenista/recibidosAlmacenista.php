@@ -13,11 +13,11 @@
                     <th scope="col" class="text-center">N° Peticion</th>
                     <th scope="col" class="text-center">Asunto Peticion</th>
                     <th scope="col" class="text-center">Emisor</th>
-                    <th scope="col" class="text-center">Fecha de Peticion</th>
-                    <th scope="col" class="text-center">Hora de Peticion</th>
+                    <th scope="col" class="text-center">Fecha Peticion</th>
+                    <th scope="col" class="text-center">Hora Peticion</th>
                     <th scope="col" class="text-center">Receptor</th>
-                    <th scope="col" class="text-center">Fecha de Respuesta</th>
-                    <th scope="col" class="text-center">Hora de Respuesta</th>
+                    <th scope="col" class="text-center">Fecha Respuesta</th>
+                    <th scope="col" class="text-center">Hora Respuesta</th>
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Visto</th>
                     <th scope="col" class="text-center">Acciones</th>
@@ -36,6 +36,7 @@
     </div>
 </div>
 
+<!-- modal agregar Peticion -->
 
 <form autocomplete="off" id="formularioAlmacenista" enctype="multipart/form-data">
     <div class="modal fade" id="agregarPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +57,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                    <label for="asunto" class="col-form-label">Asunto Peticion:</label>
                                     <input type="text" name="asunto" class="form-control" id="asunto">
                                 </div>
                             </div>
@@ -66,7 +67,7 @@
                                     <input type="text" name="emisor" class="form-control" id="emisor" disabled>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                    <label for="fechaP" class="col-form-label">Fecha Peticion:</label>
                                     <input disabled type="text" name="fechaP" class="form-control" id="fechaP">
                                 </div>
 
@@ -76,8 +77,8 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary class="col-form-label">Descripcion del Envio</summary>
-                                        <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
+                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio</summary>
+                                        <textarea style="background-color: #ECEAEA;" name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
                                     </details>
                                 </div>
                             </div>
@@ -96,9 +97,9 @@
 <!-- modal Ver Peticion -->
 <div class="modal fade" id="verPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <input type="text" name="id" id="id2" hidden>
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
-            <div class="modal-content" style="height: 100%;">
+            <div class="modal-content">
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i><span id="tituloModal2"><!--texto--></span> </h1>
@@ -108,7 +109,7 @@
                     <form>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                <label for="asunto" class="col-form-label">Asunto Peticion:</label>
                                 <input type="text" name="asunto2" class="form-control" id="asunto2" disabled>
                             </div>
                         </div>
@@ -118,20 +119,18 @@
                                 <input type="text" name="emisor2" class="form-control" id="emisor2" disabled>
                             </div>
                             <div class="mb-3" style="width: 100%">
-                                <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                <label for="fechaP" class="col-form-label">Fecha Peticion:</label>
                                 <input disabled type="text" name="fechaP2" class="form-control" id="fechaP2">
                             </div>
                             <div class="mb-3" style="width: 100%">
-                                <label for="horaP" class="col-form-label">Hora de la Peticion:</label>
+                                <label for="horaP" class="col-form-label">Hora Peticion:</label>
                                 <input type="time" name="horaP2" class="form-control" id="horaP2" disabled>
                             </div>
                         </div>
-                        <br>
-
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <details open>
-                                    <summary>Descripcion del Envio</summary>
+                                    <summary style="color: #1b335b; font-weight: 600;">Descripcion Envio</summary>
                                     <textarea name="txtDescripcion2" id="txtDescripcion2" class="form-control w-100 p-1" rows="3" disabled></textarea>
                                 </details>
                             </div>
@@ -152,7 +151,7 @@
                                 </select>
                             </div>
                             <div class="mb-3" style="width: 100%">
-                                <label for="fechaRespuesta" class="col-form-label">Fecha de Respuesta:</label>
+                                <label for="fechaRespuesta" class="col-form-label">Fecha Respuesta:</label>
                                 <div class="d-flex">
                                     <input disabled type="date" name="fechaRespuesta2" id="fechaRespuesta2" class="form-control">
                                 </div>
@@ -205,11 +204,7 @@
             [0, 'desc']
         ],
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
-                },
+                data: 'id_peticion'
             },
             {
                 data: 'asunto'
@@ -237,9 +232,9 @@
                 render: function(data, type, row) {
                     let vistoClass
                     if (row.estado == 'Aceptado') {
-                        vistoClass="text-success fw-bold"
-                    } else if(row.estado == 'Denegado') {
-                        vistoClass="text-danger fw-bold"
+                        vistoClass = "text-success fw-bold"
+                    } else if (row.estado == 'Denegado') {
+                        vistoClass = "text-danger fw-bold"
                     }
                     return '<span class="' + vistoClass + '"> ' + row.estado + ' </span>';
                 }
@@ -250,11 +245,11 @@
                     let vistoClass
                     let vistoInfo
                     if (row.visto == 'S') {
-                        vistoClass="text-success fw-bold"
-                        vistoInfo="Leido"
+                        vistoClass = "text-success fw-bold"
+                        vistoInfo = "Leido"
                     } else {
-                        vistoClass="text-danger fw-bold"
-                        vistoInfo="No leido"
+                        vistoClass = "text-danger fw-bold"
+                        vistoInfo = "No leido"
                     }
                     return '<span class="' + vistoClass + '"> ' + vistoInfo + ' </span>';
                 }
@@ -293,6 +288,8 @@
             $('#fechaRespuesta2').val(res[0]['fecha_res_pet'])
             $('#respuesta2').val(res[0]['msg_receptor'])
             let visto = "S"
+            recargarAlmacenista()
+
 
             $.ajax({
                 type: 'POST',
@@ -304,6 +301,7 @@
                 success: function(data) {
                     if (data == 1) {
                         recargarAlmacenista()
+                        tablePeticiones.ajax.reload(null, false); //Recargar tabla
                     }
                 }
             })

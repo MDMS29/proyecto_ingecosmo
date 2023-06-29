@@ -13,8 +13,8 @@
                     <th scope="col" class="text-center">N° Peticion</th>
                     <th scope="col" class="text-center">Asunto Peticion</th>
                     <th scope="col" class="text-center">Emisor</th>
-                    <th scope="col" class="text-center">Fecha de Peticion</th>
-                    <th scope="col" class="text-center">Hora de Peticion</th>
+                    <th scope="col" class="text-center">Fecha Peticion</th>
+                    <th scope="col" class="text-center">Hora Peticion</th>
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -33,9 +33,9 @@
 <form autocomplete="off" id="formularioPeticiones">
     <div class="modal fade" id="responderPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" hidden>
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="body-R">
-                <div class="modal-content" style="height: 100%;">
+                <div class="modal-content">
                     <div class="modal-header d-flex align-items-center justify-content-between">
                         <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                         <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-reply-all fs-4" title="Responder Peticion"></i><span id="tituloModal"><!--texto--> </span> </h1>
@@ -45,7 +45,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                    <label for="asunto" class="col-form-label">Asunto Peticion:</label>
                                     <input type="text" name="asunto" class="form-control" id="asunto" disabled>
                                 </div>
                             </div>
@@ -55,19 +55,18 @@
                                     <input type="text" name="emisor" class="form-control" id="emisor" disabled>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                    <label for="fechaP" class="col-form-label">Fecha Peticion:</label>
                                     <input type="text" name="fechaP" class="form-control" id="fechaP" disabled>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="horaP" class="col-form-label">Hora de la Peticion:</label>
+                                    <label for="horaP" class="col-form-label">Hora Peticion:</label>
                                     <input type="time" name="horaP" class="form-control" id="horaP" disabled>
                                 </div>
                             </div>
-                            <br>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary class="col-form-label">Descripcion del Envio:</summary>
+                                        <summary class="col-form-label" style="color: #1b335b; font-weight: 600;">Descripcion Envio:</summary>
                                         <textarea disabled name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
                                     </details>
                                 </div>
@@ -91,7 +90,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaRes" class="col-form-label">Fecha de Respuesta:</label>
+                                    <label for="fechaRes" class="col-form-label">Fecha Respuesta:</label>
                                     <div class="d-flex">
                                         <input disabled type="date" name="fechaRes" id="fechaRes" class="form-control">
                                     </div>
@@ -101,7 +100,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="respuesta" class="col-form-label">Respuesta:</label>
-                                    <textarea name="respuesta" id="respuesta" class="form-control w-100 p-1" rows="3"></textarea>
+                                    <textarea name="respuesta" id="respuesta" class="form-control w-100 p-1" style="background-color: #ECEAEA;" rows="3"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -119,7 +118,6 @@
 
 <script>
     recargarAdmin()
-    var ContadorPRC = 0; //Contador DataTable
 
     // para asignarle la fecha actual al input date
     var fechaActual = new Date();
@@ -139,11 +137,7 @@
             [0, 'desc']
         ],
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
-                },
+                data: 'id_peticion',
             },
             {
                 data: 'asunto'
@@ -241,7 +235,6 @@
                 recargarAlmacenista()
                 $('#responderPeticion').modal('hide')
                 tablePeticiones.ajax.reload(null, false); //Recargar tabla
-                ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled') //jumm
             });
         };

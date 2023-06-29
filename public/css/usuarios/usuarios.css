@@ -192,3 +192,7 @@ table {
 .show-row {
   display: table-row;
 }
+
+.descripcion{
+  background-color: #ECEAEA;
+}

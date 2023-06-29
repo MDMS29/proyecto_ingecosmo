@@ -13,8 +13,8 @@
                     <th scope="col" class="text-center">N° Peticion</th>
                     <th scope="col" class="text-center">Asunto Peticion</th>
                     <th scope="col" class="text-center">Emisor</th>
-                    <th scope="col" class="text-center">Fecha de Peticion</th>
-                    <th scope="col" class="text-center">Hora de Peticion</th>
+                    <th scope="col" class="text-center">Fecha Peticion</th>
+                    <th scope="col" class="text-center">Hora Peticion</th>
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -54,7 +54,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                    <label for="asunto" class="col-form-label">Asunto Peticion:</label>
                                     <input type="text" name="asunto" class="form-control" id="asunto" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                     <input type="text" name="emisor" class="form-control" id="emisor" disabled>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                    <label for="fechaP" class="col-form-label">Fecha Peticion:</label>
                                     <input disabled type="text" name="fechaP" class="form-control" id="fechaP">
                                 </div>
 
@@ -74,8 +74,8 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary class="col-form-label">Descripcion del Envio</summary>
-                                        <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
+                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio</summary>
+                                        <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1 descripcion" rows="3"></textarea>
                                     </details>
                                 </div>
                             </div>
