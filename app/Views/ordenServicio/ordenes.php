@@ -648,9 +648,8 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <label for="prioridad" class="col-form-label">Cambiar Estado:</label>
                         <select class="form-select" name="estadoVehiculo" id="estadoVehiculo">
-                            <option selected value="">-- Seleccione --</option>
                             <?php foreach ($estadosVehi as $estado) { ?>
-                                <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
+                                <option id="<?php echo $estado['id'] ?>H" value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -695,6 +694,7 @@
     }
     //Limpiar campos
     function limpiarCampos(input, accion) {
+        filasDina.removeAttr('disabled', '');
         $(`${input}`).val('')
         if (accion == 1) {
 
@@ -850,7 +850,9 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarOrden" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Vehiculo"></button>' +
-                        '<button class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Cambiar Estado" title="Cambiar Estado" width="20"></button>' +
+                        
+                        '<button class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado" onclick="selectOrden()"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Cambiar Estado" title="Cambiar Estado" width="20"></button>' +
+                        
                         '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_orden + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
                     )
                 }
@@ -867,6 +869,20 @@
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');
     }
+
+    //select Orden 
+    function selectOrden() {
+        $.ajax({
+            url: '<?php echo base_url('ordenServicio/obtenerEstadosVehi/') ?>',
+            type: 'POST',
+            dataType: 'json',
+            success: function(res) {
+                filasDina = $(`#${res[0]}H`).attr('disabled', '');
+                
+            }
+        })
+    }
+
     //Seleccionar vehiculo
     $('#vehiculo').on('change', function(e) {
         id = $('#vehiculo').val()

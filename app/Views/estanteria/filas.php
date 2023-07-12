@@ -77,8 +77,7 @@
                             <select class="form-select" id="fila" name="fila">
                                 <option selected>-- SELECCIONE UNA FILA --</option>
                                 <?php foreach ($filas as $fila) { ?>
-                                    <option id="<?php echo $fila['id_fila']; ?>F" value=<?php echo $fila['id_fila']; ?>>
-                                        <?php echo $fila['nombre']; ?></option>
+                                    <option id="<?php echo $fila['id_fila']; ?>F" value=<?php echo $fila['id_fila']; ?>> <?php echo $fila['nombre']; ?></option>
                                 <?php } ?>
                             </select>
                             <input hidden id="tp" name="tp">
@@ -262,7 +261,7 @@
     for (let i = 0; i < bloque.length; i++) {
         let fila = $(`#${bloque[i].id}`)
         fila = fila[0].id
-        console.log(fila);
+        console.log(fila+"hi");
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + fila,
             type: 'POST',
@@ -294,6 +293,7 @@
                     </div>`;
                     }
                     $(`#${bloque[i].id}`).html(cadena)
+                    console.log("first")
                 }
             }
         })
@@ -305,7 +305,6 @@
         var tituloMover = $(".tituloHeader")
         tituloMover.text(nombre)
         $('#idMaterialMove').val(id_material)
-
         categoria = $('#categoria').val()
 
         $.ajax({
@@ -313,12 +312,12 @@
             type: 'POST',
             dataType: 'json',
             success: function(res) {
-                console.log(filasDina);
+                console.log(filasDina+"selectionao");
                 if (id_fila == fila) {
                     filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
-                    
+
                 } else {
-                    
+
                 }
                 // var cadena
                 // cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
