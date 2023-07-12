@@ -77,5 +77,15 @@ class EstanteriaModel extends Model
         $datos = $this->findAll();
         return $datos;
     }
+    
+   public function contadorArticulos($id)
+   {
+      $this->select('COUNT(materiales.id_material) as numeroArt');
+      $this->join('materiales', 'materiales.estante = estanteria.id');
+      $this->where('estanteria.id', $id);
+      $this->groupBy('materiales.estante');
+      $datos = $this->findAll();
+      return $datos;
+   }
 
 }

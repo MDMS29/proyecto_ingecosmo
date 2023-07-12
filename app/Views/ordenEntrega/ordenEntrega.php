@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="tipoCate" class="col-form-label">Categorias o Bodega:</label>
+                                    <label for="tipoCate" class="col-form-label">Categorias o Aseguradoras:</label>
                                     <select class="form-select" name="tipoCate" id="tipoCate">
                                         <!-- SELECT DINAMICO -->
 
@@ -264,15 +264,15 @@
         },
     });
 
-    // function limpiarCampos() {
+    function limpiarCampos() {
 
-    //     $("#tipo").val('');
-    //     $("#tipoCate").val('');
-    //     $("#trabajadores").val('');
-    //     $("#ordenes").val('');
+        $("#tipo").val('');
+        $("#tipoCate").val('');
+        $("#trabajadores").val('');
+        $("#ordenes").val('');
 
 
-    // }
+    }
 
     function seleccionarOrden(id, tp) {
         if (tp == 2) {
@@ -396,7 +396,7 @@
 
             $("#tp").val(1)
             $("#id").val(0)
-            $('#btnGuardar').text('Crear Nueva Orden')
+            $('#btnGuardar').text('Guardar')
             $('#ordenes').val('')
             $('#trabajadores').val('')
             $('#tipoCate').val('')
