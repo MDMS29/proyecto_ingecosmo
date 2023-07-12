@@ -231,7 +231,7 @@
             tp = $('#tp').val()
             console.log(tp) //
             if (tp == 2) {
-                $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
+                $(this).find('#btnSi').attr('onclick', `RestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
             } else {
                 $(this).find('#btnSi').attr('onclick', `RepuestoConfirmado(${$(e.relatedTarget).data('href')})`)
             }
@@ -255,10 +255,6 @@
     }
 
     function RepuestoConfirmado(id) {
-        console.log(id)
-        id,
-        proveedor,
-        orden,
         idTrab = '<?php echo session('id') ?>'
         $.ajax({
             type: 'POST',

@@ -38,8 +38,8 @@
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
     <div class="modal fade" id="agregarRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="modalContent">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
@@ -126,7 +126,6 @@
     </div>
 </div>
 
-
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -182,7 +181,6 @@
         validNom = true
         $('#msgAgregar').text('')
         $('#cantRestock').text('')
-        $('#observaciont').val('')
         $('#observaciont').text('')
     }
 
@@ -222,6 +220,7 @@
             $('#btnGuardar').text('Agregar')
         }
     }
+
     function titulo(id) {
         $.ajax({
             type: 'POST',
@@ -284,27 +283,27 @@
 
     });
 
-    $('#btnSig').on('click', function(e) {
-        e.preventDefault()
-        id = $('#id').val()
-        observacion = $('#observaciont').val()
-        if ([observacion].includes('')) {
-            mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else {
-            $.ajax({
-                url: "<?= base_url('repuestosAdmin/insertarO') ?>",
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    id,
-                    observacion
-                },
-                success: function(res) {
-                    contador = 0       
-                }
-            })
-        }
-    })
+    // $('#btnSig').on('click', function(e) {
+    //     e.preventDefault()
+    //     id = $('#id').val()
+    //     observacion = $('#observaciont').val()
+    //     if ([observacion].includes('')) {
+    //         mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+    //     } else {
+    //         $.ajax({
+    //             url: "< ?= base_url('repuestosAdmin/registrarObservacion') ?>",
+    //             type: 'POST',
+    //             dataType: 'json',
+    //             data: {
+    //                 id,
+    //                 observacion
+    //             },
+    //             success: function(res) {
+    //                 contador = 0       
+    //             }
+    //         })
+    //     }
+    // })
 
     $('#formularioRepuesto').on('submit', function(e) {
         e.preventDefault()
@@ -333,7 +332,7 @@
                     bodega
                 },
                 success: function(res) {
-                    contador = 0
+                    Contador = 0
                     if (tp == 2) {
                         if (res == 1) {
                             tableRepuestosAdmin.ajax.reload(null, false)
@@ -368,21 +367,23 @@
     })
 
     function DevolverRepuesto(id) {
+        observacion = $('#observaciont').val()
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
+            url: "<?php echo base_url('repuestosAdmin/registrarObservacion') ?>",
             data: {
                 id,
-                estado: 'P'
+                estado: 'P',
+                observacion
             }
         }).done(function() {
             Swal.fire(
                 'Pendiente a devolver.',
-                '¡Revisa el apartado de devoluciones para confirmar su devolución!',
+                '¡Revise el apartado de devoluciones para confirmar su devolución!',
                 'success'
             )
             $('#modalConfirmarP').modal('hide')
-            contador = 0
+            Contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
         })
     }
