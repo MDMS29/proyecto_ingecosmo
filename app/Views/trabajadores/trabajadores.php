@@ -49,7 +49,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombre_p" class="col-form-label">Primer Nombre:</label>
+                                    <label for="nombre_p" class="col-form-label">Primer Nombre: <i style="color:crimson">*</i></label>
                                     <input type="text" name="nombre_p" class="form-control" id="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -59,27 +59,26 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_p" class="col-form-label">Primer Apellido:</label>
+                                    <label for="apellido_p" class="col-form-label">Primer Apellido: <i style="color:crimson">*</i></label>
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
+                                    <label for="apellido_s" class="col-form-label">Segundo Apellido: <i style="color:crimson">*</i></label>
                                     <input type="text" name="apellido_s" class="form-control" id="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ] /,'')">
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
-                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc" disabled>
+                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación: <i style="color:crimson">*</i></label>
+                                        <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
                                             <option value="1" selected>Cedula de Ciudadanía</option>
-                                            <option>-- Seleccione --</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
-                                        <label for="nIdenti" class="col-form-label">N° Identificación:</label>
+                                        <label for="nIdenti" class="col-form-label">N° Identificación: <i style="color:crimson">*</i></label>
                                         <input type="text" name="nIdenti" class="form-control" id="nIdenti" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         <small id="msgDoc" class="invalido"></small>
                                     </div>
@@ -92,7 +91,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="rol" class="col-form-label">Tipo de Cargo:</label>
+                                        <label for="rol" class="col-form-label">Tipo de Cargo: <i style="color:crimson">*</i></label>
                                         <select class="form-select form-select" name="cargo" id="cargo">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($cargos as $c) { ?>
@@ -148,14 +147,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Teléfono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Teléfono: <i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Teléfono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Teléfono: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -164,7 +163,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -220,14 +219,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3" style="width: 100%;">
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="correoAdd" class="col-form-label">Correo:</label>
+                                <label for="correoAdd" class="col-form-label">Correo:<i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                     <small id="msgCorreo" class="invalido"></small>
                                 </div>
                             </div>
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad:<i style="color:crimson">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -582,11 +581,10 @@
         direccion = $('#direccion').val()
         cargo = $('#cargo').val()
         //Control de campos vacios
-        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, cargo, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, cargo].includes('') || validIdent == false || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else if ([telefono, correo].includes('')) {
-            return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
-        } else {
+        } 
+        else {
             $.ajax({
                 url: '<?php echo base_url('trabajadores/insertar') ?>',
                 type: 'POST',
@@ -835,7 +833,7 @@
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
-        } else {            
+        } else {
             if (!regex.test(correo)) {
                 validCorreo = false
                 return mostrarMensaje('error', '¡Tipo de correo invalido!')

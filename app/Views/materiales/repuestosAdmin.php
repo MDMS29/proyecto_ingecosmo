@@ -49,17 +49,17 @@
                 <div class="modal-body">
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="exampleDataList" class="col-form-label">Nombre:</label>
+                            <label for="exampleDataList" class="col-form-label">Nombre: <i style="color:crimson">*</i></label>
                             <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="existencias" class="col-form-label">Cantidad:</label>
+                            <label for="existencias" class="col-form-label">Cantidad: <i style="color:crimson">*</i></label>
                             <input class="form-control" type="text" id="existencias" name="existencias" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                         </div>
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="proveedor" class="col-form-label">Proveedor:</label>
+                            <label for="proveedor" class="col-form-label">Proveedor: <i style="color:crimson">*</i></label>
                             <select class="form-control form-select" name="proveedor" id="proveedor">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($proveedores as $data) { ?>
@@ -68,7 +68,7 @@
                             </select>
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="orden" class="col-form-label">Orden de Servicio:</label>
+                            <label for="orden" class="col-form-label">Orden de Servicio: <i style="color:crimson">*</i></label>
                             <select class="form-control form-select" name="orden" id="orden">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($ordenes as $data) { ?>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="bodega" class="col-form-label">Bodega:</label>
+                            <label for="bodega" class="col-form-label">Bodega: <i style="color:crimson">*</i></label>
                             <select class="form-control form-select" name="bodega" id="bodega">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($bodegas as $data) { ?>

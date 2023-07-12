@@ -13,6 +13,7 @@ use App\Models\OrdenesModel;
 use App\Models\TelefonosModel;
 use App\Models\EmailModel;
 use App\Models\InvOrdenesModel;
+use App\Models\NumTempModel;
 
 class OrdenServicio extends BaseController
 {
@@ -27,6 +28,7 @@ class OrdenServicio extends BaseController
     protected $email;
     protected $inventario;
     protected $movEnc;
+    protected $numTemp;
     public function __construct()
     {
         $this->vehiculos = new VehiculosModel();
@@ -39,6 +41,7 @@ class OrdenServicio extends BaseController
         $this->telefono = new TelefonosModel();
         $this->email = new EmailModel();
         $this->inventario = new InvOrdenesModel();
+        $this->numTemp = new NumTempModel();
         helper('sistema');
     }
     public function pdf($id)
@@ -471,6 +474,7 @@ class OrdenServicio extends BaseController
 
         $vehiculo = $this->request->getVar('vehiculo');
         $kms = $this->request->getPost('kms');
+        $combustible = $this->request->getPost('combustible');
         //Vehiculo nuevo
         $infoVehi = $this->request->getPost('infoVehi');
 
@@ -482,7 +486,7 @@ class OrdenServicio extends BaseController
         $fechaSalida = $this->request->getPost('fechaSalida');
         $usuarioCrea = session('id');
         $fechaActual = date('Y-m-d');
-        //Asi podrias tomar la fecha actual y ya, para que no salga como un input, entendido entonces que no salga en la vista, pero ahora te muestro que quedaria un hueco a ve
+
         $tipoMov = 0;
 
 
@@ -500,17 +504,22 @@ class OrdenServicio extends BaseController
                 'linea' => '',
                 'modelo' => $infoVehi['nFabrica'],
                 'color' => $infoVehi['color'],
-                'n_combustible' => $infoVehi['combustible'],
                 'estado' => 'A',
                 'usuario_crea' => $usuarioCrea
             ];
             $this->vehiculos->save($dataVehi);
             $vehiculo = $this->vehiculos->getInsertID();
         }
+
+        //Obtener ul numero de la ultima orden de servicio registrada
+        $numTemp = $this->numTemp->obtenerNumero();
+        $numTemp = $numTemp['n_temporal']; //Pasar a numero
+
         $dataOrden = [
-            'n_orden' => $orden,
+            'n_orden' => $tp == 1 ? $numTemp : $orden,
             'id_vehiculo' => $vehiculo,
             'kms' => $kms,
+            'n_combustible' => $combustible,
             'nombres' => empty($nombreRespon) || $tipoCliente == 5 ? null : $nombreRespon,
             'apellidos' =>  empty($apellidoRespon) || $tipoCliente == 5 ? null : $apellidoRespon,
             'n_identificacion' =>  empty($nIdentiRes) || $tipoCliente == 5 ? null : $nIdentiRes,
