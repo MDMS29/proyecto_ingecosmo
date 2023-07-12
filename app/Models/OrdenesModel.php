@@ -15,7 +15,7 @@ class OrdenesModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-    protected $allowedFields = ['n_orden', 'id_vehiculo', 'kms', 'nombres', 'apellidos', 'n_identificacion', 'llaves', 'documentos','grua', 'estado', 'fecha_entrada', 'fecha_salida', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
+    protected $allowedFields = ['n_orden', 'id_vehiculo', 'kms', 'n_combustible', 'nombres', 'apellidos', 'n_identificacion', 'llaves', 'documentos', 'grua', 'estado', 'fecha_entrada', 'fecha_salida', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
@@ -35,7 +35,7 @@ class OrdenesModel extends Model
         $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
         $this->join('param_detalle', 'param_detalle.id_param_det = propietarios.tipo_propietario', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = ordenes_servicio.estado', 'left');
-        $this->join('vw_param_det2', 'vw_param_det2.id_param_det = vehiculos.n_combustible', 'left');
+        $this->join('vw_param_det2', 'vw_param_det2.id_param_det = ordenes_servicio.n_combustible', 'left');
         $data = $this->findAll();
         return $data;
     }
@@ -71,7 +71,8 @@ class OrdenesModel extends Model
         return $data;
     }
 
-    public function ordenesInsumos(){
+    public function ordenesInsumos()
+    {
         $this->select("id_trabajador, concat(nombre_p,' ',nombre_s,' ',apellido_p,' ',apellido_s) as nombre");
         $this->where("estado", "A");
         $data = $this->findAll();
@@ -81,7 +82,7 @@ class OrdenesModel extends Model
     {
         $this->select('count(id_orden) as n_ordenes, vehiculos.placa');
         $this->join('vehiculos', 'vehiculos.id_vehiculo = ordenes_servicio.id_vehiculo', 'left');
-        if($id != 0) {
+        if ($id != 0) {
             $this->where('ordenes_servicio.estado', $id);
         }
         $data = $this->first();
