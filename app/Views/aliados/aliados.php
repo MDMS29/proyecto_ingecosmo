@@ -47,12 +47,12 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social:</label>
+                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social: <i style="color:crimson">*</i></label>
                                     <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                     <small id="msgRaSo" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%; ">
-                                    <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                                    <label style="margin:0;" for="message-text" class="col-form-label">NIT: <i style="color:crimson">*</i></label>
                                     <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                                     <small id="msgNit" class="invalido"></small>
                                 </div>
@@ -109,14 +109,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Teléfono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Teléfono: <i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Teléfono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Teléfono: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -125,7 +125,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -180,14 +180,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3" style="width: 100%;">
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="correoAdd" class="col-form-label">Correo:</label>
+                                <label for="correoAdd" class="col-form-label">Correo:<i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                     <small id="msgCorreo" class="invalido"></small>
                                 </div>
                             </div>
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad:<i style="color:crimson">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>

@@ -140,7 +140,7 @@
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal">
                     <i class="bi bi-eye-fill fs-4 text-dark"></i>
-                    Ver Telefono
+                    Ver Telefonos
                 </h1>
                 <button type="button" class="btn" id="btnCerrarTel0" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
@@ -177,7 +177,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4 text-dark"></i> Ver Correo</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-eye-fill fs-4 text-dark"></i> Ver Correos</h1>
                 <button type="button" class="btn" id="btnCerrarCorreo0" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <div class="modal-body">

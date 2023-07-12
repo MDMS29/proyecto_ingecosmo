@@ -55,13 +55,13 @@
         <div class="modal-body">
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Nombre:</label>
+              <label for="exampleDataList" class="col-form-label">Nombre: <i style="color:crimson">*</i></label>
               <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
               <input class="form-control" id="nombreHidden" name="nombreHidden" hidden>
               <small id="msgAgregar" class="invalidoInsumo"></small>
             </div>
             <div class="mb-3" style="width: 90%;">
-              <label for="categoria" class="col-form-label">Categoria:</label>
+              <label for="categoria" class="col-form-label">Categoria: <i style="color:crimson">*</i></label>
               <select class="form-control form-select" name="estante" id="categoria">
                 <option selected value="">-- Seleccione --</option>
                 <?php foreach ($categorias as $data) { ?>
@@ -72,7 +72,7 @@
           </div>
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%;">
-              <label for="exampleDataList" class="col-form-label">Cantidad Actual:</label>
+              <label for="exampleDataList" class="col-form-label">Cantidad Actual: <i style="color:crimson">*</i></label>
               <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')" >
             </div>
 
@@ -84,7 +84,7 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+              <label for="exampleDataList" class="col-form-label">Precio Venta: <i style="color:crimson">*</i></label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">$</span>
                 <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
@@ -92,7 +92,7 @@
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
+              <label for="exampleDataList" class="col-form-label">Precio Compra: <i style="color:crimson">*</i></label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">$</span>
                 <input class="form-control" type="text  " id="precioC" name="precioC" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
@@ -102,7 +102,7 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 80%;">
-              <label for="exampleDataList" class="col-form-label">Estante:</label>
+              <label for="exampleDataList" class="col-form-label">Estante: <i style="color:crimson">*</i></label>
               <select style=" margin-left: 0px !important;" class="form-control form-select" name="estante" id="estante">
                 <option selected value="">-- Seleccione --</option>
                 <?php foreach ($estantes as $data) { ?>
@@ -112,7 +112,7 @@
             </div>
 
             <div class="mb-3" style="width: 80%;">
-              <label for="exampleDataList" class="col-form-label">Fila:</label>
+              <label for="exampleDataList" class="col-form-label">Fila: <i style="color:crimson">*</i></label>
               <select style=" margin-left: 0px !important;" class="form-control form-select" name="fila" id="fila">
                 <option selected value="">-- Seleccione --</option>
 

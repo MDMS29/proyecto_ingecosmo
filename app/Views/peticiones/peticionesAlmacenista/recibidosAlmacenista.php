@@ -167,7 +167,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btnRedireccion" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -204,7 +204,7 @@
             [0, 'desc']
         ],
         columns: [{
-                data: 'id_peticion'
+                data: 'id_peticon'
             },
             {
                 data: 'asunto'

@@ -34,7 +34,7 @@
     <div class="modal fade" id="agregarTrabajador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" value="0" hidden>
         <input type="text" name="tp" id="tp" hidden>
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="body">
                 <div class="modal-content">
                     <div class="modal-header flex align-items-center gap-3">

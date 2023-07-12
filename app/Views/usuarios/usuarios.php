@@ -53,7 +53,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombre_p" class="col-form-label">Primer Nombre:</label>
+                                    <label for="nombre_p" class="col-form-label">Primer Nombre: <i style="color:crimson">*</i></label>
                                     <input type="text" name="nombre_p" class="form-control" id="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
+                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación: <i style="color:crimson">*</i></label>
                                         <select  class="form-select form-select" name="tipoDoc" id="tipoDoc">
                                             <option value="1" selected>Cedula de Ciudadania</option>
                                         </select>
@@ -71,16 +71,16 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_p" class="col-form-label">Primer Apellido:</label>
+                                    <label for="apellido_p" class="col-form-label">Primer Apellido: <i style="color:crimson">*</i></label>
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_s" class="col-form-label">Segundo Apellido:</label>
+                                    <label for="apellido_s" class="col-form-label">Segundo Apellido: <i style="color:crimson">*</i></label>
                                     <input type="text" name="apellido_s" class="form-control" id="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
-                                        <label for="nIdenti" class="col-form-label">N° Identificación:</label>
+                                        <label for="nIdenti" class="col-form-label">N° Identificación: <i style="color:crimson">*</i></label>
                                         <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         <small id="msgDoc" class="invalido"></small>
                                     </div>
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="rol" class="col-form-label">Tipo de Rol:</label>
+                                        <label for="rol" class="col-form-label">Tipo de Rol: <i style="color:crimson">*</i></label>
                                         <select class="form-select form-select" name="rol" id="rol">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($roles as $r) { ?>
@@ -115,7 +115,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%" id="divContras">
-                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña: <i style="color:crimson">*</i>
                                     </label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
@@ -129,13 +129,13 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
-                                        <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                        <label for="nombres" class="col-form-label">Confirmar Contraseña: <i style="color:crimson">*</i></label>
                                         <input type="password" name="confirContra" class="form-control" id="confirContra" minlength="5">
                                     </div>
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombres" id="FotoUsuario" class="col-form-label">Foto de Usuario:</label>
+                                    <label for="nombres" id="fotoUsuario" class="col-form-label">Foto de Usuario:</label>
                                     <input type="file" name="foto" id="foto" class="form-control" accept="image/png">
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="bloqueFoto">
@@ -171,7 +171,7 @@
                         <div class="container p-4" style="background-color: #dfe6f2;border-radius:10px;">
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%" id="divContras">
-                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña:
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña: <i style="color:crimson">*</i>
                                     </label>
                                     <div class="flex">
                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
-                                        <label for="nombres" class="col-form-label">Confirmar Contraseña:</label>
+                                        <label for="nombres" class="col-form-label">Confirmar Contraseña: <i style="color:crimson">*</i></label>
                                         <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
                                     </div>
                                     <small id="msgConfirRes" class="normal"></small>
@@ -220,14 +220,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class="flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Telefono: <i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Telefono: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -236,7 +236,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -289,14 +289,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3" style="width: 100%;">
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="correoAdd" class="col-form-label">Correo:</label>
+                                <label for="correoAdd" class="col-form-label">Correo:<i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                     <small id="msgCorreo" class="invalido"></small>
                                 </div>
                             </div>
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad:<i style="color:crimson">*</i></label>
                                 <select class="form-select form-select" name="prioridadCorreo" id="prioridadCorreo">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -630,7 +630,7 @@
                 $('#divContras2').attr('hidden', '')
                 $('#confirContra').val('')
                 $('#btnGuardar').text('Actualizar')
-                $('#FotoUsuario').text('Cambiar foto de Usuario:')
+                $('#fotoUsuario').text('Cambiar foto de Usuario:')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
@@ -681,7 +681,7 @@
             $('#divContras2').removeAttr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
-            $('#FotoUsuario').text('Foto de Usuario:')
+            $('#fotoUsuario').text('Foto de Usuario:')
             $('#msgDoc').text('')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
         }
@@ -1046,7 +1046,7 @@
         }
 
         if ([correo, prioridad].includes('') || validCorreo == false) {
-            return mostrarMensaje('error', '¡Hay campos vacios!')
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador += 1}e` : editCorreo,

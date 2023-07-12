@@ -12,18 +12,17 @@ class Historial extends BaseController
     {
         $this->historial = new MoviEncModel();
     }
-
+    public function vehiculos()
+    {
+        echo view('principal/sidebar');
+        echo view('historial/historialVehiculos');
+    }
     public function obtenerHistorialVehiculos()
     {
         $res = $this->historial->historialVehiculos();
         return json_encode($res);
     }
 
-    public function vehiculos()
-    {
-        echo view('principal/sidebar');
-        echo view('historial/historialVehiculos');
-    }
     public function materiales()
     {
         echo view('principal/sidebar');

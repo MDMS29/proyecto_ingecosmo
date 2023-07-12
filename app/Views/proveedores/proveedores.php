@@ -110,14 +110,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Telefono: <i style="color:crimson">*</i></label>
                                 <div>
                                     <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Telefono: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -126,7 +126,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -177,14 +177,14 @@
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="correoAdd" class="col-form-label">Correo:</label>
+                            <label for="correoAdd" class="col-form-label">Correo:<i style="color:crimson">*</i></label>
                             <div>
                                 <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
+                            <label for="prioridad" class="col-form-label">Prioridad:<i style="color:crimson">*</i></label>
                             <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
                                 <option value="P">Principal</option>
