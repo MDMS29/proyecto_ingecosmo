@@ -111,13 +111,7 @@ class Filas extends BaseController
     public function contadorArticulos()
     {
         $idEstante = $this->request->getPost('idEstante');
-        $res = $this->filas->contadorArticulos($idEstante);
-        return json_encode($res);
-    }
-    public function contadorFilas()
-    {
-        $idEstante = $this->request->getPost('idEstante');
-        $res = $this->filas->contadorFilas($idEstante);
+        $res = $this->estanteria->contadorArticulos($idEstante);
         return json_encode($res);
     }
 

@@ -73,32 +73,32 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Nombre:</label>
+              <label for="exampleDataList" class="col-form-label">Nombre: <i style="color:crimson">*</i></label>
               <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
               <small id="msgAgregar" class="invalido2"></small>
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Precio Compra:</label>
+              <label for="exampleDataList" class="col-form-label">Precio Compra: <i style="color:crimson">*</i></label>
               <input class="form-control" type="text" id="precioC" name="precioC" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
+              <label for="exampleDataList" class="col-form-label">Precio Venta: </label>
               <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Cantidad Ingresada:</label>
+              <label for="exampleDataList" class="col-form-label">Cantidad Ingresada: <i style="color:crimson">*</i></label>
               <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 80%;">
-              <label for="exampleDataList" class="col-form-label">Estante:</label>
+              <label for="exampleDataList" class="col-form-label">Estante: <i style="color:crimson">*</i></label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="estante" id="estante1">
                 <option selected value="">--Seleccione--</option>
                 <?php foreach ($estanteria as $data) { ?>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="mb-3" style="width: 80%;">
-              <label for="exampleDataList" class="col-form-label">Fila:</label>
+              <label for="exampleDataList" class="col-form-label">Fila: <i style="color:crimson">*</i></label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="fila" id="fila1">
                 <option selected value="">--Seleccione--</option>
 
@@ -274,7 +274,7 @@
             </div>
 
             <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
+              <label for="exampleDataList" class="col-form-label">Cantidad a Usar: <i style="color:crimson">*</i></label>
               <div>
                 <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
                 <small id="msgUsar" class="invalido"></small>

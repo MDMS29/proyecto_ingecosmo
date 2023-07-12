@@ -35,7 +35,7 @@
             <div class="modal-content">
 
                 <div class="modal-header" id="modalHeader">
-                    <img  src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100"/>
+                    <img src="<?php echo base_url('/img/ingecosmo.png') ?>" width="100" />
 
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus">
@@ -48,8 +48,8 @@
                 <form>
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
+                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social: <i style="color:crimson">*</i></label>
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,' ')">
                             <small id="msgRaSo" class="invalido"></small>
 
                             <input hidden id="tp" name="tp">
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="mb-3" style="width: 100%; ">
-                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                            <label style="margin:0;" for="message-text" class="col-form-label">NIT: <i style="color:crimson">*</i></label>
                             <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
@@ -65,7 +65,7 @@
 
                     <div class="mb-3" style="width: 100%; padding-inline:20px;">
                         <label style="margin:0;" class="col-form-label" for="message-text">Direccion:</label>
-                        <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
+                        <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°-]/,'')"></input>
                     </div>
 
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
@@ -110,14 +110,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Telefono: <i style="color:crimson">*</i></label>
                                 <div>
-                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10"  oninput="this.value = this.value.replace(/[^0-9]/,'')">
+                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Telefono: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -126,7 +126,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i style="color:crimson">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -177,14 +177,14 @@
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="correoAdd" class="col-form-label">Correo:</label>
+                            <label for="correoAdd" class="col-form-label">Correo:<i style="color:crimson">*</i></label>
                             <div>
                                 <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
+                            <label for="prioridad" class="col-form-label">Prioridad:<i style="color:crimson">*</i></label>
                             <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
                                 <option value="P">Principal</option>
@@ -578,7 +578,7 @@
         nit = $('#nit').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false || correos.length == 0 || telefonos.length == 0) {
+        if ([RazonSocial, nit].includes('') || validRazonSocial == false || validNit == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({
@@ -643,11 +643,8 @@
                     }
                 }
             }).done(function(data) {
+                tableProveedores.ajax.reload(null, false); //Recargar tabla
                 $('#agregarProveedor').modal('hide')
-                recargaTelCorreo()
-                setTimeout(() => {
-                    tableProveedores.ajax.reload(null, false); //Recargar tabla
-                }, 3000)
                 ContadorPRC = 0
                 $('#btnGuardar').removeAttr('disabled') //jumm
                 $('#editTele').val('');
@@ -771,8 +768,8 @@
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             if (!regex.test(parseInt(numero))) {
-            return mostrarMensaje('error', '¡Telefono invalido!')
-        }
+                return mostrarMensaje('error', '¡Telefono invalido!')
+            }
         }
         contador += 1
         let info = {
@@ -923,14 +920,15 @@
         const editCorreo = $('#editCorreo').val();
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!regex.test(correo)) {
-            validCorreo = false
-            return mostrarMensaje('error', '¡Tipo de correo invalido!')
+        if ([correo, prioridad].includes('') || validCorreo == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {
+            if (!regex.test(correo)) {
+                validCorreo = false
+                return mostrarMensaje('error', '¡Tipo de correo invalido!')
+            }
         }
 
-        if ([correo, prioridad].includes('')) {
-            return mostrarMensaje('error', '¡Hay campos vacios!')
-        }
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,

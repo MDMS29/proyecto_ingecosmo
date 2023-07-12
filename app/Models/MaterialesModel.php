@@ -14,7 +14,7 @@ class MaterialesModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'n_iconos', 'estado', 'observacion', 'usuario_crea', 'fecha_crea'];
+    protected $allowedFields = ['id_orden', 'id_proveedor', 'nombre', 'categoria_material', 'tipo_material', 'cantidad_vendida', 'cantidad_actual', 'precio_venta', 'precio_compra', 'fecha_ultimo_ingre', 'fecha_ultimo_salid', 'estante', 'fila', 'estado', 'observacion', 'usuario_crea', 'fecha_crea'];
 
     protected $useTimestamps = true;
 
@@ -115,17 +115,6 @@ class MaterialesModel extends Model
         $datos = $this->findAll();
         return $datos;
     }
-
-    public function obtenerFilasInsumos($estante)
-    {
-        $this->select('filas.nombre as fila, filas.id_fila, materiales.id_material');
-        $this->join('filas', 'filas.id_fila = materiales.fila');
-        $this->where('materiales.estante', $estante);
-        $this->groupBy('materiales.fila');
-        $datos = $this->findAll();
-        return $datos;
-    }
-
     public function obtenerFilasRepuestos($estante)
     {
         $this->select('filas.nombre as fila, filas.id_fila, materiales.id_material');

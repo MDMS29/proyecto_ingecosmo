@@ -9,7 +9,7 @@ class SessionFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // Do something here
-        if (!session('rol') == 'Torre de Control' || !session('rol') == 'Almacenista') {
+        if (!session('idRol')) {
             return redirect()->to(base_url('/'));
         }
     }

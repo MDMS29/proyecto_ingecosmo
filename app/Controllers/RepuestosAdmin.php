@@ -58,14 +58,15 @@ class RepuestosAdmin extends BaseController
         return json_encode($res);
     }
 
-    public function insertarO()
+    public function registrarObservacion()
     {
         $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('estado');
         $observacion = $this->request->getPost('observacion');
-        if ($this->respuestosAdmin->update($id, ['observacion' => $observacion])) {
+        if ($this->respuestosAdmin->update($id, ['estado' => $estado, 'observacion' => $observacion])) {
             return json_encode(1);
         } else {
-            return json_encode(1);
+            return json_encode(2);
         }
     }
 
@@ -112,36 +113,43 @@ class RepuestosAdmin extends BaseController
         $orden = $this->request->getPost('orden');
         $dataMovimientoenc = [
             'id_tercero' => $proveedor,
-            'id_material' => $id,
             'id_vehiculo' => $orden,
             'id_trabajador' => $idTra,
             'fecha_movimiento' => date('Y-m-d'),
-            'estado' => $estado,
             'tipo_movimiento' => 67,
+            'estado' => $estado,
             'usuario_crea' => session('id'),
         ];
-        if ($this->respuestosAdmin->update($id, ['estado' => $estado])) {
-            if ($estado == 'A') {
+
+        if ($estado == 'A') {
+            if ($this->respuestosAdmin->update($id, ['estado' => $estado, 'observacion' => null])) {
                 return '¡Se ha reestablecido el Repuesto!';
-            } 
-            if ($estado == 'C') {
-                if($this->movimientoEnc->save($dataMovimientoenc)){
-                    $res = $this->respuestosAdmin->buscarRepuesto($id);
-                    $idEnc= $this->movimientoEnc->getInsertID();
-                    $dataMovimientodet = [
-                        'id_movimientoenc' => $idEnc,
-                        'id_material' => $id,
-                        'cantidad' => $res['cantidad_actual'],
-                        'costo' => 0,
-                        'usuario_crea' => session('id'),
-                    ];
-                   $this->movimientoDet->save($dataMovimientodet);
+            } else {
+                return '¡Ha ocurrido un error!';
+            }
+        }
+        if ($estado == 'C') {
+            if ($this->movimientoEnc->save($dataMovimientoenc)) {
+                $res = $this->respuestosAdmin->buscarRepuesto($id);
+                $idEnc = $this->movimientoEnc->getInsertID();
+                $dataMovimientodet = [
+                    'id_movimientoenc' => $idEnc,
+                    'id_material' => $id,
+                    'cantidad' => $res['cantidad_actual'],
+                    'costo' => 0,
+                    'observacion' => $res['observacion'],
+                    'usuario_crea' => session('id'),
+                ];
+                if ($this->movimientoDet->save($dataMovimientodet)) {
+                    return json_encode(1);
+                } else {
+                    return json_encode(2);
                 }
-                
-                return json_encode(1);
             } else {
                 return json_encode(2);
             }
+        } else {
+            return json_encode(2);
         }
     }
 

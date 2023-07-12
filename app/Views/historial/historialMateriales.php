@@ -18,7 +18,6 @@
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Subtotal</th>
                     <th scope="col" class="text-center">Tipo Movimiento</th>
-    
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -53,7 +52,7 @@
                             </thead>
                             <tbody id="bodyTel1">
                                 <tr class="text-center">
-                                    <td colspan="3">NO HAY TELEFONOS</td>
+                                    <td colspan="3">NO HAY MATERIALES</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -135,7 +134,7 @@
             {
                 data: "tipo_movimiento"
             },
- 
+     
 
 
         ],

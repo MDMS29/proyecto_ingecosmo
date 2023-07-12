@@ -13,10 +13,9 @@
                         <div class="textoCard">
                             <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:21px; color:black; margin-bottom:0"><?php echo  $dato['n1'] . " " . $dato['nombre'] ?></h5>
                             <div class="bloqueTextoE" id="<?= $dato['id'] ?>">
-                                <p class="subTexto">Contiene 4 Filas</p>
                                 <p class="subTexto">
                                     <span id="contador">
-                                        <!-- CONTADOS DINAMICO -->
+                                        <!-- CONTADOR DINAMICO -->
                                     </span>
                                 </p>
                             </div>
@@ -102,18 +101,8 @@
             },
             dataType: 'json',
             success: function(data) {
-                $(`#${cards[i].id} #contador`).text(data.length == 0 ? 'No tiene articulos' : 'Contiene ' + data[0]?.numeroFila + ' Articulos')
-                $.ajax({
-                    url: '<?= base_url('filas/contadorFilas') ?>',
-                    type: 'POST',
-                    data: {
-                        idEstante: cards[i].id
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                    }
-                })
+                console.log(data)
+                $(`#${cards[i].id} #contador`).text(data.length == 0 ? 'No tiene materiales' : 'Tiene ' + data[0]?.numeroArt + ' materiales')
             }
         })
     };
