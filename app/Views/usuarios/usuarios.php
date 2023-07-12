@@ -63,9 +63,8 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <label for="tipoDoc" class="col-form-label">Tipo Identificación:</label>
-                                        <select disabled class="form-select form-select" name="tipoDoc" id="tipoDoc">
+                                        <select  class="form-select form-select" name="tipoDoc" id="tipoDoc">
                                             <option value="1" selected>Cedula de Ciudadania</option>
-                                            <option>-- Seleccione --</option>
                                         </select>
                                     </div>
                                 </div>
@@ -781,9 +780,7 @@
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, rol].includes('') || contra != confirContra || validIdent == false || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else if ([telefono, correo].includes('')) {
-            return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
-        } else {
+        }  else {
             var formData = new FormData();
             formData.append('id', id);
             formData.append('tp', tp);

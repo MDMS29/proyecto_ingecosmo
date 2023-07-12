@@ -48,7 +48,7 @@
                 <form>
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social: <i style="color:crimson">*</i></label>
                             <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,' ')">
                             <small id="msgRaSo" class="invalido"></small>
 
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="mb-3" style="width: 100%; ">
-                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                            <label style="margin:0;" for="message-text" class="col-form-label">NIT: <i style="color:crimson">*</i></label>
                             <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
@@ -578,7 +578,7 @@
         nit = $('#nit').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false || correos.length == 0 || telefonos.length == 0) {
+        if ([RazonSocial, nit].includes('') || validRazonSocial == false || validNit == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({

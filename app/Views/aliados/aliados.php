@@ -658,10 +658,8 @@
         nit = $('#nit').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false || correos.length == 0 || telefonos.length == 0) {
+        if ([RazonSocial, nit].includes('') || validRazonSocial == false || validNit == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else if ([telefono, correo].includes('')) {
-            return mostrarMensaje('error', '¡Debe tener un telefono o correo principal!')
         } else {
             $.ajax({
                 url: '<?php echo base_url('aliados/insertar') ?>',
