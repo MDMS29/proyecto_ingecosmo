@@ -50,7 +50,7 @@
                     <div class="modal-body">
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%" id="ordenPlaca">
                                     <label for="ordenTrabajo" class="col-form-label">Orden de Servicio:</label>
                                     <input type="number" name="ordenTrabajo" class="form-control" id="ordenTrabajo">
                                     <small id="msgOrden" class="invalido"></small>
@@ -104,7 +104,7 @@
                                         </div>
                                         <div class="mb-3" style="width: 100%">
                                             <label for="nIdentiRes" class="col-form-label">N° Identificación:</label>
-                                            <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes">
+                                            <input type="text" class="form-control" name="nIdentiRes" id="nIdentiRes" minlength="9" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         </div>
                                     </div>
                                     <div class="d-flex gap-3" style="width: 100%">
@@ -691,7 +691,6 @@
         $('#marca').attr('disabled', '')
         $('#nFabrica').attr('disabled', '')
         $('#color').attr('disabled', '')
-        $('#combustible').attr('disabled', '')
     }
     //Limpiar campos
     function limpiarCampos(input, accion) {
@@ -849,7 +848,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarOrden" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Vehiculo"></button>' +
+                        '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarOrden" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
                         '<button class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Cambiar Estado" title="Cambiar Estado" width="20"></button>' +
                         '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_orden + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
                     )
@@ -1653,7 +1652,6 @@
                 cantidad: 0
             },
         ]
-        $('#btnGuardar').attr('disabled', '')
         arrayInven.forEach(elem => elem.checked == '' ? validInv = false : validInv = true)
         if ([orden, vehiculo = aggVehi == 0 ? vehiculo : nuevoVehiculo, cliente, txtObser, estado, kms, fechaEntrada].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
@@ -1676,9 +1674,9 @@
                         placa,
                         marca,
                         nFabrica,
-                        color,
-                        combustible
+                        color
                     },
+                    combustible,
 
                     tipoCliente,
                     cliente,

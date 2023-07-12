@@ -136,7 +136,7 @@
                                     <small id="msgConfir" class="normal"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombres" id="FotoUsuario" class="col-form-label">Foto de Usuario:</label>
+                                    <label for="nombres" id="fotoUsuario" class="col-form-label">Foto de Usuario:</label>
                                     <input type="file" name="foto" id="foto" class="form-control" accept="image/png">
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="bloqueFoto">
@@ -631,7 +631,7 @@
                 $('#divContras2').attr('hidden', '')
                 $('#confirContra').val('')
                 $('#btnGuardar').text('Actualizar')
-                $('#FotoUsuario').text('Cambiar foto de Usuario:')
+                $('#fotoUsuario').text('Cambiar foto de Usuario:')
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
@@ -682,7 +682,7 @@
             $('#divContras2').removeAttr('hidden')
             $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
-            $('#FotoUsuario').text('Foto de Usuario:')
+            $('#fotoUsuario').text('Foto de Usuario:')
             $('#msgDoc').text('')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
         }
@@ -1049,7 +1049,7 @@
         }
 
         if ([correo, prioridad].includes('') || validCorreo == false) {
-            return mostrarMensaje('error', '¡Hay campos vacios!')
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         }
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador += 1}e` : editCorreo,
