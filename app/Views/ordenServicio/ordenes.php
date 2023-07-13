@@ -671,7 +671,7 @@
     </div>
 </div>
 
-<!-- -----modal cliente----------     -->
+<!-- -----modal Cliente----------     -->
 <form autocomplete="off" id="formularioClientes">
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -682,7 +682,6 @@
                         <img src="<?php echo base_url('img/logo_empresa.png') ?>" width="100" />
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5" id="tituloModalCliente"><img src="<?= base_url('img/editar.png') ?>" alt="" width="30" height="30">Editar Cliente</h1>
                         </div>
 
@@ -695,8 +694,7 @@
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
-                                    <input hidden id="tp" name="tp">
-                                    <input hidden id="id" name="id">
+                                    <input hidden id="idc" name="idc">
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
@@ -757,7 +755,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Agregar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -790,9 +788,7 @@
                                 <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
-                                    <?php foreach ($tipoTele as $tipe) { ?>
-                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
-                                    <?php } ?>
+
                                 </select>
                             </div>
                             <div class="flex-grow-1">
@@ -888,12 +884,97 @@
     </div>
 </div>
 
+
+<!-- modal Aliados -->
+<form autocomplete="off" id="formularioAliados">
+    <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input type="text" name="idAliado" id="idAliado" value="0" hidden>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="body-R">
+                <div class="modal-content">
+                    <div class="modal-header flex align-items-center gap-3 ">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <h1 class="modal-title fs-5" id="tituloModalAliado"><img src="<?= base_url('img/editar.png') ?>" alt="" width="30" height="30">Editar Aliado</h1>
+                        </div>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
+                                    <small id="msgRaSo" class="invalido"></small>
+                                </div>
+                                <div class="mb-3" style="width: 100%; ">
+                                    <label style="margin:0;" for="message-text" class="col-form-label">NIT: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
+                                    <small id="msgNit" class="invalido"></small>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" style="width: 100%; padding-inline:20px;">
+                                <label style="margin:0;" class="col-form-label" for="message-text">Dirección:</label>
+                                <input class="form-control" id="direccionAliado" name="direccionAliado" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
+                            </div>
+
+                            <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="telefono" class="col-form-label">Teléfono:</label>
+                                    <div class="d-flex">
+                                        <input type="text" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="email" class="col-form-label">Email:</label>
+                                    <div class="d-flex">
+                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <script>
+    // variables
     var validOrden = true
     var validPlaca = true
     var validFecha = true
     var validInv = true
     var arrayInven = []
+    var ContadorPRC = 0; //Contador DataTable
+    var contador = 0; //Contador ids telefono
+    var contadorCorreo = 0; //Contador ids correos
+    var inputIden = 0;
+    let telefonos = [] //Telefonos del usuario.
+    let correos = [] //Correos del usuario.
+    var validCorreo = true;
+    var validIdent = true;
+    var validTel = true;
+    var objCorreo = {
+        id: 0,
+        correo: '',
+        prioridad: ''
+    }
+    var objTelefono = {
+        id: 0,
+        numero: '',
+        tipo: '',
+        prioridad: ''
+    }
     //Limitar fecha de entrada y salida hasta la fecha actual
     let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
     let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
@@ -990,7 +1071,7 @@
 
     }
 
-    
+
 
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
@@ -1043,7 +1124,8 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return `<a data-bs-target="#agregarCliente" data-bs-toggle="modal" onclick="seleccionarCliente(<?= 0 ?>) id="spanCliente" class=${row.estadoTercer == 'I' ? 'invalido' : ''} >
+                    return `<a data-bs-target=" ${row.tipo_tercero == 5 ? "#agregarCliente" : "#agregarAliado"}" 
+                    data-bs-toggle="modal" onclick="seleccionarCliente(${data.id_tercero}, ${row.tipo_tercero == 5 ? '2': '3'} )" id="spanCliente" class='cliente ${row.estadoTercer == 'I' ? 'invalido' : ''}' >
                     ${row.tipo_tercero == 5 ? row.cliente : row.nombreAliado} ${row.estadoTercer == 'I' ? ' - Inactivo' : ''}
                     </a>`
                 }
@@ -1152,7 +1234,7 @@
             dataType: 'json',
             success: function(res) {
                 filasDina = $(`#${res[0]}H`).attr('disabled', '');
-                
+
             }
         })
     }
@@ -1270,48 +1352,604 @@
         $('#cantTape').val('')
     }
 
+    // ---------------------------Clientes y Aliados-----------------------------
     //Editar clientes
-    function seleccionarCliente(id) {
+    function seleccionarCliente(id, tp) {
         //Actualizar datos
+        if (tp == 2) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
+                dataType: 'json',
+            }).done(function(res) {
+                limpiarCampos()
+                $('#idc').val(res[0]['id_tercero'])
+                $('#nombreP').val(res[0]['nombre_p'])
+                $('#nombreS').val(res[0]['nombre_s'])
+                $('#apellidoP').val(res[0]['apellido_p'])
+                $('#apellidoS').val(res[0]['apellido_s'])
+                $('#tipoDoc').val(1)
+                $('#nIdenti').val(res[0]['n_identificacion'])
+                $('#direccion').val(res[0]['direccion'])
+                $('#btnGuardar').text('Actualizar')
+                $('#msgDoc').text('')
+                $('.asterisco').hide()
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
+                    dataType: 'json',
+                    success: function(data) {
+                        telefonos = data[0]
+                        guardarTelefono(0)
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 5,
+                    dataType: 'json',
+                    success: function(data) {
+                        correos = data[0]
+                        guardarCorreo(0)
+                    }
+                })
+            })
+        }
+
+        if (tp == 3) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0 + '/' + 0,
+                dataType: 'json',
+                success: function(res) {
+                    limpiarCampos()
+                    $('#id').val(res[0]['id_tercero'])
+                    $('#RazonSocial').val(res[0]['razon_social'])
+                    $('#nit').val(res[0]['n_identificacion'])
+                    $('#direccionAliado').val(res[0]['direccion'])
+                    $('#msgDoc').text('')
+                    $('.asterisco').hide()
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 56,
+                        dataType: 'json',
+                        success: function(data) {
+                            telefonos = data[0]
+                            guardarTelefono(0)
+                        }
+                    })
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 56,
+                        dataType: 'json',
+                        success: function(data) {
+                            correos = data[0]
+                            guardarCorreo(0)
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+    //Envio de formulario Cliente
+    $('#formularioClientes').on('submit', function(e) {
+        e.preventDefault()
+        tp = 2
+        id = $('#idc').val()
+        // $('#btnGuardar').attr('disabled', '')
+        nombreP = $('#nombreP').val()
+        nombreS = $('#nombreS').val()
+        apellidoP = $('#apellidoP').val()
+        apellidoS = $('#apellidoS').val()
+        tipoDoc = $('#tipoDoc').val()
+        nIdenti = $('#nIdenti').val()
+        direccion = $('#direccion').val()
+        //Control de campos vacios
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false || validCorreo == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('clientes/insertar') ?>',
+                type: 'POST',
+                data: {
+                    id,
+                    tp,
+                    nombreP,
+                    nombreS,
+                    apellidoP,
+                    apellidoS,
+                    tipoDoc,
+                    nIdenti,
+                    direccion
+                },
+                success: function(idCli) {
+                    telefonos.forEach(tel => {
+                        //Insertar Telefonos
+                        $.post({
+                            url: '<?php echo base_url('telefonos/insertar') ?>',
+                            data: {
+                                tp: tp,
+                                idTele: tel.id,
+                                idUsuario: idCli,
+                                numero: tel.numero,
+                                prioridad: tel.prioridad,
+                                tipoUsu: 5,
+                                tipoTel: tel.tipo,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                }
+                            }
+                        })
+                    });
+                    correos.forEach(correo => {
+                        //Insertar Correos
+                        $.post({
+                            url: '<?php echo base_url('email/insertar') ?>',
+                            data: {
+                                tp,
+                                idCorreo: correo.id,
+                                idUsuario: idCli,
+                                correo: correo.correo,
+                                prioridad: correo.prioridad,
+                                tipoUsu: 5,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                    setTimeout(() => window.location.href = "<?= base_url('clientes') ?>", 2000)
+                                }
+                            }
+                        })
+                    });
+                    if (tp == 2) {
+                        mostrarMensaje('success', '¡Se ha Actualizado el Cliente!')
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Registrado el Cliente!')
+                    }
+                }
+            }).done(function(data) {
+                tablaOrdenes.ajax.reload(null, false); //Recargar tabla
+                ContadorPRC = 0
+                $('#agregarCliente').modal('hide')
+                $('#btnGuardar').removeAttr('disabled');
+                $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
+            });
+        };
+    })
+
+    //Envio de formulario Aliado
+    $('#formularioAliados').on('submit', function(e) {
+        e.preventDefault()
+        tp = 2
+        id = $('#idAliado').val()
+        RazonSocial = $('#RazonSocial').val()
+        nit = $('#nit').val()
+        direccion = $('#direccion').val()
+        //Control de campos vacios
+        if ([RazonSocial, nit].includes('') || validRazonSocial == false || validNit == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?php echo base_url('aliados/insertar') ?>',
+                type: 'POST',
+                data: {
+                    id,
+                    tp,
+                    RazonSocial,
+                    nit,
+                    direccion,
+                    telefonos
+                },
+                success: function(idAli) {
+                    telefonos.forEach(tel => {
+                        //Insertar Telefonos
+                        $.post({
+                            url: '<?php echo base_url('telefonos/insertar') ?>',
+                            data: {
+                                tp,
+                                idUsuario: idAli,
+                                idTele: tel.id,
+                                numero: tel.numero,
+                                prioridad: tel.prioridad,
+                                tipoUsu: 56,
+                                tipoTel: tel.tipo,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                }
+                            }
+                        })
+                    });
+                    correos.forEach(correo => {
+                        //Insertar Correos
+                        $.post({
+                            url: '<?php echo base_url('email/insertar') ?>',
+                            data: {
+                                tp,
+                                idCorreo: correo.id,
+                                idUsuario: idAli,
+                                correo: correo.correo,
+                                prioridad: correo.prioridad,
+                                tipoUsu: 56,
+                            },
+                            success: function(res) {
+                                if (res != 1) {
+                                    mostrarMensaje('error', '¡Ha ocurrido un error!')
+                                    setTimeout(() => window.location.href = "<?= base_url('aliado') ?>", 2000)
+                                }
+                            }
+                        })
+                    });
+                    if (tp == 2) {
+                        mostrarMensaje('success', '¡Se ha Actualizado el Aliado!')
+                        validTel = true
+                        validCorreo = true
+                    } else {
+                        mostrarMensaje('success', '¡Se ha Registrado el Aliado!')
+                        validTel = true
+                        validCorreo = true
+                    }
+                }
+            }).done(function(data) {
+                limpiarCampos('msgConfir')
+                $('#agregarAliado').modal('hide')
+                tableAliados.ajax.reload(null, false); //Recargar tabla
+                $('#btnGuardar').removeAttr('disabled') //jumm
+                ContadorPRC = 0
+                $('#editTele').val('');
+                objCorreo = {
+                    id: 0,
+                    correo: '',
+                    prioridad: ''
+                }
+                objTelefono = {
+                    id: 0,
+                    numero: '',
+                    tipo: '',
+                    prioridad: ''
+                }
+            });
+        };
+    })
+
+    // ---------------------------pura identificacion tipo validacion---------------------------
+    //Funcion para buscar cliente segun su identificacion
+    function buscarClienteIdent(id, inputIden) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
-            dataType: 'json',
-        }).done(function(res) {
-            limpiarCampos()
-            $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
-            $('#tp').val(2)
-            $('#id').val(res[0]['id_tercero'])
-            $('#nombreP').val(res[0]['nombre_p'])
-            $('#nombreS').val(res[0]['nombre_s'])
-            $('#apellidoP').val(res[0]['apellido_p'])
-            $('#apellidoS').val(res[0]['apellido_s'])
-            $('#tipoDoc').val(1)
-            $('#nIdenti').val(res[0]['n_identificacion'])
-            $('#direccion').val(res[0]['direccion'])
-            $('#btnGuardar').text('Actualizar')
-            $('#msgDoc').text('')
-            $('.asterisco').hide()
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
-                dataType: 'json',
-                success: function(data) {
-                    telefonos = data[0]
-                    guardarTelefono(0)
+            url: "<?php echo base_url('srchCli/') ?>" + id + "/" + inputIden,
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $('#msgDoc').text('')
+                    validIdent = true
+                } else if (res[0] != null) {
+                    $('#msgDoc').text('* Numero de identificación invalido *')
+                    validIdent = false
                 }
-            })
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 5,
-                dataType: 'json',
-                success: function(data) {
-                    correos = data[0]
-                    guardarCorreo(0)
-                }
-            })
+            }
         })
     }
+    //Identificar si el numero de identificacion no este registrado
+    $('#nIdenti').on('input', function(e) {
+        inputIden = $('#nIdenti').val()
+        tp = $('#tp').val()
+        id = $('#id').val()
+        if (tp == 1 && id == 0) {
+            buscarClienteIdent(0, inputIden)
+        } else if (tp == 2 && id != 0) {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('srchCli/') ?>" + id + "/" + inputIden,
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res[0].n_identificacion == inputIden) {
+                        $('#msgDoc').text('')
+                        validIdent = true
+                    } else {
+                        buscarClienteIdent(0, inputIden)
+                    }
+                }
+            })
+        }
+    })
+
+    // --------------------------------------puro telefono----------------------------------
+    //Al escribir validar que el numero no este registrado
+    $('#telefonoAdd').on('input', function(e) {
+        numero = $('#telefonoAdd').val()
+        buscarCorreoTel('telefonos/buscarTelefono/', numero, 'msgTel', 'telefono')
+    })
+    // Agregar Telefono a la tabla
+    $('#btnAddTel').on('click', function(e) {
+        const numero = $('#telefonoAdd').val()
+        const tipo = $('#tipoTele').val()
+        const prioridad = $('#prioridad').val()
+        const editTel = $('#editTele').val();
+        const regex = /^\d{10,10}$/;
+        if ([numero, prioridad, tipo].includes('') || validTel == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            if (!regex.test(parseInt(numero))) {
+                return mostrarMensaje('error', '¡Telefono invalido!')
+            }
+        }
+        contador += 1
+        let info = {
+            id: [editTel].includes('') || editTel == 0 ? `${contador+=1}e` : editTel,
+            tipo,
+            numero,
+            prioridad
+        }
+        let filtro = telefonos.filter(tel => tel.prioridad == 'P')
+        let filtroTel = telefonos.filter(tel => tel.numero == info.numero) //Array de numeros de telefonos
+
+        if (filtroTel.length > 0) {
+            filtro = []
+            $('#btnEditarTel').removeAttr('disabled')
+            return mostrarMensaje('error', '¡Ya se agrego este numero de telefono!')
+        }
+        if (info.prioridad == 'S') {
+            telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
+            return guardarTelefono(0)
+        } else if (filtro.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya hay un telefono prioritario!')
+
+        } else {
+            $('#btnEditarTel').removeAttr('disabled')
+            telefonos.push(info)
+            $('#telefonoAdd').val('')
+            $('#tipoTele').val('')
+            $('#prioridad').val('')
+            $('#editTele').val(0);
+            objTelefono = {
+                id: 0,
+                numero: '',
+                tipo: '',
+                prioridad: ''
+            }
+            return guardarTelefono(0)
+        }
+
+    })
+    //Funcion para buscar el correo o el telefono
+    function buscarCorreoTel(url, valor, inputName, tipo) {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 5, //url, valor, idUsuario, tipoUsuario
+            dataType: 'JSON',
+            success: function(res) {
+                if (res[0] == null) {
+                    $(`#${inputName}`).text('')
+                    validTel = true
+                    validCorreo = true
+                } else if (res[0] != null) {
+                    $(`#${inputName}`).text(`* Este ${tipo} ya esta registrado *`)
+                    validTel = false
+                    validCorreo = false
+                }
+            }
+        })
+    }
+
+    // Funcion para mostrar telefono en la tabla.
+    function guardarTelefono(tipo) {
+        $('#telefono').val(telefonos[0]?.numero)
+        var cadena
+        if (telefonos.length == 0) {
+            cadena += ` <tr class="text-center">
+            <td colspan="4">NO HAY TELEFONOS</td>
+            </tr>`
+            $('#bodyTel').html(cadena)
+        } else {
+            for (let i = 0; i < telefonos.length; i++) {
+                cadena += ` <tr class="text-center" id=${telefonos[i].id}>
+                                <td>${telefonos[i].numero}</td>
+                                <td id=${telefonos[i].tipo}>${telefonos[i].tipo == 3 ? 'Celular' : 'Fijo' }</td>
+                                <td id=${telefonos[i].prioridad}>${telefonos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
+                                ${tipo == 0 ? `<td>
+                                    <button class="btn" id="btnEditarTel${telefonos[i].id}" onclick="editarTelefono('${telefonos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarTel('${telefonos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono">
+                                </td> ` : ''}              
+                            </tr>`
+            }
+        }
+        $('#bodyTel').html(cadena)
+        $('#bodyTel1').html(cadena)
+    }
+
+    //Editar telefono
+    function editarTelefono(id) {
+        const fila = $(`#${id}`);
+        const numero = fila.find('td').eq(0)
+        const tipo = fila.find('td').eq(1)
+        const prioridad = fila.find('td').eq(2)
+        $('#telefonoAdd').val(numero.text());
+        $('#tipoTele').val(tipo.attr('id'));
+        $('#prioridad').val(prioridad.attr('id'));
+        $('#editTele').val(fila.attr('id'));
+        objTelefono = {
+            id: fila.attr('id'),
+            numero: numero.text(),
+            tipo: tipo.attr('id'),
+            prioridad: prioridad.attr('id')
+        }
+        telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
+        guardarTelefono(0)
+    }
+
+    //Eliminar telefono de la tabla
+    function eliminarTel(id) {
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('telefonos/eliminarTelefono/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        return mostrarMensaje('success', '¡Se ha eliminado el telefono!')
+                    }
+                }
+            })
+        }
+        telefonos = telefonos.filter(tel => tel.id != id)
+        guardarTelefono(0) //Actualizar tabla
+    }
+
+    // --------------------------------------puro email----------------------------------
+    //Al escribir validar que el correo no este registrado
+    $('#correoAdd').on('input', function(e) {
+        correo = $('#correoAdd').val()
+        buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
+    })
+    //Agregar Correo a la tabla
+    $('#btnAddCorre').on('click', function(e) {
+        const tp = $('#tp').val()
+        const correo = $('#correoAdd').val()
+        const prioridad = $('#prioridadCorreo').val()
+        const editCorreo = $('#editCorreo').val();
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if ([correo, prioridad].includes('') || validCorreo == false) {
+            return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {
+            if (!regex.test(correo)) {
+                validCorreo = false
+                return mostrarMensaje('error', '¡Tipo de correo invalido!')
+            }
+        }
+
+        let info = {
+            id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
+            correo,
+            prioridad
+        }
+        let filtro = correos.filter(correo => correo.prioridad == 'P')
+        let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
+        if (filtroCorreo.length > 0) {
+            filtro = []
+            return mostrarMensaje('error', '¡Ya se agrego este correo!')
+        }
+        if (info.prioridad == 'S') {
+            correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0)
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
+            return guardarCorreo(0)
+        } else if (filtro.length > 0) {
+            filtro = []
+
+            return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
+        } else {
+            correos.push(info)
+            $('#correoAdd').val('')
+            $('#prioridadCorreo').val('')
+            $('#editCorreo').val(0);
+            objCorreo = {
+                id: 0,
+                correo: '',
+                prioridad: ''
+            }
+            return guardarCorreo(0)
+        }
+
+    })
+    // Funcion para mostrar correos en la tabla.
+    function guardarCorreo(tipo) {
+        $('#email').val(correos[0]?.correo)
+        var cadena
+        if (correos.length == 0) {
+            cadena += ` <tr class="text-center">
+                            <td colspan="3">NO HAY CORREOS</td>
+                        </tr>`
+            $('#bodyCorre').html(cadena)
+        } else {
+            for (let i = 0; i < correos.length; i++) {
+                cadena += ` <tr class="text-center" id=${correos[i].id}>
+                                <td>${correos[i].correo}</td>
+                                <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
+                                ${tipo == 0 ? 
+                                    `<td>
+                                    <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
+                                    <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
+                                </td>` : '' }
+                            </tr>`
+            }
+        }
+        $('#bodyCorre').html(cadena)
+        $('#bodyCorre1').html(cadena)
+    }
+    //Editar Correo
+    function editarCorreo(id) {
+        const fila = $(`#${id}`);
+        const correo = fila.find('td').eq(0)
+        const prioridad = fila.find('td').eq(1)
+        $('#correoAdd').val(correo.text());
+        $('#prioridadCorreo').val(prioridad.attr('id'));
+        $('#editCorreo').val(fila.attr('id'));
+        objCorreo = {
+            id: fila.attr('id'),
+            correo: correo.text(),
+            prioridad: prioridad.attr('id')
+        }
+        correos = correos.filter(correo => correo.id != fila.attr('id'));
+        guardarCorreo(0)
+    }
+    //Eliminar correo de la tabla
+    function eliminarCorreo(id) {
+        tp = $('#tp').val()
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('email/eliminarEmail/') ?>' + id,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        mostrarMensaje('success', '¡Se ha eliminado el correo!')
+                    }
+                }
+            })
+        }
+        correos = correos.filter(correo => correo.id != id)
+        guardarCorreo(0) //Actualizar tabla
+    }
+
+
+
+    // ---------------------------Vehiculos-----------------------------
 
     //Tomar informacion del vehiculo
     function seleccionarOrden(id, tp) {

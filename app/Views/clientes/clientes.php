@@ -695,7 +695,6 @@
                 ContadorPRC = 0
                 tableClientes.ajax.reload(null, false); //Recargar tabla
                 $('#agregarCliente').modal('hide')
-                recargaTelCorreo()
                 $('#btnGuardar').removeAttr('disabled');
                 $('#editTele').val('');
                 objCorreo = {
@@ -904,6 +903,7 @@
         telefonos = telefonos.filter(tel => tel.id != id)
         guardarTelefono(0) //Actualizar tabla
     }
+
     // --------------------------------------puro email----------------------------------
     //Al escribir validar que el correo no este registrado
     $('#correoAdd').on('input', function(e) {
