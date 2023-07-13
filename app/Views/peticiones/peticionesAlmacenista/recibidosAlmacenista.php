@@ -57,7 +57,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="asunto" class="col-form-label">Asunto Peticion: <i style="color:crimson">*</i></label>
+                                    <label for="asunto" class="col-form-label">Asunto Peticion: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" name="asunto" class="form-control" id="asunto">
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio: <i style="color:crimson">*</i></summary>
+                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio: <i class="asterisco" style="color:crimson;">*</i></summary>
                                         <textarea style="background-color: #ECEAEA;" name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1" rows="3"></textarea>
                                     </details>
                                 </div>
@@ -85,6 +85,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
                     </div>
@@ -276,6 +277,7 @@
             dataType: 'json'
         }).done(function(res) {
             $('#tituloModal2').text('Ver Peticion - ' + id)
+            $('.asterisco').hide()
             $('#fechaRespuesta').attr('disabled', '')
             $('#id2').val(res[0]['id_peticion'])
             $('#asunto2').val(res[0]['asunto'])
@@ -322,6 +324,8 @@
         $('#txtDescripcion').val('')
         $('#txtDescripcion').removeAttr('disabled')
         $('#btnGuardar').removeAttr('hidden', '')
+        $('.campObl').show()
+        $('.asterisco').show()
     }
 
     //Envio de formulario

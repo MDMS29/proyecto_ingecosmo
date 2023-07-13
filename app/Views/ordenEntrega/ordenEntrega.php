@@ -156,12 +156,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-<<<<<<< HEAD
                     <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
-=======
-                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" onclick="limpiarCampos()">Cerrar</button>
->>>>>>> aa05bed4aa010fa7db8d7558ad6086185baa4ae2
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar">Crear orden</button>
                     </div>
                 </div>

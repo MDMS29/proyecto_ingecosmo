@@ -54,7 +54,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="asunto" class="col-form-label">Asunto Peticion: <i style="color:crimson">*</i></label>
+                                    <label for="asunto" class="col-form-label">Asunto Peticion: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" name="asunto" class="form-control" id="asunto" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio: <i style="color:crimson">*</i></summary>
+                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio: <i class="asterisco" style="color:crimson;">*</i></summary>
                                         <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1 descripcion" rows="3"></textarea>
                                     </details>
                                 </div>
@@ -82,6 +82,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
                     </div>
@@ -180,6 +181,8 @@
                 $('#txtDescripcion').val(res[0]['msg_emisor'])
                 $('#txtDescripcion').attr('disabled', '')
                 $('#btnGuardar').attr('hidden', '')
+                $('.asterisco').hide()
+                $('.campObl').hide()
             })
         } else {
             // datos vacios pero del agregar
@@ -195,6 +198,8 @@
             $('#txtDescripcion').val('')
             $('#txtDescripcion').removeAttr('disabled')
             $('#btnGuardar').removeAttr('hidden', '')
+            $('.asterisco').show()
+            $('.campObl').show()
 
         }
 
