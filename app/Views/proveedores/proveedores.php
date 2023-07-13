@@ -48,7 +48,7 @@
                 <form>
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social:</label>
+                            <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social: <i class="asterisco" style="color:crimson;">*</i></label>
                             <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,' ')">
                             <small id="msgRaSo" class="invalido"></small>
 
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="mb-3" style="width: 100%; ">
-                            <label style="margin:0;" for="message-text" class="col-form-label">NIT:</label>
+                            <label style="margin:0;" for="message-text" class="col-form-label">NIT: <i class="asterisco" style="color:crimson;">*</i></label>
                             <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                             <small id="msgNit" class="invalido"></small>
                         </div>
@@ -110,14 +110,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <div>
                                     <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -126,7 +126,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -177,14 +177,14 @@
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="correoAdd" class="col-form-label">Correo:</label>
+                            <label for="correoAdd" class="col-form-label">Correo:<i class="asterisco" style="color:crimson;">*</i></label>
                             <div>
                                 <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
+                            <label for="prioridad" class="col-form-label">Prioridad:<i class="asterisco" style="color:crimson;">*</i></label>
                             <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
                                 <option value="P">Principal</option>
@@ -526,6 +526,7 @@
                 $('#nit').val(res[0]['n_identificacion'])
                 $('#direccion').val(res[0]['direccion'])
                 $('#btnGuardar').text('Actualizar')
+                $('.asterisco').hide()
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 8,
@@ -562,6 +563,7 @@
             $('#msgNit').text('')
             $('#msgRaSo').text('')
             $('#btnGuardar').text('Agregar')
+            $('.asterisco').show()
             validRazonSocial = true;
             validNit = true;
 
@@ -578,7 +580,7 @@
         nit = $('#nit').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([RazonSocial, nit, direccion].includes('') || validRazonSocial == false || validNit == false || correos.length == 0 || telefonos.length == 0) {
+        if ([RazonSocial, nit].includes('') || validRazonSocial == false || validNit == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({

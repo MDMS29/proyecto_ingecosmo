@@ -80,7 +80,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="estado" class="col-form-label">Tipo Validacion:</label>
+                                    <label for="estado" class="col-form-label">Tipo Validacion: <i style="color:crimson">*</i></label>
                                     <select class="form-select form-select" name="estado" id="estado">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($estados as $e) { ?>
@@ -99,7 +99,7 @@
 
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="respuesta" class="col-form-label">Respuesta:</label>
+                                    <label for="respuesta" class="col-form-label">Respuesta: <i style="color:crimson">*</i></label>
                                     <textarea name="respuesta" id="respuesta" class="form-control w-100 p-1" style="background-color: #ECEAEA;" rows="3"></textarea>
                                 </div>
                             </div>

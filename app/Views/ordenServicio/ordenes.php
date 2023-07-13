@@ -151,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="kms" class="col-form-label">Kilometraje:</label>
+                                        <label for="kms" class="col-form-label">Kilometraje: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <div class="d-flex">
                                             <input type="number" name="kms" class="form-control" id="kms" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         </div>
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="combustible" class="col-form-label">Combustible:</label>
+                                        <label for="combustible" class="col-form-label">Combustible: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="combustible" id="combustible">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($combustible as $com) { ?>
@@ -171,7 +171,7 @@
                             </details>
                             <!-- INVENTARIO DE VEHICULO -->
                             <details id="datailInv">
-                                <summary>Inventario Vehiculo</summary>
+                                <summary>Inventario Vehiculo <i class="asterisco" style="color:crimson;">*</i></summary>
                                 <input type="text" id="tpInventario" hidden>
                                 <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
                                     <thead>
@@ -588,7 +588,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <input type="text" id="idObser" hidden>
-                                        <label for="observaciones" class="col-form-label d-block">Observaciones:</label>
+                                        <label for="observaciones" class="col-form-label d-block">Observaciones: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></textarea>
                                     </div>
                                 </div>
@@ -596,7 +596,7 @@
                             <div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="estado" class="col-form-label">Estado:</label>
+                                        <label for="estado" class="col-form-label">Estado: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
@@ -608,13 +608,13 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaEntrada" class="col-form-label">Fecha Entrada:</label>
+                                    <label for="fechaEntrada" class="col-form-label">Fecha Entrada: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <div class="d-flex">
                                         <input type="date" name="fechaEntrada" id="fechaEntrada" class="form-control">
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaEntrada" class="col-form-label">Fecha Salida:</label>
+                                    <label for="fechaEntrada" class="col-form-label">Fecha Salida: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <div class="d-flex">
                                         <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
@@ -672,6 +672,223 @@
     </div>
 </div>
 
+<!-- -----modal cliente----------     -->
+<form autocomplete="off" id="formularioClientes">
+    <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="body-R">
+
+                <div class="modal-content">
+                    <div class="modal-header" id="modalHeader">
+                        <img src="<?php echo base_url('img/logo_empresa.png') ?>" width="100" />
+
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
+                            <h1 class="modal-title fs-5" id="tituloModalCliente"><img src="<?= base_url('img/editar.png') ?>" alt="" width="30" height="30">Editar Cliente</h1>
+                        </div>
+
+                        <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
+                                    <input hidden id="tp" name="tp">
+                                    <input hidden id="id" name="id">
+                                </div>
+
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Segundo Nombre:</label>
+                                    <input class="form-control" id="nombreS" name="nombreS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input class="form-control" id="apellidoP" name="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
+                                </div>
+                            </div>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input class="form-control" id="apellidoS" name="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <select class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
+                                        <option value="1" selected>Cedula de Ciudadanía</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input class="form-control" id="nIdenti" name="nIdenti" type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
+                                    <small id="msgDoc" class="invalido"></small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex column-gap-3" style="width: 100%">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Direccion:</label>
+                                    <input class="form-control" id="direccion" name="direccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="telefono" class="col-form-label">Telefono:</label>
+                                    <div class="d-flex">
+                                        <input type="number" name="telefono" class="form-control" id="telefono" disabled>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="email" class="col-form-label">Email:</label>
+                                    <div class="d-flex">
+                                        <input type="email" name="email" class="form-control" id="email" disabled>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- MODAL AGREGAR - EDITAR TELEFONO -->
+<div class="modal fade" id="agregarTelefono" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="body-R">
+            <div class="modal-content">
+                <div class="modal-header flex justify-content-between align-items-center">
+                    <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                    <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                </div>
+                <input type="text" name="editTele" id="editTele" hidden>
+                <div class="modal-body">
+                    <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                        <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
+                            <div class="flex-grow-1">
+                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <div>
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+                                    <small id="msgTel" class="invalido"></small>
+                                </div>
+                            </div>
+                            <div class=" flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <?php foreach ($tipoTele as $tipe) { ?>
+                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="flex-grow-1">
+                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <select class="form-select form-select form-control" name="prioridad" id="prioridad">
+                                    <option selected value="">-- Seleccione --</option>
+                                    <option value="P">Principal</option>
+                                    <option value="S">Secundaria</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Prioridad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTel">
+                                    <tr class="text-center">
+                                        <td colspan="4">NO HAY TELEFONOS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR - EDITAR CORREO -->
+<div class="modal fade" id="agregarCorreo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header flex justify-content-between align-items-center">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
+                <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+            </div>
+            <input type="text" name="editCorreo" id="editCorreo" hidden>
+
+            <div class="modal-body">
+                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
+                    <div class="mb-2 d-flex gap-3" style="width: 100%;">
+                        <div class="d-flex gap-2" style="width: 100%;">
+                            <label for="correoAdd" class="col-form-label">Correo:<i class="asterisco" style="color:crimson;">*</i></label>
+                            <div>
+                                <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
+                                <small id="msgCorreo" class="invalido"></small>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2" style="width: 100%;">
+                            <label for="prioridad" class="col-form-label">Prioridad:<i class="asterisco" style="color:crimson;">*</i></label>
+                            <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
+                                <option selected value="">-- Seleccione --</option>
+                                <option value="P">Principal</option>
+                                <option value="S">Secundaria</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
+                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Correo</th>
+                                    <th>Prioridad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyCorre">
+                                <tr class="text-center">
+                                    <td colspan="3">NO HAY CORREOS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var validOrden = true
     var validPlaca = true
@@ -693,10 +910,12 @@
         $('#color').attr('disabled', '')
     }
     //Limpiar campos
-    function limpiarCampos(input, accion) {
-        $(`${input}`).val('')
-        if (accion == 1) {
+    function limpiarCampos(input1, input2, input3, accion) {
+        $(`#${input1}`).val('')
+        $(`#${input2}`).val('')
+        $(`#${input3}`).val('')
 
+        if (accion == 1) {
             $('#tipoCliente').val('')
             $('#cliente').val('')
             $('#divResponsable').removeClass('d-flex')
@@ -714,7 +933,66 @@
             $('#fechaSalida').attr('min', fechaLimite)
             $('#fechaSalida').val('')
         }
+
+        if (accion == 3) {
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        }
+
+        if (accion == 4) {
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        }
+
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo(0)
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono(0)
+        }
+        if (input1 == 0) {
+            telefonos = []
+            correos = []
+        }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
+        guardarTelefono(0)
+
     }
+
+    
+
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
         e.preventDefault();
@@ -766,9 +1044,9 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return `<span id="spanCliente" class=${row.estadoTercer == 'I' ? 'invalido' : ''} >
+                    return `<a data-bs-target="#agregarCliente" data-bs-toggle="modal" onclick="seleccionarCliente(<?= 0 ?>) id="spanCliente" class=${row.estadoTercer == 'I' ? 'invalido' : ''} >
                     ${row.tipo_tercero == 5 ? row.cliente : row.nombreAliado} ${row.estadoTercer == 'I' ? ' - Inactivo' : ''}
-                    </span>`
+                    </a>`
                 }
             },
             {
@@ -978,6 +1256,50 @@
         $('#cantTaSol').val('')
         $('#cantTape').val('')
     }
+
+    //Editar clientes
+    function seleccionarCliente(id) {
+        //Actualizar datos
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
+            dataType: 'json',
+        }).done(function(res) {
+            limpiarCampos()
+            $('#logoModal').attr('src', '<?php echo base_url('img/editar.png') ?>')
+            $('#tp').val(2)
+            $('#id').val(res[0]['id_tercero'])
+            $('#nombreP').val(res[0]['nombre_p'])
+            $('#nombreS').val(res[0]['nombre_s'])
+            $('#apellidoP').val(res[0]['apellido_p'])
+            $('#apellidoS').val(res[0]['apellido_s'])
+            $('#tipoDoc').val(1)
+            $('#nIdenti').val(res[0]['n_identificacion'])
+            $('#direccion').val(res[0]['direccion'])
+            $('#btnGuardar').text('Actualizar')
+            $('#msgDoc').text('')
+            $('.asterisco').hide()
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
+                dataType: 'json',
+                success: function(data) {
+                    telefonos = data[0]
+                    guardarTelefono(0)
+                }
+            })
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('email/obtenerEmailUser/') ?>' + id + '/' + 5,
+                dataType: 'json',
+                success: function(data) {
+                    correos = data[0]
+                    guardarCorreo(0)
+                }
+            })
+        })
+    }
+
     //Tomar informacion del vehiculo
     function seleccionarOrden(id, tp) {
         if (tp == 2) {
@@ -1027,6 +1349,7 @@
                     $('#btnGuardar').text('Actualizar')
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
+                    $('.asterisco').hide()
 
                     //Inventario de orden
                     $.ajax({
@@ -1156,6 +1479,7 @@
 
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
+            $('.asterisco').show()
 
         }
         agregarDisabled()

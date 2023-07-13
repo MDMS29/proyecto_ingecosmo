@@ -68,13 +68,13 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Nombre:</label>
+              <label for="exampleDataList" class="col-form-label">Nombre: <i style="color:crimson">*</i></label>
               <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
               <small id="msgAgregar" class="invalido2"></small>
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Proveedor:</label>
+              <label for="exampleDataList" class="col-form-label">Proveedor: <i style="color:crimson">*</i></label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="proveedor" id="proveedor">
                 <option selected value="">--Seleccione--</option>
                 <?php foreach ($proveedores as $data) { ?>
@@ -86,12 +86,12 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Cantidad:</label>
+              <label for="exampleDataList" class="col-form-label">Cantidad: <i style="color:crimson">*</i></label>
               <input class="form-control" type="text" id="cantidad" name="cantidad" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Orden de trabajo:</label>
+              <label for="exampleDataList" class="col-form-label">Orden de trabajo: <i style="color:crimson">*</i></label>
               <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenTrabajo" id="ordenTrabajo">
                 <option selected value="">--Seleccione--</option>
                 <?php foreach ($ordenes as $data) { ?>
@@ -289,7 +289,7 @@
             </div>
 
             <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
+              <label for="exampleDataList" class="col-form-label">Cantidad a Usar: <i style="color:crimson">*</i></label>
               <div>
                 <input type="text" class="form-control" id="cantidadUsar" name="cantidadUsar" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')" >
                 <small id="msgUsar" class="invalido"></small>
