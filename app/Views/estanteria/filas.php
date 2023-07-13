@@ -309,12 +309,13 @@
         categoria = $('#categoria').val()
 
         $.ajax({
-            url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria + '/' + fila,
+            url: '<?php echo base_url('filas/obtenerMaterialesCate/') ?>' + categoria + '/' + fila + '/' + id_fila,
             type: 'POST',
             dataType: 'json',
             success: function(res) {
                 console.log(filasDina);
                 if (id_fila == fila) {
+                    console.log("holaa gy")
                     filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
                     
                 } else {

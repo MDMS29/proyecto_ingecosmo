@@ -15,11 +15,7 @@ class OrdenesModel extends Model
     protected $returnType = 'array'; /* forma en que se retornan los datos */
     protected $useSoftDeletes = false; /* si hay eliminacion fisica de registro */
 
-<<<<<<< HEAD
-    protected $allowedFields = ['n_orden', 'id_vehiculo', 'kms', 'n_combustible', 'nombres', 'apellidos', 'n_identificacion', 'llaves', 'documentos','grua', 'estado', 'fecha_entrada', 'fecha_salida', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
-=======
     protected $allowedFields = ['n_orden', 'id_vehiculo', 'kms', 'n_combustible', 'nombres', 'apellidos', 'n_identificacion', 'llaves', 'documentos', 'grua', 'estado', 'fecha_entrada', 'fecha_salida', 'fecha_crea', 'usuario_crea']; /* relacion de campos de la tabla */
->>>>>>> a197f3502d3fac45500b99e8a0295b3f38b39c06
 
     protected $useTimestamps = true; /*tipo de tiempo a utilizar */
     protected $createdField = 'fecha_crea'; /*fecha automatica para la creacion */
