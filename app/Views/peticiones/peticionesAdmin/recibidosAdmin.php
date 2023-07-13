@@ -85,7 +85,6 @@
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($estados as $e) { ?>
                                             <option value="<?= $e['id_param_det'] ?>" <?php echo $e['id_param_det'] == 64 ? 'hidden' : '' ?>><?= $e['nombre'] ?></option>
-
                                         <?php } ?>
                                     </select>
                                 </div>

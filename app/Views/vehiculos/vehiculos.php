@@ -16,7 +16,6 @@
                     <th scope="col" class="text-center">Modelo</th>
                     <th scope="col" class="text-center">Marca</th>
                     <th scope="col" class="text-center">Color</th>
-                    <th scope="col" class="text-center">Combustible</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -95,17 +94,6 @@
                                         <label for="color" class="col-form-label">Color: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <input type="text" name="color" class="form-control" id="color" minlength="4" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="d-flex column-gap-3" style="width: 100%">
-                                <div class="mb-3" style="width: 100%">
-                                    <label for="combustible" class="col-form-label">Combustible: <i class="asterisco" style="color:crimson;">*</i></label>
-                                        <select class="form-select" name="combustible" id="combustible">
-                                        <option selected value="">-- Seleccione --</option>
-                                        <?php foreach ($combustible as $com) { ?>
-                                            <option value="<?= $com['id'] ?>"><?= $com['nombre'] ?></option>
-                                        <?php } ?>
-                                    </select>
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
@@ -196,9 +184,6 @@
             },
             {
                 data: 'color'
-            },
-            {
-                data: 'combustible'
             },
             {
                 data: null,

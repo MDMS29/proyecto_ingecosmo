@@ -29,7 +29,6 @@ class VehiculosModel extends Model
     public function obtenerVehiculos()
     {
         $this->select("vehiculos.id_vehiculo, vehiculos.id_marca, tipo_marca.nombre as marca, placa,  modelo, color,  terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.estado as estadoTercer, vw_param_det2.nombre as tipo_propietario");
-        $this->join('param_detalle', 'param_detalle.id_param_det = vehiculos.n_combustible', 'left');
         $this->join('tipo_marca', 'tipo_marca.id_marca = vehiculos.id_marca', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
         $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
@@ -39,8 +38,7 @@ class VehiculosModel extends Model
     }
     public function buscarVehiculo($orden, $placa, $id)
     {
-        $this->select("vehiculos.id_vehiculo as id, propietarios.id_tercero as cliente, placa, vehiculos.id_marca, tipo_marca.nombre as marca, modelo, color, param_detalle.id_param_det as combustible, propietarios.tipo_propietario, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as nomCliente, terceros.tipo_tercero, terceros.razon_social, terceros.n_identificacion as identificacion, terceros.direccion");
-        $this->join('param_detalle', 'param_detalle.id_param_det = vehiculos.n_combustible', 'left');
+        $this->select("vehiculos.id_vehiculo as id, propietarios.id_tercero as cliente, placa, vehiculos.id_marca, tipo_marca.nombre as marca, modelo, color, propietarios.tipo_propietario, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as nomCliente, terceros.tipo_tercero, terceros.razon_social, terceros.n_identificacion as identificacion, terceros.direccion");
         $this->join('tipo_marca', 'tipo_marca.id_marca = vehiculos.id_marca', 'left');
 
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');

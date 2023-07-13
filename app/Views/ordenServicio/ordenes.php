@@ -649,9 +649,8 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <label for="prioridad" class="col-form-label">Cambiar Estado:</label>
                         <select class="form-select" name="estadoVehiculo" id="estadoVehiculo">
-                            <option selected value="">-- Seleccione --</option>
                             <?php foreach ($estadosVehi as $estado) { ?>
-                                <option value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
+                                <option id="<?php echo $estado['id'] ?>H" value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -673,7 +672,7 @@
     </div>
 </div>
 
-<!-- -----modal cliente----------     -->
+<!-- -----modal Cliente----------     -->
 <form autocomplete="off" id="formularioClientes">
     <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -684,7 +683,6 @@
                         <img src="<?php echo base_url('img/logo_empresa.png') ?>" width="100" />
 
                         <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                            <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                             <h1 class="modal-title fs-5" id="tituloModalCliente"><img src="<?= base_url('img/editar.png') ?>" alt="" width="30" height="30">Editar Cliente</h1>
                         </div>
 
@@ -697,8 +695,7 @@
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
-                                    <input hidden id="tp" name="tp">
-                                    <input hidden id="id" name="id">
+                                    <input hidden id="idc" name="idc">
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
@@ -760,7 +757,7 @@
                     <div class="modal-footer">
                         <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Agregar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -793,9 +790,7 @@
                                 <label for="prioridad" class="col-form-label">Tipo Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
-                                    <?php foreach ($tipoTele as $tipe) { ?>
-                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
-                                    <?php } ?>
+
                                 </select>
                             </div>
                             <div class="flex-grow-1">
@@ -893,12 +888,97 @@
     </div>
 </div>
 
+
+<!-- modal Aliados -->
+<form autocomplete="off" id="formularioAliados">
+    <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input type="text" name="idAliado" id="idAliado" value="0" hidden>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="body-R">
+                <div class="modal-content">
+                    <div class="modal-header flex align-items-center gap-3 ">
+                        <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                        <div class="d-flex align-items-center justify-content-center" style="width:auto;">
+                            <h1 class="modal-title fs-5" id="tituloModalAliado"><img src="<?= base_url('img/editar.png') ?>" alt="" width="30" height="30">Editar Aliado</h1>
+                        </div>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label for="recipient-name" class="col-form-label" style="margin:0;">Razón Social: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
+                                    <small id="msgRaSo" class="invalido"></small>
+                                </div>
+                                <div class="mb-3" style="width: 100%; ">
+                                    <label style="margin:0;" for="message-text" class="col-form-label">NIT: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input type="text" class="form-control" id="nit" name="nit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
+                                    <small id="msgNit" class="invalido"></small>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" style="width: 100%; padding-inline:20px;">
+                                <label style="margin:0;" class="col-form-label" for="message-text">Dirección:</label>
+                                <input class="form-control" id="direccionAliado" name="direccionAliado" oninput="this.value = this.value.replace(/[^a-zA-Z0-9#.°- ]/,'')"></input>
+                            </div>
+
+                            <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="telefono" class="col-form-label">Teléfono:</label>
+                                    <div class="d-flex">
+                                        <input type="text" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="email" class="col-form-label">Email:</label>
+                                    <div class="d-flex">
+                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnRedireccion" id="btnGuardar">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <script>
+    // variables
     var validOrden = true
     var validPlaca = true
     var validFecha = true
     var validInv = true
     var arrayInven = []
+    var ContadorPRC = 0; //Contador DataTable
+    var contador = 0; //Contador ids telefono
+    var contadorCorreo = 0; //Contador ids correos
+    var inputIden = 0;
+    let telefonos = [] //Telefonos del usuario.
+    let correos = [] //Correos del usuario.
+    var validCorreo = true;
+    var validIdent = true;
+    var validTel = true;
+    var objCorreo = {
+        id: 0,
+        correo: '',
+        prioridad: ''
+    }
+    var objTelefono = {
+        id: 0,
+        numero: '',
+        tipo: '',
+        prioridad: ''
+    }
     //Limitar fecha de entrada y salida hasta la fecha actual
     let fechaFormateada = formatearFecha(Date()) //Funcion: formatearFecha() se encuentra en el sidebar
     let fechaLimite = `${fechaFormateada[2]}-${fechaFormateada[1]}-${fechaFormateada[0]}`
@@ -1048,7 +1128,8 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return `<a data-bs-target="#agregarCliente" data-bs-toggle="modal" onclick="seleccionarCliente(<?= 0 ?>) id="spanCliente" class=${row.estadoTercer == 'I' ? 'invalido' : ''} >
+                    return `<a data-bs-target=" ${row.tipo_tercero == 5 ? "#agregarCliente" : "#agregarAliado"}" 
+                    data-bs-toggle="modal" onclick="seleccionarCliente(${data.id_tercero}, ${row.tipo_tercero == 5 ? '2': '3'} )" id="spanCliente" class='cliente ${row.estadoTercer == 'I' ? 'invalido' : ''}' >
                     ${row.tipo_tercero == 5 ? row.cliente : row.nombreAliado} ${row.estadoTercer == 'I' ? ' - Inactivo' : ''}
                     </a>`
                 }
@@ -1148,6 +1229,20 @@
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');
     }
+
+    //select Orden 
+    function selectOrden() {
+        $.ajax({
+            url: '<?php echo base_url('ordenServicio/obtenerEstadosVehi/') ?>',
+            type: 'POST',
+            dataType: 'json',
+            success: function(res) {
+                filasDina = $(`#${res[0]}H`).attr('disabled', '');
+
+            }
+        })
+    }
+
     //Seleccionar vehiculo
     $('#vehiculo').on('change', function(e) {
         id = $('#vehiculo').val()
@@ -1261,8 +1356,9 @@
         $('#cantTape').val('')
     }
 
+    // ---------------------------Clientes y Aliados-----------------------------
     //Editar clientes
-    function seleccionarCliente(id) {
+    function seleccionarCliente(id, tp) {
         //Actualizar datos
         $.ajax({
             type: 'POST',
@@ -1283,7 +1379,6 @@
             $('#btnGuardar').text('Actualizar')
             $('#msgDoc').text('')
             $('.asterisco').hide()
-            $('.campObl').hide()
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
