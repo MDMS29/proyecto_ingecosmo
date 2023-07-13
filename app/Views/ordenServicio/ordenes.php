@@ -151,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="kms" class="col-form-label">Kilometraje: <i style="color:crimson">*</i></label>
+                                        <label for="kms" class="col-form-label">Kilometraje: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <div class="d-flex">
                                             <input type="number" name="kms" class="form-control" id="kms" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         </div>
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="d-flex column-gap-3" style="width: 100%">
                                     <div class="mb-3" style="width: 100%">
-                                        <label for="combustible" class="col-form-label">Combustible: <i style="color:crimson">*</i></label>
+                                        <label for="combustible" class="col-form-label">Combustible: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="combustible" id="combustible">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($combustible as $com) { ?>
@@ -171,7 +171,7 @@
                             </details>
                             <!-- INVENTARIO DE VEHICULO -->
                             <details id="datailInv">
-                                <summary>Inventario Vehiculo <i style="color:crimson">*</i></summary>
+                                <summary>Inventario Vehiculo <i class="asterisco" style="color:crimson;">*</i></summary>
                                 <input type="text" id="tpInventario" hidden>
                                 <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
                                     <thead>
@@ -588,7 +588,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
                                         <input type="text" id="idObser" hidden>
-                                        <label for="observaciones" class="col-form-label d-block">Observaciones: <i style="color:crimson">*</i></label>
+                                        <label for="observaciones" class="col-form-label d-block">Observaciones: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <textarea name="txtObser" id="txtObser" class="form-control w-100 p-1" rows="3" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></textarea>
                                     </div>
                                 </div>
@@ -596,7 +596,7 @@
                             <div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="estado" class="col-form-label">Estado: <i style="color:crimson">*</i></label>
+                                        <label for="estado" class="col-form-label">Estado: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="estado" id="estado">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($estadosVehi as $estado) { ?>
@@ -608,13 +608,13 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaEntrada" class="col-form-label">Fecha Entrada: <i style="color:crimson">*</i></label>
+                                    <label for="fechaEntrada" class="col-form-label">Fecha Entrada: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <div class="d-flex">
                                         <input type="date" name="fechaEntrada" id="fechaEntrada" class="form-control">
                                     </div>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="fechaEntrada" class="col-form-label">Fecha Salida: <i style="color:crimson">*</i></label>
+                                    <label for="fechaEntrada" class="col-form-label">Fecha Salida: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <div class="d-flex">
                                         <input type="date" name="fechaSalida" id="fechaSalida" class="form-control">
                                     </div>
@@ -1027,6 +1027,7 @@
                     $('#btnGuardar').text('Actualizar')
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
+                    $('.asterisco').hide()
 
                     //Inventario de orden
                     $.ajax({
@@ -1156,6 +1157,7 @@
 
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
+            $('.asterisco').show()
 
         }
         agregarDisabled()

@@ -55,7 +55,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio</label>
+                                    <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
                                         <option selected value="">--Seleccione--</option>
                                         <?php foreach ($ordenes as $dato) { ?>
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="exampleDataList" class="col-form-label">Trabajador:</label>
+                                    <label for="exampleDataList" class="col-form-label">Trabajador: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
                                         <option selected value="">--Seleccione--</option>
                                         <?php foreach ($trabajadores as $dato) { ?>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%" id="tipoMatCat">
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="tipoMat" class="col-form-label">Tipo de Material:</label>
+                                    <label for="tipoMat" class="col-form-label">Tipo de Material: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipoMat">
                                         <option selected value="">--Seleccione--</option>
                                         <?php foreach ($tipo as $dato) { ?>
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="tipoCate" class="col-form-label">Categorias o Aseguradoras:</label>
+                                    <label for="tipoCate" class="col-form-label">Categorias o Aseguradoras: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select class="form-select" name="tipoCate" id="tipoCate">
                                         <!-- SELECT DINAMICO -->
 
@@ -97,10 +97,10 @@
                             </div>
 
                             <details id="datailInv" open>
-                                <summary>Materiales a entregar</summary>
+                                <summary>Materiales a entregar <i class="asterisco" style="color:crimson;">*</i></summary>
                                 <div class="d-flex column-gap-3" style="width: 100%" id="MatCant">
                                     <div class="mb-3" style="width: 53%;">
-                                        <label for="material" class="col-form-label">Materiales:</label>
+                                        <label for="material" class="col-form-label">Materiales: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="material" id="material">
                                             <!-- SELECT DINAMICO -->
 
@@ -109,12 +109,12 @@
 
                                     <div class="d-flex gap-3">
                                         <div class="mb-3" style="width: 100%">
-                                            <label for="cantidad" class="col-form-label">Cantidad Actual</label>
+                                            <label for="cantidad" class="col-form-label">Cantidad Actual:</label>
                                             <input type="text" name="cantidadActual" class="form-control" id="cantidadActual" disabled>
                                         </div>
 
                                         <div class="mb-3" style="width: 100%">
-                                            <label for="cantidadUsar" class="col-form-label">Cantidad a usar</label>
+                                            <label for="cantidadUsar" class="col-form-label">Cantidad a usar: <i class="asterisco" style="color:crimson;">*</i></label>
                                             <input type="number" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
                                             <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                         </div>
@@ -328,6 +328,7 @@
                     $('#tipoMatCat').removeAttr('hidden', '')
                     $('#MatCant').addClass('d-flex')
                     $('#MatCant').removeAttr('hidden', '')
+                    $('.asterisco').hide()
                 }
 
             })
@@ -386,6 +387,7 @@
                     $('#MatCant').removeClass('d-flex')
                     $('#MatCant').css('display', 'none')
                     $('#MatCant').attr('hidden', '')
+                    $('.asterisco').hide()
                 }
 
             })
@@ -410,6 +412,7 @@
             $('#tipoMatCat').addClass('d-flex')
             $('#MatCant').addClass('d-flex')
             $('#MatCant').removeAttr('hidden', '')
+            $('.asterisco').show()
 
             materialesOrden = []
             mostrarMateriales()

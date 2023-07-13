@@ -47,7 +47,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="tipoCliente" class="col-form-label">Tipo Responsable: <i style="color:crimson">*</i></label>
+                                    <label for="tipoCliente" class="col-form-label">Tipo Responsable: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select class="form-select" name="tipoCliente" id="tipoCliente">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($tipoClientes as $cliente) { ?>
@@ -56,7 +56,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="cliente" class="col-form-label">Responsable: <i style="color:crimson">*</i></label>
+                                    <label for="cliente" class="col-form-label">Responsable: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select class="form-select " name="cliente" id="cliente">
                                         <!-- SELECT DINAMICO -->
                                     </select>
@@ -64,13 +64,13 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="placa" class="col-form-label">Placa: <i style="color:crimson">*</i></label>
+                                    <label for="placa" class="col-form-label">Placa: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" minlength="6" maxlength="8" class="form-control text-uppercase" name="placa" id="placa" oninput="this.value = this.value.replace(/[^a-zA-Z0-9ñ]/,'')">
                                     <input type="hidden" id="placaHidden">
                                     <small id="msgPlaca" class="invalido"></small>
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="marca" class="col-form-label">Marca: <i style="color:crimson">*</i></label>
+                                    <label for="marca" class="col-form-label">Marca: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select class="form-select " name="marca" id="marca">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($marcas as $marca) { ?>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nFabrica" class="col-form-label">No. Fabrica: <i style="color:crimson">*</i></label>
+                                    <label for="nFabrica" class="col-form-label">No. Fabrica: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select class="form-select form-control" name="nFabrica" id="nFabrica">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php $years = range(2035, 1990); ?>
@@ -92,14 +92,14 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
-                                        <label for="color" class="col-form-label">Color: <i style="color:crimson">*</i></label>
+                                        <label for="color" class="col-form-label">Color: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <input type="text" name="color" class="form-control" id="color" minlength="4" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="combustible" class="col-form-label">Combustible: <i style="color:crimson">*</i></label>
+                                    <label for="combustible" class="col-form-label">Combustible: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="combustible" id="combustible">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($combustible as $com) { ?>
@@ -236,13 +236,13 @@
                     $('#nFabrica').val(data['modelo'])
                     $('#color').val(data['color'])
                     $('#combustible').val(data['combustible'])
-
                     $('#tituloModal').text('Editar')
                     $('#imgModal').attr('src', '<?= base_url('img/editar1.png') ?>')
                     $('#imgModal').attr('width', '25')
                     $('#btnGuardar').text('Actualizar')
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
+                    $('.asterisco').hide()
                 }
             })
         } else {
@@ -261,6 +261,7 @@
             $('#imgModal').attr('width', '25')
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
+            $('.asterisco').show()
         }
     }
     //Input dinamico para los clientes
