@@ -86,7 +86,7 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Precio Venta: </label>
+              <label for="exampleDataList" class="col-form-label">Precio Venta: <i style="color:crimson">*</i></label>
               <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
@@ -428,7 +428,7 @@
     idCategoria = $("#idCategoria").val()
     fila = $("#fila1").val()
     estante = $("#estante1").val()
-    if ([nombre, precioCompra, cantidadActual, fila, estante].includes("")) {
+    if ([nombre, precioCompra, cantidadActual, fila, estante, precioVenta].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -529,7 +529,7 @@
     fila = $("#fila").val()
     cantidadActual = $("#cantidadActual").val()
     idCategoria = $("#idCategoria").val()
-    if ([nombre, precioCompra, cantidadActual, cantidadVendida, estante, fila].includes("")) {
+    if ([nombre, precioCompra, cantidadActual, cantidadVendida, estante, fila, precioVenta].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -651,10 +651,7 @@
             }
           })
 
-          Toast.fire({
-            icon: 'success',
-            title: 'Insumo usado con exito'
-          })
+          mostrarMensaje('success', '¡Insumo usado con exito!')
           setTimeout(() => {
             window.location.reload();
           }, 2500)
