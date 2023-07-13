@@ -313,7 +313,7 @@
             type: 'POST',
             dataType: 'json',
             success: function(res) {
-                console.log(filasDina+"selectionao");
+                console.log(res)
                 if (id_fila == fila) {
                     console.log("holaa gy")
                     filasDina = $(`#${res[0].fila}F`).attr('disabled', '');

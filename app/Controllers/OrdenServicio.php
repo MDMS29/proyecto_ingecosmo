@@ -438,10 +438,6 @@ class OrdenServicio extends BaseController
         echo view('ordenServicio/ordenes', $data);
     }
 
-    public function obtenerEstadosVehi(){
-        $res = $this->param->obtenerEstadosVehi('A');
-        return json_encode($res);
-    }
 
     public function buscarOrden()
     {
