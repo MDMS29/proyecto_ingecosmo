@@ -89,12 +89,12 @@ body::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 0px;
 } 
-/*
+
 *::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: 5px;
 }
-
+/*
 *::-webkit-scrollbar:hover,
 body::-webkit-scrollbar:hover {
   width: 10px;

@@ -99,13 +99,15 @@ class MaterialesModel extends Model
         return $datos;
     }
 
-    public function obtenerMaterialesCate($categoria, $fila)
+    public function obtenerMaterialesCate($categoria, $fila, $id_fila)
     {
         $this->select('id_material, nombre, fila');
         $this->where('materiales.categoria_material', $categoria);
+        $this->join('filas');
         $this->where('materiales.fila', $fila);
+        $this->where('filas.id_fila', $id_fila);
         $datos = $this->findAll();
-        return $datos;
+        return $datos;  
     }
 
     public function obtenerMaterialesFila($fila)

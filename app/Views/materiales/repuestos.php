@@ -501,7 +501,7 @@
       dataType: "json",
       success: function(data) {
         if (data == 1) {
-          mostrarMensaje('success', '¡Insumo usado con exito!')
+          mostrarMensaje('success', '¡Repuesto usado con exito!')
           setTimeout(() => {
             window.location.reload();
           }, 2000)

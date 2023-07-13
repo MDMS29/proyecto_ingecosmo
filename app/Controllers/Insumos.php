@@ -58,7 +58,7 @@ class Insumos extends BaseController
             $materiales = '';
         }
 
-        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos, "ordenes" => $ordenes, "trabajadores" => $trabajadores, "estanteria" => $estanteria, "fila" => $fila];
+        $data = ['data' => $materiales, 'nombreCategoria' => $nombre, 'icono' => $icon, 'idCate' => $idCate, "vehiculos" => $vehiculos, "ordenes" => $ordenes, "trabajadores" => $trabajadores, "estanteria" => $estanteria, "fila" => $fila, "nomEstante" => $nombre];
         echo view('/principal/sidebar');
 
         echo view('/materiales/materiales', $data);

@@ -59,9 +59,14 @@ input[class="form-control"] {
 
 .contenedor-d {
     display: flex;
-    justify-content: start; 
+    justify-content: center; 
     align-items: center;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    height: 700px;
+    width: 80%;
+    border: 2px solid #161666;
+    box-shadow: 0 2px 12px #161666;
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 1140px) {
