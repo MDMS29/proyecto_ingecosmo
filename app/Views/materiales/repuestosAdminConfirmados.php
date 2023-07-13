@@ -210,7 +210,7 @@
                 data: null,
                 render: function(data, type, row) {
                     return (
-                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',1)"><img src="<?php echo base_url("img/devolucion.png") ?>" alt="Boton Devolver" title="Devolver Repuesto" style="width: 24px; height: 21px"></button>' +
+                        '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',1)"><img src="<?php echo base_url("img/devolucion.png") ?>" alt="Boton Devolver" title="Devolver Repuesto" style="width: 24px; height: 21px"></button>'+
                         '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalConfirmarP" onclick="seleccionarRepuesto(' + data.id_material + ',2)"><img src="<?php echo base_url("img/restore.png") ?>" alt="Boton Restaurar" title="Restaurar Repuesto" width="20"></button>'
                     );
                 },
@@ -225,14 +225,13 @@
 
     // Cambiar estado de "Activo" a "Inactivo" 
     $('#modalConfirmarP').on('shown.bs.modal', function(e) {
-        setTimeout(() => {
-            tp = $('#tp').val()
-            if (tp == 2) {
-                $(this).find('#btnSi').attr('onclick', `ReestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
-            } else {
-                $(this).find('#btnSi').attr('onclick', `DevolverRepuesto(${$(e.relatedTarget).data('href')})`)
-            }
-        }, 500);
+        tp = $('#tp').val()
+
+        if (tp==2){
+            $(this).find('#btnSi').attr('onclick', `RestablecerRepuesto(${$(e.relatedTarget).data('href')})`)
+        } else {
+            $(this).find('#btnSi').attr('onclick', `DevolverRepuesto(${$(e.relatedTarget).data('href')})`)
+        }
     })
 
     function RestablecerRepuesto(id) {

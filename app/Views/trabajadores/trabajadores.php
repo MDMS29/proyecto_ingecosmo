@@ -49,7 +49,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombre_p" class="col-form-label">Primer Nombre: <i style="color:crimson">*</i></label>
+                                    <label for="nombre_p" class="col-form-label">Primer Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" name="nombre_p" class="form-control" id="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -59,18 +59,18 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_p" class="col-form-label">Primer Apellido: <i style="color:crimson">*</i></label>
+                                    <label for="apellido_p" class="col-form-label">Primer Apellido:  <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_s" class="col-form-label">Segundo Apellido: <i style="color:crimson">*</i></label>
+                                    <label for="apellido_s" class="col-form-label">Segundo Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" name="apellido_s" class="form-control" id="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ] /,'')">
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación: <i style="color:crimson">*</i></label>
+                                        <label for="tipoDoc" class="col-form-label">Tipo Identificación: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select form-select" name="tipoDoc" id="tipoDoc">
                                             <option value="1" selected>Cedula de Ciudadanía</option>
                                         </select>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
-                                        <label for="nIdenti" class="col-form-label">N° Identificación: <i style="color:crimson">*</i></label>
+                                        <label for="nIdenti" class="col-form-label">N° Identificación: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <input type="text" name="nIdenti" class="form-control" id="nIdenti" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                         <small id="msgDoc" class="invalido"></small>
                                     </div>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <div class="mb-3">
-                                        <label for="rol" class="col-form-label">Tipo de Cargo: <i style="color:crimson">*</i></label>
+                                        <label for="rol" class="col-form-label">Tipo de Cargo: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select form-select" name="cargo" id="cargo">
                                             <option selected value="">-- Seleccione --</option>
                                             <?php foreach ($cargos as $c) { ?>
@@ -120,6 +120,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                        <label  style="color: gray; margin-inline-end: auto;">¡Los campos que contengan un * deben ser llenados obligatoriamente!</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
@@ -147,14 +148,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class=" flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Teléfono: <i style="color:crimson">*</i></label>
+                                <label for="telefonoAdd" class="col-form-label">Teléfono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Teléfono: <i style="color:crimson">*</i></label>
+                                <label for="prioridad" class="col-form-label">Tipo Teléfono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -163,7 +164,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad: <i style="color:crimson">*</i></label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -219,14 +220,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3" style="width: 100%;">
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="correoAdd" class="col-form-label">Correo:<i style="color:crimson">*</i></label>
+                                <label for="correoAdd" class="col-form-label">Correo:<i class="asterisco" style="color:crimson;">*</i></label>
                                 <div>
                                     <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                     <small id="msgCorreo" class="invalido"></small>
                                 </div>
                             </div>
                             <div class="d-flex gap-2" style="width: 100%;">
-                                <label for="prioridad" class="col-form-label">Prioridad:<i style="color:crimson">*</i></label>
+                                <label for="prioridad" class="col-form-label">Prioridad:<i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -481,6 +482,7 @@
                 $('#cargo').val(res[0]['id_cargo'])
                 $('#btnGuardar').text('Actualizar')
                 $('#msgDoc').text('')
+                $('.asterisco').hide()
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,
@@ -523,6 +525,7 @@
             $('#cargo').val('')
             $('#btnGuardar').text('Agregar')
             $('#msgDoc').text('')
+            $('.asterisco').show()
         }
     }
     //Funcion para buscar trabajador segun su identificacion
