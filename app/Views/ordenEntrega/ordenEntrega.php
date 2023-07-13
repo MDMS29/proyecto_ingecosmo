@@ -144,6 +144,7 @@
                                                 <th>Cantidad</th>
                                                 <th>Precio</th>
                                                 <th>Subtotal</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody id="bodyTable">
@@ -155,7 +156,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" onclick="limpiarCampos()">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar">Crear orden</button>
                     </div>
                 </div>
@@ -270,6 +271,7 @@
         $("#tipoCate").val('');
         $("#trabajadores").val('');
         $("#ordenes").val('');
+        $("#material").val('');
 
 
     }
@@ -590,13 +592,34 @@
                                 <td class="text-center">${materialesOrden[i].tipo== 10 ?'Repuesto': 'Insumo'}</td>            
                                 <td class="text-center">${materialesOrden[i].cantidad}</td>            
                                 <td class="text-center">${formatearCantidad (materialesOrden[i].precio)}</td>            
-                                <td class="text-center">${formatearCantidad(materialesOrden[i].subtotal)}</td>            
+                                <td class="text-center">${formatearCantidad(materialesOrden[i].subtotal)}</td>
+                                <td> <button class="btn" onclick="editarMaterial()"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
+                                    <button class="btn" onclick="eliminarMaterial()"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono"></td>           
                             </tr> `
             }
         }
         $('#bodyTable').html(cadena)
 
         // $('#tableOrdenes')
+    }
+
+    function editarMaterial(id) {
+        const fila = $(`#${id}`);
+        const numero = fila.find('td').eq(0)
+        const tipo = fila.find('td').eq(1)
+        const prioridad = fila.find('td').eq(2)
+        $('#telefonoAdd').val(numero.text());
+        $('#tipoTele').val(tipo.attr('id'));
+        $('#prioridad').val(prioridad.attr('id'));
+        $('#editTele').val(fila.attr('id'));
+        objMaterial = {
+            id: fila.attr('id'),
+            numero: numero.text(),
+            tipo: tipo.attr('id'),
+            prioridad: prioridad.attr('id')
+        }
+        telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
+        guardarTelefono(0)
     }
 
     function validarInput() {
