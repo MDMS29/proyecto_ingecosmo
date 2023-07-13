@@ -87,116 +87,114 @@
     </nav>
 
 
-
-
-    <nav id="sidebar" class="active" style="position: sticky; ">
+    <nav id="sidebar" class="active" style="position: sticky;">
         <!-- <h1><a class="logo"></a></h1> -->
         <div class="d-flex justify-content-between flex-column" style="height: 100%;">
-            <ul id="allElement" class="list-unstyled components mb-5">
+            <ul id="allElement" class="list-unstyled components mb-5" style="overflow-y: scroll; -webkit-scrollbar:5px;">
 
-                <li class="active">
+                <li>
                     <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>
                         <p id="pa"><?= session('rol') ?></p>
                     </a>
                 </li>
 
                 <?php if (session('idRol') == 1) { ?>
-                    <li>
-                        <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" title="Trabajadores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
+                    <li title="Trabajadores">
+                        <a href="<?php echo base_url('trabajadores') ?>" id="aa"><span><img class="Tra" style=" width:40px; height:40px; " src="<?php echo base_url('/img/trabajadores.png') ?>" /></span>
                             <p id="pa">Trabajadores</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img title="Clientes" style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
+                    <li title="Clientes">
+                        <a href="<?php echo base_url('clientes') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/clientes.png') ?>" /></span>
                             <p id="pa">Clientes</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                    <li title="Repuestos">
+                        <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                             <p id="pa">Repuestos</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('insumosAdmin') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                    <li title="Insumos">
+                        <a href="<?php echo base_url('insumosAdmin') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                             <p id="pa">Insumos</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img title="Vehiculos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
+                    <li title="Vehiculos">
+                        <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
                             <p id="pa">Vehiculos</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('ordenServicio') ?>" id="aa"><span><img title="Ordenes Servicio" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
+                    <li title="Ordenes Servicio">
+                        <a href="<?php echo base_url('ordenServicio') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
                             <p id="pa">Ordenes de Servicio</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?= base_url('proveedores') ?>" id="aa"><span><img title="Proveedores" style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
+                    <li title="Proveedores">
+                        <a href="<?= base_url('proveedores') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/proveedores.png') ?>" /></span>
                             <p id="pa">Proveedores</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img title="Aliados" style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
+                    <li title="Aliados">
+                        <a href="<?php echo base_url('aliados') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/AliadosB.png') ?>" /></span>
                             <p id="pa">Aliados</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img title="Usuarios" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
+                    <li title="Usuarios">
+                        <a href="<?php echo base_url('usuarios') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuarioS.png') ?>" /></span>
                             <p id="pa">Usuarios</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img title="Historial Ordenes Servicio" style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
+                    <li title="Historial Ordenes Servicio">
+                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
                             <p id="pa">Historial Ordenes</p>
                         </a>
                     </li>
-                    <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">
-                        <span id="numeroDinamicoAdmin"></span>
+                    <div class="numeroDinamico" style="position: relative;">
+                        <span id="numeroDinamicoAdmin" style=" display: flex;-webkit-box-align: center;align-items: center;justify-content: center;font-size: 11px;text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgba(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;"></span>
                     </div>
-                    <li>
-                        <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
+                    <li title="Peticiones">
+                        <a href="<?php echo base_url('peticiones') ?>" id="aa"><span><img style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                             <p id="pa">Peticiones</p>
                         </a>
                     </li>
                 <?php } else if (session('idRol') == 3 || session('idRol') == 4) { ?>
-                    <li>
-                        <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img title="Repuestos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
+                    <li title="Repuestos">
+                        <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                             <p id="pa">Repuestos</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img title="Insumos" style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
+                    <li title="Insumos">
+                        <a href="<?php echo base_url('insumos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/materiales.png') ?>" /></span>
                             <p id="pa">Insumos</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?= base_url('estanteria') ?>" id="aa"><span><img title="Estanteria" style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
+                    <li title="Estanteria">
+                        <a href="<?= base_url('estanteria') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/estanteria.png') ?>" /></span>
                             <p id="pa">Estanteria</p>
                         </a>
                     </li>
                     <!--  -->
-                    <li>
-                        <a href="<?php echo base_url('ordenEntrega') ?>" id="aa"><span><img title="Ordenes de entrega" style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /></span>
+                    <li title="Ordenes de entrega">
+                        <a href="<?php echo base_url('ordenEntrega') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-entrega.png') ?>" /></span>
                             <p id="pa">Orden de entrega</p>
                         </a>
                     </li>
                     <div class="numeroDinamico" style="display: flex;-webkit-box-align: center; align-items: center; justify-content: center; font-size: 11px; text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgb(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;">
                         <span id="numeroDinamicoAlmacenista"></span>
                     </div>
-                    <li>
-                        <a href="<?php echo base_url('peticiones/indexAlmacenista') ?>" id="aa"><span><img title="Peticiones" style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
+                    <li title="Peticiones">
+                        <a href="<?php echo base_url('peticiones/indexAlmacenista') ?>" id="aa"><span><img style=" width:40px; height:45px; " src="<?php echo base_url('/img/buzon.png') ?>" /></span>
                             <p id="pa">Peticiones</p>
                         </a>
                     </li>
                 <?php } ?>
-                <li>
+                <li title="Historial Materiales">
                     <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
                         <p id="pa">Historial</p>
                     </a>
                 </li>
-                <li>
-                    <a href="" id="aa" class="salir"><span><img title="Salir" style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
+                <li title="Cerrar Sesion">
+                    <a href="" id="aa" class="salir"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
                         <p id="pa">Cerrar Sesion</p>
                     </a>
                 </li>
@@ -205,7 +203,7 @@
                 <div class="container-fluid d-flex justify-content-end" style="position:relative; border-top: 1px solid white; margin-top: -50px">
                     <button type="button" id="sidebarCollapse" class="btn btn-primary" style="padding:0px;margin:10px 0 10px 0;">
                         <i><img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" /></i>
-                        <span class="sr-only">Toggle Menu</span>
+                        <!-- <span class="sr-only">Toggle Menu</span> -->
                     </button>
                 </div>
             </nav>
@@ -217,91 +215,101 @@
     </div>
 
     <script>
-        function recargarAdmin() {
-            $.ajax({
-                url: '<?php echo base_url('peticiones/contadorPeticiones') ?>',
-                type: 'POST',
-                data: {},
-                dataType: 'json',
-                success: function(data) {
-                    $("#numeroDinamicoAdmin").text(data.contadorPet)
-                    console.log(data.contadorPet)
+        let sesion = `${"true<?= session('id') ?>"}`;
+        const informacion = {}
+        switch (sesion) {
+            case 'true':
+                localStorage.setItem("usuario", JSON.stringify({
+                    usuario: '',
+                    contrasena: ''
+                }));
+                window.location.href = '<?= base_url('') ?>'
+                break;
+            default:
+                function recargarAdmin() {
+                    $.ajax({
+                        url: '<?php echo base_url('peticiones/contadorPeticiones') ?>',
+                        type: 'POST',
+                        data: {},
+                        dataType: 'json',
+                        success: function(data) {
+                            $("#numeroDinamicoAdmin").text(data.contadorPet)
+                        }
+                    })
                 }
-            })
-        }
-        recargarAdmin()
+                recargarAdmin()
 
-        function recargarAlmacenista() {
-            $.ajax({
-                url: '<?php echo base_url('peticiones/contadorPeticionesAlmacenista/') ?>' + '<?php echo session("id") ?>',
-                type: 'POST',
-                data: {},
-                dataType: 'json',
-                success: function(data) {
-                    $("#numeroDinamicoAlmacenista").text(data.contadorVisto)
-                    console.log(data.contadorVisto)
+                function recargarAlmacenista() {
+                    $.ajax({
+                        url: '<?php echo base_url('peticiones/contadorPeticionesAlmacenista/') ?>' + '<?php echo session("id") ?>',
+                        type: 'POST',
+                        data: {},
+                        dataType: 'json',
+                        success: function(data) {
+                            $("#numeroDinamicoAlmacenista").text(data.contadorVisto)
+                        }
+                    })
                 }
-            })
-        }
-        recargarAlmacenista()
+                recargarAlmacenista()
 
-        const informacion = JSON.parse(localStorage.getItem('usuario'));
-        if (informacion == null || informacion?.usuario == '') {
-            window.location.href = '<?= base_url('') ?>'
-        }
-        $('.salir').on('click', function(e) {
-            const informacion = {
-                usuario: '',
-                contrasena: ''
-            };
-            localStorage.setItem("usuario", JSON.stringify(informacion));
-            $.ajax({
-                type: 'POST',
-                url: '<?= base_url('usuarios/salir') ?>',
-                dataType: 'json',
-                success: function(data) {
-                    if (data == 1) {
-                        window.location.href = '<?= base_url('') ?>'
-                    }
+                const informacion = JSON.parse(localStorage.getItem('usuario'));
+                if (informacion == null || informacion?.usuario == '') {
+                    window.location.href = '<?= base_url('') ?>'
                 }
-            })
-        })
-        document.querySelectorAll(".menu").forEach(el => {
-            el.addEventListener("click", () => {
-                el.classList.toggle("rotate");
-            });
-        });
-        //Mostrar mensajes de SwalFire
-        function mostrarMensaje(tipo, msg) {
-            Swal.fire({
-                position: 'center',
-                icon: `${tipo}`,
-                text: `${msg}`,
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
-        const formatearFecha = (fecha) => {
-            let fechaNueva = new Date(fecha)
-            const opciones = {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
+                $('.salir').on('click', function(e) {
+                    const informacion = {
+                        usuario: '',
+                        contrasena: ''
+                    };
+                    localStorage.setItem("usuario", JSON.stringify(informacion));
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= base_url('usuarios/salir') ?>',
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data == 1) {
+                                window.location.href = '<?= base_url('') ?>'
+                            }
+                        }
+                    })
+                })
+                document.querySelectorAll(".menu").forEach(el => {
+                    el.addEventListener("click", () => {
+                        el.classList.toggle("rotate");
+                    });
+                });
+                //Mostrar mensajes de SwalFire
+                function mostrarMensaje(tipo, msg) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: `${tipo}`,
+                        text: `${msg}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                
+                function mostrarMensajeCarrito(icon, text) {
+                    Toast.fire({
+                        icon: `${icon}`,
+                        title: `${text}`
+                    })
+                }
+                break;
             }
-            return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
-        }
-        const formatearCantidad = (cantidad) => {
-            return Number(cantidad).toLocaleString('es-CO', {
-                style: 'currency',
-                currency: 'COP'
-            })
-        };
-
-
-        function mostrarMensajeCarrito(icon, text) {
-            Toast.fire({
-                icon: `${icon}`,
-                title: `${text}`
-            })
-        }
+            const formatearFecha = (fecha) => {
+                let fechaNueva = new Date(fecha)
+                const opciones = {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                }
+                return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
+            }
+            const formatearCantidad = (cantidad) => {
+                return Number(cantidad).toLocaleString('es-CO', {
+                    style: 'currency',
+                    currency: 'COP'
+                })
+            };
     </script>

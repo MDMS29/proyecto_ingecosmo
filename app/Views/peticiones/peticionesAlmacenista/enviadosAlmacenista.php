@@ -54,7 +54,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="asunto" class="col-form-label">Asunto Peticion:</label>
+                                    <label for="asunto" class="col-form-label">Asunto Peticion: <i style="color:crimson">*</i></label>
                                     <input type="text" name="asunto" class="form-control" id="asunto" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú]/,'')">
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio</summary>
+                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio: <i style="color:crimson">*</i></summary>
                                         <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1 descripcion" rows="3"></textarea>
                                     </details>
                                 </div>
@@ -123,11 +123,7 @@
             [0, 'desc']
         ],
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    ContadorPRC = ContadorPRC + 1;
-                    return "<b>" + ContadorPRC + "</b>";
-                },
+                data: 'id_peticon'
             },
             {
                 data: 'asunto'

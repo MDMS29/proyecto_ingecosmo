@@ -82,7 +82,7 @@
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="estado" class="col-form-label">Tipo Validacion:</label>
+                                <label for="estado" class="col-form-label">Tipo Validacion: <i style="color:crimson">*</i></label>
                                 <select disabled class="form-select" name="estado2" id="estado2">
                                     <?php foreach ($estados as $e) { ?>
                                         <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
@@ -99,7 +99,7 @@
 
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="respuesta" class="col-form-label">Respuesta:</label>
+                                <label for="respuesta" class="col-form-label">Respuesta: <i style="color:crimson">*</i></label>
                                 <textarea disabled name="respuesta2" id="respuesta2" class="form-control w-100 p-1" rows="3"></textarea>
                             </div>
                         </div>

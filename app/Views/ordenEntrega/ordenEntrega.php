@@ -55,7 +55,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio</label>
+                                    <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
                                         <option selected value="">--Seleccione--</option>
                                         <?php foreach ($ordenes as $dato) { ?>
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="exampleDataList" class="col-form-label">Trabajador:</label>
+                                    <label for="exampleDataList" class="col-form-label">Trabajador: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
                                         <option selected value="">--Seleccione--</option>
                                         <?php foreach ($trabajadores as $dato) { ?>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%" id="tipoMatCat">
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="tipoMat" class="col-form-label">Tipo de Material:</label>
+                                    <label for="tipoMat" class="col-form-label">Tipo de Material: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipoMat">
                                         <option selected value="">--Seleccione--</option>
                                         <?php foreach ($tipo as $dato) { ?>
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label for="tipoCate" class="col-form-label">Categorias o Bodega:</label>
+                                    <label for="tipoCate" class="col-form-label">Categorias o Aseguradoras: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <select class="form-select" name="tipoCate" id="tipoCate">
                                         <!-- SELECT DINAMICO -->
 
@@ -97,10 +97,10 @@
                             </div>
 
                             <details id="datailInv" open>
-                                <summary>Materiales a entregar</summary>
+                                <summary>Materiales a entregar <i class="asterisco" style="color:crimson;">*</i></summary>
                                 <div class="d-flex column-gap-3" style="width: 100%" id="MatCant">
                                     <div class="mb-3" style="width: 53%;">
-                                        <label for="material" class="col-form-label">Materiales:</label>
+                                        <label for="material" class="col-form-label">Materiales: <i class="asterisco" style="color:crimson;">*</i></label>
                                         <select class="form-select" name="material" id="material">
                                             <!-- SELECT DINAMICO -->
 
@@ -109,12 +109,12 @@
 
                                     <div class="d-flex gap-3">
                                         <div class="mb-3" style="width: 100%">
-                                            <label for="cantidad" class="col-form-label">Cantidad Actual</label>
+                                            <label for="cantidad" class="col-form-label">Cantidad Actual:</label>
                                             <input type="text" name="cantidadActual" class="form-control" id="cantidadActual" disabled>
                                         </div>
 
                                         <div class="mb-3" style="width: 100%">
-                                            <label for="cantidadUsar" class="col-form-label">Cantidad a usar</label>
+                                            <label for="cantidadUsar" class="col-form-label">Cantidad a usar: <i class="asterisco" style="color:crimson;">*</i></label>
                                             <input type="number" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
                                             <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                         </div>
@@ -163,40 +163,6 @@
         </div>
     </div>
 </form>
-<div class="modal fade" id="verDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"> <img src="<?= base_url('img/orden-entrega-b.png') ?>" alt="logo-empresa" width="40" height="40"> Ver Detalles</h1>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
-            </div>
-            <input type="text" name="editOrden" id="editOrden" hidden>
-            <div class="modal-body">
-                <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
-                    <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Materiales De La orden</th>
-                                    <th>Fecha de entrega</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyEnt">
-                                <tr class="text-center">
-                                    <td colspan="3">NO HAY MATERIALES</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -298,15 +264,15 @@
         },
     });
 
-    // function limpiarCampos() {
+    function limpiarCampos() {
 
-    //     $("#tipo").val('');
-    //     $("#tipoCate").val('');
-    //     $("#trabajadores").val('');
-    //     $("#ordenes").val('');
+        $("#tipo").val('');
+        $("#tipoCate").val('');
+        $("#trabajadores").val('');
+        $("#ordenes").val('');
 
 
-    // }
+    }
 
     function seleccionarOrden(id, tp) {
         if (tp == 2) {
@@ -362,6 +328,7 @@
                     $('#tipoMatCat').removeAttr('hidden', '')
                     $('#MatCant').addClass('d-flex')
                     $('#MatCant').removeAttr('hidden', '')
+                    $('.asterisco').hide()
                 }
 
             })
@@ -378,7 +345,6 @@
                     mostrarMateriales()
                     $('#ordenes').val(rs['id_orden'])
                     $('#trabajadores').val(rs['id_trabajador'])
-
                     $.ajax({
                         type: "POST",
                         url: "<?= base_url('ordenEntrega/buscarDetallesOrden/') ?>" + id,
@@ -421,6 +387,7 @@
                     $('#MatCant').removeClass('d-flex')
                     $('#MatCant').css('display', 'none')
                     $('#MatCant').attr('hidden', '')
+                    $('.asterisco').hide()
                 }
 
             })
@@ -431,17 +398,21 @@
 
             $("#tp").val(1)
             $("#id").val(0)
-            $('#btnGuardar').text('Crear Nueva Orden')
+            $('#btnGuardar').text('Guardar')
             $('#ordenes').val('')
             $('#trabajadores').val('')
-            $('#MatCant').val('')
+            $('#tipoCate').val('')
+            $('#tipoMat').val('')
+            $('#material').val('')
 
             $('#btnGuardar').removeAttr('hidden', '')
             $('#ordenes').removeAttr('disabled', '')
             $('#trabajadores').removeAttr('disabled', '')
             $('#tipoMatCat').removeAttr('hidden', '')
+            $('#tipoMatCat').addClass('d-flex')
             $('#MatCant').addClass('d-flex')
             $('#MatCant').removeAttr('hidden', '')
+            $('.asterisco').show()
 
             materialesOrden = []
             mostrarMateriales()
@@ -602,17 +573,7 @@
 
     })
 
-    function mostrarMaterialesEnt(id) {
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url('insumos/obtenerMaterialesEnt/') ?>' + id + '/' + 9,
-            dataType: 'json',
-            success: function(data) {
-                materiales = data[0];
-                mostrarMateriales(1)
-            }
-        })
-    }
+
 
     function mostrarMateriales() {
         let cadena = ''
@@ -694,6 +655,9 @@
             if (tp == 1) {
                 mostrarMensaje('success', '¡Se ha Guardado la Orden de Entrega!')
                 $('#ordenModal').modal('hide')
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000);
             } else {
                 mostrarMensaje('success', '¡Se ha Actualizado la Orden de Entrega!')
                 $('#ordenModal').modal('hide')

@@ -38,8 +38,8 @@
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
     <div class="modal fade" id="agregarRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="modalContent">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><img id="imgModal" src=""><span id="tituloModal"><!-- TEXTO DINAMICO--></span> </h1>
@@ -49,17 +49,17 @@
                 <div class="modal-body">
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="exampleDataList" class="col-form-label">Nombre:</label>
+                            <label for="exampleDataList" class="col-form-label">Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
                             <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="existencias" class="col-form-label">Cantidad:</label>
+                            <label for="existencias" class="col-form-label">Cantidad: <i class="asterisco" style="color:crimson;">*</i></label>
                             <input class="form-control" type="text" id="existencias" name="existencias" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                         </div>
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="proveedor" class="col-form-label">Proveedor:</label>
+                            <label for="proveedor" class="col-form-label">Proveedor: <i class="asterisco" style="color:crimson;">*</i></label>
                             <select class="form-control form-select" name="proveedor" id="proveedor">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($proveedores as $data) { ?>
@@ -68,7 +68,7 @@
                             </select>
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="orden" class="col-form-label">Orden de Servicio:</label>
+                            <label for="orden" class="col-form-label">Orden de Servicio: <i class="asterisco" style="color:crimson;">*</i></label>
                             <select class="form-control form-select" name="orden" id="orden">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($ordenes as $data) { ?>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="bodega" class="col-form-label">Bodega:</label>
+                            <label for="bodega" class="col-form-label">Bodega: <i class="asterisco" style="color:crimson;">*</i></label>
                             <select class="form-control form-select" name="bodega" id="bodega">
                                 <option selected value="">-- Seleccione --</option>
                                 <?php foreach ($bodegas as $data) { ?>
@@ -111,7 +111,7 @@
 
                 <div class="contenidoEliminarP">
                     <div class="">
-                        <label id="observacion" class=""></label>
+                        <label id="observacion" class="">Motivo de devolucion: <i class="asterisco" style="color:crimson;">*</i></label>
                         <textarea id="observaciont" name="textarea" rows="5" cols="60" placeholder="Ej: El repuesto llego en mal estado..." style="border: 3px solid #161666; border-radius: 5px; padding: 7px;"></textarea>
                     </div>
 
@@ -125,7 +125,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal Confirma Eliminar -->
 <div class="modal fade" id="modalConfirmarP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -182,7 +181,6 @@
         validNom = true
         $('#msgAgregar').text('')
         $('#cantRestock').text('')
-        $('#observaciont').val('')
         $('#observaciont').text('')
     }
 
@@ -204,6 +202,7 @@
                     $('#orden').val(data['numeroOrden'])
                     $('#bodega').val(data['bodega'])
                     $('#btnGuardar').text('Actualizar')
+                    $('.asterisco').hide()
                 }
             })
 
@@ -220,8 +219,10 @@
             $('#orden').val('')
             $('#bodega').val('')
             $('#btnGuardar').text('Agregar')
+            $('.asterisco').show()
         }
     }
+
     function titulo(id) {
         $.ajax({
             type: 'POST',
@@ -229,7 +230,6 @@
             dataType: 'json',
             success: function(data) {
                 $('#tituloM').text(`Observacion - ${data.nombre}`)
-                $('#observacion').text('Motivo de devolucion:')
                 $('#observaciont').val('')
                 $('#btnSig').text('Confirmar')
             }
@@ -284,27 +284,27 @@
 
     });
 
-    $('#btnSig').on('click', function(e) {
-        e.preventDefault()
-        id = $('#id').val()
-        observacion = $('#observaciont').val()
-        if ([observacion].includes('')) {
-            mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } else {
-            $.ajax({
-                url: "<?= base_url('repuestosAdmin/insertarO') ?>",
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    id,
-                    observacion
-                },
-                success: function(res) {
-                    contador = 0       
-                }
-            })
-        }
-    })
+    // $('#btnSig').on('click', function(e) {
+    //     e.preventDefault()
+    //     id = $('#id').val()
+    //     observacion = $('#observaciont').val()
+    //     if ([observacion].includes('')) {
+    //         mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+    //     } else {
+    //         $.ajax({
+    //             url: "< ?= base_url('repuestosAdmin/registrarObservacion') ?>",
+    //             type: 'POST',
+    //             dataType: 'json',
+    //             data: {
+    //                 id,
+    //                 observacion
+    //             },
+    //             success: function(res) {
+    //                 contador = 0       
+    //             }
+    //         })
+    //     }
+    // })
 
     $('#formularioRepuesto').on('submit', function(e) {
         e.preventDefault()
@@ -333,7 +333,7 @@
                     bodega
                 },
                 success: function(res) {
-                    contador = 0
+                    Contador = 0
                     if (tp == 2) {
                         if (res == 1) {
                             tableRepuestosAdmin.ajax.reload(null, false)
@@ -368,21 +368,23 @@
     })
 
     function DevolverRepuesto(id) {
+        observacion = $('#observaciont').val()
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('repuestosAdmin/cambiarEstado') ?>",
+            url: "<?php echo base_url('repuestosAdmin/registrarObservacion') ?>",
             data: {
                 id,
-                estado: 'P'
+                estado: 'P',
+                observacion
             }
         }).done(function() {
             Swal.fire(
                 'Pendiente a devolver.',
-                '¡Revisa el apartado de devoluciones para confirmar su devolución!',
+                '¡Revise el apartado de devoluciones para confirmar su devolución!',
                 'success'
             )
             $('#modalConfirmarP').modal('hide')
-            contador = 0
+            Contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
         })
     }

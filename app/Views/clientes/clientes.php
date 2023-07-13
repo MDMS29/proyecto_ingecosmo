@@ -54,7 +54,7 @@
                         <form>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
+                                    <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                     <input hidden id="tp" name="tp">
                                     <input hidden id="id" name="id">
@@ -66,27 +66,26 @@
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido:</label>
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input class="form-control" id="apellidoP" name="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido:</label>
+                                    <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input class="form-control" id="apellidoS" name="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
-                                    <select disabled class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
-                                        <option value="1" selected>Cedula de Ciudadania</option>
-                                        <option>-- Seleccione --</option>
+                                    <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <select  class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
+                                        <option value="1" selected>Cedula de Ciudadanía</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
-                                    <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
+                                    <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input class="form-control" id="nIdenti" name="nIdenti" type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                                     <small id="msgDoc" class="invalido"></small>
                                 </div>
@@ -210,14 +209,14 @@
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="mb-2 d-flex gap-3" style="width: 100%;">
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="correoAdd" class="col-form-label">Correo:</label>
+                            <label for="correoAdd" class="col-form-label">Correo:<i class="asterisco" style="color:crimson;">*</i></label>
                             <div>
                                 <input type="email" name="correoAdd" class="form-control" id="correoAdd" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.@ñ]/,'')">
                                 <small id="msgCorreo" class="invalido"></small>
                             </div>
                         </div>
                         <div class="d-flex gap-2" style="width: 100%;">
-                            <label for="prioridad" class="col-form-label">Prioridad:</label>
+                            <label for="prioridad" class="col-form-label">Prioridad:<i class="asterisco" style="color:crimson;">*</i></label>
                             <select class="form-select form-select form-control" name="prioridadCorreo" id="prioridadCorreo">
                                 <option selected value="">-- Seleccione --</option>
                                 <option value="P">Principal</option>
@@ -285,7 +284,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-telephone text-info fw-2 text-dark"></i> Ver Telefono</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-telephone text-info fw-2 text-dark"></i> Ver Telefonos</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <input type="text" name="editTele" id="editTele" hidden>
@@ -322,7 +321,7 @@
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="100" height="60">
-                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-envelope text-warning fw-3 text-dark"></i> Ver Correo</h1>
+                <h1 class="modal-title fs-5 text-center " id="tituloModal"><i class="bi bi-envelope text-warning fw-3 text-dark"></i> Ver Correos</h1>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verCliente" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
@@ -568,6 +567,7 @@
                 $('#direccion').val(res[0]['direccion'])
                 $('#btnGuardar').text('Actualizar')
                 $('#msgDoc').text('')
+                $('.asterisco').hide()
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
@@ -609,6 +609,7 @@
             $('#nIdenti').val('')
             $('#direccion').val('')
             $('#btnGuardar').text('Agregar')
+            $('.asterisco').show()
         }
     }
     //Envio de formulario
@@ -625,7 +626,7 @@
         nIdenti = $('#nIdenti').val()
         direccion = $('#direccion').val()
         //Control de campos vacios
-        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, direccion].includes('') || validIdent == false || validCorreo == false || correos.length == 0 || telefonos.length == 0) {
+        if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti].includes('') || validIdent == false || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
             $.ajax({

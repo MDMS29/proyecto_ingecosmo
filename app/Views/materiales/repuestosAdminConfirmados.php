@@ -246,7 +246,7 @@
             $('#modalConfirmarP').modal('hide')
             contador = 0
             tableRepuestosAdmin.ajax.reload(null, false)
-            return  mostrarMensaje('success', '¡Se ha restablecido el repuesto!')
+            return  mostrarMensaje('success', '¡Se ha reestablecido el repuesto!')
         })
     }
 
