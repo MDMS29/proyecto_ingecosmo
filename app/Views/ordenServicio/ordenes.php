@@ -650,7 +650,7 @@
                         <label for="prioridad" class="col-form-label">Cambiar Estado:</label>
                         <select class="form-select" name="estadoVehiculo" id="estadoVehiculo">
                             <?php foreach ($estadosVehi as $estado) { ?>
-                                <option id="<?php echo $estado['id'] ?>H" value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
+                                <option class="opcEstado" id="<?php echo $estado['id'] ?>" value="<?= $estado['id'] ?>"><?= $estado['nombre'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -1212,7 +1212,7 @@
                 render: function(data, type, row) {
                     return (
                         '<button class="btn" onclick="seleccionarOrden(' + data.id_orden + ',2)" data-bs-target="#agregarOrden" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
-                        '<button class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Cambiar Estado" title="Cambiar Estado" width="20"></button>' +
+                        '<button  class="btn" data-href=' + data.id_orden + ' data-bs-toggle="modal" data-bs-target="#cambiarEstado"><img src="<?php echo base_url("img/cambiar-estado.png") ?>" alt="Cambiar Estado" title="Cambiar Estado" width="20"></button>' +
                         '<button class="btn" title="Descargar Orden" onclick="pdf(' + data.id_orden + ')"><img src="<?= base_url("img/pdf.png") ?>" width="25"/></button>'
                     )
                 }
@@ -1230,18 +1230,22 @@
         $('#modal-pdf').modal('show');
     }
 
-    //select Orden 
-    function selectOrden() {
-        $.ajax({
-            url: '<?php echo base_url('ordenServicio/obtenerEstadosVehi/') ?>',
-            type: 'POST',
-            dataType: 'json',
-            success: function(res) {
-                filasDina = $(`#${res[0]}H`).attr('disabled', '');
+    // //select Orden 
+    // function selectOrden() {
+    //     opcEstado=$(".opcEstado")
+    //     $.ajax({
+    //         url: '< ?php echo base_url('ordenServicio/obtenerEstadosVehi/') ?>' + id,
+    //         type: 'POST',
+    //         dataType: 'json',
+    //         success: function(res) {
+    //             if (opcEstado==id) {
+    //                 $(".opcEstado").attr('disabled', '');
+                    
+    //             }
 
-            }
-        })
-    }
+    //         }
+    //     })
+    // }
 
     //Seleccionar vehiculo
     $('#vehiculo').on('change', function(e) {
@@ -2168,6 +2172,7 @@
             success: function(data) {
                 $('#tituloModalEstado').text('Cambiar Estado - ' + data.n_orden)
                 $('#estadoVehiculo').val(data.proceso)
+                $(`#estadoVehiculo #${data.proceso}`).attr('disabled', '');
                 $('#idVehi').val($(e.relatedTarget).data('href'))
             }
         })

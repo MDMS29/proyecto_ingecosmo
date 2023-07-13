@@ -85,6 +85,8 @@ class ParamModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    
+    
     public function obtenerCombustibleVehi($estado)
     {
         $this->select('id_param_det as id, nombre');
