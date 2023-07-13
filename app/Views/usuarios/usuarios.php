@@ -115,8 +115,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%" id="divContras">
-                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña: <i class="asterisco" style="color:crimson;">*</i>
-                                    </label>
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="password" name="contra" class="form-control" id="contra" minlength="5">
                                     <small class="normal">¡La contraseña debe contar con un minimo de 6 caracteres!</small>
 
@@ -145,6 +144,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
@@ -171,7 +171,7 @@
                         <div class="container p-4" style="background-color: #dfe6f2;border-radius:10px;">
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%" id="divContras">
-                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña: <i class="asterisco" style="color:crimson;">*</i>
+                                    <label id="labelNom" for="nombres" class="col-form-label"> Contraseña: <i  style="color:crimson;">*</i>
                                     </label>
                                     <div class="flex">
                                         <input type="password" name="contraRes" class="form-control" id="contraRes" minlength="5">
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="divContras2">
                                     <div>
-                                        <label for="nombres" class="col-form-label">Confirmar Contraseña: <i class="asterisco" style="color:crimson;">*</i></label>
+                                        <label for="nombres" class="col-form-label">Confirmar Contraseña: <i  style="color:crimson;">*</i></label>
                                         <input type="password" name="confirContraRes" class="form-control" id="confirContraRes" minlength="5">
                                     </div>
                                     <small id="msgConfirRes" class="normal"></small>
@@ -196,6 +196,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                    <label style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarCampos('contraRes', 'confirContraRes')">Cerrar</button>
                         <input type="submit" class="btn btnRedireccion" value="Actualizar" id="btnActuContra"></input>
                     </div>
@@ -264,6 +265,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddTel">Agregar</button>
                 </div>
@@ -323,6 +325,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnRedireccion" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                     <button type="button" class="btn btnAccionF" id="btnAddCorre">Agregar</button>
                 </div>
@@ -632,6 +635,7 @@
                 $('#btnGuardar').text('Actualizar')
                 $('#fotoUsuario').text('Cambiar foto de Usuario:')
                 $('.asterisco').hide()
+                $('.campObl').hide()
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 7,
@@ -680,12 +684,12 @@
             $('#confirContra').val('')
             $('#divContras').removeAttr('hidden')
             $('#divContras2').removeAttr('hidden')
-            $('#labelNom').text('Contraseña:')
             $('#btnGuardar').text('Agregar')
             $('#fotoUsuario').text('Foto de Usuario:')
             $('#msgDoc').text('')
             $('#imgModal').attr('src', '<?= base_url('img/plus-b.png') ?>')
             $('.asterisco').show()
+            $('.campObl').show()
         }
     }
     //Funcion para cambiar contraseña

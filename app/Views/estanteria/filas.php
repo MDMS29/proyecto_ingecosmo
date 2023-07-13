@@ -73,9 +73,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Fila</label>
-                            <select class="form-select" id="fila" name="fila">
-                                <option selected>-- SELECCIONE UNA FILA --</option>
+                            <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Fila <i style="color:crimson">*</i></label>
+                            <select id="fila1" class="form-select" name="fila">
+                                <option value="" selected>-- Seleccione --</option>
                                 <?php foreach ($filas as $fila) { ?>
                                     <option id="<?php echo $fila['id_fila']; ?>F" value=<?php echo $fila['id_fila']; ?>>
                                         <?php echo $fila['nombre']; ?></option>
@@ -87,6 +87,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
+                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" onclick="limpiarCampos()">Cerrar</button>
                     <button type="submit" class="btn btnGuardar1" id="btnGuardar">Guardar</button>
                 </div>
@@ -158,7 +159,6 @@
 
             <div class="modal-footer" id="modalFooterD">
                 <button type="button" class="btn btnCerrar" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
-
                 <button type="button" class="btn btnEditar" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
             </div>
 
@@ -212,7 +212,7 @@
                         </div>
 
                         <div class="mb-3" style="width: 50%">
-                            <label for="exampleDataList" class="col-form-label">Cantidad a Usar:</label>
+                            <label for="exampleDataList" class="col-form-label">Cantidad a Usar: <i style="color:crimson">*</i></label>
                             <div>
                                 <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
                                 <small id="msgUsar" class="invalido"></small>
@@ -234,6 +234,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnCerrar" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btnEditar" id="btnValidar">Usar</button>
 
@@ -316,9 +317,9 @@
                 console.log(filasDina);
                 if (id_fila == fila) {
                     filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
-                    
+
                 } else {
-                    
+
                 }
                 // var cadena
                 // cadena = `<option value="" selected>-- SELECCIONE PRODUCTOS --</option>`
@@ -333,26 +334,37 @@
 
     $('#agregarFila').on('submit', function(e) {
         e.preventDefault();
-        fila = $('#fila').val()
+        fila = $('#fila1').val()
         id_material = $('#idMaterialMove').val()
-        $.ajax({
-            url: "<?php echo base_url('/filas/moverMaterial'); ?>",
-            type: 'POST',
-            data: {
-                fila,
-                id_material
-            },
-            dataType: 'json',
-            success: function(res) {
-                if (res == 1) {
-                    mostrarMensaje('success', '¡Se ha movido el insumo correctamente!');
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 2000)
+        if ([fila, id_material].includes("")) {
+            return Swal.fire({
+                position: "center",
+                icon: "error",
+                text: "¡Campos Vacios!",
+                showConfirmButton: false,
+                timer: 1000
+            })
+        } else {
+            $.ajax({
+                url: "<?php echo base_url('/filas/moverMaterial'); ?>",
+                type: 'POST',
+                data: {
+                    fila,
+                    id_material
+                },
+                dataType: 'json',
+                success: function(res) {
+                    if (res == 1) {
+                        mostrarMensaje('success', '¡Se ha movido el insumo correctamente!');
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 2000)
+                    }
                 }
-            }
-        })
-        estanteria.ajax.reload(null, false)
+            })
+            estanteria.ajax.reload(null, false)
+
+        }
     })
 
     function limpiarCampos() {

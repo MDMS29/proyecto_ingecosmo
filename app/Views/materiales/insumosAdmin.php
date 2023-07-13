@@ -73,7 +73,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Actual: <i class="asterisco" style="color:crimson;">*</i></label>
-              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')" >
+              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 100%;">
@@ -121,6 +121,7 @@
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
+          <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
@@ -155,6 +156,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <label style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#agregarUsuario" onclick="limpiarCampos()">Cerrar</button>
         <button type="button" class="btn btnAccionF" id="btnRestock">Guardar</button>
       </div>
@@ -231,9 +233,9 @@
         dataType: 'json',
         success: function(res) {
           console.log(res)
-          if(res.length == 0){
-            cadena =  `<option value="" selected>-- No Hay Filas  --</option>`
-          }else{
+          if (res.length == 0) {
+            cadena = `<option value="" selected>-- No Hay Filas  --</option>`
+          } else {
             cadena = `<option value="" selected>-- Seleccione  --</option>`
             for (let i = 0; i < res.length; i++) {
               cadena += `<option value=${res[i].id_fila}>${res[i].nombre}</option>`
@@ -273,6 +275,7 @@
           mostrarFilas(data['idEstante'], data['fila'])
           $('#btnAgregar').text('Actualizar')
           $('.asterisco').hide()
+          $('.campObl').hide()
         }
       })
     } else {
@@ -292,6 +295,7 @@
       mostrarFilas('', '')
       $('#btnAgregar').text('Guardar')
       $('.asterisco').show()
+      $('.campObl').show()
 
     }
   }

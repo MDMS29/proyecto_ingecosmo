@@ -59,7 +59,7 @@
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="apellido_p" class="col-form-label">Primer Apellido:  <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <label for="apellido_p" class="col-form-label">Primer Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
                                     <input type="text" name="apellido_p" class="form-control" id="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                                 <div class="mb-3" style="width: 100%">
@@ -120,7 +120,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <label  style="color: gray; margin-inline-end: auto;">¡Los campos que contengan un * deben ser llenados obligatoriamente!</label>
+                        <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
@@ -192,6 +192,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
@@ -254,6 +255,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
                 </div>
@@ -483,6 +485,7 @@
                 $('#btnGuardar').text('Actualizar')
                 $('#msgDoc').text('')
                 $('.asterisco').hide()
+                $('.campObl').hide()
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 6,
@@ -526,6 +529,7 @@
             $('#btnGuardar').text('Agregar')
             $('#msgDoc').text('')
             $('.asterisco').show()
+            $('.campObl').show()
         }
     }
     //Funcion para buscar trabajador segun su identificacion
@@ -586,8 +590,7 @@
         //Control de campos vacios
         if ([nombreP, apellidoP, apellidoS, tipoDoc, nIdenti, cargo].includes('') || validIdent == false || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
-        } 
-        else {
+        } else {
             $.ajax({
                 url: '<?php echo base_url('trabajadores/insertar') ?>',
                 type: 'POST',

@@ -117,6 +117,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                        <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar">Agregar</button>
                     </div>
@@ -142,14 +143,14 @@
                     <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                         <div class="mb-2 d-flex gap-3 flex-wrap" style="width: 100%;">
                             <div class="flex-grow-1">
-                                <label for="telefonoAdd" class="col-form-label">Telefono:</label>
+                                <label for="telefonoAdd" class="col-form-label">Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <div>
                                     <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
                             <div class=" flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Tipo Telefono:</label>
+                                <label for="prioridad" class="col-form-label">Tipo Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
                                     <?php foreach ($tipoTele as $tipe) { ?>
@@ -158,7 +159,7 @@
                                 </select>
                             </div>
                             <div class="flex-grow-1">
-                                <label for="prioridad" class="col-form-label">Prioridad:</label>
+                                <label for="prioridad" class="col-form-label">Prioridad: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="prioridad" id="prioridad">
                                     <option selected value="">-- Seleccione --</option>
                                     <option value="P">Principal</option>
@@ -186,6 +187,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
@@ -243,6 +245,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                 <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
             </div>
@@ -569,6 +572,7 @@
                 $('#btnGuardar').text('Actualizar')
                 $('#msgDoc').text('')
                 $('.asterisco').hide()
+                $('.campObl').hide()
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
@@ -611,6 +615,7 @@
             $('#direccion').val('')
             $('#btnGuardar').text('Agregar')
             $('.asterisco').show()
+            $('.campObl').show()
         }
     }
     //Envio de formulario

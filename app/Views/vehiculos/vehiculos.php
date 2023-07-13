@@ -114,6 +114,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                    <label style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar"><!-- TEXTO DIANMICO --></button>
                     </div>
@@ -243,6 +244,7 @@
                     $('#msgPlaca').text('')
                     $('#msgOrden').text('')
                     $('.asterisco').hide()
+                    $('.campObl').hide()
                 }
             })
         } else {
@@ -262,6 +264,7 @@
             $('#msgOrden').text('')
             $('#msgPlaca').text('')
             $('.asterisco').show()
+            $('.campObl').show()
         }
     }
     //Input dinamico para los clientes

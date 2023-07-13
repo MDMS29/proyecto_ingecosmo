@@ -155,6 +155,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar">Crear orden</button>
                     </div>
@@ -329,6 +330,7 @@
                     $('#MatCant').addClass('d-flex')
                     $('#MatCant').removeAttr('hidden', '')
                     $('.asterisco').hide()
+                    $('.campObl').hide()
                 }
 
             })
@@ -388,6 +390,7 @@
                     $('#MatCant').css('display', 'none')
                     $('#MatCant').attr('hidden', '')
                     $('.asterisco').hide()
+                    $('.campObl').hide()
                 }
 
             })
@@ -413,6 +416,7 @@
             $('#MatCant').addClass('d-flex')
             $('#MatCant').removeAttr('hidden', '')
             $('.asterisco').show()
+            $('.campObl').show()
 
             materialesOrden = []
             mostrarMateriales()

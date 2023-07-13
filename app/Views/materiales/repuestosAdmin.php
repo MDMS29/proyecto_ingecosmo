@@ -90,6 +90,7 @@
                     </div>
                 </div>
                 <div class="modal-footer" id="modalFooter">
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btnAccionF" id="btnGuardar"></button>
                 </div>
@@ -111,13 +112,14 @@
 
                 <div class="contenidoEliminarP">
                     <div class="">
-                        <label id="observacion" class="">Motivo de devolucion: <i class="asterisco" style="color:crimson;">*</i></label>
+                        <label id="observacion" class="">Motivo de devolucion: <i style="color:crimson;">*</i></label>
                         <textarea id="observaciont" name="textarea" rows="5" cols="60" placeholder="Ej: El repuesto llego en mal estado..." style="border: 3px solid #161666; border-radius: 5px; padding: 7px;"></textarea>
                     </div>
 
                 </div>
             </div>
             <div id="bloqueBtnP" class="modal-footer">
+                <label style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                 <button id="btnNo" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cancelar</button>
                 <a id="btnSig" class="btn btnAccionF " data-bs-toggle="modal" data-bs-target="#modalConfirmarP"></a>
             </div>
@@ -203,6 +205,7 @@
                     $('#bodega').val(data['bodega'])
                     $('#btnGuardar').text('Actualizar')
                     $('.asterisco').hide()
+                    $('.campObl').hide()
                 }
             })
 
@@ -220,6 +223,7 @@
             $('#bodega').val('')
             $('#btnGuardar').text('Agregar')
             $('.asterisco').show()
+            $('.campObl').show()
         }
     }
 

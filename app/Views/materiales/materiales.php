@@ -118,6 +118,7 @@
           </div>
         </div>
         <div class="modal-footer" id="modalFooter">
+          <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
@@ -292,10 +293,9 @@
               </div>
             </div>
           </div>
-
-
         </div>
         <div class="modal-footer">
+          <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>f
           <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/orden-entrega.png') ?>" alt="icon-plus" width="20">Agregar a orden</button>
 
