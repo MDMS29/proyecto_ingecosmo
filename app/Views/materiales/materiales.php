@@ -4,38 +4,41 @@
 
 <!-- contenedor card -->
 <div id="content" class="p-4 p-md-5">
-  <div class="MasBaterias" id="MasBaterias">
-    <h5 class="titulo"><?= $nombreCategoria ?></h5>
-  </div>
+  <div class="contenedorCards">
+    <div class="MasBaterias" id="MasBaterias">
+      <h2 class="titulo"><?= $nombreCategoria ?></h2>
+    </div>
 
-  <div class="contenedor-d">
-    <?php if (empty($data)) { ?>
-      <abbr>No se encuentra insumos - <?= $nombreCategoria ?></abbr>
-    <?php } else { ?>
-      <?php foreach ($data as $dato) { ?>
+    <div class="contenedor-d">
+      <div class="contenedorD2">
+        <?php if (empty($data)) { ?>
+          <abbr>No se encuentra insumos - <?= $nombreCategoria ?></abbr>
+        <?php } else { ?>
+          <?php foreach ($data as $dato) { ?>
 
-        <div class="card">
+            <div class="card">
 
-          <div class="contenido1">
-            <img src="<?php echo base_url('/img/') . $icono ?>" class="baterias" />
-            <h5 class="card-title" id="nombreCard"><?php echo $dato['nombre']; ?></h5>
-          </div>
-          <br>
-          <br>
+              <div class="contenido1">
+                <img src="<?php echo base_url('/img/') . $icono ?>" class="baterias" />
+                <h5 class="card-title" id="nombreCard"><?php echo $dato['nombre']; ?></h5>
+              </div>
+              <br>
+              <br>
 
-          <div class="contenido2">
-            <div class="Imagenes">
-              <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/MasDetallesW.png" width="30" height="30" title="Mas detalles del insumo"></input>
+              <div class="contenido2">
+                <div class="Imagenes">
+                  <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/MasDetallesW.png" width="30" height="30" title="Mas detalles del insumo"></input>
 
-              <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/grifo.png" width="30" height="30" title="Usar insumo"></input>
+                  <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/grifo.png" width="30" height="30" title="Usar insumo"></input>
+                </div>
+              </div>
+
             </div>
-          </div>
-
-        </div>
-      <?php } ?>
-    <?php } ?>
+          <?php } ?>
+        <?php } ?>
+      </div>
+    </div>
   </div>
-
   <div class="footer-page">
     <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
       Agregar</button>
@@ -363,8 +366,7 @@
         cadena = `<option value="" selected>-- Seleccione--</option>`
         for (let i = 0; i < res.length; i++) {
 
-          cadena += `<option value=${res[i].fila
-          }>${res[i].fila}</option>`
+          cadena += `<option value=${res[i].fila}>${res[i].nombre}</option>`
         }
         $('#fila1').html(cadena)
       }
@@ -384,6 +386,7 @@
       url: dataURL,
       dataType: "json",
       success: function(rs) {
+        console.log(rs)
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);
         $("#nombre1").val(rs[0]['nombre']);

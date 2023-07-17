@@ -29,13 +29,13 @@ class Materiales extends BaseController
         echo json_encode($returnData);
     }
 
-    public function detallesMaterial($id)
+    public function detallesMaterial($id_material)
     {
         $returnData = array();
-        $materiales_ = $this->materiales->traerDetalles($id);
-        if (!empty($materiales_)) {
-            array_push($returnData, $materiales_);
-        }
+        $materiales_ = $this->materiales->traerDetalles($id_material);
+
+        array_push($returnData, $materiales_);
+
         echo json_encode($returnData);
     }
 
