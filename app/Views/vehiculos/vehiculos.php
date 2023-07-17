@@ -325,7 +325,7 @@
         nFabrica = $('#nFabrica').val()
         color = $('#color').val()
         combustible = $('#combustible').val()
-        $('#brnGuardar').attr('disabled', '')
+        $('#btnGuardar').attr('disabled', '')
         if ([tipoCliente, cliente, placa, marca, nFabrica, color,  combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
