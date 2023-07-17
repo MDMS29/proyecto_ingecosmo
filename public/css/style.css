@@ -83,9 +83,20 @@ div.dataTables_wrapper div.dataTables_filter input {
   padding-top: 1em;
   gap: 1rem;
 }
+/* //scroll sidebar */
+#sidebar{
+  min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+#sidebar::-webkit-scrollbar {
+  width: 0 !important;
+  overflow-y:hidden;
+}
 
-*::-webkit-scrollbar,
-body::-webkit-scrollbar {
+
+ *::-webkit-scrollbar,
+/* body::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 0px;
 } 
@@ -93,7 +104,7 @@ body::-webkit-scrollbar {
 *::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: 5px;
-}
+}   */
 /*
 *::-webkit-scrollbar:hover,
 body::-webkit-scrollbar:hover {

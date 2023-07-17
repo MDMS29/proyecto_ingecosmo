@@ -1,4 +1,4 @@
-*{
+* {
     font-family: "Nunito", sans-serif;
 }
 
@@ -50,27 +50,56 @@ input[class="form-control"] {
     font-size: 18px;
 }
 
-
 #MasBaterias {
     display: flex;
     justify-content: center;
 }
 
+/* .titulo {
+    color: #000000;
+    font-family: 'Nunito', sans-serif;
+    font-size: 30px;
+} */
+
+.contenedorCards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .contenedor-d {
+    /* padding-left: 50px; */
+    padding-top: 30px;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     height: 700px;
-    width: 80%;
+    width: 74%;
     border: 2px solid #161666;
     box-shadow: 0 2px 12px #161666;
+
+}
+
+.contenedorD2 {
+    /* border: 2px solid #161666; */
+
+    flex-wrap: wrap;
     overflow-y: scroll;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+    width: 95%;
 }
 
 @media screen and (max-width: 1140px) {
     .contenedor-d {
+        justify-content: center;
+    }
+
+    .contenedorD2 {
         justify-content: center;
     }
 }
@@ -189,6 +218,7 @@ label {
     font-weight: 600;
 
 }
+
 /* 
 input[type="text"] {
     text-align: center;
@@ -250,9 +280,6 @@ estilos modal agregar  */
     display: flex;
     margin-left: 40%;
     font-family: 'Nunito', sans-serif;
-
-
-
 }
 
 .form-label {
