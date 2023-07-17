@@ -30,8 +30,8 @@
 </head>
 
 <body class=" d-flex align-items-stretch">
-    <nav id="sidebar2" class="navbar navbar-expand-lg " style="background-color:#000059; z-index: 999; position: absolute">
-        <div class="container-fluid">
+    <nav id="sidebar2" class="navbar "  style="background-color:#000059; z-index: 999; position: absolute">
+        <div id="scroll" class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" />
             </button>
@@ -87,10 +87,10 @@
     </nav>
 
 
-    <nav id="sidebar" class="active" style="position: sticky;">
+    <nav id="sidebar" class="active" style="position: sticky;" >
         <!-- <h1><a class="logo"></a></h1> -->
         <div class="d-flex justify-content-between flex-column" style="height: 100%;">
-            <ul id="allElement" class="list-unstyled components mb-5" style="overflow-y: scroll; -webkit-scrollbar:5px;">
+            <ul id="allElement" class="list-unstyled components mb-5" style=" overflow-y: auto; -webkit-scrollbar:5px;">
 
                 <li>
                     <a href="<?php echo base_url('usuarios/perfil/') . session('id') ?> " id="aa"><span><img title="Perfil" style=" width:40px; height:40px; " src="<?php echo base_url('/img/usuario.png') ?>" /></span>

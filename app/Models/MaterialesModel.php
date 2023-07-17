@@ -46,8 +46,8 @@ class MaterialesModel extends Model
     public function traerDetalles($id_material)
     {
         $this->select('materiales.* ,estanteria.nombre as nombreEstante, filas.nombre as filaNombre');
-        $this->join('estanteria', 'estanteria.id = materiales.estante');
-        $this->join('filas', 'filas.id_fila = materiales.fila');
+        $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
+        $this->join('filas', 'filas.id_fila = materiales.fila', 'left');
         $this->where('id_material', $id_material);
         $datos = $this->first();
         return $datos;
@@ -103,7 +103,7 @@ class MaterialesModel extends Model
     {
         $this->select('id_material, nombre, fila');
         $this->where('materiales.categoria_material', $categoria);
-        $this->join('filas');
+        // $this->join('filas');
         $this->where('materiales.fila', $fila);
         $this->where('filas.id_fila', $id_fila);
         $datos = $this->findAll();

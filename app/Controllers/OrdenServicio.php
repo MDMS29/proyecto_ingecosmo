@@ -51,6 +51,7 @@ class OrdenServicio extends BaseController
         $email = $this->email->EmailPrincipal($res['cliente'], $res['tipo_propietario']);
         $inven = $this->inventario->buscarInventario($id);
         $materiales = $this->movimiento->buscarDetEnc($id);
+
         //TODO: CAMBIAR AUTOLOAD AL MONTAR EN HOSTING
         // rgb(2, 2, 104)
         $mrg_tp = 5;
@@ -112,7 +113,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(31);
         $pdf->SetX(19);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5,  utf8_decode($res['tipo_propietario'] == 5 ? $res['nomCliente'] . ' - Cliente' : $res['nomAliado'] . ' - ' . $res['razon_social']), 0, 1, 'L');
+        $pdf->Cell(2, 5, utf8_decode($res['tipo_propietario'] == 5 ? $res['nomCliente'] . ' - Cliente' : $res['nomAliado'] . ' - ' . $res['razon_social']), 0, 1, 'L');
 
         // ---CC O NIT
         $pdf->SetY(37);
@@ -136,7 +137,7 @@ class OrdenServicio extends BaseController
         $pdf->SetY(43);
         $pdf->SetX(22);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(2, 5,  utf8_decode($res['direccion']), 0, 1, 'L');
+        $pdf->Cell(2, 5, utf8_decode($res['direccion']), 0, 1, 'L');
 
         // ---TELEFONO
         $pdf->SetY(49);
@@ -206,14 +207,14 @@ class OrdenServicio extends BaseController
 
         $pdf->SetY(49);
         $pdf->SetX(170);
-        $pdf->Cell(25, 5,  $inven[0]['checked'] == 'true' ? 'SI' : 'NO', 0, 1, 'L');
+        $pdf->Cell(25, 5, $inven[0]['checked'] == 'true' ? 'SI' : 'NO', 0, 1, 'L');
 
         /* --- TERCER RECUADRO --- */
         $pdf->RoundedRect(123, 56, 91, 7, 2);
 
         $pdf->SetY(57);
         $pdf->SetX(131);
-        $pdf->Cell(25, 5,  $inven[1]['checked'] == 'true' ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        $pdf->Cell(25, 5, $inven[1]['checked'] == 'true' ? 'Llaves(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
 
         $pdf->SetY(57);
         $pdf->SetX(160);
@@ -309,7 +310,7 @@ class OrdenServicio extends BaseController
 
         $pdf->SetFont('Arial', '', 10);
         foreach ($inven as $inv) {
-            $contador =  $contador + 1;
+            $contador = $contador + 1;
             if ($contador == 15) {
                 $xIni = 110;
                 $yIni = 94.5;
@@ -328,7 +329,7 @@ class OrdenServicio extends BaseController
 
             $inv['item'] == 'Grua' ? '' : ($inv['item'] == 'Documentos' ? '' : ($inv['item'] == 'Llaves' ? '' : ($inv['item'] == 'TipoCombustible' ? '' : ($inv['item'] == 'Observacion' ? '' : ($pdf->Rect($xIni + 41, $yIni, 4, 4, $inv['checked'] == 3 ? 'F' : ''))))));
 
-            $yIni =  $yIni + 5;
+            $yIni = $yIni + 5;
         }
 
         /* --- RADAR COMBUSTIBLE ---- */
@@ -397,6 +398,7 @@ class OrdenServicio extends BaseController
         $pdf->MultiCell(150, 2.2, utf8_decode('Autorizo a INGECOSMOS LTDA, a consultar, reportar o informar a cualquier control de riesgos más daños personales contenidos en la presente Orden de Servicio así como el trabajo d elas obligaciones contraídas con dica empresa.'), 0, 'L', false);
 
 
+
         /* --- FIRMA --- */
         $pdf->SetFont('Arial', '', 8);
         $pdf->RoundedRect(153, 241, 61, 35, 2);
@@ -405,7 +407,64 @@ class OrdenServicio extends BaseController
         $pdf->line(155, 270, 212, 270);
         $pdf->SetXY(175, 272);
         $pdf->Cell(90, 1, 'CLIENTES', 0, 'J', false);
+        
+        // --- MATERIALES USADOS
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->AddPage();
+        $pdf->SetMargins(5, 0, 5);
+        $pdf->SetTextColor(2, 2, 104);
+        $pdf->SetFillColor(2, 2, 104);
 
+        $pdf->line(2, 8, 213.8, 8);
+
+        // --CABEZERA TABLA 1
+
+        $pdf->SetXY(4, 5);
+        $pdf->Cell(90, 1, 'CANTIDAD', 0, 'J', false);
+
+        $pdf->SetXY(90, 5);
+        $pdf->Cell(90, 1, 'REPUESTO/INSUMO', 0, 'J', false);
+
+        $pdf->SetXY(186, 5);
+        $pdf->Cell(90, 1, 'VALOR UNIT.', 0, 'J', false);
+
+        $x = 5;
+        $y = 9;
+        $ciclo = sizeof($materiales) - 1;
+        if (sizeof($materiales) == 0) {
+            $pdf->SetXY($x + 75, $y);
+            $pdf->Cell(90, 1, 'NO SE HA HECHO USO DE INSUMOS', 0, 'J', false);
+            $y = $y + 5;
+        } else {
+            $subtotal = 0;
+            for ($i = 0; $i <= $ciclo; $i++) {
+                $pdf->SetXY($x + 5, $y+1);
+                $pdf->Cell(90, 1, $materiales[$i]['cantidad'], 0, 'J', false);
+
+                $pdf->SetXY($x + 25, $y+1);
+                $pdf->Cell(90, 1, $materiales[$i]['nombre'], 0, 'J', false);
+
+                $pdf->SetXY($x + 175, $y+1);
+                $pdf->Cell(90, 1, '$ ' . number_format($materiales[$i]['precio_venta'], 2), 0, 'J', false);
+                $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 4, 213.8, $y + 3);
+
+                // $subtotal = $materiales[$i]['cantidad'] * $materiales[$i]['precio_venta'];
+
+                // $subtotal = $subtotal + $subtotal;
+
+                
+                $y = $y + 6;
+            }
+            $pdf->SetXY($x + 155, $y+3.5);
+            $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
+
+            $pdf->SetXY($x + 175, $y+3.5);
+            $pdf->Cell(90, 1, '$ ' . number_format($subtotal, 2), 0, 'J', false);
+            $pdf->RoundedRect($x + 175, $y, 34, 7, 2); //SUBTOTAL
+        }
+        $pdf->RoundedRect(2, 2, 212, $y - 4, 2); //
+        $pdf->line(25, 2, 25, $y - 2);
+        $pdf->line(180, 2, 180, $y - 2);
 
 
         $this->response->setHeader('Content-Type', 'application/pdf');
@@ -430,8 +489,10 @@ class OrdenServicio extends BaseController
         $tipoCliente = $this->param->obtenerAliadoClientes();
         $combustible = $this->param->obtenerCombustibleVehi('A');
         $data = [
-            'clientes' => $clientes, 'marcas' => $marcas,
-            'estadosVehi' => $estados, 'combustible' => $combustible,
+            'clientes' => $clientes,
+            'marcas' => $marcas,
+            'estadosVehi' => $estados,
+            'combustible' => $combustible,
             'tipoClientes' => $tipoCliente
         ];
         echo view('principal/sidebar');
@@ -517,8 +578,8 @@ class OrdenServicio extends BaseController
             'kms' => $kms,
             'n_combustible' => $combustible,
             'nombres' => empty($nombreRespon) || $tipoCliente == 5 ? null : $nombreRespon,
-            'apellidos' =>  empty($apellidoRespon) || $tipoCliente == 5 ? null : $apellidoRespon,
-            'n_identificacion' =>  empty($nIdentiRes) || $tipoCliente == 5 ? null : $nIdentiRes,
+            'apellidos' => empty($apellidoRespon) || $tipoCliente == 5 ? null : $apellidoRespon,
+            'n_identificacion' => empty($nIdentiRes) || $tipoCliente == 5 ? null : $nIdentiRes,
             'estado' => $estado,
             'fecha_entrada' => $fechaEntrada,
             'fecha_salida' => $fechaSalida,
