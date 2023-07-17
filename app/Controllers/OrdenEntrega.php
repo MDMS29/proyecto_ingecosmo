@@ -194,4 +194,10 @@ class OrdenEntrega extends BaseController
             }
         }
     }
+    public function eliminarMaterial($idMat)
+    {
+        if ($this->materiales->delete($idMat)) {
+            return json_encode(1);
+        }
+    }
 }
