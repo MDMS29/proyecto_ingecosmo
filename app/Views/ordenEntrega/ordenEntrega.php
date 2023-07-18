@@ -622,8 +622,8 @@
 
         // $('#tableOrdenes')
     }
-    function editarMateriales(id) {
-        const fila = $(`#${id}`);
+    function editarMateriales(idMaterial) {
+        const fila = $(`#${idMaterial}`);
         const material = fila.find('td').eq(1)
         const tipo = fila.find('td').eq(2)
         const cantidad = fila.find('td').eq(3)
@@ -635,7 +635,7 @@
         $('#editTele').val(fila.attr('id'));
       
         objMaterial = {
-            id: fila.attr('id'),
+            idMaterial: fila.attr('idMaterial'),
             material: numero.text(),
             tipo: tipo.attr('id'),
             cantidad: cantidad.attr('id'),
@@ -660,6 +660,7 @@
                     console.log(id)
                 }
             })
+            tablaOrdenes.ajax.reload(null, false)
         }
         materialesOrden = materialesOrden.filter(mat => mat.id != id)
         mostrarMateriales(0) //Actualizar tabla
