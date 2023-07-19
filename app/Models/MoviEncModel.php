@@ -99,7 +99,7 @@ class MoviEncModel extends Model
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '68');
         $this->where('movimiento_enc.id_vehiculo', $id);
-        $this->groupBy('movimiento_enc.id_movimientoenc');
+        // $this->groupBy('movimiento_enc.id_movimientoenc');
         $data = $this->findAll();
         return $data;
     }
