@@ -772,7 +772,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -822,7 +822,7 @@
                 </div>
                 <div class="modal-footer">
                     <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-                    <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button type="button" class="btn btnAccionF" onclick="limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -837,7 +837,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                <button type="button" class="btn" aria-label="Close" onclick="limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', '', 4)">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -880,7 +880,7 @@
             </div>
             <div class="modal-footer">
                 <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-                <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                <button type="button" class="btn btnAccionF" onclick="limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -1082,30 +1082,12 @@
         $('#nFabrica').attr('disabled', '')
         $('#color').attr('disabled', '')
     }
-    //Limpiar campos
-    function limpiarCampos(input1, input2, input3, accion) {
+
+    //Limpiar campos de telefonos y correo
+    function limpiarCamposTelCorreo(input1, input2, input3, accion) {
         $(`#${input1}`).val('')
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
-
-        if (accion == 1) {
-            $('#tipoCliente').val('')
-            $('#cliente').val('')
-            $('#divResponsable').removeClass('d-flex')
-            $('#nombreRespon').val('')
-            $('#apellidoRespon').val('')
-            $('#nIdentiRes').val('')
-            $('#vehiculo').val('')
-            $('#marca').val('')
-            $('#nFabrica').val('')
-            $('#color').val('')
-            $('#kms').val('')
-            $('#combustible').val('')
-            $('#estado').val('')
-            $('#fechaEntrada').val('')
-            $('#fechaSalida').attr('min', fechaLimite)
-            $('#fechaSalida').val('')
-        }
 
         if (accion == 3) {
             if (telefonos.length != 0) {
@@ -1161,7 +1143,27 @@
             prioridad: ''
         }
         guardarTelefono(0)
+    }
 
+    //Limpiar campos modal agregar
+    function limpiarCampos(input, accion) {
+        $(`#${input}`).val('')
+        $('#tipoCliente').val('')
+        $('#cliente').val('')
+        $('#divResponsable').removeClass('d-flex')
+        $('#nombreRespon').val('')
+        $('#apellidoRespon').val('')
+        $('#nIdentiRes').val('')
+        $('#vehiculo').val('')
+        $('#marca').val('')
+        $('#nFabrica').val('')
+        $('#color').val('')
+        $('#kms').val('')
+        $('#combustible').val('')
+        $('#estado').val('')
+        $('#fechaEntrada').val('')
+        $('#fechaSalida').attr('min', fechaLimite)
+        $('#fechaSalida').val('')
     }
 
     //Mostrar Ocultar Columnas
@@ -1231,7 +1233,7 @@
                 }
             },
             {
-                data: "placa",
+                data: null,
                 render: function(data, type, row) {
                     return (
                         `<a data-bs-toggle="modal" data-bs-target="#agregarVehiculo" class="cliente text-uppercase" onclick="seleccionarCliente(${data.id_vehiculo} , 4 )">${row.placa}</a>`
@@ -1457,7 +1459,8 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
             }).done(function(res) {
-                limpiarCampos()
+                console.log(res)
+                limpiarCamposTelCorreo()
                 $('#tp').val(2)
                 $('#idc').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -1497,7 +1500,8 @@
                 url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0 + '/' + 0,
                 dataType: 'json',
                 success: function(res) {
-                    limpiarCampos()
+                    console.log(res)
+                    limpiarCamposTelCorreo()
                     $('#tp').val(2)
                     $('#idAliado').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -1539,10 +1543,11 @@
                 },
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data)
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
                     $('#tp').val(2)
                     $('#idVehiculo').val(id)
-                    $('#tipoCliente').val(data['tipo_propietario'])
+                    $('#tipoCliente2').val(data['tipo_propietario'])
                     $('#cliente2').val(data['cliente'])
                     $('#placa2').val(data['placa'])
                     $('#placaHidden2').val(data['placa'])
@@ -1560,7 +1565,7 @@
 
     }
 
-    //Envio de formulario Clientes
+    //FORMULARIO CLIENTES
     $('#formularioClientes').on('submit', function(e) {
         e.preventDefault()
         tp = 2
@@ -1633,8 +1638,6 @@
                     });
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Cliente!')
-                    } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Cliente!')
                     }
                 }
             }).done(function(data) {
@@ -1975,7 +1978,7 @@
     }
 
 
-    // ---------------------------Aliados-----------------------------
+    // -----------------------------------ALIADOS------------------------------------
     //Envio de formulario Aliados
     $('#formularioAliados').on('submit', function(e) {
         e.preventDefault()
@@ -2044,11 +2047,7 @@
                         mostrarMensaje('success', '¡Se ha Actualizado el Aliado!')
                         validTel = true
                         validCorreo = true
-                    } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Aliado!')
-                        validTel = true
-                        validCorreo = true
-                    }
+                    } 
                 }
             }).done(function(data) {
                 limpiarCampos('msgConfir')
@@ -2152,6 +2151,55 @@
         }
     })
 
+
+    // -----------------------------------VEHICULOS------------------------------------
+    //Formulario para agregar o editar Vehiculo
+    $('#formularioVehiculos').on('submit', function(e) {
+        e.preventDefault()
+        tp = 2
+        id = $('#idVehiculo').val()
+        tipoCliente = $('#tipoCliente2').val()
+        cliente = $('#cliente2').val()
+        placa = $('#placa2').val()
+        marca = $('#marca2').val()
+        nFabrica = $('#nFabrica2').val()
+        color = $('#color2').val()
+        combustible = $('#combustible2').val()
+        $('#btnGuardarVehiculo').attr('disabled', '')
+        if ([tipoCliente, cliente, placa, marca, nFabrica, color, combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?= base_url('vehiculos/insertar') ?>',
+                type: 'POST',
+                data: {
+                    tp,
+                    id,
+                    tipoCliente,
+                    cliente,
+                    placa,
+                    marca,
+                    nFabrica,
+                    color,
+                    combustible,
+                    estado: 'A'
+                },
+                success: function(data) {
+                    if (tp == 2) {
+                        data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    } else {
+                        data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    }
+                    contador = 0
+                    tablaOrdenes.ajax.reload(null, false)
+                    $('#agregarVehiculo').modal('hide')
+                    $('#btnGuardarVehiculo').removeAttr('disabled')
+                }
+            })
+        }
+    })
+
+
     // ---------------------------Vehiculos-----------------------------
     //Formulario para agregar o editar Vehiculo
     $('#formularioVehiculos').on('submit', function(e) {
@@ -2197,31 +2245,6 @@
         }
     })
 
-    //Input dinamico para los clientes
-    function verTipoCliente(id, idCliente) {
-        $.ajax({
-            url: '<?= base_url('vehiculos/buscarResponsable'); ?>',
-            data: {
-                idTipo: id
-            },
-            type: 'POST',
-            success: function(res) {
-                res = JSON.parse(res)
-                var cadena
-                cadena = `<option selected value=""> -- Seleccione -- </option>`
-                for (let i = 0; i < res.length; i++) {
-                    nombre = `${res[i].nombre_p} ${res[i].nombre_s} ${res[i].apellido_p} ${res[i].apellido_s}`;
-                    cadena += `<option ${res[i].estado == 'I' ? 'disabled' : ''} value=${res[i].id_tercero}>${res[i].tipo_tercero == 5  ? nombre : res[i].razon_social} ${res[i].estado == 'I' ? ' - Inactivo' : ''}</option>`
-                }
-                $('#cliente').html(cadena)
-                $('#cliente').val(idCliente)
-            }
-        })
-    }
-    $('#tipoCliente').on('change', function(e) {
-        id = $('#tipoCliente').val()
-        verTipoCliente(id, '')
-    })
 
     // ---------------------------Ordenes-----------------------------
     //Formulario Vehiculo
@@ -2237,6 +2260,7 @@
                 },
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data)
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
                     $('#datailInv').removeAttr('open')
                     $('#tp').val(2)
@@ -2427,9 +2451,17 @@
                 }
                 $('#cliente').html(cadena)
                 $('#cliente').val(idCliente)
+                $('#cliente2').html(cadena)
+                $('#cliente2').val(idCliente)
             }
         })
     }
+
+    $('#tipoCliente2').on('change', function(e) {
+        id = $('#tipoCliente2').val()
+        verTipoCliente(id, '')
+    })
+
     $('#tipoCliente').on('change', function(e) {
         id = $('#tipoCliente').val()
         verTipoCliente(id, '')
