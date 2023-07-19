@@ -37,6 +37,16 @@ class Filas extends BaseController
         // echo view('/materiales/materiales', $data);
     }
 
+    public  function mostrarSeccion($estante)
+    {
+        $filas = $this->filas->obtenerFilas($estante);
+        $titulo = $this->estanteria->titulo($estante);
+        $data = ['data' => $filas, 'titulo' => $titulo, 'filas' => $filas];
+        echo view('/principal/sidebar');
+        echo view('/estanteria/secciones', $data);
+        // echo view('/materiales/materiales', $data);
+    }
+
     public  function materialesEstante($estante)
     {
         $material = $this->filas->obtenerFilas($estante);
