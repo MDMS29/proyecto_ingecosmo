@@ -101,8 +101,8 @@
                                 <div class="d-flex column-gap-3" style="width: 100%" id="MatCant">
                                     <div class="mb-3" style="width: 53%;">
                                         <label for="material" class="col-form-label">Materiales: <i class="asterisco" style="color:crimson;">*</i></label>
-                                        <select class="form-select" name="material" id="material">
-                                            <!-- SELECT DINAMICO -->
+                                        <select class="form-select" name="material" id="material" >
+                                            <!-- SELECT DINAMICO --><option id=""></option>
 
                                         </select>
                                     </div>
@@ -137,6 +137,7 @@
                                     <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-center">
+                                                <input type="text" name="editMat" id="editMat" hidden>
                                                 <th hidden></th>
                                                 <th>Item</th>
                                                 <th>Material</th>
@@ -603,7 +604,6 @@
         } else {
 
             for (let i = 0; i < materialesOrden.length; i++) {
-                console.log(tipo)
                 cadena += `  <tr id="pp">
                                 <td class="text-center">${materialesOrden[i].item}</td>            
                                 <td class="text-center">${materialesOrden[i].nombre}</td>            
@@ -613,8 +613,8 @@
                                 <td class="text-center">${formatearCantidad(materialesOrden[i].subtotal)}</td>
 
                                 ${tipo == 0 ? ` <td>
-                                 <button class="btn" onclick="editarMaterial()"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Telefono">
-                                <button class="btn" onclick="eliminarMaterial(${materialesOrden[i].idMaterial})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Telefono"></td>  ` : ''}       
+                                 <button class="btn" onclick="editarMateriales(${materialesOrden[i].idMaterial}, ${materialesOrden[i].idInv})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Material">
+                                <button class="btn" onclick="eliminarMaterial(${materialesOrden[i].idMaterial}, ${materialesOrden[i].idInv})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Material"></td>  ` : ''}       
                             </tr> `
             }
         }
@@ -622,47 +622,44 @@
 
         // $('#tableOrdenes')
     }
-    function editarMateriales(idMaterial) {
-        const fila = $(`#${idMaterial}`);
+    function editarMateriales(idMaterialm, idInv) {
+        const fila = $(`#${idInv}`);
         const material = fila.find('td').eq(1)
+        console.log(material)
         const tipo = fila.find('td').eq(2)
-        const cantidad = fila.find('td').eq(3)
-        const precio = fila.find('td').eq(3)
-        $('#telefonoAdd').val(material.text());
-        $('#tipoTele').val(tipo.attr('id'));
-        $('#prioridad').val(cantidad.attr('id'));
-        $('#prioridad').val(precio.attr('id'));
-        $('#editTele').val(fila.attr('id'));
-      
         objMaterial = {
             idMaterial: fila.attr('idMaterial'),
-            material: numero.text(),
+            material: material.text(),
             tipo: tipo.attr('id'),
-            cantidad: cantidad.attr('id'),
-            precio: precio.attr('id')
         }
-        telefonos = telefonos.filter(tel => tel.id != fila.attr('id'));
-        mostrarMateriales()
+        console.log(objMaterial.nombre)
+        $('#material').val(objMaterial.nombre);
+        $('#tipoMat').val(objMaterial.tipo);
+        $('#cantidadUsar').val(objMaterial.cantidad);
+        tablaHistorial.ajax.reload(null, false)
+
+        mostrarMateriales(0) //Actualizar tabla
     }
     //Eliminar telefono de la tabla
-    function eliminarMaterial(idMaterial) {
+    function eliminarMaterial(idMaterial, idInv) {
         tp = $('#tp').val()
+        borrador= [idInv]
         if (tp == 2) {
             // Consulta tipo delete
             $.ajax({
-                url: '<?php echo base_url('ordenEntrega/eliminarMaterial/') ?>' + idMaterial,
+                url: '<?php echo base_url('ordenEntrega/eliminarMaterial/') ?>' + idInv,
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
                     if (data == 1) {
-                        return mostrarMensaje('success', '¡Se ha eliminado el material!')
+                        mostrarMensaje('success', '¡Se ha eliminado el material!')
+            
                     }
-                    console.log(id)
                 }
             })
-            tablaOrdenes.ajax.reload(null, false)
         }
-        materialesOrden = materialesOrden.filter(mat => mat.id != id)
+        tablaHistorial.ajax.reload(null, false)
+        materialesOrden = materialesOrden.filter(mat => mat.idInv != idInv)
         mostrarMateriales(0) //Actualizar tabla
     }
 
@@ -679,7 +676,7 @@
         trabajador = $("#trabajadores").val()
 
         if ([ordenServicio, trabajador].includes("") || materialesOrden.length == 0) {
-            return mostrarMensaje('e    rror', '¡Campos Vacios!')
+            return mostrarMensaje('error', '¡Campos Vacios!')
         }
         $.ajax({
             type: "POST",

@@ -30,6 +30,7 @@ class MoviDetModel extends Model
    {
       $this->select("*");
       $this->where('id_movimientoenc', $id);
+      $this->orderBy('item', 'asc' );
       $data = $this->findAll();
       return $data;
    }
