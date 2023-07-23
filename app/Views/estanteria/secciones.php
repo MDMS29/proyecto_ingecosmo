@@ -16,23 +16,72 @@
                     </div>
                 <?php } else { ?>
                     <?php foreach ($data as $dato) { ?>
+                        <div class="seccion">
                         <input type="hidden" name="categoria" id="categoria" value="<?= $dato['tipo_fila'] ?>">
-                        <div class="secciones">
-                            <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px; padding-right: 80px;"><?php echo $dato['nombre']; ?></h5>
-                            <img class="iconoSec" src="<?php echo base_url('/img/') . $dato['iconoF'] ?>">
-                            <p>holi fcjnjfdnhnwe</p>
-                            <a class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver</a>
-
+                            <div class="secciones">
+                                <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px; padding-right: 80px;"><?php echo $dato['nombre']; ?></h5>
+                                <img class="iconoSec" src="<?php echo base_url('/img/') . $dato['iconoF'] ?>">
+                                <div class="secciones2">
+                                    <p>holi fcjnjfdnhnwe</p>
+                                    <a class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver</a>
+                                </div>
+                            </div>
                         </div>
                     <?php } ?>
                 <?php } ?>
             </div>
         </div>
         <div class="footer-page">
+            <button class="btn btnRedireccion" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus" width="20"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20"> Agregar</button>
             <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/estanteria'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
+
         </div>
     </div>
 </div>
+
+<form enctype="multipart/form-data" autocomplete="off" id="agregarEstante">
+    <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="body">
+
+                <div class="modal-content" style="border:5px solid #161666; border-radius:10px;">
+                    <div class="modal-header" id="modalHeader">
+
+                        <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
+                        <div class="tituloHeader">
+                            <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar sección</h1>
+                        </div>
+                        <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body d-flex ">
+                        <form>
+                            <div class=" column-gap-3" style="width: 100%; padding-inline: 15px;">
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" for="recipient-name" style="margin:0; font-size:17px;">Nombre:</label>
+                                    <input class="form-control" type="text" min='1' max='300' id="nombre" name="nombre">
+                                </div>
+
+                                <div class="mb-3" style="width: 100%;">
+                                    <label class="col-form-label" style="margin:0; font-size:17px;" for="message-text">Imagen:</label>
+
+                                    <img src="<?php echo base_url() . '' ?> " class="logo" width="100">
+                                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*"></input>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btnGuardar1" id="btnGuardar">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <form autocomplete="off" id="agregarFila">
     <div class="modal fade" id="estanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
