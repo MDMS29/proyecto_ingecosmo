@@ -412,29 +412,30 @@ class OrdenServicio extends BaseController
 
         $materiales = $this->movimiento->buscarDetEnc($id);
         $pdf->SetAutoPageBreak(true);
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', 'B', 10);
         $pdf->AddPage();
         $pdf->SetMargins(5, 0, 5);
         $pdf->SetTextColor(2, 2, 104);
         $pdf->SetFillColor(2, 2, 104);
 
-        $pdf->line(2, 8, 213.8, 8);
+        $pdf->line(2, 6.5, 213.8, 6.5);
 
         $x = 5;
         $y = 9;
         $subtotal = 0;
 
-        // ---CABEZERA TABLA 1---
-        $pdf->SetXY(4, 5);
+        // ---CABEZERA TABLA 2---
+        $pdf->SetXY(4, 4);
         $pdf->Cell(90, 1, 'CANTIDAD', 0, 'J', false);
 
-        $pdf->SetXY(90, 5);
+        $pdf->SetXY(90, 4);
         $pdf->Cell(90, 1, 'REPUESTO/INSUMO', 0, 'J', false);
 
-        $pdf->SetXY(186, 5);
+        $pdf->SetXY(186, 4);
         $pdf->Cell(90, 1, 'VALOR UNIT.', 0, 'J', false);
 
-        // ---CONTENIDO DE TABLA 1 ---
+        $pdf->SetFont('Arial', '', 10);
+        // ---CONTENIDO DE TABLA 2 ---
         $ciclo = sizeof($materiales) - 1;
         if (sizeof($materiales) == 0) {
             $pdf->SetXY($x + 72, $y + 0.5);
@@ -442,34 +443,58 @@ class OrdenServicio extends BaseController
             $y = $y + 5;
         } else {
             for ($i = 0; $i <= $ciclo; $i++) {
-                $pdf->SetXY($x + 5, $y + 1);
+                $pdf->SetXY($x + 5, $y);
                 $pdf->Cell(90, 1, $materiales[$i]['cantidad'], 0, 'J', false);
 
-                $pdf->SetXY($x + 25, $y + 1);
+                $pdf->SetXY($x + 25, $y);
                 $pdf->Cell(90, 1, $materiales[$i]['nombre'], 0, 'J', false);
 
-                $pdf->SetXY($x + 175, $y + 1);
+                $pdf->SetXY($x + 175, $y);
                 $pdf->Cell(90, 1, '$ ' . number_format($materiales[$i]['precio_venta'], 2), 0, 'J', false);
-                $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 4, 213.8, $y + 3);
+                $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 2, 213.8, $y + 2);
 
                 $precio = $materiales[$i]['cantidad'] * $materiales[$i]['precio_venta'];
                 $subtotal = $subtotal + $precio;
 
-                $y = $y + 6;
+                $y = $y + 5;
             }
-            $pdf->SetXY($x + 155, $y + 3.5);
+            $pdf->SetXY($x + 153, $y + 2.5);
+            $pdf->SetFont('Arial', 'B', 10);
             $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
-
-            $pdf->SetXY($x + 175, $y + 3.5);
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->SetXY($x + 175, $y + 2.5);
             $pdf->Cell(90, 1, '$ ' . number_format($subtotal, 2), 0, 'J', false);
-            $pdf->RoundedRect($x + 175, $y, 34, 7, 2); //SUBTOTAL
+            $pdf->RoundedRect($x + 175, $y - 1, 34, 7, 2); //SUBTOTAL
         }
         $pdf->RoundedRect(2, 2, 212, $y - 4, 2); //CONTENEDOR DE LA TABLA
         $pdf->line(25, 2, 25, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
         $pdf->line(180, 2, 180, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
 
 
-        // --- CABEZERA TABLA 2 ---
+        // --- CABEZERA TABLA 3 ---
+        $pdf->SetFont('Arial', 'B', 10);
+
+        $pdf->RoundedRect(2, $y + 9, 212, $y, 2); //CONTENEDOR DE LA TABLA
+
+        $pdf->SetXY($x + 90, $y + 11);
+        $pdf->Cell(90, 1, 'I=Q TECNICOS', 0, 'C', false);
+        $pdf->line(2, $y + 14, 213.8, $y + 14); //DIVISORA CABEZERA DE CUERPO
+
+        $pdf->line(25, $y + 14, 25, $y + 18.5); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(140, $y + 14, 140, $y + 18.5); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(170, $y + 14, 170, $y + 18.5); //DIVISORA DE CONTENIDO VERTICAL
+
+        $pdf->SetXY($x + 2, $y + 16);
+        $pdf->Cell(90, 1, 'FECHA', 0, 'C', false);
+        $pdf->SetX($x + 70);
+        $pdf->Cell(90, 1, 'TECNICO', 0, 'C', false);
+        $pdf->SetX($x + 142);
+        $pdf->Cell(90, 1, 'VALOR', 0, 'C', false);
+        $pdf->SetX($x + 171);
+        $pdf->Cell(90, 1, 'OBSERVACIONES', 0, 'C', false);
+        $pdf->line(2, $y + 18.5, 213.8, $y + 18.5); //DIVISORA CABEZERA DE CUERPO
+
+
 
 
         $this->response->setHeader('Content-Type', 'application/pdf');
