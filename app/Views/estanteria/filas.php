@@ -32,9 +32,7 @@
                                         </div>
                                         <!-- INFORMACION DINAMICA -->
                                     </div>
-                                    <!-- <div class="bloque2">
-                                    <button class="btn btnRedireccion" id="mover"  onclick="selectMateriales('< ?php echo $dato['fila']?>')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right"></i> Mover</button>
-                                </div> -->
+                                    
                                 </div>
                             </div>
                         </div>

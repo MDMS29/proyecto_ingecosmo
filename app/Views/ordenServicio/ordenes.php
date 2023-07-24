@@ -789,7 +789,9 @@
                                 <label for="prioridad" class="col-form-label">Tipo Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <select class="form-select form-select form-control" name="tipoTele" id="tipoTele">
                                     <option selected value="">-- Seleccione --</option>
-
+                                    <?php foreach ($tipoTele as $tipe) { ?>
+                                        <option value="<?= $tipe['id'] ?>"><?= $tipe['nombre'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="flex-grow-1">
@@ -926,7 +928,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="telefono" class="col-form-label">Teléfono:</label>
                                     <div class="d-flex">
-                                        <input type="text" name="telefono" class="form-control" id="telefono" disabled style="background-color: #eceaea;">
+                                        <input type="text" name="telefono" class="form-control" id="telefonoAliado" disabled style="background-color: #eceaea;">
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarTelefono" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Telefono">+</button>
                                     </div>
                                 </div>
@@ -934,7 +936,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <label for="email" class="col-form-label">Email:</label>
                                     <div class="d-flex">
-                                        <input type="email" name="email" class="form-control" id="email" disabled style="background-color: #eceaea;">
+                                        <input type="email" name="email" class="form-control" id="emailAliado" disabled style="background-color: #eceaea;">
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#agregarCorreo" data-bs-target="#staticBackdrop" class="btn" style="border:none;background-color:gray;color:white;" title="Agregar Correo">+</button>
                                     </div>
                                 </div>
@@ -1082,7 +1084,93 @@
         $('#nFabrica').attr('disabled', '')
         $('#color').attr('disabled', '')
     }
-    
+
+    //Limpiar campos
+    function limpiarCamposTelCorreo(input1, input2, input3, accion) {
+        $(`#${input1}`).val('')
+        $(`#${input2}`).val('')
+        $(`#${input3}`).val('')
+
+        if (accion == 3) {
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarAliado').modal('show')
+                }
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarAliado').modal('show')
+            }
+        }
+
+        if (accion == 4) {
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        }
+
+        if (objCorreo.id != 0) {
+            correos.push(objCorreo)
+            guardarCorreo(0)
+        }
+        if (objTelefono.id != 0) {
+            telefonos.push(objTelefono)
+            guardarTelefono(0)
+        }
+        if (input1 == 0) {
+            telefonos = []
+            correos = []
+        }
+        objCorreo = {
+            id: 0,
+            correo: '',
+            prioridad: ''
+        }
+        objTelefono = {
+            id: 0,
+            numero: '',
+            tipo: '',
+            prioridad: ''
+        }
+        guardarTelefono(0)
+
+    }
+
+    //Limpiar campos
+    function limpiarCampos(input, accion) {
+        $(`${input}`).val('')
+        if (accion == 1) {
+            $('#ordenTrabajo').val('')
+            $('#tipoCliente').val('')
+            $('#cliente').val('')
+            $('#divResponsable').removeClass('d-flex')
+            $('#nombreRespon').val('')
+            $('#apellidoRespon').val('')
+            $('#nIdentiRes').val('')
+            $('#vehiculo').val('')
+            $('#marca').val('')
+            $('#nFabrica').val('')
+            $('#color').val('')
+            $('#kms').val('')
+            $('#combustible').val('')
+            $('#estado').val('')
+            $('#fechaEntrada').val('')
+            $('#fechaSalida').attr('min', fechaLimite)
+            $('#fechaSalida').val('')
+        }
+    }
 
     //Mostrar Ocultar Columnas
     $('a.toggle-vis').on('click', function(e) {
@@ -1151,7 +1239,7 @@
                 }
             },
             {
-                data: "placa",
+                data: null,
                 render: function(data, type, row) {
                     return (
                         `<a data-bs-toggle="modal" data-bs-target="#agregarVehiculo" class="cliente text-uppercase" onclick="seleccionarCliente(${data.id_vehiculo} , 4 )">${row.placa}</a>`
@@ -1236,23 +1324,6 @@
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');
     }
-
-    // //select Orden 
-    // function selectOrden() {
-    //     opcEstado=$(".opcEstado")
-    //     $.ajax({
-    //         url: '< ?php echo base_url('ordenServicio/obtenerEstadosVehi/') ?>' + id,
-    //         type: 'POST',
-    //         dataType: 'json',
-    //         success: function(res) {
-    //             if (opcEstado==id) {
-    //                 $(".opcEstado").attr('disabled', '');
-
-    //             }
-
-    //         }
-    //     })
-    // }
 
     //Seleccionar vehiculo
     $('#vehiculo').on('change', function(e) {
@@ -1377,7 +1448,8 @@
                 url: "<?php echo base_url('srchCli/') ?>" + id + "/" + 0,
                 dataType: 'json',
             }).done(function(res) {
-                limpiarCampos()
+                console.log(res)
+                limpiarCamposTelCorreo()
                 $('#tp').val(2)
                 $('#idc').val(res[0]['id_tercero'])
                 $('#nombreP').val(res[0]['nombre_p'])
@@ -1417,7 +1489,8 @@
                 url: "<?php echo base_url('/aliados/buscarAliado/') ?>" + id + '/' + 0 + '/' + 0,
                 dataType: 'json',
                 success: function(res) {
-                    limpiarCampos()
+                    console.log(res)
+                    limpiarCamposTelCorreo()
                     $('#tp').val(2)
                     $('#idAliado').val(res[0]['id_tercero'])
                     $('#RazonSocial').val(res[0]['razon_social'])
@@ -1459,10 +1532,11 @@
                 },
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data)
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
                     $('#tp').val(2)
                     $('#idVehiculo').val(id)
-                    $('#tipoCliente').val(data['tipo_propietario'])
+                    $('#tipoCliente2').val(data['tipo_propietario'])
                     $('#cliente2').val(data['cliente'])
                     $('#placa2').val(data['placa'])
                     $('#placaHidden2').val(data['placa'])
@@ -1480,7 +1554,7 @@
 
     }
 
-    //Envio de formulario Clientes
+    //FORMULARIO CLIENTES
     $('#formularioClientes').on('submit', function(e) {
         e.preventDefault()
         tp = 2
@@ -1553,8 +1627,6 @@
                     });
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Cliente!')
-                    } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Cliente!')
                     }
                 }
             }).done(function(data) {
@@ -1692,7 +1764,7 @@
     function buscarCorreoTel(url, valor, inputName, tipo) {
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 5, //url, valor, idUsuario, tipoUsuario
+            url: "<?php echo base_url() ?>" + `${url}` + valor + '/' + 0 + '/' + 56, //url, valor, idUsuario, tipoUsuario
             dataType: 'JSON',
             success: function(res) {
                 if (res[0] == null) {
@@ -1710,6 +1782,7 @@
     // Funcion para mostrar telefono en la tabla.
     function guardarTelefono(tipo) {
         $('#telefono').val(telefonos[0]?.numero)
+        $('#telefonoAliado').val(telefonos[0]?.numero)
         var cadena
         if (telefonos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -1837,6 +1910,7 @@
     // Funcion para mostrar correos en la tabla.
     function guardarCorreo(tipo) {
         $('#email').val(correos[0]?.correo)
+        $('#emailAliado').val(correos[0]?.correo)
         var cadena
         if (correos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -1895,7 +1969,7 @@
     }
 
 
-    // ---------------------------Aliados-----------------------------
+    // -----------------------------------ALIADOS------------------------------------
     //Envio de formulario Aliados
     $('#formularioAliados').on('submit', function(e) {
         e.preventDefault()
@@ -1962,10 +2036,6 @@
                     });
                     if (tp == 2) {
                         mostrarMensaje('success', '¡Se ha Actualizado el Aliado!')
-                        validTel = true
-                        validCorreo = true
-                    } else {
-                        mostrarMensaje('success', '¡Se ha Registrado el Aliado!')
                         validTel = true
                         validCorreo = true
                     }
@@ -2072,6 +2142,55 @@
         }
     })
 
+
+    // -----------------------------------VEHICULOS------------------------------------
+    //Formulario para agregar o editar Vehiculo
+    $('#formularioVehiculos').on('submit', function(e) {
+        e.preventDefault()
+        tp = 2
+        id = $('#idVehiculo').val()
+        tipoCliente = $('#tipoCliente2').val()
+        cliente = $('#cliente2').val()
+        placa = $('#placa2').val()
+        marca = $('#marca2').val()
+        nFabrica = $('#nFabrica2').val()
+        color = $('#color2').val()
+        combustible = $('#combustible2').val()
+        $('#btnGuardarVehiculo').attr('disabled', '')
+        if ([tipoCliente, cliente, placa, marca, nFabrica, color, combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
+            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+        } else {
+            $.ajax({
+                url: '<?= base_url('vehiculos/insertar') ?>',
+                type: 'POST',
+                data: {
+                    tp,
+                    id,
+                    tipoCliente,
+                    cliente,
+                    placa,
+                    marca,
+                    nFabrica,
+                    color,
+                    combustible,
+                    estado: 'A'
+                },
+                success: function(data) {
+                    if (tp == 2) {
+                        data == 1 ? mostrarMensaje('success', '¡Se ha actualizado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    } else {
+                        data == 1 ? mostrarMensaje('success', '¡Se ha registrado el vehiculo!') : mostrarMensaje('error', '¡Ha ocurrido un error!')
+                    }
+                    contador = 0
+                    tablaOrdenes.ajax.reload(null, false)
+                    $('#agregarVehiculo').modal('hide')
+                    $('#btnGuardarVehiculo').removeAttr('disabled')
+                }
+            })
+        }
+    })
+
+
     // ---------------------------Vehiculos-----------------------------
     //Formulario para agregar o editar Vehiculo
     $('#formularioVehiculos').on('submit', function(e) {
@@ -2117,31 +2236,6 @@
         }
     })
 
-    //Input dinamico para los clientes
-    function verTipoCliente(id, idCliente) {
-        $.ajax({
-            url: '<?= base_url('vehiculos/buscarResponsable'); ?>',
-            data: {
-                idTipo: id
-            },
-            type: 'POST',
-            success: function(res) {
-                res = JSON.parse(res)
-                var cadena
-                cadena = `<option selected value=""> -- Seleccione -- </option>`
-                for (let i = 0; i < res.length; i++) {
-                    nombre = `${res[i].nombre_p} ${res[i].nombre_s} ${res[i].apellido_p} ${res[i].apellido_s}`;
-                    cadena += `<option ${res[i].estado == 'I' ? 'disabled' : ''} value=${res[i].id_tercero}>${res[i].tipo_tercero == 5  ? nombre : res[i].razon_social} ${res[i].estado == 'I' ? ' - Inactivo' : ''}</option>`
-                }
-                $('#cliente').html(cadena)
-                $('#cliente').val(idCliente)
-            }
-        })
-    }
-    $('#tipoCliente').on('change', function(e) {
-        id = $('#tipoCliente').val()
-        verTipoCliente(id, '')
-    })
 
     // ---------------------------Ordenes-----------------------------
     //Formulario Vehiculo
@@ -2157,6 +2251,7 @@
                 },
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data)
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
                     $('#datailInv').removeAttr('open')
                     $('#tp').val(2)
@@ -2347,9 +2442,17 @@
                 }
                 $('#cliente').html(cadena)
                 $('#cliente').val(idCliente)
+                $('#cliente2').html(cadena)
+                $('#cliente2').val(idCliente)
             }
         })
     }
+
+    $('#tipoCliente2').on('change', function(e) {
+        id = $('#tipoCliente2').val()
+        verTipoCliente(id, '')
+    })
+
     $('#tipoCliente').on('change', function(e) {
         id = $('#tipoCliente').val()
         verTipoCliente(id, '')

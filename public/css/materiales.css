@@ -50,16 +50,10 @@ input[class="form-control"] {
     font-size: 18px;
 }
 
-#MasBaterias {
+#masBaterias {
     display: flex;
     justify-content: center;
 }
-
-/* .titulo {
-    color: #000000;
-    font-family: 'Nunito', sans-serif;
-    font-size: 30px;
-} */
 
 .contenedorCards {
     display: flex;

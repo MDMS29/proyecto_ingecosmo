@@ -133,13 +133,15 @@
 
 
     async function redireccion(id, tipo) {
+        console.log(tipo)
         let tipos = {
-            60: "Estante",
-            61: "Bodega"
+            60: "Estante"
+            // 61: "Bodega"
         }
         let resultados = 0;
 
-        try {
+        if (tipo==60) {
+            try {
             const res = await $.ajax({
                 url: "<?php echo base_url('/filas/filasEstante/') ?>" + id,
                 type: 'POST',
@@ -182,6 +184,41 @@
         } catch (error) {
             // Manejar el error aquí
             console.error(error);
+        }     
+        }
+
+       
+
+        if (tipo == 61) {
+
+            window.location.href = "<?php echo base_url('filas/mostrarSeccion/') ?>" + id;
+
+            // $.ajax({
+            //     url: "< ?php echo base_url('/filas/obtenerMaterialesFila/') ?>" + fila.numeroFila,
+            //     type: 'POST',
+            //     dataType: 'json',
+            //     processData: false,
+            //     contentType: false
+            // });
+
+            // if (response.length > 0) {
+            //     resultados += 1;
+            // }
+
+            // if (resultados == 0) {
+            //     return mostrarMensaje('warning', `¡${tipos[tipo]} sin materiales!`);
+            // }
+
+            // if (resultados != 0) {
+            //     const finalRes = await $.ajax({
+            //         url: "< ?php echo base_url('/filas/materialesEstante/') ?>" + id,
+            //         type: 'POST',
+            //         dataType: 'json',
+            //         processData: false,
+            //         contentType: false
+            //     });
+            //     // }
+            // }
         }
     }
 </script>

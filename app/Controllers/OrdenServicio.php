@@ -50,7 +50,6 @@ class OrdenServicio extends BaseController
         $telefono = $this->telefono->TelefonoPrincipal($res['cliente'], $res['tipo_propietario']);
         $email = $this->email->EmailPrincipal($res['cliente'], $res['tipo_propietario']);
         $inven = $this->inventario->buscarInventario($id);
-        $materiales = $this->movimiento->buscarDetEnc($id);
 
         //TODO: CAMBIAR AUTOLOAD AL MONTAR EN HOSTING
         // rgb(2, 2, 104)
@@ -407,8 +406,12 @@ class OrdenServicio extends BaseController
         $pdf->line(155, 270, 212, 270);
         $pdf->SetXY(175, 272);
         $pdf->Cell(90, 1, 'CLIENTES', 0, 'J', false);
-        
+
+
         // --- MATERIALES USADOS
+
+        $materiales = $this->movimiento->buscarDetEnc($id);
+        $pdf->SetAutoPageBreak(true);
         $pdf->SetFont('Arial', '', 10);
         $pdf->AddPage();
         $pdf->SetMargins(5, 0, 5);
@@ -417,8 +420,11 @@ class OrdenServicio extends BaseController
 
         $pdf->line(2, 8, 213.8, 8);
 
-        // --CABEZERA TABLA 1
+        $x = 5;
+        $y = 9;
+        $subtotal = 0;
 
+        // ---CABEZERA TABLA 1---
         $pdf->SetXY(4, 5);
         $pdf->Cell(90, 1, 'CANTIDAD', 0, 'J', false);
 
@@ -428,43 +434,42 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(186, 5);
         $pdf->Cell(90, 1, 'VALOR UNIT.', 0, 'J', false);
 
-        $x = 5;
-        $y = 9;
+        // ---CONTENIDO DE TABLA 1 ---
         $ciclo = sizeof($materiales) - 1;
         if (sizeof($materiales) == 0) {
-            $pdf->SetXY($x + 75, $y);
-            $pdf->Cell(90, 1, 'NO SE HA HECHO USO DE INSUMOS', 0, 'J', false);
+            $pdf->SetXY($x + 72, $y + 0.5);
+            $pdf->Cell(90, 1, 'NO SE HA HECHO USO DE MATERIALES', 0, 'J', false);
             $y = $y + 5;
         } else {
-            $subtotal = 0;
             for ($i = 0; $i <= $ciclo; $i++) {
-                $pdf->SetXY($x + 5, $y+1);
+                $pdf->SetXY($x + 5, $y + 1);
                 $pdf->Cell(90, 1, $materiales[$i]['cantidad'], 0, 'J', false);
 
-                $pdf->SetXY($x + 25, $y+1);
+                $pdf->SetXY($x + 25, $y + 1);
                 $pdf->Cell(90, 1, $materiales[$i]['nombre'], 0, 'J', false);
 
-                $pdf->SetXY($x + 175, $y+1);
+                $pdf->SetXY($x + 175, $y + 1);
                 $pdf->Cell(90, 1, '$ ' . number_format($materiales[$i]['precio_venta'], 2), 0, 'J', false);
                 $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 4, 213.8, $y + 3);
 
-                // $subtotal = $materiales[$i]['cantidad'] * $materiales[$i]['precio_venta'];
+                $precio = $materiales[$i]['cantidad'] * $materiales[$i]['precio_venta'];
+                $subtotal = $subtotal + $precio;
 
-                // $subtotal = $subtotal + $subtotal;
-
-                
                 $y = $y + 6;
             }
-            $pdf->SetXY($x + 155, $y+3.5);
+            $pdf->SetXY($x + 155, $y + 3.5);
             $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
 
-            $pdf->SetXY($x + 175, $y+3.5);
+            $pdf->SetXY($x + 175, $y + 3.5);
             $pdf->Cell(90, 1, '$ ' . number_format($subtotal, 2), 0, 'J', false);
             $pdf->RoundedRect($x + 175, $y, 34, 7, 2); //SUBTOTAL
         }
-        $pdf->RoundedRect(2, 2, 212, $y - 4, 2); //
-        $pdf->line(25, 2, 25, $y - 2);
-        $pdf->line(180, 2, 180, $y - 2);
+        $pdf->RoundedRect(2, 2, 212, $y - 4, 2); //CONTENEDOR DE LA TABLA
+        $pdf->line(25, 2, 25, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(180, 2, 180, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
+
+
+        // --- CABEZERA TABLA 2 ---
 
 
         $this->response->setHeader('Content-Type', 'application/pdf');
@@ -488,12 +493,14 @@ class OrdenServicio extends BaseController
         $estados = $this->param->obtenerEstadosVehi('A');
         $tipoCliente = $this->param->obtenerAliadoClientes();
         $combustible = $this->param->obtenerCombustibleVehi('A');
+        $tipoTel = $this->param->obtenerTipoTel();
         $data = [
             'clientes' => $clientes,
             'marcas' => $marcas,
             'estadosVehi' => $estados,
             'combustible' => $combustible,
-            'tipoClientes' => $tipoCliente
+            'tipoClientes' => $tipoCliente,
+            'tipoTele' => $tipoTel
         ];
         echo view('principal/sidebar');
         echo view('ordenServicio/ordenes', $data);

@@ -6,7 +6,7 @@
 <div id="content" class="p-4 p-md-5">
   <div class="contenedorCards">
     <div class="MasBaterias" id="MasBaterias">
-      <h2 class="titulo"><?= $nombreCategoria ?></h2>
+      <h2 style="margin-bottom: 20px;"><?= $nombreCategoria ?></h2>
     </div>
 
     <div class="contenedor-d">
@@ -366,7 +366,7 @@
         cadena = `<option value="" selected>-- Seleccione--</option>`
         for (let i = 0; i < res.length; i++) {
 
-          cadena += `<option value=${res[i].fila}>${res[i].nombre}</option>`
+          cadena += `<option value=${res[i].id_fila}>${res[i].nombre}</option>`
         }
         $('#fila1').html(cadena)
       }

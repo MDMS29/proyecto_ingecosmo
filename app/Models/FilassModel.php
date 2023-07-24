@@ -15,7 +15,7 @@ class FilassModel extends Model
    protected $returnType     = 'array';
    protected $useSoftDeletes = false;
 
-   protected $allowedFields = ['nombre', 'id_estante','usuario_crea', 'fecha_crea', 'estado'];
+   protected $allowedFields = ['nombre', 'id_estante','tipo_fila', 'iconoF','usuario_crea', 'fecha_crea', 'estado'];
 
    protected $useTimestamps = true;
    protected $createdField  = 'fecha_crea';
@@ -101,6 +101,15 @@ class FilassModel extends Model
    //      $datos = $this->findAll();
    //      return $datos;
    //   }
+
+   public function obtenerSecciones()
+   {
+       $this->select('filas.*');
+       $this->where('tipo_fila', '61');
+       $this->where('estado', 'A');
+       $datos = $this->findAll(); 
+       return $datos;
+   }
 
 
 
