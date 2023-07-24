@@ -10,6 +10,7 @@ use App\Models\MoviEncModel;
 use App\Models\MoviDetModel;
 use App\Models\OrdenesModel;
 use App\Models\TercerosModel;
+use App\Models\FilassModel;
 
 class Repuestos extends BaseController
 {
@@ -20,6 +21,7 @@ class Repuestos extends BaseController
     protected $movDet;
     protected $ordenes;
     protected $proveedores;
+    protected $filas;
 
 
     public function __construct()
@@ -30,6 +32,7 @@ class Repuestos extends BaseController
         $this->movEnc = new MoviEncModel();
         $this->movDet = new MoviDetModel();
         $this->ordenes = new OrdenesModel();
+        $this->filas = new FilassModel();
         $this->proveedores = new TercerosModel();
     }
     public function index()
@@ -40,13 +43,14 @@ class Repuestos extends BaseController
         echo view('/categorias/categoriaRepuesto', $data);
     }
 
-    public  function mostrarBodega($id, $nombre, $icon)
+    public  function mostrarBodega($id, $nombre, $icon, $estante)
     {
+        $filas = $this->filas->obtenerFilas($estante);
         $repuestos = $this->materiales->obtenerRepuestoBodega($id);
         $ordenes = $this->ordenes->obtenerOrdenes();
         $estanteria = $this->estanteria->traerBodega();
         $proveedores = $this->proveedores->obtenerProveedoresRep();
-        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria, "proveedores" => $proveedores, "nomEstante" => $nombre, "idBodega" => $id];
+        $data = ['data' => $repuestos, 'nombreBodega' => $nombre, 'icono' => $icon, "ordenes" => $ordenes, "estanteria" => $estanteria, "proveedores" => $proveedores, "nomEstante" => $nombre, "idBodega" => $id, 'filas' => $filas];
 
         echo view('/principal/sidebar');
 
@@ -73,6 +77,7 @@ class Repuestos extends BaseController
         $ordenTrabajo = $this->request->getPost('ordenTrabajo');
         $placa = $this->request->getPost('placa');
         $bodega = $this->request->getPost('bodega');
+        $seccion = $this->request->getPost('seccion');
         $tipoMaterial = $this->request->getPost('tipoMaterial');
         $usuarioCrea = session('id');
         $fechaActual = date('Y-m-d');
@@ -84,6 +89,7 @@ class Repuestos extends BaseController
             'id_orden' => $ordenTrabajo,
             'placa' => $placa,
             'estante' => $bodega,
+            'fila' => $seccion,
             'tipo_material' => $tipoMaterial
         ];
 
@@ -113,6 +119,7 @@ class Repuestos extends BaseController
 
         // return redirect()->to(base_url('/materiales'));
     }
+    
 
     public function usar()
     {

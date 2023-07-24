@@ -122,6 +122,20 @@
             </div>
           </div>
 
+          <div class="d-flex column-gap-3" style="width: 100%">
+            <div class="mb-3" style="width: 49%;">
+              <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Sección <i style="color:crimson">*</i></label>
+              <select style="background-color:#ECEAEA;" id="seccion" class="form-select" name="seccion">
+                <option value="" selected>-- Seleccione --</option>
+                <?php foreach ($filas as $fila) { ?>
+                  <option id="<?php echo $fila['id_fila']; ?>F" value=<?php echo $fila['id_fila']; ?>> <?php echo $fila['nombre']; ?></option>
+                <?php } ?>
+              </select>
+              <input hidden id="tp" name="tp">
+              <input hidden id="id" name="id">
+            </div>
+          </div>
+
           <div class="modal-footer" id="modalFooter">
             <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
             <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
@@ -135,11 +149,11 @@
 
 <!-- MODAL DETALLES -->
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
 
-    <div class="modal-content" id="modalContentD">
+    <div class="modal-content" style="border: 5px solid #161666;">
 
       <div class="modal-header flex justify-content-between align-items-center w-100">
         <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
@@ -150,7 +164,7 @@
         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
       </div>
 
-      <div class="modal-body w-100" id="modalBodyD">
+      <div class="modal-body w-100">
 
         <div class="d-flex column-gap-3" style="width: 100%">
           <div class="mb-3" style="width: 90%;">
@@ -196,7 +210,14 @@
           </div>
         </div>
 
-        <div class="modal-footer" id="modalFooterD">
+        <div class="d-flex column-gap-3" style="width: 100%">
+        <div class="mb-3" style="width: 90%;">
+            <label for="exampleDataList" class="col-form-label">Sección:</label>
+            <input type="text" class="form-control" id="seccion1" name="seccion" placeholder="" disabled>
+          </div>
+        </div>
+
+        <div class="modal-footer">
           <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
           <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
           <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
@@ -324,6 +345,7 @@
     $("#cantidad").val('');
     $("#ordenTrabajo").val('');
     $("#placa").val('');
+    $("#seccion").val('');
 
 
     $("#cantidadUsar").val('');
@@ -360,8 +382,9 @@
     cantidad = $("#cantidad").val()
     ordenTrabajo = $("#ordenTrabajo").val()
     placa = $("#placa").val()
+    seccion = $("#seccion").val()
     idCategoria = $("#idCategoria").val()
-    if ([nombre, proveedor, cantidad, ordenTrabajo, placa, bodega].includes("")) {
+    if ([nombre, proveedor, cantidad, ordenTrabajo, placa, bodega, seccion].includes("")) {
       return Swal.fire({
         position: "center",
         icon: "error",
@@ -381,6 +404,7 @@
         tipoMaterial: 10,
         idCategoria: idCategoria,
         placa: placa,
+        seccion: seccion,
         bodega: "<?= $idBodega ?>"
       },
       success: function(res) {
@@ -423,6 +447,7 @@
         $("#ordenTrabajo1").val(rs[0]['numOrden']);
         $("#placa1").val(rs[0]['placaVeh']);
         $("#bodega1").val(rs[0]['bodega']);
+        $("#seccion1").val(rs[0]['nomSeccion']);
       }
     })
   }

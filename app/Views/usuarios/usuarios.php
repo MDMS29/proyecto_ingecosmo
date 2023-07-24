@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="nombres" id="fotoUsuario" class="col-form-label">Foto de Usuario:</label>
-                                    <input type="file" name="foto" id="foto" class="form-control" accept="image/png">
+                                    <input type="file" name="foto" id="foto" class="form-control" accept="image/*">
                                 </div>
                                 <div class="mb-3" style="width: 100%" id="bloqueFoto">
                                     <img style=" width: auto; height: 100px;" alt="Foto Usuario" id="fotoPerfil" />

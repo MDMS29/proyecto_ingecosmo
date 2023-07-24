@@ -49,7 +49,7 @@
                         <img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">
                         <div class="tituloHeader">
                             <img class="imgAgregar" src="<?php echo base_url('/img/agregar11.png') ?>" />
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar estante</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;">Agregar sección</h1>
                         </div>
                         <button type="button" style="margin:0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

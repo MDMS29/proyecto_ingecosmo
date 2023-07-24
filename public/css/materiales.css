@@ -172,7 +172,7 @@ input[class="form-control"] {
     border: 5px solid var(--azulBase) !important;
     border-radius: 10px;
     background-color: white;
-    height: 500px;
+    /* height: 500px; */
 }
 
 

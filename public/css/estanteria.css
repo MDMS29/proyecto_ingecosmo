@@ -195,9 +195,10 @@ details {
 }
 
 .imagenEncab {
-  width: 80px;
+  width: 90px;
   height: 70px;
   margin-right: 0;
+  margin-left: 0px;
 }
 
 .imgAgregar {
@@ -205,6 +206,7 @@ details {
   height: 25px;
   margin-right: 10px;
 }
+
 
 .contenedor-btn-file label {
   display: block;
@@ -459,25 +461,14 @@ details {
   margin-right: 10px;
 }
 
-.secciones{
-  background: #A4AADE;
-  border: 4px solid #161666;
-  border-radius: 10px;
-  width: 170px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-right: 30px;
-  padding-bottom: 10px;
+
+
+.btnAccionF {
+  background-color: var(--azulBoton) !important;
+  color: white !important;
 }
 
-
-.iconoSec {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 20px;
-  margin-top: 15px;
+.btnCerrar {
+  background-color: var(--rojoBoton) !important;
+  color: white !important;
 }
-

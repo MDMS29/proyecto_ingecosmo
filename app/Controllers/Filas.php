@@ -125,6 +125,24 @@ class Filas extends BaseController
         return json_encode($res);
     }
 
+    public function insertarSeccion()
+    {
+        $nombreSeccion =  $this->request->getPost('nombreSeccion');
+        $idBodega =  $this->request->getPost('idBodega');
+        $usuarioCrea = session('id');
+
+        $data = [
+            'id_estante' => $idBodega,
+            'nombre' => $nombreSeccion,
+            'usuario_crea' => $usuarioCrea
+        ];
+
+        $this->filas->save($data);
+        return json_encode($this->filas->getInsertID()) ;
+
+        // return redirect()->to(base_url('/materiales'));
+    }
+
     
 
 
