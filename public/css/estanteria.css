@@ -143,7 +143,8 @@
 }
 
 .btnRedireccion {
-  color: #161666;
+  background: #161666;
+  color: #fff;
   text-decoration: none;
   border: 2px solid #161666 !important;
   border-radius: 8px;
