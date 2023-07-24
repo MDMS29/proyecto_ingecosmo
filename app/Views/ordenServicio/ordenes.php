@@ -772,7 +772,7 @@
                 <div class="modal-header flex justify-content-between align-items-center">
                     <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                     <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Telefono</h1>
-                    <button type="button" class="btn" aria-label="Close" onclick="limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 3)">X</button>
+                    <button id="cerrarTelefono1" type="button" class="btn" aria-label="Close">X</button>
                 </div>
                 <input type="text" name="editTele" id="editTele" hidden>
                 <div class="modal-body">
@@ -824,7 +824,7 @@
                 </div>
                 <div class="modal-footer">
                     <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-                    <button type="button" class="btn btnAccionF" onclick="limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
+                    <button id="cerrarTelefono2" type="button" class="btn btnAccionF">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
             </div>
@@ -839,7 +839,7 @@
             <div class="modal-header flex justify-content-between align-items-center">
                 <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
-                <button type="button" class="btn" aria-label="Close" onclick="limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', '', 4)">X</button>
+                <button id="cerrarCorreo1" type="button" class="btn" aria-label="Close">X</button>
             </div>
             <input type="text" name="editCorreo" id="editCorreo" hidden>
 
@@ -882,7 +882,7 @@
             </div>
             <div class="modal-footer">
                 <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-                <button type="button" class="btn btnAccionF" onclick="limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
+                <button type="button" id="cerrarCorreo2" class="btn btnAccionF">Cerrar</button>
                 <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
             </div>
         </div>
@@ -1091,7 +1091,39 @@
         $(`#${input2}`).val('')
         $(`#${input3}`).val('')
 
-        if (accion == 3) {
+        // MODALES
+        // 1: Telefonos Cliente
+        // 2: Correos Cliente
+        // 3: Telefonos Aliado
+        // 4: Correos Aliado
+
+        if (accion == 1) {
+            if (telefonos.length != 0) {
+                principalT = telefonos.filter(tel => tel.prioridad == 'P')
+                if (principalT.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un telefono principal!')
+                } else {
+                    $('#agregarTelefono').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarTelefono').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        } else if (accion == 2) {
+            if (correos.length != 0) {
+                principalC = correos.filter(correo => correo.prioridad == 'P')
+                if (principalC.length == 0) {
+                    return mostrarMensaje('error', '¡Debe tener un correo principal!')
+                } else {
+                    $('#agregarCorreo').modal('hide')
+                    $('#agregarCliente').modal('show')
+                }
+            } else {
+                $('#agregarCorreo').modal('hide')
+                $('#agregarCliente').modal('show')
+            }
+        } else if (accion == 3) {
             if (telefonos.length != 0) {
                 principalT = telefonos.filter(tel => tel.prioridad == 'P')
                 if (principalT.length == 0) {
@@ -1104,20 +1136,18 @@
                 $('#agregarTelefono').modal('hide')
                 $('#agregarAliado').modal('show')
             }
-        }
-
-        if (accion == 4) {
+        } else if (accion == 4) {
             if (correos.length != 0) {
                 principalC = correos.filter(correo => correo.prioridad == 'P')
                 if (principalC.length == 0) {
                     return mostrarMensaje('error', '¡Debe tener un correo principal!')
                 } else {
                     $('#agregarCorreo').modal('hide')
-                    $('#agregarCliente').modal('show')
+                    $('#agregarAliado').modal('show')
                 }
             } else {
                 $('#agregarCorreo').modal('hide')
-                $('#agregarCliente').modal('show')
+                $('#agregarAliado').modal('show')
             }
         }
 
@@ -1467,8 +1497,11 @@
                     url: '<?php echo base_url('telefonos/obtenerTelefonosUser/') ?>' + id + '/' + 5,
                     dataType: 'json',
                     success: function(data) {
+                        console.log(data)
                         telefonos = data[0]
                         guardarTelefono(0)
+                        $('#cerrarTelefono1').attr('onclick', "limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 1)")
+                        $('#cerrarTelefono2').attr('onclick', "limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 1)")
                     }
                 })
                 $.ajax({
@@ -1478,6 +1511,8 @@
                     success: function(data) {
                         correos = data[0]
                         guardarCorreo(0)
+                        $('#cerrarCorreo1').attr('onclick', "limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', 'prioridadCorreo', 2)")
+                        $('#cerrarCorreo2').attr('onclick', "limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', 'prioridadCorreo', 2)")
                     }
                 })
             })
@@ -1506,6 +1541,8 @@
                         success: function(data) {
                             telefonos = data[0]
                             guardarTelefono(0)
+                            $('#cerrarTelefono1').attr('onclick', "limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 3)")
+                            $('#cerrarTelefono2').attr('onclick', "limpiarCamposTelCorreo('telefonoAdd', 'prioridad', 'tipoTele', 3)")
                         }
                     })
                     $.ajax({
@@ -1515,6 +1552,8 @@
                         success: function(data) {
                             correos = data[0]
                             guardarCorreo(0)
+                            $('#cerrarCorreo1').attr('onclick', "limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', 'prioridadCorreo', 4)")
+                            $('#cerrarCorreo2').attr('onclick', "limpiarCamposTelCorreo('correoAdd', 'prioridadCorreo', 'prioridadCorreo', 4)")
                         }
                     })
                 }

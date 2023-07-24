@@ -34,6 +34,14 @@ class TelefonosModel extends Model
         return $data;
     }
 
+    public function obtenerTipoUser($id)
+    {
+        $this->select('id_telefono as id, tipo_usuario as telUser');
+        $this->where('id_usuario', $id);
+        $data = $this->findAll();
+        return $data;
+    }
+
     public function TelefonoPrincipal($idUsuario, $tipoUsuario)
     {
         $this->select('numero');

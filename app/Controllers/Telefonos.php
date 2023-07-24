@@ -68,6 +68,13 @@ class Telefonos extends BaseController
         array_push($array, $data);
         return json_encode($array);
     }
+    public function obtenerTipoUser($idUsuario)
+    {
+        $array = array();
+        $data = $this->telefonos->obtenerTipoUser($idUsuario);
+        array_push($array, $data);
+        return json_encode($array);
+    }
     public function eliminarTelefono($idTelefono)
     {
         if ($this->telefonos->delete($idTelefono)) {
