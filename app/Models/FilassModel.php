@@ -102,7 +102,7 @@ class FilassModel extends Model
    //      return $datos;
    //   }
 
-   public function obtenerSecciones()
+   public function obtenerSecciones($estante)
    {
        $this->select('filas.*');
        $this->where('tipo_fila', '61');

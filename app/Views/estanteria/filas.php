@@ -32,7 +32,7 @@
                                         </div>
                                         <!-- INFORMACION DINAMICA -->
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" onclick="limpiarCampos()">Cerrar</button>
                     <button type="submit" class="btn btnGuardar1" id="btnGuardar">Guardar</button>
                 </div>
@@ -260,7 +260,7 @@
     for (let i = 0; i < bloque.length; i++) {
         let fila = $(`#${bloque[i].id}`)
         fila = fila[0].id
-        console.log(fila+"hi");
+        console.log(fila + "hi");
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + fila,
             type: 'POST',
@@ -297,6 +297,8 @@
             }
         })
     }
+
+    
 
 
 

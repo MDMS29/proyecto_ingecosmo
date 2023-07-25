@@ -47,9 +47,17 @@ class Filas extends BaseController
         // echo view('/materiales/materiales', $data);
     }
 
+    // public  function obtenerSecciones($estante)
+    // {
+    //     $filas = $this->filas->obtenerSecciones($estante);
+    //     $titulo = $this->estanteria->titulo($estante);
+    //     // echo view('/materiales/materiales', $data);
+    //     return json_encode($filas);
+    // }
+
     public  function materialesEstante($estante)
     {
-        $material = $this->filas->obtenerFilas($estante);
+        $material = $this->filas->obtenerSecciones($estante);
         if (empty($material)) {
             return json_encode(1);
         } else {
@@ -130,11 +138,28 @@ class Filas extends BaseController
         $nombreSeccion =  $this->request->getPost('nombreSeccion');
         $idBodega =  $this->request->getPost('idBodega');
         $usuarioCrea = session('id');
+        $foto = $this->request->getFile('foto');
+        $res = $this->filas->obtenerFilas($idBodega);
+        $uploadPath = ROOTPATH . 'public/img/fotoSeccion/';
 
+        if ($foto == null){
+            $rutaImagen = '/default.png';
+        }else if ($foto!==null){
+            $newName = $idBodega . $nombreSeccion . '.png'; //Nombre de imagen
+            // $rutaImagen = $foto->getName(); // Obtener la ruta de la imagen guardada
+            if (!is_dir($uploadPath)) { // Verificar si el directorio existe, si no, crearlo
+                mkdir($uploadPath, 0777, true);
+            }
+            $foto->move($uploadPath, $newName); 
+            $rutaImagen =  $foto->getName(); // Obtener la ruta de la imagen guardada
+            
+        }
+        // $foto->store('img', $newName);
         $data = [
             'id_estante' => $idBodega,
             'nombre' => $nombreSeccion,
-            'usuario_crea' => $usuarioCrea
+            'usuario_crea' => $usuarioCrea,
+            'iconoF' => $rutaImagen
         ];
 
         $this->filas->save($data);
@@ -143,7 +168,22 @@ class Filas extends BaseController
         // return redirect()->to(base_url('/materiales'));
     }
 
-    
+    public function mostrarImagen($estante)
+    {
+        $res = $this->filas->obtenerFilas($estante);
+        if ($res['iconoF'] == '') {
+            $rutaImagen = '/default.png';
+            $rutaCompleta = $rutaImagen;
+        } else {
+            $rutaImagen = $res['iconoF'];
+            $rutaCompleta = $rutaImagen;
+        }
 
+        $fp = fopen($rutaCompleta, 'rb');
+
+        header("Content-Type: image/png");
+        header("Content-Length: " . filesize($rutaCompleta));
+        fpassthru($fp);
+    }
 
 }

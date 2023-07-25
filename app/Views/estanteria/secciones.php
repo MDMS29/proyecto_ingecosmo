@@ -17,10 +17,10 @@
                 <?php } else { ?>
                     <?php foreach ($data as $dato) { ?>
 
-                        <input name="categoria" id="categoria" value="<?= $dato['id_estante'] ?>">
+                        <input type="hidden" name="categoria" id="categoria" value="<?= $dato['id_estante'] ?>">
                         <div class="card2">
                             <div class="imagenes">
-                                <img class="iconos" src="<?php echo base_url('/img/') . $dato['iconoF'] ?>">
+                                <img class="iconos" src="<?php echo base_url('/img/fotoSeccion/') . $dato['iconoF']?>">
                             </div>
                             <div class="Isabella">
                                 <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:30px; padding-top: 10px;">Sección <?php echo $dato['nombre']; ?></h5>
@@ -296,6 +296,12 @@
         })
     }
 
+    // $.ajax({
+    //     url: '< ?php echo base_url('filas/obtenerMaterialesFila/') ?>' + fila,
+    //     type: 'POST',
+    //     dataType: 'json',
+    // })
+
     function detallesMaterial(id_material) {
         $('#btnUsar1').attr('onclick', `usarMaterial(${id_material},2)`)
 
@@ -429,6 +435,7 @@
             processData: false, // Importante: no proceses los datos
 
         }).done(function(data) {
+            console.log(data)
                 mostrarMensaje('success', '¡Se agrego la sección!');
                 setTimeout(() => {
                     window.location.reload()
