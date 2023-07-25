@@ -472,17 +472,44 @@ class OrdenServicio extends BaseController
 
 
         // --- CABEZERA TABLA 3 ---
+
+        
+        $pdf->SetFont('Arial', '', 10);
+        $trabajadores = $this->movimiento->buscarTrabajEnc($id);
+        $ciclo1 = sizeof($trabajadores) - 1;
+        if (sizeof($trabajadores) == 0) {
+            $pdf->SetXY($x + 72, $y + 0.5);
+            $pdf->Cell(90, 1, 'NO HAY TRABAJADORES ASIGNADOS', 0, 'J', false);
+            $y = $y + 5;
+        } else {
+            for ($i = 0; $i <= $ciclo1; $i++) {                
+                $fecha = str_split($trabajadores[$i]['fecha_movimiento'], 11);
+
+                $pdf->SetXY($x-2, $y+31);
+                $pdf->Cell(90, 1, $fecha[0], 0, 'J', false);
+
+                $pdf->SetXY($x + 25, $y+31);
+                $pdf->Cell(90, 1, $trabajadores[$i]['nombre_trabajador'], 0, 'J', false);
+
+                $pdf->SetXY($x + 136, $y+31);
+                $pdf->Cell(90, 1, '$ ' . number_format($trabajadores[$i]['suma'] , 2), 0, 'J', false);
+                $ciclo1 - $i == 0 ? '' : $pdf->line(2, $y + 34, 213.8, $y + 34);
+
+                $y = $y + 5;
+            }
+        }
+
         $pdf->SetFont('Arial', 'B', 10);
 
-        $pdf->RoundedRect(2, $y + 9, 212, $y, 2); //CONTENEDOR DE LA TABLA
+        $pdf->RoundedRect(2, $y + 9, 212, $y-13, 2); //CONTENEDOR DE LA TABLA
 
         $pdf->SetXY($x + 90, $y + 11);
         $pdf->Cell(90, 1, 'I=Q TECNICOS', 0, 'C', false);
         $pdf->line(2, $y + 14, 213.8, $y + 14); //DIVISORA CABEZERA DE CUERPO
 
-        $pdf->line(25, $y + 14, 25, $y + 18.5); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(140, $y + 14, 140, $y + 18.5); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(170, $y + 14, 170, $y + 18.5); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(25, $y + 14, 25, $y + 30); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(140, $y + 14, 140, $y + 30); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(170, $y + 14, 170, $y + 30); //DIVISORA DE CONTENIDO VERTICAL
 
         $pdf->SetXY($x + 2, $y + 16);
         $pdf->Cell(90, 1, 'FECHA', 0, 'C', false);
@@ -493,9 +520,6 @@ class OrdenServicio extends BaseController
         $pdf->SetX($x + 171);
         $pdf->Cell(90, 1, 'OBSERVACIONES', 0, 'C', false);
         $pdf->line(2, $y + 18.5, 213.8, $y + 18.5); //DIVISORA CABEZERA DE CUERPO
-
-
-
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");

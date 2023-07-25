@@ -103,6 +103,19 @@ class MoviEncModel extends Model
         $data = $this->findAll();
         return $data;
     }
+    public function buscarTrabajEnc($id)
+    {
+        $this->select('concat(trabajadores.nombre_p," ", trabajadores.nombre_s, " ", trabajadores.apellido_p, " ", trabajadores.apellido_s) as nombre_trabajador,  SUM(movimiento_det.cantidad*materiales.precio_venta) as suma, movimiento_det.cantidad, materiales.precio_venta, movimiento_enc.fecha_movimiento');
+        $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc', 'left');
+        $this->join('materiales', 'materiales.id_material = movimiento_det.id_material', 'left');
+        $this->join('trabajadores', 'trabajadores.id_trabajador = movimiento_enc.id_trabajador', 'left');
+        $this->where('movimiento_enc.tipo_movimiento', '68');
+        $this->where('movimiento_enc.id_vehiculo', $id);
+        $this->groupBy('movimiento_enc.id_trabajador');
+        $data = $this->findAll();
+        return $data;
+    }
+
 
 
     public function traerDetalles()
