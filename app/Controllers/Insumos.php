@@ -233,17 +233,13 @@ class Insumos extends BaseController
         $array = array();
         if ($id_material != 0) {
             $data = $this->materiales->buscarInsumo($id_material, '');
-            if (!empty($data)) {
-                array_push($array, $data);
-                return json_encode($array);
-            }
+            return json_encode($data);
         } else if ($nombre != '') {
             $data = $this->materiales->buscarInsumo(0, $nombre);
             return json_encode($data);
         } else if ($id_material != 0 && $nombre != '') {
             $data = $this->materiales->buscarInsumo($id_material, $nombre);
-            array_push($array, $data);
-            return json_encode($array);
+            return json_encode($data);
         }
     }
 

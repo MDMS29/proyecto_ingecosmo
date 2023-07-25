@@ -67,7 +67,7 @@ class OrdenEntrega extends BaseController
         array_push($array, $res);
         return json_encode($res);
     }
-    
+
     public function index()
     {
         $trabajadores = $this->trabajadores->trabajadoresOrdenes();
@@ -125,7 +125,7 @@ class OrdenEntrega extends BaseController
         $ordenesEnt = $this->request->getPost('ordenesEnt');
         $trabajador = $this->request->getPost('trabajador');
         $tipoMov = 68;
-        $fechaMov = date('Y-m-d');
+        $fechaMov = date("Y-m-d H:i:s");
 
         $dataEncOrden = [
             'id_vehiculo' => $ordenServicio,
@@ -138,10 +138,9 @@ class OrdenEntrega extends BaseController
         if ($tp == 2) {
             if ($this->ordenEntrega->update($idOrden, $dataEncOrden)) {
                 return json_encode($idOrden);
-            }else{
+            } else {
                 return json_encode(0);
             }
-
         } else {
             if ($this->ordenEntrega->save($dataEncOrden)) {
                 return json_encode($this->ordenEntrega->getInsertID());
@@ -152,7 +151,6 @@ class OrdenEntrega extends BaseController
     }
     public function insertarDet()
     {
-
         $tp = $this->request->getPost('tp');
         $idMovDet = $this->request->getPost('idMovDet');
         $idMovEnc = $this->request->getPost('idMovEnc');
@@ -171,15 +169,14 @@ class OrdenEntrega extends BaseController
         ];
 
         if ($tp == 2) {
-            $res= $this->movDet->buscarDetalles($idMovDet); 
-            var_dump($res);
-            if ($res==null){
+            $res = $this->movDet->buscarDetalles($idMovDet);
+            if (empty($res)) {
                 if ($this->movDet->save($dataDetMov)) {
                     return json_encode(1);
                 } else {
                     return json_encode(2);
                 }
-            } else{
+            } else {
                 if ($this->movDet->update($idMovDet, $dataDetMov)) {
                     return json_encode(1);
                 } else {
