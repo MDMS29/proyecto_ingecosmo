@@ -168,6 +168,10 @@ class OrdenEntrega extends BaseController
             'usuario_crea' => session('id')
         ];
 
+        $res = $this-> materiales->buscarInsumo($idMat, '');
+        $nuevaCant = $res['cantidad_actual'] - $cantidad;
+        $this->materiales->update($idMat, ['cantidad_actual' => $nuevaCant]);
+
         if ($tp == 2) {
             $res = $this->movDet->buscarDetalles($idMovDet);
             if (empty($res)) {
@@ -191,10 +195,5 @@ class OrdenEntrega extends BaseController
             }
         }
     }
-    public function eliminarMaterial($idMaterial)
-    {
-        if ($this->movDet->delete($idMaterial)) {
-            return json_encode(1);
-        }
-    }
+
 }

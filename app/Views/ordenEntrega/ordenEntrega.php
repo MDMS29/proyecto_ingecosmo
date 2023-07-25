@@ -134,7 +134,7 @@
                     <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                     <input type="submit" class="btn btnRedireccion" id="btnGuardar" value="Crear orden">
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -486,7 +486,7 @@
         id = $('#material').val()
         infoMaterial(id)
     })
-    
+
     function infoMaterial(id) {
         $.ajax({
             type: 'POST',
@@ -548,7 +548,7 @@
         } else {
             materialesOrden.push(objMaterial)
         }
-        console.log(materialesOrden)
+
         mostrarMateriales(0)
         objMaterial = {
             nombre: '',
@@ -624,36 +624,38 @@
         })
 
 
-        console.log(cantidad)
+
 
     }
-    // Eliminar telefono de la tabla
-     function eliminarMaterial(idMaterial, idInv) {
+    //Eliminar telefono de la tabla
+    function eliminarMaterial(idMaterial, idInv) {
         tp = $('#tp').val()
-         borrador = [idInv]
-         if (tp == 2) {
-             // Consulta tipo delete
-             $.ajax({
-                 url: '< ?php echo base_url('/ordenEntrega/eliminarMaterial/') ?>' + idInv,
-                 type: 'POST',
+        borrador = [idInv]
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?php echo base_url('ordenEntrega/eliminarMaterial/') ?>' + idMaterial + '/' + '',
+                type: 'POST',
                 dataType: 'json',
-                 success: function(data) {
-                     if (data == 1) {
+                success: function(data) {
+                    if (data == 1) {
                         mostrarMensaje('success', '¡Se ha eliminado el material!')
 
                     }
                 }
             })
-         }
-
+        }
         tablaHistorial.ajax.reload(null, false)
         materialesOrden = materialesOrden.filter(mat => mat.idInv != idInv)
-         mostrarMateriales(0) //Actualizar tabla
+        mostrarMateriales(0) //Actualizar tabla
     }
 
     function validarInput() {
         document.getElementById("btnGuardar").disabled = !document.getElementById("cantidadUsar").value.length;
     }
+
+
+
 
     $('#btnGuardar').on('click', function(e) {
         e.preventDefault();
@@ -662,6 +664,16 @@
         ordenServicio = $("#ordenes").val()
         ordenesEnt = $("#ordenesEnt").val()
         trabajador = $("#trabajadores").val()
+
+
+
+        cantidad = $('#cantidadUsar').val()
+        cantidadActual = $('#cantidadActual').val()
+        idInv = $('#idInvent').val()
+
+        $res =$('#idInvent').val()
+        $nuevaCant = $res['cantidad_actual'] - $cantidad;
+        $materiales=($idInv, ['cantidad_actual' == $nuevaCant]);
 
         if ([ordenServicio, trabajador].includes("") || materialesOrden.length == 0) {
             return mostrarMensaje('error', '¡Campos Vacios!')

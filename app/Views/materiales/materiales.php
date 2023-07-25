@@ -201,7 +201,7 @@
       <div class="modal-footer" id="modalFooterD">
         <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
         <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
-        <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
+
 
 
       </div>
@@ -230,30 +230,6 @@
 
 
         <div class="modal-body" id="modalBodyUsar">
-          <div class="d-flex column-gap-3" style="width: 100%">
-            <div class="mb-3" style="width: 100%">
-
-              <!-- <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label> -->
-
-              <!-- <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
-                <option selected="">--Seleccione--</option>
-                <?php foreach ($ordenes as $data) { ?>
-                  <option value="<?= $data['id_orden'] ?>"><?= $data['n_orden'] ?></option>
-                <?php } ?>
-              </select> -->
-            </div>
-
-            <div class="mb-3" style="width: 100%">
-              <!-- <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
-                <option selected="">--Seleccione--</option>
-                <?php foreach ($trabajadores as $data) { ?>
-                  <option value="<?= $data['id_trabajador'] ?>"><?= $data['nombre'] ?></option>
-                <?php } ?>
-
-              </select> -->
-            </div>
-          </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 50%">
