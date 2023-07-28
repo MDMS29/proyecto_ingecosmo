@@ -119,6 +119,7 @@ class OrdenEntrega extends BaseController
 
     public function insertar()
     {
+        date_default_timezone_set('America/Bogota');
         $tp = $this->request->getPost('tp');
         $idOrden = $this->request->getPost('id');
         $ordenServicio = $this->request->getPost('ordenServicio');
