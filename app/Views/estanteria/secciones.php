@@ -159,7 +159,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btnCerrar" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
                     <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
-                    <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
                 </div>
             </div>
 
@@ -278,15 +277,13 @@
                 } else {
                     for (let i = 0; i < res.length; i++) {
                         cadena += `
-                    <div class="sumary-flex">
+                        <div class="sumary-flex">
                     <p class="subTexto">
-                    <details class="detail">
-                    <summary >
+                   
                     <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
-                    </summary>
+                    
 
-                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}','${res[i].id_material}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
-                    </details></p>
+                    </p>
                     </div>`;
                     }
                     $(`#${bloque[i].id}`).html(cadena)
