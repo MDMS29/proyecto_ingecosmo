@@ -156,90 +156,10 @@
 
             <div class="modal-footer" id="modalFooterD">
                 <button type="button" class="btn btnCerrar" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
-                <button type="button" class="btn btnEditar" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
             </div>
 
         </div>
     </div>
-</div>
-
-<!-- modal usar -->
-<div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="formularioUsar" autocomplete="off">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-
-            <div class="modal-content" id="modalContentUsar">
-
-                <div class="modal-header flex justify-content-between align-items-center w-100">
-                    <input type="text" name="idMaterial" id="idMaterial" hidden>
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
-                    <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-                        <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
-                        <h1 class="modal-title fs-5 text-center" id="tituloModal">Usar Insumo</h1>
-                    </div>
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-
-
-                <div class="modal-body" id="modalBodyUsar">
-                    <div class="d-flex column-gap-3" style="width: 100%">
-                    </div>
-
-                    <div class="d-flex column-gap-3" style="width: 100%">
-                        <div class="mb-3" style="width: 50%">
-                            <label for="exampleDataList" class="col-form-label">Nombre del insumo:</label>
-                            <input class="form-control" id="nombreInsumo" name="nombreInsumo" placeholder="" disabled>
-                        </div>
-
-                        <div class="mb-3" style="width: 50%">
-                            <label for="exampleDataList" class="col-form-label">Cantidad Existente:</label>
-                            <input class="form-control" id="cantidadExistente" name="cantidadExistente" placeholder="" disabled>
-                        </div>
-                    </div>
-
-                    <div class="d-flex column-gap-3" style="width: 100%">
-
-                        <div class="mb-3" style="width: 50%;">
-                            <label for="exampleDataList" class="col-form-label">Precio Venta:</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">$</span>
-                                <input class="form-control" type="number" id="PrecioDeVenta" name="PrecioDeVenta" disabled>
-                            </div>
-                        </div>
-
-                        <div class="mb-3" style="width: 50%">
-                            <label for="exampleDataList" class="col-form-label">Cantidad a Usar: <i style="color:crimson">*</i></label>
-                            <div>
-                                <input type="number" class="form-control" id="cantidadUsar" name="cantidadUsar" onInput="validarInput()" placeholder="">
-                                <small id="msgUsar" class="invalido"></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex column-gap-3" style="width: 50%">
-
-                        <div class="mb-3" style="width: 100%">
-                            <label for="exampleDataList" class="col-form-label">Subtotal:</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">$</span>
-                                <input class="form-control" type="number" id="subtotal" name="subtotal" disabled>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-                    <button type="button" class="btn btnCerrar" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btnEditar" id="btnValidar">Usar</button>
-
-
-                </div>
-            </div>
-        </div>
-    </form>
 </div>
 
 
@@ -368,7 +288,7 @@
     })
 
     function limpiarCampos() {
-        $('#fila').val('-- SELECCIONE UNA FILA --')
+        $('#fila1').val('-- SELECCIONE UNA FILA --')
         $('#nombreProd').val('')
         filasDina.removeAttr('disabled', '');
 

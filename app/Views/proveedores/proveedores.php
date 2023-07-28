@@ -87,7 +87,7 @@
                     </div>
                 </form>
                 <div class="modal-footer">
-                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnAccionF" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
                     <button type="submit" class="btn btnRedireccion" id="btnGuardar"></button>
                 </div>
@@ -155,7 +155,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                     <button type="button" class="btn btnAccionF" onclick="limpiarCampos('telefonoAdd', 'prioridad', 'tipoTele', 3)">Cerrar</button>
                     <button type="button" class="btn btnRedireccion" id="btnAddTel">Agregar</button>
                 </div>
@@ -213,7 +213,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-            <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
+                <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                 <button type="button" class="btn btnAccionF" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">Cerrar</button>
                 <button type="button" class="btn btnRedireccion" id="btnAddCorre">Agregar</button>
             </div>
@@ -427,6 +427,8 @@
         $(`#${input3}`).val('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+        $('#msgNit').text('')
+        $('#msgRaSo').text('')
     }
 
     // ------------------------------ estructura Tabla ------------------------------------- 
