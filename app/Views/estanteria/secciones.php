@@ -9,7 +9,7 @@
             </div>
             <div class="card__content">
                 <p class="card__title">Card Title</p>
-                <p class="card__text">lolita kknbhujhnfb.</p>
+                <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <a class="card__content" href="#">Ver mas</a>
             </div>
         </div>
