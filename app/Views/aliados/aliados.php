@@ -506,6 +506,8 @@
         $('#msgConfir').text('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
+        $('#msgRaSo').text('')
+        $('#msgNit').text('')
 
     }
 
@@ -596,6 +598,10 @@
         console.log(inputRazonSocial)
         tp = $('#tp').val()
         id = $('#id').val()
+        if (inputRazonSocial == '') {
+            $('#msgRaSo').text('')
+            validRazonSocial = true
+        }
         if (tp == 1 && id == 0) {
             buscarRazonSocial(0, inputRazonSocial)
         } else if (tp == 2 && id != 0) {
