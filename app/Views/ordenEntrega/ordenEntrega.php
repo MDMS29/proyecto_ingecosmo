@@ -109,7 +109,7 @@
                                 <button type="button" id="agregarMaterial" class="btn" style="border:none;background-color:gray;color:white; width: 34px; height:38px; margin-top:35px;" title="Agregar">+</button>
                             </div>
 
-                            <div class="d-flex gap-3">
+                            <!-- <div class="d-flex gap-3">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="cantidad" class="col-form-label">Cantidad de pintura:</label>
                                     <input type="text" name="cantidadPintura" class="form-control" id="cantidadPintura"     >
@@ -120,7 +120,7 @@
                                     <input type="number" name="gramos" class="form-control" id="gramos" onInput="validarInput()">
                                     <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
@@ -165,7 +165,8 @@
         nombre: '',
         tipo: 0,
         cantidad: 0,
-        precio: 0
+        precio: 0,
+        categoria: 0,
     }
     var validUsar = true
     var contador = 0
@@ -529,6 +530,7 @@
                             item: materialesOrden.length + 1,
                             nombre: res.nombre,
                             tipo: res.tipo_material,
+                            categoria: res.categoria_material,
                             cantidad: Number($('#cantidadUsar').val()),
                             precio: Number(res.precio_venta),
                             subtotal: Number($('#cantidadUsar').val()) * Number(res.precio_venta)
@@ -594,9 +596,9 @@
             for (let i = 0; i < materialesOrden.length; i++) {
                 cadena += `  <tr id="${materialesOrden[i].idInv}">
                                 <td class="text-center">${materialesOrden[i].item}</td>            
-                                <td id="${materialesOrden[i].idMaterial}" class="text-center">${materialesOrden[i].nombre}</td>            
+                                <td id="${materialesOrden[i].idMaterial}" class="text-center">${materialesOrden[i].nombre}</td>                       
                                 <td id="${materialesOrden[i].tipo}" class="text-center">${materialesOrden[i].tipo== 10 ?'Repuesto': 'Insumo'}</td>            
-                                <td class="text-center">${materialesOrden[i].cantidad}</td>            
+                                <td class="text-center">${materialesOrden[i].cantidad}${materialesOrden[i].categoria== 32 ?'gr': 'c/u'}</td>            
                                 <td class="text-center">${formatearCantidad (materialesOrden[i].precio)}</td>            
                                 <td class="text-center">${formatearCantidad(materialesOrden[i].subtotal)}</td>
 
