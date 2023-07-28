@@ -458,50 +458,27 @@ class OrdenServicio extends BaseController
 
                 $y = $y + 5;
             }
-            $pdf->SetXY($x + 153, $y + 2.5);
-            $pdf->SetFont('Arial', 'B', 10);
-            $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
-            $pdf->SetFont('Arial', '', 10);
-            $pdf->SetXY($x + 175, $y + 2.5);
-            $pdf->Cell(90, 1, '$ ' . number_format($subtotal, 2), 0, 'J', false);
-            $pdf->RoundedRect($x + 175, $y - 1, 34, 7, 2); //SUBTOTAL
         }
+        $pdf->SetXY($x + 153, $y + 2.5);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY($x + 175, $y + 2.5);
+        $pdf->Cell(90, 1, '$ ' . number_format($subtotal, 2), 0, 'J', false);
+        $pdf->RoundedRect($x + 175, $y - 1, 34, 7, 2); //SUBTOTAL
+
         $pdf->RoundedRect(2, 2, 212, $y - 4, 2); //CONTENEDOR DE LA TABLA
         $pdf->line(25, 2, 25, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
         $pdf->line(180, 2, 180, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
 
 
-        // --- CABEZERA TABLA 3 ---
+        // // --- CABEZERA TABLA 3 ---
 
-        $y1 = 25;
-        $pdf->SetFont('Arial', '', 10);
-        $trabajadores = $this->movimiento->buscarTrabajEnc($id);
-        $ciclo1 = sizeof($trabajadores) - 1;
-        if (sizeof($trabajadores) == 0) {
-            $pdf->SetXY($x + 80, $y1+15);
-            $pdf->Cell(90, 1, 'NO HAY TECNICOS ASIGNADOS', 0, 'J', false);
-            $y = $y + 5;
-        } else {
-            // for ($i = 0; $i <= $ciclo1; $i++) {
-            //     $fecha = str_split($trabajadores[$i]['fecha_movimiento'], 11);
-
-            //     $pdf->SetXY($x - 2, $y1 + 71);
-            //     $pdf->Cell(90, 1, $fecha[0], 0, 'J', false);
-
-            //     $pdf->SetXY($x + 25, $y1 + 71);
-            //     $pdf->Cell(90, 1, $trabajadores[$i]['nombre_trabajador'], 0, 'J', false);
-
-            //     $pdf->SetXY($x + 136, $y1 + 71);
-            //     $pdf->Cell(90, 1, '$ ' . number_format($trabajadores[$i]['suma'], 2), 0, 'J', false);
-            //     $ciclo1 - $i == 0 ? '' : $pdf->line(2, $y1 + 34, 213.8, $y1 + 34);
-
-            //     $y1 = $y1 + 5;
-            // }
-        }
+        $y1 = 10;
+        $lastY = $y;
+        $pdf->SetXY($x, $y + 10);
 
         $pdf->SetFont('Arial', 'B', 10);
-
-        $pdf->RoundedRect(2, $y + 9, 212, $y1-10, 2); //CONTENEDOR DE LA TABLA
 
         $pdf->SetXY($x + 90, $y + 11);
         $pdf->Cell(90, 1, 'I=Q TECNICOS', 0, 'C', false);
@@ -516,11 +493,44 @@ class OrdenServicio extends BaseController
         $pdf->SetX($x + 171);
         $pdf->Cell(90, 1, 'OBSERVACIONES', 0, 'C', false);
 
-        $pdf->line(25, $y + 14, 25, $y + 19); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(140, $y + 14, 140, $y + 19); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(170, $y + 14, 170, $y + 19); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(2, $y + 19, 213.8, $y + 18); //DIVISORA CABEZERA DE CUERPO
 
-        $pdf->line(2, $y + 19, 213.8, $y + 19); //DIVISORA CABEZERA DE CUERPO
+        $pdf->SetFont('Arial', '', 10);
+        $trabajadores = $this->movimiento->buscarTrabajEnc($id);
+        $ciclo1 = sizeof($trabajadores) - 1;
+        if (sizeof($trabajadores) == 0) {
+            $y1 = $y1 + 5;
+            $y = $y + 5;
+            $pdf->SetXY($x + 50, $y + 16);
+            $pdf->Cell(90, 1, 'NO HAY TECNICOS ASIGNADOS', 0, 'J', false);
+        } else {
+            for ($i = 0; $i <= $ciclo1; $i++) {
+                $fecha = str_split($trabajadores[$i]['fecha_movimiento'], 11);
+
+                $pdf->SetXY($x - 2, $y + 21);
+                $pdf->Cell(90, 1, $fecha[0], 0, 'J', false);
+
+                $pdf->SetXY($x + 25, $y + 21);
+                $pdf->Cell(90, 1, $trabajadores[$i]['nombre_trabajador'], 0, 'J', false);
+
+                $pdf->SetXY($x + 135, $y + 21);
+                $pdf->Cell(90, 1, '$ ' . number_format($trabajadores[$i]['suma'], 2), 0, 'J', false);
+                $ciclo1 - $i == 0 ? '' : $pdf->line(2, $y + 24, 213.8, $y + 24);
+
+
+                $y1 = $y1 + 5;
+                $y = $y + 5;
+            }
+        }
+        $pdf->line(25, $lastY + 14, 25, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(140, $lastY + 14, 140, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(170, $lastY + 14, 170, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->RoundedRect(2, $lastY + 9, 212, $y1, 2); //CONTENEDOR DE LA TABLA;
+
+
+
+
+
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");

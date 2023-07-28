@@ -680,6 +680,16 @@
         trabajador = $("#trabajadores").val()
  
 
+
+
+        cantidad = $('#cantidadUsar').val()
+        cantidadActual = $('#cantidadActual').val()
+        idInv = $('#idInvent').val()
+
+        // $res =$('#idInvent').val()
+        // $nuevaCant = $res['cantidad_actual'] - $cantidad;
+        // $materiales=($idInv, ['cantidad_actual' == $nuevaCant]);
+
         if ([ordenServicio, trabajador].includes("") || materialesOrden.length == 0) {
             return mostrarMensaje('error', '¡Campos Vacios!')
         }
