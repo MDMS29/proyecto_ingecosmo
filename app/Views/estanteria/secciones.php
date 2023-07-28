@@ -1,6 +1,19 @@
 <link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>">
 <div id="content" class="p-4 p-md-5">
     <div class="estanteria">
+        <div class="card">
+            <div class="card__image">
+                <div class="ima">
+                    <img src="<?php echo base_url('/img/fotoSeccion/rueda.png') ?>">
+                </div>
+            </div>
+            <div class="card__content">
+                <p class="card__title">Card Title</p>
+                <p class="card__text">lolita kknbhujhnfb.</p>
+                <a class="card__content" href="#">Ver mas</a>
+            </div>
+        </div>
+
         <div class="verFilas" id="verFilas">
 
             <h1 class="titulo" style="text-transform:uppercase;">ESTANTERIA DE <?php echo $titulo['nombre'] ?></h1>
@@ -20,7 +33,7 @@
                         <input type="hidden" name="categoria" id="categoria" value="<?= $dato['id_estante'] ?>">
                         <div class="card2">
                             <div class="imagenes">
-                                <img class="iconos" src="<?php echo base_url('/img/fotoSeccion/') . $dato['iconoF']?>">
+                                <img class="iconos" src="<?php echo base_url('/img/fotoSeccion/') . $dato['iconoF'] ?>">
                             </div>
                             <div class="Isabella">
                                 <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:30px; padding-top: 10px;">Sección <?php echo $dato['nombre']; ?></h5>
@@ -433,10 +446,10 @@
 
         }).done(function(data) {
             console.log(data)
-                mostrarMensaje('success', '¡Se agrego la sección!');
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1000);
+            mostrarMensaje('success', '¡Se agrego la sección!');
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
         })
 
     })
