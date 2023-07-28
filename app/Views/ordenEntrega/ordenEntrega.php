@@ -108,6 +108,19 @@
                                 </div>
                                 <button type="button" id="agregarMaterial" class="btn" style="border:none;background-color:gray;color:white; width: 34px; height:38px; margin-top:35px;" title="Agregar">+</button>
                             </div>
+
+                            <div class="d-flex gap-3">
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="cantidad" class="col-form-label">Cantidad de pintura:</label>
+                                    <input type="text" name="cantidadPintura" class="form-control" id="cantidadPintura"     >
+                                </div>
+
+                                <div class="mb-3" style="width: 100%">
+                                    <label for="cantidadUsar" class="col-form-label">Gramos: <i class="asterisco" style="color:crimson;">*</i></label>
+                                    <input type="number" name="gramos" class="form-control" id="gramos" onInput="validarInput()">
+                                    <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
+                                </div>
+                            </div>
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
@@ -627,28 +640,29 @@
 
 
     }
-    //Eliminar telefono de la tabla
     function eliminarMaterial(idMaterial, idInv) {
         tp = $('#tp').val()
-        borrador = [idInv]
-        if (tp == 2) {
-            // Consulta tipo delete
-            $.ajax({
-                url: '<?php echo base_url('ordenEntrega/eliminarMaterial/') ?>' + idMaterial + '/' + '',
-                type: 'POST',
+         borrador = [idInv]
+         if (tp == 2) {
+             // Consulta tipo delete
+             $.ajax({
+                 url: '<?= base_url('ordenEntrega/eliminarMaterial/') ?>' + idInv,
+                 type: 'POST',
                 dataType: 'json',
-                success: function(data) {
-                    if (data == 1) {
+                 success: function(data) {
+                     if (data == 1) {
                         mostrarMensaje('success', '¡Se ha eliminado el material!')
 
                     }
                 }
             })
-        }
+         }
+
         tablaHistorial.ajax.reload(null, false)
         materialesOrden = materialesOrden.filter(mat => mat.idInv != idInv)
         mostrarMateriales(0) //Actualizar tabla
     }
+
 
     function validarInput() {
         document.getElementById("btnGuardar").disabled = !document.getElementById("cantidadUsar").value.length;
@@ -664,6 +678,7 @@
         ordenServicio = $("#ordenes").val()
         ordenesEnt = $("#ordenesEnt").val()
         trabajador = $("#trabajadores").val()
+ 
 
 
 
