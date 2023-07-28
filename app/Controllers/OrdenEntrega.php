@@ -196,4 +196,14 @@ class OrdenEntrega extends BaseController
         }
     }
 
+    public function eliminarMaterial($idMaterial)
+    {
+        if ($this->movDet->delete($idMaterial)) {
+            return json_encode(1);
+        }
+    }
+
+
+
+
 }

@@ -113,7 +113,7 @@
                             <div class=" flex-grow-1">
                                 <label for="telefonoAdd" class="col-form-label">Telefono: <i class="asterisco" style="color:crimson;">*</i></label>
                                 <div>
-                                    <input type="number" name="telefonoAdd" class="form-control" id="telefonoAdd" min='1' max='3'>
+                                    <input type="text" name="telefonoAdd" class="form-control" id="telefonoAdd" minlength="7" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
                                     <small id="msgTel" class="invalido"></small>
                                 </div>
                             </div>
@@ -427,8 +427,8 @@
         $(`#${input3}`).val('')
         $('#msgTel').text('')
         $('#msgCorreo').text('')
-        $('#msgNit').text('')
         $('#msgRaSo').text('')
+        $('#msgNit').text('')
     }
 
     // ------------------------------ estructura Tabla ------------------------------------- 
@@ -680,6 +680,7 @@
             url: "<?php echo base_url('/proveedores/buscarProveedor/') ?>" + id + "/" + 0 + "/" + inputRazonSocial,
             dataType: 'JSON',
             success: function(res) {
+                console.log(res)
                 if (res[0] == null) {
                     $('#msgRaSo').text('')
                     validRazonSocial = true
@@ -705,7 +706,6 @@
             $.ajax({
                 type: 'POST',
                 url: "<?php echo base_url('proveedores/buscarProveedor/') ?>" + id + "/" + 0 + "/" + inputRazonSocial,
-
                 dataType: 'JSON',
                 success: function(res) {
                     if (res[0]['razon_social'] == inputRazonSocial) {
@@ -772,7 +772,6 @@
         const prioridad = $('#prioridad').val()
         const editTel = $('#editTele').val();
         const regex = /^\d{10,10}$/;
-
         if ([numero, prioridad, tipo].includes('') || validTel == false) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
