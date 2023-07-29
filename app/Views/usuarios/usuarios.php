@@ -81,7 +81,7 @@
                                 <div class="mb-3" style="width: 100%">
                                     <div class="">
                                         <label for="nIdenti" class="col-form-label">N° Identificación: <i class="asterisco" style="color:crimson;">*</i></label>
-                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" minlength="9" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+                                        <input type="number" name="nIdenti" class="form-control" id="nIdenti" a">
                                         <small id="msgDoc" class="invalido"></small>
                                     </div>
                                 </div>
@@ -695,7 +695,7 @@
     //Funcion para cambiar contraseña
     $('#formularioContraseñas').on('submit', function(e) {
         e.preventDefault()
-        $('#btnGuardar').attr('disabled', '')
+        // $('#btnGuardar').attr('disabled', '')
         idUsuario = $("#idUsuario").val()
         contra = $("#contraRes").val()
         contraConfir = $("#confirContraRes").val()
@@ -769,7 +769,7 @@
     $('#formularioUsuarios').on('submit', function(e) {
         e.preventDefault()
         tp = $('#tp').val()
-        $('#btnActuContra').attr('disabled', '')
+        // $('#btnActuContra').attr('disabled', '')
         id = $('#id').val()
         nombreP = $('#nombreP').val()
         nombreS = $('#nombreS').val()

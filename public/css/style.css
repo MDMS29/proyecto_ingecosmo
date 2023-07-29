@@ -85,8 +85,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 /* //scroll sidebar */
 #sidebar{
-  min-height: 100vh;
-    max-height: 100vh;
+  
     overflow-y: scroll;
 }
 #sidebar::-webkit-scrollbar {

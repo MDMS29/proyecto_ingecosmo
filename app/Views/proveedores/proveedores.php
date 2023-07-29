@@ -49,7 +49,7 @@
                     <div class="d-flex column-gap-3" style="width: 100%; padding-inline:20px;">
                         <div class="mb-3" style="width: 100%;">
                             <label for="recipient-name" class="col-form-label" style="margin:0;">Razon Social: <i class="asterisco" style="color:crimson;">*</i></label>
-                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,' ')">
+                            <input class="form-control" type="text" min='1' max='300' id="RazonSocial" name="RazonSocial" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                             <small id="msgRaSo" class="invalido"></small>
 
                             <input hidden id="tp" name="tp">
