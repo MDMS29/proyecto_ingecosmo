@@ -217,7 +217,7 @@
   function limpiarCampos() {
     validNom = true
     $('#msgAgregar').text('')
-    $('#cantRestock').text('')
+    $('#cantRestock').val('')
   }
   //Mostrar filas al seleccionar el estante
   function mostrarFilas(estante, fila) {

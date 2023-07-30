@@ -325,7 +325,7 @@
         nFabrica = $('#nFabrica').val()
         color = $('#color').val()
         combustible = $('#combustible').val()
-        $('#btnGuardar').attr('disabled', '')
+        // $('#btnGuardar').attr('disabled', '')
         if ([tipoCliente, cliente, placa, marca, nFabrica, color,  combustible].includes('') || !validOrden || !validPlaca || !validFecha) {
             return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
         } else {
@@ -353,7 +353,7 @@
                     contador = 0
                     tablaVehiculos.ajax.reload(null, false)
                     $('#agregarVehiculo').modal('hide')
-                    $('#brnGuardar').removeAttr('disabled')
+                    // $('#brnGuardar').removeAttr('disabled')
                 }
             })
         }
