@@ -124,7 +124,6 @@ class Peticiones extends BaseController
         ];
         $this->peticiones->update($idPeticion, $peticionUpdate);
         return $idPeticion;
-        return json_encode($this->peticiones->getInsertID());
     }
 
     public function contadorPeticiones()

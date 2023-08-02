@@ -527,11 +527,6 @@ class OrdenServicio extends BaseController
         $pdf->line(170, $lastY + 14, 170, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
         $pdf->RoundedRect(2, $lastY + 9, 212, $y1, 2); //CONTENEDOR DE LA TABLA;
 
-
-
-
-
-
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");
         $pdf->Output('orden_servicio_' . $res['n_orden'] . '.pdf', "I");

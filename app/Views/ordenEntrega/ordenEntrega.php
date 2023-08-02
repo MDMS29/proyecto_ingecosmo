@@ -2,10 +2,12 @@
 
 <!-- TABLA MOSTRAR VEHICULOS -->
 <div id="content" class="p-4 p-md-5" style="background-color:rgba(0, 0, 0, 0.05);">
-    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/orden-entrega-b.png') ?>" /> Ordenes de entrega</h2>
+    <h2 class="text-center mb-4"><img style=" width:45px; height:45px; "
+            src="<?php echo base_url('/img/orden-entrega-b.png') ?>" /> Ordenes de entrega</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="2">Vehiculo</a> - <a class="toggle-vis btn" data-column="4">Fecha de Movimiento</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="2">Vehiculo</a> -
+            <a class="toggle-vis btn" data-column="4">Fecha de Movimiento</a>
         </div>
         <table class="table table-striped" id="tableHistorial" width="100%" cellspacing="0">
             <thead>
@@ -25,9 +27,13 @@
         </table>
     </div>
     <div class="footer-page mt-4">
-        <button type="button" onclick="seleccionarOrden(<?= 0 . ',' . 1 ?>)" class="btn btnRedireccion" data-bs-toggle="modal" data-bs-target="#ordenModal"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
+        <button type="button" onclick="seleccionarOrden(<?= 0 . ',' . 1 ?>)" class="btn btnRedireccion"
+            data-bs-toggle="modal" data-bs-target="#ordenModal"><img src="<?= base_url('img/plus.png') ?>"
+                alt="icon-plus" width="20">
             Crear Orden</button>
-        <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20"> Regresar</button>
+        <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center"
+            onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">
+            Regresar</button>
         <!-- <a href="< ?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="< ?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a> -->
     </div>
 </div>
@@ -40,18 +46,22 @@
         <div class="body-R">
             <div class="modal-content">
                 <div class="modal-header flex align-items-center gap-3">
-                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
+                    <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa"
+                        width="100">
                     <div class="d-flex align-items-center justify-content-center" style="width:auto;">
                         <img id="logoModal" src="<?= base_url('img/plus-b.png') ?>" alt="icon-plus" width="20">
                         <h1 class="modal-title fs-5 text-center" id="tituloModal">Nueva Orden</h1>
                     </div>
-                    <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal"
+                        aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="d-flex column-gap-3" style="width: 100%">
                         <div class="mb-3" style="width: 100%">
-                            <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio: <i class="asterisco" style="color:crimson;">*</i></label>
-                            <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
+                            <label for="nombreOrdenS" class="col-form-label">N° Orden Servicio: <i class="asterisco"
+                                    style="color:crimson;">*</i></label>
+                            <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes"
+                                id="ordenes">
                                 <option selected value="">--Seleccione--</option>
                                 <?php foreach ($ordenes as $dato) { ?>
                                     <option value="<?= $dato['id_orden'] ?>"><?= $dato['n_orden'] ?></option>
@@ -59,8 +69,10 @@
                             </select>
                         </div>
                         <div class="mb-3" style="width: 100%">
-                            <label for="exampleDataList" class="col-form-label">Trabajador: <i class="asterisco" style="color:crimson;">*</i></label>
-                            <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
+                            <label for="exampleDataList" class="col-form-label">Trabajador: <i class="asterisco"
+                                    style="color:crimson;">*</i></label>
+                            <select style="background-color:#ECEAEA;" class="form-select form-select"
+                                name="trabajadores" id="trabajadores">
                                 <option selected value="">--Seleccione--</option>
                                 <?php foreach ($trabajadores as $dato) { ?>
                                     <option value="<?= $dato['id_trabajador'] ?>"><?= $dato['nombreTrabajador'] ?></option>
@@ -70,8 +82,10 @@
                     </div>
                     <div class="d-flex column-gap-3" style="width: 100%" id="tipoMatCat">
                         <div class="mb-3" style="width: 100%;">
-                            <label for="tipoMat" class="col-form-label">Tipo de Material: <i class="asterisco" style="color:crimson;">*</i></label>
-                            <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo" id="tipoMat">
+                            <label for="tipoMat" class="col-form-label">Tipo de Material: <i class="asterisco"
+                                    style="color:crimson;">*</i></label>
+                            <select style="background-color:#ECEAEA;" class="form-select form-select" name="tipo"
+                                id="tipoMat">
                                 <option selected value="">--Seleccione--</option>
                                 <?php foreach ($tipo as $dato) { ?>
                                     <option value="<?= $dato['id_param_det'] ?>"><?= $dato['nombre'] ?></option>
@@ -80,7 +94,8 @@
                             </select>
                         </div>
                         <div class="mb-3" style="width: 100%;">
-                            <label for="tipoCate" class="col-form-label">Categorias o Aseguradoras: <i class="asterisco" style="color:crimson;">*</i></label>
+                            <label for="tipoCate" class="col-form-label">Categorias o Aseguradoras: <i class="asterisco"
+                                    style="color:crimson;">*</i></label>
                             <select class="form-select" name="tipoCate" id="tipoCate">
                                 <!-- SELECT DINAMICO -->
                             </select>
@@ -90,7 +105,8 @@
                         <summary>Materiales a entregar <i class="asterisco" style="color:crimson;">*</i></summary>
                         <div class="d-flex column-gap-3" style="width: 100%" id="MatCant">
                             <div class="mb-3" style="width: 53%;">
-                                <label for="material" class="col-form-label">Materiales: <i class="asterisco" style="color:crimson;">*</i></label>
+                                <label for="material" class="col-form-label">Materiales: <i class="asterisco"
+                                        style="color:crimson;">*</i></label>
                                 <select class="form-select" name="material" id="material">
                                     <!-- SELECT DINAMICO -->
                                 </select>
@@ -98,18 +114,23 @@
                             <div class="d-flex gap-3">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="cantidad" class="col-form-label">Cantidad Actual:</label>
-                                    <input type="text" name="cantidadActual" class="form-control" id="cantidadActual" disabled>
+                                    <input type="text" name="cantidadActual" class="form-control" id="cantidadActual"
+                                        disabled>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%">
-                                    <label for="cantidadUsar" class="col-form-label">Cantidad a usar: <i class="asterisco" style="color:crimson;">*</i></label>
-                                    <input type="number" name="cantidadUsar" class="form-control" id="cantidadUsar" onInput="validarInput()">
+                                    <label for="cantidadUsar" class="col-form-label">Cantidad a usar: <i
+                                            class="asterisco" style="color:crimson;">*</i></label>
+                                    <input type="number" name="cantidadUsar" class="form-control" id="cantidadUsar"
+                                        onInput="validarInput()">
                                     <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                 </div>
-                                <button type="button" id="agregarMaterial" class="btn" style="border:none;background-color:gray;color:white; width: 34px; height:38px; margin-top:35px;" title="Agregar">+</button>
+                                <button type="button" id="agregarMaterial" class="btn"
+                                    style="border:none;background-color:gray;color:white; width: 34px; height:38px; margin-top:35px;"
+                                    title="Agregar">+</button>
                             </div>
 
-                            <div class="d-flex gap-3">
+                            <!-- <div class="d-flex gap-3">
                                 <div class="mb-3" style="width: 100%">
                                     <label for="cantidad" class="col-form-label">Cantidad de pintura:</label>
                                     <input type="text" name="cantidadPintura" class="form-control" id="cantidadPintura"     >
@@ -120,7 +141,7 @@
                                     <input type="number" name="gramos" class="form-control" id="gramos" onInput="validarInput()">
                                     <small id="msgUsar" style="color: red;  font-weight: 600;" class="invalido"></small>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
@@ -144,7 +165,8 @@
                     <input type="text" id="idInvent" value="0" hidden>
                 </div>
                 <div class="modal-footer">
-                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
+                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos
+                        obligatorios.</label>
                     <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                     <input type="submit" class="btn btnRedireccion" id="btnGuardar" value="Crear orden">
                 </div>
@@ -172,7 +194,7 @@
     var item = 0
 
     //Mostrar Ocultar Columnas
-    $('a.toggle-vis').on('click', function(e) {
+    $('a.toggle-vis').on('click', function (e) {
         e.preventDefault();
         // Get the column API object
         var column = tablaHistorial.column($(this).attr('data-column'));
@@ -181,7 +203,7 @@
     });
     //Div ocualtar columnas de la tabla
     var botones = $(".ocultar a");
-    botones.click(function() {
+    botones.click(function () {
         if ($(this).attr('class').includes('active')) {
             $(this).removeClass('active');
         } else {
@@ -196,48 +218,48 @@
             dataSrc: "",
         },
         columns: [{
-                data: null,
-                render: function(data, type, row) {
-                    contador = contador + 1;
-                    return "<b>" + contador + "</b>";
-                }
-            },
-            // {
-            //     data: "nombreMate"
-            // },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return row.nombreOrden == null ? "No se encontro orden de servicio" : row.nombreOrden; //
-                }
-            },
-
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return row.placa == null ? "No se encontro placa " : row.placa
-                }
-            },
-
-            {
-                data: "fecha_movimiento"
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return formatearCantidad(row.subtotal)
-                }
-            },
-            {
-                data: null,
-                render: function(data, type, row) {
-                    return (
-                        '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ', 2)" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
-                        '<button class="btn" id="btnVer" onclick="seleccionarOrden(' + data.id_movimientoenc + ',3)" data-bs-target="#ordenModal" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
-
-                    );
-                },
+            data: null,
+            render: function (data, type, row) {
+                contador = contador + 1;
+                return "<b>" + contador + "</b>";
             }
+        },
+        // {
+        //     data: "nombreMate"
+        // },
+        {
+            data: null,
+            render: function (data, type, row) {
+                return row.nombreOrden == null ? "No se encontro orden de servicio" : row.nombreOrden; //
+            }
+        },
+
+        {
+            data: null,
+            render: function (data, type, row) {
+                return row.placa == null ? "No se encontro placa " : row.placa
+            }
+        },
+
+        {
+            data: "fecha_movimiento"
+        },
+        {
+            data: null,
+            render: function (data, type, row) {
+                return formatearCantidad(row.subtotal)
+            }
+        },
+        {
+            data: null,
+            render: function (data, type, row) {
+                return (
+                    '<button class="btn" onclick="seleccionarOrden(' + data.id_movimientoenc + ', 2)" data-bs-target="#ordenModal" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Orden"></button>' +
+                    '<button class="btn" id="btnVer" onclick="seleccionarOrden(' + data.id_movimientoenc + ',3)" data-bs-target="#ordenModal" data-bs-toggle="modal" title="Ver Detalles"><i class="bi bi-eye-fill fs-4 text-primary"></i></button>'
+
+                );
+            },
+        }
 
 
         ],
@@ -264,7 +286,7 @@
                 type: "POST",
                 url: "<?= base_url('ordenEntrega/buscarOrden/') ?>" + id,
                 dataType: "json",
-                success: function(rs) {
+                success: function (rs) {
                     $('#id').val(id)
                     $('#tp').val(2)
                     materialesOrden = []
@@ -276,13 +298,13 @@
                         type: "POST",
                         url: "<?= base_url('ordenEntrega/buscarDetallesOrden/') ?>" + id,
                         dataType: "json",
-                        success: function(data) {
+                        success: function (data) {
                             for (let i = 0; i < data.length; i++) {
                                 $.ajax({
                                     type: "POST",
                                     url: "<?= base_url('insumos/buscarInsumo/') ?>" + data[i].id_material,
                                     dataType: "json",
-                                    success: function(res) {
+                                    success: function (res) {
                                         objMaterial = {
                                             idInv: data[i].id_movimientodet,
                                             idMaterial: res.id_material,
@@ -327,7 +349,7 @@
                 type: "POST",
                 url: "<?= base_url('ordenEntrega/buscarOrden/') ?>" + id,
                 dataType: "json",
-                success: function(rs) {
+                success: function (rs) {
                     $('#id').val(id)
                     $('#tp').val(2)
                     materialesOrden = []
@@ -338,13 +360,13 @@
                         type: "POST",
                         url: "<?= base_url('ordenEntrega/buscarDetallesOrden/') ?>" + id,
                         dataType: "json",
-                        success: function(data) {
+                        success: function (data) {
                             for (let i = 0; i < data.length; i++) {
                                 $.ajax({
                                     type: "POST",
                                     url: "<?= base_url('insumos/buscarInsumo/') ?>" + data[i].id_material,
                                     dataType: "json",
-                                    success: function(res) {
+                                    success: function (res) {
                                         objMaterial = {
                                             idInv: data[i].id_movimientodet,
                                             idMaterial: res.id_material,
@@ -426,7 +448,7 @@
 
     }
 
-    $('#tipoMat').on('change', function(e) {
+    $('#tipoMat').on('change', function (e) {
         id = $('#tipoMat').val()
         verTipoCate(id, '')
     })
@@ -438,7 +460,7 @@
                 idTipoCate: id
             },
             type: 'POST',
-            success: function(res) {
+            success: function (res) {
                 res = JSON.parse(res)
                 var cadena
                 if (id == 10) {
@@ -464,7 +486,7 @@
             }
         })
     }
-    $('#tipoCate').on('change', function(e) {
+    $('#tipoCate').on('change', function (e) {
         id = $('#tipoCate').val()
         verMateriales(id, 0)
     })
@@ -478,13 +500,18 @@
                 id
             },
             type: 'POST',
-            success: function(res) {
+            success: function (res) {
+                console.log(res)
                 res = JSON.parse(res)
-                var cadena
-                cadena = `<option selected value=""> -- Seleccione -- </option>`
-                for (let i = 0; i < res.length; i++) {
-                    cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
-
+                var cadena = '';
+                if(res.length == 0){
+                    cadena = '<option selected value="">-- No hay materiales -- </option>'
+                }else{ 
+                    cadena = `<option selected value=""> -- Seleccione -- </option>`
+                    for (let i = 0; i < res.length; i++) {
+                        cadena += `<option value=${res[i].id_material}>${res[i].nombre}</option>`
+                        
+                    }
                 }
                 $('#material').html(cadena)
                 $('#material').val(idMaterial)
@@ -495,7 +522,7 @@
         })
     }
 
-    $('#material').on('change', function(e) {
+    $('#material').on('change', function (e) {
         id = $('#material').val()
         infoMaterial(id)
     })
@@ -505,11 +532,11 @@
             type: 'POST',
             url: '<?= base_url('insumos/buscarInsumo/') ?>' + id + '/' + '',
             data: {},
-            success: function(res) {
+            success: function (res) {
                 res = JSON.parse(res)
                 $('#cantidadActual').val(res['cantidad_actual'])
 
-                $('#cantidadUsar').on('input', function(e) {
+                $('#cantidadUsar').on('input', function (e) {
                     idMaterial = $("#idMaterial").val()
 
                     cantidad = $('#cantidadUsar').val()
@@ -540,7 +567,7 @@
         })
     }
 
-    $('#agregarMaterial').on('click', function(e) {
+    $('#agregarMaterial').on('click', function (e) {
         if (objMaterial.cantidad == 0 || validUsar == false) {
             return mostrarMensaje('error', '¡Datos vacios o invalidos !')
         }
@@ -564,12 +591,14 @@
 
         mostrarMateriales(0)
         objMaterial = {
+            idInv: 0,
+            idMaterial: 0,
+            item: 0,
             nombre: '',
             tipo: 0,
             cantidad: 0,
             precio: 0
         }
-
 
         $("#tipoMat").val('');
         $("#tipoCate").val('');
@@ -577,11 +606,7 @@
         $("#cantidadActual").val('');
         $("#cantidadUsar").val('');
         $('#idInvent').val('0')
-
-
     })
-
-
 
     function mostrarMateriales(tipo) {
         let cadena = ''
@@ -595,9 +620,9 @@
                 cadena += `  <tr id="${materialesOrden[i].idInv}">
                                 <td class="text-center">${materialesOrden[i].item}</td>            
                                 <td id="${materialesOrden[i].idMaterial}" class="text-center">${materialesOrden[i].nombre}</td>            
-                                <td id="${materialesOrden[i].tipo}" class="text-center">${materialesOrden[i].tipo== 10 ?'Repuesto': 'Insumo'}</td>            
+                                <td id="${materialesOrden[i].tipo}" class="text-center">${materialesOrden[i].tipo == 10 ? 'Repuesto' : 'Insumo'}</td>            
                                 <td class="text-center">${materialesOrden[i].cantidad}</td>            
-                                <td class="text-center">${formatearCantidad (materialesOrden[i].precio)}</td>            
+                                <td class="text-center">${formatearCantidad(materialesOrden[i].precio)}</td>            
                                 <td class="text-center">${formatearCantidad(materialesOrden[i].subtotal)}</td>
 
                                 ${tipo == 0 ? ` <td>
@@ -621,7 +646,7 @@
             type: 'POST',
             url: '<?= base_url('insumos/buscarInsumo/') ?>' + idMaterial + '/' + '',
             data: {},
-            success: function(res) {
+            success: function (res) {
                 const data = JSON.parse(res)
                 $('#tipoMat').val(tipo);
                 $('#cantidadUsar').val(cantidad);
@@ -642,21 +667,21 @@
     }
     function eliminarMaterial(idMaterial, idInv) {
         tp = $('#tp').val()
-         borrador = [idInv]
-         if (tp == 2) {
-             // Consulta tipo delete
-             $.ajax({
-                 url: '<?= base_url('ordenEntrega/eliminarMaterial/') ?>' + idInv,
-                 type: 'POST',
+        borrador = [idInv]
+        if (tp == 2) {
+            // Consulta tipo delete
+            $.ajax({
+                url: '<?= base_url('ordenEntrega/eliminarMaterial/') ?>' + idInv,
+                type: 'POST',
                 dataType: 'json',
-                 success: function(data) {
-                     if (data == 1) {
+                success: function (data) {
+                    if (data == 1) {
                         mostrarMensaje('success', '¡Se ha eliminado el material!')
 
                     }
                 }
             })
-         }
+        }
 
         tablaHistorial.ajax.reload(null, false)
         materialesOrden = materialesOrden.filter(mat => mat.idInv != idInv)
@@ -671,14 +696,14 @@
 
 
 
-    $('#btnGuardar').on('click', function(e) {
+    $('#btnGuardar').on('click', function (e) {
         e.preventDefault();
         tp = $("#tp").val()
         id = $("#id").val()
         ordenServicio = $("#ordenes").val()
         ordenesEnt = $("#ordenesEnt").val()
         trabajador = $("#trabajadores").val()
- 
+
 
 
 
@@ -704,7 +729,7 @@
                 ordenesEnt,
                 trabajador
             }
-        }).done(function(data) {
+        }).done(function (data) {
             if (data == 0) {
                 return mostrarMensaje('error', '¡Ha ocurrido un error!')
             } else {
@@ -723,7 +748,7 @@
                             subtotal: item.subtotal
                         },
                         dataType: 'json',
-                        success: function(data) {
+                        success: function (data) {
                             if (data == 0) {
                                 return mostrarMensaje('error', '¡Ha ocurrido un error!')
                             }

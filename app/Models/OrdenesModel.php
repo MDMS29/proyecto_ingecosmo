@@ -36,6 +36,7 @@ class OrdenesModel extends Model
         $this->join('param_detalle', 'param_detalle.id_param_det = propietarios.tipo_propietario', 'left');
         $this->join('vw_param_det', 'vw_param_det.id_param_det = ordenes_servicio.estado', 'left');
         $this->join('vw_param_det2', 'vw_param_det2.id_param_det = ordenes_servicio.n_combustible', 'left');
+        $this->orderBy('ordenes_servicio.id_orden', 'desc');
         $data = $this->findAll();
         return $data;
     }
