@@ -169,16 +169,17 @@ class OrdenEntrega extends BaseController
             'usuario_crea' => session('id')
         ];
 
-        $res = $this->materiales->buscarInsumo($idMat, '');
-        $nuevaCant = $res['cantidad_actual'] - $cantidad;
-        $this->materiales->update($idMat, [
-            'cantidad_actual' => $nuevaCant,
-            'cantidad_antigua' => $res['cantidad_actual']
-        ]);
+        $res2 = $this->materiales->buscarInsumo($idMat, '');
+
 
         if ($tp == 2) {
             $res = $this->movDet->buscarDetalles($idMovDet);
             if (empty($res)) {
+                $nuevaCant = $res2['cantidad_actual'] - $cantidad;
+                $this->materiales->update($idMat, [
+                    'cantidad_actual' => $nuevaCant,
+                    'cantidad_antigua' => $res['cantidad_actual']
+                ]);
                 if ($this->movDet->save($dataDetMov)) {
                     return json_encode(1);
                 } else {
@@ -186,12 +187,22 @@ class OrdenEntrega extends BaseController
                 }
             } else {
                 if ($this->movDet->update($idMovDet, $dataDetMov)) {
-                    return json_encode(1);
+                    if($cantidad < $res['cantidad'] ){
+                        return json_encode(['tipo' => 2, 'total' => intval($res['cantidad'] - $cantidad)]);
+                    }else if($cantidad > $res['cantidad']){
+                        return json_encode(['tipo' => 1, 'total' => intval($cantidad) - intval($res['cantidad'])]);
+                    }
                 } else {
                     return json_encode(2);
                 }
             }
         } else {
+            $nuevaCant = $res2['cantidad_actual'] - $cantidad;
+            $this->materiales->update($idMat, [
+                'cantidad_actual' => $nuevaCant,
+                'cantidad_antigua' => $res2['cantidad_actual']
+            ]);
+
             if ($this->movDet->save($dataDetMov)) {
                 return json_encode(1);
             } else {
@@ -200,14 +211,11 @@ class OrdenEntrega extends BaseController
         }
     }
 
-    public function eliminarMaterial($idMaterial)
+    public function eliminarMaterial($idMov)
     {
-        if ($this->movDet->delete($idMaterial)) {
-            return json_encode(1);
+        $res = $this->movDet->buscarDetalles($idMov);
+        if ($this->movDet->delete($idMov)) {
+            return json_encode($res['cantidad']);
         }
     }
-
-
-
-
 }

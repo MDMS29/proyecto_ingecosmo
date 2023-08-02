@@ -63,8 +63,6 @@ class Insumos extends BaseController
 
         echo view('/materiales/materiales', $data);
     }
-
-
     public  function materialesCategoria($id)
     {
         $material = $this->materiales->obtenerInsumo($id);
@@ -75,14 +73,11 @@ class Insumos extends BaseController
         }
         // echo view('/materiales/materiales', $data);
     }
-
-
     public function obtenerFilasInsumos($estante)
     {
         $materiales = $this->fila->obtenerFilas($estante);
         return json_encode($materiales);
     }
-
     public function obtenerMaterialesFila($fila)
     {
         $materiales = $this->materiales->obtenerMaterialesFila($fila);
@@ -90,10 +85,6 @@ class Insumos extends BaseController
             return json_encode($materiales);
         }
     }
-
-
-
-
     public function insertar()
     {
         $nombre =  $this->request->getPost('nombre');
@@ -178,7 +169,6 @@ class Insumos extends BaseController
         $idMaterial = $this->materiales->getInsertID();
     }
 
-
     public function usar()
     {
         $id =  $this->request->getPost('idMaterial');
@@ -262,4 +252,30 @@ class Insumos extends BaseController
         $res = $this->materiales->contadorRepuestos($id);
         return json_encode($res);
     }
+    public function actualizarCantMaterial(){
+        $id = $this->request->getPost('id');
+        $cantidad = $this->request->getPost('cantidad');
+        $tp = $this->request->getPost('tipo');
+        $res = $this->materiales->buscarInsumo($id, '');
+        $nuevaCant = 0;
+        switch ($tp) {
+            case 2:
+                $nuevaCant =  intVal($res['cantidad_actual']) + intval($cantidad);
+                break;
+            case 3:
+                $nuevaCant = intVal($res['cantidad_actual']) + intval($cantidad);
+                break;
+            
+            default:
+                $nuevaCant =  intVal($res['cantidad_actual']) - intval($cantidad);
+                break;
+        }
+
+        if($this->materiales->update($id, ['cantidad_actual' => $nuevaCant])){
+            return json_encode(1);
+        }
+        else{
+            return json_encode(2);
+        }        
+    }   
 }
