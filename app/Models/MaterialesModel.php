@@ -155,7 +155,7 @@ class MaterialesModel extends Model
 
     public function buscarRepuesto($id_material)
     {
-        $this->select('materiales.*, terceros.id_tercero as razon_social, estanteria.id as bodega, ordenes_servicio.id_orden as numeroOrden');
+        $this->select('materiales.*, terceros.id_tercero as razon_social, estanteria.id as bodega, ordenes_servicio.id_orden as numeroOrden, observacion as observacion');
         $this->join('ordenes_servicio', 'ordenes_servicio.id_orden = materiales.id_orden', 'left');
         $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
         $this->join('terceros', 'terceros.id_tercero = materiales.id_proveedor', 'left');

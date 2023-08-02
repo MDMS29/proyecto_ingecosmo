@@ -140,6 +140,7 @@ class RepuestosAdmin extends BaseController
                     'observacion' => $res['observacion'],
                     'usuario_crea' => session('id'),
                 ];
+                $this->respuestosAdmin->update($id, ['estado' => $estado]);
                 if ($this->movimientoDet->save($dataMovimientodet)) {
                     return json_encode(1);
                 } else {
@@ -149,6 +150,8 @@ class RepuestosAdmin extends BaseController
                 return json_encode(2);
             }
         } else {
+            $res = $this->respuestosAdmin->buscarRepuesto($id);
+            $this->respuestosAdmin->update($id, ['estado' => $estado, 'observacion' =>  $res['observacion']]);
             return json_encode(2);
         }
     }

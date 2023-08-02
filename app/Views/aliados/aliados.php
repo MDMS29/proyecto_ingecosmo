@@ -908,16 +908,29 @@
         telefonos = telefonos.filter(tel => tel.id != id)
         guardarTelefono(0) //Actualizar tabla
     }
+
+    //Al escribir validar que el correo no este registrado
+    $('#correoAdd').on('input', function(e) {
+        correo = $('#correoAdd').val()
+        buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
+    })
     //Agregar Correo a la tabla
     $('#btnAddCorre').on('click', function(e) {
         const tp = $('#tp').val()
         const correo = $('#correoAdd').val()
         const prioridad = $('#prioridadCorreo').val()
         const editCorreo = $('#editCorreo').val();
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if ([correo, prioridad].includes('') || validCorreo == false) {
             return mostrarMensaje('error', '¡Hay campos vacios!')
+        } else {
+            if (!regex.test(correo)) {
+                validCorreo = false
+                return mostrarMensaje('error', '¡Tipo de correo invalido!')
+            }
         }
+
         let info = {
             id: [editCorreo].includes('') || editCorreo == 0 ? `${contador+=1}e` : editCorreo,
             correo,
@@ -925,7 +938,6 @@
         }
         let filtro = correos.filter(correo => correo.prioridad == 'P')
         let filtroCorreo = correos.filter(correo => correo.correo == info.correo)
-
         if (filtroCorreo.length > 0) {
             filtro = []
             return mostrarMensaje('error', '¡Ya se agrego este correo!')
@@ -934,7 +946,7 @@
             correos.push(info)
             $('#correoAdd').val('')
             $('#prioridadCorreo').val('')
-            $('#editCorreo').val(0);
+            $('#editCorreo').val(0)
             objCorreo = {
                 id: 0,
                 correo: '',
@@ -943,6 +955,7 @@
             return guardarCorreo(0)
         } else if (filtro.length > 0) {
             filtro = []
+
             return mostrarMensaje('error', '¡Ya hay un correo prioritario!')
         } else {
             correos.push(info)
@@ -958,15 +971,9 @@
         }
 
     })
-    //Al escribir validar que el correo no este registrado
-    $('#correoAdd').on('input', function(e) {
-        correo = $('#correoAdd').val()
-        buscarCorreoTel('email/buscarEmail/', correo, 'msgCorreo', 'correo')
-    })
-
+    // Funcion para mostrar correos en la tabla.
     function guardarCorreo(tipo) {
-        principal = correos.filter(correo => correo.prioridad == 'P')
-        $('#email').val(principal[0]?.correo)
+        $('#email').val(correos[0]?.correo)
         var cadena
         if (correos.length == 0) {
             cadena += ` <tr class="text-center">
@@ -975,14 +982,13 @@
             $('#bodyCorre').html(cadena)
         } else {
             for (let i = 0; i < correos.length; i++) {
-                cadena += ` <tr class="text-center" id='${correos[i].id}'>
+                cadena += ` <tr class="text-center" id=${correos[i].id}>
                                 <td>${correos[i].correo}</td>
                                 <td id=${correos[i].prioridad} >${correos[i].prioridad == 'S' ? 'Secundaria' : 'Principal'}</td>
-                                ${tipo == 0 ? `<td>
+                                ${tipo == 0 ? ` <td>
                                     <button class="btn" onclick="editarCorreo('${correos[i].id}')"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Correo">
                                     <button class="btn" onclick="eliminarCorreo('${correos[i].id}')"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Correo">
-                                </td> ` 
-                                : ''}
+                                </td>`: ''}
                             </tr>`
             }
         }
@@ -991,7 +997,6 @@
     }
     //Editar Correo
     function editarCorreo(id) {
-        console.log(id)
         const fila = $(`#${id}`);
         const correo = fila.find('td').eq(0)
         const prioridad = fila.find('td').eq(1)
@@ -1025,7 +1030,6 @@
         correos = correos.filter(correo => correo.id != id)
         guardarCorreo(0) //Actualizar tabla
     }
-
 
     //Cambiar estado de "Activo" a "Eliminado" 
     $('#modalConfirmar').on('shown.bs.modal', function(e) {

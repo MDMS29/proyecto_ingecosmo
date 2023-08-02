@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>" />
 <link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <div id="content" class="p-4 p-md-5">
@@ -18,85 +19,92 @@
                                 $e += 3;
                                 $salida = array_slice($data, 0, $e);
                                 ?>
-                                <div class="card" style="width: 13rem; height:18rem; ">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$i]['nombre'] ?></h5>
-
-                                        <button onclick="redireccion(<?php echo $salida[$i]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
+                                <div class="card" ">
+                                <div class=" card__image">
+                                    <div class="ima">
+                                        <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
                                     </div>
                                 </div>
-                                <?php if ($e == 8) { ?>
+                                <div class="card__content">
+                                    <p class="card__title"><?= $salida[$i]['nombre'] ?></p>
 
-                                <?php break;
+                                    <p class="card__text">lolita kknbhujhnfb.</p>
+
+
+                                    <a onclick="redireccion(<?php echo $salida[$i]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="card__content"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</a>
+                                </div>
+                        </div>
+                        <?php if ($e == 8) { ?>
+
+                        <?php break;
                                 }
                                 $i++ ?>
-                            <?php } ?>
+                    <?php } ?>
 
-                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                </div>
+                <div class="swiper-slide">
+                    <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
 
 
 
-                            <?php $r = 0;
-                            for ($a = 0; $a < count($data);) {
+                        <?php $r = 0;
+                        for ($a = 0; $a < count($data);) {
+                        ?>
+                            <span><?php $a ?></span>
+                            <?php
+                            $a += 3;
+                            $salida = array_slice($data, 3, $a);
                             ?>
-                                <span><?php $a ?></span>
-                                <?php
-                                $a += 3;
-                                $salida = array_slice($data, 3, $a);
-                                ?>
-                                <div class="card" style="width: 13rem; height:18rem;">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
+                            <div class="card" style="width: 13rem; height:18rem;">
+                                <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
+                                <div class="textoCard">
+                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
 
-                                        <button onclick="redireccion(<?php echo $salida[$r]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
-                                    </div>
+                                    <button onclick="redireccion(<?php echo $salida[$r]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                 </div>
-                                <?php if ($e == 8) { ?>
+                            </div>
+                            <?php if ($e == 8) { ?>
 
-                                <?php break;
-                                }
-                                $r++ ?>
-                            <?php } ?>
+                            <?php break;
+                            }
+                            $r++ ?>
+                        <?php } ?>
 
-                        </div>
                     </div>
+                </div>
 
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
+                <div class="swiper-slide">
+                    <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
 
 
 
-                            <?php $j = 0;
-                            for ($l = 0; $l < count($data);) {
+                        <?php $j = 0;
+                        for ($l = 0; $l < count($data);) {
+                        ?>
+                            <span><?php $l ?></span>
+                            <?php
+                            $l += 3;
+                            $salida = array_slice($data, 6, $l);
                             ?>
-                                <span><?php $l ?></span>
-                                <?php
-                                $l += 3;
-                                $salida = array_slice($data, 6, $l);
-                                ?>
-                                <div class="card" style="width: 13rem; height:18rem;">
-                                    <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
-                                    <div class="textoCard">
-                                        <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
+                            <div class="card" style="width: 13rem; height:18rem;">
+                                <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
+                                <div class="textoCard">
+                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
 
-                                        <button onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
-                                    </div>
+                                    <button onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                 </div>
-                                <?php if ($e == 8) { ?>
+                            </div>
+                            <?php if ($e == 8) { ?>
 
-                                <?php break;
-                                }
-                                $j++ ?>
-                            <?php } ?>
+                            <?php break;
+                            }
+                            $j++ ?>
+                        <?php } ?>
 
-                        </div>
                     </div>
-                    <!-- 
+                </div>
+                <!-- 
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
                             <div class="d-flex" style="gap:10px;">
@@ -109,18 +117,18 @@
                         </div>
                     </div> -->
 
-                </div>
-                <div class="swiper-button-next" style="color:black;"></div>
-                <div class="swiper-button-prev" style="color:black;"></div>
             </div>
+            <div class="swiper-button-next" style="color:black;"></div>
+            <div class="swiper-button-prev" style="color:black;"></div>
         </div>
+    </div>
 
+</div>
+<div class="bloqueFooter">
+    <div class="footer-page">
+        <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
     </div>
-    <div class="bloqueFooter">
-        <div class="footer-page">
-            <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
-        </div>
-    </div>
+</div>
 
 </div>
 
@@ -177,24 +185,23 @@
             success: function(res) {
                 if (res == 1) {
                     Swal.fire({
-                    title: 'Esta categoria no tiene materiales',
-                    text: "¿Desea ir a esta categoria   ?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cerrar',
-                    confirmButtonColor: '#161666',
-                    cancelButtonColor: '#E25050',
-                    confirmButtonText: 'Continuar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = url
-                    }
-                })
+                        title: 'Esta categoria no tiene materiales',
+                        text: "¿Desea ir a esta categoria   ?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cerrar',
+                        confirmButtonColor: '#161666',
+                        cancelButtonColor: '#E25050',
+                        confirmButtonText: 'Continuar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = url
+                        }
+                    })
                 } else {
                     window.location.href = url
                 }
             }
         });
     }
-
 </script>

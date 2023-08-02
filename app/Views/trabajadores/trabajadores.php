@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="mb-3" style="width: 100%">
                                     <label for="apellido_s" class="col-form-label">Segundo Apellido: <i class="asterisco" style="color:crimson;">*</i></label>
-                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ] /,'')">
+                                    <input type="text" name="apellido_s" class="form-control" id="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                 </div>
                             </div>
                             <div class="d-flex column-gap-3" style="width: 100%">

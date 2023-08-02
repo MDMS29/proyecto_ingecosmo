@@ -23,8 +23,6 @@
               <div class="contenido2">
                 <div class="Imagenes">
                   <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/MasDetallesW.png" width="30" height="30" title="Mas detalles del repuesto" id="btnUsar"></input>
-
-                  <input href="#" onclick="usarMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#usarMaterial" type="image" src="<?php echo base_url(); ?>/img/grifo.png" width="30" height="30" title="usar repuestos"></input>
                 </div>
               </div>
 
@@ -226,114 +224,6 @@
 
     </div>
   </div>
-</div>
-
-<!-- MODAL USAR-->
-<div class="modal fade" id="usarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <form id="formularioUsar" autocomplete="off">
-
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-
-      <div class="modal-content" id="modalContentUsar">
-
-        <div class="modal-header flex justify-content-between align-items-center w-100">
-          <input type="text" name="idMaterial" id="idMaterial" hidden>
-          <img src="<?= base_url('img/logo_empresa.png') ?>" class="logoEmpresa" width="100">
-          <div class="d-flex align-items-center justify-content-center" style="width:auto;">
-            <img src="<?= base_url('img/usarlogo.png') ?>" width="30" height="30" style="margin-right: 5px;" />
-            <h1 class="modal-title fs-5 text-center" id="tituloModal">Usar Repuesto</h1>
-          </div>
-          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-        </div>
-
-
-        <div class="modal-body" id="modalBodyUsar">
-          <div class="d-flex column-gap-3" style="width: 100%">
-            <div class="mb-3" style="width: 100%">
-
-              <!-- <label for="exampleDataList" class="col-form-label">Orden de Servicio:</label> -->
-
-              <!-- <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenes" id="ordenes">
-                <option selected="">--Seleccione--</option>
-                < ?php foreach ($ordenes as $data) { ?>
-                  <option value="< ?= $data['id_orden'] ?>">< ?= $data['n_orden'] ?></option>
-                < ?php } ?>
-              </select> -->
-            </div>
-
-            <div class="mb-3" style="width: 100%">
-              <!-- <label for="exampleDataList" class="col-form-label">Trabajadores:</label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="trabajadores" id="trabajadores">
-                <option selected="">--Seleccione--</option>
-                < ?php foreach ($trabajadores as $data) { ?>
-                  <option value="< ?= $data['id_trabajador'] ?>">< ?= $data['nombre'] ?></option>
-                < ?php } ?>
-
-              </select> -->
-            </div>
-          </div>
-
-          <div class="d-flex column-gap-3" style="width: 100%">
-            <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Nombre del repuesto:</label>
-              <input class="form-control" id="nombreRepuesto" name="nomRepuesto" placeholder="" disabled>
-            </div>
-
-            <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Proveedor:</label>
-              <input class="form-control" id="proveedor2" name="proveedor" placeholder="" disabled>
-            </div>
-          </div>
-
-          <div class="d-flex column-gap-3" style="width: 100%">
-
-            <div class="mb-3" style="width: 50%;">
-              <label for="exampleDataList" class="col-form-label">Orden de trabajo:</label>
-              <div class="input-group mb-3">
-                <input class="form-control" type="text" id="ordenTrabajo2" name="ordenTrabajo" disabled>
-              </div>
-            </div>
-
-            <div class="mb-3" style="width: 50%;">
-              <label for="exampleDataList" class="col-form-label">Placa:</label>
-              <div class="input-group mb-3">
-                <input class="form-control" type="text" id="placa2" name="placa" disabled>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="d-flex column-gap-3" style="width: 100%">
-
-            <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Cantidad existente:</label>
-              <div>
-                <input type="number" class="form-control" id="cantidadExistente" name="cantidadExistente" onInput="validarInput()" placeholder="" disabled>
-              </div>
-            </div>
-
-            <div class="mb-3" style="width: 50%">
-              <label for="exampleDataList" class="col-form-label">Cantidad a Usar: <i style="color:crimson">*</i></label>
-              <div>
-                <input type="text" class="form-control" id="cantidadUsar" name="cantidadUsar" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
-                <small id="msgUsar" class="invalido"></small>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btnAccionF" id="btnValidar"><img src="<?= base_url('img/orden-entrega.png') ?>" alt="icon-plus" width="20">Agregar a
-            orden</button>
-
-
-        </div>
-      </div>
-    </div>
-  </form>
 </div>
 
 <script>

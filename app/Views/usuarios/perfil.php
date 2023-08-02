@@ -381,7 +381,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" for="recipient-name" style="margin:0;">Primer Nombre:</label>
-                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP">
+                                    <input class="form-control" type="text" min='1' max='300' id="nombreP" name="nombreP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
                                     <input id="id" name="id" hidden>
                                     <input type="text" name="tp" id="tp" hidden>
 
@@ -389,32 +389,31 @@
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Segundo Nombre:</label>
-                                    <input class="form-control" id="nombreS" name="nombreS"></input>
+                                    <input class="form-control" id="nombreS" name="nombreS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Primer Apellido:</label>
-                                    <input class="form-control" id="apellidoP" name="apellidoP"></input>
+                                    <input class="form-control" id="apellidoP" name="apellidoP" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
                             </div>
 
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">Segundo Apellido:</label>
-                                    <input class="form-control" id="apellidoS" name="apellidoS"></input>
+                                    <input class="form-control" id="apellidoS" name="apellidoS" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')"></input>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="tipoDoc">Tipo Identificación:</label>
                                     <select class="form-select form-select form-control" name="tipoDoc" id="tipoDoc">
                                         <option value="1" selected>Cedula de Ciudadania</option>
-                                        <option>-- Seleccione --</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-3" style="width: 100%;">
                                     <label class="col-form-label" style="margin:0;" for="message-text">N° Identificacion:</label>
-                                    <input class="form-control" id="nIdenti" name="nIdenti"></input>
+                                    <input class="form-control" id="nIdenti" name="nIdenti" minlength="9" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/,'')"></input>
                                     <small id="msgDoc" class="invalido"></small>
                                 </div>
 
@@ -455,6 +454,8 @@
         $('#msgConfirRes').text('')
         $('#msgConfir').text('')
         $('#msgDoc').text('')
+        $('#confirContraRes').val('')
+        $('#contraRes').val('')
     }
 
     function editarCampos(id, tp) {
