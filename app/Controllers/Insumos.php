@@ -220,7 +220,6 @@ class Insumos extends BaseController
 
     public function buscarInsumo($id_material, $nombre = '')
     {
-        $array = array();
         if ($id_material != 0) {
             $data = $this->materiales->buscarInsumo($id_material, '');
             return json_encode($data);
@@ -252,30 +251,36 @@ class Insumos extends BaseController
         $res = $this->materiales->contadorRepuestos($id);
         return json_encode($res);
     }
-    public function actualizarCantMaterial(){
+    public function actualizarCantMaterial()
+    {
         $id = $this->request->getPost('id');
         $cantidad = $this->request->getPost('cantidad');
         $tp = $this->request->getPost('tipo');
         $res = $this->materiales->buscarInsumo($id, '');
         $nuevaCant = 0;
+        $cantVen = 0;
         switch ($tp) {
-            case 2:
-                $nuevaCant =  intVal($res['cantidad_actual']) + intval($cantidad);
-                break;
             case 3:
-                $nuevaCant = intVal($res['cantidad_actual']) + intval($cantidad);
+                $nuevaCant = intval($res['cantidad_actual']) + intval($cantidad);
+                $cantVen = $cantidad - intval($res['cantidad_vendida']);
                 break;
-            
+
             default:
-                $nuevaCant =  intVal($res['cantidad_actual']) - intval($cantidad);
+                $nuevaCant =  $res['cantidad_actual'] - $cantidad;
+                $cantVen =  $res['cantidad_vendida'] + $cantidad;
                 break;
         }
 
-        if($this->materiales->update($id, ['cantidad_actual' => $nuevaCant])){
+        if ($this->materiales->update(
+            $id,
+            [
+                'cantidad_actual' => $nuevaCant,
+                'cantidad_vendida' => $cantVen
+            ]
+        )) {
             return json_encode(1);
-        }
-        else{
+        } else {
             return json_encode(2);
-        }        
-    }   
+        }
+    }
 }

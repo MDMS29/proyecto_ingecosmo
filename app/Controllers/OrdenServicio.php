@@ -486,11 +486,11 @@ class OrdenServicio extends BaseController
 
         $pdf->SetXY($x + 2, $y + 16);
         $pdf->Cell(90, 1, 'FECHA', 0, 'C', false);
-        $pdf->SetX($x + 70);
+        $pdf->SetXY($x + 70, $y + 16);
         $pdf->Cell(90, 1, 'TECNICO', 0, 'C', false);
-        $pdf->SetX($x + 142);
+        $pdf->SetXY($x + 142, $y + 16);
         $pdf->Cell(90, 1, 'VALOR', 0, 'C', false);
-        $pdf->SetX($x + 171);
+        $pdf->SetXY($x + 171, $y + 16);
         $pdf->Cell(90, 1, 'OBSERVACIONES', 0, 'C', false);
 
         $pdf->line(2, $y + 19, 213.8, $y + 18); //DIVISORA CABEZERA DE CUERPO

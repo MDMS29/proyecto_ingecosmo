@@ -56,7 +56,7 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Nombre: <i class="asterisco" style="color:crimson;">*</i></label>
-              <input class="form-control" id="nombre" name="nombre" oninput="this.value = this.value.replace(/[^a-zA-Zñáéíóú ]/,'')">
+              <input class="form-control" id="nombre" name="nombre" type="text">
               <input class="form-control" id="nombreHidden" name="nombreHidden" hidden>
               <small id="msgAgregar" class="invalidoInsumo"></small>
             </div>
@@ -232,7 +232,6 @@
         type: 'POST',
         dataType: 'json',
         success: function(res) {
-          console.log(res)
           if (res.length == 0) {
             cadena = `<option value="" selected>-- No Hay Filas  --</option>`
           } else {

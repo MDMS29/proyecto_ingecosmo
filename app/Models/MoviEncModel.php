@@ -65,7 +65,7 @@ class MoviEncModel extends Model
 
     public function ordenesEntrega()
     {
-        $this->select("movimiento_enc.id_movimientoenc, concat(trabajadores.nombre_p , ' ' , trabajadores.nombre_s , ' ' , trabajadores.apellido_p , ' ' , trabajadores.apellido_s) as nombreTrabajador, materiales.nombre as nombreMate , materiales.precio_compra as subtotal, movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento,ordenes_servicio.n_orden as nombreOrden, vehiculos.placa");
+        $this->select("movimiento_enc.id_movimientoenc, concat(trabajadores.nombre_p , ' ' , trabajadores.nombre_s , ' ' , trabajadores.apellido_p , ' ' , trabajadores.apellido_s) as nombreTrabajador, materiales.nombre as nombreMate , movimiento_enc.fecha_movimiento, movimiento_det.cantidad, param_detalle.nombre as tipo_movimiento,ordenes_servicio.n_orden as nombreOrden, vehiculos.placa, SUM(movimiento_det.costo) as subtotal");
         $this->join('param_detalle', 'param_detalle.id_param_det = movimiento_enc.tipo_movimiento');
         $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc');
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material');

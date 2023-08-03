@@ -136,8 +136,8 @@ class MaterialesModel extends Model
     {
         if ($id_material != 0) {
             $this->select('materiales.*,materiales.nombre as nombre_insumo, estanteria.nombre as nomEstante, estanteria.id as idEstante');
-            $this->where('id_material', $id_material);
-            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material');
+            $this->where('materiales.id_material', $id_material);
+            $this->join('param_detalle', 'param_detalle.id_param_det = materiales.categoria_material', 'left');
             $this->join('estanteria', 'estanteria.id = materiales.estante', 'left');
         } else if ($nombre != '') {
             $this->select('materiales.*,param_detalle.nombre as nombre_categoria');

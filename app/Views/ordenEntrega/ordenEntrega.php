@@ -5,15 +5,15 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/orden-entrega-b.png') ?>" /> Ordenes de entrega</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="2">Vehiculo</a> -
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="3">Vehiculo</a> -
             <a class="toggle-vis btn" data-column="4">Fecha de Movimiento</a>
         </div>
         <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
-                    <!-- <th scope="col" class="text-center">Material</th> -->
                     <th scope="col" class="text-center">N° de orden</th>
+                    <th scope="col" class="text-center">Trabajador</th>
                     <th scope="col" class="text-center">Vehiculo</th>
                     <th scope="col" class="text-center">Fecha Movimiento</th>
                     <th scope="col" class="text-center">Subtotal</th>
@@ -30,7 +30,6 @@
             Crear Orden</button>
         <button type="button" class="btn btnAccionF d-flex gap-2 align-items-center" onclick="window.history.back()"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">
             Regresar</button>
-        <!-- <a href="< ?= base_url('usuarios/eliminados') ?>" class="btn btnAccionF"> <img src="< ?= base_url('img/delete.png') ?>" alt="icon-plus" width="20"> Eliminados</a> -->
     </div>
 </div>
 
@@ -206,14 +205,14 @@
                     return "<b>" + contador + "</b>";
                 }
             },
-            // {
-            //     data: "nombreMate"
-            // },
             {
                 data: null,
                 render: function(data, type, row) {
                     return row.nombreOrden == null ? "No se encontro orden de servicio" : row.nombreOrden; //
                 }
+            },
+            {
+                data: "nombreTrabajador"
             },
 
             {
@@ -252,10 +251,13 @@
 
     function limpiarCampos() {
         $("#tipo").val('');
-        $("#tipoCate").val('');
         $("#trabajadores").val('');
         $("#ordenes").val('');
-        $("#material").val('');
+
+        var cadena = ''
+        $("#tipoMat").val('');
+        $("#tipoCate").html(cadena);
+        $("#material").html(cadena);
     }
 
     function seleccionarOrden(id, tp) {
@@ -317,8 +319,6 @@
                     $('.campObl').hide()
                     $('.btnO').show()
 
-
-
                 }
 
             })
@@ -368,7 +368,6 @@
                     $('#logoModal').attr('src', '<?= base_url('img/orden-entrega-b.png') ?>')
                     $('#logoModal').attr('width', '25')
 
-
                     $('#btnGuardar').attr('hidden', '')
                     $('#ordenes').attr('disabled', '')
                     $('#trabajadores').attr('disabled', '')
@@ -380,10 +379,6 @@
                     $('.asterisco').hide()
                     $('.campObl').hide()
                     $('.btnO').hide()
-
-
-
-
 
                 }
 
@@ -413,12 +408,8 @@
             $('.campObl').show()
             $('.btnO').show()
 
-
-
             materialesOrden = []
             mostrarMateriales(0)
-
-
 
             $("#cantidadActual").val('');
             $("#cantidadUsar").val('');
@@ -493,9 +484,6 @@
                 }
                 $('#material').html(cadena)
                 $('#material').val(idMaterial)
-
-                // $('#tipoCate').val(id)
-
             }
         })
     }
@@ -512,6 +500,7 @@
             data: {},
             success: function(res) {
                 res = JSON.parse(res)
+                console.log(res)
                 $('#cantidadActual').val(res['cantidad_actual'])
 
                 $('#cantidadUsar').on('input', function(e) {
@@ -547,7 +536,7 @@
     }
 
     $('#agregarMaterial').on('click', function(e) {
-        if (objMaterial.cantidad <= 0 || validUsar == false) {
+        if ($("#cantidadUsar").val() == '' || objMaterial.cantidad <= 0 || validUsar == false) {
             return mostrarMensaje('error', '¡Datos invalidos !')
         }
 
@@ -555,22 +544,22 @@
 
 
 
-        if (objDestMat != undefined) {
-            //EN ARRAY
-            const {
-                cantidad,
-                precio
-            } = objDestMat
+        // if (objDestMat != undefined) {
+        //     //EN ARRAY
+        //     const {
+        //         cantidad,
+        //         precio
+        //     } = objDestMat
 
-            let nuevaCant = Number(cantidad) + Number(objMaterial.cantidad)
+        //     let nuevaCant = Number(cantidad) + Number(objMaterial.cantidad)
 
-            let nuevoSub = precio * nuevaCant
-            materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0].cantidad = nuevaCant
-            materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0].subtotal = nuevoSub
-        } else {
-            //NUEVO
-            materialesOrden.push(objMaterial)
-        }
+        //     let nuevoSub = precio * nuevaCant
+        //     materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0].cantidad = nuevaCant
+        //     materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0].subtotal = nuevoSub
+        // } else {
+        //     //NUEVO
+        materialesOrden.push(objMaterial)
+        // }
 
         mostrarMateriales(0)
         objMaterial = {
@@ -580,12 +569,14 @@
             nombre: '',
             tipo: 0,
             cantidad: 0,
-            precio: 0
+            precio: 0,
+            categoria:0
         }
 
+        var cadena = ''
         $("#tipoMat").val('');
-        $("#tipoCate").val('');
-        $("#material").val('');
+        $("#tipoCate").html(cadena);
+        $("#material").html(cadena);
         $("#cantidadActual").val('');
         $("#cantidadUsar").val('');
         $('#idInvent').val('0')
@@ -598,18 +589,18 @@
                             <td colspan="7" id="td" class="text-center">NO HAY MATERIALES</td>            
                         </tr> `
         } else {
-
+            //  <button class="btn" onclick="editarMateriales(${materialesOrden[i].idMaterial}, ${materialesOrden[i].idInv})"><img src="< ?= base_url('img/edit.svg') ?>" title="Editar Material"></button> 
             for (let i = 0; i < materialesOrden.length; i++) {
                 cadena += `  <tr id="${materialesOrden[i].idInv}">
                                 <td class="text-center">${materialesOrden[i].item}</td>            
-                                <td id="${materialesOrden[i].idMaterial}" class="text-center">${materialesOrden[i].nombre}</td>                       
+                                <td id="${materialesOrden[i].idMaterial}" class="text-center">${materialesOrden[i].nombre} </td>                       
                                 <td id="${materialesOrden[i].tipo}" class="text-center">${materialesOrden[i].tipo== 10 ?'Repuesto': 'Insumo'}</td>            
-                                <td class="text-center">${materialesOrden[i].cantidad}</td>            
+                                <td class="text-center">${materialesOrden[i].cantidad} ${materialesOrden[i].categoria == 32 ? 'gr' : 'c/u'}</td>            
                                 <td class="text-center">${formatearCantidad (materialesOrden[i].precio)}</td>            
                                 <td class="text-center">${formatearCantidad(materialesOrden[i].subtotal)}</td>
 
-                                ${tipo == 0 ? ` <td>
-                                 <button class="btn" onclick="editarMateriales(${materialesOrden[i].idMaterial}, ${materialesOrden[i].idInv})"><img src="<?= base_url('img/edit.svg') ?>" title="Editar Material"></button> 
+                                ${tipo == 0 ? ` <td class="text-center">
+                                
                                 <button class="btn" onclick="eliminarMaterial(${materialesOrden[i].idMaterial}, ${materialesOrden[i].idInv})"><img src="<?= base_url('img/delete.svg') ?>" title="Eliminar Material"></button></td>  ` : ''}       
                             </tr> `
             }
@@ -617,37 +608,49 @@
         $('#bodyTable').html(cadena)
     }
 
-    function editarMateriales(idMaterial, idInv) {
-        const fila = $(`#${idInv}`);
-        const material = fila.find('td').eq(1).attr('id');
-        const tipo = fila.find('td').eq(2).attr('id');
-        const cantidad = fila.find('td').eq(3).text();
+    // function editarMateriales(idMaterial, idInv) {9
+    //     const fila = $(`#${idInv}`);
+    //     const item = fila.find('td').eq(0).text();
+    //     const material = fila.find('td').eq(1).attr('id');
+    //     const nomMaterial = fila.find('td').eq(1).text();
+    //     const tipo = fila.find('td').eq(2).attr('id');
+    //     const cantidad = fila.find('td').eq(3).text().split(' ')[0];;
 
-        $.ajax({
-            type: 'POST',
-            url: '<?= base_url('insumos/buscarInsumo/') ?>' + idMaterial + '/' + '',
-            data: {},
-            success: function(res) {
-                const data = JSON.parse(res)
-                $('#tipoMat').val(tipo);
-                $('#cantidadUsar').val(cantidad);
-                $('#cantidadActual').val(data.cantidad_actual)
-                $('#idInvent').val(fila.attr('id'));
-                verTipoCate(tipo, data.categoria_material)
-                verMateriales(data.categoria_material, material)
-                infoMaterial(material)
-                materialesOrden = materialesOrden.filter(r => r.idMaterial !== material)
-                mostrarMateriales(0)
-            }
-        })
-    }
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '< ?= base_url('insumos/buscarInsumo/') ?>' + idMaterial + '/' + '',
+    //         data: {},
+    //         success: function(res) {
+    //             const data = JSON.parse(res)
+    //             $('#tipoMat').val(tipo);
+    //             $('#cantidadUsar').val(cantidad);
+    //             $('#cantidadActual').val(data.cantidad_actual)
+    //             $('#idInvent').val(fila.attr('id'));
+    //             verTipoCate(tipo, data.categoria_material)
+    //             verMateriales(data.categoria_material, material)
+    //             infoMaterial(material)
+    //             materialesOrden = materialesOrden.filter(r => r.idMaterial !== material)
+    //             mostrarMateriales(0)
+
+    //             objMaterial = {
+    //                 idInv: fila.attr('id'),
+    //                 idMaterial: material,
+    //                 item: item,
+    //                 nombre: `${nomMaterial}`,
+    //                 tipo: tipo,
+    //                 cantidad: Number(cantidad),
+    //                 precio: Number(data.precio_venta)
+    //             }
+    //         }
+    //     })
+    // }
 
     function eliminarMaterial(idMaterial, idInv) {
         tp = $('#tp').val()
 
         const fila = $(`#${idInv}`);
         const material = fila.find('td').eq(1).attr('id');
-        const cantidad = fila.find('td').eq(3).text();
+        const cantidad = fila.find('td').eq(3).text().split(' ')[0];
 
         if (tp == 2) {
             $.ajax({
@@ -666,6 +669,10 @@
                         },
                         success: function(res) {
                             if (res == 1) {
+                                var cadena = ''
+                                $("#tipoMat").val('');
+                                $("#tipoCate").html(cadena);
+                                $("#material").html(cadena);
                                 return mostrarMensaje('success', '¡Se ha eliminado el material!')
                             } else {
                                 return mostrarMensaje('error', '¡Ha ocurrido un error!')
@@ -696,16 +703,9 @@
         ordenesEnt = $("#ordenesEnt").val()
         trabajador = $("#trabajadores").val()
 
-
-
-
         cantidad = $('#cantidadUsar').val()
         cantidadActual = $('#cantidadActual').val()
         idInv = $('#idInvent').val()
-
-        // $res =$('#idInvent').val()
-        // $nuevaCant = $res['cantidad_actual'] - $cantidad;
-        // $materiales=($idInv, ['cantidad_actual' == $nuevaCant]);
 
         if ([ordenServicio, trabajador].includes("") || materialesOrden.length == 0) {
             return mostrarMensaje('error', '¡Campos Vacios!')
@@ -739,7 +739,7 @@
                             subtotal: item.subtotal
                         },
                         dataType: 'json',
-                        success: function(data) {m 
+                        success: function(data) {
                             $.ajax({
                                 url: '<?= base_url('insumos/actualizarCantMaterial') ?>',
                                 type: 'POST',
