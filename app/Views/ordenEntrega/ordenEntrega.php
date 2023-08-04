@@ -542,8 +542,6 @@
 
         let objDestMat = materialesOrden.filter(r => r.idMaterial == objMaterial.idMaterial)[0]
 
-
-
         // if (objDestMat != undefined) {
         //     //EN ARRAY
         //     const {
@@ -691,10 +689,6 @@
     function validarInput() {
         document.getElementById("btnGuardar").disabled = !document.getElementById("cantidadUsar").value.length;
     }
-
-
-
-
     $('#btnGuardar').on('click', function(e) {
         e.preventDefault();
         tp = $("#tp").val()

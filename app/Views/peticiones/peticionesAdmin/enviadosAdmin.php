@@ -7,17 +7,21 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones Enviadas</h2>
 
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Asunto Petición</a> -
+            <a class="toggle-vis btn" data-column="4">Hora Petición</a> - <a class="toggle-vis btn" data-column="7">Hora Respuesta</a>
+        </div>
         <table class="table table-striped" id="tablePeticiones" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">N° Peticion</th>
-                    <th scope="col" class="text-center">Asunto Peticion</th>
+                    <th scope="col" class="text-center">N° Petición</th>
+                    <th scope="col" class="text-center">Asunto Petición</th>
                     <th scope="col" class="text-center">Emisor</th>
-                    <th scope="col" class="text-center">Fecha de Peticion</th>
-                    <th scope="col" class="text-center">Hora de Peticion</th>
+                    <th scope="col" class="text-center">Fecha Petición</th>
+                    <th scope="col" class="text-center">Hora Petición</th>
                     <th scope="col" class="text-center">Receptor</th>
-                    <th scope="col" class="text-center">Fecha de Respuesta</th>
-                    <th scope="col" class="text-center">Hora de Respuesta</th>
+                    <th scope="col" class="text-center">Fecha Respuesta</th>
+                    <th scope="col" class="text-center">Hora Respuesta</th>
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -38,7 +42,7 @@
     <input type="text" name="id" id="id" hidden>
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="body-R">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-header d-flex align-items-center justify-content-between">
                     <img src="<?= base_url('img/logo_empresa.png') ?>" alt="Logo Empresa" class="logoEmpresa" width="100">
                     <h1 class="modal-title fs-5 text-center d-flex align-items-center gap-2"><i class="bi bi-eye-fill fs-4" title="Ver Peticion"></i><span id="tituloModal"><!--texto--></span> </h1>
@@ -48,7 +52,7 @@
                     <form>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="asunto" class="col-form-label">Asunto de la Peticion:</label>
+                                <label for="asunto" class="col-form-label">Asunto de la Petición:</label>
                                 <input type="text" name="asunto2" class="form-control" id="asunto2" disabled>
                             </div>
                         </div>
@@ -58,19 +62,19 @@
                                 <input type="text" name="emisor2" class="form-control" id="emisor2" disabled>
                             </div>
                             <div class="mb-3" style="width: 100%">
-                                <label for="fechaP" class="col-form-label">Fecha de la Peticion:</label>
+                                <label for="fechaP" class="col-form-label">Fecha de la Petición:</label>
                                 <input disabled type="text" name="fechaP2" class="form-control" id="fechaP2">
                             </div>
                             <div class="mb-3" style="width: 100%">
-                                <label for="horaP" class="col-form-label">Hora de la Peticion:</label>
+                                <label for="horaP" class="col-form-label">Hora de la Petición:</label>
                                 <input type="time" name="horaP2" class="form-control" id="horaP2" disabled>
                             </div>
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
                                 <details open>
-                                    <summary style="color: #1b335b; font-weight: 600;">Descripcion del Envio</summary>
-                                    <textarea  name="txtDescripcion2" id="txtDescripcion2" class="form-control w-100 p-1" rows="3" disabled></textarea>
+                                    <summary style="color: #1b335b; font-weight: 600;">Descripción del Envío</summary>
+                                    <textarea name="txtDescripcion2" id="txtDescripcion2" class="form-control w-100 p-1" rows="3" disabled></textarea>
                                 </details>
                             </div>
                         </div>
@@ -82,7 +86,7 @@
                         </div>
                         <div class="d-flex column-gap-3" style="width: 100%">
                             <div class="mb-3" style="width: 100%">
-                                <label for="estado" class="col-form-label">Tipo Validacion: <i style="color:crimson">*</i></label>
+                                <label for="estado" class="col-form-label">Tipo Validación: <i style="color:crimson">*</i></label>
                                 <select disabled class="form-select" name="estado2" id="estado2">
                                     <?php foreach ($estados as $e) { ?>
                                         <option value="<?= $e['id_param_det'] ?>"><?= $e['nombre'] ?></option>
@@ -116,6 +120,24 @@
 
 
 <script>
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tablaAdminEnviados.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+    //Div ocualtar columnas de la tabla
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+
     recargarAdmin()
 
     // Tabla   
@@ -132,7 +154,10 @@
             [0, 'desc']
         ],
         columns: [{
-                data: 'id_peticion'
+                data: 'id_peticion',
+                render: function(data, type, row) {
+                    return `<b>${row.id_peticion}</b>`
+                }
             },
             {
                 data: 'asunto'
@@ -160,9 +185,9 @@
                 render: function(data, type, row) {
                     let vistoClass
                     if (row.estado == 'Aceptado') {
-                        vistoClass="text-success fw-bold"
-                    } else if(row.estado == 'Denegado') {
-                        vistoClass="text-danger fw-bold"
+                        vistoClass = "text-success fw-bold"
+                    } else if (row.estado == 'Denegado') {
+                        vistoClass = "text-danger fw-bold"
                     }
                     return '<span class="' + vistoClass + '"> ' + row.estado + ' </span>';
                 }

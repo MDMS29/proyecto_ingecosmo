@@ -7,14 +7,18 @@
     <h2 class="text-center mb-4"><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/buzon-b.png')  ?>" /> Peticiones Enviadas</h2>
 
     <div class="table-responsive p-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Asunto Petición</a> -
+            <a class="toggle-vis btn" data-column="4">Hora Petición</a>
+        </div>
         <table class="table table-striped" id="tablePeticiones" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">N° Peticion</th>
-                    <th scope="col" class="text-center">Asunto Peticion</th>
+                    <th scope="col" class="text-center">N° Petición</th>
+                    <th scope="col" class="text-center">Asunto Petición</th>
                     <th scope="col" class="text-center">Emisor</th>
-                    <th scope="col" class="text-center">Fecha Peticion</th>
-                    <th scope="col" class="text-center">Hora Peticion</th>
+                    <th scope="col" class="text-center">Fecha Petición</th>
+                    <th scope="col" class="text-center">Hora Petición</th>
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -74,7 +78,7 @@
                             <div class="d-flex column-gap-3" style="width: 100%">
                                 <div class="mb-3" style="width: 100%">
                                     <details open>
-                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripcion Envio: <i class="asterisco" style="color:crimson;">*</i></summary>
+                                        <summary style="color: #1b335b; font-weight: 600;" class="col-form-label">Descripción Envío: <i class="asterisco" style="color:crimson;">*</i></summary>
                                         <textarea name="txtDescripcion" id="txtDescripcion" class="form-control w-100 p-1 descripcion" rows="3"></textarea>
                                     </details>
                                 </div>
@@ -82,7 +86,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                    <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
+                        <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
                         <button type="button" class="btn btnAccionF" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btnRedireccion" id="btnGuardar" onclick="limpiarCampos()">Enviar</button>
                     </div>
@@ -96,6 +100,24 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    //Mostrar Ocultar Columnas
+    $('a.toggle-vis').on('click', function(e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = tablePeticiones.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+    //Div ocultar columnas de la tabla
+    var botones = $(".ocultar a");
+    botones.click(function() {
+        if ($(this).attr('class').includes('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    })
+
     recargarAlmacenista()
     var ContadorPRC = 0; //Contador DataTable
     // para asignarle la fecha actual al input date
@@ -124,7 +146,10 @@
             [0, 'desc']
         ],
         columns: [{
-                data: 'id_peticon'
+                data: 'id_peticion',
+                render: function(data, type, row) {
+                    return `<b>${row.id_peticion}</b>`
+                }
             },
             {
                 data: 'asunto'
@@ -216,7 +241,7 @@
         txtDescripcion = $('#txtDescripcion').val()
         //Control de campos vacios
         if ([asunto, txtDescripcion].includes('')) {
-            return mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+            return mostrarMensaje('error', '¡Hay campos  vacíos o inválidos!')
         } else {
             $.ajax({
                 url: '<?php echo base_url('peticiones/insertar') ?>',
@@ -230,7 +255,7 @@
                     txtDescripcion
                 },
                 success: function(idPet) {
-                    mostrarMensaje('success', '¡Se ha enviado la Peticion!')
+                    mostrarMensaje('success', '¡Se ha enviado la Petición!')
                 }
             }).done(function(data) {
                 recargarAdmin()
@@ -238,7 +263,7 @@
                 $('#agregarPeticion').modal('hide')
                 tablePeticiones.ajax.reload(null, true); //Recargar tabla
                 ContadorPRC = 0
-                $('#btnGuardar').removeAttr('disabled') //jumm
+                $('#btnGuardar').removeAttr('disabled')
             });
         };
     })

@@ -6,7 +6,7 @@
     <img style=" width:40px; height:40px; " src="<?php echo base_url('/img/insumos.png') ?>" />Administrar Insumos
   </h2>
   <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-    <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">Categoria Insumo</a> - <a class="toggle-vis btn" data-column="4">Cantidad Vendida</a> - <a class="toggle-vis btn" data-column="7">Precio Venta</a> - <a class="toggle-vis btn" data-column="8">Precio Compra</a>
+    <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="0">#</a> - <a class="toggle-vis btn" data-column="2">Categoría Insumo</a> - <a class="toggle-vis btn" data-column="4">Cantidad Vendida</a> - <a class="toggle-vis btn" data-column="7">Precio Venta</a> - <a class="toggle-vis btn" data-column="8">Precio Compra</a>
   </div>
   <div class="table-responsive p-2">
     <table class="table table-striped" id="tableInsumosAdmin" width="100%" cellspacing="0">
@@ -14,7 +14,7 @@
         <tr>
           <th scope="col" class="text-center">#</th>
           <th scope="col" class="text-center">Nombre</th>
-          <th scope="col" class="text-center">Categoria Insumo</th>
+          <th scope="col" class="text-center">Categoría Insumo</th>
           <th scope="col" class="text-center">Cantidad Actual</th>
           <th scope="col" class="text-center">Cantidad Vendida</th>
           <th scope="col" class="text-center">Estante </th>
@@ -61,7 +61,7 @@
               <small id="msgAgregar" class="invalidoInsumo"></small>
             </div>
             <div class="mb-3" style="width: 90%;">
-              <label for="categoria" class="col-form-label">Categoria: <i class="asterisco" style="color:crimson;">*</i></label>
+              <label for="categoria" class="col-form-label">Categoría: <i class="asterisco" style="color:crimson;">*</i></label>
               <select class="form-control form-select" name="estante" id="categoria">
                 <option selected value="">-- Seleccione --</option>
                 <?php foreach ($categorias as $data) { ?>
@@ -385,11 +385,11 @@
         data: null,
         render: function(data, type, row) {
           return (
-            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Boton Editar" title="Editar Insumo"></button>' +
+            '<button class="btn" onclick="seleccionarInsumo(' + data.id_material + ' , 2 )" data-bs-target="#agregarInsumo" data-bs-toggle="modal"><img src="<?php echo base_url('img/edit.svg') ?>" alt="Botón Editar" title="Editar Insumo"></button>' +
 
-            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalEliminar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Boton Eliminar" title="Eliminar Insumo"></button>' +
+            '<button class="btn" data-href=' + data.id_material + ' data-bs-toggle="modal" data-bs-target="#modalEliminar"><img src="<?php echo base_url("img/delete.svg") ?>" alt="Botón Eliminar" title="Eliminar Insumo"></button>' +
 
-            `<button class="btn" onclick="restockMaterial('${row.nombre}', ${row.cantidad_actual}, ${row.id_material})" data-bs-toggle="modal" data-bs-target="#restockMaterial"><img src="<?php echo base_url("img/restock.png") ?>" alt="Boton Reestock" title="Restock Insumo" width="25"></button>`
+            `<button class="btn" onclick="restockMaterial('${row.nombre}', ${row.cantidad_actual}, ${row.id_material})" data-bs-toggle="modal" data-bs-target="#restockMaterial"><img src="<?php echo base_url("img/restock.png") ?>" alt="Botón Restock" title="Restock Insumo" width="25"></button>`
           );
         },
       }
@@ -414,7 +414,7 @@
     fila = $('#fila').val()
 
     if ([nombre, categoria, precioC, precioV, cantidadA, estante, fila].includes('') || !validNom) {
-      mostrarMensaje('error', '¡Hay campos vacios o invalidos!')
+      mostrarMensaje('error', '¡Hay campos vacíos o inválidos!')
     } else {
       $.ajax({
         url: "<?= base_url('insumosAdmin/insertar') ?>",
@@ -457,7 +457,7 @@
   })
   // Mostrar info modal
   function restockMaterial(nombre, cantActual, id) {
-    $('#tituloRestock').text('Reestock - ' + nombre)
+    $('#tituloRestock').text('Restock - ' + nombre)
     $('#cantActu').val(cantActual)
     $('#idMate').val(id)
   }

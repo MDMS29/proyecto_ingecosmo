@@ -8,6 +8,8 @@ use App\Models\VehiculosModel;
 use App\Models\TercerosModel;
 use App\Models\EstanteriaModel;
 use App\Models\ParamModel;
+use App\Models\MoviEncModel;
+use App\Models\MoviDetModel;
 
 class InsumosAdmin extends BaseController
 {
@@ -16,6 +18,8 @@ class InsumosAdmin extends BaseController
     protected $razonSocial;
     protected $estantes;
     protected $param;
+    protected $movEnc;
+    protected $movDet;
 
     public function __construct()
     {
@@ -24,6 +28,8 @@ class InsumosAdmin extends BaseController
         $this->razonSocial = new TercerosModel();
         $this->estantes = new EstanteriaModel();
         $this->param = new ParamModel();
+        $this->movEnc = new MoviEncModel();
+        $this->movDet = new MoviDetModel();
     }
     public function index()
     {
@@ -81,7 +87,31 @@ class InsumosAdmin extends BaseController
             }
         } else {
             if ($this->insumos->save($dataInsumo)) {
-                return json_encode(1);
+                $idMaterial = $this->insumos->getInsertID();
+                $fechaActual = date('Y-m-d');
+                $dataEnc = [
+                    'tipo_movimiento' => 11,
+                    'estado' => 'A',
+                    'fecha_movimiento' => $fechaActual,
+                    'usuario_crea' => $usuarioCrea
+                ];
+                if ($this->movEnc->save($dataEnc)) {
+                    $idMovEnc = $this->movEnc->getInsertID();
+                    $dataDet = [
+                        'id_movimientoenc' => $idMovEnc,
+                        'id_material' => $idMaterial,
+                        'item' => 0,
+                        'cantidad' => $cantidadA,
+                        'costo' => $precioC,
+                        'usuario_crea' => $usuarioCrea
+        
+                    ];
+                    if ($this->movDet->save($dataDet)) {
+                        return json_encode(1);
+                    } else {
+                        return json_encode(2);
+                    }
+                }
             } else {
                 return json_encode(1);
             }
@@ -105,7 +135,7 @@ class InsumosAdmin extends BaseController
         $estado = $this->request->getPost('estado');
         if ($this->insumos->update($id, ['estado' => $estado])) {
             if ($estado == 'A') {
-                return '¡Se ha reestablecido el Insumo!';
+                return '¡Se ha restablecido el Insumo!';
             } else {
                 return '¡Se ha eliminado el Insumo!';
             }
