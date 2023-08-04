@@ -174,11 +174,10 @@ class OrdenEntrega extends BaseController
         if ($tp == 2) {
             $res = $this->movDet->buscarDetalles($idMovDet);
             if ($res == null) {
-                $nuevaCant = $res2['cantidad_actual'] - $cantidad;
-                $this->materiales->update($idMat, [
-                    'cantidad_actual' => $nuevaCant,
-                    'cantidad_antigua' => $res2['cantidad_actual']
-                ]);
+                // $nuevaCant = $res2['cantidad_actual'] - $cantidad;
+                // $this->materiales->update($idMat, [
+                //     'cantidad_actual' => $nuevaCant,
+                // ]);
                 if ($this->movDet->save($dataDetMov)) {
                     return json_encode(['tipo' => 1, 'total' => $cantidad]);
                 } else {
@@ -196,11 +195,10 @@ class OrdenEntrega extends BaseController
                 }
             }
         } else {
-            $nuevaCant = $res2['cantidad_actual'] - $cantidad;
-            $this->materiales->update($idMat, [
-                'cantidad_actual' => $nuevaCant,
-                'cantidad_antigua' => $res2['cantidad_actual']
-            ]);
+            // $nuevaCant = $res2['cantidad_actual'] - $cantidad;
+            // $this->materiales->update($idMat, [
+            //     'cantidad_actual' => $nuevaCant 
+            // ]);
 
             if ($this->movDet->save($dataDetMov)) {
                 return json_encode(['tipo' => 1, 'total' => $cantidad]);
