@@ -66,6 +66,7 @@ class InsumosAdmin extends BaseController
         $cantidadV = $this->request->getPost('cantidadV');
         $estante = $this->request->getPost('estante');
         $fila = $this->request->getPost('fila');
+        $uniMedida = $this->request->getPost('uniMedida');
         $usuarioCrea = session('id');
         $dataInsumo = [
             'nombre' => $nombre,
@@ -77,6 +78,7 @@ class InsumosAdmin extends BaseController
             'precio_compra' => $precioC,
             'estante' => $estante,
             'fila' => $fila,
+            'unidad_medida' => $uniMedida,
             'usuario_crea' => $usuarioCrea
         ];
         if ($tp == 2) {

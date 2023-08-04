@@ -73,7 +73,13 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 100%;">
               <label for="exampleDataList" class="col-form-label">Cantidad Actual: <i class="asterisco" style="color:crimson;">*</i></label>
-              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+              <div class="input-group mb-3">
+                <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+                <select style="margin-left: 0px !important;" class="text-center form-select" name="uniMedida" id="uniMedida">
+                  <option value="c/u" selected>C/u</option> 
+                  <option value="gr">Gr</option>
+                </select>
+              </div>
             </div>
 
             <div class="mb-3" style="width: 100%;">
@@ -271,6 +277,7 @@
           $('#cantidadA').val(data['cantidad_actual'])
           $('#cantidadV').val(data['cantidad_vendida'])
           $('#estante').val(data['idEstante'])
+          $('#uniMedida').val(data['unidad_medida'])
           mostrarFilas(data['idEstante'], data['fila'])
           $('#btnAgregar').text('Actualizar')
           $('.asterisco').hide()
@@ -291,6 +298,7 @@
       $('#cantidadA').val('')
       $('#cantidadV').val('')
       $('#estante').val('')
+      $('#uniMedida').val('gr')
       mostrarFilas('', '')
       $('#btnAgregar').text('Guardar')
       $('.asterisco').show()
@@ -400,6 +408,16 @@
     },
 
   });
+
+  $('#categoria').on('change', function(e){
+    id = $('#categoria').val()
+    if(id == 32){
+      $('#uniMedida').val('gr')
+    }else{
+      $('#uniMedida').val('c/u')
+    }
+  })
+
   $('#formularioInsumo').on('submit', function(e) {
     e.preventDefault()
     tp = $('#tp').val()
@@ -412,6 +430,7 @@
     cantidadV = $('#cantidadV').val()
     estante = $('#estante').val()
     fila = $('#fila').val()
+    uniMedida = $('#uniMedida').val()
 
     if ([nombre, categoria, precioC, precioV, cantidadA, estante, fila].includes('') || !validNom) {
       mostrarMensaje('error', '¡Hay campos vacíos o inválidos!')
@@ -430,6 +449,7 @@
           cantidadA,
           cantidadV: cantidadV == '' ? 0 : cantidadV,
           estante,
+          uniMedida,
           fila
         },
         success: function(res) {
