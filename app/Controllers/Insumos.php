@@ -87,6 +87,7 @@ class Insumos extends BaseController
     }
     public function insertar()
     {
+        date_default_timezone_set('America/Bogota');
         $nombre =  $this->request->getPost('nombre');
         $cantidadActual = $this->request->getPost('cantidadActual');
         $precioCompra = $this->request->getPost('precioCompra');

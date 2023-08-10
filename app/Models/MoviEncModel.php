@@ -57,8 +57,10 @@ class MoviEncModel extends Model
         $this->where('movimiento_enc.tipo_movimiento', '11');
         $this->orWhere('movimiento_enc.tipo_movimiento', '12');
         $this->orWhere('movimiento_enc.tipo_movimiento', '67');
+        $this->orWhere('movimiento_enc.tipo_movimiento', '68');
+        $this->orWhere('movimiento_enc.tipo_movimiento', '69');
         $this->groupBy('movimiento_enc.id_movimientoenc');
-        $this->orderBy('movimiento_enc.fecha_crea', 'desc');
+        $this->orderBy('movimiento_enc.id_movimientoenc', 'desc');
         $data = $this->findAll();
         return $data;
     }
@@ -92,13 +94,19 @@ class MoviEncModel extends Model
         return $data;
     }
 
-    public function buscarDetEnc($id)
+   
+    public function buscarDetEnc($id, $tipo)
     {
-        $this->select('materiales.nombre, movimiento_det.cantidad, materiales.precio_venta, movimiento_enc.fecha_movimiento');
+        $this->select('materiales.nombre, movimiento_det.cantidad, materiales.precio_venta, movimiento_enc.fecha_movimiento, materiales.categoria_material');
         $this->join('movimiento_det', 'movimiento_det.id_movimientoenc = movimiento_enc.id_movimientoenc', 'left');
         $this->join('materiales', 'materiales.id_material = movimiento_det.id_material', 'left');
         $this->where('movimiento_enc.tipo_movimiento', '68');
         $this->where('movimiento_enc.id_vehiculo', $id);
+        if($tipo != 1){
+            $this->where('materiales.categoria_material !=', '32');
+        }else{
+            $this->where('materiales.categoria_material', '32');
+        }
         // $this->groupBy('movimiento_enc.id_movimientoenc');
         $data = $this->findAll();
         return $data;
@@ -115,8 +123,6 @@ class MoviEncModel extends Model
         $data = $this->findAll();
         return $data;
     }
-
-
 
     public function traerDetalles()
     {

@@ -293,6 +293,7 @@
                                             nombre: res.nombre,
                                             tipo: res.tipo_material,
                                             cantidad: data[i].cantidad,
+                                            categoria: res.categoria_material ,
                                             precio: Number(res.precio_venta),
                                             subtotal: data[i].cantidad * Number(res.precio_venta)
                                         }
@@ -353,6 +354,7 @@
                                             nombre: res.nombre,
                                             tipo: res.tipo_material,
                                             cantidad: data[i].cantidad,
+                                            categoria: res.categoria_material ,
                                             precio: Number(res.precio_venta),
                                             subtotal: data[i].cantidad * Number(res.precio_venta)
                                         }
@@ -581,6 +583,7 @@
     })
 
     function mostrarMateriales(tipo) {
+        console.log(materialesOrden)
         let cadena = ''
         if (materialesOrden.length == 0) {
             cadena = `  <tr class="pp2">

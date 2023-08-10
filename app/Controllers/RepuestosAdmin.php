@@ -72,6 +72,7 @@ class RepuestosAdmin extends BaseController
 
     public function insertar()
     {
+     date_default_timezone_set('America/Bogota');
         $tp = $this->request->getPost('tp');
         $id = $this->request->getPost('id');
         $nombre = $this->request->getPost('nombre');
@@ -80,6 +81,7 @@ class RepuestosAdmin extends BaseController
         $orden = $this->request->getPost('orden');
         $bodega = $this->request->getPost('bodega');
         $usuCrea = session('id');
+        $fechaActual = date('Y-m-d h:i:s');
         $dataRepuesto = [
             'nombre' => $nombre,
             'id_orden' => $orden,
@@ -96,10 +98,34 @@ class RepuestosAdmin extends BaseController
                 return json_encode(1);
             }
         } else {
-            if ($this->respuestosAdmin->save($dataRepuesto)) {
-                return json_encode(1);
-            } else {
-                return json_encode(1);
+            $dataEnc = [
+                'id_vehiculo' => $orden, 
+                'tipo_movimiento' => 69,
+                'estado' => 'A',
+                'fecha_movimiento' => $fechaActual,
+                'usuario_crea' => $usuCrea
+            ];
+            if ($this->movimientoEnc->save($dataEnc)) {
+                $idMaterial = $this->respuestosAdmin->getInsertID();
+                $idMovEnc = $this->movimientoEnc->getInsertID();
+                $dataDet = [
+                    'id_movimientoenc' => $idMovEnc,
+                    'id_material' => $idMaterial,
+                    'item' => 0,
+                    'cantidad' => $existencias,
+                    'costo' => '0',
+                    'usuario_crea' => $usuCrea
+
+                ];
+                if ($this->movimientoDet->save($dataDet)) {
+                    if ($this->respuestosAdmin->save($dataRepuesto)) {
+                        return json_encode(1);
+                    } else {
+                        return json_encode(1);
+                    }
+                } else {
+                    return json_encode(2);
+                }
             }
         }
     }

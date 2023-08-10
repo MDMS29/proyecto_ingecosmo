@@ -391,10 +391,10 @@ class OrdenServicio extends BaseController
         $pdf->MultiCell(150, 2.2, utf8_decode('5. La empresa queda facultada para ejercer el derecho de retención de vehículo mientras este pendiente a la cancelación de la cuenta.'), 0, 'L', false);
 
         $pdf->SetXY(2, 260);
-        $pdf->MultiCell(150, 2.2, utf8_decode('6. Todo vehículo cancelará la suma de  $5.000 pesos diarios por concepto de parqueo a partir del día siguiente en que de terminado al trabjo su propietario no lo retire de los talleres de la empresa, o si luego de 5 días del presupuesto del daño, su recuperación no ha sido autorizada.'), 0, 'L', false);
+        $pdf->MultiCell(150, 2.2, utf8_decode('6. Todo vehículo cancelará la suma de  $5.000 pesos diarios por concepto de parqueo a partir del día siguiente en que de terminado al trabajo su propietario no lo retire de los talleres de la empresa, o si luego de 5 días del presupuesto del daño, su recuperación no ha sido autorizada.'), 0, 'L', false);
 
         $pdf->SetXY(3, 268);
-        $pdf->MultiCell(150, 2.2, utf8_decode('Autorizo a INGECOSMOS LTDA, a consultar, reportar o informar a cualquier control de riesgos más daños personales contenidos en la presente Orden de Servicio así como el trabajo d elas obligaciones contraídas con dica empresa.'), 0, 'L', false);
+        $pdf->MultiCell(150, 2.2, utf8_decode('Autorizo a INGECOSMOS LTDA, a consultar, reportar o informar a cualquier control de riesgos más daños personales contenidos en la presente Orden de Servicio así como el trabajo de las obligaciones contraídas con dicha empresa.'), 0, 'L', false);
 
 
 
@@ -410,7 +410,7 @@ class OrdenServicio extends BaseController
 
         // --- MATERIALES USADOS
 
-        $materiales = $this->movimiento->buscarDetEnc($id);
+        $pinturas = $this->movimiento->buscarDetEnc($id, 1);
         $pdf->SetAutoPageBreak(true);
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->AddPage();
@@ -422,110 +422,176 @@ class OrdenServicio extends BaseController
 
         $x = 5;
         $y = 9;
-        $subtotal = 0;
+        $subtotal1 = 0;
 
-        // ---CABEZERA TABLA 2---
-        $pdf->SetXY(4, 4);
+        // ---CABECERA TABLA 1---
+        $pdf->SetXY(80, $y - 5);
+        $pdf->Cell(90, 1, 'CONSUMO MATERIAL PINTURA', 0, 'J', false);
+
+        $pdf->SetXY(4, $y - 0.5);
         $pdf->Cell(90, 1, 'CANTIDAD', 0, 'J', false);
 
-        $pdf->SetXY(90, 4);
+        $pdf->SetXY(40, $y - 0.5);
+        $pdf->Cell(90, 1, 'GRAMOS', 0, 'J', false);
+
+        $pdf->SetXY(92, $y - 0.5);
+        $pdf->Cell(90, 1, 'PRODUCTOS', 0, 'J', false);
+
+        $pdf->SetXY(145, $y - 0.5);
+        $pdf->Cell(90, 1, 'REFERENCIA', 0, 'J', false);
+
+        $pdf->SetXY(186, $y - 0.5);
+        $pdf->Cell(90, 1, 'VALOR UNIT.', 0, 'J', false);
+        $pdf->SetFont('Arial', '', 10);
+
+        $pdf->line(2, 11.5, 213.8, 11.5);
+
+        $ciclo = sizeof($pinturas) - 1;
+        if (sizeof($pinturas) == 0) {
+            $pdf->SetXY($x + 72, $y + 4.5);
+            $pdf->Cell(90, 1, 'NO SE HA HECHO USO DE PINTURAS', 0, 'J', false);
+            $y = $y + 5;
+        } else {
+            for ($i = 0; $i <= $ciclo; $i++) {
+                $pdf->SetXY($x + 30, $y + 4.5);
+                $pdf->Cell(90, 1, $pinturas[$i]['cantidad'], 0, 'J', false);
+
+                $pdf->SetXY($x + 70, $y + 4.5);
+                $pdf->Cell(90, 1, $pinturas[$i]['nombre'], 0, 'J', false);
+
+                $pdf->SetXY($x + 175, $y + 4.5);
+                $pdf->Cell(90, 1, '$ ' . number_format($pinturas[$i]['precio_venta'], 2), 0, 'J', false);
+                $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 7, 213.8, $y + 7);
+
+                $precio = $pinturas[$i]['cantidad'] * $pinturas[$i]['precio_venta'];
+                $subtotal1 = $subtotal1 + $precio;
+
+                $y = $y + 5;
+            }
+            $pdf->line(75, $x + 1.5, 75, $y + 2); //DIVISORA DE CONTENIDO VERTICAL
+            $pdf->line(135, $x + 1.5, 135, $y + 2); //DIVISORA DE CONTENIDO VERTICAL
+        }
+        $pdf->SetXY($x + 153, $y+6);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY($x + 175, $y + 6);
+        $pdf->Cell(90, 1, '$ ' . number_format($subtotal1, 2), 0, 'J', false);
+        $pdf->RoundedRect($x + 175, $y + 3, 34, 7, 2); //SUBTOTAL
+
+        $pdf->RoundedRect(2, 2, 212, $y, 2); //CONTENEDOR DE LA TABLA
+        $pdf->line(25, $x + 1.5, 25, $y + 2); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(180, $x + 1.5, 180, $y + 2); //DIVISORA DE CONTENIDO VERTICAL
+
+        // ---CABECERA TABLA 2---
+        $materiales = $this->movimiento->buscarDetEnc($id, 2);
+        $yLast = $y + 5;
+        $subtotal = 0;
+
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetXY(4, $y + 17);
+        $pdf->Cell(90, 1, 'CANTIDAD', 0, 'J', false);
+
+        $pdf->SetXY(90, $y + 17);
         $pdf->Cell(90, 1, 'REPUESTO/INSUMO', 0, 'J', false);
 
-        $pdf->SetXY(186, 4);
+        $pdf->SetXY(186, $y + 17);
         $pdf->Cell(90, 1, 'VALOR UNIT.', 0, 'J', false);
+        $pdf->line(2, $y + 19.5, 213.8, $y + 19.5);
 
         $pdf->SetFont('Arial', '', 10);
         // ---CONTENIDO DE TABLA 2 ---
         $ciclo = sizeof($materiales) - 1;
         if (sizeof($materiales) == 0) {
-            $pdf->SetXY($x + 72, $y + 0.5);
+            $pdf->SetXY($x + 72, $y + 21.5);
             $pdf->Cell(90, 1, 'NO SE HA HECHO USO DE MATERIALES', 0, 'J', false);
             $y = $y + 5;
         } else {
             for ($i = 0; $i <= $ciclo; $i++) {
-                $pdf->SetXY($x + 5, $y);
+                $pdf->SetXY($x + 5, $y + 21.5);
                 $pdf->Cell(90, 1, $materiales[$i]['cantidad'], 0, 'J', false);
 
-                $pdf->SetXY($x + 25, $y);
+                $pdf->SetXY($x + 25, $y + 21.5);
                 $pdf->Cell(90, 1, $materiales[$i]['nombre'], 0, 'J', false);
 
-                $pdf->SetXY($x + 175, $y);
+                $pdf->SetXY($x + 175, $y + 21.5);
                 $pdf->Cell(90, 1, '$ ' . number_format($materiales[$i]['precio_venta'], 2), 0, 'J', false);
-                $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 2, 213.8, $y + 2);
+                $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 24, 213.8, $y + 24);
 
                 $precio = $materiales[$i]['cantidad'] * $materiales[$i]['precio_venta'];
                 $subtotal = $subtotal + $precio;
 
+
                 $y = $y + 5;
             }
         }
-        $pdf->SetXY($x + 153, $y + 2.5);
+        $pdf->SetXY($x + 153, $y + 24);
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(90, 1, 'SUBTOTAL', 0, 'J', false);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY($x + 175, $y + 2.5);
+        $pdf->SetXY($x + 175, $y + 24);
         $pdf->Cell(90, 1, '$ ' . number_format($subtotal, 2), 0, 'J', false);
-        $pdf->RoundedRect($x + 175, $y - 1, 34, 7, 2); //SUBTOTAL
+        $pdf->RoundedRect($x + 175, $y + 21, 34, 7, 2); //SUBTOTAL
 
-        $pdf->RoundedRect(2, 2, 212, $y - 4, 2); //CONTENEDOR DE LA TABLA
-        $pdf->line(25, 2, 25, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(180, 2, 180, $y - 2); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->RoundedRect(2, $yLast+10, 212, $yLast - 10, 2); //CONTENEDOR DE LA TABLA
+        $pdf->line(25, $yLast+10, 25,  $y + 19); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(180, $yLast+10, 180,  $y + 19); //DIVISORA DE CONTENIDO VERTICAL
 
 
-        // // --- CABEZERA TABLA 3 ---
+        // // // --- CABECERA TABLA 3 ---
 
         $y1 = 10;
         $lastY = $y;
-        $pdf->SetXY($x, $y + 10);
 
         $pdf->SetFont('Arial', 'B', 10);
 
-        $pdf->SetXY($x + 90, $y + 11);
-        $pdf->Cell(90, 1, 'I=Q TECNICOS', 0, 'C', false);
-        $pdf->line(2, $y + 14, 213.8, $y + 14); //DIVISORA CABEZERA DE CUERPO
+        $pdf->SetXY($x + 90, $y + 32);
+        $pdf->Cell(90, 1, utf8_decode('I=Q TÉCNICOS'), 0, 'C', false);
+        $pdf->line(2, $y + 35, 213.8, $y + 35); //DIVISORA CABECERA DE CUERPO
 
-        $pdf->SetXY($x + 2, $y + 16);
+        $pdf->SetXY($x + 2, $y + 37);
         $pdf->Cell(90, 1, 'FECHA', 0, 'C', false);
-        $pdf->SetXY($x + 70, $y + 16);
-        $pdf->Cell(90, 1, 'TECNICO', 0, 'C', false);
-        $pdf->SetXY($x + 142, $y + 16);
+        $pdf->SetXY($x + 70, $y + 37);
+        $pdf->Cell(90, 1, utf8_decode('TÉCNICO'), 0, 'C', false);
+        $pdf->SetXY($x + 142, $y + 37);
         $pdf->Cell(90, 1, 'VALOR', 0, 'C', false);
-        $pdf->SetXY($x + 171, $y + 16);
+        $pdf->SetXY($x + 171, $y + 37);
         $pdf->Cell(90, 1, 'OBSERVACIONES', 0, 'C', false);
 
-        $pdf->line(2, $y + 19, 213.8, $y + 18); //DIVISORA CABEZERA DE CUERPO
 
+        $pdf->line(2, $y + 39.5, 213.8, $y + 39.5); //DIVISORA CABECERA DE CUERPO
+
+        // --- CONTENIDO DE LA TABLA 3 ---
         $pdf->SetFont('Arial', '', 10);
         $trabajadores = $this->movimiento->buscarTrabajEnc($id);
         $ciclo1 = sizeof($trabajadores) - 1;
         if (sizeof($trabajadores) == 0) {
             $y1 = $y1 + 5;
             $y = $y + 5;
-            $pdf->SetXY($x + 50, $y + 16);
-            $pdf->Cell(90, 1, 'NO HAY TECNICOS ASIGNADOS', 0, 'J', false);
+            $pdf->SetXY($x + 50, $y + 37);
+            $pdf->Cell(90, 1, utf8_decode('NO HAY TÉCNICOS ASIGNADOS'), 0, 'J', false);
         } else {
             for ($i = 0; $i <= $ciclo1; $i++) {
                 $fecha = str_split($trabajadores[$i]['fecha_movimiento'], 11);
 
-                $pdf->SetXY($x - 2, $y + 21);
+                $pdf->SetXY($x - 2, $y + 42);
                 $pdf->Cell(90, 1, $fecha[0], 0, 'J', false);
 
-                $pdf->SetXY($x + 25, $y + 21);
+                $pdf->SetXY($x + 25, $y + 42);
                 $pdf->Cell(90, 1, $trabajadores[$i]['nombre_trabajador'], 0, 'J', false);
 
-                $pdf->SetXY($x + 135, $y + 21);
+                $pdf->SetXY($x + 135, $y + 42);
                 $pdf->Cell(90, 1, '$ ' . number_format($trabajadores[$i]['suma'], 2), 0, 'J', false);
-                $ciclo1 - $i == 0 ? '' : $pdf->line(2, $y + 24, 213.8, $y + 24);
-
+                $ciclo1 - $i == 0 ? '' : $pdf->line(2, $y + 5, 213.8, $y + 45);
 
                 $y1 = $y1 + 5;
                 $y = $y + 5;
             }
         }
-        $pdf->line(25, $lastY + 14, 25, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(140, $lastY + 14, 140, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->line(170, $lastY + 14, 170, $lastY + 9+ $y1); //DIVISORA DE CONTENIDO VERTICAL
-        $pdf->RoundedRect(2, $lastY + 9, 212, $y1, 2); //CONTENEDOR DE LA TABLA;
+        $pdf->line(25, $lastY + 35, 25, $y+40); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(140, $lastY + 35, 140, $y+40); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->line(170, $lastY + 35, 170, $y+40); //DIVISORA DE CONTENIDO VERTICAL
+        $pdf->RoundedRect(2, $lastY + 30, 212, $y1, 2); //CONTENEDOR DE LA TABLA;
 
         $this->response->setHeader('Content-Type', 'application/pdf');
         $pdf->Output('PDFS/orden_servicio_' . $res['n_orden'] . '.pdf', "F");
