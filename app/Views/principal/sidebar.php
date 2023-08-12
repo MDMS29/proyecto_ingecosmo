@@ -30,7 +30,7 @@
 </head>
 
 <body class=" d-flex align-items-stretch">
-    <nav id="sidebar2" class="navbar "  style="background-color:#000059; z-index: 999; position: absolute">
+    <nav id="sidebar2" class="navbar " style="background-color:#000059; z-index: 999; position: absolute">
         <div id="scroll" class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <img class="menu" style=" width:30px; height:30px;" src="<?php echo base_url('/img/menu.png') ?>" />
@@ -87,7 +87,7 @@
     </nav>
 
 
-    <nav id="sidebar" class="active" style="position: sticky;" >
+    <nav id="sidebar" class="active" style="position: sticky;height: 100vh;">
         <!-- <h1><a class="logo"></a></h1> -->
         <div class="d-flex justify-content-between flex-column" style="height: 100%;">
             <ul id="allElement" class="list-unstyled components mb-5" style=" overflow-y: auto; -webkit-scrollbar:5px;">
@@ -124,6 +124,11 @@
                             <p id="pa">Clientes</p>
                         </a>
                     </li>
+                    <li title="Vehiculos">
+                        <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
+                            <p id="pa">Vehiculos</p>
+                        </a>
+                    </li>
                     <li title="Repuestos">
                         <a href="<?php echo base_url('repuestosAdmin') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
                             <p id="pa">Repuestos</p>
@@ -139,16 +144,6 @@
                             <p id="pa">Estanteria</p>
                         </a>
                     </li>
-                    <li title="Historial Materiales">
-                    <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
-                        <p id="pa">Historial</p>
-                    </a>
-                </li>
-                    <li title="Vehiculos">
-                        <a href="<?php echo base_url('vehiculos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/vehiculo.png') ?>" /></span>
-                            <p id="pa">Vehiculos</p>
-                        </a>
-                    </li>
                     <li title="Ordenes Servicio">
                         <a href="<?php echo base_url('ordenServicio') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/orden-servicio.png') ?>" /></span>
                             <p id="pa">Ordenes de Servicio</p>
@@ -159,11 +154,6 @@
                             <p id="pa">Orden de entrega</p>
                         </a>
                     </li>
-                    <li title="Historial Ordenes Servicio">
-                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
-                            <p id="pa">Historial Ordenes</p>
-                        </a>
-                    </li>
                     <div class="numeroDinamico" style="position: relative;">
                         <span id="numeroDinamicoAdmin" style=" display: flex;-webkit-box-align: center;align-items: center;justify-content: center;font-size: 11px;text-align: center;font-weight: 500;position: absolute;border-radius: 8px;background-color: rgba(236, 47, 77);padding: 2px 4px;width: 20px;margin-left: 60px;height: 15px;"></span>
                     </div>
@@ -172,6 +162,16 @@
                             <p id="pa">Peticiones</p>
                         </a>
                     </li>
+                    <li title="Historial Materiales">
+                        <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                            <p id="pa">Historial</p>
+                        </a>
+                    </li>
+                    <li title="Historial Ordenes Servicio">
+                        <a href="<?php echo base_url('historial/vehiculos') ?>" id="aa"><span><img style=" width:40px; height:45px; " src="<?php echo base_url('/img/historial-orden.png') ?>" /></span>
+                            <p id="pa">Historial Ordenes</p>
+                        </a>
+                    </li>                    
                 <?php } else if (session('idRol') == 3 || session('idRol') == 4) { ?>
                     <li title="Repuestos">
                         <a href="<?php echo base_url('repuestos') ?>" id="aa"><span><img style=" width:40px; height:40px; " src="<?php echo base_url('/img/repuestos.png') ?>" /></span>
@@ -203,12 +203,12 @@
                         </a>
                     </li>
                     <li title="Historial Materiales">
-                    <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
-                        <p id="pa">Historial</p>
-                    </a>
-                </li>
+                        <a href="<?= base_url('historial/materiales') ?>" id="aa"><span><img style=" width:35px; height:40px; " src="<?php echo base_url('/img/historial.png') ?>" /></span>
+                            <p id="pa">Historial</p>
+                        </a>
+                    </li>
                 <?php } ?>
-                
+
                 <li title="Cerrar Sesion">
                     <a href="" id="aa" class="salir"><span><img style=" width:35px; height:35px; " src="<?php echo base_url('/img/salir.png') ?>" /></span>
                         <p id="pa">Cerrar Sesion</p>
@@ -304,7 +304,7 @@
                         timer: 1500
                     })
                 }
-                
+
                 function mostrarMensajeCarrito(icon, text) {
                     Toast.fire({
                         icon: `${icon}`,
@@ -312,20 +312,20 @@
                     })
                 }
                 break;
+        }
+        const formatearFecha = (fecha) => {
+            let fechaNueva = new Date(fecha)
+            const opciones = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
             }
-            const formatearFecha = (fecha) => {
-                let fechaNueva = new Date(fecha)
-                const opciones = {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                }
-                return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
-            }
-            const formatearCantidad = (cantidad) => {
-                return Number(cantidad).toLocaleString('es-CO', {
-                    style: 'currency',
-                    currency: 'COP'
-                })
-            };
+            return fechaNueva.toLocaleDateString('es-ES', opciones).replaceAll('/', '-').split('-')
+        }
+        const formatearCantidad = (cantidad) => {
+            return Number(cantidad).toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP'
+            })
+        };
     </script>
