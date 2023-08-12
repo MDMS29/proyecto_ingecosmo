@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>">
 <div id="content" class="p-4 p-md-5">
     <div class="estanteria">
-        <div class="card">
+        <!-- <div class="card">
             <div class="card__image">
                 <div class="ima">
-                    <img src="<?php echo base_url('/img/fotoSeccion/rueda.png') ?>">
+                    <img src="< ?php echo base_url('/img/fotoSeccion/rueda.png') ?>">
                 </div>
             </div>
             <div class="card__content">
@@ -12,7 +12,7 @@
                 <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <a class="card__content" href="#">Ver mas</a>
             </div>
-        </div>
+        </div> -->
 
         <div class="verFilas" id="verFilas">
 
@@ -24,7 +24,7 @@
 
                 <?php if (empty($data)) { ?>
 
-                    <div class="contenidoCardF">
+                    <div class="contenidoCardF" style="min-width: 400px;">
                         <p>No se encuentran filas - <?php echo $titulo['nombre'] ?></p>
                     </div>
                 <?php } else { ?>

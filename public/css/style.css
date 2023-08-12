@@ -94,7 +94,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 
- *::-webkit-scrollbar,
+ /* *::-webkit-scrollbar, */
 /* body::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 0px;

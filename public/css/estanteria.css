@@ -22,13 +22,10 @@
 }
 
 .contenedorE {
-  width: 945px;
+  max-width: 945px;
   height: 600px;
-  background: white;
   border: 2px solid #161666;
   box-shadow: 0 2px 12px #161666;
-  display: flex;
-  flex-direction: column;
   padding: 30px;
   overflow-y: scroll;
 }
@@ -90,9 +87,13 @@
   color: #161666;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex-wrap: wrap;
+  /* overflow-y: scroll; */
   height: 150px;
-  
+  /* padding: 10px; */
+  /* height: 130px; */
+  /* margin-left: -60px; */
 }
 
 .btnVer {
@@ -271,18 +272,17 @@ details {
 .textoFilaF {
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  align-items: center;
+  /* padding: 8px; */
   justify-content: space-between;
   height: 100%;
   width: 230px;
   overflow-x: scroll;
 }
 
-.sumary-flex{
+/* .sumary-flex{
   width: 100px;
   height: 36px;
-}
+} */
 
 .bloque2 {
   display: flex;
@@ -304,20 +304,14 @@ details {
   width: auto;
 }
 
-.bloqueTextoEF {
-  padding: 10px;
-  height: 130px;
-  width: auto;
-  margin-left: -60px;
-}
 
-.subTexto {
+/* .subTexto {
   margin-bottom: 0;
   width: 200px;
   height: auto;
   flex-wrap: wrap;
   display: flex;
-}
+} */
 
 /* .subTexto:hover{
   color: #E25050;

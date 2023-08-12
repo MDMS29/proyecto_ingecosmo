@@ -22,17 +22,15 @@
                             <div class="imagenes">
                                 <img class="iconos" src="<?php echo base_url('/img/') . $dato['icono'] ?>">
                             </div>
-                            <div class="Isabella">
+                            <div>
                                 <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:22px; color:black; margin-bottom:0; margin-left:80px; padding-top: 10px;">Fila <?php echo $dato['nombre']; ?></h5>
                                 <div class="textoFilaF" id="Contenedor">
                                     <div class="bloque1">
-
                                         <input id='nombreFila' value="<?php echo $dato['id_fila']; ?>" hidden>
                                         <div class="bloqueTextoEF" id="<?php echo $dato['id_fila']; ?>">
+                                            <!-- INFORMACION DINAMICA -->
                                         </div>
-                                        <!-- INFORMACION DINAMICA -->
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -180,7 +178,6 @@
     for (let i = 0; i < bloque.length; i++) {
         let fila = $(`#${bloque[i].id}`)
         fila = fila[0].id
-        console.log(fila + "hi");
         $.ajax({
             url: '<?php echo base_url('filas/obtenerMaterialesFila/') ?>' + fila,
             type: 'POST',
@@ -188,12 +185,11 @@
             success: function(res) {
                 var cadena = ""
                 var vacio = ""
-                console.log(res);
                 if (res.length == 0) {
                     cadena += `
-                    <div class="textoVacio " style="color: #000000; font-size:15px; margin-left: 60px; display:flex; justify-content:center;  align-items:center; flex-direction:column;">
-                    <i class="bi bi-exclamation-circle" style="color:#fab83c; font-size:25px;"></i>
-                    <p> ¡No hay materiales en la fila! </p> 
+                    <div class="textoVacio " style="color: #000000; font-size:15px; display:flex; justify-content:center;  align-items:center; flex-direction:column;">
+                        <i class="bi bi-exclamation-circle" style="color:#fab83c; font-size:25px;"></i>
+                        <p> ¡No hay materiales en la fila! </p> 
                     </div>`;
                     $(`#${bloque[i].id}`).html(cadena)
 
@@ -201,24 +197,22 @@
                     for (let i = 0; i < res.length; i++) {
                         cadena += `
                     <div class="sumary-flex">
-                    <p class="subTexto">
-                    <details class="detail">
-                    <summary >
-                    <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
-                    </summary>
+                        <details class="detail">
+                            <summary >
+                                <button onclick="detallesMaterial(${res[i].id_material})" class="verMas" style="background: transparent; border:transparent;">${res[i].nombre}</button>
+                            </summary>
 
-                    <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}','${res[i].id_material}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
-                    </details></p>
+                            <button class="btn btnMover" id="mover"  onclick="selectMateriales('${fila}','${res[i].nombre}','${res[i].id_material}')" data-bs-target="#estanteModal" data-bs-toggle="modal" alt="icon-plus"><i class="bi bi-arrow-left-right">mover</i> </button>
+                        </details>
                     </div>`;
                     }
                     $(`#${bloque[i].id}`).html(cadena)
-                    console.log("first")
                 }
             }
         })
     }
 
-    
+
 
 
 
@@ -233,9 +227,7 @@
             type: 'POST',
             dataType: 'json',
             success: function(res) {
-                console.log(res)
                 if (id_fila == fila) {
-                    console.log("holaa gy")
                     filasDina = $(`#${res[0].fila}F`).attr('disabled', '');
 
                 } else {
@@ -413,7 +405,6 @@
         cantidadUsar = $("#cantidadUsar").val()
         precioVenta = $("#PrecioDeVenta").val()
         subtotal = $("#subtotal").val()
-        console.log(idMaterial)
         if ([subtotal, cantidadExistente, cantidadUsar, precioVenta, trabajador, ordenes].includes("")) {
             return mostrarMensaje('error', '¡Campos Vacios!')
         }
