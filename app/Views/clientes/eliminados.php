@@ -148,7 +148,7 @@
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                        <table class="table table-bordered table-sm table-striped" id="tablePaises" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-center">
                                     <th>Telefono</th>
@@ -183,7 +183,7 @@
             <div class="modal-body">
                 <div class="container p-4" style="background-color: #d9d9d9;border-radius:10px;">
                     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                        <table class="table table-bordered table-sm table-striped" id="tablePaises" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-center">
                                     <th>Correo</th>

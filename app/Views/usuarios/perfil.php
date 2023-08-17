@@ -243,7 +243,7 @@
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="telefonos" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="table-perfil p-4">
-                            <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
+                            <table class="table table-borderless table-sm table-striped" style="border:none;margin:0;">
                                 <thead>
                                     <tr class="table-secondary">
                                         <th scope="col" class="text-center">Numero</th>
@@ -271,7 +271,7 @@
                     </div>
                     <div class="tab-pane fade" id="correos" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="table-responsive p-4">
-                            <table class="table table-borderless table-sm table-hover" style="border:none;margin:0;">
+                            <table class="table table-borderless table-sm table-striped" style="border:none;margin:0;">
                                 <thead>
                                     <tr class="table-secondary">
                                         <th scope="col" class="text-center">Correo</th>
