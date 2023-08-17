@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>" />
+<!-- <link rel="stylesheet" href="< ?php echo base_url('css/estanteria.css') ?>" /> -->
 <link rel="stylesheet" href="<?php echo base_url('css/categorias.css') ?>" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <div id="content" class="p-4 p-md-5">
@@ -12,34 +12,42 @@
                     <div class="swiper-slide">
                         <div class="d-flex justify-content-center  flex-wrap" style="gap:10px;">
                             <?php $i = 0;
-                            for ($e = 0; $e < count($data);) {
-                            ?>
-                                <span><?php $e ?></span>
+                            for ($e = 0; $e < count($data); ) {
+                                ?>
+                                <span>
+                                    <?php $e ?>
+                                </span>
                                 <?php
                                 $e += 3;
                                 $salida = array_slice($data, 0, $e);
                                 ?>
                                 <div class="card" ">
-                                <div class=" card__image">
+                                        <div class=" card__image">
                                     <div class="ima">
                                         <img class="iconos" src="<?php echo base_url('/img/') . $salida[$i]['n_iconos'] ?>">
                                     </div>
                                 </div>
                                 <div class="card__content">
-                                    <p class="card__title"><?= $salida[$i]['nombre'] ?></p>
+                                    <p class="card__title">
+                                        <?= $salida[$i]['nombre'] ?>
+                                    </p>
 
                                     <p class="card__text">lolita kknbhujhnfb.</p>
 
 
-                                    <a onclick="redireccion(<?php echo $salida[$i]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>" class="card__content"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</a>
+                                    <button
+                                        onclick="redireccion(<?php echo $salida[$i]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>')"
+                                        data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>"
+                                        class="btnVer"><i class="bi bi-arrows-fullscreen"
+                                            style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                 </div>
-                        </div>
-                        <?php if ($e == 8) { ?>
+                            </div>
+                            <?php if ($e == 8) { ?>
 
-                        <?php break;
-                                }
-                                $i++ ?>
-                    <?php } ?>
+                                <?php break;
+                            }
+                            $i++ ?>
+                        <?php } ?>
 
                     </div>
                 </div>
@@ -49,24 +57,38 @@
 
 
                         <?php $r = 0;
-                        for ($a = 0; $a < count($data);) {
-                        ?>
-                            <span><?php $a ?></span>
+                        for ($a = 0; $a < count($data); ) {
+                            ?>
+                            <span>
+                                <?php $a ?>
+                            </span>
                             <?php
                             $a += 3;
                             $salida = array_slice($data, 3, $a);
                             ?>
-                            <div class="card" style="width: 13rem; height:18rem;">
-                                <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$r]['nombre'] ?></h5>
+                            <div class="card">
+                                <div class="card__image">
+                                    <div class="ima">
+                                        <img class="iconos" src="<?php echo base_url('/img/') . $salida[$r]['n_iconos'] ?>">
+                                    </div>
+                                </div>
+                                <div class="card__content">
+                                    <p class="card__title">
+                                        <?= $salida[$r]['nombre'] ?>
+                                    </p>
 
-                                    <button onclick="redireccion(<?php echo $salida[$r]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
+                                    <p class="card__text">lolita kknbhujhnfb.</p>
+
+                                    <button
+                                        onclick="redireccion(<?php echo $salida[$r]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>')"
+                                        data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>"
+                                        class="btnVer"><i class="bi bi-arrows-fullscreen"
+                                            style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                 </div>
                             </div>
                             <?php if ($e == 8) { ?>
 
-                            <?php break;
+                                <?php break;
                             }
                             $r++ ?>
                         <?php } ?>
@@ -80,24 +102,38 @@
 
 
                         <?php $j = 0;
-                        for ($l = 0; $l < count($data);) {
-                        ?>
-                            <span><?php $l ?></span>
+                        for ($l = 0; $l < count($data); ) {
+                            ?>
+                            <span>
+                                <?php $l ?>
+                            </span>
                             <?php
                             $l += 3;
                             $salida = array_slice($data, 6, $l);
                             ?>
-                            <div class="card" style="width: 13rem; height:18rem;">
-                                <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
-                                <div class="textoCard">
-                                    <h5 class="card-title" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:25px;"><?= $salida[$j]['nombre'] ?></h5>
+                            <div class="card">
+                                <div class="card__image">
+                                    <div class="ima">
+                                        <img class="iconos" src="<?php echo base_url('/img/') . $salida[$j]['n_iconos'] ?>">
+                                    </div>
+                                </div>
+                                <div class="card__content">
+                                    <p class="card__title">
+                                        <?= $salida[$j]['nombre'] ?>
+                                    </p>
 
-                                    <button onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>')" data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
+                                    <p class="card__text">lolita kknbhujhnfb.</p>
+
+                                    <button
+                                        onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>')"
+                                        data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>"
+                                        class="btnVer"><i class="bi bi-arrows-fullscreen"
+                                            style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver mas</button>
                                 </div>
                             </div>
                             <?php if ($e == 8) { ?>
 
-                            <?php break;
+                                <?php break;
                             }
                             $j++ ?>
                         <?php } ?>
@@ -126,7 +162,9 @@
 </div>
 <div class="bloqueFooter">
     <div class="footer-page">
-        <a class="btn btnRegresar" style="background: #E25050; color:white;" href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="16"> Regresar</a>
+        <a class="btn btnRegresar" style="background: #E25050; color:white;"
+            href="<?php echo base_url('/home'); ?>"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus"
+                width="16"> Regresar</a>
     </div>
 </div>
 
@@ -137,20 +175,24 @@
     <div class="modal-dialog">
         <div style="background:white;" class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;"><img class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">Agregar Categoria</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel"
+                    style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size:40px;"><img
+                        class="imagenEncab" src="<?php echo base_url('/img/ingecosmo.png'); ?>">Agregar Categoria</h1>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre</label>
+                        <label for="recipient-name" class="col-form-label"
+                            style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre">
                         <input hidden id="tp" name="tp">
                         <input hidden id="id" name="id">
                     </div>
                     <div class="mb-3">
-                        <label for="message-text" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Imagen</label>
+                        <label for="message-text" class="col-form-label"
+                            style="font-family: 'Nunito', sans-serif; font-size:20px; color:black;">Imagen</label>
                         <input type="file" class="form-control" id="imagen" name="imagen">
                     </div>
                 </form>
@@ -182,7 +224,7 @@
             dataType: 'json',
             processData: false, // Evitar que jQuery procese los datos
             contentType: false, // Evitar que jQuery establezca el tipo de contenido
-            success: function(res) {
+            success: function (res) {
                 if (res == 1) {
                     Swal.fire({
                         title: 'Esta categoria no tiene materiales',
