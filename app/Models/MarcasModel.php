@@ -27,8 +27,9 @@ class MarcasModel extends Model
 
     public function obtenerMarcas($estado)
     {
-        $this->select('id_marca, nombre, marca');
-        $this->where('estado', $estado);
+        $this->select('tipo_marca.id_marca, tipo_marca.nombre, tipo_marca.marca, marca_vehiculo.nombre as nomMarca');
+        $this->join("marca_vehiculo", "marca_vehiculo.id_marca = tipo_marca.marca");
+        $this->where('tipo_marca.estado', $estado);
         $data = $this->findAll();
         return $data;
     }

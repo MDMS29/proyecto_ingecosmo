@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <table class="table table-bordered table-sm table-striped" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Telefono</th>
@@ -169,7 +169,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header flex justify-content-between align-items-center">
-                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="60">
+                <img src="<?= base_url('img/ingecosmo.png') ?>" alt="logo-empresa" width="60" height="100">
                 <h1 class="modal-title fs-5 text-center " id="tituloModal"><img src="<?= base_url('img/plus-b.png') ?>" alt="" width="30" height="30"> Agregar Correo</h1>
                 <button type="button" class="btn" aria-label="Close" onclick="limpiarCampos('correoAdd', 'prioridadCorreo', '', 4)">X</button>
             </div>
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                     <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                        <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                        <table class="table table-bordered table-sm table-striped" id="tablePaises" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-center">
                                     <th>Correo</th>

@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/orden-servicio-b.png') ?>" /> Ordenes de Servicio</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Cliente</a> - <a class="toggle-vis btn" data-column="2">Responsable</a> - <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Kilometraje</a> - <a class="toggle-vis btn" data-column="8">Combustible</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Cliente</a> - <a class="toggle-vis btn" data-column="2">Responsable</a> - <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Tipo</a> - <a class="toggle-vis btn" data-column="7">Color</a> - <a class="toggle-vis btn" data-column="8">Kilometraje</a> - <a class="toggle-vis btn" data-column="9">Combustible</a>
         </div>
         <table class="table table-striped" id="tableOrdenes" width="100%" cellspacing="0">
             <thead>
@@ -15,6 +15,7 @@
                     <th scope="col" class="text-center">Placa</th>
                     <th scope="col" class="text-center">Modelo</th>
                     <th scope="col" class="text-center">Marca</th>
+                    <th scope="col" class="text-center">Tipo</th>
                     <th scope="col" class="text-center">Color</th>
                     <th scope="col" class="text-center">Kilometraje</th>
                     <th scope="col" class="text-center">Combustible</th>
@@ -888,8 +889,6 @@
         </div>
     </div>
 </div>
-
-
 <!-- modal Aliados -->
 <form autocomplete="off" id="formularioAliados">
     <div class="modal fade" id="agregarAliado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -952,7 +951,6 @@
         </div>
     </div>
 </form>
-
 <!-- modal Vehiculos -->
 <form autocomplete="off" id="formularioVehiculos">
     <div class="modal fade" id="agregarVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -999,7 +997,7 @@
                                     <select class="form-select " name="marca" id="marca2">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($marcas as $marca) { ?>
-                                            <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
+                                            <option value="<?= $marca['id_marca'] ?>"><?= $marca['nomMarca'] . ' ' . $marca['nombre'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -1037,7 +1035,6 @@
         </div>
     </div>
 </form>
-
 
 <script>
     // variables
@@ -1182,7 +1179,7 @@
     function limpiarCampos(input, accion) {
         $(`${input}`).val('')
         if (accion == 1) {
-            $('#ordenTrabajo').val('')
+            // $('#ordenTrabajo').val('')
             $('#tipoCliente').val('')
             $('#cliente').val('')
             $('#divResponsable').removeClass('d-flex')
@@ -1281,6 +1278,9 @@
             },
             {
                 data: 'marca'
+            },
+            {
+                data: 'tipoMarca'
             },
             {
                 data: 'color'
@@ -2180,8 +2180,6 @@
             })
         }
     })
-
-
     // -----------------------------------VEHICULOS------------------------------------
     //Formulario para agregar o editar Vehiculo
     $('#formularioVehiculos').on('submit', function(e) {
@@ -2228,8 +2226,6 @@
             })
         }
     })
-
-
     // ---------------------------Vehiculos-----------------------------
     //Formulario para agregar o editar Vehiculo
     $('#formularioVehiculos').on('submit', function(e) {

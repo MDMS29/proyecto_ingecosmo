@@ -70,6 +70,10 @@ div.dataTables_wrapper div.dataTables_length select {
 div.dataTables_wrapper div.dataTables_filter input {
   background-color: white ;
 }
+thead tr:nth-child(1),
+tr.even{
+  background-color: white !important;
+}
 
 .dt-row{
   overflow-y: scroll;

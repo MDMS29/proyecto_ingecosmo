@@ -246,7 +246,7 @@
                             </div>
                         </div>
                         <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <table class="table table-bordered table-sm table-striped" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Telefono</th>
@@ -307,7 +307,7 @@
                             </div>
                         </div>
                         <div class="table-responsive" style="overflow:scroll-vertical;overflow-y: scroll !important; height: 150px;background-color:white;">
-                            <table class="table table-bordered table-sm table-hover" id="tablePaises" width="100%" cellspacing="0">
+                            <table class="table table-bordered table-sm table-striped" id="tablePaises" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Correo</th>

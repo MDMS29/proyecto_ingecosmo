@@ -50,9 +50,7 @@ table {
   border: 5px solid #161666;
   border-radius: 10px;
 }
-table.dataTable.table-striped > tbody > tr.odd > *{
-  box-shadow: none !important;
-}
+
 /* -- MODAL -- */
 
 .modal-content {

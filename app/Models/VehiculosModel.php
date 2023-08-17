@@ -28,8 +28,9 @@ class VehiculosModel extends Model
 
     public function obtenerVehiculos()
     {
-        $this->select("vehiculos.id_vehiculo, vehiculos.id_marca, tipo_marca.nombre as marca, placa,  modelo, color,  terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.estado as estadoTercer, vw_param_det2.nombre as tipo_propietario");
+        $this->select("vehiculos.id_vehiculo, vehiculos.id_marca, marca_vehiculo.nombre as marca, tipo_marca.nombre as tipo, placa,  modelo, color,  terceros.id_tercero, terceros.razon_social, concat(terceros.nombre_p , ' ' , terceros.nombre_s , ' ' , terceros.apellido_p , ' ' , terceros.apellido_s) as cliente, terceros.tipo_tercero, terceros.estado as estadoTercer, vw_param_det2.nombre as tipo_propietario");
         $this->join('tipo_marca', 'tipo_marca.id_marca = vehiculos.id_marca', 'left');
+        $this->join('marca_vehiculo', 'marca_vehiculo.id_marca = tipo_marca.marca', 'left');
         $this->join('propietarios', 'propietarios.id_vehiculo = vehiculos.id_vehiculo', 'left');
         $this->join('terceros', 'terceros.id_tercero = propietarios.id_tercero', 'left');
         $this->join('vw_param_det2', 'vw_param_det2.id_param_det = propietarios.tipo_propietario', 'left');

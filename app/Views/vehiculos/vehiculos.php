@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4"><img style=" width:45px; height:45px; " src="<?php echo base_url('/img/vehiculo-b.png') ?>" /> Vehiculos</h2>
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Color</a> - <a class="toggle-vis btn" data-column="7">Combustible</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="4">Modelo</a> - <a class="toggle-vis btn" data-column="5">Marca</a> - <a class="toggle-vis btn" data-column="6">Tipo</a> - <a class="toggle-vis btn" data-column="7">Color</a>
         </div>
         <table class="table table-striped" id="tableVehiculos" width="100%" cellspacing="0">
             <thead>
@@ -15,6 +15,7 @@
                     <th scope="col" class="text-center">Placa</th>
                     <th scope="col" class="text-center">Modelo</th>
                     <th scope="col" class="text-center">Marca</th>
+                    <th scope="col" class="text-center">Tipo</th>
                     <th scope="col" class="text-center">Color</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -73,7 +74,7 @@
                                     <select class="form-select " name="marca" id="marca">
                                         <option selected value="">-- Seleccione --</option>
                                         <?php foreach ($marcas as $marca) { ?>
-                                            <option value="<?= $marca['id_marca'] ?>"><?= $marca['nombre'] ?></option>
+                                            <option value="<?= $marca['id_marca'] ?>"><?= $marca['nomMarca'] . ' ' . $marca['nombre'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -181,6 +182,9 @@
             },
             {
                 data: 'marca'
+            },
+            {
+                data: 'tipo'
             },
             {
                 data: 'color'

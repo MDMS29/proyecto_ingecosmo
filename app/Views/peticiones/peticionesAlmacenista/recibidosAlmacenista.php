@@ -309,8 +309,8 @@
                 dataType: 'json',
                 success: function(data) {
                     if (data == 1) {
+                        tablaAdminEnviados.ajax.reload(null, false); //Recargar tabla
                         recargarAlmacenista()
-                        tablePeticiones.ajax.reload(null, false); //Recargar tabla
                     }
                 }
             })
