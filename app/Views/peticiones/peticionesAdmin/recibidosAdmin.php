@@ -8,8 +8,7 @@
 
     <div class="table-responsive p-2">
         <div class="d-flex justify-content-center align-items-center flex-wrap ocultar">
-            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Asunto Petición</a> -
-            <a class="toggle-vis btn" data-column="4">Hora Petición</a>
+            <b class="fs-6 text-black"> Ocultar Columnas:</b> <a class="toggle-vis btn" data-column="1">Asunto Petición</a> - <a class="toggle-vis btn" data-column="4">Hora Petición</a>
         </div>
         <table class="table table-striped" id="tablePeticiones" width="100%" cellspacing="0">
             <thead>
@@ -33,7 +32,7 @@
     </div>
 </div>
 
-<!-- modal Responder Peticion -->
+<!-- modal Responder Petición -->
 <form autocomplete="off" id="formularioPeticiones">
     <div class="modal fade" id="responderPeticion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <input type="text" name="id" id="id" hidden>
