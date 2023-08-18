@@ -32,7 +32,6 @@
                                             Bodega
                                             <?= $salida[$s]['nombre'] ?>
                                         </p>
-                                        <p class="card__text">lolita kknbhujhnfb.</p>
 
 
                                         <button
@@ -75,8 +74,6 @@
                                         <p class="card__title">
                                             Bodega <?= $salida[$t]['nombre'] ?>
                                         </p>
-
-                                        <p class="card__text">lolita kknbhujhnfb.</p>
 
 
                                         <button

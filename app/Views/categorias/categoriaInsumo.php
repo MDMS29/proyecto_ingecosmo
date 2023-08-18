@@ -32,9 +32,6 @@
                                         <?= $salida[$i]['nombre'] ?>
                                     </p>
 
-                                    <p class="card__text">lolita kknbhujhnfb.</p>
-
-
                                     <button
                                         onclick="redireccion(<?php echo $salida[$i]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>')"
                                         data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$i]['id_param_det'] . '/' . $salida[$i]['nombre'] . '/' . $salida[$i]['n_iconos'] . '/' . $salida[$i]['id_param_det'] ?>"
