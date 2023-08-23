@@ -179,8 +179,9 @@ class OrdenServicio extends BaseController
 
         $pdf->SetY(31);
         $pdf->SetX(170);
+        $pdf->SetTextColor(255, 0, 0);
         $pdf->Cell(2, 5, '' . $res['n_orden'] . '', 0, 1, 'L');
-
+        $pdf->SetTextColor(2, 2, 104);
         //Fecha de entrada
         $pdf->SetY(37);
         $pdf->SetX(124);
@@ -217,7 +218,7 @@ class OrdenServicio extends BaseController
 
         $pdf->SetY(57);
         $pdf->SetX(160);
-        $pdf->Cell(25, 5, $inven[2]['checked'] == 'true' ? 'Documentos(   ' . 'SI' . '   )' : 'Llaves(   ' . 'NO' . '   )', 0, 1, 'L');
+        $pdf->Cell(25, 5, $inven[2]['checked'] == 'true' ? 'Documentos(   ' . 'SI' . '   )' : 'Documentos(   ' . 'NO' . '   )', 0, 1, 'L');
 
         /* --- CUARTO RECUADRO --- */
         $pdf->RoundedRect(2, 64, 212, 20, 2);
@@ -370,7 +371,7 @@ class OrdenServicio extends BaseController
         $pdf->SetXY(2, 161);
         $pdf->MultiCell(210, 5, utf8_decode($inven[30]['observacion']), 0, 'J', false);
 
-        $pdf->SetFont('Arial', '', 8);
+        // $pdf->SetFont('Arial', '', 8);
 
         /* --- TERMINOS Y CONDICIONES --- */
         $pdf->SetFont('Arial', 'B', 6.5);
@@ -409,7 +410,6 @@ class OrdenServicio extends BaseController
 
 
         // --- MATERIALES USADOS
-
         $pinturas = $this->movimiento->buscarDetEnc($id, 1);
         $pdf->SetAutoPageBreak(true);
         $pdf->SetFont('Arial', 'B', 10);
@@ -461,6 +461,7 @@ class OrdenServicio extends BaseController
 
                 $pdf->SetXY($x + 175, $y + 4.5);
                 $pdf->Cell(90, 1, '$ ' . number_format($pinturas[$i]['precio_venta'], 2), 0, 'J', false);
+                
                 $ciclo - $i == 0 ? '' : $pdf->line(2, $y + 7, 213.8, $y + 7);
 
                 $precio = $pinturas[$i]['cantidad'] * $pinturas[$i]['precio_venta'];

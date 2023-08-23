@@ -1349,7 +1349,7 @@
     });
     //Descargar PDF
     function pdf(id) {
-        var ruta = "<?php echo base_url(); ?>ordenServicio/pdf/" + id;
+        var ruta = "<?php echo base_url() ?>ordenServicio/pdf/" + id;
         var iframe = document.getElementById("ifr_PDF");
         iframe.setAttribute("src", ruta);
         $('#modal-pdf').modal('show');
@@ -2286,7 +2286,6 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data)
                     verTipoCliente(data['tipo_propietario'], data['cliente'])
                     $('#datailInv').removeAttr('open')
                     $('#tp').val(2)
