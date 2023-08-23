@@ -6,31 +6,40 @@
 <div id="content" class="p-4 p-md-5">
   <div class="contenedorCards">
     <div class="MasBaterias" id="MasBaterias">
-      <h2 style="margin-bottom: 20px;"><?= $nombreCategoria ?></h2>
+      <h2 style="margin-bottom: 20px;">
+        <?= $nombreCategoria ?>
+      </h2>
     </div>
 
     <div class="contenedor-d">
       <div class="contenedorD2">
         <?php if (empty($data)) { ?>
-          <abbr>No se encuentra insumos - <?= $nombreCategoria ?></abbr>
+          <abbr>No se encuentra insumos -
+            <?= $nombreCategoria ?>
+          </abbr>
         <?php } else { ?>
           <?php foreach ($data as $dato) { ?>
 
             <div class="card">
 
-              <div class="contenido1">
-                <img src="<?php echo base_url('/img/') . $icono ?>" class="baterias" />
-                <h5 class="card-title" id="nombreCard"><?php echo $dato['nombre']; ?></h5>
-              </div>
-              <br>
-              <br>
-
-              <div class="contenido2">
-                <div class="Imagenes">
-                  <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/MasDetallesW.png" width="30" height="30" title="Mas detalles del insumo"></input>
+              <div class="card__image">
+                <div class="ima">
+                  <img class="iconos" src="<?php echo base_url('/img/') . $icono ?>" >
                 </div>
               </div>
-
+              <div class="card__content">
+              <p class="card__title" id="nombreCard">
+                <?php echo $dato['nombre']; ?>
+              </p>
+              <br>
+              <br>
+              <div class="contenido2">
+                  <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);"
+                    data-bs-toggle="modal" data-bs-target="#detallesModal" type="image"
+                    src="<?php echo base_url(); ?>/img/MasDetalles2.png" width="30" height="30"
+                    title="Mas detalles del insumo" class=""></input>
+                    </div>
+              </div>
             </div>
           <?php } ?>
         <?php } ?>
@@ -38,9 +47,12 @@
     </div>
   </div>
   <div class="footer-page">
-    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
+    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal"
+      onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
       Agregar</button>
-    <a href="<?php echo base_url('/insumos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
+    <a href="<?php echo base_url('/insumos'); ?>" class="btn btnRedireccion" id="Regresar"
+      data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus"
+        width="20">Regresar</a>
   </div>
 </div>
 
@@ -64,7 +76,8 @@
             <img src="<?= base_url('img/botonAgregar.png') ?>" width="30" height="30" style="margin-right: 5px;" />
             <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar</h1>
           </div>
-          <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
+          <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal"
+            aria-label="Close">X</button>
 
         </div>
 
@@ -75,25 +88,29 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Nombre: <i style="color:crimson">*</i></label>
-              <input class="form-control" id="nombre" name="nombre" >
+              <input class="form-control" id="nombre" name="nombre">
               <small id="msgAgregar" class="invalido2"></small>
             </div>
 
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Precio Compra: <i style="color:crimson">*</i></label>
-              <input class="form-control" type="text" id="precioC" name="precioC" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+              <input class="form-control" type="text" id="precioC" name="precioC" maxlength="6"
+                oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Precio Venta: <i style="color:crimson">*</i></label>
-              <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+              <input class="form-control" type="text" id="precioV" name="precioV" maxlength="6"
+                oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Cantidad Ingresada: <i style="color:crimson">*</i></label>
-              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+              <label for="exampleDataList" class="col-form-label">Cantidad Ingresada: <i
+                  style="color:crimson">*</i></label>
+              <input class="form-control" type="text" id="cantidadA" name="cantidadA" maxlength="4"
+                oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
           </div>
 
@@ -120,7 +137,8 @@
         </div>
         <div class="modal-footer" id="modalFooter">
           <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()"
+            data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
         </div>
       </div>
@@ -130,7 +148,9 @@
 
 
 <!-- Modal Detalles- Editar-->
-<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
@@ -151,7 +171,8 @@
         <div class="d-flex column-gap-3" style="width: 100%">
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Nombre insumo:</label>
-            <input type="text" class="form-control" id="nombre1" name="nombre1" onInput="validarInput()" placeholder="" disabled>
+            <input type="text" class="form-control" id="nombre1" name="nombre1" onInput="validarInput()" placeholder=""
+              disabled>
             <small id="msgEditar" class="invalido3"></small>
           </div>
 
@@ -173,7 +194,8 @@
 
           <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Cantidad Vendida:</label>
-            <input type="text" class="form-control" id="cantidadVendida" name="cantidadVendida" style="margin-left: 15px;" placeholder="" disabled>
+            <input type="text" class="form-control" id="cantidadVendida" name="cantidadVendida"
+              style="margin-left: 15px;" placeholder="" disabled>
           </div>
         </div>
 
@@ -197,7 +219,8 @@
       </div>
 
       <div class="modal-footer" id="modalFooterD">
-        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
+        <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()"
+          data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
         <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
 
 
@@ -250,13 +273,13 @@
   }
 
 
-  $('#estante1').on("change", function(e) {
+  $('#estante1').on("change", function (e) {
     estante = $('#estante1').val()
     $.ajax({
       url: '<?php echo base_url('insumos/obtenerFilasInsumos/') ?>' + estante,
       type: 'POST',
       dataType: 'json',
-      success: function(res) {
+      success: function (res) {
         console.log(res)
 
         var cadena
@@ -282,7 +305,7 @@
       type: "POST",
       url: dataURL,
       dataType: "json",
-      success: function(rs) {
+      success: function (rs) {
         console.log(rs)
         $("#titulo").text('Detalles');
         $("#idMaterial").val(rs[0]['id_material']);
@@ -318,7 +341,7 @@
 
 
   // formulario agregar 
-  $("#formularioAgregar").on("submit", function(e) {
+  $("#formularioAgregar").on("submit", function (e) {
     e.preventDefault()
     idMaterial = $("#idMaterial").val()
     nombre = $("#nombre").val()
@@ -350,7 +373,7 @@
         estante,
         fila: fila
       },
-      success: function(res) {
+      success: function (res) {
         if (res == 1) {
           mostrarMensaje('success', '¡Se agrego material!');
           $("#id").val(0)
@@ -372,7 +395,7 @@
   var validarInput;
 
   //Valor para el nombre si es valido o invalido
-  $('#nombre').on('input', function(e) {
+  $('#nombre').on('input', function (e) {
     nombre = $('#nombre').val()
     tp = $('#tp').val()
     id_material = $('#id').val()
@@ -383,7 +406,7 @@
         type: 'POST',
         url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
         dataType: 'JSON',
-        success: function(res) {
+        success: function (res) {
           if (res.nombre == nombre) {
             $('#msgAgregar').text('')
             validAgregar = true
@@ -402,7 +425,7 @@
       type: 'POST',
       url: "<?php echo base_url('srchIns/') ?>" + id_material + "/" + nombre,
       dataType: 'JSON',
-      success: function(res) {
+      success: function (res) {
         if (res == null) {
           $('#msgAgregar').text('')
           $("#btnAgregar").removeAttr('disabled', '');
@@ -452,7 +475,7 @@
           tipoMaterial: 9,
           idCategoria: idCategoria
         },
-        success: function(e) {
+        success: function (e) {
           $("#id").val(0)
           Swal.fire({
             position: "center",

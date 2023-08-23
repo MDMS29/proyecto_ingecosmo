@@ -2,30 +2,39 @@
 <div id="content" class="p-4 p-md-5">
   <div class="contenedorCards">
     <div class="masBaterias" id="masBaterias">
-      <h2 style="margin-bottom: 20px;"> Bodega <?= $nombreBodega ?></h2>
+      <h2 style="margin-bottom: 20px;"> Bodega
+        <?= $nombreBodega ?>
+      </h2>
     </div>
 
     <div class="contenedor-d">
       <div class="contenedorD2">
         <?php if (empty($data)) { ?>
-          <p>No se encuentra repuestos - Bodega <?= $nombreBodega ?></p>
+          <p>No se encuentra repuestos - Bodega
+            <?= $nombreBodega ?>
+          </p>
         <?php } else { ?>
           <?php foreach ($data as $dato) { ?>
             <div class="card">
 
-              <div class="contenido1">
-                <img src="<?php echo base_url('/img/') . $icono ?>" class="baterias" />
-                <h5 class="card-title" id="nombreCard"><?php echo $dato['nombre']; ?></h5>
-              </div>
-              <br>
-              <br>
-
-              <div class="contenido2">
-                <div class="Imagenes">
-                  <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);" data-bs-toggle="modal" data-bs-target="#detallesModal" type="image" src="<?php echo base_url(); ?>/img/MasDetallesW.png" width="30" height="30" title="Mas detalles del repuesto" id="btnUsar"></input>
+              <div class="card__image">
+                <div class="ima">
+                  <img class="iconos" src="<?php echo base_url('/img/') . $icono ?>">
                 </div>
               </div>
-
+              <div class="card__content">
+                <p class="card__title" id="nombreCard">
+                  <?php echo $dato['nombre']; ?>
+                </p>
+                <br>
+                <br>
+                <div class="contenido2">
+                <input href="#" onclick="detallesMaterial(<?php echo $dato['id_material'] . ',' . 2 ?>);"
+                  data-bs-toggle="modal" data-bs-target="#detallesModal" type="image"
+                  src="<?php echo base_url(); ?>/img/MasDetalles2.png" width="30" height="30"
+                  title="Mas detalles del repuesto"></input>
+                  </div>
+              </div>
             </div>
           <?php } ?>
         <?php } ?>
@@ -33,10 +42,13 @@
     </div>
   </div>
   <div class="footer-page">
-    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal" onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
+    <button type="button" class="btn btnAccionF" data-bs-toggle="modal" data-bs-target="#materialesModal"
+      onclick="agregar(0, 1)"><img src="<?= base_url('img/plus.png') ?>" alt="icon-plus" width="20">
       Agregar</button>
 
-    <a href="<?php echo base_url('/repuestos'); ?>" class="btn btnRedireccion" id="Regresar" data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus" width="20">Regresar</a>
+    <a href="<?php echo base_url('/repuestos'); ?>" class="btn btnRedireccion" id="Regresar"
+      data-bs-target="#materialesModal"><img src="<?= base_url('img/regresa.png') ?>" alt="icon-plus"
+        width="20">Regresar</a>
   </div>
 </div>
 
@@ -60,7 +72,8 @@
             <h1 class="modal-title fs-5 text-center" id="tituloModal" style="font-family: Nunito;">Agregar
             </h1>
           </div>
-          <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal" aria-label="Close">X</button>
+          <button type="button" class="btn" onclick="limpiarCampos()" data-bs-dismiss="modal"
+            aria-label="Close">X</button>
 
         </div>
 
@@ -87,12 +100,15 @@
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 90%;">
               <label for="exampleDataList" class="col-form-label">Cantidad: <i style="color:crimson">*</i></label>
-              <input class="form-control" type="text" id="cantidad" name="cantidad" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/,'')">
+              <input class="form-control" type="text" id="cantidad" name="cantidad" maxlength="4"
+                oninput="this.value = this.value.replace(/[^0-9]/,'')">
             </div>
 
             <div class="mb-3" style="width: 90%;">
-              <label for="exampleDataList" class="col-form-label">Orden de trabajo: <i style="color:crimson">*</i></label>
-              <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenTrabajo" id="ordenTrabajo">
+              <label for="exampleDataList" class="col-form-label">Orden de trabajo: <i
+                  style="color:crimson">*</i></label>
+              <select style="background-color:#ECEAEA;" class="form-select form-select" name="ordenTrabajo"
+                id="ordenTrabajo">
                 <option selected value="">--Seleccione--</option>
                 <?php foreach ($ordenes as $data) { ?>
                   <option value="<?= $data['id_orden'] ?>"><?= $data['n_orden'] ?></option>
@@ -122,7 +138,9 @@
 
           <div class="d-flex column-gap-3" style="width: 100%">
             <div class="mb-3" style="width: 49%;">
-              <label for="recipient-name" class="col-form-label" style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Sección <i style="color:crimson">*</i></label>
+              <label for="recipient-name" class="col-form-label"
+                style="font-family: 'Nunito', sans-serif; font-size:17px; font-weight: 600;">Sección <i
+                  style="color:crimson">*</i></label>
               <select style="background-color:#ECEAEA;" id="seccion" class="form-select" name="seccion">
                 <option value="" selected>-- Seleccione --</option>
                 <?php foreach ($filas as $fila) { ?>
@@ -136,7 +154,8 @@
 
           <div class="modal-footer" id="modalFooter">
             <label class="campObl" style="color: gray; margin-inline-end: auto;">(*) Campos obligatorios.</label>
-            <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btnRedireccion" onclick="limpiarCampos()"
+              data-bs-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btnAccionF" id="btnAgregar">Agregar</button>
           </div>
         </div>
@@ -146,7 +165,9 @@
 </form>
 
 <!-- MODAL DETALLES -->
-<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <input type="text" name="id" id="id" hidden>
     <input type="text" name="tp" id="tp" hidden>
@@ -209,16 +230,18 @@
         </div>
 
         <div class="d-flex column-gap-3" style="width: 100%">
-        <div class="mb-3" style="width: 90%;">
+          <div class="mb-3" style="width: 90%;">
             <label for="exampleDataList" class="col-form-label">Sección:</label>
             <input type="text" class="form-control" id="seccion1" name="seccion" placeholder="" disabled>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()" data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
+          <button type="button" class="btn btnRedireccion" data-bs-toggle="modal" onclick="limpiarCampos()"
+            data-bs-target="#detallesModal" id="btnCerrar">Cerrar</button>
           <!-- <button type="button" class="btn btnEditar" id="btnEditar" onclick="habilitar()">Editar</button> -->
-          <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal" data-bs-target="#usarMaterial">Usar</button>
+          <button type="button" class="btn btnAccionF" id="btnUsar1" data-bs-toggle="modal"
+            data-bs-target="#usarMaterial">Usar</button>
         </div>
       </div>
 
@@ -246,7 +269,7 @@
 
 
 
-  $('#ordenTrabajo').on('change', function(e) {
+  $('#ordenTrabajo').on('change', function (e) {
     id = $('#ordenTrabajo').val()
     $.ajax({
       url: "<?= base_url('ordenServicio/buscarOrden') ?>",
@@ -254,7 +277,7 @@
       data: {
         id
       },
-      success: function(data) {
+      success: function (data) {
         data = JSON.parse(data)
         $('#placa').val(data['placa'])
 
@@ -264,7 +287,7 @@
 
 
   // formulario agregar 
-  $("#formularioAgregar").on("submit", function(e) {
+  $("#formularioAgregar").on("submit", function (e) {
     e.preventDefault()
     idMaterial = $("#idMaterial").val()
     nombre = $("#nombre").val()
@@ -297,7 +320,7 @@
         seccion: seccion,
         bodega: "<?= $idBodega ?>"
       },
-      success: function(res) {
+      success: function (res) {
         if (res == 1) {
           mostrarMensaje('success', '¡Se agrego material!');
           $("#id").val(0)
@@ -326,7 +349,7 @@
       type: "POST",
       url: dataURL,
       dataType: "json",
-      success: function(rs) {
+      success: function (rs) {
         console.log(rs)
         $('#detallesModal').modal('show')
         $("#titulo").text('Detalles');
@@ -348,7 +371,7 @@
       type: "POST",
       url: dataURL,
       dataType: "json",
-      success: function(rs) {
+      success: function (rs) {
         $("#idMaterial").val(rs[0]['id_material']);
         $("#nombreRepuesto").val(rs[0]['nombre']);
         $("#proveedor2").val(rs[0]['nomProveedor']);
@@ -361,7 +384,7 @@
 
 
   // operaciones con el input usar
-  $('#cantidadUsar').on('input', function(e) {
+  $('#cantidadUsar').on('input', function (e) {
     idMaterial = $("#idMaterial").val()
     cantidad = $('#cantidadUsar').val()
     cantidadExistente = $('#cantidadExistente').val()
@@ -381,7 +404,7 @@
 
   // formulario usar
 
-  $("#formularioUsar").on("submit", function(e) {
+  $("#formularioUsar").on("submit", function (e) {
     e.preventDefault()
 
     idMaterial = $("#idMaterial").val()
@@ -416,7 +439,7 @@
         ordenTrabajo
       },
       dataType: "json",
-      success: function(data) {
+      success: function (data) {
         if (data == 1) {
           mostrarMensaje('success', '¡Repuesto usado con exito!')
           setTimeout(() => {

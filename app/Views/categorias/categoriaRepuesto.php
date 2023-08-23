@@ -33,13 +33,14 @@
                                             <?= $salida[$s]['nombre'] ?>
                                         </p>
 
-
-                                        <button
-                                            onclick="redireccion(<?php echo $salida[$s]['id'] ?>, '<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] . '/' . $salida[$s]['id'] ?>')"
-                                            data-href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] . '/' . $salida[$s]['id'] ?>"
-                                            class="btnVer"><i class="bi bi-arrows-fullscreen"
-                                                style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver
-                                            mas</button>
+                                        <div class="contenido2">
+                                            <button
+                                                onclick="redireccion(<?php echo $salida[$s]['id'] ?>, '<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] . '/' . $salida[$s]['id'] ?>')"
+                                                data-href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$s]['id'] . '/' . $salida[$s]['nombre'] . '/' . $salida[$s]['n_iconos'] . '/' . $salida[$s]['id'] ?>"
+                                                class="btnVer"><i class="bi bi-arrows-fullscreen"
+                                                    style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver
+                                                mas</button>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -64,7 +65,7 @@
                                 $salida = array_slice($data, 2, $o);
                                 ?>
                                 <div class="card">
-                                <div class="card__image">
+                                    <div class="card__image">
                                         <div class="ima">
                                             <img class="iconos"
                                                 src="<?php echo base_url('/img/') . $salida[$t]['n_iconos'] ?>">
@@ -72,16 +73,18 @@
                                     </div>
                                     <div class="card__content">
                                         <p class="card__title">
-                                            Bodega <?= $salida[$t]['nombre'] ?>
+                                            Bodega
+                                            <?= $salida[$t]['nombre'] ?>
                                         </p>
 
-
+                                        <div class="contenido2">
                                         <button
                                             onclick="redireccion(<?php echo $salida[$t]['id'] ?>, '<?php echo base_url('repuestos/mostrarBodega/') . $salida[$t]['id'] . '/' . $salida[$t]['nombre'] . '/' . $salida[$t]['n_iconos'] . '/' . $salida[$t]['id'] ?>')"
                                             data-href="<?php echo base_url('repuestos/mostrarBodega/') . $salida[$t]['id'] . '/' . $salida[$t]['nombre'] . '/' . $salida[$t]['n_iconos'] . '/' . $salida[$t]['id'] ?>"
                                             class="btnVer"><i class="bi bi-arrows-fullscreen"
                                                 style="font-size:18px; margin-right:5px; margin-left:5px; "></i>Ver
                                             mas</button>
+                                            </div>
                                     </div>
                                 </div>
                                 <?php if ($o == 4) { ?>

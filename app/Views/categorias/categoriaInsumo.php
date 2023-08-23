@@ -74,8 +74,6 @@
                                         <?= $salida[$r]['nombre'] ?>
                                     </p>
 
-                                    <p class="card__text">lolita kknbhujhnfb.</p>
-
                                     <button
                                         onclick="redireccion(<?php echo $salida[$r]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>')"
                                         data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$r]['id_param_det'] . '/' . $salida[$r]['nombre'] . '/' . $salida[$r]['n_iconos'] . '/' . $salida[$r]['id_param_det'] ?>"
@@ -118,9 +116,7 @@
                                     <p class="card__title">
                                         <?= $salida[$j]['nombre'] ?>
                                     </p>
-
-                                    <p class="card__text">lolita kknbhujhnfb.</p>
-
+                                    
                                     <button
                                         onclick="redireccion(<?php echo $salida[$j]['id_param_det'] ?>, '<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>')"
                                         data-href="<?php echo base_url('insumos/mostrarInsumo/') . $salida[$j]['id_param_det'] . '/' . $salida[$j]['nombre'] . '/' . $salida[$j]['n_iconos'] . '/' . $salida[$j]['id_param_det'] ?>"

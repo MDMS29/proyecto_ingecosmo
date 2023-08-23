@@ -53,8 +53,9 @@
 }
 
 .card1 {
-  background: #D9D9D9;
-  border: 1px solid #000000;
+  background: #fff;
+  border: 1px solid none;
+  box-shadow: 0 0 10px #00000033;
   border-radius: 5px;
   display: flex;
   justify-content: flex-start;
@@ -110,13 +111,31 @@
   font-size: 16px;
   text-align: center;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .btnVer:hover {
   color: rgb(255, 255, 255) !important;
   background-color: #161666 !important;
   cursor: pointer;
+  z-index: 1;
+}
 
+.btnVer::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0;
+  left: -40px;
+  transform: skewX(45deg);
+  background-color: #161666;
+  z-index: -1;
+  transition: all 1s;
+}
+
+.btnVer:hover::before {
+  width: 160%;
 }
 
 .iconoBroca {

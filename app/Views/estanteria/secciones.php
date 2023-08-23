@@ -1,18 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url('css/estanteria.css') ?>">
 <div id="content" class="p-4 p-md-5">
     <div class="estanteria">
-        <div class="card">
-            <div class="card__image">
-                <div class="ima">
-                    <img src="< ?php echo base_url('/img/carrito.png') ?>">
-                </div>
-            </div>
-            <div class="card__content">
-                <p class="card__title">Card Title</p>
-                <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a class="card__content" href="#">Ver mas</a>
-            </div>
-        </div>
 
         <div class="verFilas" id="verFilas">
 
