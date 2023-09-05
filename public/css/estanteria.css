@@ -98,25 +98,23 @@
 }
 
 .btnVer {
-  color: #161666 !important;
-  background: transparent !important;
+  color: #000000;
+  background: transparent;
   text-decoration: none;
   border: 2px solid #161666;
   border-radius: 8px;
-  margin-top: 0;
   width: 100px;
   height: 35px;
-  padding: 5px;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
-  text-align: center;
-  cursor: pointer;
+  /* text-align: center; */
+  position: relative;
+  transition: all 1s;
   overflow: hidden;
 }
 
 .btnVer:hover {
   color: rgb(255, 255, 255) !important;
-  background-color: #161666 !important;
   cursor: pointer;
   z-index: 1;
 }

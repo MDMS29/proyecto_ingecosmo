@@ -19,7 +19,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <a onclick="redireccion(<?php echo $dato['id'] ?>, <?php echo $dato['tipo_estante'] ?>)" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</a>
+                            <button onclick="redireccion(<?php echo $dato['id'] ?>, <?php echo $dato['tipo_estante'] ?>)" class="btnVer"><i class="bi bi-arrows-fullscreen" style="font-size:18px; margin-right:5px; margin-left:5px;"></i>Ver fila</button>
                         </div>
                     </div>
                 <?php } ?>
